@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Caribbean Waters" el:subtitle="" el:id="duffy139"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw=155
+levelh=138
+
+create_world( levelw, levelh)
+
+fill_floor("fl-water")
+
+enigma.BumperForce = 500
+
+fill_floor("fl-water", 0,0,levelw,levelh)
+
+function renderLine( linej, pattern)
+    for j=1, strlen(pattern) do
+        local c = strsub( pattern, j, j)
+        i=j+19
+        line=linej+12
+        if c =="#" then
+            set_stone( "st-greenbrown", i-1, line)
+        elseif c =="X" then
+            if not difficult then
+                set_stone("st-actorimpulse", i-1, line)
+            else
+                set_stone("st-death", i-1, line)
+            end
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {player=0, mouseforce=1})
+            set_floor("fl-hay",  i-1,  line)
+        elseif c=="Z" then
+            set_floor("fl-hay",  i-1,  line)
+            set_item("it-trigger", i-1,line, {action="callback", target="funccReset"})
+        elseif c=="." then
+            set_floor("fl-hay",  i-1,  line)
+        elseif c=="U" then
+            set_stone("st-switch", i-1,line, {action="callback",target="funccU"})
+        elseif c=="R" then
+            set_stone("st-switch", i-1,line, {action="callback",target="funccR"})
+        elseif c=="D" then
+            set_stone("st-switch", i-1,line, {action="callback",target="funccD"})
+        elseif c=="L" then
+            set_stone("st-switch", i-1,line, {action="callback",target="funccL"})
+        elseif c=="1" then
+            set_stone("st-switch", i-1,line, {action="callback",target="funccU"})
+            set_floor("fl-hay",  i-1,  line)
+        elseif c=="2" then
+            set_stone("st-switch", i-1,line, {action="callback",target="funccR"})
+            set_floor("fl-hay",  i-1,  line)
+        elseif c=="3" then
+            set_stone("st-switch", i-1,line, {action="callback",target="funccD"})
+            set_floor("fl-hay",  i-1,  line)
+        elseif c=="4" then
+            set_stone("st-switch", i-1,line, {action="callback",target="funccL"})
+            set_floor("fl-hay",  i-1,  line)
+        elseif c=="u" then
+            laser( i-1, line, 1, NORTH)
+        elseif c=="r" then
+            laser( i-1, line, 1, EAST)
+        elseif c=="d" then
+            laser( i-1, line, 1, SOUTH)
+        elseif c=="l" then
+            laser( i-1, line, 1, WEST)
+        elseif c=="O" then
+            set_item("it-extralife",i-1,line)
+            set_floor("fl-hay",  i-1,  line)
+        elseif c=="P" then
+            set_item("it-extralife",i-1,line)
+            set_floor("fl-water",  i-1,  line)
+        end
+    end
+end
+
+-- Floor:  " "
+-- Border: "#"
+-- Oxyd:   "o"
+
+renderLine(00,"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+renderLine(01,"X      X                        X         X         X              X    D     X      X            X       X       X")
+renderLine(02,"X R               X                                 L      X                                 X                    X")
+renderLine(03,"X          R            X             X                                    X                                 X    X")
+renderLine(04,"X   X            X   X    L   R           L   R     X         X     X                     X            X      L   X")
+renderLine(05,"X        D   X                     X                    X                   o                    X                X")
+renderLine(06,"X X                     X    X              D                  X               X     X               R          D X")
+renderLine(07,"X       X                              X           X                    X                  X              X       X")
+renderLine(08,"XX  X         X   X  o             X                                                    o       X  D        X     X")
+renderLine(09,"X      X                       X              o          X       X               X                                X")
+renderLine(10,"X   R        X           X              X                           D   X                  X                   X  X")
+renderLine(11,"X                            X      X         X     X           X           X         X                   X       X")
+renderLine(12,"X            o   X               X                                                             X             X    X")
+renderLine(13,"X  X                                   X      X            X                                       X              X")
+renderLine(14,"X       X                  X                            X       o  X        X    X       X                       XX")
+renderLine(15,"XX                   X                  X                                                     X          X        X")
+renderLine(16,"X      X       X                   X           X                  X     X            X             X              X")
+renderLine(17,"X  U                       ..1..          X        X     X    X                           o                       X")
+renderLine(18,"X            X             .z.O.                                         X    X                           o       X")
+renderLine(19,"X    R                X    4.Z.2          L   R         X       X                        X       X     X       U  X")
+renderLine(20,"X                X         .O.O.                            o       X     X        X          X                   X")
+renderLine(21,"X  D  X    X               ..3..      X        X    X                                                        L    X")
+renderLine(22,"X                                                       X         X                     X   D       X     X       X")
+renderLine(23,"XX                                              X          X                X D                                D  X")
+renderLine(24,"X              X       X        X        X                       X      X           X          X    o             X")
+renderLine(25,"X   X    X                                           X                                   X                        X")
+renderLine(26,"X                 X                X      X                 X        X        X              X          X        XX")
+renderLine(27,"X         o   X            X   X                 X     X        X           o      X     X          U             X")
+renderLine(28,"XX                 X                  X            o                     X                                      X X")
+renderLine(29,"X      X                X        X         X     X            X    X          X           L   R                   X")
+renderLine(30,"X               X                                                      X              X                   X       X")
+renderLine(31,"X         U                         X                  X     X               X                      D          U  X")
+renderLine(32,"XU                  X      X    o         X        U                               X        X                     X")
+renderLine(33,"X       L   R                      X        X                        L   R                    o     X        L    X")
+renderLine(34,"X  R               X         R              L    L   R            X                      X                        X")
+renderLine(35,"X         D          X     X          X                    X                  L     X           X         X       X")
+renderLine(36,"XXXXXXXX     XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+renderLine(37,"                    X")
+renderLine(38,"  X           X     X")
+renderLine(39,"       X          X X")
+renderLine(40,"X          X        X")
+renderLine(41,"    X    X     X   XX")
+renderLine(42,"       X            X")
+renderLine(43,"           X        X")
+renderLine(44,"X    X    X      X  X")
+renderLine(45,"        X    X      X")
+renderLine(46,"               X    X")
+renderLine(47,"  X   X    X       XX")
+renderLine(48,"               X    X")
+renderLine(49,"     X  X          XX")
+renderLine(50,"X      X    X       X")
+renderLine(51,"         X  X X     X")
+renderLine(52,"    X            X  X")
+renderLine(53,"       X   X        X")
+renderLine(54,"  X           X     X")
+renderLine(55,"   X  X     X      XX")
+renderLine(56,"                    X")
+renderLine(57,"     X   X    X   X X")
+renderLine(58,"                    X")
+renderLine(59,"X      X      X X   X")
+renderLine(60,"   X       X   X   XX")
+renderLine(61,"                    X")
+renderLine(62,"        X           X")
+renderLine(63,"                X   X")
+renderLine(64," X                  X")
+renderLine(65,"     X        X     X")
+renderLine(66,"                    X")
+renderLine(67,"   X     X    X    XX")
+renderLine(68,"X                   X")
+renderLine(69,"   X        X       X")
+renderLine(70,"      X             X")
+renderLine(71,"  X           X     X")
+renderLine(72,"X         X     X   X")
+renderLine(73,"                   XX")
+renderLine(74,"    X        X      X")
+renderLine(75,"                    X")
+renderLine(76,"        X  X     X  X")
+renderLine(77," X                  X")
+renderLine(78,"                    X")
+renderLine(79,"   X X X X X X X    X")
+renderLine(80,"                    X")
+renderLine(81,"                    X")
+renderLine(82,"  X X X X X X X X   X")
+renderLine(83,"                    X")
+renderLine(84,"                    X")
+renderLine(85,"X                   X")
+renderLine(86,"   X                X")
+renderLine(87,"      X          X  X")
+renderLine(88,"             X      X")
+renderLine(89,"                    X")
+renderLine(90,"  X  X   X          X")
+renderLine(91,"       X    X       X")
+renderLine(92,"X                X  X")
+renderLine(93,"   X          X     X")
+renderLine(94,"      X   X  X      X")
+renderLine(95,"      X           X X")
+renderLine(96,"          XX        X")
+renderLine(97,"X                   X")
+renderLine(98,"      X  X      X   X")
+renderLine(99,"            X       X")
+renderLine(100,"   X                X")
+renderLine(101,"                    X")
+renderLine(102,"          P         X")
+renderLine(103,"         PoP        X")
+renderLine(104,"          U         X")
+renderLine(105,"                    X")
+renderLine(106,"                    X")
+renderLine(107,"                    X")
+renderLine(108,"XXXXXXXXXXXXXXXXXXXXX")
+
+oxyd_shuffle()
+
+-- Initial position:
+initial_pos_x = 46
+initial_pos_y = 29
+
+-- Current position:
+akt_pos_x = initial_pos_x
+akt_pos_y = initial_pos_y
+
+-- Direction to move:
+-- 0  means no move into this direction
+-- 1  means to the right/bottom
+-- -1 means to the left/up
+updown = 0
+leftright = 0
+
+function funccU()
+    updown = -1
+    leftright = 0
+end
+
+function funccR()
+    leftright = 1
+    updown = 0
+end
+
+function funccD()
+    updown = 1
+    leftright = 0
+end
+
+function funccL()
+    leftright = -1
+    updown = 0
+end
+
+function funccReset()
+    fill_floor("fl-water", akt_pos_x, akt_pos_y, 5,5)
+
+    -- Reset the current position:
+    akt_pos_x = initial_pos_x
+    akt_pos_y = initial_pos_y
+
+    -- And the directions:
+    updown = 0
+    leftright = 0
+
+    fill_floor("fl-hay", akt_pos_x, akt_pos_y,5,5)
+end
+
+function timer_callback()
+
+    -- To prevent the boat from leaving the level:
+    if akt_pos_x +5 < levelw-10 and akt_pos_x > 10 and akt_pos_y +5 < levelh-6 and akt_pos_y > 6 then
+
+        -- Clear the old position:
+        fill_floor("fl-water", akt_pos_x, akt_pos_y,5,5)
+
+        -- Move the boat, calculate the new position:
+        akt_pos_x = akt_pos_x + leftright
+        akt_pos_y = akt_pos_y + updown
+
+        -- Draw it:
+        fill_floor("fl-hay", akt_pos_x, akt_pos_y,5,5)
+    end
+
+    -- Draw the initial pos too:
+    fill_floor("fl-hay", initial_pos_x, initial_pos_y,5,5)
+end
+
+if not difficult then
+    step=0.5
+else
+    step=0.3
+end
+
+set_stone("st-timer", 1, 1, {on=1,loop=1, action="callback", target="timer_callback", interval=step})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

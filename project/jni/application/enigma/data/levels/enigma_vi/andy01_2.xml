@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Red Herrings" el:subtitle="" el:id="20070116money001"/>
+      <el:version el:score="3" el:release="3" el:revision="1" el:status="released"/>
+      <el:author el:name="Andy Geldmacher" el:email="" el:homepage="http://www.geldmacher.privat.t-online.de"/>
+      <el:copyright>Copyright © 2007 Andy Geldmacher</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="01:00"/>
+    </el:info>
+    <el:luamain><![CDATA[
+enigma.ConserveLevel=FALSE
+
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+
+cells={}
+cells[" "]=cell{floor="fl-sahara"}
+cells["W"]=cell{floor="fl-water"}
+
+stones={}
+stones["#"]=cell{stone="st-rock1"}
+stones["a"]=cell{stone="st-stoneimpulse"}
+stones["b"]=cell{stone="st-grate1"}
+stones["c"]=cell{stone="st-oneway_black-e"}
+stones["d"]=cell{stone="st-stone_break"}
+stones["e"]=cell{stone="st-swap"}
+stones["f"]=cell{stone={"st-door-v", {name="door1"}}}
+stones["g"]=cell{stone={"st-coinslot", {action="openclose", target="door1"}}}
+stones["h"]=cell{stone={"st-door-v", {name="door2"}}}
+stones["i"]=cell{stone={"st-laser-e", {name="laser1"}}}
+stones["j"]=cell{stone={"st-switch", {action="onoff", target="laser1"}}}
+stones["k"]=cell{stone="st-wood"}
+stones["l"]=cell{stone="st-oneway_black-s"}
+stones["m"]=cell{stone="st-mirror-p/m"}
+stones["x"]=cell{parent={{file_oxyd,"d"}}}
+
+items={}
+items["1"]=cell{item="it-seed"}
+items["2"]=cell{item="it-coin2"}
+items["3"]=cell{item="it-umbrella"}
+items["4"]=cell{item={"it-trigger", {action="openclose", target="door2"}}}
+items["5"]=cell{item="it-dynamite"}
+items["6"]=cell{item="it-puller-w"}
+
+level={"                    ",
+       "              WWWW  ",
+       "              WWWW  ",
+       "             WWWWWW ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    "}
+stmap={"######aaaaag########",
+       "#x k #k###a f      #",
+       "# d #  l #a #x    x#",
+       "#k    # kaa #b    b#",
+       "# d####  #  c      #",
+       "## #     #  c #  a##",
+       "j        #bb# #bbc #",
+       "# ########b a #  e #",
+       "#         b aaa  a##",
+       "i         b b a  #x#",
+       "###mbbbbbbbbebbbb# #",
+       "# #       b b b  h #",
+       "####################"}
+itmap={"                    ",
+       "    1        5    6 ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "       4          1 ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       " 3                2 ",
+       "                    "}
+
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+draw_map(0,0,itmap,items)
+
+set_actor("ac-blackball", 6, 9,{player=0})
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,2263 @@
+ant.lua documentation
+Petr Machata, ant_39@centrum.cz
+
+This document describes usage of ant.lua, the collection of helper
+functions for Enigma map designers.
+
+
+================================================================================
+0] PREFACE
+================================================================================
+
+0.1 Revision history
+--------------------------------------------------------------------------------
+
+version 0.1.4: 2004-02-09:
+  Several typos fixed
+  add_multitag removed
+
+version 0.1.3: 2003-06-19:
+  Proofread, some typos fixed, some sentences changed
+  Added chapter 'Puzzle kinds'
+
+version 0.1.2: 2003-05-11:
+  Added chapter 'Multiple wholes per one target'
+  Changes in a chapter 'use_cells'
+
+version 0.1.1: 2003-04-25:
+  Number of typos fixed
+
+version 0.1: 2003-04-13:
+  this covers ant.lua for upcoming Enigma 0.8
+  first release of document
+
+
+0.2 Table of contents
+--------------------------------------------------------------------------------
+
+0] PREFACE
+   0.1 Revision history
+   0.2 Table of contents
+
+1] INTRODUCTION
+   1.1 What is this document
+   1.2 How to contact author
+   1.3 Distribution policy
+   1.4 New versions of this document
+   1.5 Bugs
+
+2] ABOUT ant.lua
+   2.1 What is ant.lua
+   2.2 What is it good for?
+   2.3 How to use it
+
+3] VISUAL MAP DESIGN
+   3.1 Simple things first
+      3.1.1 What is it, how to use it
+      3.1.2 Using cell{}
+      3.1.3 Parents of cell{}
+      3.1.4 Drawing map
+   3.2 More complicated then
+      3.2.1 Default parents
+      3.2.2 Default cell meanings
+      3.2.4 use_cells
+      3.2.3 Layered maps
+      3.2.4 Drawing per partes
+      3.2.5 Multichar maps
+   3.3 cell{} to depth
+      3.3.1 Checker floor
+      3.3.2 Random floor
+      3.3.3 Curried function construction
+
+4] FUNCTIONAL APPROACH
+   4.1 Fills, borders, ...
+   4.2 init.lua counterparts - set_, draw_
+   4.3 Coordinate mangling
+
+5] OBJECT GROUPS
+   5.1 Introduction
+   5.2 Common multiples
+      5.2.1 Multielement functions
+      5.2.2 Group actions
+      5.2.3 Rubber bands
+   5.3 Generic multielements
+      5.3.1 add_multicell
+      5.3.2 add_multiobject
+   5.4 Worm holes
+      5.4.1 Forewords
+      5.4.2 Technical background
+      5.4.3 Setting up cell{} functions
+      5.4.4 Setting up the map
+      5.4.5 Post-execution code
+      5.4.6 Multiple wholes per one target
+   5.5 Railways
+      5.5.1 What are railways
+      5.5.2 Technical background
+      5.5.3 Setting up cell{} functions
+      5.5.4 Binding the train to railway
+      5.5.5 Setting up the map
+   5.6 Puzzles
+      5.6.1 Forewords
+      5.6.2 Technical background
+      5.6.3 Setting up puzzle
+      5.6.4 Fake puzzles
+      5.6.5 Puzzle kinds
+   5.7 Slopes
+      5.7.1 Forewords
+      5.7.2 Technical background
+      5.7.3 Setting up cell{} functions
+      5.7.4 Setting up the map
+      5.7.5 Post-execution code
+      5.7.6 Mixing several slopes
+      5.7.7 Fake slopes
+      5.7.8 Invert slopes
+   5.8 Afterwords
+
+6] HELPER FUNCTIONS
+   6.1 Debugging
+      6.1.1 Warnings
+      6.1.2 Debugs
+   6.2 Clone table
+   6.3 Sending messages
+
+
+================================================================================
+[1] INTRODUCTION
+================================================================================
+
+1.1 What is this document
+--------------------------------------------------------------------------------
+
+This document tries to uncover hidden treasures of ant.lua, the library
+of helper functions for Enigma level designers. If one level is
+created with help of this, I reached my goal.
+
+Please, no great expectations. I'm not very experienced in English and
+I have never written such a document before. I did my best, but you
+know how it is...
+
+
+1.2 How to contact author
+--------------------------------------------------------------------------------
+
+Any questions, bug reports, misunderstandings, typos, flames and
+praises, regarding both this documentation and ant.lua library, please
+send to:
+
+    my e-mail:        ant_39 at centrum.cz
+    enigma-devel ML:  enigma-devel at nongnu.org
+
+
+1.3 Distribution policy
+--------------------------------------------------------------------------------
+
+This documentation is covered by GNU GPL, v.2 or later. Interpret the
+document's source text as the 'program' and adhere to the following
+terms:
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License as
+    published by the Free Software Foundation; either version 2 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+    02111-1307 USA
+
+
+1.4 New versions of this document
+--------------------------------------------------------------------------------
+
+Most probably, any new version will be located directly at Enigma CVS
+repository. If it isn't there, ant.lua was probably discarded from
+source tree either, and so the documentation is obsolete.
+
+
+1.5 Bugs
+--------------------------------------------------------------------------------
+
+There are several things missing in the document yet. There could be a
+complete reference of ant.lua, though I'm not very sure whether
+ant.lua itself is not better source (it's quite well commented, imho).
+
+Not all examples were tested. I often rely on my knowledge, so if
+something doesn't work, the bug doesn't have to be in library.
+
+Besides this, the document should be completely rewritten by someone
+better in English. This is utopia, so we simply have to get enough
+with this.
+
+
+
+================================================================================
+2] ABOUT ant.lua
+================================================================================
+
+2.1 What is ant.lua
+--------------------------------------------------------------------------------
+
+ant.lua is lua module that should help level designers to create their
+maps. Its acronym stands for `All Neccessary Tools'*. At this time,
+graphical level editor is being worked on, or maybe the works already
+pushed it to somehow usable stage. In older times there was nothing
+alike, so enigma maps were created by manually placing stones and
+floor squares to their places in a simple programming language. This
+tool made it a way more comfortable to me.
+
+It's possible that the editor will make this module useless, so
+further development will stop. It will probably stay in enigma source
+repository in future, as many maps and also some other libraries
+(ralf.lua for example) use it.
+
+*) Well, not really. It's named thus just because it's originator's
+ nickname was ant_39. But it *could* stand for this :)
+
+
+2.2 What is it good for?
+--------------------------------------------------------------------------------
+
+Well, for creating enigma maps.
+
+Now seriously. Basic idea behind creating maps to enigma is that you
+use a function every time you want to place a stone, every time you
+place a floor square, etc. You draw the level procedurally, use
+functions for filling, distribute items, stones, floors, actors,
+etc. There are loops, well known from programming languages (while,
+repeat, for, for each), but level creation process is not very simple
+even with them.
+
+For this reason the level developers tend to use some sort of visual
+map creation. You draw the level to a simple string grid, tell to the
+library that all #'s are stone walls and all *'s are say puzzle
+stones, and then call a function. It reads your definitions, looks to
+string map that you have just made, and turns them to ugly LUA code,
+that in turn changes to beautiful and precious elements of Enigma
+world.
+
+
+2.3 How to use it
+--------------------------------------------------------------------------------
+
+Let's look at how a simple map can look like, if it's created with
+ant.lua. First, how does it look without it:
+
+      enigma.ConserveLevel = TRUE
+      levelw = 20
+      levelh = 13
+
+      create_world(levelw, levelh)
+      oxyd_default_flavor = "a"       -- Default flavor for oxyd stones.
+
+      draw_border("st-brownie")
+      fill_floor("fl-hay", 0,0, level_width,level_height)
+
+      set_stone("st-fart", levelw-1,0, {name="fart"})
+      set_stone("st-timer", 0,0, {action="trigger", target="fart", interval=10})
+
+      oxyd(3,3)
+      oxyd(level_width-4,level_height-4)
+      oxyd(level_width-4, 3)
+      oxyd(3,level_height-4)
+      oxyd_shuffle()
+
+      set_actor("ac-blackball", 10,6.5, {player=0})
+
+This is a welcome map for Enigma. First level in Enigma level
+package. You have to have a great imagination to create maps in such a
+way. You have to use precious coordinates and dozens of commands,
+nothing very simple. Great for small levels and fast stings, but
+complicated levels are difficult to create this way.
+
+Using ant.lua, the code turns to look this way:
+
+      Require("levels/ant.lua")
+
+      cells={}
+      cells[" "]=cell{floor="fl-sand"}
+      cells["#"]=cell{stone="st-greenbrown"}
+      cells["~"]=cell{stone={"st-timer", {action="trigger", target="fart", interval=10}}}
+      cells["*"]=cell{stone={"st-fart", {name="fart"}}}
+
+      level = {
+         "~##################*",
+         "#                  #",
+         "#                  #",
+         "#  0            0  #",
+         "#                  #",
+         "#                  #",
+         "#         O        #",
+         "#                  #",
+         "#                  #",
+         "#  0            0  #",
+         "#                  #",
+         "#                  #",
+         "####################"
+      }
+
+      oxyd_default_flavor = "a"
+      set_default_parent(cells[" "])
+      create_world_by_map(level)
+      oxyd_shuffle()
+
+
+Generally, you will save no lines of code, but make things look
+clear. This will ease maintenance works, debugging (yes, even in lua
+maps there can be bugs...) and so on. If other people look to your
+code, it will be clear to them what have you meant, where to look for
+particular elements, and so on.
+
+At the very top of file, you have to include ant.lua with the Require
+function. Then you prepare name space of your elements, this time it's
+called cells. You may have several maps in your file, each of them
+using different name space, so that "#" in one map is stone wall and
+in other map it's metal block. This is seldom used, but it's possible.
+
+Then, you occupy name space with cell keys. In our example, there are
+four keys - "#" for green-brown stone, " " for sand floor, "~" for
+timer stone, that triggers fart each 10 seconds, and "*", the fart
+stone itself.
+
+After cells{}, there is a map itself. It incorporates all of the
+declared elements (cell keys), plus element "O" (letter o), which
+automatically stands for black marble (if you don't override it), and
+element "0" (a zero), which is oxyd stone (again, if you don't change
+it).
+
+Finally, oxyd flavor is selected (the way oxyd stones will look like),
+default parent is set up, map is created, oxyd stones are mixed. All
+done.
+
+We will look at default parent later on. You should know for now, that
+this is a default "base" element for each map cell. The command itself
+tells to ant.lua: "let there be sand floor everywhere, if not said
+otherwise".
+
+Well, this is enough for now. If you are interested, read on, really
+interesting things are yet to be said. It you are not, I'm sorry for
+bothering you. I really didn't meant to.
+
+
+================================================================================
+3] VISUAL MAP DESIGN
+================================================================================
+
+3.1 Simple things first
+--------------------------------------------------------------------------------
+
+3.1.1 What is it, how to use it
+...............................
+
+The thing that you have just seen was an example of visual map
+design. You draw the map to the string grid, declare which key
+produces which element, and let ant.lua draw the thing. The way how
+your string map looks like is very near to how the world will look
+like once it gets rendered, thus visual.
+
+ant.lua has also the features that make your life easier even if you
+want to use procedural way of map design. These are not subject of
+this chapter and are to be discussed later.
+
+
+3.1.2 Using cell{}
+..................
+
+Once more, look at the declaration of cell keys:
+
+      cells={}
+      cells[" "]=cell{floor="fl-sand"}
+      cells["#"]=cell{stone="st-greenbrown"}
+      cells["~"]=cell{stone={"st-timer", {action="trigger", target="fart", interval=10}}}
+      cells["*"]=cell{stone={"st-fart", {name="fart"}}}
+
+First you create table of cell functions. Then you fill it with keys,
+and each key bind with its meaning. The core part of this declaration
+is function cell(). It's to be seen on each declaration line, and it
+can be used to declare any combination of floor, stone, item and
+actor. It can also "inherit" from other cell function, which will be
+discussed later.
+
+Generally, there are four ways how to use cell function:
+
+      cells[" "]=cell{floor="fl-sand"}
+      cells["#"]=cell{stone="st-rock2"}
+      cells["s"]=cell{item= "it-spring2"}
+      cells["o"]=cell{actor="ac-whiteball-small"}
+
+That is, you can create any part of Enigma world with cell
+functions. You can also mix things together, like this:
+
+      cells["&"]=cell{floor="fl-water", stone="st-grate1"}
+
+Each stone, actor, item and floor may have an attributes. Attributes
+of an object affect its behavior. For example, look at switch
+stone. This stone can make an action. It can open doors, turn boulders,
+turn on lasers etc. Zillion of things. Attributes say what exactly
+will it do. Or timer stone (we had one in an example above). Timer
+stone does an action in exactly specified intervals. Kind of action and
+the interval are driven, surprisingly, by an attributes.
+
+Attributes of element are defined this way:
+
+      cells["~"]=cell{stone={"st-timer", {action="trigger", target="fart", interval=10}}}
+      cells["*"]=cell{stone={"st-fart", {name="fart"}}}
+
+Syntax is as follows:
+
+      something = cell{stone={"st-something", {attrib1=value1, attrib2=value2, ...}}}
+
+And similar for floors and others.
+
+Knowledge of attributes is basic for customizing behavior of the
+objects. You can get it by looking at a
+/enigma-dir/doc/CREATING-LEVELS, or, better, by studying Enigma
+sources. Particularly the file /enigma-dir/src/objects.cc and
+/enigma-dir/src/items.cc. I believe that a better documentation is
+underway.
+
+
+3.1.3 Parents of cell{}
+.......................
+
+Mechanism of parents provides mechanism that arranges cell keys to
+hierarchical trees. Imagine this: you want to have two surfaces in
+your map. A grass and a sand. Also you would like to have a grate
+stone over each of the surfaces. You can do something like this:
+
+      cells[" "]=cell{floor="fl-sand"}
+      cells["."]=cell{floor="fl-leaves"}
+      cells["x"]=cell{floor="fl-sand",   stone="st-grate1"}
+      cells["X"]=cell{floor="fl-leaves", stone="st-grate1"}
+
+or, better:
+
+      cells[" "]=cell{floor="fl-sand"}   -- sand alone
+      cells["."]=cell{floor="fl-leaves"} -- grass alone
+      cells["x"]=cell{parent=cells[" "], stone="st-grate1"} -- grate over sand
+      cells["X"]=cell{parent=cells["."], stone="st-grate1"} -- grate over leaves
+
+This is better, because once you change the surface (let's say you
+like fl-rough better) you have to change it in just one place. But
+still, it can be improved a bit:
+
+      cells[" "]=cell{floor="fl-sand"}   -- sand alone
+      cells["."]=cell{floor="fl-leaves"} -- grass alone
+      cells["g"]=cell{stone="st-grate1"} -- grate alone
+      cells["x"]=cell{parent={cells[" "], cells["g"]}}
+      cells["X"]=cell{parent={cells["."], cells["g"]}}
+
+And this is perfectly generic. You can replace st-grate1 with
+st-grate2 and everything changes by itself. You replace fl-sand with
+fl-rough, and sand changes to rough floor everywhere.
+
+This is one point where procedural way of creating levels is
+better. In map, you have to differ between grate on sand and grate on
+leaves, like here:
+
+      level = {
+         "####################",
+         "#....     x    ....#",
+         "#XXXXxxxxxx    ....#",
+         "#....    xxxxxxXXXX#",
+         "#....    x     ....#",
+         "####################"
+      }
+
+Hierarchy:
+
+        cells[" "]  \
+                     > -> cells["x"]
+        cells["g"]  <
+                     > -> cells["X"]
+        cells["."]  /
+
+You can create a way more complicated trees. You may not create
+circular inheritance (A has parent B, whereas B has parent A). LUA
+won't let you do so, but it wouldn't be very wise to do it either.
+
+(In fact, it is possible to workaround it and create such a
+circularity, but it brings no extra functionality, except for some
+stack overflows)
+
+In fact, parent function may be any function that accepts x and y as
+it's first two arguments. For example:
+
+         function pr(x,y)
+            print(x, y)
+         end
+
+         ... some LUA code ...
+
+         cells["w"] = cell{parent={pr, cells["p"]}}
+
+This code writes x and y coordinates of element "w" for each place
+where element is located. This example itself is good for nothing,
+there are better usages of this principle. We will discuss them later,
+in a chapter about multiples.
+
+
+3.1.4 Drawing map
+.................
+
+You already saw an example map at the beginning of this document.
+Well, that was exactly how the maps are created. You make up the
+string grid, where each char represents one square of Enigma
+world. Map may be of any size, but it should be at least 20x13
+squares, one screen map.
+
+At the end of level file, there is usually located a combo of level
+creating commands. Let's look:
+
+      oxyd_default_flavor = "a"
+      set_default_parent(cells[" "])
+      create_world_by_map(level)
+      oxyd_shuffle()
+
+More about oxyd_default_flavor variable should be said at
+/enigma-dir/doc/functions.html. Generally, this variable controls how
+do the oxyd stones look like. At the time of writing this, it's
+possible to select between "a", "b", "c", and (surprisingly) "d". It's
+expectable that next flavor will be "e", should there be any at all.
+
+Default parent will be discussed later.
+
+Then, there is create_world_by_map. There are several more approaches
+available, plus you can select a name space of cells. Full command
+looks this way:
+
+      create_world_by_map(level, cells)
+
+What means, use the map "level". Meaning of chars of this map is
+described in a table named "cells". However, you may omit the second
+argument. If you do so, ant.lua will automatically pick a table named
+"cells". If there is none, a warning will be displayed, and empty
+table used instead.
+
+
+3.2 More complicated then
+--------------------------------------------------------------------------------
+
+3.2.1 Default parents
+.....................
+
+Now we get to promised default parent. You already know that each cell
+can have a parent. Any function at all can become a parent of some
+cell, but it's usual to use another cells as a parents. This makes
+level designing somehow better to understand and once written levels
+are easier to maintain.
+
+This is everything very nice, but imagine a level built up completely
+on sand. Every floor square is sand. What happens? Look:
+
+      cells[" "] = cell{floor="fl-sand"}
+      cells["#"] = cell{parent=cells[" "], stone="st-rock3"}
+      cells["D"] = cell{parent=cells[" "], stone="st-death"}
+      cells["W"] = cell{parent=cells[" "], stone="st-wood"}
+      ...
+
+It's boring cut-and-paste. If a single function is automatically
+parent of everything, there is no need to declare it this way. You can
+simply put down:
+
+      set_default_parent(cells[" "])
+
+Well, what if there is a grassy field in the middle of all that sand?
+No problem. Default parents get executed before any other parents, and
+these are in turn executed before any other cell elements. That means,
+that common parents always override default parents, and common cell
+elements (like stone, floor, ...) always override any parent. So, this
+is perfectly legal:
+
+      cells[" "] = cell{floor="fl-sand"}
+      cells["."] = cell{floor="fl-leaves"}
+      cells[":"] = cell{parent=cells["."], floor="fl-himalaya"}
+      ...
+      set_default_parent(cells[" "])
+
+It works as expected: all spaces in map are sand, and it's OK, as sand
+is default parent. All dots mean grass, even if default parent is
+sand. And all colons are replaced with himalayas stone floor, even if
+grass is declared as a parent and sand as a default parent.
+
+In fact, this is both power and weakness of the system. Parents are
+executed every time. They're all functions, so the engine doesn't know
+what exactly they're doing. It's waste of time - all default parents
+are executed for each cell every time it gets displayed, and all cell
+common parents the same. The engine doesn't know that nine out of ten
+parents set floor, and so he sets floor nine times.
+
+
+3.2.2 Default cell meanings
+...........................
+
+After first ten levels or so, you note that you use the same symbols
+for particular entities. For example letter 'O' for black marble,
+number '0' for oxyd stone, '#' for stone wall and 'D' for death
+stone. This made me do something like common cell meaning.
+
+Default meanings save time and code in case that you use the component
+in standard way. You don't have to declare such a component and
+ant.lua automatically pick its default meaning. For example, look
+again to the welcome.lua example:
+
+      cells={}
+      cells[" "]=cell{floor="fl-sand"}
+      cells["#"]=cell{stone="st-greenbrown"}
+      cells["~"]=cell{stone={"st-timer", {action="trigger", target="fart", interval=10}}}
+      cells["*"]=cell{stone={"st-fart", {name="fart"}}}
+
+      level = {
+         "~##################*",
+         "#                  #",
+         "#                  #",
+         "#  0            0  #",
+         "#                  #",
+         "#                  #",
+         "#         O        #",
+         "#                  #",
+         "#                  #",
+         "#  0            0  #",
+         "#                  #",
+         "#                  #",
+         "####################"
+      }
+
+The cells '0' and 'O' are not declared at all, still they may be used
+at a string map. That is because 'O' and '0' are bound to black marble
+actor and oxyd stone by default. There are more of a kind:
+
+      '.' stands for "fl-abyss"
+      'o' stands for "ac-whiteball-small"
+      'W' stands for "st-wood"
+      'B' stands for "st-block"
+      'D' stands for "st-death"
+      '=' stands for "st-glass"
+      'X' stands for "st-grate"
+
+And maybe some more will be declared in future. Look to ant.lua, to
+section 'MEANINGS FOR COMMON CELL KEYS'.
+
+Besides this, there is a bunch of map moods and modes. These moods and
+modes map some other cell meanings, if you turn them on. If you write
+this into your level file:
+
+      meditation_mode()
+
+you turn on meditation mode. In this mode, letter 'O' has a special
+meaning of a floor pit (hollow) that has to be occupied by a small
+white marble for the level to be finished.
+
+Another modes and their bindings:
+
+      multiplayer_mode()
+        '1' stands for black marble
+        '2' stands for white marble
+        each of these marbles gets an it-yinyang automatically, so that
+        the player can switch between the marbles. Letter 'O' has still
+        its meaning of black marble without a yinyang item.
+
+      grass_mode()
+        '#' stands for "st-rock1"
+        ' ' stands for "fl-leaves"
+
+      metal_mode()
+        '#' stands for "st-rock2"
+        ' ' stands for "fl-metal"
+
+It's alike that more modes are to come in future.
+
+If you want to override the common meaning, no problem. Just declare
+the element in your cells table. ant.lua will look for default meaning
+only in case it doesn't find it there.
+
+
+3.2.4 use_cells
+...............
+
+When you rely on a default cell meanings, you happen to miss many of
+default meanings in your cells table. For example, you don't have to
+declare cells["#"] in metal_mode, as '#' stands for metal stone
+already.
+
+Well, but what if you want to use given cell as a parent? What if you
+want to place an actor to non-default floor. There is a sand
+everywhere in your map, so it's reasonable to use the sand for default
+parent. But you need an actor on metal floor. Typical construction
+looks like this:
+
+      cells = {}
+      cells["_"]=cell{floor="fl-metal"}
+      cells["*"]=cell{parent={cells["_"], cells["O"]}}
+
+Ha! But there is no cells["O"], because you use default meanings. And
+who wants to declare cells["O"] - there are default meanings for you
+not to have to do this. Well, there is a function that helps you in
+such a situations:
+
+      cells = {}
+      use_cells("O")
+      cells["_"]=cell{floor="fl-metal"}
+      cells["*"]=cell{parent={cells["_"], cells["O"]}}
+
+That's it. Even better, if you have only one actor in your map, you
+can override default meaning:
+
+      cells = {}
+      use_cells("O")
+      cells["_"]=cell{floor="fl-metal"}
+      cells["O"]=cell{parent={cells["_"], cells["O"]}}
+
+The function can also get a cellfuncs-table as an argument. This is
+particularly necessary if you have your definitions in a table with
+the name different from 'cells'.
+
+      cells2 = {}
+      use_cells(cells2, "O", "D")
+
+It's not very common to use 'use_cells' in map, but it happens from
+time to time.
+
+
+3.2.3 Layered maps
+..................
+
+It's also possible to map surfaces, stones and items separately.
+Three maps are created then, and you write:
+
+      create_world_by_map(floors, fcells)
+      draw_map(0, 0, stones, scells)
+      draw_map(0, 0, items,  icells)
+
+If you have only one table of cell meanings, named 'cells', you may
+write this, as 'cells' is being looked for by default:
+
+      create_world_by_map(floors)
+      draw_map(0, 0, stones)
+      draw_map(0, 0, items)
+
+The only tricky thing to avoid is default parent - you may not use
+default parents in layered maps, or, the default parent may not change
+map itself. Imagine sand floor for the default parent. You let ant.lua
+draw floors, and it's OK. Then you let draw stones, and all floors are
+overridden by default parent. Beware. Or, draw layers in reverse
+order.
+
+
+3.2.4 Drawing per partes
+........................
+
+Currently, it's possible to draw a map as a whole, by one command, or,
+for more precious drawing, draw a part of map, or draw just the
+squares you want to be drawn.
+
+These functions are participating in drawing process. They're
+organized so that the most low-level function is first and the most
+high-level last.
+
+      function render_key(rx, ry, key, cellfuncs)
+      function get_cell_by_xy(mx, my, map)
+      function render_map_cell(rx0, ry0, mx, my, map, cellfuncs)
+      function draw_map_portion(rx0, ry0, mxy0, mxy1, map, cellfuncs)
+      function draw_map(rx0, ry0, map, cellfuncs)
+      function prepare_world_by_map(map)
+      function create_world_by_map(map, cellfuncs)
+
+Now we'll look on those functions briefly.
+
+  render_key: render one square of world
+    rx, ry: which square to render
+    key:    the cell key, like in string map
+    cellfuncs: table of cell functions, may be omitted
+    *example: render_key(5,15, '#')
+              render_key(5,15, ' ', cells)
+
+  get_cell_by_xy: get a key at given map location
+    mx, my: coordinates of key at map
+    map:    string map
+
+  render_map_cell: draw given square of map
+    rx0, ry0: where should be left top corner of map located in world
+    mx, my:   coordinates of the cell in map
+    map:      the map
+    cellfuncs:table of cell functions, may be omitted
+
+  draw_map_portion: draw given part of map
+    rx0, ry0: where should be left top corner of map located in world
+    mxy0:     {mx0,my0} -> coordinates of left top corner of portion
+    mxy1:     {mx1,my1} -> coordinates of right bottom corner
+    map:      string map
+    cellfuncs:table of cell functions, may be omitted
+    *example: draw_map_portion(0,0, {2,5}, {10,7}, level, cells)
+
+  draw_map: draw whole map
+    rx0, ry0: world coordinates of left top corner of map
+    map:      string map to be drawn
+    cellfuncs:table of cell functions, may be omitted
+
+  prepare_world_by_map: create Enigma world with the size by given map
+    map: string map, which the size of the world is taken from
+
+  create_world_by_map: create and draw Enigma world
+    map:       string map of the world
+    cellfuncs: table of cell functions, may be omitted
+
+
+3.2.5 Multichar maps
+....................
+
+It could happen that you need to use the map, where each cell is
+defined by more than one character. You may simply create the map so
+complex, that you run out of chars. You may create the map, where each
+key is composed of three chars, first declaring floor type, second
+stone, third item or actor. Generally it's not used, but there is a
+possibility to do so. Functions in ant.lua can work with such a maps.
+
+There is only one thing that you have to do, to let ant.lua know what
+key width you are using, that is, how many chars are the keys composed
+of. That thing is:
+
+      set_cell_key_width(w)
+
+where 'w' stands for the width of key. By default it's 1, and you can
+use any positive whole number that you want.
+
+String maps have to reflect cell key width. If you have got a cell key
+width of 2, strings in map simply cannot have lengths like 7 or
+13. Let's convert our example map to multichar:
+
+      Require("levels/ant.lua")
+
+      cells={}
+      cells["  "]=cell{floor="fl-sand"}
+      cells["##"]=cell{stone="st-greenbrown"}
+      cells["~~"]=cell{stone={"st-timer", {action="trigger", target="fart", interval=10}}}
+      cells["**"]=cell{stone={"st-fart", {name="fart"}}}
+
+      level = {
+         "~~####################################**",
+         "##                                    ##",
+         "##                                    ##",
+         "##    00                        00    ##",
+         "##                                    ##",
+         "##                                    ##",
+         "##                  OO                ##",
+         "##                                    ##",
+         "##                                    ##",
+         "##    00                        00    ##",
+         "##                                    ##",
+         "##                                    ##",
+         "########################################"
+      }
+
+      oxyd_default_flavor = "a"
+      set_cell_key_width(2)
+      set_default_parent(cells["  "])
+      create_world_by_map(level)
+      oxyd_shuffle()
+
+How are default cell meanings parsed in case of multichar maps? Well,
+there may be some default meanings, but it's not alike. However, the
+engine tries. It it doesn't find any meaning among both common cell
+functions table and default meanings, it picks first char and tries
+again. So '00' becomes oxyd stone, as well as '0$' or anything else
+with zero as first char.
+
+Behavior of some ant.lua functions may be changed by the fact that the
+map is multichar. For example, get_map_width() returns correct map
+size, even if strings in map are twice (three times, ...)  longer.
+get_cell_by_xy() gives back correct cell key, not the char located at,
+say, [7,15], but the string of two (three, ...) chars located at map
+position [7,15]. And so on...
+
+
+3.3 cell{} to depth
+--------------------------------------------------------------------------------
+
+3.3.1 Checker floor
+...................
+
+Sometimes you want to create something as basic as a checkerboard
+floor. It's, in my opinion, nice design element. You would expect this
+to be no problem, but...
+
+Well, it generally is not a problem in procedural way of map design.
+But if you have to draw the checkerboard into string map, you soon
+find out terrible truth. It's boring and map looks messy.
+
+I tried, too. And this experience made me to create a mechanism to
+draw checkerboard floors. This mechanism may be happily used also to
+create checkerboard stones or anything, but most common it's used for
+creating floors, thus its name.
+
+Syntax is as follows:
+
+      cells={}
+      cells[";"]=cell{floor="fl-tigris"}
+      cells[","]=cell{floor="fl-sahara"}
+      cells[" "]=cell{{{checkerfloor,{cells[","], cells[";"]}}}}
+
+It's kinda LISPy, due to special syntax that we will discuss later
+on. In fact, this is special case of calling parent. Also, you could
+write something like this:
+
+      cells[" "]=cell{parent={{checkerfloor, {cells[","], cells[";"]}}}}
+
+and it is the same.
+
+By default, a grid of 1x1 square is done, checkerboard squares have
+the size of one precious Enigma world stone. There are arguments, that
+change this:
+
+      sahara=     cell{floor="fl-sahara"}
+      tigris=     cell{floor="fl-tigris"}
+      solidfloor= cell{{{checkerfloor,{sahara,tigris; side=2, offset=1}}}}
+
+Argument 'side' changes the size of the square: here each of the
+squares takes up area of four stones: 2x2.
+
+Argument 'offset' does exactly what it sounds like: it 'shifts' the
+grid. By default, left top corner of first square of checkerboard is
+aligned with left top corner of world (square coordinates [0,0]).
+Offset of 1 moves it to the square [1,1].
+
+Also you can create asymmetric constructions. You may specify also
+these attributes:
+
+      sidex: to specify width of squares
+      sidey: to specify height of squares
+      offsetx: to shift the grid to right
+      offsety: to shift the grit down
+
+
+3.3.2 Random floor
+..................
+
+Random floor is a similar case to checkerboards. You need one once
+upon a time and creating such a floor by hand is boring and not so
+very random as one wishes. That was the reason behind creating random
+floor parent.
+
+Just like the checker floor, also this parent may be used to construct
+anything random. Random stones, random items, you choose.
+
+Random floor is constructed like in this example:
+
+      normal = cell{floor="fl-rough"}
+      invert = cell{floor="fl-inverse"}
+      tiles  = cell{{{randomfloor, {normal, invert}}}}
+
+You see, the syntax is very similar to that used in checker floor
+parent. Soon, you will see this is no coincidence.
+
+You can declare as many random elements as you want:
+
+      normal = cell{floor="fl-rough"}
+      invert = cell{floor="fl-inverse"}
+      sahara = cell{floor="fl-sahara"}
+      tigris = cell{floor="fl-tigris"}
+      tiles  = cell{{{randomfloor, {normal, invert, sahara, tigris}}}}
+
+Great, you think. What if I want one item to occur more often? The
+answer is item occurrence factor. Each item may be followed by a
+number, which declares how often the tile will occur compared to
+others. If you omit the number (like in above examples), factor of 1
+is default. See the example:
+
+
+      tigris = cell{floor="fl-tigris"}
+      samba  = cell{floor="fl-samba"}
+      stone  = cell{floor="fl-stone"}
+      cells[" "] = cell{{{randomfloor, tigris, 3, samba, 1, stone, 20}}}
+
+In this case, the floor tiles will be picked in ratio 3:1:20. Most
+often, the stone floor will occur, approximately twenty times more
+often than samba floor. Tigris floor will occur less often,
+approximately three times more than samba.
+
+A function 'random' is used to pick random number. Result of the
+function may be modified by the function 'randomseed', which initiates
+random seed generator:
+
+      randomseed(666) -- a truly evil landscape
+      randomseed(date"%d%H%M%S") -- 'real' randomness
+
+
+3.3.3 Curried function construction
+...................................
+
+Let's look at a parent functions again. Cell parents provide interface
+to call another functions. In fact, common cell construction:
+
+      tigris = cell{floor="fl-tigris"}
+
+just assigns a function to name 'tigris'. Later on, you may write
+things like this:
+
+      tigris(5, 15)
+
+and this means 'place a tigris floor to the square located at
+[5,15]'. Just as simple. If you construct a cell function like this:
+
+      cells["%"] = cell{parent=tigris, stone="st-glass"}
+
+you just let the function cells["%"] execute the function tigris
+before everything else. Note, cells["%"] is also function, so you can
+happen to write things like cells["%"](5, 15)!
+
+The rule is: each function may be used as an parent. If it accepts
+some arguments, first two of them have to be (x,y). Like here, in the
+example we've seen before:
+
+      function pr(x,y) print(x, y); end
+      cells["w"] = cell{parent=pr}
+
+If you enclose them to the curly brackets, you can call several
+parents at one run:
+
+      cells["w"] = cell{parent={pf1, pf2, pf3}}
+
+Finally, you may omit leading 'parent=' - if ant.lua finds no 'parent'
+assignment, it automatically looks for the first item of the
+table. So, this is perfectly legal:
+
+      cells["w"] = cell{{pf1, pf2, pf3}}
+
+Another problem is passing arguments to parent functions. Let's look
+to randomfloor parent example once more:
+
+      tiles  = cell{{{randomfloor, {normal, invert}}}}
+
+The same could be written also this way:
+
+      tiles  = cell{parent={{randomfloor, {normal, invert}}}}
+
+Let's convert it to syntactical rule:
+
+      tiles  = cell{parent={{function_name, argument}}}
+
+And we are done. If you enclose parent to double curly brackets, it
+becomes curry function construction. First element of inner table is
+function name, all other elements are function arguments. If you omit
+leading 'parent=', you'll get to triple-curly-encapsulation, rather
+common in maps with ant.lua:
+
+      function pr(x,y, greet, name)
+         print(greet..", "..name.." from ["..x..","..y.."]!")
+      end
+
+      hallo = cell{{{pr, "Hallo", "world"}}}
+
+      hallo(2,3)
+
+This code chunk will produce: "Hallo, world from [2,3]!"
+
+Still not at the end. This construction lets you create so called
+curried constructions. Curried functions are used in some programming
+languages (Haskell for example). What ant.lua provides is far from
+curried functions known from such a languages, but it's somehow
+similar. Look at this to see what's going on:
+
+      hallo0 = cell{{{pr, "Hallo", "world"}}}
+      hallo1 = cell{{{pr, "Hallo"}}}
+      hallo2 = cell{{{hallo1, "world"}}}
+
+      hallo0(2,3)
+      hallo1(2,3, "world")
+      hallo2(2,3)
+      pr(2,3, "Hallo", "world")
+
+Of course, all these function calls produce the same output.
+
+Curried function calls are rather common in maps that use ant.lua.
+Later on we'll take a look at 'object multiples' - this thing is
+completely build on top of curried function call. And features like
+railway generator, puzzle generator or slope generator stand on object
+groups in turn. It could be said that most features of ant.lua use
+curried call.
+
+
+================================================================================
+4] FUNCTIONAL APPROACH
+================================================================================
+
+4.1 Fills, borders, ...
+--------------------------------------------------------------------------------
+
+There are several functions for drawing Enigma maps in init.lua. Most
+of them (if not all) have their counterparts in ant.lua. The difference
+is, that init.lua functions work with stone/floor/item names, but
+ant.lua function works with functions.
+
+Let's look at how are the basic function, filling the world and
+drawing border, declared:
+
+      function fill_world_func(fillfunc, x0, y0, w, h)
+      function draw_border_func(fillfunc, x0, y0, w, h)
+      function draw_func_corners(fillfunc, x0, y0, w, h)
+
+You see, first argument is a function, then there are coordinates of
+area to be filled. The area may actually be omitted completely, and
+then whole world is filled/bordered at once. Function
+'draw_func_corners' behaves similarly to 'draw_border_func', except
+that it draws only the four corners of given area.
+
+As to the 'fillfunc', this can be any function at all, but preferably
+it should look something like this:
+
+      function fill(x,y)
+         do_something(x,y)
+      end
+
+This function will be executed for each cell at given area (that is
+for the fill_world function), or for each cell of the border of given
+area (that is for draw_border function).
+
+Note, that also cell{} function have got the form of func(x,y), so you
+can happily use them:
+
+      floor0 = cell{floor="fl-himalaya"}
+      stone0 = cell{stone="st-rock4"}
+      actor0 = cell{actor={"ac-blackball", {player=0}}}
+
+      create_world(20, 13)
+      fill_world_func(floor0)
+      draw_border_func(stone0)
+      actor0(5,5)
+
+And we are done. Note that if you haven't got a string map, you must
+use common function create_world(w,h).
+
+How to fill/border/cornerify just a given portion of map? Well, use
+x0, y0, x, h arguments of function:
+
+      fill_world_func(floor0, 39, 1, 19, 11)
+
+init.lua provides a single function to let you draw a checkerboard of
+selected floor kinds. In ant.lua there is no function alike. It's
+possible to do it this way:
+
+      normal = cell{floor="fl-normal"}
+      invers = cell{floor="fl-inverse"}
+      checker= cell{{{checkerfloor, {normal, invers}}}}
+      fill_world_func(checker)
+
+This mechanism is much more generic. You use the same filling function
+as usual, just add the function that generates checker floor. Note
+that creating random floor is a matter of rewriting 'checkerfloor' to
+'randomfloor', and you can create checkers/randoms from floors,
+stones, items and even an actors.
+
+
+4.2 init.lua counterparts - set_, draw_
+--------------------------------------------------------------------------------
+
+The library also provides functions similar to set_ and draw_functions
+from init.lua. Group of 'set_' functions in init.lua was aimed to
+place a single item/stone/floor/actor to given position. As usual,
+ant.lua does the same with a single function set_funcs:
+
+      function set_funcs(fillfunc, poslist)
+
+Where 'fillfuncs' is a function to be executed on given positions, and
+'poslist' are those positions. Look at examples:
+
+      set_funcs(doorA, {{2,1},{2,11},{10,1},{10,11}})
+      set_funcs(fakeoxyd, {{1,1},{1,11}})
+      set_funcs(oxyd, {{18,1},{18,11}})
+
+Argument 'poslist' is really a list of positions, as you expected. You
+got the idea. It's also possible to execute several functions at once,
+though this is seldom used:
+
+      set_funcs({abyss, doorA}, {{2,1},{2,11},{10,1},{10,11}})
+
+Another useful function is draw_funcs. This is similar to draw_floor,
+draw_items and others from init.lua. Draw_funcs executes given
+function at several places in one row:
+
+      function draw_func(fillfunc, {x0,y0}, {dx,dy}, steps)
+
+Real life examples follow:
+
+      draw_func(stone, {3,2}, {0,1}, 11)
+      draw_func(abyss, {13,0}, {0,1}, 13)
+
+First in list is function to be executed, then starting location
+follows, then increment and finally number of steps to proceed. First
+line of above example says: "take a function 'stone' and call it for
+x,y coordinates beginning at {3,2}, and ending up at {3,12}". So,
+given {dx,dy} is continually added to initial location {x0,y0} exactly
+'steps' times, and for each location the function is called.
+
+More general syntax is this:
+
+      function draw_func(fillfunc, xylist, dxdylist, steps)
+
+This syntax allows you to use several {x0,y0} locations or several
+{dx,dy} increments. Let's look at examples:
+
+      draw_func(stone, {{1,1},{5,1}}, {0,1}, 10)
+
+Two vertical rows of 'stones' are drawn, each consisting of ten stone
+blocks, the first starting at {1,1}, second at {5,1}.
+
+      draw_func(stone, {0,0}, {{0,1}, {1,0}} 10)
+
+Two rows of ten stones are drawn, one horizontal and one vertical,
+both starting at {0,0}.
+
+Also you can use table of functions, if you want to execute several
+function for each cell:
+
+      draw_func({floor0, stone0}, {0,0}, {0,1}, 10)
+
+Last function of this sub-chapter is 'ngon' drawing function. It's
+particularly useful for placing several actors to circular/
+triangular/ pentagonal/ any other polygonal settings. Basic syntax
+follows:
+
+      function ngon_funcs(fillfunc, xylist, radiuslist, count)
+
+* fillfuncs: this is, as usual, a function or several functions in a table.
+* xylist: this is {x0,y0} coordinates of a polygon center. You may
+  also specify several locations, if you want to create several
+  polygons, like in draw_func.
+* radiuslist: this is a single number, if you want to create a single
+  polygon, or a table of numbers, if you want to create several
+  concentric polygons.
+* count: a number of elements in polygon
+
+A real-world example:
+
+      ngon_funcs(actor, {10,10}, 2.25, 3)
+
+To turn whole polygon by a given angle, include that angle as a last
+function argument:
+
+      ngon_funcs(actor, {10,10}, 2.25, 3, 60)
+
+And finally, if you want to place stones, floors and items, you have
+to round their coordinates (you simply cannot place a floor tile to
+{1.63, 7.25}). This is done via 'roundfunc' syntax:
+
+      function ngon_funcs(fillfunc, xylist, radiuslist, count, alpha0, roundfunc)
+
+For example:
+
+      ngon_funcs(actor, {10,10}, 2.25, 3, 60, floor)
+
+'floor' is a name of a mathematical function, not a function to draw
+Enigma floor. You could also use for example 'ceil'. To be precious,
+you can use any function, that accepts one argument and results it's
+modified value:
+
+      function f0(x) return x*x end
+      ngon_funcs(actor, {10,10}, 2.25, 3, 60, f0)
+
+But I have no idea what would this be good for :)
+
+
+4.3 Coordinate mangling
+--------------------------------------------------------------------------------
+
+Very impressive feature of whole cell{} function mechanism is, that it
+provides a way to transform a coordinates automatically for you. Maybe
+you know the problem with placing the items to lower and right edges
+of map - one never knows what exactly to subtract from level_width to
+get the right value.
+
+Look at the piece of code from the welcome-map example:
+
+      oxyd(3,3)
+      oxyd(level_width-4,level_height-4)
+      oxyd(level_width-4, 3)
+      oxyd(3,level_height-4)
+
+What this piece actually does, is that it places the four oxyd stones
+to location [3,3] relatively to the four corners of map. Even this
+line of code:
+
+      oxyd(level_width-4,level_height-4)
+
+Actually means 'place the oxyd three from bottom and three from
+right', or something alike.
+
+In ant.lua code, you can simply write:
+
+      oxyd( 3, 3)
+      oxyd(-3,-3)
+      oxyd(-3, 3)
+      oxyd( 3,-3)
+
+As we all know that negative coordinates don't exist in Enigma,
+ant.lua converts those so that they become relative to lower/right
+edges of map. Simple as that.
+
+What is even better? It's possible to use coordinates list:
+
+      oxyd({{3,3}, {-3,-3}, {-3,3}, {3,-3}})
+
+This is good enough, but for the cases like this one, where you need
+to place some entity to the four corners of imaginary rectangle, there
+is a function:
+
+      draw_func_corners(fillfunc, x0, y0, w, h)
+
+The tricky thing is that the function requires 'w' and 'h'
+arguments. This means that you cannot simply write:
+
+      draw_func_corners(oxyd, 3, 3, -3, -3)
+
+as this time, '-3' means 'three squares less than width of the
+map'. Use this instead:
+
+      draw_func_corners(oxyd, 3, 3, -6, -6)
+
+
+================================================================================
+5] OBJECT GROUPS
+================================================================================
+
+5.1 Introduction
+--------------------------------------------------------------------------------
+
+What are object groups? What are they good for? Generally, object
+group is nothing but a table filled with some special data. If those
+data are interpreted correctly, they may happen to become stones,
+actors, floors, coordinates or other meaningful constructions.
+
+Imagine that you want to build a map. There are four doors, one in
+each level corner. And one switch in a center. Now, how do you get all
+doors open at the same time, after someone switches the button? You
+use object group, so-called multiple. That multiple holds all the
+doors at one table, and it can open/close them upon button switch. The
+advantage is, that you can add as many doors as you want to map, and
+all will open at once.
+
+Another example: a rubber bands. If you want to connect several
+actors, or actors and stones with rubber bands, you add them to
+multiple and after the level is drawn, you bind them together with one
+command. Let's look at some real-world example:
+
+      cells["O"]=cell{{{add_multiactor, "ac-blackball", actors, {player=0}, 2}}}
+      cells["%"]=cell{{{add_multistone, "st-rock3", stones}}}
+      ... code,map,stuff ...
+      create_world_by_map(level)
+      add_rubber_bands(actors, stones, -10, 4)
+
+That's all. No matter how much actors are there, no matter how much
+stones are they to be bound to. We'll talk about rubber bands more
+later. Now, as you got the idea what is it good for, let's move on.
+
+
+5.2 Common multiples
+--------------------------------------------------------------------------------
+
+5.2.1 Multielement functions
+............................
+
+There are four basic object multiples in ant.lua:
+
+      add_multistone(x, y, face, group, attribs)
+      add_multifloor(x, y, face, group, attribs)
+      add_multiitem(x, y, face, group, attribs)
+      add_multiactor(x, y, face, group, attribs, actor_mode)
+
+Basic difference between them is obvious.
+
+Step one when creating a multiple is to define a group. It's usual to
+store the object to logical groups - doors that should open at once
+have to be in one group, actors to be bound by rubber bands have to be
+in another. To define a group, do this:
+
+      group = {}
+
+That's it. This has to be done for each group, so that LUA has a space
+to add objects to. The above example should look like this:
+
+      actors={}
+      stones={}
+      cells["O"]=cell{{{add_multiactor, "ac-blackball", actors, {player=0}, 2}}}
+      cells["%"]=cell{{{add_multistone, "st-rock3", stones}}}
+
+This example also shows a step two. You have to create a rule to fill
+a multiple with objects. In above example, the group named 'actors' is
+filled up with the rule add_multiactor ("ac-blackball", the black
+marble) and 'stones' group is filled up with stones "st-rock3".
+
+It's possible to mix up several kinds of elements in one group. For
+example, it's perfectly reasonable if you store a doors and bridges in
+one group, and then let them all open/close at once.
+
+      openables={}
+      cells["-"]=cell{{{add_multistone, "st-door", openables, {type="h"}}}}
+      cells["|"]=cell{{{add_multistone, "st-door", openables, {type="v"}}}}
+      cells["T"]=cell{{{add_multifloor, "fl-bridge", openables, {name="bridgeA"}}}}
+
+Moreover, it's also possible to have one object placed in several
+groups. I've never need such a thing, but it's well possible to do so:
+
+      openables={}
+      stones={}
+      cells["-(1)"]=cell{{{add_multistone, "st-door", openables, {type="h"}}}}
+      cells["-(2)"]=cell{{{add_multistone, "st-door", stones, {type="h"}}}}
+      cells["-"]=   cell{parent={cells["-(1)"], cells["-(2)"]}}
+      cells["D"]=   cell{{{add_multistone, "st-death", stones}}}
+      cells["T"]=   cell{{{add_multifloor, "fl-bridge", openables, {name="bridgeA"}}}}
+
+In this example, the element "-" is added both to 'openables' and
+'stones'. Like I said, this is not very common :)
+
+
+5.2.2 Group actions
+...................
+
+Fine, so we know everything about creating a group, yet there was no
+example of real usage. The simplest usage is to send a message to all
+elements in group. In one of above examples, the group 'openables'
+grouped together all the elements that could work with a 'openclose'
+message:
+
+      send_group_message(openables, "open", nil)
+
+This function has the same syntax and semantics as a 'send_message'
+from init.lua, it just accepts a group of objects at a first
+place. You can use this on groups of objects only. Since now, there
+were only the object groups, that is, the groups made up of stones,
+floors, items and actors. But this will change soon.
+
+Sending a message is not the only thing to be done with object
+group. You can also change the attribute of grouped objects. As in the
+above case, you can only do this with game elements - stones, floors,
+you know. This is done this way:
+
+      set_group_attribs(bolders, {direction=EAST})
+
+First argument is object group, second the attributes to be changed
+(like in 'set_attribs' from init.lua).
+
+
+5.2.3 Rubber bands
+..................
+
+Creating a rubber bands is kinda tricky in a string-map-based
+level. How to mark which objects should be rubber-banded together?
+Answer is object groups.
+
+Basically, you need two groups for this, one with the objects 'from'
+which the rubber band be made, and another with the object 'to' which
+the rubber band will be made. In fact, you can well use the same group
+for both, and it's often used.
+
+There are several rubber-banding functions. We'll go through all of
+them.
+
+First, imagine you want to rubber band each actors with each
+bolder. Actors are in first group, bolders in another. You can do it
+this way:
+
+      add_rubber_bands(actors, bolders, 5, 0)
+
+That is, bind each actor with each bolder by rubber band of length 0
+and force 5. In a special case of one bolder in 'bolders' group, all
+actors are bound to a single bolder. In another special case of a
+single actor in a 'actors' group, poor actor is bound to all
+bolders. And finally, if there is a single actor and a single bolder,
+they are simply bound together.
+
+Another useful construction is to create a rubber band pairs. This
+time, you really need two different groups. First object from first
+group is then bound with first object from second group, second from
+first group with second from second group, and so on:
+
+      add_rubber_band_pairs(actors, blocks, 10, 0)
+
+It's really useful to have both the groups populated by same number of
+elements. Above example is picked from a meditation landscape, where
+each of the small white marbles is bound to one stone block.
+
+Last rubber banding function is 'rubber_band_circle'. This time you
+only need a single group. First object of the group is bound with
+second, the second is bound with third, and so on. Last one is then
+bound with the first:
+
+      rubber_band_circle(actors, 10, 2)
+
+In Enigma, you are only allowed to bind the actor and stone or the
+actor and actor. Because of this, the group in this case has to be
+made up of the actors only, or, more exactly, the two neighboring
+elements may not be stone-stone. It's not possible to bind the actor
+to floor or item, so avoid using those object in rubber band
+constructions completely.
+
+
+5.3 Generic multielements
+--------------------------------------------------------------------------------
+
+Besides multielements that represent Enigma game objects, there are
+several so-called generic multielements. Those usually cannot accept
+multimessages, nor can their attributes be changed by
+change_group_attribs. These multielements are used in special ant.lua
+utilities - train-, wormhole- and slope-generator.
+
+Everything that was said about common multielements is true for
+generic multielements, too. They are stored in a table, that has to be
+declared, so the basic construction looks like this:
+
+      group={}
+      cells["!"]=cell{{{add_*, group, ...}}}
+
+Where add_* stands for the multielement function, group is group which
+the multielement should be given to, and '...' stands for 'another
+arguments'.
+
+Generic multielement functions are these:
+
+      function add_multicell(x, y, group, tag)
+      function add_multiobject(x, y, group, func)
+
+In upcoming chapters, each of them will be talked about a bit.
+
+
+5.3.1 add_multicell
+...................
+
+Each multicell element holds three values: two coordinates (x,y) and a
+'tag' value. For example:
+
+      slopes={}
+      cells["*"]=cell{{{add_multicell, slopes, -1}}}
+
+This example will add an element to the 'slopes' table for each
+asterisk in your string map. Every such element will be tagged to -1.
+
+add_multicell element is the most widely used one.
+
+
+5.3.2 add_multiobject
+.....................
+
+Another multielement is add_multiobject. This is used rather seldom,
+much much lesser than add_multicell. Multiobject function is similar
+to multicell, except for the tag, which is 'function' this time:
+
+      function add_multiobject(x, y, group, func)
+
+Given function gets executed with the (x,y) coordinates, and its
+result is stored to given table. Real-world examples are rather
+obscure constructions like this one:
+
+      cells = {}
+      use_cells(cells, "O")
+      cells["O"]=cell{{{add_multiobject, actors, cells["O"]}}}
+
+cells["O"] is a function, we all know. This function has in fact a
+return value. Simply said, cell{} function that places an actor return
+this actor. Cell function that creates a stone return this stone. And
+so on. Because of use_cells(cells, "O") the default meaning for "O"
+will be added to cells[] table. And add_multiobject will thus add its
+return value, that is just created actor, to the 'actors' table.
+
+In fact, the function can be anything. It doesn't have to result in
+Enigma object, like in above example. It may well return string or
+number, or even the table. It's up to you, the level designer, if you
+find use for this construction.
+
+
+5.4 Worm holes
+--------------------------------------------------------------------------------
+
+5.4.1 Forewords
+...............
+
+Worm hole pairs are nice map addition, seen in many maps across all
+Enigma map packages. However if you want to create such a pair by
+traditional resources, you find out that it's far from the comfort of
+moving letters across the string map. You have to change attributes of
+given worm hole directly - by choosing another pair of numbers. And as
+I really am a lazy person, the first thing to do when creating map
+with wormholes, was to add a generator that would just simplify this
+task.
+
+
+5.4.2 Technical background
+..........................
+
+Wormholes in Enigma have a simple purpose. If an actor enters
+wormhole, it's moved to arbitrary location in Enigma world. Thus, each
+worm hole has to be fed up with coordinates of target.
+
+The work of wormhole generator stands on top of object groups. You
+feed the generator with a table of worm hole items and a table of worm
+hole targets, and it puts them into pairs and create appropriate items
+with the right attributes.  Both the worm holes and their targets are
+special table of multicells.
+
+Basic scheme is this:
+
+* declare group for wholes and wtargets
+* declare whole symbols and wtarget symbols for cells[]
+* let the map be drawn
+* render worm holes
+
+
+5.4.3 Setting up cell{} functions
+.................................
+
+At first, you have to declare the groups:
+
+      holes={}
+      targets={}
+
+Now add a wormhole pairs. There is function that does this for you,
+called 'worm_hole_pair':
+
+      worm_hole_pair(cellfuncs, whole_cell, tgt_cell, whole_parent, tgt_parent, whole_grp, tgt_grp, tagnumber)
+
+* cellfuncs is a table of cell functions (usually cells[])
+* whole_cell is a letter that will stand for worm hole on string map
+* tgt_cell is a letter that will stand for a worm hole target
+* whole_parent is a function to be used as a parent of worm hole cell
+* tgt_parent is a function to be used as a parent of worm hole target
+* whole_grp is a group of worm holes
+* tgt_grp is table of worm hole targets
+* tagnumber is unique number that identifies the wormhole-target pair
+
+For example, the setting might look this way:
+
+      worm_hole_pair(cells, "A", "a", cells[" "], cells[" "], holes, targets, 1)
+      worm_hole_pair(cells, "B", "b", cells["_"], cells["_"], holes, targets, 2)
+      worm_hole_pair(cells, "C", "c", cells["_"], cells["_"], holes, targets, 3)
+
+If you need some special fine-tuning, you can write the same this way
+(in the example, there is a "A"-"a" pair defined):
+
+      cellfuncs["A"] = cell{{cells["_"], {add_multicell, holes,   1}}}
+      cellfuncs["a"] = cell{{cells[" "], {add_multicell, targets, 1}}}
+
+
+5.4.4 Setting up the map
+........................
+
+In map, you simply place the whole-letters and wtarget-letters to
+their places, so that they represent desired actor hyper-jumps.
+
+      level = {
+         "###################",
+         "#A       #       a#",
+         "#        #        #",
+         "#        #        #",
+         "#b       #       B#",
+         "###################"
+      }
+
+
+5.4.5 Post-execution code
+.........................
+
+When map is drawn, the mission doesn't end yet. You now have the
+holes{} and targets{} tables filled with reasonable informations. Now,
+the worm hole generator can transform it to worm holes for you:
+
+      create_world_by_map(level)
+      render_wormholes(holes, targets, {strength=10, range=5})
+
+And we're done. The important thing is to call generator after the
+world is drawn.
+
+
+5.4.6 Multiple wholes per one target
+....................................
+
+If you want several worm holes to move actor to a single location,
+just give them same tag-numbers:
+
+      wholes={}
+      wtgts={}
+      worm_hole_pair(cells, "A", "b", cells[" "], cells[" "], wholes, wtgts, 2)
+      worm_hole_pair(cells, "B", "d", cells[" "], cells[" "], wholes, wtgts, 4)
+      worm_hole_pair(cells, "C", "b", cells[" "], cells[" "], wholes, wtgts, 2)
+      worm_hole_pair(cells, "D", "a", cells[" "], cells[" "], wholes, wtgts, 1)
+      worm_hole_pair(cells, "E", "c", cells[" "], cells[" "], wholes, wtgts, 3)
+      worm_hole_pair(cells, "F", "d", cells[" "], cells[" "], wholes, wtgts, 4)
+      worm_hole_pair(cells, "G", "c", cells[" "], cells[" "], wholes, wtgts, 3)
+      worm_hole_pair(cells, "H", "a", cells[" "], cells[" "], wholes, wtgts, 1)
+
+In the example, worm holes "A" and "C" move actor to target denoted by
+"b". Please note that it's *tag-number* what is important, and that tag
+numbers have to match with the letter of target location (all pairs
+tagged with number 2 have the same target letter: "b").
+
+
+
+5.5 Railways
+--------------------------------------------------------------------------------
+
+5.5.1 What are railways
+.......................
+
+Railways, or trains, are the constructions in Enigma maps, that...
+that actually behave like a train. Train has fixed, predefined
+journey, a rail. On this rail there is arbitrary number of vehicles
+moving, each of them "drawing" Enigma tiles (usually floors). It's
+usual that "train" is composed of two vehicles: one that sets up the
+floor and another that replaces it with abyss, water or other lethal
+surface. Trains are actually incorporated to three of my Enigma maps:
+ant08 (Mourning Palace), ant10 (Circularity) and ant11 (Cannonball).
+Go on and look at them if you want to find out what's going on
+exactly.
+
+
+5.5.2 Technical background
+..........................
+
+Each train (that is a vehicle/railway combination) is defined by two
+tables:
+
+* table of cells that the railway consists of
+* table of engines - path constructors and destructors
+
+Basic idea is, that in each tick, each of engines is moved on to the
+next cell of the railway.  Each engine marks its rail - every field it
+enters is marked with its tag number, causing that it never can step
+on this field again (this prevents the engine from loosing its
+direction).  So, the engine tagged with '1' can step only to fields,
+that are not marked with '1', and similarly for '0'.
+
+Engines with tag '1' are called 'constructors', and those are
+'locomotive' of the train. Engines tagged with '0' are destructors,
+and they are acting as a last wagon of a train. Their mission is to
+erase tagnumber, so that locomotive can move to the field later, when
+it visits it again.
+
+The path should be circular, and one field thick. In fact, engines are
+always trying to keep their direction, so that they do not turn until
+they have to. Thus it could be possible to create a two-fields thick
+railway. It's not very simple though, and I never tried it. The train
+will fail if it goes into the tight corner - it cannot invert its
+direction.
+
+
+5.5.3 Setting up cell{} functions
+.................................
+
+To setup a rail, you need four cells. One for train constructor, one
+for train destructor, one for the body of train and one for the
+pathway. Example of a typical construction follows:
+
+      path = {}
+      loco = {}
+      cells["!"]=cell{parent={cells["."], {add_multicell, path, 0}}}
+      cells["_"]=cell{parent={cells["!"], {add_multicell, path, 1}, cells["'"]}}
+      cells["c"]=cell{parent={cells["_"], {add_multicell, loco, construct}}}
+      cells["d"]=cell{parent={cells["!"], {add_multicell, loco, destruct}}}
+
+That means:
+* cells marked "!" are part of path and are tagged to zero
+* cells marked "_" are also part of path, but are tagged to 1 instead
+* cells marked "c" are engines, and are tagged by function 'construct'
+* cells marked "d" are also engines, but are tagged by function 'destruct'
+
+Note that one of parents of cells["!"] function is cells["."],
+denoting that outside the train, there is abyss (or whatever happens
+to be under cells["."]). Similarly, cells["_"] has cells["'"] as a
+parent, and this is how the train body will look like. This is how the
+path and train looks like after startup, after the train starts to
+move, 'construct' and 'destruct' functions drive what will be
+displayed! If you want to simple setup, do this:
+
+      path = {}
+      loco = {}
+      cells["."]=cell{how does the railway look like}
+      cells["'"]=cell{how does the train look like}
+      cells["!"]=cell{parent={cells["."], {add_multicell, path, 0}}}
+      cells["_"]=cell{parent={cells["!"], {add_multicell, path, 1}, cells["'"]}}
+      cells["c"]=cell{parent={cells["_"], {add_multicell, loco, cells["'"]}}}
+      cells["d"]=cell{parent={cells["!"], {add_multicell, loco, cells["."]}}}
+
+This is not very wise, as cells[] functions are bloated with
+functionality. Remember all these curried constructions and the like -
+they provide much power, but this drawbacks in rather slow execution
+(up to four times slower than init.lua functions). Both 'construct'
+and 'destruct' functions are called repeatedly each tick, for each
+move the train does. The faster they are, the better. In my opinion,
+it's better to create hard-core functions that do the dirty work fast
+enough:
+
+      function construct(x, y) set_floor("fl-normal", x, y) end
+      function destruct(x, y)  set_floor("fl-abyss", x, y) end
+
+      cells["."]=construct
+      cells["'"]=destruct
+      cells["!"]=cell{parent={cells["."], {add_multicell, path, 0}}}
+      cells["_"]=cell{parent={cells["!"], {add_multicell, path, 1}, cells["'"]}}
+      cells["c"]=cell{parent={cells["_"], {add_multicell, loco, construct}}}
+      cells["d"]=cell{parent={cells["!"], {add_multicell, loco, destruct}}}
+
+
+5.5.4 Binding the train to railway
+..................................
+
+Now you have the cells declared, but still the train is not ready. You
+have to make up the function that moves engines on the railway each
+time it's called. Don't worry, it is as simple as this:
+
+      rail = new_rail(loco, path)
+
+Now, each time the rail() function gets called, it moves all the
+engines ahead, processing 'construct' and 'destruct' functions. To do
+this repeatedly (your train should move on fluently), let the function
+be called by timer stone:
+
+      cells["~"]=cell{stone={"st-timer", {action="callback", target="rail", interval=0.15}}}
+
+Ready. Now just draw the map and you are done.
+
+
+5.5.5 Setting up the map
+........................
+
+In your string map, the path will be denoted by exclamation marks, the
+train by underscores, locomotives by 'c' and last wagons by 'd'. Don't
+forget to add a timer stone '~' to make your train move!
+
+Result map could look this way:
+
+      level = {
+         "####################",
+         "#!!!!!!!  !!c___d!!#",
+         "#!     !!!!       !#",
+         "#!!!!!         !!!!#",
+         "#    !!!!!!!!!!!   #",
+         "###################~"
+      }
+
+And that is all. Congratulations, your map just got a train.
+
+
+5.6 Puzzles
+--------------------------------------------------------------------------------
+
+5.6.1 Forewords
+...............
+
+Puzzles are popular map constructions overall. The puzzle consists of
+several 'puzzle stones', that may only be moved together. You can
+create constructions of dozens puzzle stones as well as two or three
+stones big ones.
+
+Creating puzzles is not complicated at all, it's simply boring. It
+means that you have to declare several cells to become several kinds
+of puzzle stones - one with sockets to left and down, one with up and
+right, one with left, down and right, one with... You got it. But if
+you want to create so called 'complete cluster' (each stone of puzzle
+has all the sockets connected to other stones), it's just a matter of
+dumb work to make up a cluster elements out of the cluster
+layout. This is where ant.lua brings help.
+
+In fact, it's somehow possible to create also open clusters, but this
+feature is not very strong and generally you better rely on boring
+hard-coding cell functions.
+
+
+5.6.2 Technical background
+..........................
+
+The puzzle generator aims at creating complete puzzle clusters. It
+needs a table, in which there are coordinates of a puzzle stones,
+reads this table and places right puzzle elements to Enigma world. In
+the table, there is in fact a 'layout' of a puzzle cluster.
+
+The step-by-step recipe to create a puzzle cluster is here:
+
+* declare a layout table
+* declare a cell function that represents cell stone
+* draw a map
+* render puzzles
+
+
+5.6.3 Setting up puzzle
+.......................
+
+You have to declare a table where LUA will store the layout in. This
+is done in usual way:
+
+      puzzles = {}
+
+Next, declare a cell function:
+
+      cells["*"]=cell{{{add_multicell, puzzles}}}
+
+Now draw the string map:
+
+      level = {
+         "####################",
+         "#                  #",
+         "#  ***   ***       #",
+         "#  * ***** *       #",
+         "#***       ***     #",
+         "####################"
+      }
+
+And create world out of it:
+
+      create_world_by_map(level)
+
+Like in case of wormholes, in this moment the table of puzzles is
+filled with information about layout of puzzle. You just have to pass
+this information to puzzle generator:
+
+      render_puzzles(puzzles)
+
+Done!
+
+
+5.6.4 Fake puzzles
+..................
+
+There is one more feature of the puzzle generator, that can help you
+in creating incomplete puzzles. You can declare a cell to act as if
+there is a puzzle stone, but in fact no stone is rendered there.
+Effectively this will make neighboring stones to open thir sockets to
+this field.
+
+To set up this fake puzzle stone, declare the puzzle cell this way:
+
+      cells["&"]=cell{{{add_multicell, puzzles, 2}}}
+
+Then the puzzle won't be generated on given map element, but it's
+neighbors will have their sockets opened in this direction like there
+should be one.
+
+
+5.6.5 Puzzle kinds
+..................
+
+There are several puzzle kinds in enigma. There is a classic puzzle,
+an Oxyd1 compatible puzzle, plus 'st-bigbrick' stone that is actually
+being constructed like a puzzle (it has nearly the same attributes as
+'st-puzzle' does).
+
+To let level designer choose a puzzle kind, it's possible to pass a
+'kind' argument to a render_puzzles() function. If this argument is
+omitted, ant.lua automatically picks a 'puzzle' kind. If it's
+supplied, it has to be a function with this interface:
+
+      function some_puzzle(x, y, connections)
+
+In init.lua, there are currently (at time of writing this) two
+functions with necessary syntax and semantics: puzzle() and puzzle2()
+(for Oxyd1 compatible puzzles). The call then looks this way:
+
+      render_puzzles(puzzles1)
+      render_puzzles(puzzles2, puzzle2)
+
+You could declare your own rendering function. For example:
+
+      function bigbrick(x, y, conn)
+         set_stone("st-bigbrick", x, y, {connections=conn})
+      end
+
+      render_puzzles(puzzles3, bigbrick)
+
+
+5.7 Slopes
+--------------------------------------------------------------------------------
+
+5.7.1 Forewords
+...............
+
+Slope is Enigma floor kind, that pushes the actor to move in one
+direction -- gradiented floor. Gradients can create really big
+constructions, beveled areas, both sunken and raised.
+
+With slopes, its very similar to puzzles. Both the fact, that
+declaring cell functions is boring, and the way the slopes are
+generated.
+
+
+5.7.2 Technical background
+..........................
+
+Slope generator can create a wide variety of slope settings, but some
+things it's simply unable to do. It has no intelligence, it's just
+automaton that reads input data and based on them it decides what kind
+of slope will be on this or that place.
+
+It works on a pattern matching basis. Each cell setup is compared with
+a table of patterns, the nearest one is picked up and we hope it's the
+right one. It happens that some complicated settings are just not
+parsed the right way, or there are ambiguities. There is no simple
+remedy for this situation, than to add another pattern to patterns
+database. Most of the time, the patterns match just well and slopes
+are happily (and correctly) generated.
+
+Next thing is setting up where is the center of desired shape. The
+program needs to know how to shape slopes, whether "up-down" or
+"down-up". The point that declares where is the "upside" of sloped
+shape is called 'pivot'.
+
+The basic step-by-step recipe follows:
+
+* create table for slopes and pivots
+* create cell functions for slopes and pivots
+* create map
+* let the pivot be spread
+* render slopes
+
+Most of work is done by ant.lua for you, but there are some steps that
+may require some skill and experience.
+
+
+5.7.3 Setting up cell{} functions
+.................................
+
+Tables for cells and pivots are created in common fashion:
+
+      slopes={}
+      pivots={}
+
+Into 'slopes', the overall layout of the shape will be placed. This is
+similar table to the one used in puzzle generator. In 'pivots' table,
+the locations of 'central points' are stored.
+
+Next, cell functions are created:
+
+      cells["*"]=cell{{{add_multicell, slopes, 1}}}
+      cells["&"]=cell{{{add_multicell, pivots, slopes}, cells[" "]}}
+
+You see, add_multicell is used once more. Tag '1' has meaning of 'here
+be the slope'. Cell '&' is tagged by the slopes table. This way the
+pivots are bound to slopes, so that it is possible to lay several
+concentric slope shapes.
+
+
+5.7.4 Setting up the map
+........................
+
+Now the map is populated with the asterisks, representing the slope
+boundary, and one or more pivot ampersands, placed *INSIDE* that
+boundary.
+
+Placing pivot into closed boundary is critical, otherwise the stack
+overflows, or others errors occur.
+
+      level = {
+         "####################",
+         "#  **************  #",
+         "#  *&           *  #",
+         "#  *            *  #",
+         "#  **************  #",
+         "####################"
+      }
+
+
+5.7.5 Post-execution code
+.........................
+
+After the map is drawn, the tables are fed up with information about
+the shape. Now two steps have to be done: the pivot has to be spread,
+so that the whole boundary gets filled, and program can effectively
+differ between "up" and "down". Then, the slope can be rendered.
+
+Piece of code that processes the thing looks right like this:
+
+      create_world_by_map(level)
+      spread_tag(pivots)
+      render_slopes(slopes)
+
+That's it.
+
+
+5.7.6 Mixing several slopes
+...........................
+
+Sometimes you want to create several slopes where one bounds
+another. You could need to create two slopes overlapping. It can
+happen (it happens) that you need to create a slope that the program
+cannot render correctly. In all such cases, you should break your
+slope to several parts, and place each one to separate table:
+
+      slopes1={}
+      slopes2={}
+      pivots1={}
+      pivots2={}
+
+      cells["*"]=cell{{{add_multicell, slopes1, 1}}}
+      cells["@"]=cell{{{add_multicell, slopes2, 1}}}
+      cells["&"]=cell{{{add_multicell, pivots1, slopes1}, cells[" "]}}
+      cells["%"]=cell{{{add_multicell, pivots2, slopes2}, cells[" "]}}
+      cells["^"]=cell{parent={cells["*"],cells["@"]}}
+
+You have to reflect this in your map:
+
+      level = {
+         "####################",
+         "#  **********      #",
+         "#  *@@@@@@@@^@@@   #",
+         "#  *@&%     *  @   #",
+         "#  *@       *  @   #",
+         "#  *@@@@@@@@^@@@   #",
+         "#  **********      #",
+         "####################"
+      }
+
+Rendered by Enigma, this doesn't look very nice, as one slope just
+overrides another. Well, at least you got the idea how it works.
+
+
+5.7.7 Fake slopes
+.................
+
+Like in puzzles, you can create also fake slopes. Fake slope is a
+cell, that behaves like a slope, but it never gets rendered. Fake
+slopes are tagged by the number '2':
+
+      cells["+"]=cell{{{add_multicell, slopes, 2}}}
+
+
+5.7.8 Invert slopes
+...................
+
+If you want to create inverted-slope (southwest instead of northeast
+and so on), tag it with a number -1:
+
+      cells["+"]=cell{{{add_multicell, slopes, -1}}}
+
+You can also create a whole boundary invert, by using 'invert'
+argument in 'render_slopes' function:
+
+      render_slopes(slopes, -1)
+
+Actually you can pass anything non-nil as invert argument, and whole
+boundary gets inverted. If there are invert cells in boundary, the are
+drawn 'normally' - that is, double inversion results to original
+state, like in De Morgan's.
+
+
+5.8 Afterwords
+--------------------------------------------------------------------------------
+
+It's perfectly possible to mix up generators of ant.lua in map. Not
+just several instances on one generator, like two trains or two
+slopes. It's of course possible to mix up trains with slopes and
+puzzles. Just remember, that some constructions are static. If you are
+creating engine with slope in center, that would move over the map,
+you don't need the slope generator. It cannot help you, unless you
+want to spread tag and render slopes each round over and over.
+
+Well, this was the core of ant.lua. There are a few helper functions
+besides this, but in fact ant.lua will provide you no better
+functionality.
+
+
+================================================================================
+6] HELPER FUNCTIONS
+================================================================================
+
+6.1 Debugging
+--------------------------------------------------------------------------------
+
+It's a simple fact that even in enigma maps there tend to be errors.
+ant.lua can help you in map designing by providing warning and error
+messages each time some ill argument gets passed or something. If you
+debug, you may use several ant.lua functions that provide warning
+and debug messages.
+
+The functions follow:
+
+      function warning(text)
+      function be_pedantic(mode)
+      function debug(text)
+      function debug_mode()
+      function debug_mode_off()
+
+6.1.1 Warnings
+..............
+
+This function displays a warning message in a following format:
+
+      warning: [ant.lua]: <text>
+
+Where <text> is replaced by your text. If you want no warnings to
+occur, that is, if a warning means that the map is broken and there is
+no need to even try if it works, you may turn on pedantic mode:
+
+      be_pedantic()
+
+In pedantic mode, each warning turns to error. If an error occurs
+during the map load time, the map never gets loaded.
+
+Pedantic mode is turned off this way:
+
+      be_pedantic(0)
+
+
+6.1.2 Debugs
+............
+
+ant.lua provides a number of debugging messages. These inform you
+about the code execution and about some checkpoints that were
+passed. If you find yourself in doubt whether a function gets executed
+at all, turn on debug mode:
+
+      debug_mode()
+
+In debug mode, the messages like this one:
+
+      debug: [ant.lua]: creating world [20x13]
+
+Appear on your terminal every once in a while. You can produce your
+own debug messages, should you want:
+
+      debug("beer overflow: fridge limit reached (improbable)")
+
+I use this when creating some really complicated maps with lots of LUA
+experiments in. You can leave the messages in a file even after the
+debug, just remove the debug_mode() line. I remove them though, as I
+like clean code :).
+
+
+6.2 Clone table
+--------------------------------------------------------------------------------
+
+This function makes a copy of a table. It's just a shallow copy
+though, only the first layer of values is copied, nested tables stay
+intact.
+
+      cf = clone_table(cellfuncs)
+
+
+6.3 Sending messages
+--------------------------------------------------------------------------------
+
+Sending messages is a common way how to make one object do the things
+like opening, closing, switching on and off, triggering etc. As long
+as you use the triggers and switches for this purpose, everything is
+OK. If you want to send a message on your own, you have to write
+things like this:
+
+      enigma.SendMessage(enigma.GetNamedObject("doorA"), "open", nil)
+
+There is a function that provides this in a simple interface:
+
+      send_message_named(objname, message, third)
+
+Well, in fact I do not know what the 'third' argument means, but I
+never saw anyone to pass anything other than 'nil' here. Above example
+changes this way:
+
+      send_message_named("doorA", "open", nil)
+
+Much better.
+
+Besides this, it's possible to send a message to the group of objects.
+This is covered in chapter [5.2.2 Group actions].
+
+================================================================================
+~end of ant_lua.txt~

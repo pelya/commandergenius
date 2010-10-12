@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation -" el:subtitle="esprit 80" el:id="ss_esp80"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Sven Siggelkow" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Sven Siggelkow</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+create_world(levelw, levelh)
+
+fill_floor("fl-bluegray")
+
+enigma.AddConstantForce(0,20)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+      local c = strsub( pattern, i, i)
+      if c ==   "#" then
+         set_stone("st-rock6",i-1,line)
+      elseif c=="H" then
+         hollow(i-1,line)
+        end
+    end
+end
+--              01234567890123456789
+renderLine(00, "####################")
+renderLine(01, "#                  #")
+renderLine(02, "#                  #")
+renderLine(03, "#                  #")
+renderLine(04, "#        #H#       #")  
+renderLine(05, "#        #H#       #")
+renderLine(06, "#        #H#       #")
+renderLine(07, "#        #H#       #")
+renderLine(08, "#                  #")
+renderLine(09, "#                  #")
+renderLine(10, "#                  #")
+renderLine(11, "#                  #")
+renderLine(12, "####################")
+--              01234567890123456789
+
+set_actor("ac-whiteball-small", 2.5, 11.5, {player=0})
+set_actor("ac-whiteball-small",7.5, 11.5, {player=0})
+set_actor("ac-whiteball-small", 13.5, 11.5, {player=0})
+set_actor("ac-whiteball-small",17.5, 11.5, {player=0})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

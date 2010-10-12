@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' version="0.2" xml:lang="en">
+  <xs:annotation>
+    <xs:documentation>
+      XML schema definitions for Enigma score
+      Copyright © 2006 Ronald Lamprecht
+      GPL2
+    </xs:documentation>
+  </xs:annotation>
+  <xs:element name="score">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="properties" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              All simple key-value-properties:
+              UserName, UserId, Count
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="property" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="key" type="xs:string" use="required"/>
+                  <xs:attribute name="value" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element> <!-- property -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element> <!-- properties -->
+        
+        <xs:element name="levels" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              Users level state:
+              id         - level id
+              version    - score version
+              easy1      -
+              easy1rel   -
+              diff1      -
+              diff1rel   -
+              easy2      -
+              easy2rel   -
+              diff2      -
+              diff2rel   -
+              rating     -
+              sec      -
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="level" minOccurs="0" maxOccurs="unbounded" >
+                <xs:complexType>
+                  <xs:attribute name="id" type="xs:string" use="required"/>
+                  <xs:attribute name="version" type="xs:positiveInteger" use="required"/>
+                  <xs:attribute name="easy1" type="uscoreType" use="optional" default="-1"/>
+                  <xs:attribute name="easy1rel" type="xs:float" use="optional" default="0.92"/>
+                  <xs:attribute name="diff1" type="uscoreType" use="optional" default="-1"/>
+                  <xs:attribute name="diff1rel" type="xs:float" use="optional" default="0.92"/>
+                  <xs:attribute name="easy2" type="uscoreType" use="optional" default="-1"/>
+                  <xs:attribute name="easy2rel" type="xs:float" use="optional" default="0.92"/>
+                  <xs:attribute name="diff2" type="uscoreType" use="optional" default="-1"/>
+                  <xs:attribute name="diff2rel" type="xs:float" use="optional" default="0.92"/>
+                  <xs:attribute name="rating" type="ratingType" use="optional" default="-1"/>
+                  <xs:attribute name="rating-inherited" type="ratingType" use="optional" default="-1"/>
+                  <xs:attribute name="sec" type="xs:string" use="required"/>
+                  <xs:anyAttribute namespace="##targetNamespace" processContents="skip"/>
+                </xs:complexType>
+              </xs:element> <!-- level -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element> <!-- levels -->
+        
+        <xs:element name="indices" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              Index based scoring info
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+                <xs:any namespace="##targetNamespace" minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+            </xs:sequence>
+            <xs:anyAttribute namespace="##targetNamespace" processContents="skip"/>
+          </xs:complexType>
+        </xs:element> <!-- indices -->
+        
+        <xs:any namespace="##targetNamespace" minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element> <!-- score -->
+  
+  <xs:simpleType name="uscoreType">
+    <xs:restriction base="xs:short">
+      <xs:minInclusive value="-2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ratingType">
+    <xs:restriction base="xs:short">
+      <xs:minInclusive value="-1"/>
+      <xs:maxInclusive value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

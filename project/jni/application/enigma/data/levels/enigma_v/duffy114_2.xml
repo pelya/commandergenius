@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Plan Ahead" el:subtitle="" el:id="duffy114"/>
+      <el:version el:score="2" el:release="2" el:revision="2" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2004 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+rooms_wide=1
+rooms_high=1
+
+levelw=1+(19*rooms_wide)
+levelh=1+(12*rooms_high)
+
+create_world( levelw, levelh)
+enigma.ConserveLevel=TRUE
+
+fill_floor("fl-rough-red", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-rock1", i-1, line)
+        elseif c =="%" then
+            set_stone( "st-rock1", i-1, line)
+            set_floor("fl-water",i-1,line)
+        elseif c == "O" then
+            set_stone("st-oxyd", i-1, line,{color="0"})
+        elseif c == "P" then
+            set_stone("st-oxyd", i-1, line,{color="1"})
+        elseif c == "Q" then
+            set_stone("st-oxyd", i-1, line,{color="2"})
+        elseif c == "`" then
+            set_stone("st-oxyd", i-1, line,{color="3"})
+        elseif c == "^" then
+            set_stone("st-oxyd", i-1, line,{color="4"})
+        elseif c == "." then
+            if not difficult then
+                set_stone("st-oxyd", i-1, line,{color="2"})
+            else
+                set_stone("st-oxyd", i, line,{color="2"})
+                set_stone( "st-rock1", i-1, line)
+            end
+        elseif c == "*" then
+            set_stone( "st-brownie", i-1, line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c == "~" then
+            set_floor("fl-water",i-1,line)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {player=0, essential=1})
+            set_item("it-yinyang",i-1,line)
+        elseif c=="y" then
+            if not difficult then
+                set_actor("ac-whiteball", i-1,line+.5, {player=1, essential=1})
+            else
+                set_actor("ac-whiteball", i-.5,line+.5, {player=1, essential=1})
+            end
+        elseif c=="C" then
+            set_item("it-crack3",i-1,line)
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c=="S" then
+            set_item("it-seed",i-1,line)
+        elseif c=="B" then
+            set_item("it-bag",i-1,line)
+        elseif c=="D" then
+            set_item("it-dynamite",i-1,line)
+        elseif c=="h" then
+            set_item("it-hollow",i-1,line)
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c == "G" then
+            if difficult==false then
+                --            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+            else
+                draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+            end
+        elseif c == "H" then
+            set_stone("st-rock3_break",i-1,line)
+        elseif c == "$" then
+            set_stone("st-rock3",i-1,line)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c=="=" then
+            set_floor("fl-space",i-1,line)
+        elseif c=="U" then
+            set_stone("st-oneway", i-1,line, {orientation=enigma.NORTH})    
+        elseif c=="R" then
+            set_stone("st-oneway", i-1,line, {orientation=enigma.EAST})    
+        elseif c=="D" then
+            set_stone("st-oneway", i-1,line, {orientation=enigma.SOUTH})    
+        elseif c=="L" then
+            set_stone("st-oneway", i-1,line, {orientation=enigma.WEST})
+        elseif c=="u" then
+            set_stone("st-oneway_black", i-1,line, {orientation=enigma.NORTH})
+        elseif c=="r" then
+            set_stone("st-oneway_black", i-1,line, {orientation=enigma.EAST})
+        elseif c=="d" then
+            set_stone("st-oneway_black", i-1,line, {orientation=enigma.SOUTH})
+        elseif c=="l" then
+            set_stone("st-oneway_black", i-1,line, {orientation=enigma.WEST})
+        elseif c=="w" then
+            set_stone("st-oneway_white", i-1,line, {orientation=enigma.WEST})
+        elseif c=="Z" then
+            yy1( "black",  i-1, line)
+        elseif c=="Y" then
+            yy1( "white",  i-1, line)
+            if not difficult then
+                set_item("it-yinyang",i-1,line)
+            end
+        elseif c=="q" then
+            yy1( "white",  i-1, line)
+        end
+    end    
+end
+
+function yy1( color, x, y)
+    stone = format( "st-%s4", color)
+    set_stone( stone, x, y)
+end
+
+renderLine(00,"####################")
+renderLine(01,"###    ######   SZO#")
+renderLine(02,"#Dw    lCCCCl   SZZ#")
+renderLine(03,"### qqq######    ZZ#")
+renderLine(04,"#O  qhH######Hh  ZP#")
+renderLine(05,"#P  qhH~~~~~ZHh  ZZ#")
+renderLine(06,"#. yqhH~~~~~ZHhBzSYQ")
+renderLine(07,"#`  qhH~~~~~ZHh  ZZ#")
+renderLine(08,"#^  qhH######Hh  Z`#")
+renderLine(09,"### qqq######    ZZ#")
+renderLine(10,"#Dl    rCCCCr   SZZ#")
+renderLine(11,"###    ######   SZ^#")
+renderLine(12,"####################")
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

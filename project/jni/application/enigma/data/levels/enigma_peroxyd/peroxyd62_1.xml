@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Per.Oxyd 62" el:subtitle="Per.Oxyd 62" el:id="peroxyd62"/>
+      <el:version el:score="1" el:release="1" el:revision="2" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2005 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00" el:engine="per.oxyd">
+       <el:dependency el:path="lib/libpuzzle" el:id="lib/libpuzzle" el:release="2" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="1:27"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelw = 39
+levelh = 13
+
+create_world(levelw, levelh)
+
+fill_floor("fl-abyss",0,0,levelw,levelh)
+fill_floor("fl-metal",0,1,levelw,levelh-2)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+          if c=="X" then
+            oxyd(i-1,line)
+                elseif c=="#" then
+                   set_stone("st-plain",i-1,line)
+
+                elseif c=="O" then
+                   set_stone("st-oneway_black-s",i-1,line)
+                elseif c=="K" then
+                   set_stone("st-wood",i-1,line)
+
+                elseif c=="T" then
+                   set_stone("st-turnstile",i-1,line)
+                elseif c=="N" then
+                   set_stone("st-turnstile-n",i-1,line)
+                elseif c=="E" then
+                   set_stone("st-turnstile-e",i-1,line)
+                elseif c=="S" then
+                   set_stone("st-turnstile-s",i-1,line)
+                elseif c=="W" then
+                   set_stone("st-turnstile-w",i-1,line)
+
+                elseif c=="w" then
+                   set_floor("fl-water",i-1,line)
+                elseif c=="a" then
+                   set_floor("fl-abyss",i-1,line)
+
+                elseif c=="f" then
+                   set_item("it-flagblack",i-1,line)
+                elseif c=="s" then
+                   set_item("it-spring1",i-1,line)
+        end
+    end    
+end
+
+renderLine(00 , "                                       ")
+renderLine(01 , "#######################################")
+renderLine(02 , "##### N      ### N     ################")
+renderLine(03 , "###   TETETE   # T ###    aaaas w     #")
+renderLine(04 , "##  # S S S  #  NS ##  ########## #   #")
+renderLine(05 , "## X########### TE    #       ###  wWT#")
+renderLine(06 , "##O####################       #   KN  #")
+renderLine(07 , "#f X###################    N  # ## T  #")
+renderLine(08 , "## ##  N N N ########     WTE #    S  #")
+renderLine(09 , "##     TETETE  ###### #    www###  N  #")
+renderLine(10 , "#####  S S S #        #    www     T  #")
+renderLine(11 , "#######################################")
+renderLine(12 , "                                       ")
+
+puzzle({"##",
+        "##"},{24,8},"bluepuzzle","none")
+
+-- Special
+set_item("it-document", 17, 10, {text="text1"})
+set_actor("ac-blackball", 2.5,7.5, {player=0})  
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Did you bring your flag?</el:english>
+        <el:translation el:lang="de">Haben Sie Ihre Fahne dabei?</el:translation>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

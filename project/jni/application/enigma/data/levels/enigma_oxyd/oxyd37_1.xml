@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd"
+  xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Oxyd 37"
+        el:subtitle="Oxyd 37"
+        el:id="20060629ulf005"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Ulf Stegemann" el:email="ulf-enigma@zeitform.de"
+        el:homepage="http://ulf.zeitform.de"/>
+      <el:copyright>Copyright © 2006 Ulf Stegemann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd1"/>
+      <el:modes el:easy="false" el:single="true" el:network="false" el:control="force"
+        el:scoreunit="duration" el:scoretarget="time"/>
+      <el:score el:easy="-" el:difficult="00:24"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelw = 20
+levelh = 13
+enigma.ConserveLevel=TRUE
+
+-- LANDSCAPE --
+create_world(levelw, levelh)
+fill_floor("fl-plank",0,0,level_width,level_height)
+draw_checkerboard_floor("fl-himalaya","fl-normal",1,2,18,9)
+draw_floor("fl-abyss",{0,0},{1,0},20)
+draw_floor("fl-abyss",{0,12},{1,0},20)
+draw_border("st-woven",0,1,level_width,level_height-2)
+
+-- STONES --
+draw_stones("st-plain_move",{1,4},{1,0},18)
+draw_stones("st-plain_move",{1,8},{1,0},7)
+draw_stones("st-plain_move",{9,8},{1,0},10)
+draw_stones("st-plain_move",{3,2},{0,1},9)
+draw_stones("st-plain_move",{16,2},{0,1},9)
+draw_stones("st-plain_move",{10,9},{0,1},2)
+set_stone("st-plain_move",2,7)
+set_stone("st-plain_move",6,9)
+set_stone("st-plain_move",8,7)
+draw_border("st-bombs",13,5,3,3)
+
+-- set_stone("st-plain_hole",15,8)
+
+-- ITEMS --
+set_item("it-blackbomb",4,3)
+fill_items("it-blackbomb",5,2,4,2)
+draw_items("it-blackbomb",{9,2},{1,1},2)
+fill_items("it-blackbomb",11,2,2,2)
+set_item("it-blackbomb",13,3)
+fill_items("it-blackbomb",14,2,2,2)
+draw_items("it-blackbomb",{17,3},{0,2},2)
+draw_items("it-blackbomb",{1,5},{0,1},3)
+draw_items("it-blackbomb",{4,5},{0,1},3)
+set_item("it-blackbomb",4,9)
+draw_items("it-blackbomb",{5,5},{0,2},3)
+draw_items("it-blackbomb",{6,5},{0,1},3)
+draw_items("it-blackbomb",{7,5},{0,2},2)
+fill_items("it-blackbomb",8,5,2,2)
+set_item("it-blackbomb",11,7)
+draw_items("it-blackbomb",{12,5},{0,2},3)
+draw_items("it-blackbomb",{18,7},{-3,2},2)
+set_item("it-blackbomb",4,9)
+draw_items("it-blackbomb",{6,10},{1,0},4)
+draw_items("it-blackbomb",{11,10},{1,0},5)
+set_item("it-blackbomb",12,8)
+set_item("it-blackbomb",15,8)
+set_item("it-blackbomb",16,8)
+set_item("it-blackbomb",10,10)
+set_item("it-dynamite",9,7)
+
+-- OXYDS --
+oxyd_default_flavor = "a"
+oxyd(5,6)
+oxyd(7,6)
+oxyd(12,6)
+oxyd(14,6)
+oxyd_shuffle()
+
+-- ACTOR --
+set_actor("ac-blackball",2,3)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+     </el:i18n>
+  </el:protected>
+</el:level>

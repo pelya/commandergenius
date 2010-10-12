@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Yo-Yo" el:subtitle="Per.Oxyd 18" el:id="martin72"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="per.oxyd">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world( 20, 13)
+oxyd_default_flavor = "a"
+
+fill_floor( "fl-dunes")
+
+draw_border( "st-rock5")
+draw_border( "st-white3", 3, 2, 14, 9)
+
+oxyd(1,2)
+oxyd(1,10)
+oxyd(18,2)
+oxyd(18,10)
+oxyd(3,1)
+oxyd(15,1)
+oxyd(3,11)
+oxyd(15,11)
+oxyd_shuffle()
+
+local ac1 = set_actor("ac-blackball", 10, 5)
+local ac2 = set_actor("ac-whiteball", 10, 4, {player=0, mouseforce=0})
+
+AddRubberBand( ac1, ac2, 30, 1)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

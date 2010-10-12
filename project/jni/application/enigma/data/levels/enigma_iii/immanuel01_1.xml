@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Portable Laser" el:subtitle="" el:id="immanuel01"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Immanuel Herrmann" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Immanuel Herrmann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world(20, 13)
+
+oxyd_default_flavor = "a"
+
+draw_border("st-rock5")
+
+fill_floor("fl-sahara", 0, 0, 20, 13)
+fill_floor("fl-abyss", 16, 1, 3, 11)
+
+set_stone("st-switch", 4, 4, {action="onoff", target="laser1"})
+set_stone("st-wood", 4, 8)
+set_stone("st-swap", 8, 4)
+set_stone("st-wood_001", 8, 8)
+
+set_attrib(laser(12, 4, FALSE, EAST), "name", "laser1")
+set_stone("st-grate1", 12, 8)
+
+oxyd(19, 4)
+oxyd(19, 8)
+
+set_actor("ac-blackball", 6.5, 6.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

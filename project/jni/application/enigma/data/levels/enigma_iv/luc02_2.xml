@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Antimaze" el:subtitle="" el:id="luc02"/>
+      <el:version el:score="1" el:release="2" el:revision="3" el:status="released"/>
+      <el:author  el:name="Lukas Schüller" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2005 Lukas Schüller</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/natmaze" el:id="lib/natmaze" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>May 06: Reduced Size by Andreas</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+mfloors = {"fl-leaves","fl-wood","fl-rough-blue","fl-rough-red","fl-sand","fl-rough","fl-normal"}
+
+originx = 1
+originy = 1
+
+function cell_to_level( cellx, celly )
+  return originx + cellx * 2, originy + celly * 2
+end
+
+function fill_randomfloor(names, x0,y0, w,h)
+    if x0 == nil then x0 = 0 end
+    if y0 == nil then y0 = 0 end
+    if w  == nil then w  = level_width end
+    if h  == nil then h  = level_height end
+    for y=y0,y0+h-1 do
+        for x=x0,x0+w-1 do
+            set_floor(names[random(getn(names))], x, y) 
+        end
+    end
+end
+
+stone_gothrough = "st-rock1_hole"
+stone_block = "st-invisible"
+--stone_gothrough = "st-grate1"
+--stone_block = "st-rock1"
+
+function render_cell( maze, cellx, celly )
+  x,y = cell_to_level( cellx, celly )
+  set_stone("st-rock1",x+1,y+1)
+  if not maze:can_go_south(cellx,celly) then
+    set_stone(stone_block,x,y+1)
+  else
+    set_stone(stone_gothrough,x,y+1)
+  end
+  if not maze:can_go_east(cellx,celly) then
+    set_stone(stone_block,x+1,y)
+  else
+    set_stone(stone_gothrough,x+1,y)
+  end
+end
+
+--local maze = new_kruskal_maze(38,24)
+local maze = new_kruskal_maze(19,18)
+
+--CreateWorld(maze.width*2+2,maze.height*2+2)
+CreateWorld(maze.width*2+1, maze.height*2+1)
+
+fill_randomfloor(mfloors)
+render_maze(maze,render_cell)
+draw_border("st-rock1")
+oxyd(1,0)
+oxyd(2*maze.width-1,2*maze.height)
+oxyd(1,2*maze.height)
+oxyd(2*maze.width-1,0)
+oxyd_shuffle()
+local actorx, actory = cell_to_level(random(maze.width)-1,random(maze.height)-1)
+
+set_actor("ac-blackball", actorx + 0.5, actory + 0.5,{player=0})
+
+--display.SetFollowMode(display.FOLLOW_SMOOTH)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

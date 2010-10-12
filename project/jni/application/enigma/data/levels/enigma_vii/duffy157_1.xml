@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Oneway for White" el:subtitle="One Way for White" el:id="duffy157"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw=30
+levelh=40
+
+create_world( levelw, levelh)
+
+fill_floor("fl-bluegreen", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="x" then
+            set_stone( "st-greenbrown", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "!" then
+            fill_floor("fl-water", i-1,line, 1,1)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c=="g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c=="l" then
+            oneway(i-1,line, enigma.WEST)
+        elseif c=="u" then
+            oneway(i-1,line, enigma.NORTH)
+        elseif c=="r" then
+            oneway(i-1,line, enigma.EAST)
+        elseif c=="d" then
+            oneway(i-1,line, enigma.SOUTH)
+        elseif c=="z" then
+            if enigma.CreatingPreview then
+                set_actor("ac-blackball", 0.5, 13.5 , {player=0})
+            else
+                set_actor("ac-blackball", i-.5,line+.5, {player=0})
+            end
+            set_item("it-yinyang", i-1,line)
+        elseif c=="y" then
+            set_actor("ac-whiteball",  i-.5, line+.5, {player=1})
+            set_item("it-yinyang", i-1,line)
+        elseif c=="g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c=="G" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+            set_item("it-seed", i-1, line)
+        elseif c=="#" then
+            yy1( "black",  i-1, line)
+        elseif c=="w" then
+            yy1( "white",  i-1, line)
+        elseif c=="S" then
+            set_stone("st-switch", i-1,line, {action="openclose",target="door1"})
+        elseif c=="s" then
+            doorh( i-1,line, {name="door1"})
+        end
+    end    
+end
+
+function yy1( color, x, y)
+    stone = format( "st-%s4", color)
+    set_stone( stone, x, y)
+end
+
+-- Floor:  " "
+-- Border: "#"
+-- Oxyd:   "o"
+
+renderLine(00,"xxxxxxxxxxxxxxxxxxxx")
+renderLine(01,"xgggggggGggggggr   x")
+renderLine(02,"xgggGgggggGggggr y x")
+renderLine(03,"xGgggggggggggggr   x")
+renderLine(04,"xggggggggggggggxuuux")
+renderLine(05,"xgggggGgggggggggGggx")
+renderLine(06,"xggggggggggggggggggx")
+renderLine(07,"xggggggggggGgggggggx")
+renderLine(08,"xggggggGgggggggxuuux")
+renderLine(09,"xggGgggggggggggl   x")
+renderLine(10,"xggggggggGgggggl z x")
+renderLine(11,"xggggggggggggggl   x")
+renderLine(12,"xGxxxxxxxxxxxxxxxxxx")
+renderLine(13,"x gl   ##  #  l  xox")
+renderLine(14,"x  xg gll  l  x  x#x")
+renderLine(15,"xu#xxuxxxu###u#u## x")
+renderLine(16,"xu## gl    r  #  r x")
+renderLine(17,"x  l  xdxdxxu##u##ux")
+renderLine(18,"xg xg r l gx x   # x")
+renderLine(19,"xd###dxux###d#uxd#ux")
+renderLine(20,"x r l l r  l x x l x")
+renderLine(21,"x xu#uxu#dx#u# x xwx")
+renderLine(22,"x #   x x #ggl x xsx")
+renderLine(23,"x r gg#g#gl  # l xox")
+renderLine(24,"xxxxxxx xxxxxxxxxxxx")
+renderLine(25,"x       x!!!!!!!!!!!")
+renderLine(26,"x wwwww x!!!!!!!!!!!")
+renderLine(27,"x w###w x!!!!!!!!!!!")
+renderLine(28,"x w#S#w x!!!!!!!!!!!")
+renderLine(29,"x w###w x!!!!!!!!!!!")
+renderLine(30,"x wwwww x!!!!!!!!!!!")
+renderLine(31,"x       x!!!!!!!!!!!")
+renderLine(32,"xxxxxxxxx!!!!!!!!!!!")
+renderLine(33,"!!!!!!!!!!!!!!!!!!!!")
+renderLine(34,"!!!!!!!!!!!!!!!!!!!!")
+renderLine(35,"!!!!!!!!!!!!!!!!!!!!")
+renderLine(36,"!!!!!!!!!!!!!!!!!!!!")
+renderLine(37,"!!!!!!!!!!!!!!!!!!!!")
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

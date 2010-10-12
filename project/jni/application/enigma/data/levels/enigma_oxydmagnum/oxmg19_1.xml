@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Oxyd Magnum Gold 19" el:subtitle="Oxyd Magnum Gold 19" el:id="oxydmagnumgold19"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd.magnum">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="true"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="0:15"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+
+fill_floor("fl-water",0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+          if c=="o" then
+            oxyd(i-1,line)
+
+                elseif c=="n" then
+                   set_floor("fl-normal",i-1,line)
+                elseif c=="s" then
+                   set_floor("fl-acblack",i-1,line)
+                elseif c=="w" then
+                   set_floor("fl-acwhite",i-1,line)
+        end
+    end    
+end
+
+renderLine(00 , "                    ")
+renderLine(01 , "    o               ")
+renderLine(02 , "onwwnnnssnnnnnnnnns ")
+renderLine(03 , " n    n         w s ")
+renderLine(04 , " nnnnnnssnnwwno w n ")
+renderLine(05 , " s n      n  n  n n ")
+renderLine(06 , " s n     onssn  n n ")
+renderLine(07 , " n nwwnnnnn  nnnn n ")
+renderLine(08 , " n o  s   w    n  n ")
+renderLine(09 , " n    s   w   on  n ")
+renderLine(10 , " nnnnwwnnnnnnnnnwwno")
+renderLine(11 , "  o                 ")
+renderLine(12 , "                    ")
+
+oxyd_shuffle()
+
+-- Special
+set_actor("ac-blackball", 1.5,2.5, {player=0})  
+set_actor("ac-whiteball", 2.5,2.5, {player=1})  
+set_item("it-yinyang",1,2)
+set_item("it-yinyang",2,2)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

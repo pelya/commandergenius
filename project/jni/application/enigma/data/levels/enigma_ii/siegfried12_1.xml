@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Push your way" el:subtitle="" el:id="level4b"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Siegfried Fennig" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Siegfried Fennig</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world( levelw, levelh)
+draw_border( "st-wood")
+fill_floor("fl-dunes")
+
+oxyd( 1, 2)
+oxyd( 18, 2)
+oxyd( 1, 10)
+oxyd(18, 10)
+oxyd_shuffle()
+
+puzzle(5,3,PUZ_1111)
+puzzle(6,3,PUZ_1111)
+puzzle(7,3,PUZ_1111)
+puzzle(8,3,PUZ_1111)
+puzzle(9,3,PUZ_1111)
+puzzle(10,3,PUZ_1111)
+puzzle(11,3,PUZ_1111)
+puzzle(12,3,PUZ_1111)
+puzzle(13,3,PUZ_1111)
+puzzle(14,3,PUZ_1111)
+puzzle(5,4,PUZ_1111)
+puzzle(6,4,PUZ_1111)
+puzzle(7,4,PUZ_1111)
+puzzle(8,4,PUZ_1111)
+puzzle(9,4,PUZ_1111)
+puzzle(10,4,PUZ_1111)
+puzzle(11,4,PUZ_1111)
+puzzle(12,4,PUZ_1111)
+puzzle(13,4,PUZ_1111)
+puzzle(14,4,PUZ_1111)
+puzzle(5,5,PUZ_1111)
+puzzle(6,5,PUZ_1111)
+puzzle(7,5,PUZ_0000)
+puzzle(8,5,PUZ_1111)
+puzzle(9,5,PUZ_0000)
+puzzle(10,5,PUZ_1111)
+puzzle(11,5,PUZ_0000)
+puzzle(12,5,PUZ_1111)
+puzzle(13,5,PUZ_1111)
+puzzle(14,5,PUZ_1111)
+puzzle(5,6,PUZ_1111)
+puzzle(6,6,PUZ_1111)
+puzzle(7,6,PUZ_1111)
+puzzle(8,6,PUZ_1111)
+puzzle(9,6,PUZ_1111)
+puzzle(10,6,PUZ_0000)
+puzzle(11,6,PUZ_1111)
+puzzle(12,6,PUZ_1111)
+puzzle(13,6,PUZ_1111)
+puzzle(14,6,PUZ_1111)
+puzzle(5,7,PUZ_1111)
+puzzle(6,7,PUZ_1111)
+puzzle(7,7,PUZ_1111)
+puzzle(8,7,PUZ_1111)
+puzzle(9,7,PUZ_1111)
+puzzle(10,7,PUZ_1111)
+puzzle(11,7,PUZ_1111)
+puzzle(12,7,PUZ_0000)
+puzzle(13,7,PUZ_1111)
+puzzle(14,7,PUZ_1111)
+puzzle(5,8,PUZ_1111)
+puzzle(6,8,PUZ_1111)
+puzzle(7,8,PUZ_1111)
+puzzle(8,8,PUZ_0000)
+puzzle(9,8,PUZ_1111)
+puzzle(10,8,PUZ_1111)
+puzzle(11,8,PUZ_1111)
+puzzle(12,8,PUZ_1111)
+puzzle(13,8,PUZ_1111)
+puzzle(14,8,PUZ_1111)
+puzzle(5,9,PUZ_1111)
+puzzle(6,9,PUZ_1111)
+puzzle(7,9,PUZ_1111)
+puzzle(8,9,PUZ_1111)
+puzzle(9,9,PUZ_1111)
+puzzle(10,9,PUZ_1111)
+puzzle(11,9,PUZ_1111)
+puzzle(12,9,PUZ_1111)
+puzzle(13,9,PUZ_1111)
+puzzle(14,9,PUZ_1111)
+
+draw_stones("st-wood", {8,2}, {1,0},4)
+draw_stones("st-wood", {8,10}, {1,0},4)
+draw_stones("st-wood", {1,5}, {0,1},3)
+draw_stones("st-wood", {18,5}, {0,1},3)
+set_stones("st-wood", {{3,4},{3,6},{3,8},{16,4},{16,6},{16,8}})
+draw_stones("st-invisible", {8,11}, {1,0},4)
+draw_stones("st-invisible", {2,10}, {1,0},3)
+draw_stones("st-invisible", {2,2}, {0,1},8)
+draw_stones("st-invisible", {17,2}, {0,1},9)
+draw_stones("st-grate1", {5,2}, {1,0},3)
+draw_stones("st-grate1", {12,2}, {1,0},3)
+draw_stones("st-grate1", {5,10}, {1,0},3)
+draw_stones("st-grate1", {12,10}, {1,0},3)
+draw_stones("st-grate1", {4,3}, {0,1},7)
+draw_stones("st-grate1", {15,3}, {0,1},7)
+draw_stones("st-grate1", {2,1}, {1,0},6)
+draw_stones("st-grate1", {12,1}, {1,0},6)
+draw_stones("st-grate1", {2,11}, {1,0},6)
+draw_stones("st-grate1", {12,11}, {1,0},6)
+
+set_item("it-magicwand",3,6)
+
+--yes, it is an empty text! --raoul
+document(3,8, "text1")
+
+set_actor("ac-blackball", 15.5, 9.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="false"> </el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

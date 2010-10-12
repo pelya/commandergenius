@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Pleasure Garden" el:subtitle="" el:id="duffy134"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd1">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw=77
+levelh=37
+
+create_world( levelw, levelh)
+
+fill_floor("fl-leaves", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-greenbrown", i-1, line)
+        elseif c =="N" then
+            set_stone( "st-greenbrown", i-1, line)
+            set_floor("fl-water",i-1,line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "V" then
+            set_stone("st-door", i-1, line , {name="door2", type="v"})
+        elseif c == "T" then
+            set_stone("st-door", i-1, line , {name="door3", type="v"})
+        elseif c == "U" then
+            set_stone("st-door", i-1, line , {name="door4", type="v"})
+        elseif c == "A"then
+            set_stone("st-door", i-1, line , {name="door1", type="v"})
+        elseif c == "B" then
+            set_stone("st-door", i-1, line , {name="door5", type="v"})
+        elseif c == "b" then
+            set_stone("st-wood", i-1, line)
+        elseif c == "W" then
+            set_stone("st-wood", i-1, line)
+            set_item("it-extralife",i-1,line)
+        elseif c == "Q" then
+            shogundot1(i-1,line, {action="openclose", target="door1"})
+            fill_floor("fl-water", i-1,line, 1,1)
+        elseif c == "t" then
+            shogundot3(i-1,line, {action="openclose", target="door3"})
+        elseif c == "u" then
+            shogundot3(i-1,line, {action="openclose", target="door4"})
+        elseif c == "G" then
+            shogundot3(i-1,line, {action="openclose", target="door5"})
+        elseif c == "," then
+            set_item("it-trigger", i-1,line, {action="openclose", target="door6"})
+        elseif c == "<" then
+            set_stone("st-door_b", i-1,line, {name="door6", type="h"})
+        elseif c == "." then
+            set_item("it-trigger", i-1,line, {action="openclose", target="door7"})
+        elseif c == ">" then
+            set_stone("st-door_b", i-1,line, {name="door7", type="h"})
+        elseif c == "/" then
+            set_item("it-trigger", i-1,line, {action="openclose", target="door8"})
+        elseif c == "?" then
+            set_stone("st-door_b", i-1,line, {name="door8", type="h"})
+        elseif c == ";" then
+            set_item("it-trigger", i-1,line, {action="openclose", target="door9"})
+        elseif c == ":" then
+            set_stone("st-door_b", i-1,line, {name="door9", type="h"})
+        elseif c == "1" then
+            oneway(i-1,line, enigma.NORTH)
+        elseif c == "2" then
+            oneway(i-1,line, enigma.EAST)
+        elseif c == "3" then
+            oneway(i-1,line, enigma.SOUTH)
+        elseif c == "4" then
+            oneway(i-1,line, enigma.WEST)
+        elseif c == "E" then
+            oneway(i-1,line, enigma.SOUTH)
+            set_item("it-spoon",i-1,line)
+        elseif c == "$" then
+            oneway(i-1,line, enigma.WEST)
+            set_item("it-spoon",i-1,line)
+        elseif c == "F" then
+            oneway(i-1,line, enigma.EAST)
+            set_item("it-spoon",i-1,line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c == "*" then
+            hammer(i-1,line)
+        elseif c == "s" then
+            set_stone("st-stoneimpulse",i-1,line)
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c == "v" then
+            set_stone("st-switch", i-1,line, {action="openclose", target="door2"})
+        elseif c == "z" then
+            set_actor("ac-blackball", i-1,line, {player=0})
+        elseif c == "a" then
+            set_stone("st-shogun", i-1, line, {holes=1})
+            set_floor("fl-water",i-1,line)
+        elseif c == "n" then
+            set_stone("st-shogun", i-1, line, {holes=2})
+        elseif c == "O" then
+            set_stone("st-shogun", i-1, line, {holes=1})
+        elseif c == "p" then
+            set_stone("st-shogun", i-1, line, {holes=2})
+        elseif c == "q" then
+            set_stone("st-shogun", i-1, line, {holes=4})
+        elseif c == "S" then
+            set_stone("st-shogun", i-1, line, {holes=4})
+        elseif c == "r" then
+            set_stone("st-shogun", i-1, line, {holes=1})
+        elseif c == "~" then
+            mirror3(i-1,line,TRUE,FALSE, 1)
+        elseif c == "H" then
+            draw_stones("st-stone_break", {i-1,line}, {1,0},1)
+        elseif c == "M" then
+            mirrorp(i-1,line,TRUE,TRUE, 4)
+        elseif c == "@" then
+           mirrorp(i-1,line,TRUE,TRUE, 2)
+        elseif c == "%" then
+            mirrorp(i-1,line,TRUE,FALSE, 2)
+        elseif c == "^" then
+            mirrorp(i-1,line,TRUE,FALSE, 4)
+        elseif c == "X" then
+            set_attrib(laser(i-1,line, FALSE, NORTH), "name", "laser")
+        elseif c == "x" then
+            set_item("it-trigger", i-1,line, {action="on", target="laser"})
+        elseif c == "'" then
+            set_stone("st-bolder", i-1,line, {direction=NORTH})
+        elseif c == "R" then
+            set_stone("st-bolder", i-1,line, {direction=EAST})
+        elseif c == "L" then
+            set_stone("st-bolder", i-1,line, {direction=WEST})
+        elseif c == "D" then
+            set_stone("st-bolder", i-1,line, {direction=SOUTH})
+        elseif c == "i" then
+            set_stone( "st-invisible", i-1, line)
+        elseif c == "h" then
+            set_stone("st-greenbrown_hole",i-1,line)
+        elseif c == "&" then
+            set_stone("st-brownie",i-1,line)
+        elseif c == "w" then
+            draw_stones("st-glass", {i-1,line},{1,0}, 1)
+        elseif c == "`" then
+            fill_floor("fl-water", i-1,line, 1,1)
+        elseif c == "9" then
+            hollow(i-1,line)
+        elseif c == "+" then
+            set_item("it-blackbomb",i-1,line)
+        elseif c == "=" then
+            set_stone("st-bombs", i-1,line)
+        elseif c == "d" then
+                dynamite(i-1,line)
+        elseif c == "[" then
+            set_stone("st-swap", i-1,line)
+        elseif c == "0" then
+            set_item( "it-magicwand", i-1,line)
+        elseif c == "J" then
+            set_stone("st-death",i-1,line)
+        elseif c == "j" then            document(i-1,line,"Quickly!")
+        end
+    end
+end
+
+-- Floor:  " "
+-- Border: "#"
+-- Oxyd:   "o"
+
+renderLine(00,"#############################################################################")
+renderLine(01,"#   !!    b+b +b + J     `;`     #o`  # ^%^%^%^%^%^%^%^%o####################")
+renderLine(02,"# +########+##+##+       # `   ``#ob# #                !!####################")
+renderLine(03,"#b++++++++++  + #+##     ```0  #L#o`# # ^%^%^%^%^%^%^%^% ####################")
+renderLine(04,"# + + +         # ##``          s#ob# #!wwwwwwwwwwwwwwww^####################")
+renderLine(05,"#+       +  + ++#++# Ds`  RD   # #o`# # %               s####################")
+renderLine(06,"#   ++  ++ ++    b+# #`Ds 'L  s'/#ob# #                 #####################")
+renderLine(07,"#++ +     ++      +#,  #    g sD #o`# #  ^               ####################")
+renderLine(08,"#       +++++   +++#       `bLg# #ob#3##               % ####################")
+renderLine(09,"#++ +++++       +=+#  s    g g  g#o`#                    ####################")
+renderLine(10,"#            # ++++#:#R#`  g     #ob#wwwwwwwwwwwwwwwwwwww####################")
+renderLine(11,"#    [  b       d  #?#  R&`.`  g #o jo@@@@@@@@@~MMMMMMMMM####################")
+renderLine(12,"#####11########### #>#### #########o o#########w#############################")
+renderLine(13,"#  333#    #   #   #<    # # ######o  #                                  sD #")
+renderLine(14,"# ## 3   # # # # ##### # # # i   hh#  `R#                                 # #")
+renderLine(15,"#      # #   #   #     # # # hh# #h#R&`s                                sD  #")
+renderLine(16,"###### ################# # #  i  #h#  `#R#                               #  #")
+renderLine(17,"##     #       #     #   # # #hhi###   #s            x#                     #")
+renderLine(18,"## ##### ##### ### ### ### # i i       # R#    X                            #")
+renderLine(19,"## # #   #   #   # # #     # #h# ###  ## s                                s #")
+renderLine(20,"## # # ### # ### # # ##### # i i hh#  #   #                              #L #")
+renderLine(21,"## # # #   #   # # # #   # # #hh##h#  #   's                               s#")
+renderLine(22,"## # # # ##### # #   # #      i  hh#  #  #                                #L#")
+renderLine(23,"#  #   # #   # #    #  #############  #  's                                 #")
+renderLine(24,"#   #### # # # # ############################################################")
+renderLine(25,"###    # # # # # # V        !!!!!! !! #    ``````````    #g#gggggg#g##     v#")
+renderLine(26,"# #### # # # # # # #!!!!!!! !    !  ! H    ```Q``N```    #g##S## ##gUB      #")
+renderLine(27,"# #    # ### # # # #        !! ! !! !!#    #`````a``3    #g        g##      #")
+renderLine(28,"# # ####   # # #   # !!!!!!!!   !!    #    ```#`###4`    #g## ##p##g##      #")
+renderLine(29,"# #  #  ## # #  ## #  !       !    !! #                  #g## ## ##g#########")
+renderLine(30,"# ## # # # #  #  # #! !!!! ! !!!! ! ! #    gg ggg        Agr n  t  uT31432$4#")
+renderLine(31,"# #    # # # # #   #  !    ! !  ! !   #    gbbbbg        #g## ## ##g#232E411#")
+renderLine(32,"# #### # # #   ### #! !! !!! ! !! ! !!#    gb g W        #g## ## ##g#2$41234#")
+renderLine(33,"#    #     # #     #  !  !   !    ! ! #     bg bg  z     #gq    O  g#21422F4#")
+renderLine(34,"# ######## ####### # !!! !!! !!! !!   H    gbbbbg        #g## ## ##g#3124211#")
+renderLine(35,"#          #       #       !   ! !  !!#    ggg gg        #g#ggggGg#g#$41232*#")
+renderLine(36,"#############################################################################")
+
+oxyd_shuffle()
+
+abyss(29,8)
+
+draw_stones("st-stone_break", {20,25}, {0,1},11)
+draw_stones("st-stone_break", {21,25}, {0,1},11)
+draw_stones("st-stone_break", {22,25}, {0,1},11)
+draw_stones("st-stone_break", {23,25}, {0,1},11)
+draw_stones("st-stone_break", {24,25}, {0,1},11)
+draw_stones("st-stone_break", {25,25}, {0,1},11)
+draw_stones("st-stone_break", {26,25}, {0,1},11)
+draw_stones("st-stone_break", {27,25}, {0,1},11)
+draw_stones("st-stone_break", {28,25}, {0,1},11)
+draw_stones("st-stone_break", {29,25}, {0,1},11)
+draw_stones("st-stone_break", {30,25}, {0,1},11)
+draw_stones("st-stone_break", {31,25}, {0,1},11)
+draw_stones("st-stone_break", {32,25}, {0,1},11)
+draw_stones("st-stone_break", {33,25}, {0,1},11)
+draw_stones("st-stone_break", {34,25}, {0,1},11)
+draw_stones("st-stone_break", {35,25}, {0,1},11)
+draw_stones("st-stone_break", {36,25}, {0,1},11)
+draw_stones("st-stone_break", {37,25}, {0,1},11)
+
+set_stone( "st-greenbrown", 18, 7)
+set_stone( "st-greenbrown", 1 , 7)
+set_stone( "st-greenbrown", 2 , 7)
+set_stone( "st-greenbrown", 11, 2)
+set_stone( "st-greenbrown", 14, 2)
+set_stone( "st-greenbrown", 17, 2)
+
+set_stone("st-wood", 2, 9)
+
+oneway(2,8, enigma.EAST)
+
+draw_stones("st-grate1",{3,8},{0,1},4)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true" />
+        <el:translation el:lang="de">Lustgarten</el:translation>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

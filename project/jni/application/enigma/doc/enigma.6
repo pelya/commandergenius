@@ -1,0 +1,103 @@
+.TH ENIGMA 6 "February 2nd, 2007" "Raoul Bourquin" "Enigma"
+.
+.SH NAME
+enigma \- Puzzle game reminiscent of Oxyd
+.
+.SH SYNOPSIS
+.B enigma
+.RI [\| options \|]
+.RI [\| levelfile.xml \|]
+\&.\|.\|.
+.br
+.B enigma
+.RB [\| \-\-assert \|]
+.RB [\| \-d 
+.IR path \|] 
+.RB [\| \-\-help \|]
+.RB [\| \-l 
+.IR lang \|]
+.RB [\| \-\-log \|]
+.RB [\| \-\-nograb \|]
+.RB [\| \-\-nomusic \|]
+.RB [\| \-\-nosound \|]
+.RB [\| \-p 
+.IR file \|]
+.RB [\| \-\-showfps \|]
+.RB [\| \-\-version \|]
+.RB [\| \-w \|]
+.RI [\| levelfile.xml \|]
+\&.\|.\|.
+.
+.SH DESCRIPTION
+.
+The object of the game is to find and uncover pairs of identically
+colored Oxyd stones. Simple? Yes. Easy? Certainly not!  Hidden
+traps, vast mazes, laser beams, and, most of all, countless hairy
+puzzles usually block your direct way to the Oxyd stones.  Enigma's
+game objects (and there are hundreds of them, lest you get bored)
+interact in many unexpected ways, and since many of them follow the laws of
+physics (Enigma's special laws of physics, that is), controlling them
+with the mouse isn't always trivial .\|.\|.\|
+.PP
+.B For more information, please refer to the manual
+.B or the project homepage: <http://www.nongnu.org/enigma/>!
+.
+.SH OPTIONS
+.
+.TP
+.B \-\-assert
+Forces all debugging assertions, even expensive ones, to be evaluated.
+.TP
+.BI \-d\  path ,\ \-\-data= path 
+Prepend another data directory to Enigma's search path.
+.TP
+.B \-h, \-\-help
+Display a list of available command line options and quit.
+.TP
+.BI \-l\  lang ,\ \-\-lang= lang 
+Override the default language. The language is given in the common 2 character
+sequence as fr for French or ru for Russian.
+.TP
+.B \-\-log
+This switch turns on logging of internal information to the standard output.
+.TP
+.B \-\-nograb
+Do not use exclusive mouse/keyboard access.
+.TP
+.B \-\-nomusic
+Start Enigma without background music. Sound effects will still be played.
+.TP
+.B \-\-nosound
+Start Enigma without sound effects.
+.TP
+.BI \-p\  file ,\ \-\-pref= file
+Start Enigma with an alternative preferences file without the leading dot for
+hidden filenames.
+.TP
+.B \-\-showfps
+Show the framerate (FPS) during the Game.
+.TP
+.B \-\-version
+Print the Enigma version number and quit.
+.TP
+.B \-w, \-\-window
+Run Enigma in a window; do not switch to fullscreen mode.
+.
+.SH USAGE
+.
+For the many in\-game control keys take a look at the manual or press
+.B F1
+to get online help in nearly all menus.
+.
+.SH AUTHORS
+.
+Daniel Heck <dheck@gmx.de> is the main author 
+and maintainer of Enigma.
+Enigma itself is based on Oxyd, created by Meinolf Schneider.
+This manual page was created by Joe Wreschnig <piman@sacredchao.net> 
+and is currently maintained by Raoul Bourquin.
+.
+.SH BUGS
+.
+Please report bugs to <enigma\-devel@nongnu.org>.
+.

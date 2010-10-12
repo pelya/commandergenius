@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Deadend" el:subtitle="" el:id="deadend"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Daniel Heck" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2002 Daniel Heck</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world(20, 13)
+enigma.ConserveLevel=FALSE
+
+draw_border("st-metal")
+fill_floor("fl-gray")
+
+oxyd(1,1)
+oxyd(level_width-2,level_height-2)
+oxyd(level_width-2, 1)
+oxyd(1,level_height-2)
+
+fakeoxyd(1,2)
+fakeoxyd(level_width-3,1)
+fakeoxyd(2,11)
+fakeoxyd(18,10)
+
+draw_stones("st-metal", {1,level_height/2}, {1,0}, level_width-2)
+draw_stones("st-metal", {level_width/2,1}, {0,1}, level_height/2-1)
+draw_stones("st-metal", {level_width/2-1,level_height/2}, {0,1}, level_height/2)
+
+oneway(5,level_height/2, enigma.SOUTH)
+oneway(9,9, enigma.EAST)
+oneway(10,3, enigma.EAST)
+oneway(14,6, enigma.SOUTH)
+
+document(4,4, "text1")
+document(15,8, "text2")
+
+draw_stones("st-grate1", {9,1},{0,1},5)
+draw_stones("st-grate1", {11,1},{0,1},5)
+draw_stones("st-grate1", {8,7},{0,1},5)
+draw_stones("st-grate1", {10,7},{0,1},5)
+set_item("it-magicwand",11,1)
+set_item("it-yinyang", 12,1)
+set_actor("ac-whiteball", 7,5)
+set_actor("ac-blackball", 14,5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Look closely!</el:english>
+      </el:string> 
+      <el:string el:key="text2">
+        <el:english el:translate="false">... press F3 to try again ...</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,855 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Temple of Ganesha" el:subtitle="" el:id="duffy154"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw=96
+levelh=61
+
+create_world( levelw, levelh)
+
+fill_floor("fl-metal", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-rock6", i-1, line)
+        elseif c == "o" then
+            set_stone("st-oxyd", i-1, line,{color="0"})
+            abyss(i-1,line)
+        elseif c == ":" then
+            set_stone("st-oxyd", i-1, line,{color="0"})
+        elseif c =="*" then
+            set_stone( "st-brownie", i-1, line)
+            abyss(i-1,line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c == "~" then
+            fill_floor("fl-water", i-1,line, 1,1)
+        elseif c == "m" then
+            set_floor("fl-normal", i-1,line)
+        elseif c == "n" then
+            set_floor("fl-leaves", i-1,line)
+        elseif c == "p" then
+            set_floor("fl-metal", i-1,line)
+        elseif c == "S" then
+            set_floor("fl-space", i-1,line)
+        elseif c == "c" then
+            set_floor("fl-marble", i-1,line)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-1,line+.5, {player=0})
+            set_floor("fl-normal", i-1,line)
+        elseif c == "I" then
+            abyss(i-1,line)
+        elseif c == "s" then
+            abyss(i-1,line)
+            set_item("it-seed",i-1,line)
+        elseif c == "O" then
+            set_item("it-extralife",i-1,line)
+            set_floor("fl-metal", i-1,line)
+        elseif c == ";" then
+            set_item("it-extralife",i-1,line)
+            set_floor("fl-abyss", i-1,line)
+        elseif c=="2" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="49.5",targety="18.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="4" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="46.5",targety="18.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="5" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="49.5",targety="42.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="6" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="46.5",targety="42.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="@" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="46.5",targety="22.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="$" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="49.5",targety="22.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="%" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="46.5",targety="38.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="^" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="49.5",targety="38.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="J" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="29.5",targety="33.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="K" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="66.5",targety="33.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="L" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="66.5",targety="27.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="M" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="29.5",targety="27.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="j" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="25.5",targety="27.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="k" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="70.5",targety="27.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="l" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="70.5",targety="33.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="U" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="25.5",targety="33.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="v" then
+            dynamite(i-1,line)
+            set_floor("fl-normal", i-1,line)
+        elseif c =="V" then
+            set_stone( "st-bombs", i-1, line)
+        elseif c == "=" then
+            puzzle(i-1,line,PUZ_0101)
+            abyss(i-1,line)
+        elseif c == "i" then
+            puzzle(i-1,line,PUZ_1010)
+            abyss(i-1,line)
+        elseif c == "/" then
+            puzzle(i-1,line,PUZ_0110)
+            abyss(i-1,line)
+        elseif c == "`" then
+            puzzle(i-1,line,PUZ_0011)
+            abyss(i-1,line)
+        elseif c == "u" then
+            puzzle(i-1,line,PUZ_1001)
+            abyss(i-1,line)
+        elseif c == "f" then
+            puzzle(i-1,line,PUZ_1100)
+            abyss(i-1,line)
+        elseif c == "+" then
+            puzzle(i-1,line,PUZ_0101)
+            set_floor("fl-normal", i-1,line)
+        elseif c == "R" then
+            puzzle(i-1,line,PUZ_1010)
+            set_floor("fl-normal", i-1,line)
+        elseif c=="A" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="48",targety="3"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="B" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="48",targety="6"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="C" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="90",targety="30.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="D" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="86",targety="30.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="E" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="48",targety="58"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="F" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="48",targety="55"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="G" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="6",targety="30"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="H" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="10",targety="30.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="x" then
+            set_floor("fl-normal", i-1,line)
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="48",targety="30.5"})  
+        elseif c=="q" then
+            abyss(i-1,line)
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="48",targety="30.5"})  
+        elseif c == "w" then
+            set_stone("st-switch",i-1,line,{target="funcc1",action="callback"})
+            abyss(i-1,line)
+        elseif c == "W" then
+            set_stone("st-switch",i-1,line,{target="funcc2",action="callback"})
+            abyss(i-1,line)
+        elseif c == "X" then
+            set_stone("st-switch",i-1,line,{target="funcc3",action="callback"})
+        elseif c == "y" then
+            set_stone("st-switch",i-1,line,{target="funcc4",action="callback"})
+            abyss(i-1,line)
+        elseif c == "Y" then
+            set_stone("st-switch",i-1,line,{target="funcc5",action="callback"})
+            abyss(i-1,line)
+        elseif c == "Z" then
+            set_stone("st-switch",i-1,line,{target="funcc6",action="callback"})
+        elseif c=="N" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="61.5",targety="31.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="T" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="34.5",targety="31.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="P" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="34.5",targety="29.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="Q" then
+            set_item("it-wormhole", i-1, line, {strength=4,targetx="61.5",targety="29.5"})
+            set_floor("fl-normal", i-1,line)
+        elseif c=="0" then
+            set_floor("fl-marble", i-1,line)
+            doorv( i-1,line, {name="door1"})
+        elseif c=="3" then
+            set_floor("fl-marble", i-1,line)
+            doorv( i-1,line, {name="door2"})
+        elseif c=="7" then
+            set_floor("fl-marble", i-1,line)
+            doorv( i-1,line, {name="door3"})
+        elseif c=="9" then
+            set_floor("fl-marble", i-1,line)
+            doorv( i-1,line, {name="door4"})
+        end
+    end    
+end
+
+-- Floor:  " "
+-- Border: "#"
+-- Oxyd:   "o"
+
+myline00="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+myline01="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+myline02="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!xmmmmmmx!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+myline03="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+myline04="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+myline05="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+myline06="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+myline07="!!!!!!!!!!!/================================++++++++================================`!!!!!!!!!!!"
+myline08="!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!"
+myline09="!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!"
+myline10="!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!xmmmmmmx!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!"
+myline11="!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!"
+myline12="!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!"
+myline13="!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!"
+myline14="!!!!!!!!!!!i!!!!!!!###############!!!!!!!!!!!!!wW!!!!!!!!!!!!!###############!!!!!!!i!!!!!!!!!!!"
+myline15="!!!!!!!!!!!i!!!!!!!#x#N&  mmm  mm##############################mm  mmm  &T#x#!!!!!!!i!!!!!!!!!!!"
+myline16="!!!!!!!!!!!i!!!!!!!#I###########mmm   mmmmmm   II   mmmmmm   mmm###########I#!!!!!!!i!!!!!!!!!!!"
+myline17="!!!!!!!!!!!i!!!!!!!#          :# ############# II ############# #:          #!!!!!!!i!!!!!!!!!!!"
+myline18="!!!!!!!!!!!i!!!!!!!# ###########m#IIIIIIIIIII# II #IIIIIIIIIII#m########### #!!!!!!!i!!!!!!!!!!!"
+myline19="!!!!!!!!!!!i!!!!!!!# #mm  mmm  mm#I#########I#$II@#I#########I#mm  mmm  mm# #!!!!!!!i!!!!!!!!!!!"
+myline20="!!!!!!!!!!!i!!!!!!!# #m###########I#O      #I##II##I#      O#I###########m# #!!!!!!!i!!!!!!!!!!!"
+myline21="!!!!!!!!!!!i!!!!!!!# #m#IIIIIIIIIII# ##### #I#2II4#I# ##### #IIIIIIIIIII#m# #!!!!!!!i!!!!!!!!!!!"
+myline22="!!!!!!!!!!!i!!!!!!!# # #I#########I# #IIo# #I# II #I# #oII# #I#########I# # #!!!!!!!i!!!!!!!!!!!"
+myline23="!!!!!!!!!!!i!!!!!!!# # #I#Bmm  mm#I# #I### #I# II #I# ###I# #I#mm  mmC#I# # #!!!!!!!i!!!!!!!!!!!"
+myline24="!!!!!!!!!!!i!!!!!!!# # #I#######m#I# #I#A  #I#    #I#  D#I# #I#m#######I# # #!!!!!!!i!!!!!!!!!!!"
+myline25="!!!!!!!!!!!i!!!!!!!# #m#IIIIIIo# #I# #I#####I##  ##I#####I# #I# #oIIIIII#m# #!!!!!!!i!!!!!!!!!!!"
+myline26="!!!!!!!!!!!i!!!!!!!# #m#########m#I# #IIIIIIII#  #IIIIIIII# #I#m#########m# #!!!!!!!i!!!!!!!!!!!"
+myline27="!!!!!xmmmmmRmmx!!!!# #m mmJ#Um mm#I# #######I##  ##I####### #I#mm ml#Kmm m# #!!!!xmmRmmmmmx!!!!!"
+myline28="!!!!!mmmmmmRmmm!!!!# #############I#       #q#mmmm#q#       #I############# #!!!!mmmRmmmmmm!!!!!"
+myline29="!!!!!mmmmmmRmmm!!!!# 0ccccccccccccc####### ###mmmm### #######ccccccccccccc7 #!!!!mmmRmmmmmm!!!!!"
+myline30="!!!!!mmmmmmRmmmmmmZ# ###############sIIIII    mmzm    IIIIIs############### #XmmmmmmRmmmmmm!!!!!"
+myline31="!!!!!mmmmmmRmmm!!!!# 3ccccccccccccc####### ###mmmm### #######ccccccccccccc9 #!!!!mmmRmmmmmm!!!!!"
+myline32="!!!!!mmmmmmRmmm!!!!# #############I#       #q#mmmm#q#       #I############# #!!!!mmmRmmmmmm!!!!!"
+myline33="!!!!!xmmmmmRmmx!!!!# #m mmM#jm mm#I# #######I##  ##I####### #I#mm mk#Lmm m# #!!!!xmmRmmmmmx!!!!!"
+myline34="!!!!!!!!!!!i!!!!!!!# #m#########m#I# #IIIIIIII#  #IIIIIIII# #I#m#########m# #!!!!!!!i!!!!!!!!!!!"
+myline35="!!!!!!!!!!!i!!!!!!!# #m#IIIIIIo# #I# #I#####I##  ##I#####I# #I# #oIIIIII#m# #!!!!!!!i!!!!!!!!!!!"
+myline36="!!!!!!!!!!!i!!!!!!!# # #I#######m#I# #I#H  #I#    #I#  E#I# #I#m#######I# # #!!!!!!!i!!!!!!!!!!!"
+myline37="!!!!!!!!!!!i!!!!!!!# # #I#Gmm  mm#I# #I### #I# II #I# ###I# #I#mm  mmF#I# # #!!!!!!!i!!!!!!!!!!!"
+myline38="!!!!!!!!!!!i!!!!!!!# # #I#########I# #IIo# #I# II #I# #oII# #I#########I# # #!!!!!!!i!!!!!!!!!!!"
+myline39="!!!!!!!!!!!i!!!!!!!# #m#IIIIIIIIIII# ##### #I#5II6#I# ##### #IIIIIIIIIII#m# #!!!!!!!i!!!!!!!!!!!"
+myline40="!!!!!!!!!!!i!!!!!!!# #m###########I#O      #I##II##I#      O#I###########m# #!!!!!!!i!!!!!!!!!!!"
+myline41="!!!!!!!!!!!i!!!!!!!# #mm  mmm  mm#I#########I#^II%#I#########I#mm  mmm  mm# #!!!!!!!i!!!!!!!!!!!"
+myline42="!!!!!!!!!!!i!!!!!!!# ###########m#IIIIIIIIIII# II #IIIIIIIIIII#m########### #!!!!!!!i!!!!!!!!!!!"
+myline43="!!!!!!!!!!!i!!!!!!!#          :# ############# II ############# #:          #!!!!!!!i!!!!!!!!!!!"
+myline44="!!!!!!!!!!!i!!!!!!!#I###########mmm   mmmmmm   II   mmmmmm   mmm###########I#!!!!!!!i!!!!!!!!!!!"
+myline45="!!!!!!!!!!!i!!!!!!!#x#Q&  mmm  mm##############################mm  mmm  &P#x#!!!!!!!i!!!!!!!!!!!"
+myline46="!!!!!!!!!!!i!!!!!!!###############!!!!!!!!!!!!!Yy!!!!!!!!!!!!!###############!!!!!!!i!!!!!!!!!!!"
+myline47="!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!"
+myline48="!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!"
+myline49="!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!"
+myline50="!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!xmmmmmmx!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!"
+myline51="!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!"
+myline52="!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!"
+myline53="!!!!!!!!!!!f================================++++++++================================u!!!!!!!!!!!"
+myline54="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+myline55="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+myline56="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+myline57="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+myline58="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!xmmmmmmx!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+myline59="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+myline60="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+
+function renderLine2( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c == "p" then
+            set_floor("fl-metal", i-1,line)
+        elseif c == "I" then
+            abyss(i-1,line)
+        end
+    end
+end
+
+--renderLine(00,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+--renderLine(01,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+--renderLine(02,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!xmmmmmmx!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+--renderLine(03,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+--renderLine(04,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmOOmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+--renderLine(05,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+--renderLine(06,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+--renderLine(07,"!!!!!!!!!!!/================================++++++++================================`!!!!!!!!!!!")
+--renderLine(08,"!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!")
+--renderLine(09,"!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!")
+--renderLine(10,"!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!")
+--renderLine(11,"!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!")
+--renderLine(12,"!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!")
+--renderLine(13,"!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!")
+--renderLine(14,"!!!!!!!!!!!i!!!!!!!###############!!!!!!!!!!!!!Ww!!!!!!!!!!!!!###############!!!!!!!i!!!!!!!!!!!")
+--renderLine(15,"!!!!!!!!!!!i!!!!!!!#Nmm   mmm  mm##############################mm  mmm   mmT#!!!!!!!i!!!!!!!!!!!")
+--renderLine(16,"!!!!!!!!!!!i!!!!!!!#############mmm   mmmmmm   II   mmmmmm   mmm#############!!!!!!!i!!!!!!!!!!!")
+--renderLine(17,"!!!!!!!!!!!i!!!!!!!B          o# ############# II ############# #o          B!!!!!!!i!!!!!!!!!!!")
+--renderLine(18,"!!!!!!!!!!!i!!!!!!!# ###########m#IIIIIIIIIII# II #IIIIIIIIIII#m########### #!!!!!!!i!!!!!!!!!!!")
+--renderLine(19,"!!!!!!!!!!!i!!!!!!!# #mm  mmm  mm#I#########I#$II@#I#########I#mm  mmm  mm# #!!!!!!!i!!!!!!!!!!!")
+--renderLine(20,"!!!!!!!!!!!i!!!!!!!# #m###########I#       #I##II##I#       #I###########m# #!!!!!!!i!!!!!!!!!!!")
+--renderLine(21,"!!!!!!!!!!!i!!!!!!!# #m#IIIIIIIIIII# ##### #I#2II4#I# ##### #IIIIIIIIIII#m# #!!!!!!!i!!!!!!!!!!!")
+--renderLine(22,"!!!!!!!!!!!i!!!!!!!# # #I#########I# #IIo# #I# II #I# #o!!# #I#########I# # #!!!!!!!i!!!!!!!!!!!")
+--renderLine(23,"!!!!!!!!!!!i!!!!!!!# # #I#Bmm  mm#I# #I### #I# II #I# ###!# #I#mm  mmC#I# # #!!!!!!!i!!!!!!!!!!!")
+--renderLine(24,"!!!!!!!!!!!i!!!!!!!# # #I#######m#I# #I#A  #I#    #I#  D#!# #I#m#######I# # #!!!!!!!i!!!!!!!!!!!")
+--renderLine(25,"!!!!!!!!!!!i!!!!!!!# #m#IIIIIIo# #I# #I#####I##  ##I#####!# #I# #oIIIIII#m# #!!!!!!!i!!!!!!!!!!!")
+--renderLine(26,"!!!!!!!!!!!i!!!!!!!# #m#########m#I# #IIIIIIII#  #IIIIIIII# #I#m#########m# #!!!!!!!i!!!!!!!!!!!")
+--renderLine(27,"!!!!!xmmmmmRmmm!!!!# #m mmJ#Um mm#I# #######I##  ##I####### #I#mm ml#Kmm m# #!!!!mmmRmmmmmx!!!!!")
+--renderLine(28,"!!!!!mmmmmmRmmm!!!!# #############I#       #I#mmmm#I#       #I############# #!!!!mmmRmmmmmm!!!!!")
+--renderLine(29,"!!!!!mmmmmmRmmm!!!!# ~IIIIIIIIIIIII####### ###mmmm### #######IIIIIIIIIIIII~ #!!!!mmmRmmmmmm!!!!!")
+--renderLine(30,"!!!!!mmOmmDRmmmmmmZ# ~##############sIIIII    mmzm    IIIIIs##############~ #XmmmmmmRmmmOmm!!!!!")
+--renderLine(31,"!!!!!mmmmmmRmmm!!!!# ~IIIIIIIIIIIII####### ###mmmm### #######IIIIIIIIIIIII~ #!!!!mmmRmmmmmm!!!!!")
+--renderLine(32,"!!!!!mmmmmmRmmm!!!!# #############I#       #I#mmmm#I#       #I############# #!!!!mmmRmmmmmm!!!!!")
+--renderLine(33,"!!!!!xmmmmmRmmm!!!!# #m mmM#jm mm#I# #######I##  ##I####### #I#mm mk#Lmm m# #!!!!mmmRmmmmmx!!!!!")
+--renderLine(34,"!!!!!!!!!!!i!!!!!!!# #m#########m#I# #IIIIIIII#  #IIIIIIII# #I#m#########m# #!!!!!!!i!!!!!!!!!!!")
+--renderLine(35,"!!!!!!!!!!!i!!!!!!!# #m#IIIIIIo# #I# #I#####I##  ##I#####I# #I# #oIIIIII#m# #!!!!!!!i!!!!!!!!!!!")
+--renderLine(36,"!!!!!!!!!!!i!!!!!!!# # #I#######m#I# #I#H  #I#    #I#  E#I# #I#m#######I# # #!!!!!!!i!!!!!!!!!!!")
+--renderLine(37,"!!!!!!!!!!!i!!!!!!!# # #I#Gmm  mm#I# #I### #I# II #I# ###I# #I#mm  mmF#I# # #!!!!!!!i!!!!!!!!!!!")
+--renderLine(38,"!!!!!!!!!!!i!!!!!!!# # #I#########I# #IIo# #I# II #I# #oII# #I#########I# # #!!!!!!!i!!!!!!!!!!!")
+--renderLine(39,"!!!!!!!!!!!i!!!!!!!# #m#IIIIIIIIIII# ##### #I#5II6#I# ##### #IIIIIIIIIII#m# #!!!!!!!i!!!!!!!!!!!")
+--renderLine(40,"!!!!!!!!!!!i!!!!!!!# #m###########I#       #I##II##I#       #I###########m# #!!!!!!!i!!!!!!!!!!!")
+--renderLine(41,"!!!!!!!!!!!i!!!!!!!# #mm  mmm  mm#I#########I#^II%#I#########I#mm  mmm  mm# #!!!!!!!i!!!!!!!!!!!")
+--renderLine(42,"!!!!!!!!!!!i!!!!!!!# ###########m#IIIIIIIIIII# II #IIIIIIIIIII#m########### #!!!!!!!i!!!!!!!!!!!")
+--renderLine(43,"!!!!!!!!!!!i!!!!!!!B          o# ############# II ############# #o          B!!!!!!!i!!!!!!!!!!!")
+--renderLine(44,"!!!!!!!!!!!i!!!!!!!#############mmm   mmmmmm   II   mmmmmm   mmm#############!!!!!!!i!!!!!!!!!!!")
+--renderLine(45,"!!!!!!!!!!!i!!!!!!!#Qmm   mmm  mm##############################mm  mmm   mmP#!!!!!!!i!!!!!!!!!!!")
+--renderLine(46,"!!!!!!!!!!!i!!!!!!!###############!!!!!!!!!!!!!Yy!!!!!!!!!!!!!###############!!!!!!!i!!!!!!!!!!!")
+--renderLine(47,"!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!")
+--renderLine(48,"!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!")
+--renderLine(49,"!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!")
+--renderLine(50,"!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!")
+--renderLine(51,"!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!")
+--renderLine(52,"!!!!!!!!!!!i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!i!!!!!!!!!!!")
+--renderLine(53,"!!!!!!!!!!!f================================++++++++================================u!!!!!!!!!!!")
+--renderLine(54,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+--renderLine(55,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+--renderLine(56,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmOOmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+--renderLine(57,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!mmmmmmmm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+--renderLine(58,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!xmmmmmmx!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+--renderLine(59,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+--renderLine(60,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
+oxyd_shuffle()
+
+door1=enigma.GetNamedObject("door1")
+door2=enigma.GetNamedObject("door2")
+door3=enigma.GetNamedObject("door3")
+door4=enigma.GetNamedObject("door4")
+
+f1=0
+function funcc1()
+   if f1==0 then
+      f1=1
+   elseif f1==1 then
+      f1=0
+   end
+   funcccheck()
+end
+
+f2=0
+function funcc2()
+   if f2==0 then
+      f2=1
+   elseif f2==1 then
+      f2=0
+   end
+   funcccheck()
+end
+
+f3=0
+function funcc3()
+   if f3==0 then
+      f3=1
+   elseif f3==1 then
+      f3=0
+   end
+   funcccheck()
+end
+
+f4=0
+function funcc4()
+   if f4==0 then
+      f4=1
+   elseif f4==1 then
+      f4=0
+   end
+   funcccheck()
+end
+
+f5=0
+function funcc5()
+   if f5==0 then
+      f5=1
+   elseif f5==1 then
+      f5=0
+   end
+   funcccheck()
+end
+
+f6=0
+function funcc6()
+   if f6==0 then
+      f6=1
+   elseif f6==1 then
+      f6=0
+   end
+   funcccheck()
+end
+
+through=0
+ppos=0
+function funcccheck()
+   if f1==1 and f2==1 and f3==1 and f4==1 and f5==1 and f6==1 then
+      pos=1
+   else
+      pos=0
+   end
+   if ppos>pos or ppos<pos then
+      myline00 = gsub(myline00, " ", "n")
+      myline01 = gsub(myline01, " ", "n")
+      myline02 = gsub(myline02, " ", "n")
+      myline03 = gsub(myline03, " ", "n")
+      myline04 = gsub(myline04, " ", "n")
+      myline05 = gsub(myline05, " ", "n")
+      myline06 = gsub(myline06, " ", "n")
+      myline07 = gsub(myline07, " ", "n")
+      myline08 = gsub(myline08, " ", "n")
+      myline09 = gsub(myline09, " ", "n")
+      myline10 = gsub(myline10, " ", "n")
+      myline11 = gsub(myline11, " ", "n")
+      myline12 = gsub(myline12, " ", "n")
+      myline13 = gsub(myline13, " ", "n")
+      myline14 = gsub(myline14, " ", "n")
+      myline15 = gsub(myline15, " ", "n")
+      myline16 = gsub(myline16, " ", "n")
+      myline17 = gsub(myline17, " ", "n")
+      myline18 = gsub(myline18, " ", "n")
+      myline19 = gsub(myline19, " ", "n")
+      myline20 = gsub(myline20, " ", "n")
+      myline21 = gsub(myline21, " ", "n")
+      myline22 = gsub(myline22, " ", "n")
+      myline23 = gsub(myline23, " ", "n")
+      myline24 = gsub(myline24, " ", "n")
+      myline25 = gsub(myline25, " ", "n")
+      myline26 = gsub(myline26, " ", "n")
+      myline27 = gsub(myline27, " ", "n")
+      myline28 = gsub(myline28, " ", "n")
+      myline29 = gsub(myline29, " ", "n")
+      myline30 = gsub(myline30, " ", "n")
+      myline31 = gsub(myline31, " ", "n")
+      myline32 = gsub(myline32, " ", "n")
+      myline33 = gsub(myline33, " ", "n")
+      myline34 = gsub(myline34, " ", "n")
+      myline35 = gsub(myline35, " ", "n")
+      myline36 = gsub(myline36, " ", "n")
+      myline37 = gsub(myline37, " ", "n")
+      myline38 = gsub(myline38, " ", "n")
+      myline39 = gsub(myline39, " ", "n")
+      myline40 = gsub(myline40, " ", "n")
+      myline41 = gsub(myline41, " ", "n")
+      myline42 = gsub(myline42, " ", "n")
+      myline43 = gsub(myline43, " ", "n")
+      myline44 = gsub(myline44, " ", "n")
+      myline45 = gsub(myline45, " ", "n")
+      myline46 = gsub(myline46, " ", "n")
+      myline47 = gsub(myline47, " ", "n")
+      myline48 = gsub(myline48, " ", "n")
+      myline49 = gsub(myline49, " ", "n")
+      myline50 = gsub(myline50, " ", "n")
+      myline51 = gsub(myline51, " ", "n")
+      myline52 = gsub(myline52, " ", "n")
+      myline53 = gsub(myline53, " ", "n")
+      myline54 = gsub(myline54, " ", "n")
+      myline55 = gsub(myline55, " ", "n")
+      myline56 = gsub(myline56, " ", "n")
+      myline57 = gsub(myline57, " ", "n")
+      myline58 = gsub(myline58, " ", "n")
+      myline59 = gsub(myline59, " ", "n")
+      myline60 = gsub(myline60, " ", "n")
+      myline17 = gsub(myline17, ":", "n")
+      myline43 = gsub(myline43, ":", "n")
+
+      myline00 = gsub(myline00, "p", "n")
+      myline01 = gsub(myline01, "p", "n")
+      myline02 = gsub(myline02, "p", "n")
+      myline03 = gsub(myline03, "p", "n")
+      myline04 = gsub(myline04, "p", "n")
+      myline05 = gsub(myline05, "p", "n")
+      myline06 = gsub(myline06, "p", "n")
+      myline07 = gsub(myline07, "p", "n")
+      myline08 = gsub(myline08, "p", "n")
+      myline09 = gsub(myline09, "p", "n")
+      myline10 = gsub(myline10, "p", "n")
+      myline11 = gsub(myline11, "p", "n")
+      myline12 = gsub(myline12, "p", "n")
+      myline13 = gsub(myline13, "p", "n")
+      myline14 = gsub(myline14, "p", "n")
+      myline15 = gsub(myline15, "p", "n")
+      myline16 = gsub(myline16, "p", "n")
+      myline17 = gsub(myline17, "p", "n")
+      myline18 = gsub(myline18, "p", "n")
+      myline19 = gsub(myline19, "p", "n")
+      myline20 = gsub(myline20, "p", "n")
+      myline21 = gsub(myline21, "p", "n")
+      myline22 = gsub(myline22, "p", "n")
+      myline23 = gsub(myline23, "p", "n")
+      myline24 = gsub(myline24, "p", "n")
+      myline25 = gsub(myline25, "p", "n")
+      myline26 = gsub(myline26, "p", "n")
+      myline27 = gsub(myline27, "p", "n")
+      myline28 = gsub(myline28, "p", "n")
+      myline29 = gsub(myline29, "p", "n")
+      myline30 = gsub(myline30, "p", "n")
+      myline31 = gsub(myline31, "p", "n")
+      myline32 = gsub(myline32, "p", "n")
+      myline33 = gsub(myline33, "p", "n")
+      myline34 = gsub(myline34, "p", "n")
+      myline35 = gsub(myline35, "p", "n")
+      myline36 = gsub(myline36, "p", "n")
+      myline37 = gsub(myline37, "p", "n")
+      myline38 = gsub(myline38, "p", "n")
+      myline39 = gsub(myline39, "p", "n")
+      myline40 = gsub(myline40, "p", "n")
+      myline41 = gsub(myline41, "p", "n")
+      myline42 = gsub(myline42, "p", "n")
+      myline43 = gsub(myline43, "p", "n")
+      myline44 = gsub(myline44, "p", "n")
+      myline45 = gsub(myline45, "p", "n")
+      myline46 = gsub(myline46, "p", "n")
+      myline47 = gsub(myline47, "p", "n")
+      myline48 = gsub(myline48, "p", "n")
+      myline49 = gsub(myline49, "p", "n")
+      myline50 = gsub(myline50, "p", "n")
+      myline51 = gsub(myline51, "p", "n")
+      myline52 = gsub(myline52, "p", "n")
+      myline53 = gsub(myline53, "p", "n")
+      myline54 = gsub(myline54, "p", "n")
+      myline55 = gsub(myline55, "p", "n")
+      myline56 = gsub(myline56, "p", "n")
+      myline57 = gsub(myline57, "p", "n")
+      myline58 = gsub(myline58, "p", "n")
+      myline59 = gsub(myline59, "p", "n")
+      myline60 = gsub(myline60, "p", "n")
+      myline20 = gsub(myline20, "O", "n")
+      myline40 = gsub(myline40, "O", "n")
+      myline43 = gsub(myline43, "o", "p")
+      myline17 = gsub(myline17, "o", "p")
+
+      myline00 = gsub(myline00, "I", "p")
+      myline01 = gsub(myline01, "I", "p")
+      myline02 = gsub(myline02, "I", "p")
+      myline03 = gsub(myline03, "I", "p")
+      myline04 = gsub(myline04, "I", "p")
+      myline05 = gsub(myline05, "I", "p")
+      myline06 = gsub(myline06, "I", "p")
+      myline07 = gsub(myline07, "I", "p")
+      myline08 = gsub(myline08, "I", "p")
+      myline09 = gsub(myline09, "I", "p")
+      myline10 = gsub(myline10, "I", "p")
+      myline11 = gsub(myline11, "I", "p")
+      myline12 = gsub(myline12, "I", "p")
+      myline13 = gsub(myline13, "I", "p")
+      myline14 = gsub(myline14, "I", "p")
+      myline15 = gsub(myline15, "I", "p")
+      myline16 = gsub(myline16, "I", "p")
+      myline17 = gsub(myline17, "I", "p")
+      myline18 = gsub(myline18, "I", "p")
+      myline19 = gsub(myline19, "I", "p")
+      myline20 = gsub(myline20, "I", "p")
+      myline21 = gsub(myline21, "I", "p")
+      myline22 = gsub(myline22, "I", "p")
+      myline23 = gsub(myline23, "I", "p")
+      myline24 = gsub(myline24, "I", "p")
+      myline25 = gsub(myline25, "I", "p")
+      myline26 = gsub(myline26, "I", "p")
+      myline27 = gsub(myline27, "I", "p")
+      myline28 = gsub(myline28, "I", "p")
+      myline29 = gsub(myline29, "I", "p")
+      myline30 = gsub(myline30, "I", "p")
+      myline30 = gsub(myline30, "s", "p")
+      myline31 = gsub(myline31, "I", "p")
+      myline32 = gsub(myline32, "I", "p")
+      myline33 = gsub(myline33, "I", "p")
+      myline34 = gsub(myline34, "I", "p")
+      myline35 = gsub(myline35, "I", "p")
+      myline36 = gsub(myline36, "I", "p")
+      myline37 = gsub(myline37, "I", "p")
+      myline38 = gsub(myline38, "I", "p")
+      myline39 = gsub(myline39, "I", "p")
+      myline40 = gsub(myline40, "I", "p")
+      myline41 = gsub(myline41, "I", "p")
+      myline42 = gsub(myline42, "I", "p")
+      myline43 = gsub(myline43, "I", "p")
+      myline44 = gsub(myline44, "I", "p")
+      myline45 = gsub(myline45, "I", "p")
+      myline46 = gsub(myline46, "I", "p")
+      myline47 = gsub(myline47, "I", "p")
+      myline48 = gsub(myline48, "I", "p")
+      myline49 = gsub(myline49, "I", "p")
+      myline50 = gsub(myline50, "I", "p")
+      myline51 = gsub(myline51, "I", "p")
+      myline52 = gsub(myline52, "I", "p")
+      myline53 = gsub(myline53, "I", "p")
+      myline54 = gsub(myline54, "I", "p")
+      myline55 = gsub(myline55, "I", "p")
+      myline56 = gsub(myline56, "I", "p")
+      myline57 = gsub(myline57, "I", "p")
+      myline58 = gsub(myline58, "I", "p")
+      myline59 = gsub(myline59, "I", "p")
+      myline60 = gsub(myline60, "I", "p")
+
+      myline28 = gsub(myline28, "q", "p")
+      myline32 = gsub(myline32, "q", "p")
+
+      myline22 = gsub(myline22, "o", "p")
+      myline25 = gsub(myline25, "o", "p")
+      myline35 = gsub(myline35, "o", "p")
+      myline38 = gsub(myline38, "o", "p")
+
+--        myline39 = gsub(myline39, "5", "I")
+--        myline39 = gsub(myline39, "6", "I")
+--        myline41 = gsub(myline41, "%", "I")
+--        myline41 = gsub(myline41, "^", "I")
+--        myline21 = gsub(myline21, "2", "I")
+--        myline21 = gsub(myline21, "4", "I")
+--        myline19 = gsub(myline19, "@", "I")
+--        myline19 = gsub(myline19, "$", "I")
+--        myline24 = gsub(myline24, "A", "I")
+--        myline24 = gsub(myline24, "D", "I")
+--        myline36 = gsub(myline36, "H", "I")
+--        myline36 = gsub(myline36, "E", "I")
+
+
+    myline00 = gsub(myline00, "n", "I")
+    myline01 = gsub(myline01, "n", "I")
+    myline02 = gsub(myline02, "n", "I")
+    myline03 = gsub(myline03, "n", "I")
+    myline04 = gsub(myline04, "n", "I")
+    myline05 = gsub(myline05, "n", "I")
+    myline06 = gsub(myline06, "n", "I")
+    myline07 = gsub(myline07, "n", "I")
+    myline08 = gsub(myline08, "n", "I")
+    myline09 = gsub(myline09, "n", "I")
+    myline10 = gsub(myline10, "n", "I")
+    myline11 = gsub(myline11, "n", "I")
+    myline12 = gsub(myline12, "n", "I")
+    myline13 = gsub(myline13, "n", "I")
+    myline14 = gsub(myline14, "n", "I")
+    myline15 = gsub(myline15, "n", "I")
+    myline16 = gsub(myline16, "n", "I")
+    myline17 = gsub(myline17, "n", "I")
+    myline18 = gsub(myline18, "n", "I")
+    myline19 = gsub(myline19, "n", "I")
+    myline20 = gsub(myline20, "n", "I")
+    myline21 = gsub(myline21, "n", "I")
+    myline22 = gsub(myline22, "n", "I")
+    myline23 = gsub(myline23, "n", "I")
+    myline24 = gsub(myline24, "n", "I")
+    myline25 = gsub(myline25, "n", "I")
+    myline26 = gsub(myline26, "n", "I")
+    myline27 = gsub(myline27, "n", "I")
+    myline28 = gsub(myline28, "n", "I")
+    myline29 = gsub(myline29, "n", "I")
+    myline30 = gsub(myline30, "n", "I")
+    myline31 = gsub(myline31, "n", "I")
+    myline32 = gsub(myline32, "n", "I")
+    myline33 = gsub(myline33, "n", "I")
+    myline34 = gsub(myline34, "n", "I")
+    myline35 = gsub(myline35, "n", "I")
+    myline36 = gsub(myline36, "n", "I")
+    myline37 = gsub(myline37, "n", "I")
+    myline38 = gsub(myline38, "n", "I")
+    myline39 = gsub(myline39, "n", "I")
+    myline40 = gsub(myline40, "n", "I")
+    myline41 = gsub(myline41, "n", "I")
+    myline42 = gsub(myline42, "n", "I")
+    myline43 = gsub(myline43, "n", "I")
+    myline44 = gsub(myline44, "n", "I")
+    myline45 = gsub(myline45, "n", "I")
+    myline46 = gsub(myline46, "n", "I")
+    myline47 = gsub(myline47, "n", "I")
+    myline48 = gsub(myline48, "n", "I")
+    myline49 = gsub(myline49, "n", "I")
+    myline50 = gsub(myline50, "n", "I")
+    myline51 = gsub(myline51, "n", "I")
+    myline52 = gsub(myline52, "n", "I")
+    myline53 = gsub(myline53, "n", "I")
+    myline54 = gsub(myline54, "n", "I")
+    myline55 = gsub(myline55, "n", "I")
+    myline56 = gsub(myline56, "n", "I")
+    myline57 = gsub(myline57, "n", "I")
+    myline58 = gsub(myline58, "n", "I")
+    myline59 = gsub(myline59, "n", "I")
+    myline60 = gsub(myline60, "n", "I")
+
+   renderLine2(00, myline00)
+   renderLine2(01, myline01)
+   renderLine2(02, myline02)
+   renderLine2(03, myline03)
+   renderLine2(04, myline04)
+   renderLine2(05, myline05)
+   renderLine2(06, myline06)
+   renderLine2(07, myline07)
+   renderLine2(08, myline08)
+   renderLine2(09, myline09)
+   renderLine2(10, myline10)
+   renderLine2(11, myline11)
+   renderLine2(12, myline12)
+   renderLine2(13, myline13)
+   renderLine2(14, myline14)
+   renderLine2(15, myline15)
+   renderLine2(16, myline16)
+   renderLine2(17, myline17)
+   renderLine2(18, myline18)
+   renderLine2(19, myline19)
+   renderLine2(20, myline20)
+   renderLine2(21, myline21)
+   renderLine2(22, myline22)
+   renderLine2(23, myline23)
+   renderLine2(24, myline24)
+   renderLine2(25, myline25)
+   renderLine2(26, myline26)
+   renderLine2(27, myline27)
+   renderLine2(28, myline28)
+   renderLine2(29, myline29)
+   renderLine2(30, myline30)
+   renderLine2(31, myline31)
+   renderLine2(32, myline32)
+   renderLine2(33, myline33)
+   renderLine2(34, myline34)
+   renderLine2(35, myline35)
+   renderLine2(36, myline36)
+   renderLine2(37, myline37)
+   renderLine2(38, myline38)
+   renderLine2(39, myline39)
+   renderLine2(40, myline40)
+   renderLine2(41, myline41)
+   renderLine2(42, myline42)
+   renderLine2(43, myline43)
+   renderLine2(44, myline44)
+   renderLine2(45, myline45)
+   renderLine2(46, myline46)
+   renderLine2(47, myline47)
+   renderLine2(48, myline48)
+   renderLine2(49, myline49)
+   renderLine2(50, myline50)
+   renderLine2(51, myline51)
+   renderLine2(52, myline52)
+   renderLine2(53, myline53)
+   renderLine2(54, myline54)
+   renderLine2(55, myline55)
+   renderLine2(56, myline56)
+   renderLine2(57, myline57)
+   renderLine2(58, myline58)
+   renderLine2(59, myline59)
+   renderLine2(60, myline60)
+   if through==0 then
+   set_item("it-spring1",47,30)
+   set_item("it-spring1",48,30)
+   through=1
+end
+door1=enigma.GetNamedObject("door1")
+door2=enigma.GetNamedObject("door2")
+door3=enigma.GetNamedObject("door3")
+door4=enigma.GetNamedObject("door4")
+   enigma.SendMessage(door1, "openclose", nil)
+   enigma.SendMessage(door2, "openclose", nil)
+   enigma.SendMessage(door3, "openclose", nil)
+   enigma.SendMessage(door4, "openclose", nil)
+end
+   ppos=pos
+end 
+
+   renderLine(00, myline00)
+   renderLine(01, myline01)
+   renderLine(02, myline02)
+   renderLine(03, myline03)
+   renderLine(04, myline04)
+   renderLine(05, myline05)
+   renderLine(06, myline06)
+   renderLine(07, myline07)
+   renderLine(08, myline08)
+   renderLine(09, myline09)
+   renderLine(10, myline10)
+   renderLine(11, myline11)
+   renderLine(12, myline12)
+   renderLine(13, myline13)
+   renderLine(14, myline14)
+   renderLine(15, myline15)
+   renderLine(16, myline16)
+   renderLine(17, myline17)
+   renderLine(18, myline18)
+   renderLine(19, myline19)
+   renderLine(20, myline20)
+   renderLine(21, myline21)
+   renderLine(22, myline22)
+   renderLine(23, myline23)
+   renderLine(24, myline24)
+   renderLine(25, myline25)
+   renderLine(26, myline26)
+   renderLine(27, myline27)
+   renderLine(28, myline28)
+   renderLine(29, myline29)
+   renderLine(30, myline30)
+   renderLine(31, myline31)
+   renderLine(32, myline32)
+   renderLine(33, myline33)
+   renderLine(34, myline34)
+   renderLine(35, myline35)
+   renderLine(36, myline36)
+   renderLine(37, myline37)
+   renderLine(38, myline38)
+   renderLine(39, myline39)
+   renderLine(40, myline40)
+   renderLine(41, myline41)
+   renderLine(42, myline42)
+   renderLine(43, myline43)
+   renderLine(44, myline44)
+   renderLine(45, myline45)
+   renderLine(46, myline46)
+   renderLine(47, myline47)
+   renderLine(48, myline48)
+   renderLine(49, myline49)
+   renderLine(50, myline50)
+   renderLine(51, myline51)
+   renderLine(52, myline52)
+   renderLine(53, myline53)
+   renderLine(54, myline54)
+   renderLine(55, myline55)
+   renderLine(56, myline56)
+   renderLine(57, myline57)
+   renderLine(58, myline58)
+   renderLine(59, myline59)
+   renderLine(60, myline60)
+
+display.SetFollowMode(display.FOLLOW_SCROLLING)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

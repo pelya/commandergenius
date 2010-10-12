@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Mirror Sharing" el:subtitle="" el:id="duffy150"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+rooms_wide=2
+rooms_high=1
+
+levelw=1+(19*rooms_wide)
+levelh=1+(12*rooms_high)
+
+create_world( levelw, levelh)
+enigma.ConserveLevel=FALSE
+
+fill_floor("fl-normal", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-rock2", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "*" then
+            set_stone( "st-brownie", i-1, line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c == "~" then
+            set_floor("fl-water",i-1,line)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {player=0, essential=1})
+            set_item("it-yinyang",i-1,line)
+        elseif c=="y" then
+            set_actor("ac-whiteball", i-.5,line+.5, {player=1, essential=1})
+            set_item("it-yinyang",i-1,line)
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c=="=" then
+            set_floor("fl-space",i-1,line)
+        elseif c=="-" then
+            mirrorp(i-1,line,FALSE,TRUE, 1)
+            set_item("it-landmine",i-1,line)
+        elseif c=="_" then
+            mirrorp(i-1,line,FALSE,FALSE, 1)
+        elseif c=="R" then
+            set_attrib(laser(i-1,line, TRUE, EAST), "name", "laser1")
+        elseif c=="U" then
+            set_attrib(laser(i-1,line, TRUE, NORTH), "name", "laser2")
+        elseif c=="A" then
+            set_stone("st-switch",i-1,line,{action="callback",target="funcca"})
+        elseif c=="B" then
+            set_stone("st-switch",i-1,line,{action="callback",target="funccb"})
+        elseif c=="C" then
+            set_stone("st-switch",i-1,line,{action="callback",target="funccc"})
+        elseif c=="D" then
+            set_stone("st-switch",i-1,line,{action="callback",target="funccd"})
+        elseif c=="E" then
+            set_stone("st-switch",i-1,line,{action="callback",target="funcce"})
+        elseif c=="F" then
+            set_stone("st-switch",i-1,line,{action="callback",target="funccf"})
+        elseif c=="G" then
+            set_stone("st-switch",i-1,line,{action="callback",target="funccg"})
+        elseif c=="H" then
+            set_stone("st-switch",i-1,line,{action="callback",target="funcch"})
+        elseif c=="I" then
+            set_stone("st-switch",i-1,line,{action="callback",target="funcci"})
+        elseif c=="1" then
+            set_stone("st-laserswitch",i-1,line,{action="callback",target="funcc1"})
+        elseif c=="2" then
+            set_stone("st-laserswitch",i-1,line,{action="callback",target="funcc2"})
+        elseif c=="3" then
+            set_stone("st-laserswitch",i-1,line,{action="callback",target="funcc3"})
+        elseif c=="4" then
+            set_stone("st-laserswitch",i-1,line,{action="callback",target="funcc4"})
+        elseif c=="5" then
+            set_stone("st-laserswitch",i-1,line,{action="callback",target="funcc5"})
+        elseif c=="6" then
+            set_stone("st-laserswitch",i-1,line,{action="callback",target="funcc6"})
+        elseif c=="7" then
+            set_stone("st-laserswitch",i-1,line,{action="callback",target="funcc7"})
+        elseif c=="8" then
+            set_stone("st-laserswitch",i-1,line,{action="callback",target="funcc8"})
+        elseif c=="a" then
+            doorv(i-1,line,{name="doora"})
+        elseif c=="b" then
+            doorv(i-1,line,{name="doorb"})
+        elseif c=="c" then
+            doorv(i-1,line,{name="doorc"})
+        elseif c=="d" then
+            doorv(i-1,line,{name="doord"})
+        end
+    end
+end
+
+renderLine(00,"#######################################")
+renderLine(01,"#oa                #                co#")
+renderLine(02,"###        3   2   #                ###")
+renderLine(03,"#         ggggggg  #  ggggggg         #")
+renderLine(04,"# A B C   g  -  g  # 5g-   -g   A B C #")
+renderLine(05,"#         g     g  #  g     g         #")
+renderLine(06,"# D E F z g-   -g  #  g  -  g4y D E F #")
+renderLine(07,"#         g     g  #  g     g         #")
+renderLine(08,"# G H I  Rg  -  g  # 6g-   -g   G H I #")
+renderLine(09,"#         ggggggg  #  ggggggg         #")
+renderLine(10,"###          1     #       U        ###")
+renderLine(11,"#ob                #                do#")
+renderLine(12,"#######################################")
+
+oxyd_shuffle()
+
+d1=enigma.GetNamedObject("doora")
+d2=enigma.GetNamedObject("doorb")
+d3=enigma.GetNamedObject("doorc")
+d4=enigma.GetNamedObject("doord")
+
+ff1=0
+function funcc1()
+    if ff1==0 then
+    ff1=1
+    else
+    ff1=0
+    end
+    funcccheck()
+end
+
+ff2=0
+function funcc2()
+    if ff2==0 then
+    ff2=1
+    else
+    ff2=0
+    end
+    funcccheck()
+end
+
+ff3=0
+function funcc3()
+    if ff3==0 then
+    ff3=1
+    else
+    ff3=0
+    end
+    funcccheck()
+end
+
+ff4=0
+function funcc4()
+    if ff4==0 then
+    ff4=1
+    else
+    ff4=0
+    end
+    funcccheck()
+end
+
+ff5=0
+function funcc5()
+    if ff5==0 then
+    ff5=1
+    else
+    ff5=0
+    end
+    funcccheck()
+end
+
+ff6=0
+function funcc6()
+    if ff6==0 then
+    ff6=1
+    else
+    ff6=0
+    end
+    funcccheck()
+end
+
+ff7=0
+function funcc7()
+    if ff7==0 then
+    ff7=1
+    else
+    ff7=0
+    end
+    funcccheck()
+end
+
+ff8=0
+function funcc8()
+    if ff8==0 then
+    ff8=1
+    else
+    ff8=0
+    end
+    funcccheck()
+end
+
+ffc=0
+function funcccheck()
+    if (ff1+ff2+ff3+ff4+ff5+ff6==6 and ffc==0) then
+        enigma.SendMessage(d1,"open",nil)
+        enigma.SendMessage(d2,"open",nil)
+        enigma.SendMessage(d3,"open",nil)
+        enigma.SendMessage(d4,"open",nil)
+        ffc=1
+    elseif (ff1+ff2+ff3+ff4+ff5+ff6<6 and ffc==1) then
+        enigma.SendMessage(d1,"close",nil)
+        enigma.SendMessage(d2,"close",nil)
+        enigma.SendMessage(d3,"close",nil)
+        enigma.SendMessage(d4,"close",nil)
+        ffc=0
+    end
+end
+
+ffa=1
+function funcca()
+    if ffa==0 then
+    enigma.KillStone(11,4)
+    enigma.KillItem(11,4)
+    mirrorp(23,4,FALSE,TRUE, 1)
+    set_item("it-landmine",23,4)
+    ffa=1
+    else
+    enigma.KillStone(23,4)
+    enigma.KillItem(23,4)
+    mirrorp(11,4,FALSE,TRUE, 1)
+    set_item("it-landmine",11,4)
+    ffa=0
+    end
+end
+
+ffb=0
+function funccb()
+    if ffb==0 then
+    enigma.KillStone(13,4)
+    enigma.KillItem(13,4)
+    mirrorp(25,4,FALSE,TRUE, 1)
+    set_item("it-landmine",25,4)
+    ffb=1
+    else
+    enigma.KillStone(25,4)
+    enigma.KillItem(25,4)
+    mirrorp(13,4,FALSE,TRUE, 1)
+    set_item("it-landmine",13,4)
+    ffb=0
+    end
+end
+
+ffc=1
+function funccc()
+    if ffc==0 then
+    enigma.KillStone(15,4)
+    enigma.KillItem(15,4)
+    mirrorp(27,4,FALSE,TRUE, 1)
+    set_item("it-landmine",27,4)
+    ffc=1
+    else
+    enigma.KillStone(27,4)
+    enigma.KillItem(27,4)
+    mirrorp(15,4,FALSE,TRUE, 1)
+    set_item("it-landmine",15,4)
+    ffc=0
+    end
+end
+
+ffd=0
+function funccd()
+    if ffd==0 then
+    enigma.KillStone(11,6)
+    enigma.KillItem(11,6)
+    mirrorp(23,6,FALSE,TRUE, 1)
+    set_item("it-landmine",23,6)
+    ffd=1
+    else
+    enigma.KillStone(23,6)
+    enigma.KillItem(23,6)
+    mirrorp(11,6,FALSE,TRUE, 1)
+    set_item("it-landmine",11,6)
+    ffd=0
+    end
+end
+
+ffe=1
+function funcce()
+    if ffe==0 then
+    enigma.KillStone(13,6)
+    enigma.KillItem(13,6)
+    mirrorp(25,6,FALSE,TRUE, 1)
+    set_item("it-landmine",25,6)
+    ffe=1
+    else
+    enigma.KillStone(25,6)
+    enigma.KillItem(25,6)
+    mirrorp(13,6,FALSE,TRUE, 1)
+    set_item("it-landmine",13,6)
+    ffe=0
+    end
+end
+
+fff=0
+function funccf()
+    if fff==0 then
+    enigma.KillStone(15,6)
+    enigma.KillItem(15,6)
+    mirrorp(27,6,FALSE,TRUE, 1)
+    set_item("it-landmine",27,6)
+    fff=1
+    else
+    enigma.KillStone(27,6)
+    enigma.KillItem(27,6)
+    mirrorp(15,6,FALSE,TRUE, 1)
+    set_item("it-landmine",15,6)
+    fff=0
+    end
+end
+
+ffg=1
+function funccg()
+    if ffg==0 then
+    enigma.KillStone(11,8)
+    enigma.KillItem(11,8)
+    mirrorp(23,8,FALSE,TRUE, 1)
+    set_item("it-landmine",23,8)
+    ffg=1
+    else
+    enigma.KillStone(23,8)
+    enigma.KillItem(23,8)
+    mirrorp(11,8,FALSE,TRUE, 1)
+    set_item("it-landmine",11,8)
+    ffg=0
+    end
+end
+
+ffh=0
+function funcch()
+    if ffh==0 then
+    enigma.KillStone(13,8)
+    enigma.KillItem(13,8)
+    mirrorp(25,8,FALSE,TRUE, 1)
+    set_item("it-landmine",25,8)
+    ffh=1
+    else
+    enigma.KillStone(25,8)
+    enigma.KillItem(25,8)
+    mirrorp(13,8,FALSE,TRUE, 1)
+    set_item("it-landmine",13,8)
+    ffh=0
+    end
+end
+
+ffi=1
+function funcci()
+    if ffi==0 then
+    enigma.KillStone(15,8)
+    enigma.KillItem(15,8)
+    mirrorp(27,8,FALSE,TRUE, 1)
+    set_item("it-landmine",27,8)
+    ffi=1
+    else
+    enigma.KillStone(27,8)
+    enigma.KillItem(27,8)
+    mirrorp(15,8,FALSE,TRUE, 1)
+    set_item("it-landmine",15,8)
+    ffi=0
+    end
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd"
+      xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Knights &amp; Boxes" el:id="20061201johannes313"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author el:name="Johannes Laire" el:email="johannes.laire@gmail.com"/>
+      <el:copyright>Copyright (C) 2006 Johannes Laire</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+        <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="08:16"/>
+    </el:info>
+    <el:luamain><![CDATA[
+----------------------------------------
+cells={}
+cells["+ "]=cell{actor="ac-blackball"}
+cells["0 "]=cell{oxyd}
+cells["N "]=cell{stone="st-chess_black"}
+cells["B "]=cell{stone="st-wood"}
+cells["# "]=cell{stone="st-marble"}
+cells[". "]=cell{floor="fl-metal"}
+cells["  "]=cell{floor="fl-abyss"}
+cells[", "]=cell{floor="fl-water"}
+cells["50"]=cell{floor={"fl-bridge-open", {name="50"}}}
+cells["51"]=cell{floor={"fl-bridge-open", {name="51"}}}
+cells["52"]=cell{floor={"fl-bridge-open", {name="52"}}}
+cells["53"]=cell{floor={"fl-bridge-open", {name="53"}}}
+cells["54"]=cell{floor={"fl-bridge-open", {name="54"}}}
+cells["55"]=cell{floor={"fl-bridge-open", {name="55"}}}
+cells["56"]=cell{floor={"fl-bridge-open", {name="56"}}}
+cells["57"]=cell{floor={"fl-bridge-open", {name="57"}}}
+cells["58"]=cell{floor={"fl-bridge-open", {name="58"}}}
+cells["59"]=cell{floor={"fl-bridge-open", {name="59"}}}
+cells["60"]=cell{floor={"fl-bridge-open", {name="60"}}}
+cells["61"]=cell{floor={"fl-bridge-open", {name="61"}}}
+cells["62"]=cell{floor={"fl-bridge-open", {name="62"}}}
+cells["63"]=cell{floor={"fl-bridge-open", {name="63"}}}
+cells["10"]=cell{item={"it-trigger", {action="openclose", target="50"}}}
+cells["11"]=cell{item={"it-trigger", {action="openclose", target="51"}}}
+cells["12"]=cell{item={"it-trigger", {action="openclose", target="52"}}}
+cells["13"]=cell{item={"it-trigger", {action="openclose", target="53"}}}
+cells["14"]=cell{item={"it-trigger", {action="openclose", target="54"}}}
+cells["15"]=cell{item={"it-trigger", {action="openclose", target="55"}}}
+cells["16"]=cell{item={"it-trigger", {action="openclose", target="56"}}}
+cells["17"]=cell{item={"it-trigger", {action="openclose", target="57"}}}
+cells["18"]=cell{item={"it-trigger", {action="openclose", target="58"}}}
+cells["19"]=cell{item={"it-trigger", {action="openclose", target="59"}}}
+cells["20"]=cell{item={"it-trigger", {action="openclose", target="60"}}}
+cells["21"]=cell{item={"it-trigger", {action="openclose", target="61"}}}
+cells["22"]=cell{item={"it-trigger", {action="openclose", target="62"}}}
+cells["23"]=cell{item={"it-trigger", {action="openclose", target="63"}}}
+
+level = {
+--                                        ! 
+   "                                      # # # # # # # # # # # # # # # # # # # # ",
+   "                    # # # # # # # #   # , , , , , , , , , , , , , , , , , , # ",
+   "      0 0   0 0     # . 10. . . . #   # , , , , , , , , , . . , , , , , , , # ",
+   "    0 . .   . . 0   # . N # . 11. #   # , , . B . . B . . . . . . . . . , , # ",
+   "    0 . . . . . 0   # . N # 12# . # # # , , . . , . , , , , . , , B . . , , # ",
+   "        . . .       # N # # . . . 14# # , , , . . . , , , , . , , . B . , , # ",
+   "    0 . . . . . 0   # . 13. # N N . . . . . . . B . , , 1516B . , . . . , , # ",
+   "    0 . . 50. . 0   # # # . . . # # # # , , . , , . . , 171819. , , , , , , # ",
+   "      0 0 510 0         # # + # #     # , . B B . B . , 20212223, , , , , , # ",
+   "          52                63        # , . . . . . . , , , , , , , , , , , # ",
+   "          53545556575859606162        # , , , , , , , , , , , , , , , , , , # ",
+   "                                      # , , , , , , , , , , , , , , , , , , # ",
+   "                                      # # # # # # # # # # # # # # # # # # # # "
+--                                        ! 
+}
+set_cell_key_width(2)
+
+oxyd_default_flavor = "d"
+set_default_parent(cells[". "])
+create_world_by_map(level,cells)
+oxyd_shuffle()
+enigma.ConserveLevel = FALSE
+----------------------------------------
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

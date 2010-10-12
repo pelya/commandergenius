@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Laser Squad" el:subtitle="Fight the Light" el:id="duffy153"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw=50
+levelh=30
+
+create_world( levelw, levelh)
+enigma.ConserveLevel=FALSE
+
+fill_floor("fl-bluegreen", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-greenbrown", i-1, line)
+        elseif c =="w" then
+            set_stone( "st-glass", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {player=0})
+        elseif c=="/" then
+            mirrorp(i-1,line,TRUE,FALSE, 4)
+        elseif c==";" then
+            mirrorp(i-1,line,TRUE,FALSE, 2)
+        elseif c=="L" then
+            set_attrib(laser(i-1,line, TRUE, WEST), "name", "laser")
+        elseif c=="U" then
+            set_attrib(laser(i-1,line, FALSE, NORTH), "name", "laser2")
+        elseif c=="V" then
+            set_attrib(laser(i-1,line, FALSE, NORTH), "name", "laser3")
+        elseif c=="G" then
+            doorv( i-1,line, {name="door1"})
+        elseif c=="H" then
+            doorv( i-1,line, {name="door2"})
+        elseif c=="u" then
+            set_item("it-trigger", i-1,line, {action="on", target="laser2"})
+        elseif c=="v" then
+            set_item("it-trigger", i-1,line, {action="on", target="laser3"})
+        elseif c=="g" then
+            set_stone("st-switch", i-1,line, {action="openclose",target="door1"})
+        elseif c=="h" then
+            set_stone("st-switch", i-1,line, {action="openclose",target="door2"})
+        end
+    end
+end
+
+function yy1( color, x, y)
+    stone = format( "st-%s4", color)
+    set_stone( stone, x, y)
+end
+
+-- Floor:  " "
+-- Border: "#"
+-- Oxyd:   "o"
+
+renderLine(00,"/;################o#")
+renderLine(01,";w                 L")
+renderLine(02,"#  # ## ## ## ## # #")
+renderLine(03,"# ##o##o##o##o##o#o#")
+renderLine(04,"#  #################")
+renderLine(05,"# ###o###o###o###o##")
+renderLine(06,"#  ## ### ### ### ##")
+renderLine(07,"/w                 #")
+renderLine(08,";/# ### ### ### ## #")
+renderLine(09,"###o###o###o###o## #")
+renderLine(10,"################## #")
+renderLine(11,"#hGz          uv H #")
+renderLine(12,"########UV######g#o#")
+
+oxyd_shuffle()
+
+set_stone("st-timer", 20,2, {loop=0, action="onoff", target="laser", interval=1.25})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

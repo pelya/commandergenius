@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Spacestation" el:subtitle="" el:id="raoul23"/>
+      <el:version el:score="1" el:release="1" el:revision="3" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="raoul@users.berlios.de" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+       <el:dependency el:path="lib/libpuzzle" el:id="lib/libpuzzle" el:release="2" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="true"/>
+      <el:score el:easy="-" el:difficult="7:29"/>
+    </el:info>
+    <el:luamain><![CDATA[
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+
+levelh=37
+levelw=39
+cells={}
+stones={}
+
+stones[" "]=cell{}
+cells[" "]=cell{}
+cells[" "]=cell{floor="fl-abyss"}
+cells["-"]=cell{floor="fl-metal"}
+stones["o"]=cell{parent={{file_oxyd,"b"}}}
+stones["#"]=cell{stone="st-metal"}
+stones["A"]=cell{stone="st-metal"}
+stones["X"]=cell{stone="st-grate1"}
+stones["B"]=cell{stone="st-black4"}
+stones["W"]=cell{stone="st-white4"}
+if difficult then
+level={"----------------------------------------------------------",
+       "- ---------------- - ---------------- --- --- --- --- ----",
+       "---  - - - - - - -----              ----  --- --- ---   --",
+       "--   - - - - - -  ---  ------------  ---  --- --- ---   --",
+       "--   - - - - - -  --- -------------- ---                --",
+       "--   - - - - - -  --- -------------- ---  --- --- ---   --",
+       "--   - - - - - -  --- -------------- ---  --- --- ---   --",
+       "--   - - - - - -  --- --------------  --  --- --- ---   --",
+       "--   - - - - - -  --- --------------  --                --",
+       "--   - - - - - -  --- --------------  --  --- --- ---   --",
+       "--   - - - - - -  --- --------------  --  --- --- ---   --",
+       "--   - - - - - -  --- --------------  --- --- --- --- ----",
+       "--------------------- --------------  --------------------",
+       "--------------------- --------------  -                 --",
+       "--------------------- --------------  -                 --",
+       "--------------------- --------------  -              -----",
+       "--------------------  ------------ ----------------- -   -",
+       "--------------------                  -            ---   -",
+       "--------------------                  -                  -",
+       "--------------------                  -            ---   -",
+       "--------------------  ------------ ----------------- -   -",
+       "--------------------- --------------  -              -----",
+       "--------------------- --------------  -                 --",
+       "--------------------- --------------  -                 --",
+       "--------------------- --------------  --------------------",
+       "--   - - - - - -  --- --------------  ---- --- --- --- ---",
+       "--   - - - - - -  --- --------------  --   --- --- ---  --",
+       "--   - - - - - -  --- --------------  --   --- --- ---  --",
+       "--   - - - - - -  --- --------------  --                --",
+       "--   - - - - - -  --- --------------  --   --- --- ---  --",
+       "--   - - - - - -  --- -------------- ---   --- --- ---  --",
+       "--   - - - - - -  --- -------------- ---   --- --- ---  --",
+       "--   - - - - - -  --- -------------- ---                --",
+       "--   - - - - - -  ---  ------------  ---   --- --- ---  --",
+       "---  - - - - - - -----              ----   --- --- ---  --",
+       "- ---------------- - ---------------- ---- --- --- --- ---",
+       "----------------------------------------------------------"}
+else
+level={"----------------------------------------------------------",
+       "----------------------------------------- --- --- --- ----",
+       "----------------------------------------  --- --- ---   --",
+       "---  - - - - - - -----              ----  --- --- ---   --",
+       "---  - - - - - - ----- ------------ ----                --",
+       "---  - - - - - - ----- ------------ ----  --- --- ---   --",
+       "---  - - - - - - ----- ------------ ----  --- --- ---   --",
+       "---  - - - - - - ----- ------------   --  --- --- ---   --",
+       "---  - - - - - - ----- ------------   --                --",
+       "---  - - - - - - ----- ------------   --  --- --- ---   --",
+       "---  - - - - - - ----- ------------   --  --- --- ---   --",
+       "---  - - - - - - ----- ------------   --- --- --- --- ----",
+       "---------------------- ------------   --------------------",
+       "---------------------- -------------  -                ---",
+       "---------------------- -------------- -               ----",
+       "---------------------- -----------------------------------",
+       "--------------------   -----------------------------------",
+       "--------------------                  -                  -",
+       "--------------------                  -                  -",
+       "--------------------                  -                  -",
+       "--------------------   -----------------------------------",
+       "---------------------- -----------------------------------",
+       "---------------------- -------------- -               ----",
+       "---------------------- -------------  -                ---",
+       "---------------------- ------------   --------------------",
+       "---  - - - - - - ----- ------------   ---- --- --- --- ---",
+       "---  - - - - - - ----- ------------   --   --- --- ---  --",
+       "---  - - - - - - ----- ------------   --   --- --- ---  --",
+       "---  - - - - - - ----- ------------   --                --",
+       "---  - - - - - - ----- ------------   --   --- --- ---  --",
+       "---  - - - - - - ----- ------------ ----   --- --- ---  --",
+       "---  - - - - - - ----- ------------ ----   --- --- ---  --",
+       "---  - - - - - - ----- ------------ ----                --",
+       "---  - - - - - - -----              ----   --- --- ---  --",
+       "----------------------------------------   --- --- ---  --",
+       "------------------------------------------ --- --- --- ---",
+       "----------------------------------------------------------"}
+end
+
+stmap={"##########################################################",
+       "#    X X X X X X   #                  #  X   X   X   X   #",
+       "#    X X X X X X   #                  #                  #",
+       "#                  #                  #  X   X   X   X   #",
+       "#                  #                  #  XX XXX XXX XX   #",
+       "#                  #                  #  X   X   X   X   #",
+       "#                  #     o      o     W                  #",
+       "#                  #      o    o      #  X   X   X   X   #",
+       "#                  #       o  o       #  XX XXX XXX XX   #",
+       "#                  #        oo        #  X   X   X   X   #",
+       "#                  #                  #                  #",
+       "#                  #                  #  X   X   X   X   #",
+       "#W### # # # # # ##B#                  ##################W#",
+       "#  ## A A A A A A  #                  #                  #",
+       "#  ## A A A A A A  #                  #                  #",
+       "#  ## A A A A A A  W                  #                  #",
+       "#  ## A A A A A A  #                  W                  #",
+       "#  ## A A A A A A  #                  #                  #",
+       "#  ## A A A A A A  #                  #                  #",
+       "#  ## A A A A A A  #                  #                  #",
+       "#  ## A A A A A A  #                  B                  #",
+       "#  ## A A A A A A  B                  #                  #",
+       "#  ## A A A A A A  #                  #                  #",
+       "#  ## A A A A A A  #                  #                  #",
+       "#W### # # # # # ##B#                  ##################B#",
+       "#                  #                  #   X   X   X   X  #",
+       "#                  #                  #                  #",
+       "#                  #        oo        #   X   X   X   X  #",
+       "#                  #       o  o       #   XX XXX XXX XX  #",
+       "#                  #      o    o      #   X   X   X   X  #",
+       "#                  #     o      o     B                  #",
+       "#                  #                  #   X   X   X   X  #",
+       "#                  #                  #   XX XXX XXX XX  #",
+       "#                  #                  #   X   X   X   X  #",
+       "#    X X X X X X   #                  #                  #",
+       "#    X X X X X X   #                  #   X   X   X   X  #",
+       "##########################################################"}
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+set_actor("ac-blackball",1.5,17.5,{player=0,name="bb"})
+set_actor("ac-whiteball",1.5,19.5,{player=1,name="wb"})
+set_item("it-yinyang",1,17)
+set_item("it-yinyang",1,19)
+set_item("it-flagwhite",19,15)
+set_item("it-flagblack",19,21)
+--set_item("it-trigger",20,21,{action="callback", target="generate_further_level", invisible=true})
+oxyd_shuffle()
+---------- ROOM 1 ----------
+-- Variables:
+passages={{},{}}
+-- set a puzzle:
+function set_p_row(x,y)
+    set_stone("st-puzzle-s",x,y)
+    draw_stones("st-puzzle-ns",{x,y+1}, {0,1}, 9)
+    set_stone("st-puzzle-hollow",x,y+10)
+    set_stone("st-puzzle-hollow",x,y+11)
+    draw_stones("st-puzzle-ns",{x,y+12}, {0,1}, 9)
+    set_stone("st-puzzle-n",x,y+21)
+end
+-- Puzzles
+function set_puzzles()
+    for i=1,6 do
+        local k=random(1,10)
+        set_p_row(5+2*i-2,3+k-1)
+    end
+end
+function set_doors()
+    for i=1,6 do
+        local k=random(1,10)
+        passages[1][i]=k
+    
+        set_stone("st-black4",6+2*i-2,13+k-1)
+        if not difficult then
+            set_stone("st-black4",6+2*i-2,13+k)
+        end
+    end
+    for i=1,6 do
+        local k
+    
+        repeat
+            k=random(1,10)
+        until ( k~=passages[1][i] and k~=passages[1][i]+1 and k~=passages[1][i]-1 )
+        passages[2][i]=k
+    
+        set_stone("st-white4",6+2*i-2,13+k-1)
+        if not difficult then
+            set_stone("st-white4",6+2*i-2,13+k)
+        end
+    end
+end
+-- the Z-Passages:
+function set_z()
+    local zs=random(1,2)
+    local ys=12+random(1,9)
+    local yw
+    repeat
+        yw=12+random(1,9)
+    until yw~=ys and yw~=ys+1 and yw~=ys-1
+    if zs==1 then
+        set_stone("st-black4",3,ys)
+        set_stone("st-black4",3,ys+1)
+        set_stone("st-black4",4,ys+1)
+        set_stone("st-black4",4,ys+2)
+        set_stone("st-white4",3,yw)
+        set_stone("st-white4",3,yw+1)
+        set_stone("st-white4",4,yw+1)
+        set_stone("st-white4",4,yw+2)
+    else
+        set_stone("st-black4",3,ys+1)
+        set_stone("st-black4",3,ys+2)
+        set_stone("st-black4",4,ys)
+        set_stone("st-black4",4,ys+1)
+        set_stone("st-white4",3,yw+1)
+        set_stone("st-white4",3,yw+2)
+        set_stone("st-white4",4,yw)
+        set_stone("st-white4",4,yw+1)
+    end
+end
+function prepare_room_1()
+    set_doors()
+    set_puzzles()
+    set_z()
+end
+prepare_room_1()
+--------- ROOM 3 ---------
+-- "Things":
+function set_thing(x,y,init)
+    if init==1 then
+        puzzle({"#*#",
+                "# #",
+                "###"},{x,y},"bluepuzzle","none")
+    elseif init==2 then
+        puzzle({"###",
+                "# *",
+                "###"},{x,y},"bluepuzzle","none")
+    elseif init==3 then
+        puzzle({"###",
+                "# #",
+                "#*#"},{x,y},"bluepuzzle","none")
+    elseif init==4 then    
+        puzzle({"###",
+                "* #",
+                "###"},{x,y},"bluepuzzle","none")
+    end
+end
+-- set all of these "things"
+position={{{},{},{}},{{},{},{}}}
+function set_all_things()
+    for i=1,3 do
+        for j=1,3 do
+            local k=random(1,4)
+            position[1][i][j]=k
+            set_thing(42+(i-1)*4,1+(j-1)*4,position[1][i][j])
+        end
+    end
+    for i=1,3 do
+        for j=1,3 do
+            local k=random(1,4)
+            position[2][i][j]=k
+            set_thing(43+(i-1)*4,25+(j-1)*4,position[2][i][j])
+        end
+    end
+end
+-- which right, which left?
+rotation={{{},{},{}},{{},{},{}}}
+function determine_rotation()
+    for i=1,3 do
+        for j=1,3 do
+            local k=random(1,2)
+            rotation[1][i][j]=k
+        end
+    end
+    for i=1,3 do
+        for j=1,3 do
+            local k=random(1,2)
+            rotation[2][i][j]=k
+        end
+    end
+end
+function kill_ring(x,y)
+    enigma.KillStone(x,y)
+    enigma.KillStone(x+1,y)
+    enigma.KillStone(x+2,y)
+    enigma.KillStone(x,y+1)
+    enigma.KillStone(x+2,y+1)
+    enigma.KillStone(x,y+2)
+    enigma.KillStone(x+1,y+2)
+    enigma.KillStone(x+2,y+2)
+end
+function rotate(onoff, sender)
+    local j = enigma.GetAttrib(sender, "myattriby")
+    local i = enigma.GetAttrib(sender, "myattribx")
+    local r = enigma.GetAttrib(sender, "room")
+    if rotation[r][i][j]==1 then
+        position[r][i][j]=position[r][i][j]+1
+    else
+        position[r][i][j]=position[r][i][j]-1
+    end
+    if position[r][i][j]>4 then
+        position[r][i][j]=1
+    end    
+    if position[r][i][j]<1 then
+        position[r][i][j]=4
+    end         
+    if r == 1 then
+        kill_ring(42+(i-1)*4,1+(j-1)*4)         
+        set_thing(42+(i-1)*4,1+(j-1)*4,position[1][i][j])
+    else
+        kill_ring(43+(i-1)*4,25+(j-1)*4)         
+        set_thing(43+(i-1)*4,25+(j-1)*4,position[2][i][j])
+    end
+end
+--ways:
+function set_way(x,y)
+    local k=random(1,4)
+    if k==1 then
+        set_floor("fl-metal",x+3,y+1)
+        set_floor("fl-metal",x+7,y+1)
+        set_floor("fl-metal",x+9,y+3)
+        set_floor("fl-metal",x+3,y+5)
+        set_floor("fl-metal",x+7,y+5)
+        set_floor("fl-metal",x+1,y+7)
+        set_floor("fl-metal",x+3,y+9)
+        set_floor("fl-metal",x+7,y+9)
+    elseif k==2 then
+        set_floor("fl-metal",x+3,y+1)
+        set_floor("fl-metal",x+7,y+1)
+        set_floor("fl-metal",x+1,y+3)
+        set_floor("fl-metal",x+3,y+5)
+        set_floor("fl-metal",x+7,y+5)
+        set_floor("fl-metal",x+9,y+7)
+        set_floor("fl-metal",x+3,y+9)
+        set_floor("fl-metal",x+7,y+9)
+    elseif k==3 then
+        set_floor("fl-metal",x+1,y+3)
+        set_floor("fl-metal",x+1,y+7)
+        set_floor("fl-metal",x+3,y+9)
+        set_floor("fl-metal",x+5,y+7)
+        set_floor("fl-metal",x+5,y+3)
+        set_floor("fl-metal",x+7,y+1)
+        set_floor("fl-metal",x+9,y+3)
+        set_floor("fl-metal",x+9,y+7)
+    elseif k==4 then
+        set_floor("fl-metal",x+1,y+3)
+        set_floor("fl-metal",x+1,y+7)
+        set_floor("fl-metal",x+3,y+1)
+        set_floor("fl-metal",x+5,y+7)
+        set_floor("fl-metal",x+5,y+3)
+        set_floor("fl-metal",x+7,y+9)
+        set_floor("fl-metal",x+9,y+3)
+        set_floor("fl-metal",x+9,y+7)
+    end
+    if k==1 or k==3 then
+        set_floor("fl-metal",x-1,y)
+        set_floor("fl-metal",x-1,y+1)
+        set_floor("fl-metal",x+11,y+9)
+        set_floor("fl-metal",x+11,y+10)
+    else
+        set_floor("fl-metal",x-1,y+10)
+        set_floor("fl-metal",x-1,y+9)
+        set_floor("fl-metal",x+11,y)
+        set_floor("fl-metal",x+11,y+1)
+    end
+end
+--- TRIGGERS ---
+function set_trigger_o()
+    local k=1
+    local l=1
+    for i = 1, 9 do  
+        set_stone("st-switch_white", 55, 2+i-1,{action = "callback", target = "rotate", myattribx = k, myattriby = l, room = 2 })
+        k=k+1
+        if k>3 then
+            k=1
+            l=l+1
+        end
+    end
+end
+function set_trigger_u()
+    local k=1
+    local l=1
+    for i = 1, 9 do  
+        set_stone("st-switch_black", 40, 26+i-1,{action = "callback", target = "rotate", myattribx = k, myattriby = l, room = 1 })
+        k=k+1
+        if k>3 then
+            k=1
+            l=l+1
+        end
+    end
+end
+function prepare_room_3()
+    set_all_things()
+    determine_rotation()
+    set_way(42,1)
+    set_way(43,25)
+    set_trigger_o()
+    set_trigger_u()
+end
+
+prepare_room_3()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

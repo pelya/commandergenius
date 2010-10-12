@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Dangling" el:subtitle="Per.Oxyd 9" el:id="martin69"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="per.oxyd">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world( 20, 25)
+oxyd_default_flavor = "a"
+
+fill_floor( "fl-abyss")
+fill_floor( "fl-gray", 1,2,18,21)
+fill_floor( "fl-gray", 2,1,16,1)
+fill_floor( "fl-gray", 2,23,16,1)
+
+set_stone("st-actorimpulse", 1, 2)
+set_stone("st-actorimpulse",18, 2)
+draw_stones("st-actorimpulse", {2,1}, {1,0}, 16)
+
+oxyd(3,3)
+oxyd(16,3)
+oxyd(3,19)
+oxyd(16,19)
+oxyd(7,21)
+oxyd(12,21)
+oxyd_shuffle()
+
+local ac = set_actor("ac-blackball", 10, 5)
+local st = set_stone("st-grate1", 10, 4)
+
+AddRubberBand( ac, st, 30, 1)
+
+enigma.AddConstantForce(0,50)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

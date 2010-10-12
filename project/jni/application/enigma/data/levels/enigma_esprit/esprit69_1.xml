@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="esprit 69" el:subtitle="esprit 69" el:id="ss_esp69"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Sven Siggelkow" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Sven Siggelkow</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd1">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Added non-Enigma-compatibility-mode to support fire correctly -- Andreas Sep.06
+
+levelw = 39
+levelh = 13
+create_world(levelw, levelh)
+oxyd_default_flavor = "b"
+set_actor("ac-blackball", 27.5,6.5)
+display.SetFollowMode(display.FOLLOW_SCROLLING)
+
+fill_floor("fl-rough-red",0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+      local c = strsub( pattern, i, i)
+      if c ==   "#" then
+         set_stone("st-stone1", i-1,line)
+      elseif c =="m" then
+         set_item("it-coin4", i-1,line)
+      elseif c=="w" then
+         set_floor("fl-wood",  i-1,  line)
+         set_item("it-burnable_ignited", i-1,  line)
+      elseif c=="1" then
+         set_stone("st-door_c", i-1,line, {name="door1", type="v"})
+      elseif c=="2" then
+         set_stone("st-door_c", i-1,line, {name="door2", type="v"})
+      elseif c=="3" then
+         set_stone("st-door_c", i-1,line, {name="door3", type="v"})
+      elseif c=="4" then
+         set_stone("st-door_c", i-1,line, {name="door4", type="v"})
+      elseif c=="5" then
+         set_stone("st-door_c", i-1,line, {name="door5", type="v"})
+      elseif c=="6" then
+         set_stone("st-door_c", i-1,line, {name="door6", type="v"})
+      elseif c=="7" then
+         set_stone("st-door_c", i-1,line, {name="door7", type="v"})
+      elseif c=="9" then
+         set_stone("st-door_c", i-1,line, {name="door9", type="v"})
+      elseif c =="a" then
+         set_item("it-key_a", i-1,line)                  
+      elseif c =="b" then
+         set_item("it-key_b", i-1,line)
+      elseif c =="c" then
+         set_item("it-key_c", i-1,line)
+      elseif c =="I" then
+         set_stone("st-coinslot", i-1,line, {action="openclose", target="door9"})
+      elseif c =="E" then
+         set_stone("st-coinslot", i-1,line, {action="openclose", target="door5"})
+      elseif c =="A" then
+         set_stone("st-key_a", i-1, line, {action="openclose", target="door1"})
+      elseif c =="B" then
+         set_stone("st-key_b", i-1, line, {action="openclose", target="door2"})
+      elseif c =="C" then
+         set_stone("st-key_c", i-1, line, {action="openclose", target="door3"})
+      elseif c=="D" then
+     set_stone("st-switch",i-1,line, {action="openclose", target="door4"})         
+      elseif c=="F" then
+     set_stone("st-switch",i-1,line, {action="openclose", target="door6"})   
+      elseif c=="G" then
+     set_stone("st-switch",i-1,line, {action="openclose", target="door7"})
+      elseif c=="r" then
+     set_actor("ac-rotor", i,line+1, {mouseforce=0, range=50, force=70})
+      elseif c=="R" then
+     set_actor("ac-rotor", i,line+1, {mouseforce=0, range=6, force=20})
+      elseif c=="O" then
+     oxyd(i-1,line)         
+        end
+    end  
+end
+--               012345678901234567890123456789012345678
+renderLine(00 , "#######################################")
+renderLine(01 , "#m          ###        ###            #")
+renderLine(02 , "#m          #O#        #O#            #")
+renderLine(03 , "###A        #4#D       #3#C        ####")
+renderLine(04 , "#R #                 b             7O##")  
+renderLine(05 , "#  1                          m    ####")
+renderLine(06 , "####                           m  wGw #")
+renderLine(07 , "#r 2                   c          www #")
+renderLine(08 , "#  #                                 m#")
+renderLine(09 , "###B      #5#E    #6#F    #9#I        #")
+renderLine(10 , "#         #O#     #O#     #O#m        #")
+renderLine(11 , "#         ###     ###     ###        a#")
+renderLine(12 , "#######################################") 
+--               012345678901234567890123456789012345678
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

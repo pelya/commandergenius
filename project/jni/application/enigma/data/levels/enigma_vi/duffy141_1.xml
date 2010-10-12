@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="In the Middle" el:subtitle="" el:id="duffy141"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+rooms_wide=1
+rooms_high=1
+
+levelw=1+(19*rooms_wide)
+levelh=1+(12*rooms_high)
+
+create_world( levelw, levelh)
+enigma.ConserveLevel=FALSE
+
+fill_floor("fl-metal", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c == "o" then
+            oxyd( i-1, line)
+            abyss(i-1,line)
+        elseif c == "F" then
+            set_stone("st-fart",i-1, line)
+            abyss(i-1,line)
+        elseif c == "*" then
+            set_stone( "st-brownie", i-1, line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {name="ac1",player=0, essential=1})
+            set_item("it-yinyang",i-1,line)
+        elseif c=="y" then
+            set_actor("ac-whiteball", i-.5,line+.5, {name="ac2",player=1, essential=1})
+            set_item("it-yinyang",i-1,line)
+        elseif c=="k" then
+            set_actor("ac-killerball", i-.5,line+.5, {name="ac3",controllers=0})
+            abyss(i-1,line)
+        elseif c=="K" then
+            set_actor("ac-killerball", i-.5,line+.5, {name="ac4",controllers=0})
+            abyss(i-1,line)
+        elseif c == "u" then
+            set_floor("fl-gradient",  i-1,  line, {type=2})
+        elseif c == "r" then
+            set_floor("fl-gradient",  i-1,  line, {type=3})
+        elseif c == "d" then
+            set_floor("fl-gradient",  i-1,  line, {type=1})
+        elseif c == "l" then
+            set_floor("fl-gradient",  i-1,  line, {type=4})
+        elseif c == "1" then
+            set_floor("fl-gradient",  i-1,  line, {type=11})
+        elseif c == "3" then
+            set_floor("fl-gradient",  i-1,  line, {type=9})
+        elseif c == "7" then
+            set_floor("fl-gradient",  i-1,  line, {type=12})
+        elseif c == "9" then
+            set_floor("fl-gradient",  i-1,  line, {type=10})
+        end
+    end
+end
+
+renderLine(00,"!!!!!!!!!!!!!!!!!!!!")
+renderLine(01,"!3dddddddddddddddd1!")
+renderLine(02,"!r        z       l!")
+renderLine(03,"!r 7uuuuuuuuuuuu9 l!")
+renderLine(04,"!r l!!!!!oo!!!!!r l!")
+renderLine(05,"!r l!o!!!!k!!!o!r l!")
+renderLine(06,"!r l!!!o!FF!o!!!r l!")
+renderLine(07,"!r l!o!!!K!!!!o!r l!")
+renderLine(08,"!r l!!!!!oo!!!!!r l!")
+renderLine(09,"!r 1dddddddddddd3 l!")
+renderLine(10,"!r       y        l!")
+renderLine(11,"!9uuuuuuuuuuuuuuuu7!")
+renderLine(12,"!!!!!!!!!!!!!!!!!!!!")
+
+oxyd_shuffle()
+
+ac1=enigma.GetNamedObject("ac1")
+ac2=enigma.GetNamedObject("ac2")
+ac3=enigma.GetNamedObject("ac3")
+ac4=enigma.GetNamedObject("ac4")
+
+AddRubberBand(ac1,ac3,50,3)
+AddRubberBand(ac2,ac4,50,3)
+AddRubberBand(ac3,ac4,30,2)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

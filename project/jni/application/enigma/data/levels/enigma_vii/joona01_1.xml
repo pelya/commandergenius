@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd"
+          xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="DownDown" el:id="20070406joona005"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author el:name="Joona Laire" el:email="joona.laire@gmail.com"/>
+      <el:copyright>Copyright © 2006 Joona Laire</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+        <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:score el:easy="01:05" el:difficult="01:10"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+cells[" "]=cell{floor="fl-himalaya"}
+cells["X"]=cell{stone="st-blue-sand"}
+cells["+"]=cell{actor="ac-blackball"}
+cells["0"]=cell{oxyd}
+cells["Z"]=cell{stone="st-break_bolder"}
+cells["A"]=cell{stone="st-bolder-s"}
+cells["D"]=cell{stone="st-death"}
+
+if difficult then
+    cells["a"]=cell{stone="st-bolder-s"}
+else
+    cells["a"]=cell{floor="fl-himalaya"}
+end
+
+level = {
+   "XXXXXXXXXXXXXXXXXXXX",
+   "XAAAAAAAAAAAAAAAAAAX",
+   "XAAAAAAAAAAAAAAAAAAX",
+   "XAAAAAAAAAAAAAAAAAAX",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "XAAAAAAAAAAAAAAAAAAX",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X", -- !!
+   "X                  X",
+   "XAAAAAAAAAAAAAAAAAAX",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "XaaaaaaaaaaaaaaaaaaX",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X", -- !!
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X        +         X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "XZ ZZZZZZZZZZZZZZ ZX", -- !!
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "XZZZZZZZZ ZZZZZZZZZX",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X Z              Z X",
+   "X ZZZZZZZZZZZZZZZZ X", -- !!
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X      Z Z         X",
+   "XZZZZZZZ ZZZZZZZZZZX",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X ZZ ZZ ZZ ZZ ZZ ZZX",
+   "X ZZ ZZ ZZ ZZ ZZ ZZX", -- !!
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X      Z Z  Z Z    X",
+   "X      Z Z  Z Z    X",
+   "X      Z Z  Z Z    X",
+   "XZZZZZZZ Z  Z ZZZZZX",
+   "XZ       Z  Z     ZX",
+   "XZ ZZZZZZZ  ZZZZZ ZX",
+   "XZ Z            Z ZX",
+   "XZ ZZZZZZZZZZZZZZ ZX", -- !!
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "XZ Z  Z  Z Z ZZZZ  X",
+   "X Z  Z ZZ Z Z    Z X",
+   "X  Z  ZZ   Z  ZZ  ZX",
+   "X  ZZ    Z   ZZ   ZX",
+   "X Z  Z ZZZZ Z    Z X",
+   "XZ    Z    Z    Z ZX", -- !!
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "XZZZZZZZZZZZZZZZZZ X",
+   "X                  X",
+   "X  ZZZZZZZZZZZZZZZZX",
+   "X                  X",
+   "XZZZZZZZZZZZZZZZZ  X",
+   "X                  X",
+   "X  ZZZZZZZZZZZZZZZZX",
+   "X                  X", -- !!
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X          ZZZ   Z X",
+   "X   ZZZ   Z   Z Z  Z",
+   "X  Z   Z Z  Z  Z  ZX",
+   "X Z  Z  Z  Z Z   Z X",
+   "XZ  Z Z   Z   ZZZ  X",
+   "Z  Z   ZZZ         X",
+   "X Z                X",
+   "X                  X", -- !!
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X ZZZZZZZZZZZZZZZZ X",
+   "X                  X",
+   "XZZZZZZZZ ZZZZZZZZZX",
+   "X                  X",
+   "X ZZZZZZZZZZZZZZZZ X",
+   "X                  X",
+   "XZZZZZZZZ ZZZZZZZZZX", -- !!
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "XZ  Z  Z  Z  Z  Z  Z",
+   "Z  Z  Z  Z  Z  Z  ZX",
+   "Z  Z  Z ZZ  Z  Z  ZX",
+   "XZZ Z  Z  Z  Z  Z  Z",
+   "Z  Z  Z  Z ZZ ZZZ ZX",
+   "X Z  Z  Z  Z  Z  Z X", -- !!
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X ZZZZZZZZZ        X",
+   "X Z   Z   Z        X",
+   "X   Z   Z Z        X",
+   "XZZZZZZZZ ZZZZZZZZZX",
+   "X                  X",
+   "X ZZZZZZZZZZZZZZZZ X", -- !!
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X ZZZZZZZZZZZZZZZZ X",
+   "X Z   Z      Z   Z X",
+   "X Z Z Z Z  Z Z Z Z X",
+   "X Z Z Z Z  Z Z Z Z X",
+   "X   Z   Z  Z   Z   X",
+   "XZZZZZZZZ  ZZZZZZZZX", -- !!
+   "X                  X",
+   "X                  X",
+   "X        ZZ        X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X ZZZZZZZZZZZZZZZZZX",
+   "X Z   Z   Z   Z   ZX",
+   "X Z Z Z Z Z Z Z Z ZX",
+   "X Z Z Z Z Z Z Z Z ZX", -- !!
+   "X   Z   Z   Z   Z ZX",
+   "XZZZZZZZZZZZZZZZZ ZX",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X                  X",
+   "X XX            XX X",
+   "X  X            X  X",
+   "XX0XXXXXXXXXXXXXX0XX"
+}
+
+oxyd_default_flavor = "d"
+set_default_parent(cells[" "])
+create_world_by_map(level,cells)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

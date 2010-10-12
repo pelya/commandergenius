@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Don't Touch" el:subtitle="" el:id="raoul07"/>
+      <el:version el:score="2" el:release="2" el:revision="1" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="raoul@users.berlios.de" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/natmaze" el:id="lib/natmaze" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="1:02"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- (Maze)Code partly taken from nat27.lua
+maze_width = 5
+maze_height = 6
+
+function cellx_to_worldx( cellx )
+    return originx + 2*cellx
+end
+
+function celly_to_worldy( celly )
+    return originy + 2*celly
+end
+
+function maze_floor(x,y)
+    set_stone("st-stoneimpulse-hollow",x,y)
+end
+
+function maze_wall(x,y)
+    set_stone("st-stoneimpulse",x,y)
+end
+
+function render_cell( maze, cellx, celly )
+    local x = cellx_to_worldx(cellx)
+    local y = celly_to_worldy(celly)
+    
+    maze_floor(x,y)
+    
+    if maze:can_go_east(cellx,celly) then
+        maze_floor(x+1,y)
+    elseif maze:contains_cell(cellx+1,celly) then
+        maze_wall(x+1,y)
+    end
+    
+    if maze:can_go_south(cellx,celly) then
+        maze_floor(x,y+1)
+    elseif maze:contains_cell(cellx,celly+1) then
+        maze_wall(x,y+1)
+    end
+    
+    if maze:contains_cell(cellx+1,celly+1) then
+        maze_wall(x+1,y+1)
+    end
+end
+
+function draw_maze()
+    render_maze( new_kruskal_maze(maze_width,maze_height), render_cell )
+end
+
+cells = {}
+
+-- World
+create_world( 20, 13 )
+oxyd_default_flavor = "b"
+
+originx=1
+originy=1
+draw_maze()
+
+originx=10
+originy=1
+draw_maze()
+
+draw_border("st-stoneimpulse")
+fill_floor("fl-black")
+
+if not difficult then
+    oxyd(0,1)
+    oxyd(0,11)
+    oxyd(19,1)
+    oxyd(19,11)
+else
+    oxyd(0,1)
+    oxyd(0,11)
+    oxyd(19,1)
+    oxyd(19,11)
+    oxyd(1,0)
+    oxyd(1,12)
+    oxyd(18,0)
+    oxyd(18,12)
+    set_item("it-extralife",10,6)
+end
+
+set_stone("st-grate1",10,6)
+set_actor("ac-blackball", 10+0.5, 6+0.5, {player=0})
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

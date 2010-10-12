@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Demo I18N" el:subtitle="Translate or let it be translated" el:id="20060211ral002"/>
+      <el:version el:score="1" el:release="1" el:revision="2" el:status="experimental"/>
+      <el:author  el:name="Ronald Lamprecht" el:email="ral@users.berlios.de"/>
+      <el:copyright>Copyright © 2006 Ronald Lamprecht</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92"/>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world( levelw, levelh)
+draw_border("st-wood")
+fill_floor("fl-leavesb", 0,0,levelw,levelh)
+
+oxyd( 4,4)
+oxyd( 14,4)
+
+document(5,10,"hint1")
+document(10,10,"hint2")
+document(10,5,"Heureka!")
+set_actor("ac-blackball", 4, 11)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Übersetzten oder übersetzten lassen</el:translation>
+      </el:string>
+      <el:string el:key="hint1">
+        <el:english el:comment="Let 'right' be ambiguous: correct and opposite of left - if not possible choose correct">Read the right document</el:english>
+        <el:translation el:lang="de">Lies das rechte Dokument</el:translation>
+      </el:string>
+      <el:string el:key="hint2">
+        <el:english el:comment="the correct one and not the right positioned one">The right one, not the right one!</el:english>
+        <el:translation el:lang="de">Das rechte, nicht das rechte</el:translation>
+      </el:string>
+      <el:string el:key="Heureka!">
+        <el:english el:translate="false">Heureka!</el:english>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+  <el:public>
+    <el:i18n>
+      <el:string el:key="hint1">
+        <!-- Better wrong French than nothing  -  the translator should correct it -->
+        <el:translation el:lang="fr">Lisez la document de droite</el:translation> 
+      </el:string>
+    </el:i18n>
+  </el:public>
+</el:level>
+

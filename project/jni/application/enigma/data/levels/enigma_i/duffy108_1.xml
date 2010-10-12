@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Security Guards" el:subtitle="" el:id="duffy108"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2004 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+rooms_wide=1
+rooms_high=3
+
+levelw=1+(19*rooms_wide)
+levelh=1+(12*rooms_high)
+
+create_world( levelw, levelh)
+
+fill_floor("fl-normal", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-rock1", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "*" then
+            set_stone( "st-brownie", i-1, line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c == "~" then
+           set_floor("fl-water",i-1,line)
+        elseif c=="z" then
+           set_actor("ac-blackball", i-.5,line+.5, {controllers=1,player=0})
+        elseif c=="S" then
+           set_actor("ac-top", i-.5,line+.5, {controllers=0,range=0,force=0})
+            set_floor("fl-gradient",  i-1,  line, {type=1})
+        elseif c=="N" then
+           set_actor("ac-top", i-.5,line+.5, {controllers=0,range=0,force=0})
+            set_floor("fl-gradient",  i-1,  line, {type=2})
+        elseif c=="d" then
+            set_floor("fl-gradient",  i-1,  line, {type=1})
+        elseif c=="u" then
+            set_floor("fl-gradient",  i-1,  line, {type=2})
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c=="=" then
+            set_floor("fl-space",i-1,line)
+        elseif c=="s" then
+            fill_floor("fl-space",i,line-1,16,13)
+        elseif c=="H" then
+           set_item("it-tinyhollow",i-1,line)
+           set_floor("fl-normal",i-1,line)
+        elseif c=="O" then
+           set_item("it-extralife",i-1,line)
+        elseif c=="Q" then
+           set_stone("st-switch",i-1,line,{action="callback",target="funcc1"})
+        elseif c=="A" then
+           set_stone("st-door_a",i-1,line,{close=0,name="door1"})
+        elseif c=="B" then
+           set_stone("st-door_a",i-1,line,{close=0,name="door2"})
+        elseif c=="C" then
+           set_stone("st-door_a",i-1,line,{close=0,name="door3"})
+        elseif c=="D" then
+           set_stone("st-door_a",i-1,line,{close=0,name="door4"})
+        elseif c=="E" then
+           set_stone("st-door_a",i-1,line,{close=0,name="door5"})
+        elseif c=="F" then
+           set_stone("st-door_a",i-1,line,{close=0,name="door6"})
+        elseif c=="G" then
+           set_stone("st-door_a",i-1,line,{close=0,name="door7"})
+        elseif c=="`" then
+           set_stone("st-door_a",i-1,line,{close=0,name="door8"})
+        elseif c=="I" then
+           set_stone("st-door_a",i-1,line,{close=0,name="door9"})
+        elseif c=="J" then
+           set_stone("st-door_a",i-1,line,{close=0,name="door10"})
+        elseif c=="K" then
+           set_stone("st-door_a",i-1,line,{close=0,name="door11"})
+        elseif c=="L" then
+           set_stone("st-door_a",i-1,line,{close=0,name="door12"})
+        elseif c=="M" then
+           set_stone("st-door_a",i-1,line,{close=0,name="door13"})
+        elseif c=="$" then
+           set_stone("st-door_a",i-1,line,{close=0,name="door14"})
+        elseif c=="%" then
+           set_stone("st-door_a",i-1,line,{close=0,name="door15"})
+        elseif c=="P" then
+           set_stone("st-door_a",i-1,line,{close=0,name="door16"})
+         end
+    end    
+end
+
+renderLine(00,"####################")
+renderLine(01,"# # #S# #  # # # #S#")
+renderLine(02,"# # #d# #  # # # #=#")
+renderLine(03,"# # #d# #  #S# # #=#")
+renderLine(04,"# # #d# #  #d# # #=#")
+renderLine(05,"# # #d# #  #d# #S#d#")
+renderLine(06,"# # #d# #Sd#d# #d#d#")
+renderLine(07,"# # #d# #dd#d# #d#d#")
+renderLine(08,"# # #d# #dd#d# #d#d#")
+renderLine(09,"# # #d# #dd#d# #d#d#")
+renderLine(10,"# # #d# #dd#d# #d#u#")
+renderLine(11,"# # #d# #dd#d# #d#Q#")
+renderLine(12,"#o#A#B#C#DE#F#G#`#o#")
+renderLine(13,"os# # # #  # # # # o")
+renderLine(14,"# # # # #  # # # # #")
+renderLine(15,"o # # # #  # # # # o")
+renderLine(16,"# # # # #  # # # # #")
+renderLine(17,"o # # # #  # # # # o")
+renderLine(18,"#zH H H H  H H H H #")
+renderLine(19,"o # # # #  # # # # o")
+renderLine(20,"# # # # #  # # # # #")
+renderLine(21,"o # # # #  # # # # o")
+renderLine(22,"# # # # #  # # # # #")
+renderLine(23,"o # # # #  # # # # o")
+renderLine(24,"#o#I#J#K#LM#$#%#P#o#")
+renderLine(25,"# #u# #u#uu# #u# # #")
+renderLine(26,"# #u# #u#uu# #u# # #")
+renderLine(27,"# #u# #u#uu# #u# # #")
+renderLine(28,"# #u# #u#uu# #N# # #")
+renderLine(29,"# #N# #u#uu# # # # #")
+renderLine(30,"# # # #u#uu# # # # #")
+renderLine(31,"# # # #u#uu# # # # #")
+renderLine(32,"# # # #u#uN# # # # #")
+renderLine(33,"# # # #N#  # # # # #")
+renderLine(34,"# # # # #  # # # # #")
+renderLine(35,"# # # # #  # # # # #")
+renderLine(36,"####################")
+
+oxyd_shuffle()
+
+door1=enigma.GetNamedObject("door1")
+door2=enigma.GetNamedObject("door2")
+door3=enigma.GetNamedObject("door3")
+door4=enigma.GetNamedObject("door4")
+door5=enigma.GetNamedObject("door5")
+door6=enigma.GetNamedObject("door6")
+door7=enigma.GetNamedObject("door7")
+door8=enigma.GetNamedObject("door8")
+door9=enigma.GetNamedObject("door9")
+door10=enigma.GetNamedObject("door10")
+door11=enigma.GetNamedObject("door11")
+door12=enigma.GetNamedObject("door12")
+door13=enigma.GetNamedObject("door13")
+door14=enigma.GetNamedObject("door14")
+door15=enigma.GetNamedObject("door15")
+door16=enigma.GetNamedObject("door16")
+
+enigma.SendMessage(door1,"open",nil)
+enigma.SendMessage(door2,"open",nil)
+enigma.SendMessage(door3,"open",nil)
+enigma.SendMessage(door4,"open",nil)
+enigma.SendMessage(door5,"open",nil)
+enigma.SendMessage(door6,"open",nil)
+enigma.SendMessage(door7,"open",nil)
+enigma.SendMessage(door8,"open",nil)
+enigma.SendMessage(door9,"open",nil)
+enigma.SendMessage(door10,"open",nil)
+enigma.SendMessage(door11,"open",nil)
+enigma.SendMessage(door12,"open",nil)
+enigma.SendMessage(door13,"open",nil)
+enigma.SendMessage(door14,"open",nil)
+enigma.SendMessage(door15,"open",nil)
+enigma.SendMessage(door16,"open",nil)
+
+function funcc1()
+   enigma.SendMessage(door1,"close",nil)
+   enigma.SendMessage(door2,"close",nil)
+   enigma.SendMessage(door3,"close",nil)
+   enigma.SendMessage(door4,"close",nil)
+   enigma.SendMessage(door5,"close",nil)
+   enigma.SendMessage(door6,"close",nil)
+   enigma.SendMessage(door7,"close",nil)
+   enigma.SendMessage(door8,"close",nil)
+   enigma.SendMessage(door9,"close",nil)
+   enigma.SendMessage(door10,"close",nil)
+   enigma.SendMessage(door11,"close",nil)
+   enigma.SendMessage(door12,"close",nil)
+   enigma.SendMessage(door13,"close",nil)
+   enigma.SendMessage(door14,"close",nil)
+   enigma.SendMessage(door15,"close",nil)
+   enigma.SendMessage(door16,"close",nil)
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

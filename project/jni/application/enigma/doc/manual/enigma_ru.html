@@ -1,0 +1,2588 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!--Copyright C 2003, 2004, 2005, 2006 Daniel Heck и другие участники
+
+Копирование и распространение этого файла с изменениями или без разрешено любым 
+способом без отчислений, если сохранены уведомление об авторских правах и это 
+уведомление.
+-->
+<!-- Created on March, 25 2007 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>Руководство по Enigma: Enigma</title>
+
+<meta name="description" content="Руководство по Enigma: Enigma">
+<meta name="keywords" content="Руководство по Enigma: Enigma">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=koi8-r">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Top"></a>
+<a name="SEC_Top"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="settitle">Enigma</h1>
+
+<p>Это руководство описывает как установить и играть в Enigma. Оно соответствует 
+версии Enigma под номером 1.00.
+</p>
+<p>Copyright &copy; 2003, 2004, 2005, 2006 Daniel Heck и другие участники
+</p>
+<p>Копирование и распространение этого файла с изменениями или без разрешено любым 
+способом без отчислений, если сохранены уведомление об авторских правах и это 
+уведомление.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC1">1. Введение</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Знакомство с Enigma
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC5">2. Игра</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    Как играть в Enigma
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC16">3. Некоторые игровые объекты</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Описание некоторых игровых объектов</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC30">4. Дополнительные темы</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Дополнительные возможности и администрирование</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC35">5. Спойлеры</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Подсказки для некоторых сложных уровней</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC41">6. Благодарности</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Создатели и благодарности</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+</pre></th></tr></table>
+
+<hr size="1">
+<a name="g_t_00f7_00d7_00c5_00c4_00c5_00ce_00c9_00c5"></a>
+<a name="SEC1"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC_Top" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[ &lt;&lt; ]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 1. Введение </h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC2">1.1 Об Enigma</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Некоторые факты об Enigma</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC3">1.2 Установка</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Получение и установка Enigma
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC4">1.3 Распространение Enigma</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">         Передавайте копии вашим друзьям!
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="g_t_00ef_00c2-Enigma"></a>
+<a name="SEC2"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC1" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 1.1 Об Enigma </h2>
+
+<p>Сказать, что Enigma ? игра-головоломка это преуменьшение. На самом деле Enigma 
+это огромная коллекция головоломок, и каждый из ее 550 уникальных уровней снова 
+и снова потребует сообразительности, ловкости и подлинной силы воли от своих игроков. 
+Enigma проста в изучении, интересна в игре и сложна в овладении. Она может развлечь 
+пользователей почти любого возраста. Она содержит сотни уровней. И, если этого 
+не достаточно, она также полностью бесплатна. Если Вам нравятся игры-головоломки 
+и у Вас твердая рука, Enigma возможно займет Вас на протяжении целых часов.
+</p>
+<p>Цель игры ? найти и открыть пары <samp>`Oxyd'</samp>-камней одинакового цвета. Просто? Да. 
+Легко? Конечно, нет! Скрытые ловушки, огромные лабиринты, лазерные лучи и, самое 
+главное, бесчисленные причудливые головоломки обычно перекрывающие Вам прямой путь 
+к Oxyd-камням. Игровые объекты Enigma (их здесь сотни, чтобы Вы не скучали) 
+взаимодействуют многочисленными непредсказуемыми способами, и поскольку многие из 
+них подчиняются законам физики (а точнее, особым законам физики Enigma), управление 
+ими с помощью мыши не всегда тривиально <small class="enddots">....</small>
+</p>
+<p>Первоначальная цель проекта Enigma была сохранить дух серии игр Oxyd, после того 
+как их издатель решил покинуть игровой бизнес в 2002 году. У поклонников этой 
+знаменитой игры будет чувство дежа вю. Но спустя годы, Enigma впитала идеи из 
+множества других популярных игр и добавила свои уникальные особенности к каждой 
+из них.
+</p>
+<p>Enigma доступна для Windows, Mac OS X, и большинства разновидностей Linux и других 
+современных Unix'ов. Она переведена на многие языки. Даже это руководство доступно 
+на нескольких языках.
+</p>
+<p>Существует официальная <a href="http://www.nongnu.org/enigma">домашняя страница</a> Enigma, 
+которая содержит страницы скриншотов, загрузок, последних новостей и самую последнюю 
+версию этого <a href="http://www.nongnu.org/enigma/manual">руководства</a>.
+С разработчиками Enigma всегда можно связаться с помощью электронной почты по адресу
+<a href="mailto:enigma-devel@nongnu.org">enigma-devel@nongnu.org</a>.
+</p>
+<p>Enigma это свободное программное обеспечение, другими словами, приветствуется 
+копировать ее и давать ее Вашим друзьям (смотрите (see section <a href="#SEC4">Распространение Enigma</a>).  
+Enigma разрабатывается маленькой группой добровольцев, все из нас работают в наше 
+свободное время. Если Вам понравилась игра, пожалуйста пришлите нам электронное письмо. 
+Это пожалуй единственная вещь, которая всегда приводит к тому, что мы посвящаем этой 
+игре бесчисленное множество часов.
+</p>
+
+<hr size="6">
+<a name="g_t_00f5_00d3_00d4_00c1_00ce_00cf_00d7_00cb_00c1"></a>
+<a name="SEC3"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC2" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC4" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 1.2 Установка </h2>
+
+<p>Последняя версия Enigma может быть загружена со
+<a href="http://www.nongnu.org/enigma/download.html">страницы загрузок</a> Enigma. Эта 
+страница содержит пакеты для следующих операционных систем:
+</p>
+<dl compact="compact">
+<dt> <strong>Windows</strong></dt>
+<dd><p>Версия Enigma для Windows распространяется, как самораспаковывающаяся программа. 
+Просто скачайте и запустите предложенный файл <tt>`.exe'</tt>.
+</p>
+</dd>
+<dt> <strong>Unix</strong></dt>
+<dd><p>Существуют бинарные пакеты для некоторых популярных дистрибутивов Linux, таких как 
+SUSE, Redhat или Debian. Для других Unix-подобных операционных систем обычно самое 
+простое решение это сборка Enigma из исходных кодов.
+</p>
+</dd>
+<dt> <strong>Mac OS X</strong></dt>
+<dd><p>Для операционной системы версии X установка не требуется, просто запустите файл
+<tt>`.dmg'</tt> или <tt>`.tar.gz'</tt>.
+</p>
+</dd>
+</dl>
+
+<p>Страница загрузок, как правило, содержит более подробную и современную информацию. 
+Если Вы не можете заставить Enigma работать на Вашем компьютере, не бойтесь попросить 
+помощи в рассылке Enigma
+(<a href="mailto:enigma-devel@nongnu.org">enigma-devel@nongnu.org</a>).
+</p>
+<hr size="6">
+<a name="g_t_00f2_00c1_00d3_00d0_00d2_00cf_00d3_00d4_00d2_00c1_00ce_00c5_00ce_00c9_00c5-Enigma"></a>
+<a name="SEC4"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC3" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 1.3 Распространение Enigma </h2>
+
+<p>Enigma это свободное программное обеспечение и она может распространяться на условиях 
+GNU General Public License (GPL). Эта лицензия поставляется с каждым изданием Enigma 
+(или в файле <tt>`COPYING'</tt> или в файле
+<tt>`COPYING.txt'</tt>).  Если Вы хотите только <em>играть</em> в Enigma, Вам не обязательно 
+читать все те термины (скорее всего Вы и не захотите). Для Вас, лицензия в основном 
+гласит: Играйте в Enigma сколько хотите, пока хотите и можете давать ее своим друзьям!
+</p>
+<p>Если Вы хотите изменить Enigma или способствовать ее дальнейшей разработке, пожалуйста 
+<em>прочтите</em> ицензию, всего один раз в жизни. Лицензия GPL гарантирует, что Enigma 
+будет оставаться свободным программным обеспечением в будущем. В частности, если 
+Вы изменяете Enigma или распространяете измененную версию, Вы не можете отнять ни 
+у кого другого право использовать, изменять и распространять Enigma или производные 
+от нее.
+</p>
+<p>Предыдущие два абзаца не заменяют настоящую лицензию, но дают представление о ней 
+в общих чертах на простом русском. Пожалуйста обратитесь к GPL, если Вы не определились 
+или если Вам нужно знать больше подробностей.
+</p>
+<hr size="6">
+<a name="g_t_00e9_00c7_00d2_00c1"></a>
+<a name="SEC5"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC4" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC6" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 2. Игра </h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC6">2.1 Знакомство</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Передвижение по меню и начало игры</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC11">2.2 Правила Игры</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">           Как играть в Enigma
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC15">2.3 Управление</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Команды клавиатуры и мыши</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="g_t_00fa_00ce_00c1_00cb_00cf_00cd_00d3_00d4_00d7_00cf"></a>
+<a name="SEC6"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC5" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC7" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 2.1 Знакомство </h2>
+
+<p>После запуска Enigma, Вы окажетесь в главном меню, откуда Вы можете начать новую 
+игру, установить некоторые параметры или выйти из игры, если Вам надоело. Следующие 
+разделы познакомят Вас с меню уровней и меню настроек; все остальное можно надеятся 
+говорит само за себя. Многие меню предоставляют интерактивную помощь; просто нажмите 
+клавишу
+<kbd>F1</kbd>.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC7">2.1.1 Меню уровней</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Выбирает следующий уровень</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC8">2.1.2 Меню Пакет уровней</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Выбирает пакет уровней</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC9">2.1.3 Настройки</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Приспособьте Enigma под свои предпочтения
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC10">2.1.4 Инспектор уровня</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Подробная информация об уровне</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="g_t_00ed_00c5_00ce_00c0-_00d5_00d2_00cf_00d7_00ce_00c5_00ca"></a>
+<a name="SEC7"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC6" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC6" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 2.1.1 Меню уровней </h3>
+
+<p>Нажатие на &quot;Начать игру&quot; в главном меню приведет Вас к меню уровней, которое 
+выглядит приблизительно как это:
+</p>
+<p><img src="./images/levelmenu.png" alt="images/levelmenu">
+</p>
+<p>Экран состоит из трех областей: верхняя область содержит информацию о выбранном 
+в данный момент уровне и текущем пакете уровней, средняя область показывает вид 
+доступных уровней, а внизу находится ряд кнопок.
+</p>
+<p>Вы можете передвигаться по списку уровней или используя маленькие кнопки со 
+стрелками справа, или пользуясь клавишами со стрелками. Для начала новой игры 
+просто кликните на изображении местности на которой Вы хотите играть или нажмите
+<kbd>Enter</kbd>.
+</p>
+<p>В Enigma есть два уровня сложности: &quot;простой&quot; и &quot;нормальный&quot;. Чтобы переключиться 
+между простой и нормальной сложностью, нажмите кнопку в центре ряда кнопок: 
+переключитесь на значок с изображением серебрянной медали и пера, если Вы предпочитаете 
+уровни полегче или с изображением золотой медали для нормального, более сложного, 
+режима игры.
+</p>
+<p>В упрощенной версии доступны не все уровни; поэтому они обозначены пером (если 
+Вы еще их не решили) или серебрянной медалью в верхнем левом углу их изображения.
+</p>
+<p>Вы можете перейти на следующий уровень нажав или <kbd>F5</kbd>, или кнопку
+<kbd>&gt;&gt;|</kbd> в нижнем ряду. Значение слова &quot;следующий&quot; в предыдущем предложении 
+зависит от режима, который Вы выбрали самой левой кнопкой в нижнем ряду.
+</p>
+<ul>
+<li> 
+Иконка неподвижного черного шарика устанавливается для &quot;строго следующего&quot;. Вы 
+перейдете на следующий уровень в пакете уровней, невзирая на то, решили вы этот 
+уровень или нет.
+
+</li><li>
+Иконка показывающая медали, готовые к вручению устанавливается для режима следующего 
+нерешенного. В этом режиме кнопка <kbd>&gt;&gt;|</kbd> перемещает к следующему нерешенному 
+уровню.
+
+</li><li>
+Иконка с ускоряющимся черным шариком устанавливается для режима соответствия. 
+Соответствие это профессиональный усредненный рейтинг уровня. Оно представляет 
+собой очки, которые должны быть набраны опытным игроком. Уровни, в которых ваше 
+время равно или меньше уровня соответствия будут обозначены значком ускоряющегося 
+шарика. В этом режиме кнопка
+<kbd>&gt;&gt;|</kbd>  перемещает к следующему уровню с очками хуже уровня соответствия.
+
+</li><li>
+Наконец, значок планеты предлагает режим охоты за мировыми рекордами. Если Ваши 
+очки лучшие из всех заработанных, Вы будете удостоены значка мирового рекорда. 
+Если Вы выберете этот режим, уровень будет переигрываться снова и снова, пока 
+Вы не добьетесь мирового рекорда. 
+
+</li></ul>
+
+<p>Уровень может дополнительно обозначаться маленьким красным треугольником с 
+восклицательным знаком в верхнем левом углу. Этот знак уведомит Вас, если уровень 
+был обновлен после того как Вы его решили. Вы сможете увидеть его только, если 
+Вы обновите Enigma до более новой версии.
+</p>
+<p>Вы можете перемещаться по меню уровней с помощью следующих клавиш:
+</p>
+<dl compact="compact">
+<dt> <kbd><kbd>ESC</kbd></kbd></dt>
+<dd><p>Вернуться к предыдущему меню
+</p>
+</dd>
+<dt> <kbd><kbd>F1</kbd></kbd></dt>
+<dd><p>Показать помощь
+</p>
+</dd>
+<dt> <kbd><kbd>F5</kbd></kbd></dt>
+<dd><p>Перейти к следующему уровню, аналогично кнопке <kbd>&gt;&gt;|</kbd> 
+</p>
+</dd>
+<dt> <kbd>Стрелки</kbd></dt>
+<dd><p>Сменить уровень
+</p>
+</dd>
+<dt> <kbd><kbd>Enter</kbd></kbd></dt>
+<dd><p>Играть на выбранном уровне
+</p>
+</dd>
+<dt> <kbd><kbd>Пробел</kbd></kbd></dt>
+<dd><p>Перейти к следующему пакету уровней
+</p>
+</dd>
+<dt> <kbd><kbd>Backspace</kbd></kbd></dt>
+<dd><p>Перейти к предыдущему пакету уровней
+</p>
+</dd>
+</dl>
+
+<hr size="6">
+<a name="g_t_00ed_00c5_00ce_00c0-_00f0_00c1_00cb_00c5_00d4-_00d5_00d2_00cf_00d7_00ce_00c5_00ca"></a>
+<a name="SEC8"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC7" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC6" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 2.1.2 Меню Пакет уровней </h3>
+
+<p>С Enigma поставляется много уровней. На самом деле, много-много уровней. Чтобы 
+сохранить порядок, они входят в &quot;пакеты уровней&quot;. А из-за того, что каждый релиз 
+Enigma добавляет больше уровней, мы даже собрали пакеты уровней в &quot;группы&quot;. 
+К счастью, все это значительно проще чем звучит.
+</p>
+<p>Чтобы выбрать пакет уровней, войдите в меню &quot;Пакет уровней&quot;, которое доступно 
+из главного меню или из меню уровней.
+</p>
+<p>Это меню показывает группы в левой колонке, а пакеты уровней выбранной группы в 
+другой колонке справа. Официальными группами, которые поставляются вместе с 
+Enigma являются следующие:
+</p>
+<ul>
+<li> <b>Enigma</b> - уровни, которые написаны только для Enigma 
+</li><li> <b>D&eacute;j&agrave;-vu</b> - уровни, которые Вы могли видеть раньше
+</li><li> <b>Sokoban</b>
+</li><li> <b>Facets</b> - специальные наборы и виды выше перечисленных уровней
+</li><li> <b>User</b> - личные уровни и пакеты уровней, наподобие Истории, автоматически 
+генерируемые системой для пользователя.
+</li><li> <b>Development</b> - шаблоны и незаконченные уровни от команды Enigma
+</li><li> <b>All Packs</b>
+</li></ul>
+
+<p>Щелчок левой кнопки мыши выбирает группу или пакет уровней. 
+</p>
+<p>Описание дополнительных возможностей пакетов уровней смотрите в <a href="#SEC31">Пользовательские пакеты уровней</a>.
+</p>
+<hr size="6">
+<a name="g_t_00ee_00c1_00d3_00d4_00d2_00cf_00ca_00cb_00c9"></a>
+<a name="SEC9"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC8" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC10" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC6" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 2.1.3 Настройки </h3>
+
+<p>Меню настроек позволяет Вам приспособить Enigma под Ваши предпочтения.
+</p>
+<dl compact="compact">
+<dt> <strong>Язык</strong></dt>
+<dd><p>Выберите язык для меню и (если доступно) внутриигровых документов.
+</p>
+</dd>
+<dt> <strong>Полный экран</strong></dt>
+<dd><p>Переключает между полноэкранным и оконным режимами экрана. Вы также можете использовать
+<kbd>Alt-<kbd>Enter</kbd></kbd>, чтобы сделать это, даже когда Вы не в меню настроек. 
+<em>Примечание:</em> На некоторых системах Вы должны вернуться в главное меню, 
+чтобы переключиться из оконного в полноэкранный режим или наоборот.
+</p>
+</dd>
+<dt> <strong>Видеорежим</strong></dt>
+<dd><p>Эта кнопка позволяет Вам изменить видеорежим, используемый Enigma. Enigma не 
+переключает видеорежим немедленно, а ждет пока Вы вернетесь в главное меню.
+</p>
+</dd>
+<dt> <strong>Гамма</strong></dt>
+<dd><p>Если необходимо, настройте здесь яркость экрана.
+</p>
+</dd>
+<dt> <strong>Скорость мыши</strong></dt>
+<dd><p>Определяет насколько быстро Ваш шарик ускоряется, когда Вы двигаете мышью. 
+Вы можете использовать клавиши-курсоры влево и вправо, чтобы изменить скорость 
+мыши во время игры.
+</p>
+</dd>
+<dt> <strong>Громкость звуков</strong></dt>
+<dd><p>Громкость звуковых эффектов в игре.
+</p>
+</dd>
+<dt> <strong>Набор звуков</strong></dt>
+<dd><p>Эта кнопка предоставляет Вам выбор набора звуковых эффектов Enigma, используемых 
+во время игры. Если Вы используете Enigma с оригинальными файлами данных Oxyd, 
+эта опция позволит Вам использовать оригинальные звуки на всех уровнях.
+</p>
+</dd>
+<dt> <strong>Громкость музыки</strong></dt>
+<dd><p>Громкость фоновой музыки в меню.
+</p>
+
+</dd>
+<dt> <strong>Стерео</strong></dt>
+<dd><p>Переключает между &quot;обычным&quot; стерео, &quot;обратным&quot; стерео и моно звуками.
+</p>
+</dd>
+<dt> <strong>Обновлять рейтинг</strong></dt>
+<dd><p>Если установлено в <samp>`Авто'</samp>, Enigma время от времени будет пытаться скачать 
+новые данные о рейтинге. Это обновит общедоступные рейтинги, мировые рекорды, 
+очки соответствия и т.п. Смотрите
+See section <a href="#SEC33">Регистрация очков</a>.
+</p>
+</dd>
+<dt> <strong>Имя игрока</strong></dt>
+<dd><p>Введите Ваше имя или ник, которые Вы хотите присоединить к вашим рекордам, при 
+отсылке файла enigma.scores. Смотрите See section <a href="#SEC33">Регистрация очков</a>.
+</p>
+</dd>
+<dt> <strong>Папка пользователя</strong></dt>
+<dd><p>Путь к месту, в котором Enigma хранит все Ваши пользовательские данные. Обратитесь 
+к справочному руководству за подробной информации.
+</p>
+</dd>
+<dt> <strong>Папка эскизов</strong></dt>
+<dd><p>Путь к месту, в котором Enigma хранит все Ваши пользовательские эскизы. Обратитесь 
+к справочному руководству за подробной информацией.
+</p>
+</dd>
+</dl>
+
+<hr size="6">
+<a name="g_t_00e9_00ce_00d3_00d0_00c5_00cb_00d4_00cf_00d2-_00d5_00d2_00cf_00d7_00ce_00d1"></a>
+<a name="SEC10"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC9" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC11" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC6" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 2.1.4 Инспектор уровня </h3>
+
+<p>Чтобы увидеть более подробную информацию об уровне, Вы можете вызвать инспектора 
+уровня. Нажмите или просто правую кнопку мыши, или нажмите левую кнопку вместе 
+с клавишей <kbd>Ctrl</kbd> на изображении уровня в меню уровней.
+</p>
+<p>Вы можете сравнить Ваши очки с мировыми рекордами, очками соответствия, очками 
+автора уровня. Предусмотрены даже некоторые данные, о том сколько игроков решили 
+уровень.
+</p>
+<p>Кроме прочей информации, детальное описание которой есть в справочном руководстве, 
+Вы можете ввести небольшое примечание к уровню и оценить уровень.
+</p>
+<p>Пожалуйста имейте ввиду, что поле для ввода примечания может позволить Вам ввести 
+только символы ASCII в зависимости от системы с которой работает Enigma.
+</p>
+<p>Рейтинг это ваше личное впечатление от уровня. <samp>`-'</samp> означает отсутствие мнения. 
+0 - очень плохой, 5 - посредственный, 10 - самый лучший. Рейтинг будет отослан 
+вместе с Вашими очками (смотрите (see section <a href="#SEC33">Регистрация очков</a>).
+</p>
+<p>Последнее, но не менее значимое - Вы можете использовать инспектор уровня, чтобы 
+посмотреть снимки экрана, которые Вы сделали во время игры (смотрите (see section <a href="#SEC15">Управление</a>).
+</p>
+<hr size="6">
+<a name="g_t_00f0_00d2_00c1_00d7_00c9_00cc_00c1-_00e9_00c7_00d2_00d9"></a>
+<a name="SEC11"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC10" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 2.2 Правила Игры </h2>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC12">2.2.1 Обычные местности</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC13">2.2.2 Местности для двух игроков</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC14">2.2.3 Местности для медитации</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+
+<hr size="6">
+<a name="g_t_00ef_00c2_00d9_00de_00ce_00d9_00c5-_00cd_00c5_00d3_00d4_00ce_00cf_00d3_00d4_00c9"></a>
+<a name="SEC12"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC11" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC11" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 2.2.1 Обычные местности </h3>
+
+<p>Основная идея Enigma проста: В большинстве уровней Вы управляете маленьким черным 
+шариком, ищете и &quot;открываете&quot; совпадающие пары так называемых <em>Oxyd-камней</em>.  
+Закрытые Oxyd-камни выглядят как эти (существует четыре различных варианта, но 
+все они действуют одинаково):
+</p>
+<p><img src="./images/st-oxyds.png" alt="images/st-oxyds">
+</p>
+<p>Когда Вы касаетесь Вашим шариком Oxyd-камня, он открывается и показывает обозначение 
+цвета. На любой местности есть два Oxyd-камня с одинаковым обозначением. Вы должны 
+дотронуться до двух соответствующих камней подряд, чтобы открыть их навсегда--если 
+символы не одинаковы, первый Oxyd-камень снова закроется. Чтобы завершить местность 
+Вам нужно найти и открыть все пары Oxyd-камней. На следующем изображении Вы видите 
+пару зеленых Oxyd-камней, которые уже открыты. Знак вопроса внутри синего Oxyd-камня 
+означает, что второй синий символ остается спрятанным.
+</p>
+<p><img src="./images/intro-oxyd.png" alt="images/intro-oxyd">
+</p>
+<p><em>Между прочим: если Вы еще не сделали этого, сейчас самое время запустить 
+Enigma и поиграть на первых уровнях!</em>
+</p>
+<p>Вы можете поднимать с пола объекты передвигаясь по ним. Инвентарь внизу экрана 
+показывает список предметов в вашем распоряжении. В начале новой игры у Вас не 
+будет ничего, кроме двух запасных шариков. Следующее изображение показывает 
+инвентарь, содержащий лопату, клочок бумаги, два бруска динамита, Ваши дополнительные 
+жизни и зонт:
+</p>
+<p><img src="./images/intro-inventory.png" alt="images/intro-inventory">
+</p>
+<p>Самый левый объект может быть активирован нажатием левой кнопки мыши: он будет 
+или брошен на пол, или выполнит какое-то действие. Динамит, например, загорится, 
+когда Вы бросите его, а пружина подбросит Ваш шар. Нажмите правую кнопку мыши или 
+используйте колесо мыши, чтобы чередовать предметы в инвентаре.
+</p>
+<p>Если, по какой-то причине, Вы не хотите поднимать предметы, зажмите любую кнопку 
+мыши, когда передвигаетесь. В некоторых ситуациях это может Вам пригодится.
+</p>
+<p>Многие камни могут перемещаться, если достаточно сильно их толкнуть. Один из 
+самых полезных камней ? деревянный ящик, который используется для строительства 
+мостов через воду и бездну. Это изображение показывает как строить мост, сбрасывая 
+деревянные ящики в воду:
+</p>
+<p><img src="./images/intro-plank.png" alt="images/intro-plank">
+</p>
+<p>Игровые объекты взаимодействуют друг с другом удивительными способами: объекты 
+лежащие на полу, например, могут быть преобразованы, с использованием лазерных 
+лучей и подвижных камней. А многие камни изменяются, если Вы коснетесь их различными 
+объектами из первого слота Вашего инвентаря (волшебная палочка-?-самый известный 
+объект в этой категории).
+</p>
+<p>Последнее, но не менее значимое: Не впадайте в уныние от видимой запутанности 
+игры--поведение большинства объектов в свое время станет ясным. Некоторые 
+неясные объекты описаны в <a href="#SEC16">Некоторые игровые объекты</a>.
+</p>
+<hr size="6">
+<a name="g_t_00ed_00c5_00d3_00d4_00ce_00cf_00d3_00d4_00c9-_00c4_00cc_00d1-_00c4_00d7_00d5_00c8-_00c9_00c7_00d2_00cf_00cb_00cf_00d7"></a>
+<a name="SEC13"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC12" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC14" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC11" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 2.2.2 Местности для двух игроков </h3>
+
+<p>Сначала немного о плохом: Enigma еще не поддерживает Интернет или сетевую игру. 
+Поэтому, местности для двух игроков в действительности однопользовательские, 
+где Вы можете переключаться между двумя шарами: черным, которым Вы уже пользовались 
+и дополнительным белым шаром:
+</p>
+<p><img src="./images/intro-twoplayer.png" alt="images/intro-twoplayer">
+</p>
+<p>На то, что Вы на уровне для двух игроков указывает маленький символ Инь-Янь в 
+Вашем инвентаре. Активация этого объекта переключает управление с черного на 
+белый шар и наоборот.
+</p>
+<hr size="6">
+<a name="g_t_00ed_00c5_00d3_00d4_00ce_00cf_00d3_00d4_00c9-_00c4_00cc_00d1-_00cd_00c5_00c4_00c9_00d4_00c1_00c3_00c9_00c9"></a>
+<a name="SEC14"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC13" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC15" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC11" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 2.2.3 Местности для медитации </h3>
+
+<p>В так называемых местностях для медитации Ваша задача совершенно другая: в отличие 
+от нахождения совпадающих Oxyd-камней, Вам нужно положить все маленькие белые 
+шарики в лунки в полу. Уровень завершится, как только каждый шарик 
+<em>остановится</em> в своей собственной лунке.
+</p>
+<p><img src="./images/intro-meditation.png" alt="images/intro-meditation">
+</p>
+<p>Однако будьте осторожны: Все шарики передвигаются вместе и поспешное движение 
+мышью может легко вытолкнуть некоторые из них из своих лунок. Местности для 
+медитации, как правило, требуют очень твердой руки и уйму терпения (между прочим, 
+именно поэтому они называются местностями для медитации!).
+</p>
+<hr size="6">
+<a name="g_t_00f5_00d0_00d2_00c1_00d7_00cc_00c5_00ce_00c9_00c5"></a>
+<a name="SEC15"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC14" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 2.3 Управление </h2>
+
+<p>Здесь перечислено управление во время игры. (Вы не обязаны запоминать его прямо 
+сейчас?-Вы всегда можете отобразить этот список во время игры, нажав клавишу
+<kbd>F1</kbd>.)
+</p>
+<dl compact="compact">
+<dt> <kbd>Левая кнопка мыши</kbd></dt>
+<dd><p>Использовать первый предмет в инвентаре
+</p>
+</dd>
+<dt> <kbd>Правая кнопка мыши/колесо мыши</kbd></dt>
+<dd><p>Чередовать предметы инвентаря
+</p>
+</dd>
+<dt> <kbd><kbd>ESC</kbd></kbd></dt>
+<dd><p>Показать игровое меню
+</p>
+</dd>
+<dt> <kbd><kbd>F1</kbd></kbd></dt>
+<dd><p>Показать экран помощи
+</p>
+</dd>
+<dt> <kbd><kbd>F3</kbd></kbd></dt>
+<dd><p>Уничтожить текущий шар
+</p>
+</dd>
+<dt> <kbd><kbd>Shift-F3</kbd></kbd></dt>
+<dd><p>Перезапустить текущий уровень
+</p>
+</dd>
+<dt> <kbd><kbd>F4</kbd></kbd></dt>
+<dd><p>Перейти к следующему уровню
+</p>
+</dd>
+<dt> <kbd><kbd>F5</kbd></kbd></dt>
+<dd><p>Перейти к следующему нерешенному уровню
+</p>
+</dd>
+<dt> <kbd><kbd>F10</kbd></kbd></dt>
+<dd><p>Сделать снимок экрана
+</p>
+</dd>
+<dt> <kbd><kbd>Стрелка влево</kbd></kbd></dt>
+<dd><p>Уменьшить скорость мыши
+</p>
+</dd>
+<dt> <kbd><kbd>Стрелка вправо</kbd></kbd></dt>
+<dd><p>Увеличить скорость мыши
+</p>
+</dd>
+<dt> <kbd>Alt-<kbd>Enter</kbd></kbd></dt>
+<dd><p>Переключиться между полноэкранным и оконным режимом (не на всех системах работает 
+незамедлительно)
+</p>
+</dd>
+<dt> <kbd>Alt-X</kbd></dt>
+<dd><p>Немедленно вернуться к меню уровней
+</p></dd>
+</dl>
+
+<hr size="6">
+<a name="g_t_00ee_00c5_00cb_00cf_00d4_00cf_00d2_00d9_00c5-_00c9_00c7_00d2_00cf_00d7_00d9_00c5-_00cf_00c2_00df_00c5_00cb_00d4_00d9"></a>
+<a name="SEC16"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC15" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 3. Некоторые игровые объекты </h1>
+
+<p>Существуют дюжины различных игровых объектов, которые Вы увидите на уровнях Enigma. 
+Мы хотим описать здесь только небольшой классифицированный набор этих объектов. 
+Если Вы новенький в Enigma, возможно Вы захотите начать с уровней из пакета учебника? 
+Просто запустите Enigma, выберите &quot;Пакет уровней&quot;, потом кнопку &quot;Enigma&quot; в верхнем 
+левом углу, потом &quot;Tutorial&quot; справа. Начните с первого уровня &quot;Oxyd Stones 1&quot;. 
+Учебник покажет Вам самые важные объекты и идеи, и некоторые из простейших уровней 
+Enigma.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC17">3.1 Предметы</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC21">3.2 Камни</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+
+
+<hr size="6">
+<a name="g_t_00f0_00d2_00c5_00c4_00cd_00c5_00d4_00d9"></a>
+<a name="SEC17"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC16" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.1 Предметы </h2>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC18">3.1.1 Взрывчатка</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Динамит и бомбы</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC19">3.1.2 Зонты</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC20">3.1.3 Флаги</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Установка точки восстановления</td></tr>
+</table>
+
+<hr size="6">
+<a name="g_t_00f7_00da_00d2_00d9_00d7_00de_00c1_00d4_00cb_00c1"></a>
+<a name="SEC18"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC17" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 3.1.1 Взрывчатка </h3>
+
+<p><img src="./images/it-explosives.png" alt="images/it-explosives">
+</p>
+<p>Существует три типа взрывчатки, которые Вы можете найти повсюду в Enigma. Самый 
+безобидный это палочка динамита. Она наносит не такой большой урон поверхности 
+или соседним камням, когда взрывается, но она полезна для разрушения определенных 
+камней и для поджигания соседних бомб.
+</p>
+<p>Черные бомбы достаточно мощные, чтобы разрушить большинство поверхностей и многие 
+другие объекты. Для большинства целей они-выбор для разрушения. У белых бомб 
+сила разрушения пяти черных бомб, убегайте скорее, когда увидите их горящими!
+</p>
+<hr size="6">
+<a name="g_t_00fa_00cf_00ce_00d4_00d9"></a>
+<a name="SEC19"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC18" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC20" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 3.1.2 Зонты </h3>
+
+<p><img src="./images/it-umbrella.png" alt="images/it-umbrella">
+</p>
+<p>Используйте зонты, чтобы сделать Ваш шар неуязвимым на небольшой момент времени 
+(десять секунд, если быть точным). Когда Вы активируете зонт, вокруг вашего шара 
+появится белый ореол на время действия защиты. Если ореол начал мигать, у Вас 
+есть три секунды, чтобы переместить Ваш шар в безопасное место.
+</p>
+<hr size="6">
+<a name="g_t_00e6_00cc_00c1_00c7_00c9"></a>
+<a name="SEC20"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC19" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 3.1.3 Флаги </h3>
+
+<p><img src="./images/it-flags.png" alt="images/it-flags">
+</p>
+<p>Флаги в основном используются в длительных и опасных путешествиях. Если Ваш шар 
+разрушился, новый шар появится на том месте, где Вы в последний раз установили 
+флаг, вместо того чтобы появиться в начале уровня. Есть два типа флагов: черный 
+и белый, которые устанавливают начальные точки соответственно черного и белого шаров.
+</p>
+
+
+<hr size="6">
+<a name="g_t_00eb_00c1_00cd_00ce_00c9"></a>
+<a name="SEC21"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC20" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC22" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.2 Камни </h2>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC22">3.2.1 Смертоносные камни</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC23">3.2.2 Обменные камни</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC24">3.2.3 Зеркала</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC25">3.2.4 Односторонние камни</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC26">3.2.5 Сегун-камни</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC27">3.2.6 Болдеры</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC28">3.2.7 Камни-мозаики</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC29">3.2.8 Почтовые камни</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+<hr size="6">
+<a name="g_t_00f3_00cd_00c5_00d2_00d4_00cf_00ce_00cf_00d3_00ce_00d9_00c5-_00cb_00c1_00cd_00ce_00c9"></a>
+<a name="SEC22"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC21" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC23" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 3.2.1 Смертоносные камни </h3>
+
+<p><img src="./images/st-lethal.png" alt="images/st-lethal">
+</p>
+<p>Существует два вида камней, которых Вы должны избегать во что бы то ни стало, 
+только если у Вас нет зонта, чтобы защитить Ваш драгоценный шарик.
+</p>
+<p><em>Камень с изображением черепа</em> так же опасен, как и выглядит; дотроньтесь 
+до него и погибнете. На самом деле Вы предупреждены. Существуют даже более хитрые 
+варианты, которые невидимы; не забудьте Ваши магические очки.
+</p>
+<p><em>Черный рыцарь</em> часто охраняет важные проходы, и в основном он <em>не</em> в 
+настроении пропускать Вас. Предъявите хороший аргумент, чтобы &quot;убедить&quot; его.
+</p>
+<hr size="6">
+<a name="g_t_00ef_00c2_00cd_00c5_00ce_00ce_00d9_00c5-_00cb_00c1_00cd_00ce_00c9"></a>
+<a name="SEC23"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC22" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC24" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 3.2.2 Обменные камни </h3>
+
+<p><img src="./images/st-swap.png" alt="images/st-swap">
+</p>
+<p>Обменные камни, будучи ударенными, не просто перемещаются на смежный (пустой) 
+участок; вместо этого, они меняются местами с камнем который они ударили. 
+Следовательно, единственный способ переместить обменный камень из одного места 
+в другое--неоднократно менять его с другими &quot;обычными&quot; камнями.
+</p>
+
+
+<hr size="6">
+<a name="g_t_00fa_00c5_00d2_00cb_00c1_00cc_00c1"></a>
+<a name="SEC24"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC23" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC25" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 3.2.3 Зеркала </h3>
+
+<p><img src="./images/st-mirrors.png" alt="images/st-mirrors">
+</p>
+<p>Лазерные лучи могут преломляться с помощью зеркальных камней. В Enigma существует 
+два типа зеркальных камней: плоские зеркала и треугольные зеркала. Плоское зеркало 
+ведет себя как обычное зеркало: входящий лазерный луч отражается, если он 
+перпендикулярен зеркалу и отклоняется влево или вправо, если он падает на зеркало 
+под углом в 45 градусов.
+</p>
+<p>Треугольные зеркала немного сложнее: три стороны ведут себя как обычные зеркала, 
+отражая и отклоняя входящий луч. Но луч, который падает на вершину треугольника 
+разделяется на <em>два</em> исходящих луча, которые движутся в противоположных направлениях.
+</p>
+<p>Оба типа зеркал дополнительно могут быть полупрозрачными или перемещаемыми. 
+Полупрозрачные зеркала преломляют часть входящего луча, как их непрозрачные 
+братья, но часть луча проходит неизменной. Перемещаемые зеркала смонтированы 
+на светло-серые камни, неподвижные на темно-серые камни.
+</p>
+<p>Вы можете поворачивать зеркала, слегка дотрагиваясь до них своим шаром. Но будьте 
+осторожны с зеркалами, на которые уже падает лазерный луч, довольно просто 
+неумышленно уничтожить Ваш шар!
+</p>
+<hr size="6">
+<a name="g_t_00ef_00c4_00ce_00cf_00d3_00d4_00cf_00d2_00cf_00ce_00ce_00c9_00c5-_00cb_00c1_00cd_00ce_00c9"></a>
+<a name="SEC25"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC24" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 3.2.4 Односторонние камни </h3>
+
+<p><img src="./images/st-oneway.png" alt="images/st-oneway">
+</p>
+<p>Через эти камни можно пройти только в одном направлении. Из них могут быть построены 
+целые лабиринты, но в основном они вынуждают Вас закончить одну часть уровня, перед прохождением следующей.
+</p>
+<p>У Вас проблемы с односторонним камнем, который преграждает Вам путь? Может быть 
+волшебный предмет сможет Вам помочь <small class="enddots">....</small>
+</p>
+<hr size="6">
+<a name="g_t_00f3_00c5_00c7_00d5_00ce_002d_00cb_00c1_00cd_00ce_00c9"></a>
+<a name="SEC26"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC25" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC27" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 3.2.5 Сегун-камни </h3>
+
+<p><img src="./images/st-shogun.png" alt="images/st-shogun">
+</p>
+<p>В некоторых уровнях Вы можете встретить мигающие синие точки на поверхности. 
+Они могут быть активированы правильной комбинацией <em>сегун-камней</em>, тогда 
+они обычно сделают что-то полезное, наподобие открытия дверей или создания мостов.
+</p>
+<p>Маленькая мигающая точка активируется перемещением на нее сегун-камня с маленьким 
+отверстием. Чтобы активировать большие точки, одного сегун-камня недостаточно. 
+Вместо этого Вам нужно правильно сложить два или три сегун-камня, вталкивая камни 
+с маленькими отверстием в камни с большими отверстиями. Например, если Вы хотите 
+активировать точку среднего размера, Вам нужно сначала разместить на ней сегун-камень 
+с отверстием средних размеров, а потом втолкнуть камень с малым отверстием в тот, 
+что больше.
+</p>
+<hr size="6">
+<a name="g_t_00e2_00cf_00cc_00c4_00c5_00d2_00d9"></a>
+<a name="SEC27"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC26" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC28" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 3.2.6 Болдеры </h3>
+
+<p><img src="./images/st-bolder.png" alt="images/st-bolder">
+</p>
+<p>Болдеры движутся в направлении, показанном на них стрелкой, пока не столкнутся с 
+другим камнем. Возможно они блокируют Вам путь и Вам надо освободить их тем или 
+иным способом. Но никогда, никогда не становитесь перед ними, так как Ваш шар 
+мгновенно разобьется, когда болдер пройдет по нему!
+</p>
+<p>Однако, Вы также можете использовать их, так как они способны открывать Oxyd-камни, 
+когда столкнутся с ними. Вы можете перенаправить целенаправленные камни несколькими 
+способами <small class="enddots">....</small>
+</p>
+<hr size="6">
+<a name="g_t_00eb_00c1_00cd_00ce_00c9_002d_00cd_00cf_00da_00c1_00c9_00cb_00c9"></a>
+<a name="SEC28"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC27" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC29" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 3.2.7 Камни-мозаики </h3>
+
+<p>Камни-мозаики получили свое имя из-за того, что отдельные камни могут быть соединены 
+вместе, как кусочки мозаики. У камней-мозаик есть разъемы на некоторых или на всех 
+сторонах, которые могут прикрепляться к разъемам смежных камней. Как только они 
+будут соединены, группы камней-мозаик перемещаются как единое целое. Вы можете 
+использовать эти блоки, например, чтобы строить мосты через воду или бездну.
+</p>
+<p>Когда их коснется волшебная палочка, камни-мозаики отреагируют по разному. Если 
+блок камней-мозаик соединен окончательно (другими словами у него нет свободных 
+разъемов), блок немедленно начнет взрываться, камень за камнем. Если блок соединен 
+не до конца, камни в ряду или колонке, до которой дотронулись сместятся на одно 
+место по горизонтали или по вертикали.
+</p> 
+<p>Существует редкий вариант обычных камней-мозаик, который ведет себя немного по 
+другому. Основная его среда обитания это уровни Oxyd 1, а узнать его можно по 
+цвету труб, оранжевому вместо синего. Эти камни-мозаики не могут перемещаться 
+как единое целое. Они ведут себя как синие камни-мозаики, когда Вы дотрагиваетесь 
+до них волшебной палочкой: блок взрывается, если он полностью соединен или ряд 
+или колонка блока, до которой дотронулись смещается.  
+</p>
+<hr size="6">
+<a name="g_t_00f0_00cf_00de_00d4_00cf_00d7_00d9_00c5-_00cb_00c1_00cd_00ce_00c9"></a>
+<a name="SEC29"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC28" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 3.2.8 Почтовые камни </h3>
+
+<p><img src="./images/st-mail.png" alt="images/st-mail">
+</p>
+<p>Почтовые камни могут использоваться для пересылки предметов из Вашего инвентаря 
+в некое недоступное место на поверхности. Когда Вы дотрагиваясь используете почтовый 
+камень, первый объект в Вашем инвентаре изымается и ложится в конце канала связи, 
+присоединенного к почтовому камню. В большинстве случаев, Вы должны сами построить 
+этот канал, например, &quot;пересылая&quot; отдельные части канала.
+</p>
+<p>Будьте осторожны: почтовый камень не работает, если на конце канала связи уже 
+есть объект. Очень легко неумышленно переслать объект, который впоследствии 
+заблокирует канал, поэтому будьте осторожны!
+</p>
+
+
+
+
+
+
+<hr size="6">
+<a name="g_t_00e4_00cf_00d0_00cf_00cc_00ce_00c9_00d4_00c5_00cc_00d8_00ce_00d9_00c5-_00d4_00c5_00cd_00d9"></a>
+<a name="SEC30"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC29" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC31" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 4. Дополнительные темы </h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC31">4.1 Пользовательские пакеты уровней</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">История, Результаты поиска и Авто</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC32">4.2 Резервное копирование</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Что копировать для безопасности</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC33">4.3 Регистрация очков</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Позвольте миру узнать о Вашем успехе</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC34">4.4 Обновление Enigma</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             Сохранение очков и уровней при обновлении
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="g_t_00f0_00cf_00cc_00d8_00da_00cf_00d7_00c1_00d4_00c5_00cc_00d8_00d3_00cb_00c9_00c5-_00d0_00c1_00cb_00c5_00d4_00d9-_00d5_00d2_00cf_00d7_00ce_00c5_00ca"></a>
+<a name="SEC31"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC30" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC32" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 4.1 Пользовательские пакеты уровней </h2>
+
+<p><a href="#SEC8">Меню Пакет уровней</a> предлагает некоторые дополнительные возможности. В группе
+<samp>`User'</samp> есть три пакета уровней, которые изначально пусты:
+<samp>`Auto Folder'</samp>, <samp>`History'</samp> и <samp>`Search Result'</samp>.
+</p>
+<p>Кликая на кнопке <samp>`Поиск'</samp> в меню пакетов уровней Вы можете искать среди 
+совокупности уровней. Просто переместите мышь к текстовому полю и введите 
+строку для поиска. Вы можете искать по автору, названию и имени файла. Поиск не 
+восприимчив к регистру. Например, Вы можете искать строку &quot;jump&quot;. Полученные 
+уровни будут представлены в пакете уровней под названием &quot;Search Results&quot;.
+</p>
+<p>Пакет уровней <samp>`History'</samp> обновляется автоматически с каждым уровнем на котором 
+Вы играли. Это может пригодиться, если Вы ищете уровень, на котором играли на 
+последней неделе, но не знаете ключевых слов для поиска.
+</p>
+<p><samp>`Auto Folder'</samp> это пакет уровней, который Вы можете использовать, чтобы 
+добавить новые уровни, например уровни, которые Вы скачали из Интернета или 
+написали сами. Папка, в которой Вы должны хранить уровни--<samp>`levels/auto'</samp> в 
+директории, которая указана в строке <samp>`Папка пользователя'</samp> в
+<a href="#SEC9">Настройки</a>. Когда Enigma запускается, уровни в этой папке находятся и 
+загружаются автоматически.
+</p>
+<p>Enigma предлагает намного больше возможностей, выходящих за пределы этого руководства. 
+Чтобы узнать подробности, пожалуйста прочтите справочное руководство.
+</p>
+<hr size="6">
+<a name="g_t_00f2_00c5_00da_00c5_00d2_00d7_00ce_00cf_00c5-_00cb_00cf_00d0_00c9_00d2_00cf_00d7_00c1_00ce_00c9_00c5"></a>
+<a name="SEC32"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC31" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC33" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 4.2 Резервное копирование </h2>
+
+<p>Если Вы боитесь потерять все Ваши очки, в результате отказа жесткого диска, или 
+если Вы хотите переместить Ваши очки с одного компьютера на другой, полезно знать, 
+как зарезервировать информацию о состоянии Enigma. Чтобы сделать это, сначала 
+найдите в <a href="#SEC9">Настройки</a> Enigma
+<samp>`Папку пользователя'</samp>.  Вы можете просто сделать резервную копию той папки
+--важными являются файлы <samp>`enigma.score'</samp> и <samp>`state.xml'</samp>.
+</p>
+<hr size="6">
+<a name="g_t_00f2_00c5_00c7_00c9_00d3_00d4_00d2_00c1_00c3_00c9_00d1-_00cf_00de_00cb_00cf_00d7"></a>
+<a name="SEC33"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC32" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC34" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 4.3 Регистрация очков </h2>
+
+<p>Для регистрации Ваших очков, Вам нужно отправить нам файл <samp>`enigma.score'</samp>, 
+расположенный в директории <samp>`Папка пользователя'</samp>. Пожалуйста ищите более 
+подробные указания на домашней странице проекта.
+</p>
+<p>Чтобы автоматически скачивать списки обновленных мировых рекордов, Вам просто 
+нужно включить опцию <samp>`Обновлять рейтинг'</samp>.
+</p>
+<hr size="6">
+<a name="g_t_00ef_00c2_00ce_00cf_00d7_00cc_00c5_00ce_00c9_00c5-Enigma"></a>
+<a name="SEC34"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC33" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 4.4 Обновление Enigma </h2>
+
+<p>Если Вы не настраивали Вашу старую версию, просто удалите старую версию и установите 
+новую. Это все, что Вы должны сделать, так как Ваши очки автоматически обновятся.
+</p>
+<p>Если Вам понадобится добавить уровни в директории установки Enigma, Вам нужно 
+сделать их резервную копию перед удалением. После этого Вы можете без опасений 
+удалить старую версию и установить новую.
+</p>
+<p>Старый файл очков <samp>`~/.enigmarc2'</samp> для систем с переменной окружения <samp>`HOME'</samp> 
+или <samp>`.../Application Data/enigmarc.lua2'</samp> для лишенных &quot;HOME&quot; систем Windows 
+автоматически преобразуется в новый формат. Вы можете удалить старые очки после 
+первого успешного запуска Enigma 1.00.
+</p>
+<p>Если Вы хотите играть на уровнях, которые Вы сохранили со старой установки, 
+пожалуйста прочтите справочное руководство.
+</p>
+<hr size="6">
+<a name="g_t_00f3_00d0_00cf_00ca_00cc_00c5_00d2_00d9"></a>
+<a name="SEC35"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC34" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC36" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 5. Спойлеры </h1>
+
+<p>Этот раздел содержит подсказки для некоторых сложных уровней. Настоятельно <em>не</em> 
+рекомендуется читать спойлеры, если Вы не застряли окончательно. Некоторые уровни 
+намеренно усложнены и даже игрокам-ветеранам Enigma нужны часы, чтобы решить их. 
+Некоторые уровни легче решить в упрощенном режиме игры (смотрите (see section <a href="#SEC7">Меню уровней</a>).
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC36">5.1 Прохождение Advanced Tutorial</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC40">5.2 Советы для нескольких уровней</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+<hr size="6">
+<a name="g_t_00f5_00de_00c5_00c2_00ce_00c9_00cb"></a>
+<a name="SEC36"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC35" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC37" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 5.1 Прохождение Advanced Tutorial </h2>
+
+<p>Считается, что местности в пакете уровней &quot;Tutorial&quot; просты. Кроме последней, 
+которая не так проста <small class="enddots">....</small>  Этот раздел руководства предоставлен Jacob Scott.
+</p>
+<p>Это прохождение моего уровня &quot;Advanced Tutorial&quot; в пакете уровней &quot;Tutorial&quot; 
+(чтобы менять пакеты уровней, кликните на &quot;Пакет уровней&quot; внизу-слева экрана и 
+выберите пакет уровней). Во время игры в первую очередь, Вам нужно читать все 
+документы в комнате.
+</p>
+<p>Конечная цель этого уровня, как и большинства уровней Enigma, найти и дотронуться 
+до всех &quot;Oxyd-камней&quot; своим черным шариком. Когда Вы касаетесь Oxyd-камня, он 
+открывается и показывает цвет. Если Вы дотронетесь по очереди до двух Oxyd-камней 
+одинакового цвета, они оба останутся открытыми. Вы завершите уровень, как только 
+подберете все пары Oxyd-камней на уровне.
+</p>
+<p>В уровне около двадцати комнат, собранных в три отдельных области. В первой области 
+Вы встретите некоторые основные типы блоков и поверхностей, которые встречаются 
+в Enigma и решите пару простых головоломок. Вторая область сложнее и познакомит 
+Вас с полезными приемами обмана активного врага. Третья и последняя область даст 
+Вам поэкспериментировать с продвинутым взаимодействием между объектами Enigma. В 
+этом отдельном уровне, всевозможные камни могут быть найдены в одной комнате в 
+конце третьей области.
+</p>
+<hr size="6">
+<a name="SEC37"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC36" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC38" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC36" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 5.1.1 Область 1 </h3>
+
+<p>Вы начинаете в комнате окруженной неподвижными стенами, кроме прохода справа, 
+воды внизу-слева и закрытого прохода вверху-справа.
+</p>
+<p>Комната 1: Идите через проход в стене справа.
+</p>
+<p>Комната 2: Просто избегайте блоков с изображенным на них черепом.
+</p>
+<p>Комната 3: Столкните четыре деревянных ящика в воду в ряд, чтобы создать мост 
+на противоположный берег. Теперь толкните черноватые блоки справа. Передвиньте 
+блоки из коры с пути (возможно влево) и постройте мост справа из деревянных ящиков.
+</p>
+<p>Комната 4: Подойдите поближе к волчку. Когда он погонится за Вами, ведите его 
+влево и вокруг блоков в центре комнаты. Как только волчок будет далеко от перехода 
+на следующий уровень, проскочите туда.
+</p>
+<p>Комната 5: Единственная опасность здесь--черепа внизу комнаты. Первый тип 
+поверхности это металл--эта поверхность похожа на &quot;лиственную&quot;, по которой Вы 
+передвигались ранее. Следующая поверхность &quot;красная&quot;--на этой поверхности сложно 
+замедлиться или ускориться. Третий тип это лед--на этой поверхности слабое трение. 
+Последний тип поверхности это космос--здесь вообще нет трения; вы не можете изменить 
+вектор скорости (скорость и направление), когда Вы находитесь на этой поверхности.
+</p>
+<p>Комната 6: Просто идите по склонам. Потом выйдите влево, пройдя по &quot;обратной&quot; 
+поверхности--когда на этой поверхности Вы направляете мышь (или похожий контроллер) 
+в одном направлении, шар ускоряется в обратном (если у Вас с этим проблемы, 
+попробуйте повернуть Вашу мышь на 180 градусов).
+</p>
+<p>Комната 7: Попытайтесь получить дополнительный шар, поставив подвижный блок на 
+нижний переключатель. Сначала толкните его на один квадрат вверх, потом влево 
+на шесть квадратов. Потом толкните его на пять квадратов вниз и два вправо. В 
+конце концов толкните его на один квадрат вверх и один влево. Возьмите дополнительный 
+шар и затем поставьте блок на другой переключатель, чтобы открыть проход слева 
+от комнаты.
+</p>
+<p>Комната 8: Возьмите динамит (Вам нужно будет зайти на лед) и бросьте его напротив 
+желтых блоков, чтобы взорвать их и пройти. Лопата не обязательна, но останьтесь 
+поэкспериментировать с ней.
+</p>
+<p>Комната 9: Толкните самый нижний подвижный блок влево. Сейчас болдеры, пытающиеся 
+пройти вправо, преграждают Вам путь. Толкните самый правый подвижный блок (влево 
+или вправо), чтобы дать сползти болдерам. Возьмите волшебную палочку (не дотрагивайтесь 
+случайно ни до каких подвижных блоков, когда волшебная палочка находится в начале 
+Вашего инвентаря) и толкните подвижный блок над водой вниз. Теперь вернитесь в 
+правую часть комнаты, выставьте волшебную палочку в начало Вашего инвентаря и 
+коснитесь трех верхних болдеров из длинного столбца (постарайтесь не попадаться 
+на пути любых болдеров). Толкните самый левый подвижный блок влево и идите в 
+следующую комнату.
+</p>
+<p>Комната 10: Коснитесь переключателя. Теперь толкните два блока из коры вверх (на 
+один квадрат каждый). Толкните средний (сверху вниз) деревянный ящик влево, а 
+деревянный ящик, справа-сверху от него в воду. Столкните оставшиеся ящики в воду, 
+чтобы образовать столбец (постарайтесь не утонуть). Теперь ударьте окно (голубую 
+полосу) на большой скорости. Возьмите шар и перейдите через мост в первую комнату. 
+Отсюда идите в открывшийся проход.
+</p>
+<hr size="6">
+<a name="SEC38"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC37" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC39" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC36" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 5.1.2 Область 2 </h3>
+
+<p>Во второй области Вы встретите ротор, являющийся активным противником Вашего 
+черного шара. Различные роторы могут действовать несколько различно, но они 
+всегда непонятливы. Предназначение последнего--заставить его сделать, то что 
+Вам нужно, держась на безопасном расстоянии.
+</p>
+<p>Осмотритесь в этой области (но пока не трогайте подвижный блок). Вам нужно 
+пройти через трое закрытых ворот в верху этой области.
+</p>
+<p>Первые ворота: Толкните белый шар влево (не пройдите случайно через черный 
+односторонний блок) чтобы освободить его (это может потребовать нескольких 
+попыток). Возьмите ложку и довольно сильно толкните белый шар через белый 
+односторонний блок, чтобы он не остановился. Теперь идите через черный односторонний 
+блок и проведите белый шар через проход. Довольно сильно толкните белый шар через 
+следующий белый односторонний блок, чтобы он не остановился ниже. Как только белый 
+шар пройдет, используйте ложку; Вы вновь начнете уровень в начале и больше ничего 
+не случится. Снова пройдите через ворота--первые ворота вверху комнаты открыты.
+</p>
+<p>Вторые ворота: Толкните подвижный блок в самой правой комнате этой области вправо 
+и бегите. В воротах, соединяющих вторую и третью область, появится документ с 
+полезной информацией. Подведите ротор (заставляя его гнаться за Вами, как Вы 
+делали это с волчком) к низу стены справа от ворот между первой и второй областями. 
+Пройдите через ворота и через мост в комнату под Вами. Коснитесь переключателя, 
+чтобы закрыть ворота и вернитесь в комнату откуда Вы начали. Вы больше не видите 
+ротор--его не будет в той комнате, где и Вы--но если присмотреться, Вы сможете 
+увидеть где он. Цель здесь состоит в том, чтобы не подвергая себя опасности, заставить 
+ротор пойти к переключателю и открыть для Вас дверь. Пусть ротор пойдет за Вами из 
+верхнего-правого угла этой комнаты в верхний-левый. Он должен быть вытолкнут влево 
+несколькими наклонами. Доведите ротор вниз слева, пока он не продолжит свой путь и 
+Вы не услышите звук нажатого переключателя. Коснитесь переключателя, чтобы открыть 
+ворота и вернуться во вторую область ? вторые ворота, должны быть открыты.
+</p>
+<p>Третьи ворота: Просто толкните подвижный блок, из которого выскочил ротор, на 
+переключатель в комнате, где он появился. Вернитесь в комнату слева от Вас--третьи 
+ворота должны быть открыты. Идите через трое отрытых ворот.
+</p>
+<hr size="6">
+<a name="SEC39"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC38" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC40" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC36" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 5.1.3 Область 3 </h3>
+
+<p>В третьей области Вам нужно исследовать взаимодействия между различными объектами 
+Enigma. Здесь Вы найдете лазеры, зеркала и монеты. Вам прийдется решить простую 
+головоломку лазер-и-зеркало, чтобы дать лазеру попасть в отдельный камень, который 
+откроет мост в следующую комнату. Чтобы преодолеть следующие несколько комнат, 
+Вы должны создать несколько новых объектов, прожигая лазерным лучом существующие 
+объекты.
+</p>
+<p>В первой части этой области есть три зеркала и лазер с переключателем.
+</p>
+<p>Комната 1: Вам нужно дать лазеру попасть в черный камень. Толкните нижнее-левое 
+зеркало на один квадрат вниз и поверните его так, чтобы оно выглядело наподобие 
+&quot;\&quot; легко дотрагиваясь до него (влево вплоть до лазера должно быть тридцать 
+квадратов). Толкните верхнее-левое зеркало на восемь квадратов влево, на один 
+квадрат вниз и поверните его, чтобы оно было похоже на &quot;/&quot; (оно должно быть в 
+четырех квадратах от предыдущего зеркала и прямо над ним). Толкните верхнее-правое 
+зеркало на два квадрата вверх, а затем на три квадрата вправо (оно должно быть 
+правее на двадцать два квадрата от предыдущего зеркала и на один квадрат ниже 
+черного камня). Расположите это зеркало в виде &quot;/&quot;. Теперь дотроньтесь до переключателя, 
+чтобы включить лазер (не попадите под него или не проходите через лазерный луч). 
+Как только это будет сделано, идите через мост справа от Вас.
+</p>
+<p>Комната 2: Возьмите несколько монет и возвращайтесь в предыдущую комнату. Выключив 
+и включив лазер, поразите лазерным лучом одну из монет. Возьмите полученный объект 
+(зонт), повторите процесс и возьмите второй зонт. Теперь бросьте одну из монет за 
+зеркалом и сдвиньте на нее зеркало. Поразите эту монету со значением пять лазером, 
+чтобы создать молот. Поразите лазером молот (выключив и включив лазер), чтобы создать 
+меч. Если Вы хотите несколько дополнительных шаров, Вы можете перетащить зеркало над 
+монетой дважды и поразить лазером монету с увеличенным значением (самое большее, 
+до десяти). Чтобы вернуться в комнату с рыцарями, поставьте зеркала в их начальные 
+позиции, уберите все объекты, блокирующие лазер и коснитесь переключателя. Теперь 
+используя правую кнопку мыши или клавишу &quot;Tab&quot; выставьте в начало (слева) своего 
+инвентаря меч. Ударьте несколько рыцарей (каждого по четыре раза), чтобы пройти.
+</p>
+<p>Комната 3: Используйте зонт и проследуйте над бездной в комнату под Вами, а 
+затем в комнату справа от Вас. Если окружающее Вас кольцо начнет мигать, 
+используйте другой зонт.
+</p>
+<p>Комната 4: Просто подберите пары Oxyd-камней дотрагиваясь до Oxyd-камней 
+одинакового цвета с активированными Oxyd-камнями (по одному за раз). Не трогайте 
+грубые камни (черные камни). Вы выиграли!
+</p>
+
+<hr size="6">
+<a name="g_t_00f3_00cf_00d7_00c5_00d4_00d9"></a>
+<a name="SEC40"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC39" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 5.2 Советы для нескольких уровней </h2>
+
+<dl compact="compact">
+<dt> <strong>I/6: Welcome to the Machine</strong></dt>
+<dd><p>Сообщение вблизи верхнего-правого угла содержит важный совет.
+</p>
+</dd>
+<dt> <strong>I/8: Easy?</strong></dt>
+<dd><p>Поставьте первый сегун-камень в верхний левый угол, а второй <em>над</em> самой 
+правой сегун-точкой.
+</p>
+</dd>
+<dt> <strong>I/31: Where Am I?</strong></dt>
+<dd><p>Используйте деревянные ящики, чтобы не заблудиться. 
+</p>
+</dd>
+<dt> <strong>I/32: The Grim Reaper</strong></dt>
+<dd><p>Всегда ли Вы считаете, что Ваша мышь перевернута???
+</p>
+</dd>
+<dt> <strong>I/43: Sokoban Revival</strong></dt>
+<dd><p>Помните? Это первый уровень оригинального Сокобана &hellip;  Он ведь не такой трудный!
+</p>
+</dd>
+<dt> <strong>I/65: Lasers 101</strong></dt>
+<dd><p>Поставьте два зеркала вверху и одно внизу. Перемещая зеркала и точно целясь, 
+Вы можете попасть лазерным лучом по всем Oxyd-камням.
+</p>
+</dd>
+<dt> <strong>I/72: Way to Go</strong></dt>
+<dd><p>Одна из синих точек ведет себя по-разному. Воспользуйтесь этим!
+</p>
+</dd>
+<dt> <strong>I/80: Meditation</strong></dt>
+<dd><p>Расположите шарики горизонтально. 
+</p>
+</dd>
+<dt> <strong>II/15: Knock Knock!</strong></dt>
+<dd><p>Постучитесь в стены.
+</p>
+</dd>
+<dt> <strong>II/27: Twelve doors</strong></dt>
+<dd><p>Вы открыли все двери и все равно не можете пройти? Вы что-то пропустили!
+</p>
+</dd>
+<dt> <strong>II/40: Space Meditation</strong></dt>
+<dd><p>Слышали когда-нибудь о проблеме трех тел?
+</p>
+</dd>
+<dt> <strong>II/44: Pharaos' Tombs</strong></dt>
+<dd><p>Обратитесь к &quot;Easy Shifting <small class="enddots">....</small>&quot;.
+</p>
+</dd>
+<dt> <strong>II/56: Easy Shifting <small class="enddots">....</small></strong></dt>
+<dd><p>Обратитесь к &quot;Running Rings&quot;.
+</p>
+</dd>
+<dt> <strong>II/57: Floppy Swapping</strong></dt>
+<dd><p>Первое--найдите дискету и волшебную палочку, они Вам понадобятся. Второе--всегда
+носите дискету и волшебную палочку с собой. Третье--некоторые камни похожи, но 
+действуют не одинаково.
+</p>
+</dd>
+<dt> <strong>II/59: The Disappearing Block</strong></dt>
+<dd><p>Зажмите лазер.
+</p>
+</dd>
+<dt> <strong>II/65: Laser Magic</strong></dt>
+<dd><p>Время узнать несколько вещей о преобразовании объектов. Экспериментируйте!
+</p>
+</dd>
+<dt> <strong>II/69: Question of Speed</strong></dt>
+<dd><p>Или скорее: Вопрос начала???  
+</p>
+</dd>
+<dt> <strong>II/77: Push Your Way</strong></dt>
+<dd><p>Сначала найдите волшебную палочку! 
+</p>
+</dd>
+<dt> <strong>II/97: Tool Time</strong></dt>
+<dd><p>Прячьте опасные инструменты от детей.
+</p>
+</dd>
+<dt> <strong>II/99: Domain of Mysteries</strong></dt>
+<dd><p>Осторожно продвигайтесь к успеху.
+</p>
+</dd>
+<dt> <strong>II/100: Patterns</strong></dt>
+<dd><p>Есть ли здесь подобие?
+</p>
+</dd>
+<dt> <strong>III/14: Use the PIN</strong></dt>
+<dd><p><small class="enddots">....</small> или воспользуйтесь Вашей любимой энциклопедией, если Вы не можете точно 
+вспомнить число.
+</p>
+</dd>
+<dt> <strong>III/16: Control Panel</strong></dt>
+<dd><p>Сообщение в левой комнате расскажет Вам, как расположить блоки в первой строке 
+переключателей. После этого, используйте коды цветов, показанных в левой комнате. 
+</p>
+</dd>
+<dt> <strong>III/22: Portable Laser</strong></dt>
+<dd><p>Будьте признательны!
+</p>
+</dd>
+<dt> <strong>III/27: Tricks and Traps</strong></dt>
+<dd><p>Не можете выбраться из первого экрана? Сконцентрируйтесь сначала на мигающей точке. 
+Не можете найти последний Oxyd-камень? Активируйте три из больших мигающих точек 
+на первом экране и маленький на третьем экране.
+</p>
+</dd>
+<dt> <strong>III/28: Wells</strong></dt>
+<dd><p>Боитесь умереть?
+</p>
+</dd>
+<dt> <strong>III/29: Push? Pull!</strong></dt>
+<dd><p>Одна перестановка вверх - Одна перестановка вниз - Головоломка вправо - Продолжите дальше!
+</p>
+</dd>
+<dt> <strong>III/40: Snow White</strong></dt>
+<dd><p>Три маленьких эскимоса - Связанные в кольцо на ледяном поле - Не могут найти их маленькие иглу - Скрытые под снежным покровом.
+</p>
+</dd>
+<dt> <strong>III/43: The Ditch</strong></dt>
+<dd><p>Вы не можете решить этот уровень без потери своего &quot;Я&quot;.
+</p>
+</dd>
+<dt> <strong>III/49: What's the Problem?</strong></dt>
+<dd><p>Ловушки по всей территории &hellip; это местность для медитации.
+</p>
+</dd>
+<dt> <strong>III/95: Jump and Run</strong></dt>
+<dd><p>Есть пружина, спрятанная за зеркалом.
+</p>
+</dd>
+<dt> <strong>IV/6: TNT Shortage?</strong></dt>
+<dd><p>С молотком проще!
+</p>
+</dd>
+<dt> <strong>IV/17: Flood Gates</strong></dt>
+<dd><p>Осторожное затопление определенных областей может пригодиться. Не покидайте первую 
+комнату без активации нижнего переключателя. Многие из всех нижних переключателей 
+действуют одинаково.
+</p>
+</dd>
+<dt> <strong>IV/25: Light Switches</strong></dt>
+<dd><p>Зажмите лазеры, если Вы не достаточно быстры. 
+</p>
+</dd>
+<dt> <strong>IV/27: Robbery</strong></dt>
+<dd><p>Проберитесь в банк, через трещины в полу. 
+</p>
+</dd>
+<dt> <strong>IV/34: Running Rings</strong></dt>
+<dd><p>Обратитесь к &quot;Pharao's Tomb&quot;.
+</p>
+</dd>
+<dt> <strong>IV/39: How Many Spirals?</strong></dt>
+<dd><p>Некоторые люди выпрыгивают из окна при пожаре  - поступите иначе.
+</p>
+</dd>
+<dt> <strong>IV/47: Just Moving Blocks?</strong></dt>
+<dd><p>Слишком много деревянных ящиков? Как бы Вам убрать один?
+</p>
+</dd>
+<dt> <strong>IV/48: Artillery</strong></dt>
+<dd><p>Пушечное ядро тоже открывает Oxyd-камни.
+</p>
+</dd>
+<dt> <strong>IV/54: Fire Safety</strong></dt>
+<dd><p>Переключатель вредит Вам? Уничтожьте его!
+</p>
+</dd>
+<dt> <strong>IV/64: The Flagstone Reaper</strong></dt>
+<dd><p>Это выполняется.
+</p>
+</dd>
+<dt> <strong>IV/65: Little Bit of Everything</strong></dt>
+<dd><p>Найдите способ уничтожения.
+</p>
+</dd>
+<dt> <strong>V/15: Solvable?</strong></dt>
+<dd><p>Не напоминает ли Вам о чем-то ЗСЮВ?
+</p>
+</dd>
+<dt> <strong>V/16: Draggers</strong></dt>
+<dd><p>Принято считать, что этот уровень--зло. Существует источник, спрятанный возле 
+Вашего начального положения.
+</p>
+</dd>
+<dt> <strong>V/24: Space Pirates</strong></dt>
+<dd><p>Этот уровень хитрый. Подожгите бомбу возле деревянных ящиков.
+</p>
+</dd>
+<dt> <strong>V/32: Walk the Plank</strong></dt>
+<dd><p>Не хватает пиратов, чтобы покорить этот уровень? Есть другой, более простой путь.
+</p>
+</dd>
+<dt> <strong>V/34: Island of Safety</strong></dt>
+<dd><p>Начните анализ с сотни.
+</p>
+</dd>
+<dt> <strong>V/45: Psycho Pushing</strong></dt>
+<dd><p>Толкай и беги.
+</p>
+</dd>
+<dt> <strong>V/58: Now What?</strong></dt>
+<dd><p>Когда Вы видите пересечение, что должно быть в следующем ряду?
+</p>
+</dd>
+<dt> <strong>V/78: Don't Be Greedy</strong></dt>
+<dd><p>Где-то в этом руководстве есть совет получше.
+</p>
+</dd>
+<dt> <strong>V/89: Ice-Bomb</strong></dt>
+<dd><p>Под камнем спрятан лучший совет.
+</p>
+</dd>
+<dt> <strong>V/91: Firefox</strong></dt>
+<dd><p>Пол горит быстрее.
+</p>
+</dd>
+<dt> <strong>VI/8: Orbitting</strong></dt>
+<dd><p>Не позволяйте ничему дотрагиваться до границ.
+</p>
+</dd>
+<dt> <strong>VI/23: Prepare Your Defense</strong></dt>
+<dd><p>Лазер изменяет не только предметы.
+</p>
+</dd>
+<dt> <strong>esprit 43</strong></dt>
+<dd><p>Принесите жертву вулкану.
+</p>
+</dd>
+<dt> <strong>esprit 52</strong></dt>
+<dd><p>Играйте до поры до времени.
+</p>
+</dd>
+<dt> <strong>esprit 100</strong></dt>
+<dd><p>Взорвите угол.
+</p>
+</dd>
+<dt> <strong>Oxyd Magnum 99 (level 22): Letter Bomb</strong></dt>
+<dd><p>Подорвите взрывающиеся камни.
+</p>
+</dd>
+<dt> <strong>PerOxyd 49 (level 22): Hidden Treasure</strong></dt>
+<dd><p>Удостоверьтесь, что у Вас всегда есть доступ к комнате с переключателем на полу. Потом ищите второй экран со &quot;спрятанными сокровищами&quot;.
+</p>
+</dd>
+</dl>
+
+<hr size="6">
+<a name="g_t_00e2_00cc_00c1_00c7_00cf_00c4_00c1_00d2_00ce_00cf_00d3_00d4_00c9"></a>
+<a name="SEC41"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC40" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC42" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[ &gt;&gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 6. Благодарности </h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC42">6.1 Главные разработчики</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC43">6.2 Особые благодарности</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC44">6.3 Помощники</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC45">6.4 Используемое программное обеспечение</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+
+<hr size="6">
+<a name="g_t_00e7_00cc_00c1_00d7_00ce_00d9_00c5-_00d2_00c1_00da_00d2_00c1_00c2_00cf_00d4_00de_00c9_00cb_00c9"></a>
+<a name="SEC42"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC41" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC43" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[ &gt;&gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.1 Главные разработчики </h2>
+
+<dl compact="compact">
+<dt> <strong>Raoul Bourquin</strong></dt>
+<dd><p>Руководство уровнями и дизайн, бесценные дополнения по всем вопросам
+</p>
+</dd>
+<dt> <strong>Siegfried Fennig</strong></dt>
+<dd><p>Дизайн уровней, графика
+</p>
+</dd>
+<dt> <strong>Martin Hawlisch</strong></dt>
+<dd><p>Дизайн уровней, графика, программирование
+</p>
+</dd>
+<dt> <strong>Daniel Heck</strong></dt>
+<dd><p>Главный разработчик, графика, документация
+</p>
+</dd>
+<dt> <strong>Ronald Lamprecht</strong></dt>
+<dd><p>XML, графический интерфейс, программирование основной части, документация
+</p>
+</dd>
+<dt> <strong>Andreas Lochmann</strong></dt>
+<dd><p>Программирование, руководство уровнями, дизайн уровней, документация
+</p>
+</dd>
+<dt> <strong>Petr Machata</strong></dt>
+<dd><p>Дизайн уровней, программирование
+</p>
+</dd>
+<dt> <strong>Nat Pryce</strong></dt>
+<dd><p>Дизайн уровней
+</p>
+</dd>
+<dt> <strong>Jacob Scott</strong></dt>
+<dd><p>Дизайн уровней
+</p>
+</dd>
+<dt> <strong>Sven Siggelkow</strong></dt>
+<dd><p>Дизайн уровней и специальные знания Oxyd
+</p>
+</dd>
+<dt> <strong>Ralf Westram</strong></dt>
+<dd><p>Программирование, дизайн уровней
+</p></dd>
+</dl>
+
+
+<hr size="6">
+<a name="g_t_00ef_00d3_00cf_00c2_00d9_00c5-_00c2_00cc_00c1_00c7_00cf_00c4_00c1_00d2_00ce_00cf_00d3_00d4_00c9"></a>
+<a name="SEC43"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC42" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC44" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[ &gt;&gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.2 Особые благодарности </h2>
+
+<dl compact="compact">
+<dt> <strong>Johannes Fortmann</strong></dt>
+<dd><p>Портирование на Mac OS X, немного программирования, графика
+</p>
+</dd>
+<dt> <strong>Dustin Norlander</strong></dt>
+<dd><p>Дизайнер шрифта &quot;Dustismo&quot;
+</p>
+</dd>
+<dt> <strong>Jeremy Sawicki</strong></dt>
+<dd><p>Переработка формата файла Oxyd, Oxydlib
+</p>
+</dd>
+<dt> <strong>Erich Schubert</strong></dt>
+<dd><p>Пакеты для Debian/Ubuntu
+</p>
+</dd>
+<dt> <strong>Meinolf Schneider</strong></dt>
+<dd><p>Оригинальная идея игры-<em>Спасибо</em>!
+</p>
+</dd>
+<dt> <strong>Andrew &quot;Necros&quot; Sega</strong></dt>
+<dd><p>Музыка в меню (<em>Pentagonal Dreams</em>)
+</p>
+
+</dd>
+<dt> <strong>David W. Skinner</strong></dt>
+<dd><p>Много уровней для Сокобана с сайта
+<a href="http://users.bentonrea.com/~sasquatch/sokoban">http://users.bentonrea.com/~sasquatch/sokoban</a>
+</p>
+
+</dd>
+</dl>
+
+<hr size="6">
+<a name="g_t_00f0_00cf_00cd_00cf_00dd_00ce_00c9_00cb_00c9"></a>
+<a name="SEC44"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC43" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[ &gt;&gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.3 Помощники </h2>
+
+<p>Наша признательность различным меньшим помощникам:
+</p>
+<ul>
+<li>
+Roberto Bardin (Дизайн уровней)
+
+</li><li>
+Alain Busser (Дизайн уровней, французский перевод игры и руководства)
+
+</li><li>
+Guy Busser (Дизайн уровней)
+
+</li><li>
+Richi B&uuml;tzer (Дизайн уровней)
+
+</li><li>
+capkoh (Дизайн уровней)
+
+</li><li>
+Serge Dremuk (Русский перевод)
+
+</li><li>
+Xerxes M. Dynatos (Дизайн уровней)
+
+</li><li>
+Edward (Дизайн уровней)
+
+</li><li> 
+Stephanie Fabian (Бесценные сообщения об ошибках)
+
+</li><li>
+Roberto Garc&iacute;a (Испанский перевод)
+
+</li><li> 
+Edwin Groothuis (Портирование на FreeBSD)
+
+</li><li>
+Immanuel Herrmann (Дизайн уровней)
+
+</li><li>
+illmind (Дизайн уровней)
+
+</li><li>
+M&aacute;t&eacute; Lehel Juh&aacute;sz (Венгерский перевод)
+
+</li><li>
+Samuele Kaplun (Итальянский перевод)
+
+</li><li>
+Jens-Christian Korth (Дизайн уровней)
+
+</li><li>
+Manuel K&ouml;nig (Дизайн уровней, сообщения об ошибках)
+
+</li><li>
+Markus Laire (Дизайн уровней)
+
+</li><li>
+Dominik Lehmann (Дизайн уровней)
+
+</li><li>
+Edward Leuf (Отзывы, сообщения об ошибках)
+
+</li><li>
+Ingo van Lil (Отзывы, сообщения об ошибках)
+
+</li><li>
+Frank van der Loo (Немецкий перевод)
+
+</li><li>
+Sidney Markowitz (Портирование на Mac OS X)
+
+</li><li>
+moonpearl (Дизайн уровней)
+
+</li><li>
+Krishnamurti Lelis Lima Vieira Nunes (Португальский перевод)
+
+</li><li>
+Daniel Nylander (Шведский перевод)
+
+</li><li>
+Peter Santo (Дизайн уровней)
+
+</li><li>
+Lukas Sch&uuml;ller (Дизайн уровней)
+
+</li><li> 
+Achim Settelmeier (специальный файл RPM)
+
+</li><li> 
+Jon Sneyers (Дизайн уровней)
+
+</li><li>
+Spaceman (Дизайн уровней)
+
+</li><li>
+Ulf Stegemann (Дизайн уровней)
+
+</li><li>
+J&uuml;rgen Sticht (Дизайн уровней)
+
+</li><li> 
+Andrzej Szombierski (Дизайн уровней)
+
+</li><li>
+Tacvek (Обновление Lua 5.1)
+
+</li><li>
+Michael Terry (Файл .desktop)
+
+</li><li>
+Ray Wick (Дизайн уровней)
+
+</li><li>
+Joe Wreschnig (Руководство)
+
+</li><li>
+Yuriy Zhyromskiy (Русский перевод руководства)
+
+</li></ul>
+
+<hr size="6">
+<a name="g_t_00e9_00d3_00d0_00cf_00cc_00d8_00da_00d5_00c5_00cd_00cf_00c5-_00d0_00d2_00cf_00c7_00d2_00c1_00cd_00cd_00ce_00cf_00c5-_00cf_00c2_00c5_00d3_00d0_00c5_00de_00c5_00ce_00c9_00c5"></a>
+<a name="SEC45"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC44" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[ &gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[ &gt;&gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.4 Используемое программное обеспечение </h2>
+
+<dl compact="compact">
+<dt> <strong>SDL</strong> </dt>
+<dd><p><a href="http://www.libsdl.org/">http://www.libsdl.org/</a>
+</p>
+</dd>
+<dt> <strong>SDL_image</strong></dt>
+<dd><p><a href="http://www.libsdl.org/SDL_image">http://www.libsdl.org/SDL_image</a>
+</p>
+</dd>
+<dt> <strong>SDL_mixer</strong></dt>
+<dd><p><a href="http://www.libsdl.org/SDL_mixer">http://www.libsdl.org/SDL_mixer</a>
+</p>
+</dd>
+<dt> <strong>Lua</strong></dt>
+<dd><p><a href="http://www.lua.org">http://www.lua.org</a>
+</p>
+</dd>
+<dt> <strong>Oxydlib</strong></dt>
+<dd><p><a href="http://www.sawicki.us/oxyd">http://www.sawicki.us/oxyd</a>
+</p>
+</dd>
+<dt> <strong>toLua++</strong></dt>
+<dd><p><a href="http://www.codenix.com/~tolua">http://www.codenix.com/~tolua</a>
+</p>
+</dd>
+<dt> <strong>zipios</strong></dt>
+<dd><p><a href="http://zipios.sourceforge.net">http://zipios.sourceforge.net</a>
+</p>
+</dd>
+<dt> <strong>Xerces C++</strong></dt>
+<dd><p><a href="http://xml.apache.org/xerces-c">http://xml.apache.org/xerces-c</a>
+</p>
+</dd>
+</dl>
+
+<hr size="6">
+<a name="SEC_Contents"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1>Table of Contents</h1>
+<div class="contents">
+
+<ul class="toc">
+  <li><a name="TOC1" href="#SEC1">1. Введение</a>
+  <ul class="toc">
+    <li><a name="TOC2" href="#SEC2">1.1 Об Enigma</a></li>
+    <li><a name="TOC3" href="#SEC3">1.2 Установка</a></li>
+    <li><a name="TOC4" href="#SEC4">1.3 Распространение Enigma</a></li>
+  </ul></li>
+  <li><a name="TOC5" href="#SEC5">2. Игра</a>
+  <ul class="toc">
+    <li><a name="TOC6" href="#SEC6">2.1 Знакомство</a>
+    <ul class="toc">
+      <li><a name="TOC7" href="#SEC7">2.1.1 Меню уровней</a></li>
+      <li><a name="TOC8" href="#SEC8">2.1.2 Меню Пакет уровней</a></li>
+      <li><a name="TOC9" href="#SEC9">2.1.3 Настройки</a></li>
+      <li><a name="TOC10" href="#SEC10">2.1.4 Инспектор уровня</a></li>
+    </ul></li>
+    <li><a name="TOC11" href="#SEC11">2.2 Правила Игры</a>
+    <ul class="toc">
+      <li><a name="TOC12" href="#SEC12">2.2.1 Обычные местности</a></li>
+      <li><a name="TOC13" href="#SEC13">2.2.2 Местности для двух игроков</a></li>
+      <li><a name="TOC14" href="#SEC14">2.2.3 Местности для медитации</a></li>
+    </ul></li>
+    <li><a name="TOC15" href="#SEC15">2.3 Управление</a></li>
+  </ul></li>
+  <li><a name="TOC16" href="#SEC16">3. Некоторые игровые объекты</a>
+  <ul class="toc">
+    <li><a name="TOC17" href="#SEC17">3.1 Предметы</a>
+    <ul class="toc">
+      <li><a name="TOC18" href="#SEC18">3.1.1 Взрывчатка</a></li>
+      <li><a name="TOC19" href="#SEC19">3.1.2 Зонты</a></li>
+      <li><a name="TOC20" href="#SEC20">3.1.3 Флаги</a></li>
+    </ul></li>
+    <li><a name="TOC21" href="#SEC21">3.2 Камни</a>
+    <ul class="toc">
+      <li><a name="TOC22" href="#SEC22">3.2.1 Смертоносные камни</a></li>
+      <li><a name="TOC23" href="#SEC23">3.2.2 Обменные камни</a></li>
+      <li><a name="TOC24" href="#SEC24">3.2.3 Зеркала</a></li>
+      <li><a name="TOC25" href="#SEC25">3.2.4 Односторонние камни</a></li>
+      <li><a name="TOC26" href="#SEC26">3.2.5 Сегун-камни</a></li>
+      <li><a name="TOC27" href="#SEC27">3.2.6 Болдеры</a></li>
+      <li><a name="TOC28" href="#SEC28">3.2.7 Камни-мозаики</a></li>
+      <li><a name="TOC29" href="#SEC29">3.2.8 Почтовые камни</a></li>
+    </ul>
+</li>
+  </ul></li>
+  <li><a name="TOC30" href="#SEC30">4. Дополнительные темы</a>
+  <ul class="toc">
+    <li><a name="TOC31" href="#SEC31">4.1 Пользовательские пакеты уровней</a></li>
+    <li><a name="TOC32" href="#SEC32">4.2 Резервное копирование</a></li>
+    <li><a name="TOC33" href="#SEC33">4.3 Регистрация очков</a></li>
+    <li><a name="TOC34" href="#SEC34">4.4 Обновление Enigma</a></li>
+  </ul></li>
+  <li><a name="TOC35" href="#SEC35">5. Спойлеры</a>
+  <ul class="toc">
+    <li><a name="TOC36" href="#SEC36">5.1 Прохождение Advanced Tutorial</a>
+    <ul class="toc">
+      <li><a name="TOC37" href="#SEC37">5.1.1 Область 1</a></li>
+      <li><a name="TOC38" href="#SEC38">5.1.2 Область 2</a></li>
+      <li><a name="TOC39" href="#SEC39">5.1.3 Область 3</a></li>
+    </ul></li>
+    <li><a name="TOC40" href="#SEC40">5.2 Советы для нескольких уровней</a></li>
+  </ul></li>
+  <li><a name="TOC41" href="#SEC41">6. Благодарности</a>
+  <ul class="toc">
+    <li><a name="TOC42" href="#SEC42">6.1 Главные разработчики</a></li>
+    <li><a name="TOC43" href="#SEC43">6.2 Особые благодарности</a></li>
+    <li><a name="TOC44" href="#SEC44">6.3 Помощники</a></li>
+    <li><a name="TOC45" href="#SEC45">6.4 Используемое программное обеспечение</a></li>
+  </ul>
+</li>
+</ul>
+</div>
+<hr size="1">
+<a name="SEC_About"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1>About This Document</h1>
+<p>
+  This document was generated by <em>GeD</em> on <em>March, 25 2007</em> using <a href="http://texi2html.cvshome.org/"><em>texi2html 1.76</em></a>.
+</p>
+<p>
+  The buttons in the navigation panels have the following meaning:
+</p>
+<table border="1">
+  <tr>
+    <th> Button </th>
+    <th> Name </th>
+    <th> Go to </th>
+    <th> From 1.2.3 go to</th>
+  </tr>
+  <tr>
+    <td align="center"> [ &lt; ] </td>
+    <td align="center">Back</td>
+    <td>previous section in reading order</td>
+    <td>1.2.2</td>
+  </tr>
+  <tr>
+    <td align="center"> [ &gt; ] </td>
+    <td align="center">Forward</td>
+    <td>next section in reading order</td>
+    <td>1.2.4</td>
+  </tr>
+  <tr>
+    <td align="center"> [ &lt;&lt; ] </td>
+    <td align="center">FastBack</td>
+    <td>beginning of this chapter or previous chapter</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td align="center"> [ Up ] </td>
+    <td align="center">Up</td>
+    <td>up section</td>
+    <td>1.2</td>
+  </tr>
+  <tr>
+    <td align="center"> [ &gt;&gt; ] </td>
+    <td align="center">FastForward</td>
+    <td>next chapter</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td align="center"> [Top] </td>
+    <td align="center">Top</td>
+    <td>cover (top) of document</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td align="center"> [Contents] </td>
+    <td align="center">Contents</td>
+    <td>table of contents</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td align="center"> [Index] </td>
+    <td align="center">Index</td>
+    <td>index</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td align="center"> [ ? ] </td>
+    <td align="center">About</td>
+    <td>about (help)</td>
+    <td> &nbsp; </td>
+  </tr>
+</table>
+
+<p>
+  where the <strong> Example </strong> assumes that the current position is at <strong> Subsubsection One-Two-Three </strong> of a document of the following structure:
+</p>
+
+<ul>
+  <li> 1. Section One
+    <ul>
+      <li>1.1 Subsection One-One
+        <ul>
+          <li>...</li>
+        </ul>
+      </li>
+      <li>1.2 Subsection One-Two
+        <ul>
+          <li>1.2.1 Subsubsection One-Two-One</li>
+          <li>1.2.2 Subsubsection One-Two-Two</li>
+          <li>1.2.3 Subsubsection One-Two-Three &nbsp; &nbsp;
+            <strong>&lt;== Current Position </strong></li>
+          <li>1.2.4 Subsubsection One-Two-Four</li>
+        </ul>
+      </li>
+      <li>1.3 Subsection One-Three
+        <ul>
+          <li>...</li>
+        </ul>
+      </li>
+      <li>1.4 Subsection One-Four</li>
+    </ul>
+  </li>
+</ul>
+
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated by <em>GeD</em> on <em>March, 25 2007</em> using <a href="http://texi2html.cvshome.org/"><em>texi2html 1.76</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

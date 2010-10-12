@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Unfair!" el:subtitle="" el:id="ant33"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+use_cells(cells, "O", "W")
+
+cells[" "]=cell{floor="fl-metal"}
+cells["#"]=cell{stone="st-metal"}
+cells["%"]=cell{stone="st-swap"}
+
+cells[">"]=cell{{{gradient, FLAT_FORCE_E}}}
+cells["<"]=cell{{{gradient, FLAT_FORCE_W}}}
+cells["^"]=cell{{{gradient, FLAT_FORCE_N}}}
+cells["v"]=cell{{{gradient, FLAT_FORCE_S}}}
+cells["`"]=cells[">"]
+
+cells["w"]=cell{{cells["W"], cells["`"]}}
+cells["s"]=cell{item="it-spring1"}
+
+cells["-"]=doorh
+
+action_A  = function () cell{{{cells[">"], 1, 4}; mode=-1}}() end
+cells["A"]=cell{item={"it-trigger", {action="callback", target="action_A"}}}
+
+cells["B"]=cell{{{switch, "doorB", "openclose"}}}
+cells["b"]=cell{{cells["`"], {doorv, {name="doorB"}}}}
+
+-- commented out by Raoul, oct 06 to repair this level for Enigma 1.0
+--success_C =function() send_message_named("doorC", "open", nil); end;
+--failed_C  =function() send_message_named("doorC", "close", nil); end;
+--states_C  =bool_table(3, 0, bool_and, success_C, failed_C)
+--action_C  =function() cell{{{bool_set, states_C}}}() end
+--cells["C"]=cell{item={"it-trigger", {action="callback", target="action_C"}}}
+
+-- Workaround for the 5 lines above:
+t1, t2, t3 = 0,0,0
+
+function test_C(onoff, sender)
+    local nr_tr = enigma.GetAttrib(sender, "door_nr")
+
+    if nr_tr == 1 then
+        t1=1-t1
+    elseif nr_tr == 2 then
+        t2=1-t2
+    elseif nr_tr ==3 then
+        t3=1-t3
+    end
+
+    if t1==1 and t2==1 and t3==1 then --open door
+        send_message_named("doorC", "open", nil)
+    else -- close door
+        send_message_named("doorC", "close", nil)
+    end
+end
+
+cells["I"]=cell{item={"it-trigger", {action="callback", target="test_C", door_nr=1}}}
+cells["J"]=cell{item={"it-trigger", {action="callback", target="test_C", door_nr=2}}}
+cells["K"]=cell{item={"it-trigger", {action="callback", target="test_C", door_nr=3}}}
+-- /Workaround
+
+cells["c"]=cell{{{doorh, {name="doorC"}}}}
+
+cells["E"]=cell{{{switch, "doorE", "close"}}}
+cells["e"]=cell{{cells[" "], {doorv, {name="doorE"}}}}
+
+slopes={}
+pivots={}
+cells["*"]=cell{{{add_multicell, slopes, 1}}}
+cells["&"]=cell{{{add_multicell, pivots, slopes}, cells[" "]}}
+
+cells["O"]=cell{{cells["O"], {document, "text1"}}}
+cells["2"]=cell{actor={"ac-blackball", {player=1, mouseforce=0}}}
+cells["+"]=cell{{{document, "text2"}}}
+
+level = {
+   "...................................................................................................................",
+   "...................................................................................................................",
+   "#################......#########################################################################............#######",
+   "#```#```````````########``````````````````#``````````>>`vBvvvvvv`<vvv`D```````^vvvvvvvvvvv`````##############*****#",
+   "#2`````````````````````w``````````````````.`````````<^vvv#>>>>>>``>vvvv>>>>>>>```````w```````````````````.` E*  &*#",
+   "#####``````````````#####``````````````````#````````````>>b^^`````#-#>>>v^^^^D`^^^^^^^^^^^^`````##############* 0 *#",
+   "....################...###########################################s#############################            #*   *#",
+   "#####              #####                            W W W# W   I #c# ..     #                  #      ======#* 0 *#",
+   "#O  A                  W.                           W  W  W W  J     ..                       W.   %W =XX   e* + *#",
+   "#   #           ########                            W W  # W   K     ..     #                  #      =W    #*****#",
+   "#################......#########################################################################      =     #######",
+   "...............................................................................................##############......",
+   "..................................................................................................................."
+}
+
+set_default_parent(" ")
+oxyd_default_flavor = "d"
+create_world_by_map(level)
+
+send_message_named("doorE", "open", nil)
+
+spread_tag(pivots)
+render_slopes(slopes, -1)
+
+oxyd_shuffle()
+enigma.ConserveLevel=FALSE
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">I don't believe that you are the Marble. I won't let you pass until you prove me wrong: you have to be faster than my champion!</el:english>
+      </el:string> 
+      <el:string el:key="text2">
+        <el:english el:translate="true">Congratulations! You may pass!</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

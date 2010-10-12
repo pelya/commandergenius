@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Fatal Attraction I" el:subtitle="" el:id="spaceman1"/>
+      <el:version el:score="2" el:release="2" el:revision="2" el:status="released"/>
+      <el:author  el:name="Spaceman" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Spaceman</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Levelcode cleaned by raoul 3.2006
+-- !!BBE105!! Do not delete this line
+
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+
+levelh=13
+levelw=20
+
+cells={}
+stones={}
+
+stones[" "]=cell{}
+cells[" "]=cell{}
+
+cells["!"]=cell{floor="fl-normal"}
+
+if difficult then
+    stones["!"]=cell{stone="st-fart"}
+else
+    stones["!"]=cell{stone="st-likeoxydb"}
+end
+stones["#"]=cell{parent={{file_oxyd,"b"}}}
+
+level={"!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!"}
+stmap={"!!!!!!!!!!!!!!!!!!!!",
+       "!                  !",
+       "!                  !",
+       "!                  !",
+       "!       #  #       !",
+       "!      #    #      !",
+       "!     #      #     !",
+       "!    #        #    !",
+       "!   #          #   !",
+       "!  #            #  !",
+       "! #              # !",
+       "!#                #!",
+       "!!!!!!!!!!!!!!!!!!!!"}
+
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+
+set_actor("ac-blackball",10.5,1.5,{player=0,name="bb"})
+set_actor("ac-rotor",4.5,11.5,{range=20,force=20,name="rot1",gohome=TRUE})
+set_actor("ac-rotor",15.5,11.5,{range=20,force=20,name="rot2",gohome=TRUE})
+
+AddRubberBand(enigma.GetNamedObject("bb"),enigma.GetNamedObject("rot1"),10,100)
+AddRubberBand(enigma.GetNamedObject("bb"),enigma.GetNamedObject("rot2"),10,100)
+
+set_item("it-document",10,1,{text="text1"})
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Don't get too attracted!</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

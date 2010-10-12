@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Snowball Fight" el:subtitle="" el:id="nat14"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Nat Pryce" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Nat Pryce</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world( 20, 13 )
+fill_floor( "fl-samba" )
+fill_floor( "fl-ice", 7, 1, level_width-8, level_height-2 )
+fill_floor( "fl-samba", 1, 1, 6, level_height-2 )
+
+draw_border( "st-actorimpulse")
+draw_stones( "st-white4", {7,1}, {0,1}, level_height-2 )  
+
+oxyd( level_width-1, 1 )
+oxyd( level_width-1, 3 )
+oxyd( level_width-1, 5 )
+oxyd( level_width-1, 7 )
+oxyd( level_width-1, 9 )
+oxyd( level_width-1, 11 )
+oxyd_shuffle()
+
+anchor = set_stone( "st-stone1", 0, 6 ) 
+black = set_actor( "ac-blackball", 2.5, 6.5 )
+white1 = set_actor( "ac-whiteball", 5.5, 3.5 )
+white2 = set_actor( "ac-whiteball", 5.5, 9.5 )
+
+AddRubberBand( black, anchor, 10, 2 )
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,107 @@
+Requirements for Building Enigma
+================================
+A list of libraries and tools needed to build Enigma. Some of the listed
+items may be included in your environment. Other "standard" tools not
+listed may even be missing in your environment.
+(L) - the info is valid for Linux
+(W) - the info is valid only for Windows mingw (incl. cross compilation)
+This list is a memory protocoll - anyone who sets up a new development
+environment is encouraged to check and add missing items. Please report 
+further compatibilities and incompatibilities.
+
+Product         Version      
+                recommended     other           incompatible   
+Source          Address/Info
+
+Libraries:
+----------
+SDL-devel       1.2.14 - 1.2.9	(no 1.2.10 on Mac, no 1.2.12,1.2.13 on Win!) 
+                http://www.libsdl.org/download-1.2.php
+                SDL-devel-1.2.14-mingw32.tar.gz (Mingw32) +  fix r5262
+                
+SDL_ttf-devel   2.0.10 -  2.0.6
+                http://www.libsdl.org/projects/SDL_ttf/
+                SDL_ttf-devel-2.0.9-VC8.zip (W)
+                
+SDL_mixer-devel 1.2.11 - 1.2.7
+                http://www.libsdl.org/projects/SDL_mixer/
+                SDL_mixer-devel-1.2.11-VC.zip (W)
+                
+SDL_image-devel 1.2.10 - 1.2.6
+                http://www.libsdl.org/projects/SDL_image/
+                SDL_image-devel-1.2.10-VC.zip (W)
+
+Xerces-C        3.0.1     2.4 - 3.0.1 (L)   < 2.3 (L); 3.0 < r671894
+Apache          2.7 : http://xml.apache.org/xerces-c/download.cgi
+                      Linux: use rpm spec 
+                3.0 : https://svn.apache.org/repos/asf/xerces/c/trunk
+                      Linux: ./configure --prefix=/mysweethome; make; install)
+                      Windows: see doc/README.mingw
+
+libpng          1.2.18  - must be compatible to dynamic SDL_imager libs                         
+	        http://sourceforge.net/project/showfiles.php?group_id=5624                Developer files (W)
+                (The 1.2.8 dll is incompatible to SDL_image 1.2.4)
+                
+zlib            1.2.3
+/GnuWin32       http://gnuwin32.sourceforge.net/packages/zlib.htm
+                Binaries + Developer files (W)
+
+Tools:
+------
+
+gcc             3.4.2 (W)   - 4.0 (L)                    
+GNU/mingw       http://www.mingw.org/download.shtml
+                MinGW-5.1.3.exe + MinSYS-1.0.10.exe + msysDTK-1.0.1 with
+		w32api 3.9 + binutils 2.16.91-20060119-1 +
+		gcc-core 3.4.2-20040916-1 + gcc-g++ 3.4.2-20040916-1	
+                (crosscompiler see doc/README.mingw and etc/build-cross.sh)
+
+autoconf        2.59                            <= 2.56
+GNU/mingw       http://www.mingw.org/download.shtml
+                msys-autoconf-2.59.tar.bz2
+
+
+texi2html       1.78, 1.76                            < 1.70 ?
+                http://www.nongnu.org/texi2html/
+
+gettext         0.14.4
+GNU/GnuWin32    http://gnuwin32.sourceforge.net/packages/gettext.htm (W)
+                Binaries + Dependencies (W)
+                
+zip             2.3.1
+/GnuWin32       http://gnuwin32.sourceforge.net/packages/zip.htm (W)
+                Binaries (W)
+
+doxygen         1.4.4                           incl 1.4.4
+                http://www.stack.nl/~dimitri/doxygen/
+                (for source documentation)
+
+Graphviz        2.2.1
+AT&T            http://www.graphviz.org/About.php
+                (for source documentation)
+
+upx             3.00 -  1.2.5
+                http://upx.sourceforge.net/
+
+ccache          2.4 (L)
+                http://ccache.samba.org/
+                
+NSIS            2.21 (W)
+                http://nsis.sourceforge.net
+
+ImageMagick     
+                http://www.imagemagick.org
+                (just convert tool for png to pdf convertion)
+
+TeX
+                (for pdf generation)
+
+Berlios repository access
+-------------------------
+subversion
+                http://subversion.tigris.org/
+                http://tortoisesvn.tigris.org/ (W)
+
+ssh
+                http://www.chiark.greenend.org.uk/~sgtatham/putty/ (W)
+

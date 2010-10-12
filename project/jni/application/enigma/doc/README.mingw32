@@ -1,0 +1,197 @@
+Building Enigma for Windows
+===========================
+
+This file outlines the steps required to build Enigma versions for
+Windows.  If you find inaccuracies or omissions in this file, please
+report them to enigma-devel@nongnu.org.
+
+
+1) Native compilation
+---------------------
+
+It seems no one has managed to build Enigma with Visual Studio yet, so
+you must resort to MinGW port of GNU C++ and the other GNU build
+tools.  (Setting up a usable build environment is unfortunately more
+difficult than the following notes suggest; prepare for a certain
+amount of "tinkering".  But you can always ask for help on the Enigma
+mailing list.)
+
+  - Get and install MinGW from www.mingw.org
+
+  - Get and install the appropriate development packages of
+
+      * SDL >= 1.2 (www.libsdl.org)
+      * SDL_mixer >= 1.2.4 (http://www.libsdl.org/projects/SDL_mixer)
+      * SDL_image >= 1.2.0 (http://www.libsdl.org/projects/SDL_image)
+      * SDL_ttf  (http://www.libsdl.org/projects/SDL_ttf)
+      * zlib
+      * libpng
+      * Xerces-C
+
+  - Build Enigma by invoking "./configure && make" from the Enigma
+    source directory.
+
+For a more detailed memory log see appendix A)
+
+2) Cross compilation
+--------------------
+
+You can also build Enigma for Windows from Linux.  Because most
+development tools are readily available on Linux, this may in fact be
+easier than the native compilation outlined above.  You need:
+
+  - A Linux version of the MinGW compiler.  Debian has prebuilt packages 
+    for this (check gcc -v includes --enable-sjlj-exceptions), 
+    for other distributions try: 
+    
+      /etc/build-cross.sh 
+    
+    a updated and modified version of the script from
+      http://www.libsdl.org/extras/win32/cross/README.txt
+
+  - Get and install the libraries listed above
+
+  - Configure the Enigma source code using etc/mingw32-configure.sh.
+    Depending on your setup, you may have to adapt this little script
+    a little bit.
+
+  - Run "make"
+
+For a more detailed memory log see appendix B)
+
+3) Packaging
+------------
+
+There are two ways to package Enigma: Either as a simple .zip file or
+as a graphical installer.  The script in etc/mingw32-dist.sh builds a
+.zip package that includes all necessary files.  It also includes in
+enigma.nsi a simple NSIS script that can be used to build a graphical
+installer from the zip file.  Here is how:
+
+  - Install NSIS 2.0 from www.nsis.org (It also runs under Wine if you
+    are a Linux user).
+
+  - Build a .zip package.
+
+  - Extract the zip file and run the NSIS compiler on the included
+    .nsi file.
+
+
+4) Additional Notes
+-------------------
+
+A) Native MinGW Compilation
+---------------------------
+
+Decide where to install mingw,msys and GnuWin32 - the main restriction is are
+paths without spaces (f.e. D:\MinGW, D:\msys, D:\GnuWin32).
+
+Install MinGW-version.exe (includes: runtime+w32api+binutils+gcc-[core+g++]+make)
+
+Install MinSys-version.exe
+Install msysDTK-version.exe
+Install msys-autoconf-2.59.tar.bz2 to msys
+(Install msys-automake-1.8.2.tar.bz2 to msys)
+
+Execute all shell commands from now on in msys/bash
+
+Extract texi2html - ./configure;make;make install
+
+Add GnuWin32/bin to PATH (either Windows or msys/bash)
+Extract gettext-bin + dep to GnuWin32
+Extract zip-bin to GnuWin32
+
+Install upx anywhere in PATH
+
+SDL-devel-1.2.14-mingw32.tar.gz
+  extract to a workdir
+  cp -rv bin lib share include /mingw/
+  sed 's|^prefix=.*|prefix=/minw/|' <bin/sdl-config > /mingw/bin/i386-mingw32msvc-sdl-config
+  cp /mingw/share/aclocal/sdl.m4 /share/aclocal/
+  cp bin/*.dll to enigma/etc
+
+SDL_ttf-devel-2.0.9-VC8.zip, SDL_mixer-devel-1.2.11-VC.zip, SDL_image-devel-1.2.10-VC.zip
+  extract
+  cp includes to /mingw/include/SDL
+  cp lib/*.lib to /mingw/lib
+  cp lib/*.dll to enigma/etc
+
+libpng-1.2.18.tar.gz
+  extract to workdir
+  ./configure --prefix=/mingw
+  make
+  make install
+
+zlib-1.2.3-lib.zip, libpng-1.2.8-lib.zip
+  extract
+  cp includes to /mingw/include
+  cp lib/libz.dll.a, libpng.dll.a to /mingw/lib 
+
+xerces-c
+  ./configure --prefix=/mingw
+  make
+  make install
+  
+enigma
+  ./autogen.sh
+  ./configure
+  cd etc
+  ./mingw32-dist.sh
+  install etc/enigma.zip
+
+B) Cross MinGW Compilation
+---------------------------
+
+Decide where to install the cross compiler. The project default is
+/usr/i586-mingw32msvc with root ownership. If you are sure that you are the
+only cross compile user you can install it in your homedir, too.
+
+Let us call the installation base path CROSSPREFIX and TARGET the system we 
+build for (default: i586-minge32msvc). Then we will define
+CROSSPATH = CROSSPREFIX/TARGET  (default:/usr/i586-mingw32msvc/i586-mingw32msvc)
+
+etc/build-cross.sh copy as root or user to a workdir
+  edit PREFIX to your selected CROSSPATH
+  edit MINGW_URL if appropriate
+  execute it - this will take some time
+  (you may save the downloaded source directory - the rest can be deleted)
+  chown -R root:root CROSSPATH
+
+SDL-devel-1.2.9-mingw32.tar.gz
+  extract to a workdir
+  move include/* to include/SDL
+  edit Makefile CROSS_PATH to your selected CROSSPATH
+  edit bin/i386-mingw32msvc-sdl-config  prefix to your selceted CROSSPATH
+  make cross
+  ln -s CROSSPATH/bin/i386-mingw32msvc-sdl-config CROSSPREFIX/bin/sdl-config
+  cp bin/*.dll to enigma/etc
+
+SDL_ttf-devel-2.0.7-VC6.zip, SDL_mixer-devel-1.2.6-VC6.zip, SDL_image-devel-1.2.4-VC6.zip
+  extract
+  cp includes to CROSSPATH/include/SDL
+  cp lib/*.lib to CROSSPATH/lib
+  cp lib/*.dll to enigma/etc
+
+zlib-1.2.3-lib.zip, libpng-1.2.8-lib.zip
+  extract
+  cp includes to CROSSPATH/include
+  cp lib/libz.dll.a, libpng.dll.a to CROSSPATH/lib 
+
+xerces-c
+  cp etc/xerces-mingw-config.sh to base directory of xerces-c
+  edit xerces-mingw-config.sh - add your CROSSPREFIX/bin to PATH, 
+    use your TARGET as commandprefix
+  execute "xerces-mingw-config.sh --prefix=CROSSPATH --disable-transcoder-icu --disable-netaccessor-curl
+  PATH=CROSSPREFIX/bin:$PATH (the path defined at the beginning!)
+  make
+  make install (as root with PATH=CROSSPREFIX/bin:$PATH)
+  
+enigma
+  export ENIGMADEVDLLS="SDL SDL_image SDL_mixer SDL_ttf jpeg libpng13 zlib"
+  export ENIGMADEVCROSSPREFIX=CROSSPREFIX (the path defined at the beginning!)
+  ./autogen.sh
+  cd etc
+  ./mingw32-configure.sh
+  ./mingw32-dist.sh
+  install etc/enigma.zip on Windows
+

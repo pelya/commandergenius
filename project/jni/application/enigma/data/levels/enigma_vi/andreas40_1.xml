@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Ariadne" el:subtitle="" el:id="andreas40"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Andreas Lochmann" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Andreas Lochmann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+       <el:dependency el:path="lib/andreas_ghosts" el:id="lib/andreas_ghosts"
+          el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="01:17"/>
+    </el:info>
+    <el:luamain><![CDATA[
+
+-- Created with the help of BBE 1.05
+
+levelh=25
+levelw=20
+enigma.FlatForce=30
+enigma.SlopeForce=10
+enigma.ElectricForce=30
+
+switchstate1 = 0
+switchstate2 = 0
+function openfloor()
+  switchstate1 = -1
+  switchstate2 = -1
+  for x = 0, levelw - 1 do
+    for y = 0, levelh - 1 do
+      local fl = enigma.GetKind(enigma.GetFloor(x,y))
+      if (fl == "fl-marble") or (fl == "fl-gradient") then
+        set_floor("fl-abyss", x, y)
+        set_floor("fl-space", x, y)
+      end
+    end
+  end
+  set_floor("fl-abyss", ghosts_ghost_x[1], ghosts_ghost_y[1])
+  set_floor("fl-space", ghosts_ghost_x[1], ghosts_ghost_y[1])
+  ghosts_savedfloor[1] = "fl-space"
+end
+function switchfunc1()
+  if switchstate1 ~= -1 then
+    switchstate1 = 1 - switchstate1
+    if (switchstate1 == 1) and (switchstate2 == 1) then
+      openfloor()
+    end
+  end
+  SendMessage("bridge1", "openclose")
+end
+function switchfunc2()
+  if switchstate2 ~= -1 then
+    switchstate2 = 1 - switchstate2
+    if (switchstate1 == 1) and (switchstate2 == 1) then
+      openfloor()
+    end
+  end
+  SendMessage("bridge2", "openclose")
+end
+
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+function ac_rotor(x,y)
+  local horse = set_actor("ac-horse",x+1.5,y+0.5)
+  ghosts_set_ghost(x, y, "ac-top", 1, ghosts_direction_intelligent,
+    {range = 0, force = 5, gohome = FALSE})
+  local rotor = enigma.GetNamedObject("ghost_1")
+  AddRubberBand(rotor, horse, 100, 1)
+end
+function ac_blackball(x,y)
+  set_actor("ac-blackball", x+0.5, y+0.5, {essential = 1})
+end
+function ac_whiteball(x,y)
+  set_actor("ac-whiteball", x+0.5, y+0.5, {name="whiteball", essential = 1})
+end
+targetnumber = 0
+function setitrub1(x,y)
+  targetnumber = targetnumber + 1
+  set_stone("st-stone1", x, y - 1, {name = "target"..targetnumber})
+  set_item("it-rubberband", x, y, {target = "target"..targetnumber,
+    scissor = TRUE, strength = 1})
+end
+
+cells={}
+items={}
+actors={}
+stones={}
+actors[" "]=cell{}
+stones[" "]=cell{}
+cells[" "]=cell{}
+items[" "]=cell{}
+
+cells["!"]=cell{floor="fl-water"}
+--cells["$"]=cell{floor="fl-marble"}
+cells["$"]=cell{parent={{ghosts_set_rail,1,"fl-marble"}}}
+cells["%"]=cell{floor="fl-stwood"}
+cells["&"]=cell{floor="fl-abyss"}
+cells["1"]=cell{floor={"fl-bridge-open", {type = "y", name = "bridge1"}}}
+cells["2"]=cell{floor={"fl-bridge-open", {type = "y", name = "bridge2"}}}
+stones["!"]=cell{stone="st-rock10"}
+stones["#"]=cell{stone="st-block"}
+stones["$"]=cell{stone={"st-key_b", {action="callback", target="switchfunc1"}}}
+stones["%"]=cell{stone={"st-key_a", {action="callback", target="switchfunc2"}}}
+stones["b"]=cell{stone="st-black4"}
+stones["w"]=cell{stone="st-white4"}
+stones["'"]=cell{stone="st-stone1"}
+stones["("]=cell{parent={{file_oxyd,"d"}}}
+items["!"]=cell{parent={{setitrub1}}}
+items["#"]=cell{item="it-key_b"}
+items["$"]=cell{item="it-key_a"}
+items["%"]=cell{item="it-yinyang"}
+items["&"]=cell{item={"it-rubberband", {target="whiteball", scissor = TRUE, strength = 1}}}
+actors["!"]=cell{parent={{ac_rotor}}}
+actors["$"]=cell{parent={{ac_blackball}}}
+actors["%"]=cell{parent={{ac_whiteball}}}
+
+level={"!!!!&!!!!!!!!!!!!!!!",
+       "!!!!&$$$$$$$$$$$$$$!",
+       "!$$%%$$$$$$$$$$$$$$!",
+       "!$$%%$$$$$$$$$$$$$$!",
+       "!$$%%$$$$$$$$$$$$$$!",
+       "!!!!&$$$$$$$$$$$$$$!",
+       "!$$$$$$$$$$$$$$$$$$!",
+       "!$$$$$$$$$$$$$$$$$$!",
+       "!$$$$$$$$$$$$$$$$$$!",
+       "!$$$$$$$$$$$$$$$$$$!",
+       "!$$$$$$$$$$$$$$$$$$!",
+       "!$$$$$$$$$$$$$$$$$$!",
+       "!$$$$$$$$$$$$$$$$$$!",
+       "!$$$$$$$$$$$$$$$$$$!",
+       "!$$$$$$$$$$$$$$$$$$!",
+       "!$$$$$$$$$$$$$$$$$$!",
+       "!$$$$$$$$$$&&&&&&&&!",
+       "!$$$$$$$$$$!%%%!%%%!",
+       "!$$$$$$$$$$!%%%!%%%!",
+       "!$$$$$$$$$$!%%%!%%%!",
+       "!$$$$$$$$$$!!1!!!2!!",
+       "!$$$$$$$$$%%%%%%%%%!",
+       "!$$$$$$$$$%%%%%%%%%!",
+       "!$$$$$$$$$%%%%%%%%%!",
+       "!!!!!!!!!!!!!!!!!!!!"}
+   acmap={"                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "  !                 ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "             $   %  ",
+          "                    ",
+          "                    "}
+  itmap={"                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "       #     !      ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "             $      ",
+         "                    ",
+         "        !      !    ",
+         "                    ",
+         "    !               ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "        !           ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "    !               ",
+         "             % & %  ",
+         "                    ",
+         "                    "}
+ stmap={"    !!!!!!!!!!!!!!! ",
+        "    ! #     #     ! ",
+        " !$ b # ### ##### ! ",
+        " !! b   # #       ! ",
+        " !% b ### ###'### ! ",
+        "    ! #     # #   ! ",
+        "!!!!!#### ### # ##! ",
+        "!   #     #       ! ",
+        "! ### # # # ### # ! ",
+        "! #   # #   # # # ! ",
+        "! # ### '#### #'# ! ",
+        "!   #     #     # ! ",
+        "!## '## ####### # ! ",
+        "!     #   #   #   ! ",
+        "! ### ### # # ### ! ",
+        "!   #   #   #     ! ",
+        "!## ### '#!!!!!!!!! ",
+        "!     #   !         ",
+        "!## # ### !  (   (  ",
+        "! # #     !         ",
+        "! # '#####! !w! !b! ",
+        "! #   #   b         ",
+        "! # # # # b         ",
+        "!   #   # b         ",
+        "!!!!!!!!!!!         "}
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+draw_map(0,0,acmap,actors)
+draw_map(0,0,itmap,items)
+oxyd_shuffle()
+ghosts_init(0,0)
+enigma.ConserveLevel = FALSE
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

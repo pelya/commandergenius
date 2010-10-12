@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Laser Magic" el:subtitle="" el:id="ant30"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+enigma.ConserveLevel=FALSE
+
+cells={}
+
+floor = cell{floor={face="fl-floor_001"}}
+stone = cell{stone={face="st-marble"}}
+block = cell{stone={face="st-block"}}
+stbrk = cell{stone={face="st-stone_break"}}
+door  = cell{stone={face="st-door", attr={name="doorA", type="v"}}}
+
+cslt1 = cell{stone={face="st-coinslot", attr={action="openclose", target="doorA"}}}
+cslt2 = cell{stone={face="st-coinslot", attr={action="onoff", target="laserA"}}}
+coin1 = cell{item= {face="it-coin1"}}
+
+actor = cell{actor={face="ac-blackball", attr={player=0, mouseforce=1}}}
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+create_world(20, 13)
+oxyd_default_flavor = "b"
+fill_world_func(floor)
+draw_border_func(stone)
+
+draw_func(stone, {3,1}, {0,1}, 11)
+draw_func(stone, {16,1}, {0,1}, 11)
+
+set_funcs(fakeoxyd, {{1,1},{1,11}})
+set_funcs(oxyd, {{18,1},{18,11}})
+
+door(3, 6)
+cslt1(5, 6)
+Document(2, 3, "text1")
+
+set_attrib(laser(16, 11, FALSE, WEST), "name", "laserA")
+stbrk(16, 6)
+cslt2(14, 6)
+
+actor(7,7)
+coin1(9,7)
+coin1(10,7)
+
+block(11, 3)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Give it another try ...</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

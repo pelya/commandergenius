@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd"
+  xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Per.Oxyd 28"
+        el:subtitle="Per.Oxyd 28"
+        el:id="20070104ulf016"/>
+      <el:version el:score="1" el:release="1" el:revision="$Revision: 68 $" el:status="released"/>
+      <el:author  el:name="Ulf Stegemann" el:email="ulf-enigma@zeitform.de"
+        el:homepage="http://ulf.zeitform.de"/>
+      <el:copyright>Copyright © 2006 Ulf Stegemann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+        <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false" el:control="force"
+        el:scoreunit="duration" el:scoretarget="time"/>
+      <el:score el:easy="01:19" el:difficult="01:19"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- CELLS --
+cells={}
+cells[" "]=cell{floor="fl-rough"}
+cells["x"]=cell{floor="fl-abyss"}
+-- cells["#"]=cell{floor="fl-rough"}
+cells["#"]=cell{stone="st-rock1"}
+cells["X"]=cell{stone="st-plain_break"}
+cells["1"]=cell{stone="st-bolder-s"}
+cells["2"]=cell{stone="st-bolder-w"}
+cells["B"]=cell{stone="st-bombs"}
+
+-- LANDSCAPE MAP --
+level = {
+   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "##########################################################",
+   "########   ##   ####  1#XX###########XX1# ################",
+   "######## # ## # ####  B#XX###########XXB# ################",
+   "######## # ## # ####  B#XX###########XXB# ################",
+   "######## # ## # ####  B#XX###########XXB# ################",
+   "0O       #    #    X  B#XX     X222  XXB# XXXXXXXXXXXXX2 0",
+   "######## ############# #XX########### # # ################",
+   "######## #           # #XX########### # # ################",
+   "######## #           # #XX########### # # ################",
+   "#######              #    ########### #   ################",
+   "##########################################################",
+   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+
+-- GENERAL --
+enigma.ConserveLevel=TRUE
+oxyd_default_flavor = "a"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+oxyd_shuffle()
+display.SetFollowMode(display.FOLLOW_SCROLLING)
+
+-- ITEMS --
+set_item("it-bag",10,8)
+set_item("it-seed",11,8)
+set_item("it-surprise",12,8)
+set_item("it-flagwhite",13,8)
+set_item("it-key",14,8)
+set_item("it-odometer",15,8)
+set_item("it-coin1",16,8)
+set_item("it-coin1",17,8)
+set_item("it-document",18,8,{text="text1"})
+set_item("it-hammer",19,8)
+set_item("it-dynamite",20,8)
+
+set_item("it-magnet",10,9,{on=FALSE})
+set_item("it-pin",11,9)
+set_item("it-spade",12,9)
+set_item("it-flagblack",13,9)
+set_item("it-key",14,9)
+set_item("it-coin2",15,9)
+set_item("it-coin2",16,9)
+set_item("it-coin1",17,9)
+set_item("it-cherry",18,9)
+set_item("it-coffee",19,9)
+set_item("it-dynamite",20,9)
+
+set_item("it-pipe-ne",7,10)
+set_item("it-pipe-ne",9,10)
+set_item("it-pipe-sw",10,10)
+set_item("it-pipe-ne",11,10)
+set_item("it-pipe-sw",12,10)
+set_item("it-pipe-sw",13,10)
+set_item("it-floppy",14,10)
+set_item("it-coin2",15,10)
+set_item("it-umbrella",16,10)
+set_item("it-coin1",17,10)
+set_item("it-cherry",18,10)
+set_item("it-cherry",19,10)
+set_item("it-dynamite",20,10)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english>Umbreallas protect you against oncomming boulder!</el:english>
+        <el:translation el:lang="de">Selbstmordversuch mit Schirm.</el:translation>
+      </el:string>
+     </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="The Wild Hunt" el:subtitle="" el:id="duffy159"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+rooms_wide=1
+rooms_high=1
+
+levelw=1+(19*rooms_wide)+1
+levelh=1+(12*rooms_high)
+
+create_world( levelw, levelh)
+enigma.SlopeForce=10
+
+fill_floor("fl-bluegray", 0,0,levelw,levelh)
+
+speed=3
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-death", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {player=0})
+        elseif c=="A" then
+            set_actor("ac-horse", i-.5,line+.5,{force=speed, target1="1 1", target2="18 1", target3="18 11", target4="1 11"})
+        elseif c=="B" then
+            set_actor("ac-horse", i-.5,line+.5,{force=speed, target1="16 3", target2="3 3", target3="3 9", target4="16 9"})
+        elseif c=="C" then
+            set_actor("ac-horse", i-.5,line+.5,{force=speed, target1="14 7", target2="5 7", target3="5 5", target4="14 5"})
+        elseif c == "D" then --1-d
+            set_floor("fl-gradient",  i-1,  line, {type=1})
+        elseif c == "U" then --2-u
+            set_floor("fl-gradient",  i-1,  line, {type=2})
+        elseif c == "R" then --3-r
+            set_floor("fl-gradient",  i-1,  line, {type=3})
+        elseif c == "L" then --4-l
+            set_floor("fl-gradient",  i-1,  line, {type=4})
+        end
+    end    
+end
+
+renderLine(00,"#o################o#")
+renderLine(01,"#A                 #")
+renderLine(02,"# #######UU####### #")
+renderLine(03,"# o             Bo #")
+renderLine(04,"# # #o########o# # #")
+renderLine(05,"# # #          # # #")
+renderLine(06,"o # L ###oo### R # o")
+renderLine(07,"# # #         C# # #")
+renderLine(08,"# # #o########o# # #")
+renderLine(09,"# o              o #")
+renderLine(10,"# #######DD####### #")
+renderLine(11,"#z                 #")
+renderLine(12,"#o################o#")
+
+oxyd_shuffle()
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Die Wilde Jagd</el:translation>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

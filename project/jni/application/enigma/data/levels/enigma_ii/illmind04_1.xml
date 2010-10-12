@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Knight Moves" el:subtitle="" el:id="illmind04"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="illmind" el:email="support@mag-heut.net" el:homepage="http://www.mag-heut.net/"/>
+      <el:copyright>Copyright © 2005 illmind</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- level dimensions and standards
+levelw = 39
+levelh = 13
+-- second room: no access possible (only timers) !!!
+create_world(levelw, levelh)
+oxyd_default_flavor = "d"
+draw_border("st-glass")
+fill_floor("fl-black", 0,0, level_width,level_height)
+draw_stones("st-glass", {19,1}, {0,1}, 11)
+
+-- extra stones in level
+draw_stones("st-rock1", {2,2}, {1,0}, 14)
+draw_stones("st-rock1", {2,4}, {1,0}, 13)
+draw_stones("st-rock1", {1,6}, {1,0}, 12)
+set_stones("st-rock1", {{14,6},{14,8},{14,10},{18,2}})
+set_stones("st-wood", {{17,1},{15,3}})
+set_stone( "st-timer", 0, 0, {action="callback", target="ill_timer", interval=3})
+
+-- items and documents
+set_item("it-sword", 18,11)
+set_item("it-document", 3,1, {text="text1"})
+set_item("it-document", 15,3, {text="text2"})
+
+-- trapdoors vertical
+set_stone("st-door", 2,  1, {name="illdoor01", type="v"})
+set_stone("st-door", 4,  1, {name="illdoor02", type="v"})
+set_stone("st-door", 6,  1, {name="illdoor03", type="v"})
+set_stone("st-door", 8,  1, {name="illdoor04", type="v"})
+set_stone("st-door", 10,  1, {name="illdoor05", type="v"})
+set_stone("st-door", 12,  1, {name="illdoor06", type="v"})
+set_stone("st-door", 14,  1, {name="illdoor07", type="v"})
+set_stone("st-door", 16,  1, {name="illdoor08", type="v"})
+set_stone("st-door", 2,  3, {name="illdoor09", type="v"})
+set_stone("st-door", 4,  3, {name="illdoor10", type="v"})
+set_stone("st-door", 6,  3, {name="illdoor11", type="v"})
+set_stone("st-door", 8,  3, {name="illdoor12", type="v"})
+set_stone("st-door", 10,  3, {name="illdoor13", type="v"})
+set_stone("st-door", 12,  3, {name="illdoor14", type="v"})
+set_stone("st-door", 14,  3, {name="illdoor15", type="v"})
+set_stone("st-door", 2,  5, {name="illdoor16", type="v"})
+set_stone("st-door", 4,  5, {name="illdoor17", type="v"})
+set_stone("st-door", 6,  5, {name="illdoor18", type="v"})
+set_stone("st-door", 8,  5, {name="illdoor19", type="v"})
+
+-- trapdoors horizontal
+set_stone("st-door", 1,  2, {name="illdoor20", type="h"})
+set_stone("st-door", 1,  4, {name="illdoor21", type="h"})
+
+-- trigger platforms
+set_item("it-trigger", 18, 1, {action="openclose", target="illdoor20"})
+set_item("it-trigger", 18, 3, {action="openclose", target="illdoor21"})
+
+-- door timers
+set_stone("st-timer", 21,1, {loop=1, action="openclose", target="illdoor01", interval=3})
+set_stone("st-timer", 21,2, {loop=1, action="openclose", target="illdoor02", interval=2})
+set_stone("st-timer", 21,3, {loop=1, action="openclose", target="illdoor03", interval=3})
+set_stone("st-timer", 21,4, {loop=1, action="openclose", target="illdoor04", interval=4})
+set_stone("st-timer", 21,5, {loop=1, action="openclose", target="illdoor05", interval=3})
+set_stone("st-timer", 21,6, {loop=1, action="openclose", target="illdoor06", interval=2})
+set_stone("st-timer", 21,7, {loop=1, action="openclose", target="illdoor07", interval=3})
+set_stone("st-timer", 21,8, {loop=1, action="openclose", target="illdoor08", interval=4})
+set_stone("st-timer", 21,9, {loop=1, action="openclose", target="illdoor09", interval=3})
+set_stone("st-timer", 21,10, {loop=1, action="openclose", target="illdoor10", interval=2})
+set_stone("st-timer", 21,11, {loop=1, action="openclose", target="illdoor11", interval=3})
+set_stone("st-timer", 22,1, {loop=1, action="openclose", target="illdoor12", interval=4})
+set_stone("st-timer", 22,2, {loop=1, action="openclose", target="illdoor13", interval=3})
+set_stone("st-timer", 22,3, {loop=1, action="openclose", target="illdoor14", interval=2})
+set_stone("st-timer", 22,4, {loop=1, action="openclose", target="illdoor15", interval=3})
+set_stone("st-timer", 22,5, {loop=1, action="openclose", target="illdoor16", interval=4})
+set_stone("st-timer", 22,6, {loop=1, action="openclose", target="illdoor17", interval=3})
+set_stone("st-timer", 22,7, {loop=1, action="openclose", target="illdoor18", interval=2})
+set_stone("st-timer", 22,8, {loop=1, action="openclose", target="illdoor19", interval=3})
+
+-- stationary lasers
+set_stone("st-laser", 16, 2, {on=TRUE, dir=SOUTH, name="illkill01"})
+set_stone("st-laser", 17, 2, {on=FALSE, dir=SOUTH, name="illkill02"})
+set_stone("st-laser", 14, 5, {on=FALSE, dir=EAST, name="illkill03"})
+set_stone("st-laser", 14, 7, {on=TRUE, dir=EAST, name="illkill04"})
+set_stone("st-laser", 14, 9, {on=FALSE, dir=EAST, name="illkill05"})
+set_stone("st-laser", 14, 11, {on=TRUE, dir=EAST, name="illkill06"})
+set_stone("st-laser", 18, 4, {on=FALSE, dir=WEST, name="illkill07"})
+set_stone("st-laser", 18, 6, {on=TRUE, dir=WEST, name="illkill08"})
+set_stone("st-laser", 18, 8, {on=FALSE, dir=WEST, name="illkill09"})
+set_stone("st-laser", 18, 10, {on=TRUE, dir=WEST, name="illkill10"})
+
+-- laser timers
+set_stone("st-timer", 23,2, {loop=1, action="onoff", target="illkill01", interval=4})
+set_stone("st-timer", 23,3, {loop=1, action="onoff", target="illkill02", interval=4})
+set_stone("st-timer", 23,4, {loop=1, action="onoff", target="illkill03", interval=2})
+set_stone("st-timer", 23,5, {loop=1, action="onoff", target="illkill04", interval=2})
+set_stone("st-timer", 23,6, {loop=1, action="onoff", target="illkill05", interval=2})
+set_stone("st-timer", 23,7, {loop=1, action="onoff", target="illkill06", interval=3})
+set_stone("st-timer", 23,8, {loop=1, action="onoff", target="illkill07", interval=3})
+set_stone("st-timer", 23,9, {loop=1, action="onoff", target="illkill08", interval=3})
+set_stone("st-timer", 23,10, {loop=1, action="onoff", target="illkill09", interval=3})
+set_stone("st-timer", 23,11, {loop=1, action="onoff", target="illkill10", interval=3})
+
+
+
+-- effect timer
+mytimer=-1
+function ill_timer()
+mytimer=mytimer+1
+if mytimer==0 then
+fill_floor("fl-ice", 0,0, 1,1)
+elseif mytimer==1 then
+fill_floor("fl-ice", 1,0, 1,1)
+set_stone("st-knight", 9, 5)
+elseif mytimer==2 then
+fill_floor("fl-ice", 2,0, 1,1)
+set_stone("st-knight", 10, 5)
+elseif mytimer==3 then
+fill_floor("fl-ice", 3,0, 1,1)
+set_stone("st-knight", 11, 5)
+elseif mytimer==4 then
+fill_floor("fl-ice", 4,0, 1,1)
+set_stone("st-knight", 12, 5)
+elseif mytimer==5 then
+fill_floor("fl-ice", 5,0, 1,1)
+set_stone("st-knight", 13, 5)
+elseif mytimer==6 then
+fill_floor("fl-ice", 6,0, 1,1)
+set_stone("st-knight", 13, 6)
+elseif mytimer==7 then
+fill_floor("fl-ice", 7,0, 1,1)
+set_stone("st-knight", 13, 7)
+elseif mytimer==8 then
+fill_floor("fl-ice", 8,0, 1,1)
+set_stone("st-knight", 12, 7)
+elseif mytimer==9 then
+fill_floor("fl-ice", 9,0, 1,1)
+set_stone("st-knight", 11, 7)
+elseif mytimer==10 then
+fill_floor("fl-ice", 10,0, 1,1)
+set_stone("st-knight", 10, 7)
+elseif mytimer==11 then
+fill_floor("fl-ice", 11,0, 1,1)
+set_stone("st-knight", 9, 7)
+elseif mytimer==12 then
+fill_floor("fl-ice", 12,0, 1,1)
+set_stone("st-knight", 8, 7)
+elseif mytimer==13 then
+fill_floor("fl-ice", 13,0, 1,1)
+set_stone("st-knight", 7, 7)
+elseif mytimer==14 then
+fill_floor("fl-ice", 14,0, 1,1)
+set_stone("st-knight", 6, 7)
+elseif mytimer==15 then
+fill_floor("fl-ice", 15,0, 1,1)
+set_stone("st-knight", 5, 7)
+elseif mytimer==16 then
+fill_floor("fl-ice", 16,0, 1,1)
+set_stone("st-knight", 4, 7)
+elseif mytimer==17 then
+fill_floor("fl-ice", 17,0, 1,1)
+set_stone("st-knight", 3, 7)
+elseif mytimer==18 then
+fill_floor("fl-ice", 18,0, 1,1)
+set_stone("st-knight", 2, 7)
+elseif mytimer==19 then
+fill_floor("fl-ice", 19,0, 1,1)
+set_stone("st-knight", 1, 7)
+elseif mytimer==20 then
+fill_floor("fl-ice", 19,1, 1,1)
+set_stone("st-knight", 2, 8)
+elseif mytimer==21 then
+fill_floor("fl-ice", 19,2, 1,1)
+set_stone("st-knight", 3, 8)
+elseif mytimer==22 then
+fill_floor("fl-ice", 19,3, 1,1)
+set_stone("st-knight", 5, 8)
+elseif mytimer==23 then
+fill_floor("fl-ice", 19,4, 1,1)
+set_stone("st-knight", 6, 8)
+elseif mytimer==24 then
+fill_floor("fl-ice", 19,5, 1,1)
+set_stone("st-knight", 8, 8)
+elseif mytimer==25 then
+fill_floor("fl-ice", 19,6, 1,1)
+set_stone("st-knight", 9, 8)
+elseif mytimer==26 then
+fill_floor("fl-ice", 19,7, 1,1)
+set_stone("st-knight", 11, 8)
+elseif mytimer==27 then
+fill_floor("fl-ice", 19,8, 1,1)
+set_stone("st-knight", 12, 8)
+elseif mytimer==28 then
+fill_floor("fl-ice", 19,9, 1,1)
+set_stone("st-knight", 13, 9)
+elseif mytimer==29 then
+fill_floor("fl-ice", 19,10, 1,1)
+set_stone("st-knight", 12, 9)
+elseif mytimer==30 then
+fill_floor("fl-ice", 19,11, 1,1)
+set_stone("st-knight", 11, 9)
+elseif mytimer==31 then
+fill_floor("fl-ice", 19,12, 1,1)
+set_stone("st-knight", 10, 9)
+elseif mytimer==32 then
+fill_floor("fl-ice", 18,12, 1,1)
+set_stone("st-knight", 9, 9)
+elseif mytimer==33 then
+fill_floor("fl-ice", 17,12, 1,1)
+set_stone("st-knight", 8, 9)
+elseif mytimer==34 then
+fill_floor("fl-ice", 16,12, 1,1)
+set_stone("st-knight", 7, 9)
+elseif mytimer==35 then
+fill_floor("fl-ice", 15,12, 1,1)
+set_stone("st-knight", 6, 9)
+elseif mytimer==36 then
+fill_floor("fl-ice", 14,12, 1,1)
+set_stone("st-knight", 5, 9)
+elseif mytimer==37 then
+fill_floor("fl-ice", 13,12, 1,1)
+set_stone("st-knight", 4, 9)
+elseif mytimer==38 then
+fill_floor("fl-ice", 12,12, 1,1)
+set_stone("st-knight", 3, 9)
+elseif mytimer==39 then
+fill_floor("fl-ice", 11,12, 1,1)
+set_stone("st-knight", 2, 9)
+elseif mytimer==40 then
+fill_floor("fl-ice", 10,12, 1,1)
+set_stone("st-knight", 1, 9)
+elseif mytimer==41 then
+fill_floor("fl-ice", 9,12, 1,1)
+set_stone("st-knight", 1, 10)
+elseif mytimer==42 then
+fill_floor("fl-ice", 8,12, 1,1)
+set_stone("st-knight", 2, 10)
+elseif mytimer==43 then
+fill_floor("fl-ice", 7,12, 1,1)
+set_stone("st-knight", 3, 10)
+elseif mytimer==44 then
+fill_floor("fl-ice", 6,12, 1,1)
+set_stone("st-knight", 4, 10)
+elseif mytimer==45 then
+fill_floor("fl-ice", 5,12, 1,1)
+set_stone("st-knight", 5, 10)
+elseif mytimer==46 then
+fill_floor("fl-ice", 4,12, 1,1)
+set_stone("st-knight", 6, 10)
+elseif mytimer==47 then
+fill_floor("fl-ice", 3,12, 1,1)
+set_stone("st-knight", 7, 10)
+elseif mytimer==48 then
+fill_floor("fl-ice", 2,12, 1,1)
+set_stone("st-knight", 8, 10)
+elseif mytimer==49 then
+fill_floor("fl-ice", 1,12, 1,1)
+set_stone("st-knight", 9, 10)
+elseif mytimer==50 then
+fill_floor("fl-ice", 0,12, 1,1)
+set_stone("st-knight", 10, 10)
+elseif mytimer==51 then
+fill_floor("fl-ice", 0,11, 1,1)
+set_stone("st-knight", 11, 10)
+elseif mytimer==52 then
+fill_floor("fl-ice", 0,10, 1,1)
+set_stone("st-knight", 12, 10)
+elseif mytimer==53 then
+fill_floor("fl-ice", 0,9, 1,1)
+set_stone("st-knight", 13, 10)
+elseif mytimer==54 then
+fill_floor("fl-ice", 0,8, 1,1)
+set_stone("st-knight", 12, 11)
+elseif mytimer==55 then
+fill_floor("fl-ice", 0,7, 1,1)
+set_stone("st-knight", 11, 11)
+elseif mytimer==56 then
+fill_floor("fl-ice", 0,6, 1,1)
+set_stone("st-knight", 9, 11)
+elseif mytimer==57 then
+fill_floor("fl-ice", 0,5, 1,1)
+set_stone("st-knight", 8, 11)
+elseif mytimer==58 then
+fill_floor("fl-ice", 0,4, 1,1)
+set_stone("st-knight", 6, 11)
+elseif mytimer==59 then
+fill_floor("fl-ice", 0,3, 1,1)
+set_stone("st-knight", 5, 11)
+elseif mytimer==60 then
+fill_floor("fl-ice", 0,2, 1,1)
+set_stone("st-knight", 3, 11)
+elseif mytimer==61 then
+fill_floor("fl-ice", 0,1, 1,1)
+set_stone("st-knight", 2, 11)
+end
+end
+
+-- oxyd stones
+oxyd(1,8)
+oxyd(4,8)
+oxyd(7,8)
+oxyd(10,8)
+oxyd(13,8)
+oxyd(1,11)
+oxyd(4,11)
+oxyd(7,11)
+oxyd(10,11)
+oxyd(13,11)
+
+oxyd_shuffle()
+
+-- blackball
+set_actor("ac-blackball", 1.5, 1.5, {player=0})
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- you may edit beyond this point ! -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- extralife:  for experimenting purposes -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- set_item("it-extralife", 5,1)
+-- set_item("it-extralife", 7,1)
+-- set_item("it-extralife", 9,1)
+-- set_item("it-extralife", 11,1)
+-- set_item("it-extralife", 13,1)
+-- set_item("it-extralife", 15,1)
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- delete minus signs infront of set_item -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">So,  where  are  the  knights?  -  you'll  be  sorry  you  asked!</el:english>
+      </el:string> 
+      <el:string el:key="text2">
+        <el:english el:translate="false">illmind's  knight  moves  ...</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

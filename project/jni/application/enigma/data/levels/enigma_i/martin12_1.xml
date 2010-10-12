@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Archipelago" el:subtitle="" el:id="martin12"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 39
+levelh = 25
+
+create_world( levelw, levelh)
+
+fill_floor("fl-water", 0,0,levelw,levelh)
+stone = "st-wood"
+floor = "fl-sand"
+
+oxyd(  6, 0)
+oxyd( 25, 0)
+oxyd( 34, 0)
+oxyd( 38, 6)
+oxyd( 34,12)
+oxyd( 22,12)
+oxyd( 13,12)
+oxyd(  4,12)
+
+oxyd_shuffle()
+
+fill_floor( floor, 5, 3, 6, 5)
+fill_floor( floor,12, 7, 3, 5)
+fill_floor( floor, 3, 9, 3, 3)
+fill_floor( floor,16, 5, 3, 3)
+fill_floor( floor,20, 5, 3, 3)
+fill_floor( floor,21, 9, 3, 3)
+fill_floor( floor,24, 1, 3, 3)
+fill_floor( floor,25, 7, 3, 3)
+fill_floor( floor,28, 2, 3, 3)
+fill_floor( floor,29, 6, 3, 3)
+fill_floor( floor,33, 1, 3, 3)
+fill_floor( floor,33, 9, 3, 3)
+fill_floor( floor,35, 5, 3, 3)
+
+set_stone( stone, 7, 4)
+set_stone( stone, 8, 5)
+set_stone( stone, 6, 5)
+set_stone( stone, 7, 6)
+set_stone( stone,12, 9)
+set_stone( stone,13, 9)
+set_stone( stone,14, 8)
+set_stone( stone,14, 7)
+set_stone( stone,17, 5)
+set_stone( stone,18, 6)
+set_stone( stone,16, 6)
+set_stone( stone,17, 7)
+set_stone( stone,21, 6)
+set_stone( stone,22,10)
+set_stone( stone,29, 3)
+set_stone( stone,30, 7)
+set_stone( stone,34, 2)
+set_stone( stone,36, 6)
+
+set_actor("ac-blackball", 9, 6.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

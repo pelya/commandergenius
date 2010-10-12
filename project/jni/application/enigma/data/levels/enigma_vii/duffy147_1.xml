@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Comet" el:subtitle="" el:id="duffy147"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+rooms_wide=1
+rooms_high=1
+
+levelw=1+(19*rooms_wide)+1
+levelh=1+(12*rooms_high)
+
+create_world( levelw, levelh)
+if not difficult then
+    enigma.ElectricForce=40
+else
+    enigma.ElectricForce=50
+end
+
+fill_floor("fl-red", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-invisible", i-1, line)
+            abyss(i-1,line)
+        elseif c =="P" then
+            set_stone( "st-chargeplus", i-1, line)
+            abyss(i-1,line)
+        elseif c =="M" then
+            set_stone( "st-chargeminus", i-1, line)
+            abyss(i-1,line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+            abyss(i-1,line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {player=0})
+            set_floor("fl-gradient",  i-1,  line, {type=3})
+        elseif c=="y" then
+            set_actor("ac-whiteball", i-1,line+.5, {player=1})
+        elseif c=="k" then
+            set_actor("ac-killerball", i-.5,line+.5, {controllers=0})
+            set_floor("fl-gradient",  i-1,  line, {type=4})
+        elseif c=="T" then
+            set_stone("st-timer",i-1,line,{loop=1,interval=0.7,action="callback",target="funcc1"})
+        end
+    end
+end
+
+if not difficult then
+    renderLine(00,"####################T")
+    renderLine(01,"#!!!!!!!!!!!!!!!!!!# ")
+    renderLine(02,"#!!!!!o!!!!!!o!!!!!# ")
+    renderLine(03,"#!!!!!!!!!!!!!!!!!!# ")
+    renderLine(04,"#!o!            !o!# ")
+    renderLine(05,"#!!!            !!!# ")
+    renderLine(06,"#!!Pk          zM!!# ")
+    renderLine(07,"#!!!            !!!# ")
+    renderLine(08,"#!o!            !o!# ")
+    renderLine(09,"#!!!!!!!!!!!!!!!!!!# ")
+    renderLine(10,"#!!!!!o!!!!!!o!!!!!# ")
+    renderLine(11,"#!!!!!!!!!!!!!!!!!!# ")
+    renderLine(12,"#################### ")
+else
+    renderLine(00,"####################T")
+    renderLine(01,"#!!!!!o!!!!!!o!!!!!# ")
+    renderLine(02,"#!!!!!!!!!!!!!!!!!!# ")
+    renderLine(03,"#!!!!!!!!!!!!!!!!!!# ")
+    renderLine(04,"#o!!            !!o# ")
+    renderLine(05,"#!!!            !!!# ")
+    renderLine(06,"#!!Pk          zM!!# ")
+    renderLine(07,"#!!!            !!!# ")
+    renderLine(08,"#o!!            !!o# ")
+    renderLine(09,"#!!!!!!!!!!!!!!!!!!# ")
+    renderLine(10,"#!!!!!!!!!!!!!!!!!!# ")
+    renderLine(11,"#!!!!!o!!!!!!o!!!!!# ")
+    renderLine(12,"#################### ")
+end
+
+
+oxyd_shuffle()
+
+ff1=0
+function funcc1()
+    if ff1==0 then
+        set_floor("fl-red",4,6)
+        set_floor("fl-red",15,6)
+        enigma.KillStone(3,6)
+        enigma.KillStone(16,6)
+        ff1=1
+    end
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

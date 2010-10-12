@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="The Aztec Temple" el:subtitle="" el:id="zogga01"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Dominik Lehmann" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Dominik Lehmann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Date: 06-15-2006
+
+-- Lua Code --
+
+Story={
+"text1",
+"text2",
+"text3",
+"text4",
+"text5",
+"text6",
+"text7",
+"text8",
+"text9",
+"text10",
+"text11",
+"text12",
+"text13",
+"text14",
+"text15",
+"text16",
+"text17",
+"text18",
+"text19",
+"text20",
+"text21",
+"text22",
+"text23",
+"text24",
+"text25",
+}
+
+create_world(41,37)
+
+-- Floors --
+cells={}
+cells[" "]=cell{floor={face="fl-leavesb"}}
+cells["#"]=cell{floor={face="fl-white"}}
+cells["$"]=cell{floor={face="fl-water",parent=cells["#"]}}
+cells["%"]=cell{floor={face="fl-leaves"}}
+cells["&"]=cell{floor={face="fl-gravel"}}
+cells["'"]=cell{floor={face="fl-bridge-open",attr={name="CaveBridge1",type="y"}}}
+cells["("]=cell{floor={face="fl-bridge-open",attr={name="CaveBridge2",type="y"}}}
+cells[")"]=cell{floor={face="fl-swamp"}}
+cells["*"]=cell{floor={face="fl-bridge-open",attr={name="WhiteBridge1",type="y"}}}
+cells["+"]=cell{floor={face="fl-bridge-open",attr={name="WhiteBridge2",type="y"}}}
+cells[","]=cell{floor={face="fl-stwood",parent=cells["$"]}}
+cells["-"]=cell{floor={face="fl-bridge-open",attr={name="WhiteBridge3",type="y"}}}
+cells["."]=cell{floor={face="fl-bridge-open",attr={name="WhiteBridge",type="x"}}}
+cells["/"]=cell{floor={face="fl-bridge"}}
+cells["0"]=cell{floor={face="fl-gradient1"}}
+level={
+"                                         ",
+"                                       0 ",
+"                                       0 ",
+"                         $$$$$$$$$,,$  0 ",
+"                         $$$,,,,,,,,$  0 ",
+"                         $$$,$,$,$$,$  0 ",
+"                         $$$,,,,,$$,$  0 ",
+"                         ,,$,,,,,$$,$  0 ",
+"                         $,$$$,$,$$,$  0 ",
+"                         $,,,$,$,$$,$  0 ",
+"                         $$,,,,$,,$,,  0 ",
+"                    %    $$$$$,,,,,,,  0 ",
+"                                $$     0 ",
+"################### &&&&&&& ))  $$  $  0 ",
+"################### &&&&&&& )) $$$ $$$ 0 ",
+"################### &&&&&&& )) $$$  $  0 ",
+"################### &&      )) $       0 ",
+"################### && ))))))) $$$$ %  0 ",
+"################### '( )))))))     $$$ 0 ",
+"###################    )))))))     $$$ 0 ",
+"###################                $$$ 0 ",
+"###################                    0 ",
+"###################        /           0 ",
+"################### %                  0 ",
+"###################                    0 ",
+"###################                    0 ",
+"###################                    0 ",
+"###################                    0 ",
+"###################     $  &&&&&&&&&&&&0 ",
+"###################        &&&&&&&&&&&&0 ",
+"###################        &&&&&&&&&&&&0 ",
+"###################        &&&&&&&&&&&&0 ",
+"###################        &&&&&&&&&&&&0 ",
+"##################$### *+- &&&&&&&&&&&&0 ",
+"######################     $$$$$$   && 0 ",
+"######################    .$$$$$$   && 0 ",
+"######################                   "}
+
+draw_map(0,0,level,cells)
+
+-- Items --
+cells={}
+cells[" "]=cell{}
+cells["#"]=cell{item={face="it-trigger",attr={action="callback",target="DiaDoor1"}}}
+cells["$"]=cell{item={face="it-trigger",attr={action="callback",target="DiaDoor2"}}}
+cells["%"]=cell{item={face="it-document",attr={text=Story[1]}}}
+cells["&"]=cell{item={face="it-sword"}}
+cells["'"]=cell{item={face="it-extralife"}}
+cells["("]=cell{item={face="it-trigger",attr={action="callback",target="Diamond1"}}}
+cells[")"]=cell{item={face="it-document",attr={text=Story[20]}}}
+cells["*"]=cell{item={face="it-trigger",attr={action="callback",invisible=1,target="TempleText1"}}}
+cells["+"]=cell{item={face="it-trigger",attr={action="callback",invisible=1,target="TempleText2"}}}
+cells[","]=cell{item={face="it-trigger",attr={action="callback",invisible=1,target="TempleText3"}}}
+cells["-"]=cell{item={face="it-trigger",attr={action="callback",invisible=1,target="FreeGoshers"}}}
+cells["."]=cell{item={face="it-document",attr={text=Story[25]}}}
+cells["/"]=cell{item={face="it-trigger",attr={action="callback",target="Diamond2"}}}
+cells["0"]=cell{item={face="it-document",attr={text=Story[2]}}}
+cells["1"]=cell{item={face="it-document",attr={text=Story[19]}}}
+cells["2"]=cell{item={face="it-trigger",attr={action="openclose",invisible=1,target="StartDoor"}}}
+cells["3"]=cell{item={face="it-trigger",attr={action="openclose",invisible=1,target="DiskDoor3"}}}
+cells["4"]=cell{item={face="it-trigger",attr={action="callback",invisible=1,target="OpenCave"}}}
+cells["5"]=cell{item={face="it-shogun-l",attr={action="callback",target="OpenWhiteBridge"}}}
+cells["6"]=cell{item={face="it-shogun-l",attr={action="openclose",target="WhiteBridge"}}}
+cells["7"]=cell{item={face="it-document",attr={text=Story[18]}}}
+cells["8"]=cell{item={face="it-hammer"}}
+cells["9"]=cell{item={face="it-flagblack"}}
+cells[":"]=cell{item={face="it-document",attr={text=Story[17]}}}
+cells[";"]=cell{item={face="it-document",attr={text=Story[16]}}}
+cells["<"]=cell{item={face="it-key_a"}}
+cells["="]=cell{item={face="it-document",attr={text=Story[3]}}}
+cells[">"]=cell{item={face="it-document",attr={text=Story[6]}}}
+cells["?"]=cell{item={face="it-document",attr={text=Story[9]}}}
+cells["@"]=cell{item={face="it-trigger",attr={action="openclose",target="WhiteDoor1"}}}
+cells["A"]=cell{item={face="it-trigger",attr={action="openclose",target="WhiteDoor2"}}}
+cells["B"]=cell{item={face="it-floppy"}}
+cells["C"]=cell{item={face="it-document",attr={text=Story[4]}}}
+cells["D"]=cell{item={face="it-document",attr={text=Story[5]}}}
+cells["E"]=cell{item={face="it-document",attr={text=Story[8]}}}
+cells["F"]=cell{item={face="it-document",attr={text=Story[14]}}}
+cells["G"]=cell{item={face="it-key_b"}}
+cells["H"]=cell{item={face="it-document",attr={text=Story[13]}}}
+cells["I"]=cell{item={face="it-yinyang"}}
+cells["J"]=cell{item={face="it-document",attr={text=Story[10]}}}
+cells["K"]=cell{item={face="it-trigger",attr={action="openclose",invisible=1,target="BlackExitDoor"}}}
+cells["L"]=cell{item={face="it-trigger",attr={action="close",invisible=1,target="BlackExitDoor"}}}
+cells["M"]=cell{item={face="it-trigger",attr={action="openclose",target="BlackEnterDoor"}}}
+cells["N"]=cell{item={face="it-trigger",attr={action="close",invisible=1,target="WhiteRoomDoor"}}}
+cells["O"]=cell{item={face="it-magicwand"}}
+cells["P"]=cell{item={face="it-document",attr={text=Story[12]}}}
+cells["Q"]=cell{item={face="it-flagwhite",parent=cells["P"]}}
+cells["R"]=cell{item={face="it-document",attr={text=Story[11]}}}
+cells["S"]=cell{item={face="it-document",attr={text=Story[7]}}}
+cells["T"]=cell{item={face="it-trigger",attr={action="open",invisible=1,target="WhiteRoomDoor"}}}
+level={
+"                                         ",
+"                          B          L   ",
+"                                       S ",
+"                                         ",
+"    %                                    ",
+"                                         ",
+"                     9  =            M   ",
+"          )  0                C          ",
+"                                         ",
+"                                         ",
+"                  2                      ",
+"    & '       '     3                N   ",
+"                                         ",
+"                                   G O   ",
+"          *                              ",
+"                                         ",
+"          +            ;                 ",
+"                                    K    ",
+"          ,                              ",
+"                       <                 ",
+"                                         ",
+"          -              @      D        ",
+"                        >                ",
+"        (   /       4:   A         H     ",
+"          .                              ",
+" #                  5                    ",
+"                    6                    ",
+"                                  E  Q   ",
+"                                         ",
+"                                         ",
+"                                         ",
+"               1                         ",
+"                                     R   ",
+"                                         ",
+"                    7              I     ",
+" $                  8   ?         FJ I T ",
+"                                         "}
+
+draw_map(0,0,level,cells)
+
+-- Stones --
+
+number_TD = 0
+function parent_TD(x,y)   -- frees ASCII 4, 7, :, ;
+  number_TD = number_TD + 1
+  set_stone("st-door_a", x, y, {name = "TD"..tostring(number_TD)})
+end
+
+number_DD = 0
+function parent_DD(x,y)   -- frees lots of ASCIIs
+  number_DD = number_DD + 1  
+  set_stone("st-door_a", x, y, {name = "DD"..tostring(number_DD)})
+end
+
+mainstone = "st-camouflage"  --"st-rock1"
+movestone = mainstone.."_move"
+holestone = mainstone.."_hole"
+
+cells={}
+cells[" "]=cell{}
+cells["#"]=cell{stone={face=mainstone}}
+cells["$"]=cell{stone={face="st-bluegray"}}
+cells["%"]=cell{stone={face=movestone}}
+cells["&"]=cell{stone={face="st-death"}}
+cells["'"]=cell{stone={face="st-oxyd",attr={color="0"}}}
+cells["("]=cell{stone={face="st-oxyd",attr={color="1"}}}
+cells[")"]=cell{stone={face="st-oxyd",attr={color="3"}}}
+cells["*"]=cell{stone={face="st-oxyd",attr={color="4"}}}
+cells["+"]=cell{stone={face="st-door-h",attr={name="DogDoor1"}}}
+cells[","]=cell{stone={face="st-door-h",attr={name="GuardDoor1"}}}
+cells["-"]=cell{stone={face="st-stone_break"}}
+cells["."]=cell{stone={face="st-black4"}}
+cells["/"]=cell{stone={face="st-door-h",attr={name="DogDoor2"}}}
+cells["0"]=cell{stone={face="st-door-h",attr={name="GuardDoor2"}}}
+cells["1"]=cell{stone={face="st-oxyd",attr={color="2"}}}
+cells["2"]=cell{stone={face="st-oxyd",attr={color="5"}}}
+cells["3"]=cell{parent={{parent_TD}}}
+cells["5"]=cell{stone={face="st-knight"}}
+cells["6"]=cell{stone={face="st-thief"}}
+cells["8"]=cell{stone={face="st-door-h",attr={name="GoshersDoor"}}}
+cells["9"]=cell{stone={face="st-door-h",attr={name="DiamondDoor"}}}
+cells["<"]=cell{stone={face="st-door-h",attr={name="DogDoor3"}}}
+cells["="]=cell{stone={face="st-door-h",attr={name="GuardDoor3"}}}
+cells[">"]=cell{parent={{parent_DD}}}
+cells["C"]=cell{stone={face="st-stoneimpulse"}}
+cells["E"]=cell{stone={face="st-oxyd",attr={color="6"}}}
+cells["G"]=cell{stone={face="st-oxyd",attr={color="7"}}}
+cells["I"]=cell{stone={face="st-door-h",attr={name="DogDoor4"}}}
+cells["J"]=cell{stone={face="st-door-h",attr={name="GuardDoor4"}}}
+cells["P"]=cell{stone={face="st-stoneimpulse-hollow"}}
+cells["Q"]=cell{stone={face="st-white4"}}
+cells["U"]=cell{stone={face="st-floppy",attr={action="callback",target="OpenDog"}}}
+cells["V"]=cell{stone={face="st-switch_white",attr={action="callback",target="OpenTemple"}}}
+cells["]"]=cell{stone={face="st-door-v",attr={name="StartDoor"}}}
+cells["^"]=cell{stone={face="st-rotator-left"}}
+cells["_"]=cell{stone={face="st-bluegray_hole"}}
+cells["`"]=cell{stone={face="st-grate1"}}
+cells["a"]=cell{stone={face="st-rotator_move-left"}}
+cells["b"]=cell{stone={face="st-glass"}}
+cells["c"]=cell{stone={face="st-door-h",attr={name="SideDoor"}}}
+cells["d"]=cell{stone={face="st-blocker"}}
+cells["e"]=cell{stone={face="st-mirror-p\\t"}}
+cells["f"]=cell{stone={face="st-laserswitch",attr={action="openclose",target="SideDoor"}}}
+cells["g"]=cell{stone={face="st-bolder-s"}}
+cells["h"]=cell{stone={face=holestone}}
+cells["i"]=cell{stone={face="st-wood"}}
+cells["j"]=cell{stone={face="st-mirror-p/m"}}
+cells["k"]=cell{stone={face="st-switch_white",parent=cells["#"],attr={action="openclose",target="StartDoor"}}}
+cells["l"]=cell{stone={face="st-key_a",attr={action="onoff",target="CaveLaser"}}}
+cells["m"]=cell{stone={face="st-door-v",attr={name="DiskDoor1"}}}
+cells["n"]=cell{stone={face="st-laser-w",attr={name="CaveLaser"}}}
+cells["o"]=cell{stone={face="st-shogun-sml"}}
+cells["p"]=cell{stone={face="st-laserswitch",attr={action="openclose",target="DiskDoor2"}}}
+cells["q"]=cell{stone={face="st-door-v",attr={name="DiskDoor2"}}}
+cells["r"]=cell{stone={face="st-door-v",attr={name="LaserCaveDoor"}}}
+cells["s"]=cell{stone={face="st-key_b",attr={action="openclose",target="LaserCaveDoor"}}}
+cells["t"]=cell{stone={face="st-door-v",attr={name="DiskDoor3"}}}
+cells["u"]=cell{stone={face="st-mirror-p/"}}
+cells["v"]=cell{stone={face="st-mirror-3<"}}
+cells["w"]=cell{stone={face="st-mirror-p\\"}}
+cells["x"]=cell{stone={face="st-switch_black",attr={action="callback",target="SwitchGrate"}}}
+cells["y"]=cell{stone={face="st-glass1"}}
+cells["z"]=cell{stone={face="st-door-v",attr={name="BlackEnterDoor"}}}
+cells["{"]=cell{stone={face="st-switch_white",attr={action="callback",target="RemoveWater"}}}
+cells["|"]=cell{stone={face="st-door-v",attr={name="BlackExitDoor"}}}
+cells["}"]=cell{stone={face="st-oneway-n"}}
+cells["?"]=cell{stone={face="st-door-h",attr={name="WhiteDoor2"}}}
+cells["@"]=cell{stone={face="st-door-h",attr={name="WhiteDoor1"}}}
+cells["A"]=cell{stone={face="st-oneway_black-e"}}
+cells["B"]=cell{stone={face="st-oneway_black-w"}}
+cells["D"]=cell{stone={face="st-door-v",attr={name="WhiteRoomDoor"}}}
+cells["F"]=cell{stone={face="st-laserswitch",attr={action="openclose",target="DiskDoor1"}}}
+level={
+"##########################k##############",
+"#    -.-          U#     # mqtd      zA #",
+"#    -#-           #``   #####   i i ## #",
+"#  %###            #a````          i  # #",
+"#                  #   ^`             # #",
+"#                  #   ``   `   `    `# #",
+"#                  ] %g       ii      # #",
+"#       33333      #   `     i i`    `# #",
+"#       $555$      ^   `        i  i  # #",
+"#  & & &$656$& & & #``a`    i         # #",
+"#  #+#/#$555$#<#I# # ```    i  `     {# #",
+"#  # # $$656$$ # Q # d         i i   |B #",
+"$$$$$$$$$555$$$$$$V#######.#hh##  ##### #",
+"$ $$ $ $$   $$ $ $$#       #  ##  #Q Q# #",
+"$  $,$0$     $=$J$Q#     i n& #   #   # #",
+"$                  #  ##..l#  #   #. .# #",
+"$                  #  #h#### &# ###iiiC #",
+"$    $         $   #  #    &  #    i iC #",
+"$   $$$       $$$  #  #       #  ##   C #",
+"$    $         $   #  #  &   &#   # ` # #",
+"$   $$$       $$$  #  #########   #   # #",
+"$    $         $   #       .      Ci i# #",
+"$        $8$       #     j        C i C #",
+"$        $ $       #       .      # i # #",
+"$$$$$$$$$$9$$$$$$$$##b#############QCC# #",
+"$             >>>>>#   i i         o  D #",
+"$             >E>E>#    i i           # #",
+"$  '   '   (  >>>>>#   i i o         %# #",
+"$             >G>G>#bbb` ``##########}# #",
+"$  (   1   1  >>>>>#bebi i br   bwbuv`F #",
+"$             CCCCC#bbb i  #su  bbb u`# #",
+"$  )   )   *  C%P  -       #          # #",
+"$             C C  #       p v   u    # #",
+"$  *   2   2  C C  $cb$   ###########?# #",
+"$             C C  _  $   #         y@# #",
+"$             C    _  $        #    y # #",
+"$$$$$$$$$$$$$$CCCCC$$f$###CCCCC###x####&#"}
+
+draw_map(0,0,level,cells)
+
+-- Actors --
+cells={}
+cells[" "]=cell{}
+cells["#"]=cell{actor={face="ac-blackball",attr={name="Me"}}}
+cells["&"]=cell{actor={face="ac-top",attr={name="Goshers",force=15,range=40}}}
+cells["$"]=cell{actor={face="ac-rotor",attr={force=20,range=30}}}
+if difficult then
+  cells["%"]=cell{actor={face="ac-rotor"}}
+else
+  cells["%"]=cell{}
+end
+cells["'"]=cell{actor={face="ac-whiteball",attr={name="Xila"}}}
+level={
+"                                         ",
+"                                         ",
+"  #                                      ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"    $ $       $ $                        ",
+"                                         ",
+"    % %       % %                        ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"          &                              ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                         ",
+"                                     '   ",
+"                                         "}
+
+draw_map(0,0,level,cells)
+
+oxyd_shuffle()
+
+-- Lua Code --
+function OpenTemple()
+ for j = 1, number_TD do
+  SendMessage("TD"..tostring(j),"open")
+ end
+end
+
+function OpenDog()
+ SendMessage("DogDoor1","open")
+ SendMessage("DogDoor2","open")
+ SendMessage("DogDoor3","open")
+ SendMessage("DogDoor4","open")
+end
+
+function OpenGuard()
+ SendMessage("GuardDoor1","open")
+ SendMessage("GuardDoor2","open")
+ SendMessage("GuardDoor3","open")
+ SendMessage("GuardDoor4","open")
+end
+
+function OpenCave()
+ SendMessage("CaveBridge1","openclose")
+ SendMessage("CaveBridge2","openclose")
+end
+
+function RemoveWater()
+ set_floor("fl-leavesb",27,7)
+ set_floor("fl-leavesb",27,8)
+ set_floor("fl-leavesb",28,8)
+ set_floor("fl-leavesb",29,8)
+ set_floor("fl-leavesb",29,9)
+ set_floor("fl-leavesb",26,10)
+ set_floor("fl-leavesb",29,5)
+ set_floor("fl-leavesb",31,5)
+ set_floor("fl-leavesb",34,10)
+ fill_floor("fl-leavesb",25,3,3,4)
+ fill_floor("fl-leavesb",28,3,6,1)
+ fill_floor("fl-leavesb",33,5,2,5)
+ fill_floor("fl-leavesb",36,3,1,7)
+ fill_floor("fl-leavesb",25,11,5,1)
+ fill_floor("fl-leavesb",25,8,1,3)
+ fill_floor("fl-leavesb",31,8,1,3)
+ set_item("it-document",36,11,{text=Story[15]})
+end
+
+function OpenWhiteBridge()
+ SendMessage("WhiteBridge1","openclose")
+ SendMessage("WhiteBridge2","openclose")
+ SendMessage("WhiteBridge3","openclose")
+end
+
+Grate=false
+
+function SwitchGrate()
+ if Grate==false then
+  set_stone("st-grate1",36,17)
+  Grate=true
+ else
+  kill_stone(36,17)
+  Grate=false
+ end
+end
+
+GoshersIsFree=false
+TTDone={0,0,0,0}
+
+function TempleText1()
+ if TTDone[1]==0 then
+  set_item("it-document",10,16,{text=Story[21]})
+  TTDone[1]=1
+ end
+end
+function TempleText2()
+ if TTDone[2]==0 then
+  set_item("it-document",10,18,{text=Story[22]})
+  TTDone[2]=1
+ end
+end
+function TempleText3()
+ if TTDone[3]==0 then
+  set_item("it-document",10,20,{text=Story[23]})
+  TTDone[3]=1
+ end
+end
+
+function FreeGoshers()
+ if TTDone[4]==0 then
+  set_stone("st-switch_black",4,18,{name="TempleSwitch1",action="callback",target="Temple1"})
+  set_stone("st-switch_white",4,20,{name="TempleSwitch2",action="callback",target="Temple2"})
+  set_stone("st-switch_white",16,18,{name="TempleSwitch3",action="callback",target="Temple3"})
+  set_stone("st-switch_black",16,20,{name="TempleSwitch4",action="callback",target="Temple4"})
+  set_item("it-document",10,20,{text=Story[24]})
+  kill_item(10,14)
+  kill_item(10,16)
+  kill_item(10,18)
+  SendMessage("GoshersDoor","open")
+  TTDone[4]=1
+  GoshersIsFree=true
+ end
+end
+
+TS={random(0,1),random(0,1),random(0,1),random(0,1)}
+
+function Temple(x)
+ if GoshersIsFree==true then
+  if TS[x]==1 then
+   TS[x]=0
+  else
+   TS[x]=1
+  end
+  if TS[1]==1 and TS[2]==1 and TS[3]==1 and TS[4]==1 then
+   SendMessage("DiamondDoor","open")
+   SendMessage("GoshersDoor","close")
+   set_stone("st-wood",9,15)
+   set_stone("st-wood",11,15)
+   set_stone("st-bluegray",4,18)
+   set_stone("st-bluegray",4,20)
+   set_stone("st-bluegray",16,18)
+   set_stone("st-bluegray",16,20)
+  end
+ end
+end
+
+function Temple1() Temple(1) end
+function Temple2() Temple(2) end
+function Temple3() Temple(3) end
+function Temple4() Temple(4) end
+
+DD={0,0}
+
+function Diamond(x)
+ if DD[x]==0 then
+  DD[x]=1
+ else
+  DD[x]=0
+ end
+ if DD[1]==1 and DD[2]==1 then
+  SendMessage("GoshersDoor","open")
+  OpenGuard()
+ else
+  SendMessage("GoshersDoor","close")
+ end
+end
+
+function Diamond1() Diamond(1) end
+function Diamond2() Diamond(2) end
+
+OD={0,0}
+
+function DiaDoor(x)
+ if OD[x]==0 then
+  OD[x]=1
+ else
+  OD[x]=0
+ end
+ if OD[1]==1 and OD[2]==1 then
+  OpenDiamonds()
+ end
+end
+
+function DiaDoor1() DiaDoor(1) end
+function DiaDoor2() DiaDoor(2) end
+
+function OpenDiamonds()
+ for j = 1, number_DD do
+  SendMessage("DD"..tostring(j),"open")
+ end
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Welcome to Mexico! Eight hours ago, your plane arrived at the Airport of "Coatlicue", which is a small village surrounded by unexplored jungle terrain. Now you find yourself in front of an impressive temple, which seems to be a relic of the ancient Aztec empire. But the temple is in surprisingly good condition ...</el:english>
+      </el:string> 
+      <el:string el:key="text2">
+        <el:english el:translate="true">Next to the giant doors of the temple you see a chrome sign: "Restoration by: G. G. Goshers, A.D. 1998". A smaller sign beneath says: "Property of G. G. Goshers. Trespassing prohibited!". Now you notice the dog kennels built up along the front side of the temple. "Goshers made this ancient relic a fortress", you think, "this cannot be legal, for Goshers received funding from the UK Government. I'll try to call him to account!"</el:english>
+      </el:string> 
+      <el:string el:key="text3">
+        <el:english el:translate="true">This guard doesn’t notice me.</el:english>
+      </el:string> 
+      <el:string el:key="text4">
+        <el:english el:translate="true">This lake was obviously made by Goshers. I think the correct way is south.</el:english>
+      </el:string> 
+      <el:string el:key="text5">
+        <el:english el:translate="true">There's an inscription on the old wall, saying in spanish: "Careful! What you touch could be the last thing you touch!"</el:english>
+      </el:string> 
+      <el:string el:key="text6">
+        <el:english el:translate="true">Chrome sign: "Control of the beast’s cage."</el:english>
+      </el:string> 
+      <el:string el:key="text7">
+        <el:english el:translate="true">Oooh, this slope is steep! Try not to touch the skull!</el:english>
+      </el:string> 
+      <el:string el:key="text8">
+        <el:english el:translate="true">This building down there looks like a prison. Let's see if I can determine its purpose ... Ah, there's another chrome sign. Goshers seems to favour chrome signs. It says: "Natives’ prison".</el:english>
+      </el:string> 
+      <el:string el:key="text9">
+        <el:english el:translate="true">Getting beyond the prison building was a really good idea. But now you have to cross this lake. Be thrifty with those boxes!</el:english>
+      </el:string> 
+      <el:string el:key="text10">
+        <el:english el:translate="true">Now, peering through the grilled prison windows, you see a native woman imprisoned there. Obviously Goshers locked up all the natives, who disturbed his "work"; trying to enter the temple and to get rich from the treasures of the Aztecs. It might be helpful to be accompanied by someone, who knows the secrets of the jungle and this temple ...</el:english>
+      </el:string> 
+      <el:string el:key="text11">
+        <el:english el:translate="true">Since the white man there freed me from the prison, he certainly cannot be as evil as this Goshers is. Perhaps he wants to end the mastery of Goshers and free my people. And even if this is not the case, it's better to be free than imprisoned. I think I should thank him.</el:english>
+      </el:string> 
+      <el:string el:key="text12">
+        <el:english el:translate="true">You meet the English adventurer in the front of the prison. "Hello, I'm Xila!", you tell him in broken English. After he introduced himself as well, both of you begin to work out a plan against the evil G. G. Goshers.</el:english>
+      </el:string>
+      <el:string el:key="text13">
+        <el:english el:translate="true">This is a really hard puzzle. The English man will have to help me, if this enigma is to be solved.</el:english>
+      </el:string> 
+      <el:string el:key="text14">
+        <el:english el:translate="true">You wonder what this switch could trigger.</el:english>
+      </el:string> 
+      <el:string el:key="text15">
+        <el:english el:translate="true">Xila knows how to drain the lake!</el:english>
+      </el:string> 
+      <el:string el:key="text16">
+        <el:english el:translate="true">You were lucky to find this hole. It prevents you from drowning.</el:english>
+      </el:string> 
+      <el:string el:key="text17">
+        <el:english el:translate="true">This glass stone must fulfill a purpose ...</el:english>
+      </el:string> 
+      <el:string el:key="text18">
+        <el:english el:translate="true">It's funny that such a temple should have a side entrance.</el:english>
+      </el:string> 
+      <el:string el:key="text19">
+        <el:english el:translate="true">Be careful! There are sensors in the walls.</el:english>
+      </el:string> 
+      <el:string el:key="text20">
+        <el:english el:translate="true">After the huge doors of the old temple have opened, you see, that the entrance is protected by 11 knights, armed with spears. These guards are very dangerous. Without a sword you'll never be able to enter. Be careful. There are not only knights, but also thieves.</el:english>
+      </el:string> 
+      <el:string el:key="text21">
+        <el:english el:translate="true">"Congratulations. You just managed to enter this old Aztec Temple."</el:english>
+      </el:string> 
+      <el:string el:key="text22">
+        <el:english el:translate="true">"You've been smarter than I expected. But you'll never enter the treasure room nor escape from here!"</el:english>
+      </el:string> 
+      <el:string el:key="text23">
+        <el:english el:translate="true">"I, Goshers, will certainly be able to rid myself of one of my archenemies by just killing you!"</el:english>
+      </el:string> 
+      <el:string el:key="text24">
+        <el:english el:translate="true">"Run for your life!"</el:english>
+      </el:string>
+      <el:string el:key="text25">
+        <el:english el:translate="true">Xila and you just entered the Diamond Room of the old Aztec Temple. By taking him back to Great Britain and rendering him to the police, you have ended the evil career of Gerald Gregory Goshers. Congratulations on the success of your expedition!</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

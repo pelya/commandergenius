@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Slide it in" el:subtitle="" el:id="ss13"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Sven Siggelkow" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Sven Siggelkow</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:credits>Thanks to Thomas Schmalz</el:credits>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+create_world(levelw, levelh)
+
+fill_floor("fl-dunes")
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+      local c = strsub( pattern, i, i)
+      if c ==   "#" then
+         set_stone("st-greenbrown",i-1,line)
+      elseif c=="D" then
+         set_stone("st-death",i-1,line)
+      elseif c=="p" then               
+         set_stone("st-door_a",i-1,line)
+      elseif c=="|" then
+     set_stone("st-greenbrown_hole",i-1,line)
+     if (not difficult) then -- easy
+       set_stone("st-grate2",i-1,line)
+     else                            -- hard
+       set_stone("st-greenbrown_hole",i-1,line)
+     end
+     set_floor("fl-gradient",  i-1,  line, {type=1})
+      elseif c=="a" then
+     if (not difficult) then -- easy
+       set_stone("st-grate2",i-1,line)
+     else                            -- hard
+       set_stone("st-greenbrown_hole",i-1,line)
+     end
+         hollow(i-1,line, {name="hollow1"})
+      elseif c=="b" then
+     if (not difficult) then -- easy
+       set_stone("st-grate2",i-1,line)
+     else                            -- hard
+       set_stone("st-greenbrown_hole",i-1,line)
+     end
+         hollow(i-1,line, {name="hollow2"})
+      elseif c=="c" then
+     if (not difficult) then -- easy
+       set_stone("st-grate2",i-1,line)
+     else                            -- hard
+       set_stone("st-greenbrown_hole",i-1,line)
+     end
+         hollow(i-1,line, {name="hollow3"})
+      elseif c=="d" then
+     if (not difficult) then -- easy
+       set_stone("st-grate2",i-1,line)
+     else                            -- hard
+       set_stone("st-greenbrown_hole",i-1,line)
+     end
+         hollow(i-1,line, {name="hollow4"})
+      elseif c=="e" then
+         set_stone("st-door_a", i-1,line, {name="door1", type="v"})
+      elseif c=="f" then
+         set_stone("st-door_a", i-1,line, {name="door2", type="v"})
+      elseif c=="g" then
+         set_stone("st-door_a", i-1,line, {name="door3", type="v"})
+      elseif c=="h" then
+         set_stone("st-door_a", i-1,line, {name="door4", type="v"})
+      elseif c=="1" then
+     set_stone("st-switch",i-1,line, {action="callback", target="s1"})
+      elseif c=="2" then
+     set_stone("st-switch",i-1,line, {action="callback", target="s2"})
+      elseif c=="3" then
+     set_stone("st-switch",i-1,line, {action="callback", target="s3"})
+      elseif c=="4" then
+     set_stone("st-switch",i-1,line, {action="callback", target="s4"})    
+      elseif c=="W" then
+     set_stone("st-timer",i-1,line, {action="openclose", target="door1"})
+      elseif c=="X" then
+     set_stone("st-timer",i-1,line, {action="openclose", target="door2"})
+      elseif c=="Y" then
+     set_stone("st-timer",i-1,line, {action="openclose", target="door3"})
+      elseif c=="Z" then
+     set_stone("st-timer",i-1,line, {action="openclose", target="door4"})
+      elseif c=="5" then
+     set_stone("st-fourswitch",i-1,line, {name="switch1", action="openclose", target="door1"})
+      elseif c=="6" then
+     set_stone("st-fourswitch",i-1,line, {name="switch2", action="openclose", target="door2"})
+      elseif c=="7" then
+     set_stone("st-fourswitch",i-1,line, {name="switch3", action="openclose", target="door3"})
+      elseif c=="8" then
+     set_stone("st-fourswitch",i-1,line, {name="switch4", action="openclose", target="door4"})    
+      elseif c=="x" then
+         set_actor("ac-whiteball-small", i,line+.5, {player=0})
+        end
+    end
+end
+--              01234567890123456789
+renderLine(00, "####W#56#XY#78#Z####")
+renderLine(01, "#                  #")
+renderLine(02, "# x   x      x   x #")
+renderLine(03, "#                  #")
+renderLine(04, "#                  #")  
+renderLine(05, "#   pepfp  pgphp   #")
+renderLine(06, "#   p|p|p  p|p|p   #")
+renderLine(07, "#   p|p|p  p|p|p   #")
+renderLine(08, "#   p|p|p  p|p|p   #")
+renderLine(09, "#   p|p|p  p|p|p   #")
+renderLine(10, "#   p|p|p  p|p|p   #")
+renderLine(11, "#   pcpdp  papbp   #")
+renderLine(12, "#DDD#1#2#DD#3#4#DDD#")
+--              01234567890123456789
+
+local s={0, 0, 0, 0}
+
+function s1()
+   s[1] = 1-s[1]
+   if (s[1] == 1) then 
+      set_item("it-hill",12,11)
+   else 
+      set_item("it-hollow",12,11)
+   end
+end
+
+function s2()
+   s[2] = 1-s[2]
+   if (s[2] == 1) then 
+      set_item("it-hill",14,11)
+   else 
+      set_item("it-hollow",14,11)
+   end
+end
+
+function s3()
+   s[3] = 1-s[3]
+   if (s[3] == 1) then 
+      set_item("it-hill",5,11)
+   else 
+      set_item("it-hollow",5,11)
+   end
+end
+
+function s4()
+   s[4] = 1-s[4]
+   if (s[4] == 1) then 
+      set_item("it-hill",7,11)
+   else 
+      set_item("it-hollow",7,11)
+   end
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

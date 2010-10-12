@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation -" el:subtitle="Per.Oxyd 80" el:id="daniel5"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Daniel Heck" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Daniel Heck</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="per.oxyd">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+enigma.ConserveLevel = FALSE
+fill_floor("fl-abyss")
+fill_floor("fl-metal", 2,2,16,9)
+
+set_item("it-hollow", 7,4)
+set_item("it-hollow", 5,7)
+set_item("it-hollow", 9,6)
+set_item("it-hollow", 13,5)
+
+draw_floor("fl-gradient", {17,3}, {0,1}, 7, {type=3})
+draw_floor("fl-gradient", {2,3}, {0,1}, 7, {type=4})
+draw_floor("fl-gradient", {3,2}, {1,0}, 14, {type=2})
+draw_floor("fl-gradient", {3,10}, {1,0}, 14, {type=1})
+set_floor("fl-gradient", 17,10, {type=9})
+set_floor("fl-gradient", 17,2, {type=10})
+set_floor("fl-gradient", 2,10, {type=11})
+set_floor("fl-gradient", 2,2, {type=12})
+
+local ac1=set_actor("ac-whiteball-small", 8,5, {player=0, essential=1})
+local ac2=set_actor("ac-whiteball-small", 10,5, {player=0, essential=1})
+local ac3=set_actor("ac-whiteball-small", 10,7, {player=0, essential=1})
+local ac4=set_actor("ac-whiteball-small", 10,9, {player=0, essential=1})
+
+AddRubberBand(ac1, ac2, 6, 1)
+AddRubberBand(ac2, ac3, 6, 1)
+AddRubberBand(ac2, ac4, 6, 1)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

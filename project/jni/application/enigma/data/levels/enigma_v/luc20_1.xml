@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Frogger" el:subtitle="" el:id="luc20"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Lukas Schüller" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2005 Lukas Schüller</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- VARS
+timetillnewcar_a = 1
+timetillnewcar_b = 1
+timetillnewcar_c = 1
+timetillnewcar_d = 1
+timetillnewcar_e = 1
+trees_a = {1,6,11,16}
+trees_b = {2,8,14}
+trees_c = {3,13}
+trees_d = {4,11,18}
+trees_e = {1,7,13}
+timetilltreemove = 3
+function regenerate_environment()
+  if(timetillnewcar_a > 0) then
+    timetillnewcar_a = timetillnewcar_a-1
+  else
+    set_stone("st-bolder-e",0,15)
+    timetillnewcar_a = 6
+  end
+  if(timetillnewcar_b > 0) then
+    timetillnewcar_b = timetillnewcar_b-1
+  else
+    set_stone("st-bolder-w",19,14)
+    timetillnewcar_b = 7
+  end
+  if(timetillnewcar_c > 0) then
+    timetillnewcar_c = timetillnewcar_c-1
+  else
+    set_stone("st-bolder-e",0,13)
+    timetillnewcar_c = 7
+  end
+  if(timetillnewcar_d > 0) then
+    timetillnewcar_d = timetillnewcar_d-1
+  else
+    set_stone("st-bolder-w",19,12)
+    timetillnewcar_d = 9
+  end
+  if(timetillnewcar_e > 0) then
+    timetillnewcar_e = timetillnewcar_e-1
+  else
+    set_stone("st-bolder-e",0,11)
+    timetillnewcar_e = 8
+  end
+  if(timetilltreemove > 0) then
+    timetilltreemove = timetilltreemove-1
+  else
+    for i=1, getn(trees_a) do
+      trees_a[i] = trees_a[i]+1
+      behindaa = trees_a[i]-1
+      if(behindaa <= 0) then
+        behindaa = behindaa+20
+      end
+      behindab = trees_a[i]-2
+      if(behindab <= 0) then
+        behindab = behindab+20
+      end
+      behindac = trees_a[i]-3
+      if(behindac <= 0) then
+        behindac = behindac+20
+      end
+      set_floor("fl-wood",trees_a[i],9)
+      set_floor("fl-wood",behindaa,9)
+      set_floor("fl-wood",behindab,9)
+      set_floor("fl-water",behindac,9)
+      if(trees_a[i] == 20) then
+        trees_a[i] = 0
+      end
+    end
+    for i=1, getn(trees_b) do
+      trees_b[i] = trees_b[i]-1
+      behindba = trees_b[i]+1
+      if(behindba >= 19) then
+        behindba = behindba-18
+      end
+      behindbb = trees_b[i]+2
+      if(behindbb >= 19) then
+        behindbb = behindbb-18
+      end
+      behindbc = trees_b[i]+3
+      if(behindbc >= 19) then
+        behindbc = behindbc-18
+      end
+      behindbd = trees_b[i]+4
+      if(behindbd >= 19) then
+        behindbd = behindbd-18
+      end
+      set_floor("fl-wood",trees_b[i],8)
+      set_floor("fl-wood",behindba,8)
+      set_floor("fl-wood",behindbb,8)
+      set_floor("fl-wood",behindbc,8)
+      set_floor("fl-water",behindbd,8)
+      if(trees_b[i] == 1) then
+        trees_b[i] = 19
+      end
+    end
+    for i=1, getn(trees_c) do
+      trees_c[i] = trees_c[i]+1
+      behindca = trees_c[i]-1
+      if(behindca <= 0) then
+        behindca = behindca+20
+      end
+      behindcb = trees_c[i]-2
+      if(behindcb <= 0) then
+        behindcb = behindcb+20
+      end
+      behindcc = trees_c[i]-3
+      if(behindcc <= 0) then
+        behindcc = behindcc+20
+      end
+      set_floor("fl-wood",trees_c[i],7)
+      set_floor("fl-wood",behindca,7)
+      set_floor("fl-wood",behindcb,7)
+      set_floor("fl-water",behindcc,7)
+      if(trees_c[i] == 20) then
+        trees_c[i] = 0
+      end
+    end
+    for i=1, getn(trees_d) do
+      trees_d[i] = trees_d[i]-1
+      behindda = trees_d[i]+1
+      if(behindda >= 22) then
+        behindda = behindda-21
+      end
+      behinddb = trees_d[i]+2
+      if(behinddb >= 22) then
+        behinddb = behinddb-21
+      end
+      behinddc = trees_d[i]+3
+      if(behinddc >= 22) then
+        behinddc = behinddc-21
+      end
+      set_floor("fl-wood",trees_d[i],6)
+      set_floor("fl-wood",behindda,6)
+      set_floor("fl-wood",behinddb,6)
+      set_floor("fl-water",behinddc,6)
+      if(trees_d[i] == 1) then
+        trees_d[i] = 22
+      end
+    end
+    for i=1, getn(trees_e) do
+      trees_e[i] = trees_e[i]+1
+      behindea = trees_e[i]-1
+      if(behindca <= 0) then
+        behindea = behindea+18
+      end
+      behindeb = trees_e[i]-2
+      if(behindeb <= 0) then
+        behindeb = behindeb+18
+      end
+      set_floor("fl-wood",trees_e[i],5)
+      set_floor("fl-wood",behindea,5)
+      set_floor("fl-water",behindeb,5)
+      if(trees_e[i] == 18) then
+        trees_e[i] = 0
+      end
+    end
+  end
+end
+CreateWorld(20,18)
+draw_border("st-yellow")
+fill_floor("fl-leaves")
+
+fill_floor("fl-water",0,5,20,5)
+fill_floor("fl-normal",0,11,20,5)
+
+set_stone("st-timer",0,0,{action="callback",target="regenerate_environment",interval=0.2})
+kill_stone(19,15)
+kill_stone(0,14)
+kill_stone(19,13)
+kill_stone(0,12)
+kill_stone(19,11)
+fill_floor("fl-normal",19,15,20,5)
+
+set_item("it-trigger",19,15,{invisible=1,action="callback",target="kill1"})
+set_item("it-trigger",0,14,{invisible=1,action="callback",target="kill2"})
+set_item("it-trigger",19,13,{invisible=1,action="callback",target="kill3"})
+set_item("it-trigger",0,12,{invisible=1,action="callback",target="kill4"})
+set_item("it-trigger",19,11,{invisible=1,action="callback",target="kill5"})
+
+function set_oxyd(x,y)
+  draw_stones("st-yellow",{x,y},{0,1},3)
+  set_stone("st-yellow",x+2,y+2)
+  set_stone("st-yellow",x+2,y)
+  set_item("it-wormhole",x+2,y+1,{targetx=10,targety=16.5,range=0.5})
+  set_item("it-extralife",x+1,y+1)
+  oneway(x+1,y+2,enigma.NORTH)
+  oxyd(x+1,y)
+end
+oxyd_default_flavor="a"
+set_oxyd(1,1)
+set_oxyd(4,1)
+set_oxyd(7,1)
+set_oxyd(10,1)
+set_oxyd(13,1)
+set_oxyd(16,1)
+oxyd_shuffle()
+set_actor("ac-blackball",10,16.5,{player=0})
+
+display.SetFollowMode(display.FOLLOW_SMOOTH)
+
+-- KILLS
+function kill1()
+  enigma.KillStone(19,15)
+end
+
+function kill2()
+  enigma.KillStone(0,14)
+end
+
+function kill3()
+  enigma.KillStone(19,13)
+end
+
+function kill4()
+  enigma.KillStone(0,12)
+end
+
+function kill5()
+  enigma.KillStone(19,11)
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

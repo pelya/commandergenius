@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Do It Yourself" el:subtitle="" el:id="martin97"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+
+cells[" "]=cell{floor="fl-bluegray"}
+cells["."]=cell{item="it-coin1"}
+cells["D"]=cell{item={"it-document", {text="text1"}}}
+cells["~"]=cell{floor="fl-water"}
+cells[""]=cell{}
+cells["#"]=cell{stone="st-glass"}
+cells["*"]=cell{stone="st-glass_move"}
+cells["/"]=cell{stone="st-mirror-p/"}
+cells["v"]=cell{stone="st-mirror-3vt"}
+cells["`"]=cell{stone="st-mirror-p\\"}
+cells["-"]=cell{stone={"st-laser-w", {name="laser2"}}}
+cells["l"]=cell{stone={"st-laser-n", {name="laser1"}}}
+cells["M"]=cell{stone="st-wood"}
+cells["$"]=cell{stone="st-death_invisible"}
+cells["%"]=cell{stone="st-knight"}
+cells["h"]=cell{stone="st-break_acblack"}
+cells["t"]=cell{item={"it-trigger", {action="onoff", target="laser1"}}}
+cells["T"]=cell{item={"it-trigger", {action="on", target="laser2"}}}
+
+cells["o"]=cell{actor={"ac-blackball", {player=0, mouseforce=1}}}
+
+level = {
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "/vvvvvvv` /vvvvvvv`                     ",
+   "#########0###################0######### ",
+   "#...             #`#~~~~~~~~~~~~~~~~  #-",
+   "# o              ######      $      $M# ",
+   "#                  *t #     %%%   $ $ # ",
+   "#        0         ####     %0%   $ $ # ",
+   "#                D #      $ %%%   $ $ # ",
+   "#                  #          $   $ $ # ",
+   "#  M               #   $    %%%   $ $ # ",
+   "#        0         #        %0% $$$ $ # ",
+   "#                  #        %%% $   $ # ",
+   "#                  # $          $ $$$ # ",
+   "#                  ~T   $   hhh $     # ",
+   "#########0###################0######### ",
+   "l                                       "   
+}
+
+set_default_parent(cells[" "])
+
+create_world_by_map(level,cells)
+                                                                                                                              
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Take some money and build yourself the tools you need.</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

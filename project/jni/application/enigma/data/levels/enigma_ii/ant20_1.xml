@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Come To Me" el:subtitle="" el:id="ant20"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- 2003-02-09 -- fixes in object groups
+-- 2003-02-10 -- change in interfacing parent functions in ant.lua, rubber band changed
+-- 2003-02-20 -- rewrite
+-- 2003-03-25 -- using slope generator
+num = 0
+function switchcell(x, y, boundwith, tgt)
+   num = num +1
+   local fname = "switchfunc"..num
+
+   local func0 = function()
+            kill_stone(x, y)
+            local obj = {set_stone("st-death", x, y, {})}
+            add_rubber_bands(boundwith, obj, 16, 0)
+            send_group_message(tgt, "open")
+         end
+
+   setglobal(fname, func0)
+
+   switch(x, y, fname, "callback")
+end
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+cells={}
+
+cells["_"]=cell{floor="fl-normal"}
+cells[" "]=cell{floor="fl-sand"}
+cells["#"]=cell{stone="st-metal"}
+
+slopes={}
+pivots={}
+cells["*"]=cell{{{add_multicell, slopes, -1}}}
+cells["%"]=cell{{{add_multicell, slopes, 1}}}
+cells["&"]=cell{{{add_multicell, pivots, slopes}}}
+
+actors = {}
+cells["O"]=cell{{{add_multiactor, "ac-blackball", actors, {player=0}}}}
+
+doors = {}
+cells["b"]=cell{{cells["_"],{add_multistone, "st-door_b", doors, {type="v"}}}}
+cells["B"]=cell{{cells["_"],{switchcell, actors, doors}}}
+
+cells["0"]=oxyd
+
+level = {
+   "#0################0#",
+   "0b****************b0",
+   "#**              **#",
+   "#*  O             *#",
+   "#*     _____      *#",
+   "#*     _%%%_      *#",
+   "#*     _%B%_      *#",
+   "#*     _%%%_  &   *#",
+   "#*     _____      *#",
+   "#*                *#",
+   "#**              **#",
+   "0b****************b0",
+   "#0################0#"
+}
+
+set_default_parent(cells[" "])
+create_world_by_map(level)
+
+spread_tag(pivots)
+render_slopes(slopes)
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

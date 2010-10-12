@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Pontoon Bridges" el:subtitle="" el:id="duffy137"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Old filename was newlevelc17</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw=50
+levelh=20
+
+create_world( levelw, levelh)
+
+fill_floor("fl-leaves", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-greenbrown", i-1, line)
+        elseif c =="*" then
+            set_stone( "st-greenbrown", i-1, line)
+            fill_floor("fl-water", i-1,line, 1,1)
+        elseif c =="c" then
+            set_stone( "st-greenbrown", i-1, line)
+            fill_floor("fl-sand", i-1,line, 1,1)
+        elseif c =="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c =="s" then
+            fill_floor("fl-sand", i-1,line, 1,1)
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c =="B" then
+            set_stone( "st-bombs", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "!" then
+            fill_floor("fl-water", i-1,line, 1,1)
+        elseif c == "D" then
+            set_item("it-dynamite",i-1,line)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {player=0})
+        elseif c == "8" then
+            puzzle(i-1,line,PUZ_0010)
+        elseif c == "6" then
+            puzzle(i-1,line,PUZ_0001)
+        elseif c == "2" then
+            puzzle(i-1,line,PUZ_1000)
+        elseif c == "4" then
+            puzzle(i-1,line,PUZ_0100)
+        elseif c == "7" then
+            puzzle(i-1,line,PUZ_1001)
+        elseif c == "9" then
+            puzzle(i-1,line,PUZ_1100)
+        elseif c == "3" then
+            puzzle(i-1,line,PUZ_0110)
+        elseif c == "1" then
+            puzzle(i-1,line,PUZ_0011)
+        elseif c == "=" then
+            puzzle(i-1,line,PUZ_0101)
+        elseif c == "i" then
+            puzzle(i-1,line,PUZ_1010)
+        elseif c == "^" then
+            puzzle(i-1,line,PUZ_1011)
+        elseif c == "&" then
+            puzzle(i-1,line,PUZ_0001)
+            fill_floor("fl-water", i-1,line, 1,1)
+        end
+    end
+end
+
+-- Floor:  " "
+-- Border: "#"
+-- Oxyd:   "o"
+
+renderLine(00,"#######################################")
+renderLine(01,"#      !!!!!!!!!      B#  8     !!!!!!#")
+renderLine(02,"#     8!!!!!*!!!       #  i    3&!!!!!#")
+renderLine(03,"#    4^ !!!!!!!!!      # 47 41 i!!!!!!o")
+renderLine(04,"#  8412  !!!!*!*!!   31#     i 9&!!!!!#")
+renderLine(05,"# 8i i41  !!!!!!!!   97#!#   2  !!!!!!#")
+renderLine(06,"# i912 i   !!!!!*!     #!##############")
+renderLine(07,"# 282 47   !!!*!!!!  8     !!!!!!!!!**#")
+renderLine(08,"#  9==6   !!!!!!!!!  i 46 8!!!!!!!!!!!#")
+renderLine(09,"#         !!!!!!!!   9636 i!!!!!!!!!!D#")
+renderLine(10,"#   z    !!!*!!!!!     i4=7!!!!!!!!!!!#")
+renderLine(11,"#o       !!!!!!!!#    47   !!!!!!!!!**#")
+renderLine(12,"#######################################")
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd"
+  xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Tarzan"
+        el:subtitle="Hanging around in the Jungle"
+        el:id="20060629ulf003"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Ulf Stegemann" el:email="ulf-enigma@zeitform.de"
+        el:homepage="http://ulf.zeitform.de"/>
+      <el:copyright>Copyright © 2006 Ulf Stegemann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+        <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false" el:control="force"
+        el:scoreunit="duration" el:scoretarget="time"/>
+      <el:score el:easy="04:56" el:difficult="08:23"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- CELLS --
+
+-- default symbols
+-- '.' stands for "fl-abyss"
+-- 'O' stands for blackball
+-- 'o' stands for "ac-whiteball-small"
+-- '0' stands for oxyd stone
+-- 'W' stands for "st-wood"
+-- 'B' stands for "st-block"
+-- 'D' stands for "st-death"
+-- '=' stands for "st-glass"
+-- 'X' stands for "st-grate"
+-- for grass_mode()
+-- ' ' fl-leaves
+-- '#' st-rock1
+
+grass_mode()
+cells={}
+
+-- DIFFICULTY --
+if (not difficult) then -- easy
+  cells["s"]=cell{stone="st-greenbrown"}
+else
+  cells["s"]=cell{stone="st-scissors"}
+end
+
+cells[" "]=cell{floor="fl-leaves"}
+cells["x"]=cell{stone="st-rubberband"}
+cells["w"]=cell{floor="fl-water"}
+-- cells["w"]=cell{floor="fl-red"}
+cells["#"]=cell{stone="st-greenbrown"}
+-- cells["s"]=cell{stone="st-scissors"}
+-- cells["s"]=cell{stone="st-metal"}
+cells["W"]=cell{stone="st-wood"}
+cells["f"]=cell{stone="st-likeoxyda"}
+cells["S"]=cell{floor="fl-swamp"}
+cells["d"]=cell{item={"it-document",{text="text1"}}}
+
+set_default_parent(cells[" "])
+
+-- LANDSCAPE MAP --
+
+level = {
+   "#########################################################################################",
+   "#Od   s######ss########################################ss######ss########################",
+   "###x   s##s#s  s###########s########ss################s  x ###s  s#########s###########s#",
+   "#       xs 0s   s#######sss x#######s s0s#############s    sss x  ss###ss#s s#########s #",
+   "#                x####ss     s#####s     sss#########s             s##s  s   s#######f  #",
+   "#                 sfss        sfssx         s#######x               sx        ss##sxs   #",
+   "s                    x                       x#####s                            00      #",
+   "#                                    x        s##0s     s0ss         0                  s",
+   "s                                              ss          s0s            x             #",
+   "#                         0                                                             #",
+   "#        x                                                x                             #",
+-- st-rubberband above this line --
+   "#                f                                                                      #",
+   "s                                                                                       s",
+   "#                                      f                             f                  f",
+   "#                                                                                       #",
+   "#                                                                                       s",
+   "#                                                                                       #",
+   "#          0                                                                            #",
+   "#                                                                                       #",
+   "#  f                                                  W                                 #",
+   "#                    SSSSSSSS              0                    SS          SS          #",
+   "#SSS               SSSSSwwwSSSSSSSS       SSS             W   SSSSSSS  SSSSSSSSS        #",
+   "wwwwwwwwwwwwwwwwwSSSwwwwwwwwwwwwwwSSSSSSSSSwwSSSSwwwwwwwwwwwSSwwwwwwSSSSwwwwwwwwSSwwwwwww",
+   "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+   "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww0wwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
+}
+
+-- GENERAL --
+enigma.ConserveLevel=TRUE
+oxyd_default_flavor = "a"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+oxyd_shuffle()
+enigma.AddConstantForce(0,100)
+display.SetFollowMode(display.FOLLOW_SMOOTH)
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Im Dschungel herumhängen</el:translation>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="false">Aahhhhhiaaiaaaiaiaaaaaaaaaaaaaaaaaaaaaahhhhhhh!</el:english>
+      </el:string>
+     </el:i18n>
+  </el:protected>
+</el:level>
+
+

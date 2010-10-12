@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation -" el:subtitle="Per.Oxyd Link 60" el:id="meditation17"/>
+      <el:version el:score="2" el:release="2" el:revision="1" el:status="released"/>
+      <el:author  el:name="Siegfried Fennig" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Siegfried Fennig</el:copyright>
+      <el:license el:type="Donated to Enigma under the projects license" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="per.oxyd">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="true"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+draw_border("st-rock1")
+fill_floor("fl-gray")
+
+hollow( 6, 6)
+hollow(13, 6)
+
+set_item("it-seed", 3, 9)
+
+draw_stones("st-grate1", { 3, 3}, {1,0},14)
+draw_stones("st-grate1", { 3, 9}, {1,0},14)
+draw_stones("st-grate1", { 3, 4}, {0,1}, 5)
+draw_stones("st-grate1", {16, 4}, {0,1}, 5)
+
+set_item("it-yinyang",  1, 6)
+set_item("it-yinyang", 18, 6)
+
+local ac1=set_actor("ac-blackball", 1.5, 6.5)
+local ac2=set_actor("ac-whiteball",18.5, 6.5)
+local ac3=set_actor("ac-whiteball-small", 7.5, 6.5, {player=0, mouseforce=0})
+local ac4=set_actor("ac-whiteball-small",12.5, 6.5, {player=0, mouseforce=0})
+
+AddRubberBand(ac1, ac3, 16,0)
+AddRubberBand(ac3, ac4, 12,0)
+AddRubberBand(ac4, ac2, 16,0)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

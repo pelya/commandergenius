@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Oxydmoron" el:subtitle="" el:id="raoul14"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="raoul@users.berlios.de" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="0:58"/>
+    </el:info>
+    <el:luamain><![CDATA[
+
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+levelh=13
+levelw=20
+cells={}
+stones={}
+stones[" "]=cell{}
+cells[" "]=cell{}
+cells[" "]=cell{floor="fl-water"}
+cells["#"]=cell{floor="fl-concrete"}
+--cells["#"]=cell{floor="fl-sand"}
+stones["O"]=cell{parent={{file_oxyd,"b"}}}
+stones["S"]=cell{stone="st-black4"}
+stones["W"]=cell{stone="st-white4"}
+stones["Y"]=cell{stone="st-yinyang1"}
+level={"                    ",
+       " ####          #### ",
+       " #  ##       ###### ",
+       " #   #####   # #### ",
+       " ##      #   #  #   ",
+       "  ##    #### #  #   ",
+       "   #  ########  #   ",
+       "   #  # ####    ##  ",
+       "   #  #   #      ## ",
+       " #### #   #####   # ",
+       " ######       ##  # ",
+       " ####          #### ",
+       "                    "}
+if not difficult then
+stmap={"                    ",
+       " WWWW       O       ",
+       " W  WW    O  WW Y   ",
+       " W O WWWWW   W      ",
+       " WW O    W   W  S   ",
+       "  WW O       W  S   ",
+       "   W  SS    WW  S   ",
+       "   W  S       O SS  ",
+       "   W  S   S    O SS ",
+       "      S   SSSSS O S ",
+       "   Y SS  O    SS  S ",
+       "       O       SSSS ",
+       "                    "}
+else
+stmap={"                    ",
+       " WWWW O     O       ",
+       " W  WW    O  WW Y   ",
+       " W O WWWWW   W      ",
+       " WW O    W   W  S   ",
+       "  WW O       W  S   ",
+       " O W  SS    WW  S O ",
+       "   W  S       O SS  ",
+       "   W  S   S    O SS ",
+       "      S   SSSSS O S ",
+       "   Y SS  O    SS  S ",
+       "       O     O SSSS ",
+       "                    "}
+end
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+set_item("it-yinyang",3,10)
+set_item("it-yinyang",16,2)
+set_actor("ac-blackball",2.5,10.5,{player=0,name="bb"})
+set_actor("ac-whiteball",17.5,2.5,{player=1,name="wb"})
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

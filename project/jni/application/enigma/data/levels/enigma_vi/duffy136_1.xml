@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Group Trip to Meditation" el:subtitle="" el:id="duffy136"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw=80
+levelh=30
+
+create_world( levelw, levelh)
+
+fill_floor("fl-bluegreen", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-greenbrown", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "D" then
+            set_stone( "st-death", i-1, line)
+        elseif c == "W" then
+            set_stone( "st-glass", i-1, line)
+        elseif c == "!" then
+            fill_floor("fl-water", i-1,line, 1,1)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c == "r" then
+            set_stone("st-bolder", i-1,line, {direction=EAST})
+        elseif c=="g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c=="l" then
+            oneway(i-1,line, enigma.WEST)
+        elseif c=="w" then
+            set_actor("ac-whiteball-small", i,line+1, {player=0, mouseforce=1, essential=1})
+        elseif c=="H" then
+            hollow(i-1,line)
+        elseif c=="L" then
+            set_attrib(laser(i-1,line, TRUE, NORTH), "name", "laser")
+        elseif c=="F" then
+            set_stone("st-switch", i-1,line, {action="openclose",target="door1"})
+        elseif c=="G" then
+            doorh( i-1,line, {name="door1"})
+        elseif c=="s" then
+            set_stone("st-stoneimpulse",i-1,line)
+        elseif c=="%" then
+            set_stone("st-stoneimpulse",i-1,line,{name="s1"})
+        elseif c=="S" then
+            set_stone( "st-stoneimpulse-hollow", i-1,line)
+        end
+    end
+end
+
+-- Floor:  " "
+-- Border: "#"
+-- Oxyd:   "o"
+
+renderLine(00,"####################!!!!!!!!!!!!!!!!!!#########D#############################")
+renderLine(01,"#        w                 !    !  !                     #                  #")
+renderLine(02,"#                          !!         ################## D SSSSSSSSSSSSSS%# #")
+renderLine(03,"#                      !!             #             #    # S    H SS H    S #")
+renderLine(04,"#      w   w           !!  #       # !# WWWWWWWWW   # #### S H    SS    H S #")
+renderLine(05,"#                              !     !#         W   #    # S   SSSSSSSS   S #")
+renderLine(06,"#                              !     !#         W        # S   S  HH  S   S #")
+renderLine(07,"#    w   w   w               !    !   #WWWWWWW  ########## S H SSSSSSSS H S #")
+renderLine(08,"#                      #             !#         #   l   F# S              S #")
+renderLine(09,"#                      !      #       #         #   #    # S     H  H     S #")
+renderLine(10,"#  w   w   w   w           !   !      # WWWWWWWW#G###    # SSSSSSSSSSSSSSSS #")
+renderLine(11,"#                      !!         !!!!#                                     #")
+renderLine(12,"####################!!!!!!!!!!!!!!!!!!#####L#################################")
+
+oxyd_shuffle()
+
+set_stone("st-timer", 77,0, {loop=0, action="onoff", target="laser", interval=1})
+set_stone("st-timer", 78,0, {loop=0, action="trigger", target="s1", interval=2})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

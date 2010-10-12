@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Edwards Mountain" el:subtitle="" el:id="edward11"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Edward" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Edward</el:copyright>
+      <el:license el:type="Donated to Enigma under the projects license" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="2:43"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world(20,13)
+
+fill_floor("fl-brick")
+
+function renderLine(line,pattern)
+    for i=1, strlen(pattern) do
+        local c=strsub(pattern,i,i)
+        if c=="#" then
+            set_stone("st-brick",i-1,line)
+        elseif c=="." then
+            set_floor("fl-abyss",i-1,line)
+        elseif c=="-" then
+            if not difficult then
+                set_floor("fl-gradient",i-1,line,{type=23})
+            else
+                set_floor("fl-gradient",i-1,line,{type=random(21,22)})
+            end
+        elseif c=="X" then
+            oxyd(i-1,line)
+        elseif c=="<" then
+            oneway(i-1,line,WEST)
+        elseif c==">" then
+            oneway(i-1,line,EAST)
+        elseif c=="^" then
+            oneway(i-1,line,NORTH)
+        elseif c=="O" then
+            oneway(i-1,line,SOUTH)
+        elseif c=="0" then
+            set_actor("ac-blackball",i-1,line)
+        elseif c=="l" then
+            set_stone("st-laser-e",i-1,line,{name="laser"})
+        elseif c=="|" then
+            set_stone("st-door-v",i-1,line)
+        elseif c=="S" then
+            set_stone("st-switch",i-1,line,{action="onoff",target="laser"})
+        elseif c=="x" then
+            set_stone("st-fart",i-1,line)
+        elseif c=="+" then
+            set_stone("st-yinyang1",i-1,line)
+        elseif c=="1" then
+            set_floor("fl-gradient",i-1,line,{type=1})
+        elseif c=="2" then
+            set_floor("fl-gradient",i-1,line,{type=2})
+        elseif c=="3" then
+            set_floor("fl-gradient",i-1,line,{type=3})
+        elseif c=="4" then
+            set_floor("fl-gradient",i-1,line,{type=4})
+        elseif c=="5" then
+            set_floor("fl-gradient",i-1,line,{type=9})
+        elseif c=="6" then
+            set_floor("fl-gradient",i-1,line,{type=10})
+        elseif c=="7" then
+            set_floor("fl-gradient",i-1,line,{type=11})
+        elseif c=="8" then
+            set_floor("fl-gradient",i-1,line,{type=12})
+        elseif c=="o" then
+            set_item("it-vortex-open",i-1,line,{targetx=9.5,targety=10.5})
+        end
+    end
+end
+
+renderLine(00,"####################")
+renderLine(01,"####################")
+renderLine(02,"#             ++   #")
+renderLine(03,"#......82226  +    #")
+renderLine(04,"X22222248263  ++   #")
+renderLine(05,"#------44o33  O++ +#")
+renderLine(06,"X11111147153  O+   #")
+renderLine(07,"#......71115  O+++ #")
+renderLine(08,"#         x  x >>> #")
+renderLine(09,"#       x^Xx #S#####")
+renderLine(10,"# 0     < >  l |||X#")
+renderLine(11,"####################")
+renderLine(12,"####################")
+
+set_stone("st-door-v",15,10,{name="door1"})
+set_stone("st-door-v",16,10,{name="door2"})
+set_stone("st-door-v",17,10,{name="door3"})
+
+set_item("it-trigger",18,2,{action="openclose",target="door1"})
+set_stone("st-switch",18,1,{action="openclose",target="door2"})
+set_stone("st-fourswitch",17,1,{action="openclose",target="door3"})
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

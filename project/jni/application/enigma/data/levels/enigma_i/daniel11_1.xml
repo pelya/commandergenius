@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="The Grim Reaper" el:id="space"/>
+      <el:version el:score="1" el:release="1" el:revision="3" el:status="released"/>
+      <el:author  el:name="Daniel Heck"/>
+      <el:copyright>Copyright © Daniel Heck</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92"/>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>recoded to Lua embedded in new XML format by Ronald Lamprecht</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 25
+
+create_world(levelw, levelh)
+draw_border("st-likeoxydc")
+fill_floor("fl-space", 0,0, level_width,level_height)
+
+if options.Difficulty == HARD then
+    fill_floor("fl-inverse", 7,4, 6,5)
+    fill_floor("fl-inverse", 7,16, 6,5)
+    set_stones("st-death", {{9,0},{10,0},
+                   {9,levelh-1},{10,levelh-1},
+                   {0,6},{levelw-1,6},
+                   {0,18},{levelw-1,18}
+               }
+           )
+else
+    fill_floor("fl-gray", 6,4, 8,6)
+    fill_floor("fl-gray", 6,15, 8,6)
+    set_stones("st-actorimpulse", {{9,0}, {10,0},
+                   {9,levelh-1},{10,levelh-1},
+                   {0,6},{levelw-1,6},
+                   {0,18},{levelw-1,18}
+               }
+           )
+end
+
+oxyd(1,1)
+oxyd(level_width-2, 1)
+oxyd(1, level_height/2)
+oxyd(level_width-2, level_height/2)
+oxyd(level_width-2,level_height-2)
+oxyd(1,level_height-2)
+oxyd_shuffle()
+
+set_actor("ac-blackball", 10,6.5, {player=0})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Der Sensemann</el:translation>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>
+
+
+

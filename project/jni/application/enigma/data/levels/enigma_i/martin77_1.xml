@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Hit the Right One" el:subtitle="" el:id="martin77"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world( levelw, levelh)
+draw_border("st-bluegray")
+draw_border("st-bluegray", 0,5,6,3)
+
+oneway( 5,6, EAST)
+
+fill_floor("fl-space")
+
+fill_floor("fl-bluegray", 1,1,5,11)
+
+SetDefaultAttribs("it-wormhole", {range=4, strength=20})
+
+set_item("it-wormhole", 7,3,{targetx=3, targety=10})
+set_item("it-wormhole", 7,9,{targetx=3, targety=3})
+set_item("it-wormhole", 11,5,{targetx=3, targety=10})
+set_item("it-wormhole", 11,7,{targetx=3, targety=3})
+set_item("it-wormhole", 14,4,{targetx=3, targety=10})
+set_item("it-wormhole", 14,8,{targetx=3, targety=3})
+set_item("it-wormhole", 16,6,{targetx=3, targety=6.5})
+
+oxyd(1,1)
+oxyd(1,6)
+oxyd(1,11)
+oxyd(18,1)
+oxyd(18,6)
+oxyd(18,11)
+
+oxyd_shuffle()
+
+set_actor("ac-blackball", 3, 3)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

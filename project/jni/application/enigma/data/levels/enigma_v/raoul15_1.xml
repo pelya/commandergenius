@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Ghost Islands" el:subtitle="" el:id="raoul15"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="raoul@users.berlios.de" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+       <el:dependency el:path="lib/libterrain" el:id="lib/libterrain" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="1:03"/>
+    </el:info>
+    <el:luamain><![CDATA[
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+levelh=13
+levelw=20
+cells={}
+stones={}
+stones[" "]=cell{}
+cells[" "]=cell{}
+cells[" "]=cell{floor="fl-water"}
+cells["#"]=cell{floor="fl-gray"}
+cells["a"]=cell{floor="fl-gradient1"}
+cells["b"]=cell{floor="fl-gradient2"}
+cells["c"]=cell{floor="fl-gradient3"}
+cells["d"]=cell{floor="fl-gradient4"}
+cells["e"]=cell{floor="fl-gradient5"}
+cells["f"]=cell{floor="fl-gradient6"}
+cells["g"]=cell{floor="fl-gradient7"}
+cells["h"]=cell{floor="fl-gradient8"}
+cells["i"]=cell{floor="fl-gradient9"}
+cells["j"]=cell{floor="fl-gradient10"}
+cells["k"]=cell{floor="fl-gradient11"}
+cells["l"]=cell{floor="fl-gradient12"}
+cells["s"]=cell{floor="fl-swamp"}
+stones["O"]=cell{parent={{file_oxyd,"b"}}}
+stones["X"]=cell{stone="st-death_invisible"}
+
+if not difficult then
+enigma.SlopeForce=15
+level={"####ef  seaaaaaf    ",
+       "#sssgh  sc#####d    ",
+       "#s     ssc#####d    ",
+       "#ssss sssc#####d    ",
+       "eaaaaaaaai#####ds   ",
+       "c##############ds   ",
+       "c#######lbbbbbjdss  ",
+       "c#######dsssssckaaf ",
+       "c#######dss  sc###d ",
+       "c#######ds    c###d ",
+       "c#######ds    c###d ",
+       "c#######d     gbbbh ",
+       "gbbbbbbbh           "}
+stmap={"                    ",
+       "          O   O     ",
+       "                    ",
+       "            X       ",
+       "                    ",
+       " O     O  O   O     ",
+       "                    ",
+       "                    ",
+       "    X          O O  ",
+       "                X   ",
+       "               O O  ",
+       " O     O            ",
+       "                    "}
+else
+enigma.SlopeForce=18
+level={"####ef   eaaaaaf    ",
+       "#   gh   c#####d    ",
+       "#        c#####d    ",
+       "#        c#####d    ",
+       "eaaaaaaaai#####d    ",
+       "c##############d    ",
+       "c#######lbbbbbjd    ",
+       "c#######d     ckaaf ",
+       "c#######d     c###d ",
+       "c#######d     c###d ",
+       "c#######d     c###d ",
+       "c#######d     gbbbh ",
+       "gbbbbbbbh           "}
+stmap={"                    ",
+       "          O   O     ",
+       "           X X      ",
+       "            X       ",
+       "           X X      ",
+       " O     O  O   O     ",
+       "  X   X             ",
+       "   O O              ",
+       "    X          O O  ",
+       "   O O          X   ",
+       "  X   X        O O  ",
+       " O     O            ",
+       "                    "}
+end
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+-- Draw hills with libterrain.lua:
+draw_full(1,5,7,7,1)
+draw_full(10,1,5,5,1)
+draw_full(15,8,3,3,1)
+set_actor("ac-blackball",5,1,{player=0,name="bb"})
+oxyd_shuffle()
+display.SetFollowMode(display.FOLLOW_SCROLLING)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Robbery" el:subtitle="" el:id="ant29"/>
+      <el:version el:score="2" el:release="2" el:revision="1" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+function f_doorA() send_group_message(doorsA, "openclose") end
+function f_doorB() send_group_message(doorsB, "openclose") end
+
+floor = cell{floor="fl-himalaya"}
+stone = cell{stone="st-rock4"}
+actor = cell{actor={"ac-blackball", {player=0}}}
+
+doorsA = {}
+doorsB = {}
+doorA = cell{{{add_multistone, "st-door_a", doorsA, {type="v"}}}}
+doorB = cell{{{add_multistone, "st-door_a", doorsB, {type="v"}}}}
+
+cslt1 = cell{stone={"st-coinslot", {action="callback", target="f_doorA"}}}
+cslt2 = cell{stone={"st-coinslot", {action="callback", target="f_doorB"}}}
+
+coin1 = cell{item= {"it-coin1"}}
+coin2 = cell{item= {"it-coin2"}}
+coin3 = cell{item= {"it-coin4"}}
+coinr = cell{{{randomfloor, {coin1, coin2, coin3}}}}
+
+crack3 = cell{item= {"it-crack3", {fixed=1}}}
+crack2 = cell{item= {"it-crack1", {fixed=1}}}
+
+create_world(20, 13)
+oxyd_default_flavor = "a"
+
+fill_world_func(floor)
+
+draw_border_func(stone)
+draw_func(abyss, {13,0}, {0,1}, 13)
+
+for i=0,4 do draw_func(coinr, {14+i,6-i}, {0,1}, 2*i+1) end
+
+draw_func(stone, {12,1}, {0,1}, 3)
+draw_func(stone, {12,11}, {0,-1}, 3)
+draw_func(stone, {14,1}, {0,1}, 3)
+draw_func(stone, {14,11}, {0,-1}, 3)
+
+set_funcs(oxyd, {{1,1},{1,11},{11,1},{11,11}})
+set_funcs(stone, {{1,2},{2,2},{1,10},{2,10},{11,2},{10,2},{11,10},{10,10}})
+
+set_funcs(doorA, {{2,1},{10,11}})
+set_funcs(doorB, {{2,11},{10,1}})
+
+cslt1(6,4)
+cslt2(6,8)
+
+coin1(8,7)
+
+crack3(11,9)
+crack2(10,9)
+crack2(11,8)
+
+set_item("it-spring2",10,11)
+set_item("it-spring2",10,1)
+
+actor(5,5)
+
+oxyd_shuffle()
+enigma.ConserveLevel = FALSE
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

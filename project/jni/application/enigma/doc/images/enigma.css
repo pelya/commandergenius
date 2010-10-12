@@ -1,0 +1,456 @@
+/* Copyright (C) 2007 Ronald Lamprecht
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+body { 
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #aaaaaa;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: small;
+}
+
+:link  { 
+    color: #930; 
+    text-decoration: none;
+}
+
+:visited  { 
+    color: #930; 
+    text-decoration: none;
+}
+
+:link:hover, :visited:hover {
+    color: #777;
+    text-decoration: none;
+}
+
+:link:active, :link:active {
+    color: #000;
+}
+
+.dbody { 
+    min-width: 700px;
+    max-width: 1000px;
+    margin: auto;
+    padding: 10px;
+    position: relative;
+    font-size: 110%;
+}
+
+li {
+    padding: 1px 4px;
+}
+
+.note {
+    background-color: #eeeeee;
+    border: thin solid black;
+    padding: 5px;
+}
+
+.navbar {
+    background-color: #666666;
+    height: 100px;
+    top: 0;
+    border-bottom: 1px solid black;
+}
+
+.navbar .navcornerul {
+    float: left;
+    width: 15px;
+    height: 15px;
+    overflow:hidden;
+}
+
+.navbar .navcornerur {
+    float: right;
+    width: 15px;
+    height: 15px;
+    overflow:hidden;
+}
+
+.navbar .navlink {
+    margin-left: 15px;
+    margin-right: 15px;
+    text-align: left;
+}
+
+.navbar .navlink .navenigma {
+    float: left;
+    margin: 0;
+}
+
+.navbar .navlink .navlang {
+    float: right;
+    margin-bottom: 10px;
+}
+
+.navbar .navlink .navmain {
+    clear: right;
+    margin-left: 0px;
+    padding-bottom: 10px;
+}
+
+.navbar .navlink .navmain tr {
+    padding-left: 0;
+}
+
+.navbar .navmain a:hover {   /* IE */
+    background-color: #ffffff;
+}
+
+.navbar .navmain a:hover img {  /* Firefox,... */
+    background-color: #ffffff;
+}
+
+.mainbody {
+    text-align: left;
+    padding-left: 1.0em;
+    padding-right: 1.0em;
+    padding-top: 1.0em;
+    padding-bottom: 1em;
+    margin-top: 0;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.leftcolumn {
+    float: left;
+    width: 20%;
+    min-width: 144px;
+}
+
+
+.mainbody .menu {
+    margin-bottom: 1em;
+    font-size: 100%;
+    padding-left: 0px;
+    padding-top: 0;
+}
+
+.menu ul  {
+    margin-left: 0;
+    padding: 0;
+    list-style: none;
+    margin-top: 0;
+}
+
+.mlist {
+    margin: 0 0 1em 0;
+}
+
+.mlist li {
+    display: inline;
+    padding: 0;
+    margin: 0;
+}
+
+.mlist li a  { 
+    text-decoration: none; 
+    background: #ededed; 
+    display: block; 
+    padding: 3px 10px; 
+    border-top: 1px solid #fff; 
+    border-right: 1px solid #ddd; 
+    border-bottom: 1px solid #ddd 
+}
+
+.mlist li li a {
+    padding: 3px 8px 3px 20px;
+}
+
+.mlist li li li a {
+    padding: 3px 8px 3px 30px;
+}
+
+.mlist :link:hover, .mlist :visited:hover {
+    color: #555;
+    text-decoration: none;
+}
+
+.mlist :link:active, .mlist :link:active {
+    color: #555;
+}
+
+
+.menusubtitle  { 
+    color: #666; 
+    font-size: 80%;
+}
+
+.rightcolumn {
+    float: right;
+    width: 195px;
+}
+
+.infobody {
+    width: 180px;
+    font-size: 90%;    
+    border:1px solid black;
+    background-color: #a8a8a8;
+    margin-left: 1em;
+    margin-bottom: 20px;
+}
+
+.info {
+    margin: 10px;
+}
+
+.info h3 {
+    width: auto;
+    border-bottom: 1px dotted #333;
+    font-size: 110%;
+}
+
+.imagetitle {
+    text-align: center;
+    padding-top: 1em;
+}
+
+.info :link:hover, .info :visited:hover {
+    color: #555;
+    text-decoration: none;
+}
+
+.info :link:active, .info :link:active {
+    color: #555;
+}
+
+.screenshot img {
+    border-width: 4px;
+}
+
+.screenshot a:link, .screenshot  a:visited {
+    color: #777;   /* IE needs body attributes for image coloring */
+}
+
+.screenshot a:link:hover, .screenshot a:visited:hover {
+    color: #333;   /* IE needs body attributes for image coloring */
+}
+
+.powered-by {
+    margin-top: 1.5em;
+    border-top: 1px solid #666;
+}
+
+.powered-by a:link, .powered-by  a:visited {
+    color: #777;   /* IE needs body attributes for image coloring */
+}
+
+.powered-by a:link:hover, .powered-by a:visited:hover {
+    color: #333;   /* IE needs body attributes for image coloring */
+}
+
+.bottombar {
+    /*  border-top: 1px solid black; */
+    padding: 1px;
+    background-color: #666666;
+    color: #aaaaaa;
+    text-align: center;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.bottombar :link  { 
+    color: #333; 
+    text-decoration: none;
+}
+
+.bottombar :visited  { 
+    color: #333; 
+    text-decoration: none;
+}
+
+.bottombar :link:hover, .bottombar :visited:hover {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.bottombar :link:active, .bottombar :link:active {
+    color: #000;
+}
+
+
+.bottombar p { 
+    padding-left: 1.0em;
+    font-size: 80%;
+}
+
+
+.main {
+    margin-left: 1.0em;
+    line-height: 130%;
+}
+
+.main h2 {
+}
+
+.main h3 {
+    width: auto;
+    border-bottom: 1px dotted #777;
+}
+
+.date {
+    color: gray;
+}
+
+.testimonial .quote {
+    padding-right: 3em;
+    padding-left: 2em;
+    font-family: serif;
+    margin-top: 1.7em;
+    margin-bottom: 0px;
+}
+
+.testimonial .author {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-right: 3em;
+    padding-left: 2em;
+    text-align: right;
+    font-size: 90%;
+}
+
+.faq h4 {
+    font-size: 100%;
+    color: #333;
+    border-bottom: none;
+}
+
+.faq p {
+    padding-left: 1em;
+}
+
+.arrowup {
+    float: right;
+}
+
+.faq ul ul {
+    margin-left: 0em;    /* overwrite IE indention */
+    padding-left: 1em;   /* overwrite Firefox indention */
+}
+
+.usernames {
+    font-size: 100%;
+    margin-top: 4em;
+    border:1px solid black;
+    padding-left: 0.5em;
+}
+
+.usernames ul {
+    font-size: 85%;
+    list-style-type: none;
+    text-indent: -3em;
+}
+
+.stat-help {
+    float: right;
+    width: 40%;
+    font-size: 90%;
+    border:1px solid black;
+    padding: 1em;
+}
+
+.statistics table {
+    margin-bottom: 50px;
+    text-align: center;
+    line-height: 120%;
+}
+.statistics caption {
+    font-weight: bold;
+    font-size: 110%;
+    line-height: 130%;
+}
+.statistics .left{
+    text-align: left;
+}
+.statistics .num {
+    text-align: right;
+    padding-right: 20px;
+}
+.statistics .text {
+    text-align: left;
+}
+
+.statistics .normalcaption {
+    font-size: 100%;
+}
+
+.repository {
+    font-size: 90%;
+    margin-bottom: 1em;
+}
+
+.repository td {
+    padding-left: 2em;
+    line-height: 120%;
+}
+
+.repository .path {
+    font-family: Courier, monospace;
+}
+
+.tasks .diff {
+    text-align: right;
+    font-style: italic;
+}
+
+.lotmpic {
+    float: right;
+    padding-left: 2em;
+    padding-bottom: 1em;
+}
+
+.lotm .lotmpic img {
+    border-width: 4px;
+    border-color: #777;
+    padding-right: 0em;
+    margin-top: 1em;
+    padding-top: 0em;
+    padding-bottom: 0em;
+}
+
+.lotmpic .imagetitle {
+    font-size: 90%;
+}
+
+.lotm img {
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+.lotm .quote {
+    padding-right: 3em;
+    padding-left: 2em;
+    font-family: serif;
+    margin-top: 1em;
+    margin-bottom: 0px;
+}
+
+.lotm .author {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-right: 3em;
+    padding-left: 2em;
+    text-align: right;
+    font-size: 90%;
+}
+
+.credits table td {
+    padding-right: 1em;
+}

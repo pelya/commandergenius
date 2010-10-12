@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="It Takes Two" el:subtitle="Per.Oxyd Link 1" el:id="martin43"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="per.oxyd">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="true"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world( 20, 13)
+
+fill_floor( "fl-wood", 0, 0, 20, 13)
+
+draw_border( "st-greenbrown")
+
+function oxyd_base( color, x, y)
+    stone = format( "st-%s4", color)
+    set_stone( stone, x-1, y-1)
+    set_stone( stone, x,   y-1)
+    set_stone( stone, x+1, y-1)
+    set_stone( stone, x-1, y)
+    set_stone( stone, x+1, y)
+    set_stone( stone, x-1, y+1)
+    set_stone( stone, x,   y+1)
+    set_stone( stone, x+1, y+1)
+    oxyd( x, y)
+end
+
+oxyd_default_flavor = "d"
+
+oxyd_base( "white", 2, 2)
+oxyd_base( "white", 8, 2)
+oxyd_base( "black",11, 2)
+oxyd_base( "black",17, 2)
+oxyd_base( "black", 5, 6)
+oxyd_base( "white",14, 6)
+oxyd_base( "black", 2,10)
+oxyd_base( "black", 8,10)
+oxyd_base( "white",11,10)
+oxyd_base( "white",17,10)
+
+oxyd_shuffle()
+
+set_item("it-yinyang", 8,6)
+set_item("it-yinyang", 11,6)
+
+set_actor("ac-blackball", 11.5, 6.5)
+set_actor("ac-whiteball",  8.5, 6.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

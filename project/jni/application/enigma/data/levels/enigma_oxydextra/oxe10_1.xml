@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation -" el:subtitle="Oxyd Extra 10" el:id="meditation3"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="anonymous" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © anonymous</el:copyright>
+      <el:license el:type="Donated to Enigma under the projects license" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd.extra">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+stone="st-woven"
+
+draw_border( stone)
+fill_floor("fl-stone")
+draw_stones( stone, { 1,6}, {1,0}, 7)
+draw_stones( stone, {12,6}, {1,0}, 7)
+draw_stones( stone, { 5,1}, {0,1}, 4)
+draw_stones( stone, {14,1}, {0,1}, 4)
+draw_stones( stone, { 5,8}, {0,1}, 4)
+draw_stones( stone, {14,8}, {0,1}, 4)
+draw_stones( stone, { 7,2}, {0,1}, 9)
+draw_stones( stone, {12,2}, {0,1}, 9)
+
+hollow(2,2)
+hollow(level_width-3,level_height-3)
+hollow(level_width-3, 2)
+hollow(2,level_height-3)
+
+set_actor("ac-whiteball-small", 8.5,4.5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small",11.5,4.5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small", 8.5,8.5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small",11.5,8.5, {player=0, mouseforce=1})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

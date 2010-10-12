@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation -" el:subtitle="esprit 40" el:id="meditation7"/>
+      <el:version el:score="2" el:release="2" el:revision="0" el:status="released"/>
+      <el:author  el:name="anonymous" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © anonymous</el:copyright>
+      <el:license el:type="Donated to Enigma under the projects license" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+
+draw_border("st-rock3")
+
+fill_floor("fl-marble")
+
+state_h1 = 0
+function trigger_h1()
+    if state_h1 == 0 then
+        state_h1 = 1
+    SendMessage("h1", "trigger")
+    else
+        state_h1 = 0
+    end
+end
+
+state_h2 = 0
+function trigger_h2()
+    if state_h2 == 0 then
+        state_h2 = 1
+        SendMessage("h2", "trigger")
+    else
+        state_h2 = 0
+    end
+end
+
+state_h3 = 0
+function trigger_h3()
+    if state_h3 == 0 then
+        state_h3 = 1
+        SendMessage("h3", "trigger")
+    else
+        state_h3 = 0
+    end
+end
+
+state_h4 = 0
+function trigger_h4()
+    if state_h4 == 0 then
+        state_h4 = 1
+        SendMessage("h4", "trigger")
+    else
+        state_h4 = 0
+    end
+end
+
+draw_stones( "st-rock3", { 5,7}, {0,1}, 5)
+draw_stones( "st-rock3", { 7,7}, {0,1}, 5)
+draw_stones( "st-rock3", { 9,7}, {0,1}, 5)
+draw_stones( "st-rock3", {11,7}, {0,1}, 5)
+draw_stones( "st-rock3", {13,7}, {0,1}, 5)
+
+set_item( "it-hollow", 6,11, {name="h1"})
+set_item( "it-hollow", 8,11, {name="h2"})
+set_item( "it-hollow",10,11, {name="h3"})
+set_item( "it-hollow",12,11, {name="h4"})
+
+set_item("it-trigger", 6, 8, {invisible=1, action="callback", target="trigger_h1"})
+set_item("it-trigger", 8, 8, {invisible=1, action="callback", target="trigger_h2"})
+set_item("it-trigger",10, 8, {invisible=1, action="callback", target="trigger_h3"})
+set_item("it-trigger",12, 8, {invisible=1, action="callback", target="trigger_h4"})
+
+set_actor("ac-whiteball-small", 2.7,5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small",17.3,5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small", 3.7,5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small",16.3,5, {player=0, mouseforce=1})
+
+enigma.AddConstantForce(0,17)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

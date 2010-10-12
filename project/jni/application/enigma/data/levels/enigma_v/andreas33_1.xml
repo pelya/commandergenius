@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Thievish Alleys" el:subtitle="" el:id="andreas33"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Andreas Lochmann" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Andreas Lochmann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="00:31" el:difficult="00:36"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Created with the help of BBE 1.05
+
+levelh=13
+levelw=39
+enigma.FlatForce=30
+enigma.SlopeForce=30
+enigma.ElectricForce=30
+enigma.ConserveLevel=FALSE
+
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+function ac_blackball(x,y)
+    set_actor("ac-blackball",x+0.5,y+0.5,{player=0})
+end
+
+cells={}
+items={}
+actors={}
+stones={}
+actors[" "]=cell{}
+stones[" "]=cell{}
+cells[" "]=cell{}
+items[" "]=cell{}
+
+cells["!"]=cell{floor="fl-brick"}
+stones["!"]=cell{stone="st-stoneimpulse"}
+stones["#"]=cell{parent={{file_oxyd,"d"}}}
+stones["$"]=cell{stone="st-thief"}
+stones["%"]=cell{stone="st-brownie"}
+stones["&"]=cell{stone="st-stoneimpulse-hollow"}
+stones["'"]=cell{stone="st-floppy"}
+stones["("]=cell{stone="st-door-h"}
+actors["!"]=cell{parent={{ac_blackball}}}
+items["!"]=cell{item="it-floppy"}
+
+level={"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"}
+acmap={"                                       ",
+       "                                       ",
+       "                                       ",
+       "                                       ",
+       "                                       ",
+       "                                       ",
+       "                                       ",
+       "                                       ",
+       "                                       ",
+       "                                       ",
+       "  !                                    ",
+       "                                       ",
+       "                                       "}
+itmap={"                                       ",
+       "                                       ",
+       "                                       ",
+       "                                       ",
+       "                                       ",
+       "                                       ",
+       "                                       ",
+       "                                       ",
+       "                                       ",
+       "   !                                   ",
+       "   !                                   ",
+       "   !                                   ",
+       "                                       "}
+if difficult then
+ stmap={"!!!!!!!!!$$$$$$$$$$$!!!!!$$$!!!!!!!$$#$",
+        "!    $  &&&&&&&&&!&&&   &&  &    $& $ $",
+        "! $  $           $    $$$!$ &&&  $& '($",
+        "! $  !!&&!!!!!$  !&&!!!  &$$$$& !!& '($",
+        "! $ &&$   $  &&&&&   $&  &&&&&& !   '($",
+        "! $ & $$&&!&         $&         !  !% $",
+        "! $$&  $& $!!$ $$!!&&$&&!!!!!&&!!  !!&!",
+        "!% $&& $&   !&&&&&$ &$      $  $      !",
+        "! $$$&&$&   $     $ &!&&&&&&!&&!&&&&&&!",
+        "!   $ &$!$&&!!!$  $  $$$$$  $  $$$$$  $",
+        "#   $ &&&&& $ &&&&!&&&&&&&&&!&&&&&&&& $",
+        "$   $     &       $         $       & $",
+        "$$$$$$$$$$!!!!!!!!!!!!!!!!!!!!!!!!!!!$$"}
+else
+ stmap={"!!!!!!!!!$$$$$$$$$$$!!!!!$$$!!!!!!!$$#$",
+        "!    $  &&&&&&&&&!&&&   &&  &    $& $ $",
+        "! $  $           $    $$$!$ &&&  $& '($",
+        "! $  !!&&!!!!!$  !&&!!!  &$$$$& !!& '($",
+        "! $ &&$   $  &&&&&   $&  &&&&&& !   '($",
+        "! $ & $$&&!&         $&         !  !% $",
+        "! $$&  $& $!!$ $$!!&&$&&!!!!!&&!!  !!&!",
+        "!% $&& $&   !&&&&&$ &$      $  $      !",
+        "! $$$&&$&   $     $ &!&&&&&&!&&!&&&&& !",
+        "!   $ &$!$&&!!!$  $  $$$$$  $  $$$$$& !",
+        "#   $ &&& & $ &&&&!&&&&&&&&&!&&&&&&&& !",
+        "$   $     &       $         $         !",
+        "$$$$$$$$$$!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"}
+end
+
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+draw_map(0,0,itmap,items)
+draw_map(0,0,acmap,actors)
+
+Signal ("st(36 2)","st(37 2)")
+Signal ("st(36 3)","st(37 3)")
+Signal ("st(36 4)","st(37 4)")
+oxyd_shuffle()
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

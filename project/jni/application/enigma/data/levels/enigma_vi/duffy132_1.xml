@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Prepare Your Defense" el:subtitle="" el:id="duffy132"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2005 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd1">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+rooms_wide=6
+rooms_high=1
+
+levelw=1+(19*rooms_wide)
+levelh=1+(12*rooms_high)
+
+create_world( levelw, levelh)
+enigma.ConserveLevel=FALSE
+
+fill_floor("fl-concrete", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-woven", i-1, line)
+        elseif c =="%" then
+           set_stone("st-break_acwhite",i-1,line)
+        elseif c =="w" then
+           set_stone("st-glass",i-1,line)
+        elseif c =="`" then
+           set_stone("st-knight",i-1,line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "*" then
+            set_stone( "st-brownie", i-1, line)
+                elseif c == "!" then
+            abyss(i-1,line)
+        elseif c == "~" then
+           set_floor("fl-water",i-1,line)
+        elseif c == "I" then
+           set_floor("fl-ice",i-1,line)
+        elseif c=="z" then
+           set_actor("ac-blackball", i-1,line+1, {player=0})
+        elseif c=="h" then
+           set_actor("ac-horse", i-.5,line+.5, {name="h1",controllers=0,mouseforce=0})
+           set_floor("fl-normal",i-1,line)
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c == "_" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+           set_floor("fl-ice",i-1,line)
+        elseif c == "Y" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+           set_floor("fl-water",i-1,line)
+        elseif c == "G" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+           set_item("it-blackbomb",i-1,line)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c=="=" then
+            set_floor("fl-space",i-1,line)
+        elseif c=="Q" then
+           set_stone("st-bolder", i-1,line, {name="b1",direction=WEST})
+        elseif c=="T" then
+           set_item("it-trigger",i-1,line,{action="openclose",target="door1"})
+        elseif c=="U" then
+           set_item("it-trigger",i-1,line,{action="onoff",target="laser1"})
+           set_floor("fl-ice",i-1,line)
+        elseif c=="t" then
+           set_item("it-trigger",i-1,line,{action="callback",target="funcc1"})
+        elseif c=="A" then
+           doorv(i-1,line,{name="door1"})
+           set_item("it-sword",i-1,line)
+        elseif c=="B" then
+           doorv(i-1,line,{name="door2"})
+        elseif c=="K" then
+           set_item("it-key_a",i-1,line)
+        elseif c=="k" then
+           set_stone("st-key_a",i-1,line,{action="openclose",target="door2"})
+        elseif c=="L" then
+            set_attrib(laser(i-1,line, FALSE, WEST), "name", "laser1")
+         elseif c == ";" then
+            mirrorp(i-1,line,TRUE,FALSE, 2)
+         elseif c == "/" then
+            mirrorp(i-1,line,TRUE,FALSE, 4)
+         elseif c == "-" then
+            mirrorp(i-1,line,TRUE,FALSE, 1)
+         elseif c == "|" then
+            mirrorp(i-1,line,TRUE,FALSE, 3)
+         elseif c == "M" then
+           mirror3(i-1,line,TRUE,FALSE,1)
+        elseif c == "C" then
+           set_item("it-coffee",i-1,line)
+        elseif c == "c" then
+           set_item("it-cherry",i-1,line)
+        elseif c == "n" then
+           set_item("it-coin2",i-1,line)
+        elseif c == "e" then
+           set_item("it-extinguisher",i-1,line,{load=2})
+        elseif c == "f" then
+           set_item("it-odometer",i-1,line)
+        elseif c == "p" then
+           set_item("it-pin",i-1,line)
+        elseif c == "s" then
+           set_item("it-spade",i-1,line)
+        elseif c == "F" then
+           set_item("it-flagblack",i-1,line)
+        elseif c == "W" then
+           set_item("it-weight",i-1,line)
+        elseif c == "q" then
+           set_item("it-spoon",i-1,line)
+        elseif c == ":" then
+           set_item("it-floppy",i-1,line)
+        elseif c == "." then
+           set_item("it-glasses",i-1,line)
+        elseif c == "<" then
+                    set_stone("st-oneway", i-1,line, {orientation=enigma.WEST})
+        elseif c == "&" then
+                    set_stone("st-swap", i-1,line)
+        elseif c == "$" then
+                    set_stone("st-bombs", i-1,line)
+        elseif c == "b" then
+           set_item("it-blackbomb",i-1,line)
+        elseif c == "^" then
+           set_item("it-whitebomb",i-1,line)
+        elseif c == "H" then
+           hollow(i-1,line)
+        elseif c == "S" then
+           set_stone("st-stoneimpulse",i-1,line)
+        elseif c == "d" then --1-d
+           set_floor("fl-gradient",  i-1,  line, {type=1})
+        elseif c == "u" then --2-u
+           set_floor("fl-gradient",  i-1,  line, {type=2})
+        elseif c == "r" then --3-r
+           set_floor("fl-gradient",  i-1,  line, {type=3})
+        elseif c == "l" then --4-l
+           set_floor("fl-gradient",  i-1,  line, {type=4})
+        elseif c == "1" then --ur
+           set_floor("fl-gradient",  i-1,  line, {type=11})
+        elseif c == "3" then --dl
+           set_floor("fl-gradient",  i-1,  line, {type=9})
+        elseif c == "7" then --dr
+           set_floor("fl-gradient",  i-1,  line, {type=12})
+        elseif c == "9" then --ul
+           set_floor("fl-gradient",  i-1,  line, {type=10})
+        elseif c == "V" then
+               set_stone( "st-blocker", i-1, line)
+        elseif c == "O" then
+           set_item("it-extralife",i-1,line)
+        elseif c == ">" then
+           set_stone( "st-rubberband", i-1, line,{name="r1"})
+         end
+    end    
+end
+
+renderLine(00,"############################################################################################>######SS##############")
+renderLine(01,"#t                                                                           IIII_UI~~~ 3d1   %+%   !!#  *  k#efp##")
+renderLine(02,"#  z                                                                         ~~~~~~II~~ rhl   %%%     #* * * #c:.##")
+renderLine(03,"#                                                                            ~~~~~~I~~~ 9u7           # * *  #nOF##")
+renderLine(04,"#t                                                                                                     *  * *#CqW##")
+renderLine(05,"################################################################################gggggggggggggggggggggg########ggg##")
+renderLine(06,"#Q                                                                                    b                 ~  VKV   T#")
+renderLine(07,"################################################################################ggggggGgggggggggggg##ggggg####ggg##")
+renderLine(08,"#o                                                                           !!!      b  #               <      H##")
+renderLine(09,"#                                                                            !!!  bbbbb  #  g   ;      H  wwwwww-##")
+renderLine(10,"#                                                                            ###  b ###    g+g   H & #    Mwwwww/##")
+renderLine(11,"#o                                                                           BA<bbb #s! `#        # H     |wwwwwL##")
+renderLine(12,"###################################################################################################################")
+
+oxyd_shuffle()
+
+enigma.SendMessage(enigma.GetNamedObject("door1"),"open",nil)
+
+AddRubberBand(enigma.GetNamedObject("h1"),enigma.GetNamedObject("r1"),10,6)
+
+ff1=0
+function funcc1()
+if ff1==0 then
+   enigma.SendMessage(enigma.GetNamedObject("b1"),"direction",EAST)
+   ff1=1
+end
+end
+
+display.SetFollowMode(display.FOLLOW_SCROLLING)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

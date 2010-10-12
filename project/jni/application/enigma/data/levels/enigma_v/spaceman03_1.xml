@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Fatal Attraction III" el:subtitle="" el:id="spaceman3"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Spaceman" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Spaceman</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- !!BBE105!! Do not delete this line
+-- modified by raoul
+
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+levelh=13
+levelw=39
+enigma.FlatForce=30
+enigma.SlopeForce=30
+enigma.ElectricForce=30
+cells={}
+items={}
+stones={}
+stones[" "]=cell{}
+cells[" "]=cell{}
+items[" "]=cell{}
+cells["!"]=cell{floor="fl-normal"}
+stones["!"]=cell{stone="st-bluegray"}
+stones["#"]=cell{parent={{file_oxyd,"c"}}}
+items["!"]=cell{item="it-floppy"}
+items["#"]=cell{item="it-yinyang"}
+stones["%"]=cell{stone="st-floppy"}
+stones["h"]=cell{stone="st-door-h"}
+stones["v"]=cell{stone="st-door-v"}
+level={"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"}
+  itmap={"                                       ",
+         "          !                 !          ",
+         "          #                 #          ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       "}
+ stmap={"!!!!!!!!!!%!!!!!!!!!!!!!!!!!%!!!!!!!!!!",
+        "!        v v       !       v v        !",
+        "!  #     !h!     # ! #     !h!     #  !",
+        "!                  !                  !",
+        "!                  !                  !",
+        "!                  !                  !",
+        "!                  !                  !",
+        "!                  !                  !",
+        "!                  !                  !",
+        "!                  !                  !",
+        "!  #             # ! #             #  !",
+        "!                  !                  !",
+        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"}
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+draw_map(0,0,itmap,items)
+--SIGNALS
+Signal ("st(10 0)","st(9 1)")
+Signal ("st(10 0)","st(10 2)")
+Signal ("st(10 0)","st(11 1)")
+Signal ("st(28 0)","st(27 1)")
+Signal ("st(28 0)","st(28 2)")
+Signal ("st(28 0)","st(29 1)")
+-- ACTORS
+set_actor("ac-blackball",10.5,1.5,{player=0,name="black"})
+set_actor("ac-whiteball",28.5,1.5,{player=1,name="white"})
+set_actor("ac-rotor",10.5,11.5,{range=15,force=10,gohome=FALSE,name="rot1"})
+set_actor("ac-rotor",28.5,11.5,{range=15,force=10,gohome=FALSE,name="rot2"})
+--RUBBERBANDS
+AddRubberBand(enigma.GetNamedObject("black"),enigma.GetNamedObject("rot1"),10,100)
+AddRubberBand(enigma.GetNamedObject("white"),enigma.GetNamedObject("rot2"),10,100)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

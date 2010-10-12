@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="The wrong Place?" el:subtitle="" el:id="just17"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="JuSt" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 JuSt</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="1:32"/>
+    </el:info>
+    <el:luamain><![CDATA[
+enigma.ConserveLevel=FALSE
+
+create_world(20, 13)
+oxyd_default_flavor="b"
+
+-- Floor Layer
+fill_floor("fl-light")
+set_floor("fl-water", 9, 4)
+
+-- Item Layer
+set_item("it-trigger", 18, 0, {action="open", target="door2", invisible=FALSE})
+fill_items("it-pipe-h", 1, 1, 2, 2)
+set_item("it-floppy", 3, 1)
+fill_items("it-pipe-v", 1, 3, 2, 3)
+draw_items("it-pipe-es", {1, 6}, {1, 0}, 2)
+draw_items("it-pipe-sw", {1, 7}, {1, 0}, 2)
+draw_items("it-pipe-ne", {1, 8}, {1, 0}, 2)
+draw_items("it-pipe-wn", {1, 9}, {1, 0}, 2)
+draw_items("it-seed", {1, 10}, {1, 0}, 2)
+set_item("it-seed", 1, 11)
+set_item("it-trigger", 8, 12, {action="open", target="door1", invisible=FALSE})
+
+-- Stone Layer
+oxyd(11, 8)
+oxyd(10, 8)
+draw_stones("st-glass2", {0, 0}, {0, 1}, 13)
+draw_stones("st-glass2", {1, 0}, {1, 0}, 7)
+draw_stones("st-glass2", {9, 0}, {1, 0}, 9)
+draw_stones("st-glass2", {3, 1}, {0, 1}, 5)
+draw_stones("st-glass2", {9, 2}, {1, 0}, 9)
+draw_stones("st-glass2", {19, 2}, {0, 1}, 11)
+draw_stones("st-glass2", {17, 3}, {0, 1}, 5)
+draw_stones("st-glass2", {9, 5}, {0, 1}, 6)
+draw_stones("st-glass2", {10, 7}, {1, 0}, 3)
+draw_stones("st-glass2", {3, 9}, {0, 1}, 2)
+draw_stones("st-glass2", {17, 9}, {0, 1}, 2)
+draw_stones("st-glass2", {10, 10}, {1, 0}, 7)
+draw_stones("st-glass2", {1, 12}, {1, 0}, 7)
+draw_stones("st-glass2", {9, 12}, {1, 0}, 9)
+set_stone("st-laser", 8, 0, {dir=SOUTH, on="1"})
+set_stones("st-glass2", {{19, 0}, {9, 3}, {3, 7}, {12, 8}})
+set_stone("st-laser", 19, 1, {dir=WEST, on="1"})
+set_stone("st-mail-e", 3, 6)
+set_stone("st-door", 3, 8, {name="door1", type="v"})
+set_stone("st-door", 12, 9, {name="door2", type="v"})
+set_stone("st-laser", 3, 11, {dir=EAST, on="1"})
+set_stone("st-lightpassenger", 14, 11)
+set_stone("st-laser", 18, 12, {dir=NORTH, on="1"})
+
+-- Actor Layer
+set_actor("ac-blackball", 2.5, 11.5, {player="0", mouseforce="1"})
+
+oxyd_shuffle()
+  ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="esprit 91" el:subtitle="esprit 91" el:id="ss_esp91"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Sven Siggelkow" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Sven Siggelkow</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 39
+levelh = 25
+create_world(levelw, levelh)
+oxyd_default_flavor = "a"
+set_actor("ac-blackball", 35.5,19.5)
+display.SetFollowMode(display.FOLLOW_SCROLLING)
+fill_floor("fl-floor_001")
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+      local c = strsub( pattern, i, i)
+      if c ==   "#" then
+         set_stone("st-stone1", i-1,line)
+      elseif c=="W" then
+         set_stone("st-greenbrown", i-1,line)
+      elseif c=="M" then
+         set_stone("st-greenbrown_move", i-1,line)
+      elseif c=="X" then
+         set_item("it-dynamite",i-1,line)
+         set_stone("st-greenbrown_move", i-1,line)
+      elseif c=="1" then
+         set_stone("st-switch", i-1,line,{name="s1s", target="s1", action="callback"})
+      elseif c=="2" then
+         set_stone("st-switch", i-1,line,{target="s2", action="callback"})
+      elseif c=="3" then
+         set_stone("st-switch", i-1,line,{target="s3", action="callback"})
+      elseif c=="4" then
+         set_stone("st-switch", i-1,line,{name="s4s", target="s4", action="callback"})
+      elseif c=="5" then
+         set_stone("st-switch", i-1,line,{target="s1s", action="onoff"})
+      elseif c=="6" then
+         set_stone("st-switch", i-1,line,{target="s6", action="callback"})
+      elseif c=="7" then
+         set_stone("st-switch", i-1,line,{target="s7", action="callback"})
+      elseif c=="8" then
+         set_stone("st-switch", i-1,line,{target="s8", action="callback"})
+      elseif c=="9" then
+         set_stone("st-switch", i-1,line)
+      elseif c=="A" then
+         set_stone("st-switch", i-1,line,{target="sA", action="callback"})
+      elseif c=="B" then
+         set_stone("st-switch", i-1,line,{name="sBs", target="sB", action="callback"})
+      elseif c=="C" then
+         set_stone("st-switch", i-1,line,{target="sC", action="callback"})
+      elseif c=="D" then
+         set_stone("st-switch", i-1,line,{target="sD", action="callback"})
+      elseif c=="E" then
+         set_stone("st-switch", i-1,line,{target="sE", action="callback"})
+      elseif c=="F" then
+         set_stone("st-switch", i-1,line,{target="sF", action="callback"})
+      elseif c=="0" then
+         set_stone("st-switch", i-1,line,{name="s0s", target="s0", action="callback"})
+      elseif c=="n" then
+         set_stone("st-switch", i-1,line,{target="sn", action="callback"})
+      elseif c=="Z" then
+         set_stone("st-switch", i-1,line,{target="sZ", action="callback"})
+      elseif c=="Y" then
+         set_stone("st-switch", i-1,line,{target="sY", action="callback"})
+      elseif c==">" then set_stone("st-oneway-e", i-1,line)
+      elseif c=="_" then set_stone("st-oneway-s", i-1,line)
+      elseif c=="a" then set_stone("st-oneway-e", i-1,line,{name="a"})
+      elseif c=="b" then set_stone("st-oneway-e", i-1,line,{name="b"})
+      elseif c=="f" then set_stone("st-oneway-e", i-1,line,{name="f"})
+      elseif c=="g" then set_stone("st-oneway-e", i-1,line,{name="g"})
+      elseif c=="h" then set_stone("st-oneway-e", i-1,line,{name="h"})
+      elseif c=="i" then set_stone("st-oneway-e", i-1,line,{name="i"})
+      elseif c=="m" then set_stone("st-oneway-e", i-1,line,{name="m"})
+      elseif c=="o" then set_stone("st-oneway-e", i-1,line,{name="o"})
+      elseif c=="p" then set_stone("st-oneway-e", i-1,line,{name="p"})
+      elseif c=="q" then set_stone("st-oneway-e", i-1,line,{name="q"})
+      elseif c=="r" then set_stone("st-oneway-e", i-1,line,{name="r"})
+      elseif c=="v" then set_stone("st-oneway-e", i-1,line,{name="v"})
+      elseif c=="w" then set_stone("st-oneway-e", i-1,line,{name="w"})
+      elseif c=="c" then set_stone("st-oneway-s", i-1,line,{name="c"})
+      elseif c=="d" then set_stone("st-oneway-s", i-1,line,{name="d"})
+      elseif c=="e" then set_stone("st-oneway-s", i-1,line,{name="e"})
+      elseif c=="j" then set_stone("st-oneway-s", i-1,line,{name="j"})
+      elseif c=="k" then set_stone("st-oneway-s", i-1,line,{name="k"})
+      elseif c=="l" then set_stone("st-oneway-s", i-1,line,{name="l"})
+      elseif c=="s" then set_stone("st-oneway-s", i-1,line,{name="s"})
+      elseif c=="t" then set_stone("st-oneway-s", i-1,line,{name="t"})
+      elseif c=="u" then set_stone("st-oneway-s", i-1,line,{name="u"})
+      elseif c=="O" then
+     oxyd(i-1,line)         
+        end
+    end  
+end
+--               012345678901234567890123456789012345678
+renderLine(00 , "#######################################")
+renderLine(01 , "#O    W1     W2    W3    W4     W     #")
+renderLine(02 , "#     W      W     W     W      W     #")
+renderLine(03 , "#     a      >     >     >      b     #")
+renderLine(04 , "#     W      W     W     W      W     #")  
+renderLine(05 , "#     W      W     W     X      W     #")
+renderLine(06 , "#     WWWWcWWWWWdWWWWWeWMWWWW_WWW    Z#")
+renderLine(07 , "#     W5     W6    W7    W8     W     #")
+renderLine(08 , "#     W      X     M     W      W     #")
+renderLine(09 , "#     f      g     h     i      >     #")
+renderLine(10 , "#     W      W     W     W      W     #")
+renderLine(11 , "#     W      W     W     W      W     #")
+renderLine(12 , "#     WWMW_WWWWWjWWWWWkWWWWWWlWMW    n#") 
+renderLine(13 , "#     W9     WA    WB    WC     W     #")
+renderLine(14 , "#     W      M     W     W      W     #")
+renderLine(15 , "#     m      o     p     q      r     #")
+renderLine(16 , "#     W      W     W     W      W     #")
+renderLine(17 , "#     W      W     W     W      W     #")  
+renderLine(18 , "#     WWWWsWWWWW_MWWWWtWWWWWWuWWW    Y#")
+renderLine(19 , "#     WD     WE    WF    W0     W     #")
+renderLine(20 , "#     W      W     W     W      W     #")
+renderLine(21 , "#     >      >     v     w      >     #")
+renderLine(22 , "#     W      W     W     W      W     #")
+renderLine(23 , "#O    W      W     W     W      W     #")
+renderLine(24 , "#######################################")
+--               012345678901234567890123456789012345678
+
+oxyd_shuffle()
+
+function flip_stone (x, y)
+    local stone = enigma.GetStone (x, y)
+    SendMessage (stone, "flip")
+end
+
+function s1()
+    flip_stone (6,  9)
+    flip_stone (10, 6)
+end
+
+function s2()
+    flip_stone (13, 9)
+    flip_stone (16, 6)
+end
+
+function s3()
+    flip_stone (19, 9)
+    flip_stone (22, 6)
+end
+
+function s4()
+    flip_stone (22, 12)
+end
+
+function s6()
+    flip_stone (25, 9)
+end
+
+function s7()
+    flip_stone (6, 3)
+end
+
+function s8()
+    flip_stone (29, 18)
+end
+
+function sA()
+    flip_stone (19, 15)
+    flip_stone (19, 21)
+end
+
+function sB()
+    flip_stone (16, 12)
+end
+
+function sC()
+    SendMessage ("sBs", "onoff")
+    flip_stone (32, 15)
+end
+
+function sD()
+    flip_stone (6, 15)
+    flip_stone (10, 18)
+    flip_stone (13, 15)
+end
+
+function sE()
+    flip_stone (22, 18)
+end
+
+function sF()
+    flip_stone (19, 15)
+end
+
+function s0()
+    flip_stone (25, 15)
+    flip_stone (22, 18)
+    flip_stone (25, 21)
+    flip_stone (29, 18)
+end
+
+function sZ()
+    flip_stone (32, 3)
+end
+
+function sn()
+    flip_stone (29, 12)
+end
+
+function sY()
+    SendMessage ("s4s", "onoff")
+    SendMessage ("s0s", "onoff")
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

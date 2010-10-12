@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Time is Money" el:subtitle="" el:id="nat11"/>
+      <el:version el:score="2" el:release="2" el:revision="0" el:status="released"/>
+      <el:author  el:name="Nat Pryce" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Nat Pryce</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+enigma.ConserveLevel=FALSE
+
+--time constants changed in Enigma
+function floor( floor_type, attribs )
+    return function( x, y )
+        set_floor( floor_type, x, y, attribs or {} )
+    end
+end
+
+function stone( stone_type, attribs )
+    return function( x, y )
+        set_stone( stone_type, x, y, attribs or {} )
+    end
+end
+
+function item( item_type, attribs )
+    return function( x, y )
+        set_item( item_type, x, y, attribs or {} )
+    end
+end
+
+function actor( actor_type, attribs )
+    return function( x, y )
+        set_actor( actor_type, x+0.5, y+0.5, attribs
+or {} )
+    end
+end
+
+function gradient( gradient_type )
+    return function( x, y )
+        set_floor( "fl-gradient", x, y, {type=gradient_type} )
+    end
+end
+
+function create_world_from_map( tiles, map )
+    create_world( strlen(map[1]), getn(map) )
+    
+    for y,line in pairs(map) do
+        for x = 1,strlen(line) do
+            local tile = strchar(strbyte(line,x))
+            local constructors = tiles[tile]
+            
+            if constructors then
+                for i,constructor in pairs(constructors) do
+                    constructor(x-1,y-1)
+                end
+            else
+                error("invalid tile identifier " ..
+tile )
+            end
+        end
+    end
+end
+
+default_floor = floor("fl-normal")
+
+oxyd_default_flavor = "b"
+
+tiles = {
+    [" "] = { abyss },
+    ["S"] = { floor("fl-normal") },
+    ["W"] = { gradient(SLOPE_S) },
+    ["X"] = { gradient(SLOPE_N) },
+    ["A"] = { gradient(SLOPE_E) },
+    ["D"] = { gradient(SLOPE_W) },
+    ["Q"] = { gradient(SLOPE_LARGE_SE) },
+    ["Z"] = { gradient(SLOPE_LARGE_NE) },
+    ["E"] = { gradient(SLOPE_LARGE_SW) },
+    ["C"] = { gradient(SLOPE_LARGE_NW) },
+    ["q"] = { gradient(SLOPE_SMALL_SE) },
+    ["z"] = { gradient(SLOPE_SMALL_NE) },
+    ["e"] = { gradient(SLOPE_SMALL_SW) },
+    ["c"] = { gradient(SLOPE_SMALL_NW) },
+    ["o"] = { default_floor, 
+              actor("ac-blackball",{player=0}) },
+    ["#"] = { default_floor, 
+              stone("st-rock1") },
+    ["="] = { default_floor, 
+              stone("st-coinslot",
+              {target="laser",action="onoff"})},
+    ["$"] = { default_floor,
+              item("it-coin2") },
+    ["x"] = { default_floor, oxyd },
+    [">"] = { default_floor, 
+              stone("st-laser",
+                    {name="laser",on=TRUE,dir=EAST})},
+}
+
+create_world_from_map( tiles, {
+"                                       ",
+" ##################################### ",
+" #QWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWE# ",
+" =ASoS$SSSSSSSSSSSSSSSSSSSSSSSSSSSSSD# ",
+" #ZXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXzSD# ",
+" #################################ASD# ",
+"                                 #ASD# ",
+" #x#x# ###########################ASD# ",
+" #QWE# #QWWWWWWWWWWWWWWWWWWWWWWWWWqSD# ",
+" #ASD# #ASSSSSSSSSSSSSSSSSSSSSSSSSSSD# ",
+" #ASD# #AScXXXXXXXXXXXXXXXXXXXXXXXXXC# ",
+" >ASD# #ASD########################### ",
+" #ASD# #ASD#                           ",
+" #ASD# #ASD########################### ",
+" #ASD# #ASeWWWWWWWWWWWWWWWWWWWWWWWWWE# ",
+" #ASD# #ASSSSSSSSSSSSSSSSSSSSSSSSSSSD# ",
+" #ASD# #ZXXXXXXXXXXXXXXXXXXXXXXXXXzSD# ",
+" #ASD# ###########################ASD# ",
+" #ASD#                           #ASD# ",
+" #ASD#############################ASD# ",
+" #ASeWWWWWWWWWWWWWWWWWWWWWWWWWWWWWqSD# ",
+" #ASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSD# ",
+" #ZXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXC# ",
+" ##################################### ",
+"                                       ",
+})
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="The Big Swamp" el:subtitle="" el:id="luc10"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Lukas Schüller" el:email="Lucky_Luc@web.de" el:homepage=""/>
+      <el:copyright>Copyright © 2005 Lukas Schüller</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+       <el:dependency el:path="lib/natmaze" el:id="lib/natmaze" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:credits>Thanks to Petr Machata for his ant.lua script and Nat Pryce for his natmaze.lua script</el:credits>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- I took this from Petr Machata's Meditation level
+function cell_to_level( cellx, celly )
+    return originx + cellx * 2, originy + celly * 2
+end
+function render_cell(maze, cellx, celly)
+    x,y = cell_to_level(cellx, celly)
+    cells["w"](x, y)
+    if maze:can_go_south(cellx,celly) then
+       cells["w"](x, y+1)
+    end
+    if maze:can_go_east(cellx,celly) then
+       cells["w"](x+1, y)
+    end
+ end
+originx, originy = nil, nil
+mazew, mazeh = nil, nil
+function get_limits(x,y)
+   originx = originx or x
+   originy = originy or y
+   if (x>originx) then
+      mazew = ceil((x-originx+1)/2)
+   end
+   if (y>originy) then
+      mazeh = ceil((y-originy+1)/2)
+   end
+end
+cells={}
+normal = cell{floor="fl-swamp"}
+wood = cell{floor="fl-samba"}
+cells["w"]=cell{{{randomfloor, {normal, normal, normal, normal, wood}}}}
+cells[" "]=cell{floor="fl-water"}
+cells["Z"]=cell{{{get_limits}}}
+level = {
+  " 0                                    0 ",
+  " Z O                                    ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                        ",
+  "                                      Z ",
+  " 0                                    0 "
+}
+set_default_parent(cells[" "])
+create_world_by_map(level)
+render_maze(new_kruskal_maze(mazew, mazeh), render_cell)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

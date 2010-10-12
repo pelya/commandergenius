@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Chessing Positions" el:subtitle="" el:id="raoul22"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="raoul@users.berlios.de" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="true"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+function floorb(x,y)
+    set_floor("fl-black",x,y,{friction=8})
+end
+function floorc(x,y)
+    set_floor("fl-concrete",x,y,{friction=10})
+end
+levelh=25
+levelw=20
+cells={}
+stones={}
+stones[" "]=cell{}
+cells[" "]=cell{}
+cells[" "]=cell{floor="fl-water"}
+cells["!"]=cell{floor="fl-rock"}
+cells["#"]=cell{parent={{floorc}}}
+cells["-"]=cell{parent={{floorb}}}
+stones["o"]=cell{parent={{file_oxyd,"b"}}}
+stones["#"]=cell{stone="st-grate1"}
+stones["W"]=cell{stone="st-chess_white"}
+stones["B"]=cell{stone="st-chess_black"}
+level={"!!!!    !!!!    !!!!",
+       "!!!      !!      !!!",
+       "!!                !!",
+       "!                  !",
+       "                    ",
+       "    ############    ",
+       "    #----------#    ",
+       "    #----------#    ",
+       "    #--##--##--#    ",
+       "    #--##--##--#    ",
+       "    #####--#####    ",
+       "        #--#        ",
+       "        #--#        ",
+       "    #####--#####    ",
+       "    #--##--##--#    ",
+       "    #--##--##--#    ",
+       "    #----------#    ",
+       "    #----------#    ",
+       "    ############    ",
+       "                    ",
+       "!                  !",
+       "!!                !!",
+       "!!!      !!      !!!",
+       "!!!!    !!!!    !!!!"}
+stmap={"o        oo        o",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "    ############    ",
+       "    #          #    ",
+       "    #          #    ",
+       "    #  ##  ##  #    ",
+       "    #  ##  ##  #    ",
+       "    #####  #####    ",
+       "        #  #        ",
+       "        #  #        ",
+       "    #####  #####    ",
+       "    #  ##  ##  #    ",
+       "    #  ##  ##  #    ",
+       "    #          #    ",
+       "    #          #    ",
+       "    ############    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "o        oo        o"}
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+set_actor("ac-blackball",14,15,{player=1,controllers=2,name="b1"})
+set_actor("ac-whiteball",6,9,{player=0,controllers=1,name="b2"})
+set_item("it-yinyang",14,15)
+set_item("it-yinyang",6,9)
+set_item("it-document",5,8,{text="text1"})
+oxyd_shuffle()
+display.SetFollowMode(display.FOLLOW_SCROLLING)
+-- Set the triggers --
+triggermatrix= {{1,1,1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1,1,1},
+                {0,0,0,0,1,1,0,0,3,3},
+                {0,0,0,0,1,1,0,0,3,3},
+                {0,0,0,0,1,1,0,0,0,0},
+                {0,0,0,0,1,1,0,0,0,0},
+                {0,0,0,0,1,1,0,0,0,0},
+                {0,0,0,0,1,1,0,0,0,0},
+                {2,2,0,0,1,1,0,0,0,0},
+                {2,2,0,0,1,1,0,0,0,0},
+                {1,1,1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1,1,1},}
+pw={{13,8},{14,8},{13,9},{14,9}}
+pb={{5,14},{6,14},{5,15},{6,15}}
+for i = 1, 10 do
+    for j = 1, 12 do
+        if triggermatrix[j][i]==1 then
+            set_item("it-trigger", 5+i-1, 6+j-1,{action = "callback", target = "func_change_floor", invisible=true})
+        elseif triggermatrix[j][i]==2 then
+            set_stone("st-chess_white",5+i-1,6+j-1,{name="w"})
+            set_item("it-trigger", 5+i-1, 6+j-1,{action = "callback", target = "func_black", invisible=true})
+        elseif triggermatrix[j][i]==3 then
+            set_stone("st-chess_black",5+i-1,6+j-1,{name="b"})
+            set_item("it-trigger", 5+i-1, 6+j-1,{action = "callback", target = "func_white", invisible=true})
+        end
+    end
+end
+function func_change_floor(onoff, sender)
+    local x, y = enigma.GetPos(sender)
+    if enigma.GetStone(x,y) ~= nil then
+        farbe=enigma.GetAttrib(enigma.GetStone(x,y),"name")
+        if farbe ~= nil then
+            if farbe == "w" then 
+                set_floor("fl-white",x,y,{friction=8})
+            elseif farbe == "b" then
+                set_floor("fl-abyss_fake",x,y,{friction=8})
+            end
+        end
+    end
+end
+-- are the horses at home --
+function func_black(onoff, sender)
+    --test, if the black horses are on their place
+    at_home_b=0
+    for k=1,4 do
+        if enigma.GetStone(pb[k][1],pb[k][2]) ~= nil then
+            farbe_b=enigma.GetAttrib(enigma.GetStone(pb[k][1],pb[k][2]),"name")
+            if farbe_b == "b" then
+                at_home_b=at_home_b+1
+                if at_home_b==4 then
+                    build_bridge_b()
+                end
+            end
+        end
+    end
+end
+function func_white(onoff, sender)
+    --test, if the white horses are on their place
+    at_home_w=0
+    for k=1,4 do
+        if enigma.GetStone(pw[k][1],pw[k][2]) ~= nil then
+            farbe_w=enigma.GetAttrib(enigma.GetStone(pw[k][1],pw[k][2]),"name")
+            if farbe_w == "w" then
+                at_home_w=at_home_w+1
+                if at_home_w==4 then
+                    build_bridge_w()
+                end
+            end
+        end
+    end
+end
+-- build bridges to the oxyds --
+function build_bridge_w()
+    set_floor("fl-concrete",3,19)
+    set_floor("fl-concrete",4,19)
+    set_floor("fl-concrete",2,20)
+    set_floor("fl-concrete",3,20)
+    set_floor("fl-concrete",4,20)
+    set_floor("fl-concrete",2,21)
+    set_floor("fl-concrete",3,21)
+    set_floor("fl-concrete",9,19)
+    set_floor("fl-concrete",9,20)
+    set_floor("fl-concrete",9,21)
+    set_floor("fl-concrete",10,19)
+    set_floor("fl-concrete",10,20)
+    set_floor("fl-concrete",10,21)
+    set_floor("fl-concrete",15,19)
+    set_floor("fl-concrete",16,19)
+    set_floor("fl-concrete",15,20)
+    set_floor("fl-concrete",16,20)
+    set_floor("fl-concrete",17,20)
+    set_floor("fl-concrete",16,21)
+    set_floor("fl-concrete",17,21)
+end
+function build_bridge_b()
+    set_floor("fl-concrete",2,2)
+    set_floor("fl-concrete",3,2)
+    set_floor("fl-concrete",2,3)
+    set_floor("fl-concrete",3,3)
+    set_floor("fl-concrete",4,3)
+    set_floor("fl-concrete",3,4)
+    set_floor("fl-concrete",4,4)
+    set_floor("fl-concrete",9,2)
+    set_floor("fl-concrete",9,3)
+    set_floor("fl-concrete",9,4)
+    set_floor("fl-concrete",10,2)
+    set_floor("fl-concrete",10,3)
+    set_floor("fl-concrete",10,4)
+    set_floor("fl-concrete",16,2)
+    set_floor("fl-concrete",17,2)
+    set_floor("fl-concrete",15,3)
+    set_floor("fl-concrete",16,3)
+    set_floor("fl-concrete",17,3)
+    set_floor("fl-concrete",15,4)
+    set_floor("fl-concrete",16,4)
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Remember 'Changing Positions'?</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,1 @@
+enigma.ElectricForce = 60

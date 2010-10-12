@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Keystone" el:subtitle="" el:id="raoul12"/>
+      <el:version el:score="1" el:release="1" el:revision="3" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="raoul@users.berlios.de" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/libpuzzle" el:id="lib/libpuzzle" el:release="2" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="1:10"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Another Level with Puzzles...
+-- GENERAL --
+levelw = 20
+levelh = 37
+create_world(levelw, levelh)
+enigma.ConserveLevel = TRUE
+
+-- DESIGN --
+boden="fl-black"
+wand="st-glass"
+
+-- FLOOR --
+fill_floor("fl-abyss_fake", 0,0,levelw,levelh)
+fill_floor(boden, 3,0,15,13)
+fill_floor(boden, 5,26,11,9)
+
+-- STONES --
+draw_border(wand,3,0,15,13)
+draw_border(wand,5,26,11,9)
+
+-- second room --
+if not difficult then
+set_stone("st-switch_white", 8, 29, {action="callback",target="per1",name="rot1"})
+set_stone("st-switch_white", 8, 31, {action="callback",target="per2",name="rot2"})
+set_stone("st-switch_white", 9, 30, {action="callback",target="per3",name="rot3"})
+set_stone("st-switch_white", 10, 30, {action="callback",target="per4",name="rot4"})
+set_stone("st-switch_white", 11, 30, {action="callback",target="per5",name="rot5"})
+set_stone("st-switch_white", 12, 29,{action="callback",target="per6",name="rot6"})
+set_stone("st-switch_white", 12, 31, {action="callback",target="per7",name="rot7"})
+else
+set_stone("st-switch_white", 8, 29, {action="callback",target="per7",name="rot1"})
+set_stone("st-switch_white", 8, 31, {action="callback",target="per6",name="rot2"})
+set_stone("st-switch_white", 9, 30, {action="callback",target="per5",name="rot3"})
+set_stone("st-switch_white", 10, 30, {action="callback",target="per4",name="rot4"})
+set_stone("st-switch_white", 11, 30, {action="callback",target="per3",name="rot5"})
+set_stone("st-switch_white", 12, 29,{action="callback",target="per2",name="rot6"})
+set_stone("st-switch_white", 12, 31, {action="callback",target="per1",name="rot7"})
+end
+
+-- ACTORS --
+set_actor("ac-blackball", 15.5,10.5, {player=0})
+set_actor("ac-whiteball", 7.5,28.5, {player=1})
+set_item("it-yinyang", 15,10)
+set_item("it-yinyang", 7,28)
+
+-- OXYD --
+oxyd(3,6)
+oxyd(10,0)
+oxyd(10,12)
+oxyd(17,6)
+oxyd_default_flavor = "d"
+oxyd_shuffle()
+
+-- Oranges Puzzleteil:
+puzzle({"## ##",
+        " ### ",
+        "## ##"},{8,5},"redpuzzle","permutation")
+
+-- shift_helper_functions --
+waswo = {"","","","","","","","","","",""}
+nr = 1
+
+function local_translate_type(type)
+    local local_translate_table = {"","w","s","sw","e","ew","es","esw","n","nw","ns","nsw","ne","new","nes","nesw"}
+    return local_translate_table[type]
+end
+
+local i, j = 0, 0
+for i=1, 3 do
+    for j=1, 5 do
+        local this_stone = enigma.GetStone(8+j-1,5+i-1)
+        if this_stone ~= nil then
+            local temp = local_translate_type(enigma.GetAttrib(this_stone,"connections"))
+            waswo[nr] = "st-puzzle2-"..tostring(temp)
+            nr = nr+1
+        end
+    end
+end
+
+-- Blaue Puzzleteile:
+puzzle({"#  # ",
+        "#####",
+        "# #  "},{4,5},"bluepuzzle","none")
+
+puzzle({" #  #",
+        "#####",
+        " #  #"},{12,5},"bluepuzzle","none")
+
+puzzle({"###",
+        " # ",
+        "###",
+        " # ",
+        " # "},{9,1},"bluepuzzle","none")
+
+puzzle({" # ",
+        " ##",
+        "## ",
+        " # ",
+        "###"},{9,7},"bluepuzzle","none")
+
+---------------
+function per1()
+ localram={"",""}
+ localram[1]=waswo[1]
+ localram[2]=waswo[2]
+ tmp=localram[2]
+ localram[2]=localram[1]
+ localram[1]=tmp
+ waswo[1]=localram[1]
+ waswo[2]=localram[2]
+ set_stone(localram[1],8,5)
+ set_stone(localram[2],9,5)
+end
+---------------
+function per2()
+ localram={"",""}
+ localram[1]=waswo[8]
+ localram[2]=waswo[9]
+ tmp=localram[2]
+ localram[2]=localram[1]
+ localram[1]=tmp 
+ waswo[8]=localram[1]
+ waswo[9]=localram[2]
+ set_stone(localram[1],8,7)
+ set_stone(localram[2],9,7)
+end
+---------------
+function per3()
+ localram={"","",""}
+ localram[1]=waswo[2]
+ localram[2]=waswo[5]
+ localram[3]=waswo[9]
+ tmp=localram[3]
+ localram[3]=localram[2]
+ localram[2]=localram[1]
+ localram[1]=tmp
+ waswo[2]=localram[1]
+ waswo[5]=localram[2]
+ waswo[9]=localram[3]
+ set_stone(localram[1],9,5)
+ set_stone(localram[2],9,6)
+ set_stone(localram[3],9,7)
+end
+---------------
+function per4()
+ localram={"","",""}
+ localram[1]=waswo[5]
+ localram[2]=waswo[6]
+ localram[3]=waswo[7]
+ tmp=localram[3]
+ localram[3]=localram[2]
+ localram[2]=localram[1]
+ localram[1]=tmp
+ waswo[5]=localram[1]
+ waswo[6]=localram[2]
+ waswo[7]=localram[3]
+ set_stone(localram[1],9,6)
+ set_stone(localram[2],10,6)
+ set_stone(localram[3],11,6)
+end
+---------------
+function per5()
+ localram={"","",""}
+ localram[1]=waswo[3]
+ localram[2]=waswo[7]
+ localram[3]=waswo[10]
+ tmp=localram[3]
+ localram[3]=localram[2]
+ localram[2]=localram[1]
+ localram[1]=tmp
+ waswo[3]=localram[1]
+ waswo[7]=localram[2]
+ waswo[10]=localram[3]
+ set_stone(localram[1],11,5)
+ set_stone(localram[2],11,6)
+ set_stone(localram[3],11,7)
+end
+---------------
+function per6()
+ localram={"",""}
+ localram[1]=waswo[3]
+ localram[2]=waswo[4]
+ tmp=localram[2]
+ localram[2]=localram[1]
+ localram[1]=tmp
+ waswo[3]=localram[1]
+ waswo[4]=localram[2]
+ set_stone(localram[1],11,5)
+ set_stone(localram[2],12,5)
+end
+---------------
+function per7()
+ localram={"",""}
+ localram[1]=waswo[10]
+ localram[2]=waswo[11]
+ tmp=localram[2]
+ localram[2]=localram[1]
+ localram[1]=tmp
+ waswo[10]=localram[1]
+ waswo[11]=localram[2]
+ set_stone(localram[1],11,7)
+ set_stone(localram[2],12,7)
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

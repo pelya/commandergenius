@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="The Swing" el:subtitle="Per.Oxyd 1" el:id="daniel2"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Daniel Heck" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Daniel Heck</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="per.oxyd">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+oxyd_default_flavor = "c"       -- Default flavor for oxyd stones.
+
+enigma.ConserveLevel = FALSE
+fill_floor("fl-gray")
+draw_border("st-greenbrown")
+draw_border("st-greenbrown", 0,5,3,3)
+draw_border("st-greenbrown", 17,5,3,3)
+oxyd(1,1)
+oxyd(7,1)
+oxyd(12,1)
+oxyd(18,1)
+oxyd(3,6)
+oxyd(16,6)
+oxyd(1,11)
+oxyd(7,11)
+oxyd(12,11)
+oxyd(18,11)
+oxyd_shuffle()
+
+local ac=set_actor("ac-blackball", 10,6.5)
+local st1=set_stone("st-brownie", 1,6)
+local st2=set_stone("st-brownie", 18,6)
+AddRubberBand(ac, st1, 15)
+AddRubberBand(ac, st2, 15)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

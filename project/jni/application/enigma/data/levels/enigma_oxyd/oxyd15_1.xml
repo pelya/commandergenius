@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd"
+  xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Oxyd 15"
+        el:subtitle="Oxyd 15"
+        el:id="20061221ulf010"/>
+      <el:version el:score="1" el:release="1" el:revision="$Revision: 68 $" el:status="released"/>
+      <el:author  el:name="Ulf Stegemann" el:email="ulf-enigma@zeitform.de"
+        el:homepage="http://ulf.zeitform.de"/>
+      <el:copyright>Copyright © 2006 Ulf Stegemann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+        <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false" el:control="force"
+        el:scoreunit="duration" el:scoretarget="time"/>
+      <el:score el:easy="00:39" el:difficult="00:39"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- CELLS --
+cells={}
+cells[" "]=cell{floor="fl-ice"}
+cells["x"]=cell{floor="fl-abyss"}
+cells["#"]=cell{stone="st-plain_move"}
+cells["H"]=cell{stone="st-plain"}
+cells["d"]=cell{item={"it-document",{text="text1"}}}
+cells["P"]=cell{stone="st-plain_move",item="it-pin"}
+cells["."]=cell{item={"it-crack0"}}
+
+-- LANDSCAPE MAP --
+level = {
+   "xxxxxxxxxxxxxxxxxxxx",
+   "0xxxxxxxxxxxxxxxxxx0",
+   "x                  x",
+   "x  ##############  x",
+   "x  #     d      #  x",
+   "x. #    H HH    #  x",
+   "x  #    H  H    #  x",
+   "x  #    HH H    # .x",
+   "x  #            #  x",
+   "x  P#############  x",
+   "x                  x",
+   "0xxxxxxxxxxxxxxxxxx0",
+   "xxxxxxxxxxxxxxxxxxxx"
+}
+
+-- GENERAL --
+enigma.ConserveLevel=TRUE
+oxyd_default_flavor = "a"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+oxyd_shuffle()
+
+-- ACTOR --
+set_actor("ac-blackball",10,6.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english>It's easier with spikes!</el:english>
+        <el:translation el:lang="de">Mit Spikes geht's besser!</el:translation>
+      </el:string>
+     </el:i18n>
+  </el:protected>
+</el:level>

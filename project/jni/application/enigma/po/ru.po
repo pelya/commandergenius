@@ -1,0 +1,4097 @@
+# Russian translations for Enigma.
+# Copyright (C) 2006 Dremuk Serge.
+# This file is distributed under the same license as the Enigma.
+# Dremuk Serge <dremuk@rambler.ru>, 2006.
+#
+#: po/level_i18n.cc:3628
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-12-13 19:40+0100\n"
+"PO-Revision-Date: 2006-12-9 14:48+0300\n"
+"Last-Translator: Dremuk Serge <dremuk@rambler.ru>\n"
+"Language-Team: Russian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/server.cc:144 src/server.cc:158 src/gui/LevelInspector.cc:199
+msgid "Server Error: could not load level '"
+msgstr "Ошибка сервера: невозможно загрузить уровень '"
+
+#: src/client.cc:66
+#, c-format
+msgid "Mouse speed: %d"
+msgstr "Скорость мыши: %d"
+
+#: src/client.cc:77
+msgid "Another nameless level"
+msgstr "Другой безымянный уровень"
+
+#: src/client.cc:81
+msgid " by "
+msgstr " от "
+
+#: src/client.cc:475
+msgid "Left mouse button:"
+msgstr "Левая кнопка мыши:"
+
+#: src/client.cc:475
+msgid "Activate/drop leftmost inventory item"
+msgstr "Использовать/Бросить левый инструмент"
+
+#: src/client.cc:476
+msgid "Right mouse button:"
+msgstr "Правая кнопка мыши:"
+
+#: src/client.cc:476
+msgid "Rotate inventory items"
+msgstr "Циклически прокрутить инвентарь"
+
+#: src/client.cc:477 src/gui/LevelMenu.cc:166 src/gui/ScreenshotViewer.cc:34
+msgid "Escape:"
+msgstr "Esc:"
+
+#: src/client.cc:477
+msgid "Show game menu"
+msgstr "Меню игры"
+
+#: src/client.cc:478
+msgid "F1:"
+msgstr "F1:"
+
+#: src/client.cc:478 src/gui/LevelMenu.cc:167 src/gui/ScreenshotViewer.cc:35
+msgid "Show this help"
+msgstr "Показать эту справку"
+
+#: src/client.cc:479
+msgid "F3:"
+msgstr "F3:"
+
+#: src/client.cc:479
+msgid "Kill current marble"
+msgstr "Разрушить текущий шар"
+
+#: src/client.cc:480
+msgid "Shift+F3:"
+msgstr "Shift+F3:"
+
+#: src/client.cc:480
+msgid "Restart the current level"
+msgstr "Перезагрузить текущий уровень"
+
+#: src/client.cc:481
+msgid "F4:"
+msgstr "F4:"
+
+#: src/client.cc:481
+msgid "Skip to next level"
+msgstr "Cледующий уровень"
+
+#: src/client.cc:482 src/gui/LevelPackComposer.cc:50
+msgid "F5:"
+msgstr "F5:"
+
+#: src/client.cc:483
+#, fuzzy
+msgid "F6:"
+msgstr "F9:"
+
+#: src/client.cc:483
+msgid "Jump back to last level"
+msgstr ""
+
+#: src/client.cc:484
+msgid "F10:"
+msgstr "F10:"
+
+#: src/client.cc:484
+msgid "Make screenshot"
+msgstr "Снимок экрана"
+
+#: src/client.cc:485
+msgid "Left/right arrow:"
+msgstr "Левая/Правая стрелки:"
+
+#: src/client.cc:485
+msgid "Change mouse speed"
+msgstr "Скорость мыши"
+
+#: src/client.cc:486
+msgid "Alt+x:"
+msgstr "Alt+x:"
+
+#: src/client.cc:486
+msgid "Return to level menu"
+msgstr "Меню уровней"
+
+#: src/client.cc:497
+msgid "Skip to next level for best score hunt"
+msgstr "К следующему уровню для улучшения рекорда"
+
+#: src/client.cc:498
+msgid "Skip to next unsolved level"
+msgstr "К следующему нерешенному уровню"
+
+#: src/client.cc:651
+msgid "Too slow for "
+msgstr "Слишком медленно по сравнению с "
+
+#: src/client.cc:656
+msgid "You are slow today.. [Ctrl-A]"
+msgstr "Вы сегодня медленно играете.. [Ctrl-A]"
+
+#: src/client.cc:728
+msgid "Exactly the world record of "
+msgstr "Рекордное время решения - "
+
+#: src/client.cc:730
+msgid "Great! A new world record!"
+msgstr "Отлично! Новый рекорд!"
+
+#: src/client.cc:735
+msgid "Again your personal record..."
+msgstr "Снова Ваш персональный рекорд..."
+
+#: src/client.cc:741
+msgid "New personal record - better than par!"
+msgstr "Новый персональный рекорд - лучший!"
+
+#: src/client.cc:743
+msgid "New personal record, but over par!"
+msgstr "Новый персональный рекорд, но хуже прежнего!"
+
+#: src/client.cc:745
+msgid "New personal record!"
+msgstr "Новый персональный рекорд!"
+
+#: src/client.cc:756
+msgid "Your record, "
+msgstr "Ваш рекорд, "
+
+#: src/client.cc:763
+msgid "behind world record."
+msgstr " опоздания по сравнению с рекордом."
+
+#: src/client.cc:765
+msgid "behind your record."
+msgstr " опоздания по сравнению с Вашим рекордом."
+
+#: src/client.cc:773
+msgid "Level finished - better than par!"
+msgstr "Уровень решен быстрее рекорда!"
+
+#: src/client.cc:775
+msgid "Level finished, but over par!"
+msgstr "Уровень решен медленнее прежнего рекорда!"
+
+#: src/client.cc:777
+msgid "Level finished!"
+msgstr "Уровень решен!"
+
+#: src/client.cc:780
+msgid " Cheater!"
+msgstr " Обманщик!"
+
+#: src/client.cc:809
+#, c-format
+msgid "Enigma pack %s - level #%d: %s"
+msgstr "Пакет уровней %s - уровень #%d: %s"
+
+#: src/client.cc:819
+msgid "Your record: "
+msgstr "Ваш рекорд: "
+
+#: src/client.cc:821
+msgid "World record to beat: "
+msgstr "Рекордное время: "
+
+#: src/main.cc:279
+#, c-format
+msgid "Error in configuration file.\n"
+msgstr "Ошибка в конфигурационном файле.\n"
+
+#: src/main.cc:515 src/main.cc:538
+#, c-format
+msgid "Error Home directory does not exist.\n"
+msgstr "Ошибка! Домашняя папка не существует.\n"
+
+#: src/main.cc:530
+#, c-format
+msgid "Error Application Data directory does not exist.\n"
+msgstr "Ошибка! Папка с данными игры не существует.\n"
+
+#: src/main.cc:558 src/main.cc:607
+#, c-format
+msgid "Error in XML initialization.\n"
+msgstr "Ошибка при инициализации XML.\n"
+
+#: src/main.cc:683
+#, c-format
+msgid ""
+"Mac OS X upgrade from Enigma 1.00\n"
+"\n"
+"The default user data path has changed from\n"
+"  %s \n"
+"\n"
+"to the visible data path\n"
+"  %s \n"
+"\n"
+"If ok Enigma will move your data to this new location.\n"
+"Note that you have to restart Enigma once for completion of this update."
+msgstr ""
+
+#: src/main.cc:684
+msgid "OK"
+msgstr ""
+
+#: src/main.cc:684 src/gui/OptionsMenu.cc:123
+msgid "Never"
+msgstr "Никогда"
+
+#: src/main.cc:684
+msgid "Remind"
+msgstr ""
+
+#: src/main.cc:834
+msgid ""
+"Fatal Error that causes the application to quit:\n"
+"\n"
+msgstr ""
+"Ошибка! Выход из игры:\n"
+"\n"
+
+#: src/main.cc:836 src/gui/MainMenu.cc:227
+msgid "Quit"
+msgstr "Выход"
+
+#: src/gui/MainMenu.cc:70 src/gui/MainMenu.cc:219 src/gui/LevelPackMenu.cc:62
+msgid "Start Game"
+msgstr "Начать игру"
+
+#: src/gui/MainMenu.cc:71
+msgid "Join Game"
+msgstr "Подключиться к игре"
+
+#: src/gui/MainMenu.cc:72 src/gui/OptionsMenu.cc:317
+#: src/gui/ScreenshotViewer.cc:34
+msgid "Back"
+msgstr "Назад"
+
+#: src/gui/MainMenu.cc:110
+msgid "Main developers of the 1.0 release:"
+msgstr "Главные разработчики версии 1.0:"
+
+#: src/gui/MainMenu.cc:111
+msgid "  RONALD LAMPRECHT (lead)"
+msgstr "  RONALD LAMPRECHT (главный разработчик)"
+
+#: src/gui/MainMenu.cc:115
+msgid "Special Thanks To:"
+msgstr "Особая благодарность:"
+
+#: src/gui/MainMenu.cc:116
+msgid "  DANIEL HECK (project founder)"
+msgstr "  DANIEL HECK (основатель проекта)"
+
+#: src/gui/MainMenu.cc:117
+msgid "  MEINOLF SCHNEIDER (game idea, level design)"
+msgstr "  MEINOLF SCHNEIDER (идея игры, дизайн уровней)"
+
+#: src/gui/MainMenu.cc:119
+msgid "Please refer to the manual or the next pages for full credits."
+msgstr "Смотрите руководство или следующие страницы о всех разработчиках."
+
+#: src/gui/MainMenu.cc:121
+msgid "Home Page: http://www.nongnu.org/enigma"
+msgstr "Домашняя страница: http://www.nongnu.org/enigma"
+
+#: src/gui/MainMenu.cc:122
+msgid "Contact: enigma-devel@nongnu.org"
+msgstr "Контакты: enigma-devel@nongnu.org"
+
+#: src/gui/MainMenu.cc:124
+msgid "Enigma is free software and may be distributed under the"
+msgstr "Enigma - свободное программное обеспечение, и может распространяться"
+
+#: src/gui/MainMenu.cc:125
+msgid "terms of the GNU General Public License, version 2."
+msgstr "на условиях GNU GPL версии 2."
+
+#: src/gui/MainMenu.cc:127
+#, fuzzy
+msgid "Copyright (C) 2002-2007 Daniel Heck and contributors."
+msgstr "Авторское право (C) 2002-2005 Daniel Heck и участники."
+
+#: src/gui/MainMenu.cc:129
+msgid "Main developer of all releases:"
+msgstr "Главные разработчики всех версий:"
+
+#: src/gui/MainMenu.cc:143
+msgid "Special Thanks:"
+msgstr "Особая благодарность:"
+
+#: src/gui/MainMenu.cc:156
+msgid "Contributors:"
+msgstr "Участники: "
+
+#: src/gui/MainMenu.cc:220 src/gui/LevelMenu.cc:64
+msgid "Level Pack"
+msgstr "Пакет уровней"
+
+#: src/gui/MainMenu.cc:222
+msgid "Network Game"
+msgstr "Сетевая игра"
+
+#: src/gui/MainMenu.cc:223
+msgid "Editor"
+msgstr "Редактор"
+
+#: src/gui/MainMenu.cc:225 src/gui/GameMenu.cc:48
+msgid "Options"
+msgstr "Настройки"
+
+#: src/gui/MainMenu.cc:226
+msgid "Credits"
+msgstr "Создатели"
+
+#: src/gui/MainMenu.cc:316
+msgid "Preferences Path:"
+msgstr "Путь к настройкам:"
+
+#: src/gui/MainMenu.cc:326
+msgid "User Path:"
+msgstr "Папка пользователя:"
+
+#: src/gui/MainMenu.cc:336
+msgid "User Image Path:"
+msgstr "Изображения:"
+
+#: src/gui/MainMenu.cc:346
+msgid "System Path:"
+msgstr "Системная папка:"
+
+#: src/gui/MainMenu.cc:356
+msgid "Resource Paths:"
+msgstr "Папка с ресурсами:"
+
+#: src/gui/MainMenu.cc:366
+msgid "L10n Path:"
+msgstr "Путь к L10n:"
+
+#: src/gui/OptionsMenu.cc:72 src/gui/OptionsMenu.cc:93
+msgid "muted"
+msgstr "выкл."
+
+#: src/gui/OptionsMenu.cc:110
+msgid "Music in game"
+msgstr "Музыка в игре"
+
+#: src/gui/OptionsMenu.cc:110
+msgid "No music in game"
+msgstr "Без музыки в игре"
+
+#: src/gui/OptionsMenu.cc:115 src/gui/OptionsMenu.cc:119
+#: src/gui/OptionsMenu.cc:218
+msgid "Yes"
+msgstr "Да"
+
+#: src/gui/OptionsMenu.cc:115 src/gui/OptionsMenu.cc:119
+#: src/gui/OptionsMenu.cc:218
+msgid "No"
+msgstr "Нет"
+
+#: src/gui/OptionsMenu.cc:123
+msgid "Auto"
+msgstr "Авто"
+
+#: src/gui/OptionsMenu.cc:206
+msgid "reversed"
+msgstr "реверс"
+
+#: src/gui/OptionsMenu.cc:207
+msgid "mono"
+msgstr "моно"
+
+#: src/gui/OptionsMenu.cc:208
+msgid "normal"
+msgstr "норма"
+
+#: src/gui/OptionsMenu.cc:271 src/gui/LevelInspector.cc:335
+#: src/gui/LevelInspector.cc:351 src/gui/LevelInspector.cc:364
+msgid "unknown"
+msgstr "неизвестный"
+
+#: src/gui/OptionsMenu.cc:336
+msgid "Language: "
+msgstr "Язык: "
+
+#: src/gui/OptionsMenu.cc:337
+msgid "Fullscreen: "
+msgstr "Полный экран: "
+
+#: src/gui/OptionsMenu.cc:338
+msgid "Video mode: "
+msgstr "Видеорежим: "
+
+#: src/gui/OptionsMenu.cc:339
+msgid "Gamma correction: "
+msgstr "Гамма: "
+
+#: src/gui/OptionsMenu.cc:340
+msgid "Mouse speed: "
+msgstr "Скорость мыши: "
+
+#: src/gui/OptionsMenu.cc:349
+msgid "Sound volume: "
+msgstr "Гр. звуков: "
+
+#: src/gui/OptionsMenu.cc:350
+msgid "Sound set: "
+msgstr "Набор звуков: "
+
+#: src/gui/OptionsMenu.cc:351
+msgid "Music volume: "
+msgstr "Гр. музыки: "
+
+#: src/gui/OptionsMenu.cc:352
+msgid "Stereo: "
+msgstr "Стерео: "
+
+#: src/gui/OptionsMenu.cc:353
+msgid "Ratings update: "
+msgstr "Обновлять рейтинг: "
+
+#: src/gui/OptionsMenu.cc:367
+msgid "User name: "
+msgstr "Имя игрока: "
+
+#: src/gui/OptionsMenu.cc:368
+msgid "User path: "
+msgstr "Папка пользователя: "
+
+#: src/gui/OptionsMenu.cc:369
+msgid "User image path: "
+msgstr "Папка эскизов: "
+
+#: src/gui/LevelMenu.cc:62 src/gui/LevelPackMenu.cc:63
+msgid "Main Menu"
+msgstr "Главное меню"
+
+#: src/gui/LevelMenu.cc:166
+msgid "Skip to main menu"
+msgstr "Главное меню"
+
+#: src/gui/LevelMenu.cc:169
+msgid "Arrows:"
+msgstr "Стрелки:"
+
+#: src/gui/LevelMenu.cc:169
+msgid "Select level"
+msgstr "Уровень"
+
+#: src/gui/LevelMenu.cc:170
+msgid "Return:"
+msgstr "Enter:"
+
+#: src/gui/LevelMenu.cc:170 src/gui/LevelMenu.cc:175
+msgid "Play selected level"
+msgstr "Играть уровень"
+
+#: src/gui/LevelMenu.cc:171
+msgid "Back/Space:"
+msgstr "Забой/Пробел:"
+
+#: src/gui/LevelMenu.cc:171
+msgid "Previous/next levelpack"
+msgstr "Предыдущий/Следующий пакет уровней"
+
+#: src/gui/LevelMenu.cc:172
+msgid "Mark current level as Unsolved"
+msgstr "Пометить текущий уровень как Нерешенный"
+
+#: src/gui/LevelMenu.cc:174
+msgid "Alt+Return:"
+msgstr "Alt+Enter"
+
+#: src/gui/LevelMenu.cc:174
+msgid "Switch between fullscreen and window"
+msgstr "Полноэкранный и оконный вид"
+
+#: src/gui/LevelMenu.cc:175 src/gui/LevelPackMenu.cc:48
+msgid "Left click:"
+msgstr "Левый щелчок"
+
+#: src/gui/LevelMenu.cc:176 src/gui/LevelPackMenu.cc:49
+msgid "Right or control click:"
+msgstr "Правый щелчок"
+
+#: src/gui/LevelMenu.cc:176
+msgid "Inspect selected level"
+msgstr "Проверить выбранный уровень"
+
+#: src/gui/LevelMenu.cc:193
+msgid "Select next level for world record hunt"
+msgstr "Выбрать следующий уровень для нового рекорда"
+
+#: src/gui/LevelMenu.cc:195
+msgid "Select next unsolved level"
+msgstr "Выбрать следующий нерешенный уровень"
+
+#: src/gui/LevelMenu.cc:244
+msgid "You are not allowed to play this level yet."
+msgstr "Вам еще не разрешено играть этот уровень."
+
+#: src/gui/LevelMenu.cc:280 src/gui/LevelPackComposer.cc:350
+#, c-format
+msgid "%s: %d levels"
+msgstr "%s: %d уровней"
+
+#: src/gui/LevelMenu.cc:296
+#, c-format
+msgid "%d%% best"
+msgstr "%d%% лучших"
+
+#: src/gui/LevelMenu.cc:301
+#, c-format
+msgid "%d%% par, hcp %.1f"
+msgstr "%d%% рекордов, способность %.1f"
+
+#: src/gui/LevelMenu.cc:305
+#, c-format
+msgid "%d%% solved"
+msgstr "%d%% решено"
+
+#: src/gui/LevelMenu.cc:340
+#, c-format
+msgid "Your time: %d:%02d"
+msgstr "Ваше время: %d:%02d"
+
+#: src/gui/LevelMenu.cc:346
+msgid "That's world record."
+msgstr "Это мировой рекорд."
+
+#: src/gui/LevelMenu.cc:348
+#, c-format
+msgid "That's %d:%02d below world record."
+msgstr "На %d:%02d лучше рекорда."
+
+#: src/gui/LevelMenu.cc:358
+#, c-format
+msgid "World record: %d:%02d"
+msgstr "Рекорд: %d:%02d"
+
+#: src/gui/LevelMenu.cc:360
+#, c-format
+msgid "Par: %d:%02d World record: %d:%02d"
+msgstr "Рекорд: %d:%02d Мировой рекорд: %d:%02d"
+
+#: src/gui/LevelMenu.cc:374
+#, c-format
+msgid "World record by %s: %d:%02d"
+msgstr "Рекорд от %s: %d:%02d"
+
+#: src/gui/LevelMenu.cc:377
+#, c-format
+msgid "Par: %d:%02d World record by %s: %d:%02d"
+msgstr "Рекорд: %d:%02d Мировой рекорд от %s: %d:%02d"
+
+#: src/gui/LevelMenu.cc:407
+msgid "No further unsolved level available!"
+msgstr "Нерешенных уровней нет!"
+
+#: src/gui/LevelPackComposer.cc:42
+msgid "Shift click:"
+msgstr "Shift + щелчок"
+
+#: src/gui/LevelPackComposer.cc:42
+msgid "Add to clipboard"
+msgstr "Добавить в буфер обмена"
+
+#: src/gui/LevelPackComposer.cc:43
+msgid "Shift delete:"
+msgstr "Shift Delete:"
+
+#: src/gui/LevelPackComposer.cc:43
+msgid "Clear clipboard"
+msgstr "Очистить буфер обмена"
+
+#: src/gui/LevelPackComposer.cc:44
+msgid "F8:"
+msgstr "F8:"
+
+#: src/gui/LevelPackComposer.cc:44
+msgid "Insert clipboard as reference"
+msgstr "Вставить из буфера как ссылку"
+
+#: src/gui/LevelPackComposer.cc:45
+msgid "F9:"
+msgstr "F9:"
+
+#: src/gui/LevelPackComposer.cc:45
+msgid "Insert clipboard as copy"
+msgstr "Вставить из буфера как копию"
+
+#: src/gui/LevelPackComposer.cc:47
+msgid "Alt left arrow:"
+msgstr "Alt + Влево:"
+
+#: src/gui/LevelPackComposer.cc:47
+msgid "Exchange level with predecessor"
+msgstr "Поменять уровень с предыдущим"
+
+#: src/gui/LevelPackComposer.cc:48
+msgid "Alt right arrow:"
+msgstr "Alt + Вправо:"
+
+#: src/gui/LevelPackComposer.cc:48
+msgid "Exchange level with successor"
+msgstr "Поменять уровень со следующим"
+
+#: src/gui/LevelPackComposer.cc:49
+msgid "Delete:"
+msgstr "Delete:"
+
+#: src/gui/LevelPackComposer.cc:49
+msgid "Delete level"
+msgstr "Удалить уровень"
+
+#: src/gui/LevelPackComposer.cc:50
+msgid "Update index from levels"
+msgstr "Обновить индекс уровней"
+
+#: src/gui/LevelPackComposer.cc:55
+msgid "F10"
+msgstr "F10"
+
+#: src/gui/LevelPackComposer.cc:56
+msgid "Move clipboard levels"
+msgstr "Поместить уровни из буфера"
+
+#: src/gui/LevelPackComposer.cc:120 src/gui/LevelPackConfig.cc:306
+#: src/gui/LPGroupConfig.cc:99 src/gui/SearchMenu.cc:58
+msgid "Undo"
+msgstr "Отменить"
+
+#: src/gui/LevelPackComposer.cc:121 src/gui/LevelPackConfig.cc:307
+#: src/gui/LPGroupConfig.cc:100 src/gui/LevelInspector.cc:178
+#: src/gui/HelpMenu.cc:34
+msgid "Ok"
+msgstr "Ок"
+
+#: src/gui/LevelPackComposer.cc:364
+#, c-format
+msgid "Clipboard: %d levels"
+msgstr "Буфер: %d уровней"
+
+#: src/gui/LevelPackConfig.cc:154
+msgid "Levelpack:"
+msgstr "Пакет уровней"
+
+#: src/gui/LevelPackConfig.cc:155
+msgid "Owner:"
+msgstr "Владелец:"
+
+#: src/gui/LevelPackConfig.cc:156 src/gui/LPGroupConfig.cc:55
+msgid "Group:"
+msgstr "Группа:"
+
+#: src/gui/LevelPackConfig.cc:157
+msgid "Location"
+msgstr "Размещение"
+
+#: src/gui/LevelPackConfig.cc:158
+msgid "in [All Packs]:"
+msgstr "во [Всех Пакетах]:"
+
+#: src/gui/LevelPackConfig.cc:215
+msgid "Edit Metadata"
+msgstr "Метаданные"
+
+#: src/gui/LevelPackConfig.cc:218
+msgid "Release:"
+msgstr "Выпуск: "
+
+#: src/gui/LevelPackConfig.cc:219
+msgid "Revision:"
+msgstr "Издание: "
+
+#: src/gui/LevelPackConfig.cc:220
+msgid "Compatibility:"
+msgstr "Совместим.:"
+
+#: src/gui/LevelPackConfig.cc:221
+msgid "Default Location:"
+msgstr "Размещение: "
+
+#: src/gui/LevelPackConfig.cc:222
+msgid "Level types:"
+msgstr "Типы уровней:"
+
+#: src/gui/LevelPackConfig.cc:297
+msgid "Please reasign levelpack to another group for group deletion"
+msgstr "Перенесите этот пакет в другую группу для удаления группы"
+
+#: src/gui/LevelPackConfig.cc:300
+msgid "Compose Pack"
+msgstr "Составить пакет"
+
+#: src/gui/LevelPackConfig.cc:302
+msgid "Update Pack"
+msgstr "Обновить пакет"
+
+#: src/gui/LevelPackConfig.cc:381
+msgid ""
+"Error: empty title not allowed - press \"Undo\" to exit without modifications"
+msgstr ""
+"Ошибка: пустое имя не разрешено - нажмите \"Отменить\" для выхода без "
+"изменений"
+
+#: src/gui/LevelPackConfig.cc:393
+msgid "Error: use only \"a-zA-Z0-9 _-#\" for levelpack title"
+msgstr "Ошибка: используйте символы \"a-zA-Z0-9 _-#\" для имени пакета"
+
+#: src/gui/LevelPackConfig.cc:402
+msgid "Error: title already in use - choose another title"
+msgstr "Ошибка: имя уже существует - выберите другое имя"
+
+#: src/gui/LevelPackMenu.cc:46
+msgid "Left column:"
+msgstr "Левая колонка:"
+
+#: src/gui/LevelPackMenu.cc:46
+msgid "Levelpack groups"
+msgstr "Группы пакетов"
+
+#: src/gui/LevelPackMenu.cc:47
+msgid "Right columns:"
+msgstr "Правая колонка:"
+
+#: src/gui/LevelPackMenu.cc:47
+msgid "Levelpacks of selected group"
+msgstr "Пакеты выбранной группы"
+
+#: src/gui/LevelPackMenu.cc:48
+msgid "Select group or levelpack"
+msgstr "Выбрать группу или пакет"
+
+#: src/gui/LevelPackMenu.cc:49
+msgid "Configure group or levelpack"
+msgstr "Настроить группу или пакет"
+
+#: src/gui/LevelPackMenu.cc:60
+msgid "New Group"
+msgstr "Новая группа"
+
+#: src/gui/LevelPackMenu.cc:61 src/gui/SearchMenu.cc:59
+msgid "Search"
+msgstr "Поиск"
+
+#: src/gui/LPGroupConfig.cc:63
+msgid "Position:"
+msgstr "Позиция:"
+
+#: src/gui/LPGroupConfig.cc:97
+msgid "New Pack"
+msgstr "Новый пакет"
+
+#: src/gui/LPGroupConfig.cc:98
+msgid "Delete Group"
+msgstr "Удалить группу"
+
+#: src/gui/LPGroupConfig.cc:128
+msgid ""
+"Error: empty group name not allowed - press \"Undo\" to exit without "
+"modifications"
+msgstr ""
+"Ошибка: пустое имя группы не разрешено - нажмите \"Отменить\" для выхода без "
+"изменений"
+
+#: src/gui/LPGroupConfig.cc:139
+msgid "Error: group name is a duplicate of an existing group"
+msgstr "Ошибка: данное имя группы уже существует"
+
+#: src/gui/LPGroupConfig.cc:144
+msgid "Error: \"Every group\" is a reserved group name"
+msgstr "Ошибка: \"Все группы\" - зарезервированное имя"
+
+#: src/gui/LPGroupConfig.cc:149
+msgid "Error: group name must not be enclosed in square brackets"
+msgstr "Ошибка: имя группы не должно быть в квадратных скобках"
+
+#: src/gui/LPGroupConfig.cc:205
+msgid "Error: group not empty"
+msgstr "Ошибка: группа не пустая"
+
+#: src/gui/ScreenshotViewer.cc:36
+msgid "Page Up:"
+msgstr "Page Up:"
+
+#: src/gui/ScreenshotViewer.cc:36
+msgid "Show previous screenshot"
+msgstr "Предыдущий снимок"
+
+#: src/gui/ScreenshotViewer.cc:37
+msgid "Page Down:"
+msgstr "Page Down:"
+
+#: src/gui/ScreenshotViewer.cc:37
+msgid "Show next screenshot"
+msgstr "Следующий снимок"
+
+#: src/gui/ScreenshotViewer.cc:105
+msgid "No screenshot available:"
+msgstr "Доступных снимков нет:"
+
+#: src/gui/SearchMenu.cc:40
+msgid "Shallow Search:"
+msgstr "Подробный поиск:"
+
+#. TRANSLATORS: the translation can have double size of the english text
+#: src/gui/SearchMenu.cc:42
+msgid "case independent search in title, author, filename"
+msgstr "в имени, авторе, файле без учета регистра"
+
+#: src/gui/LevelInspector.cc:179
+msgid "Screenshot"
+msgstr "Снимок экрана"
+
+#: src/gui/LevelInspector.cc:227
+msgid "Level: "
+msgstr "Уровень: "
+
+#: src/gui/LevelInspector.cc:229 src/gui/LevelInspector.cc:287
+msgid "Author: "
+msgstr "Автор: "
+
+#: src/gui/LevelInspector.cc:230
+msgid "Contact: "
+msgstr "Контакты: "
+
+#: src/gui/LevelInspector.cc:231
+msgid "Homepage: "
+msgstr "Страница: "
+
+#: src/gui/LevelInspector.cc:252
+msgid "Public Ratings"
+msgstr "Публик. рейтинг"
+
+#: src/gui/LevelInspector.cc:254
+msgid "Intelligence: "
+msgstr "Интеллект: "
+
+#: src/gui/LevelInspector.cc:255
+msgid "Dexterity: "
+msgstr "Ловкость: "
+
+#: src/gui/LevelInspector.cc:256
+msgid "Patience: "
+msgstr "Терпение: "
+
+#: src/gui/LevelInspector.cc:257
+msgid "Knowledge: "
+msgstr "Знания: "
+
+#: src/gui/LevelInspector.cc:258
+msgid "Speed: "
+msgstr "Скорость: "
+
+#: src/gui/LevelInspector.cc:259
+msgid "Difficulty: "
+msgstr "Сложность: "
+
+#: src/gui/LevelInspector.cc:280
+msgid "Scores"
+msgstr "Баллы"
+
+#: src/gui/LevelInspector.cc:283
+msgid "You: "
+msgstr "Вы: "
+
+#: src/gui/LevelInspector.cc:284
+msgid "World: "
+msgstr "Мировой: "
+
+#. TRANSLATORS: PAR = professional average rate - an expression used by golfers
+#: src/gui/LevelInspector.cc:286
+msgid "PAR: "
+msgstr "Рекорд: "
+
+#: src/gui/LevelInspector.cc:288
+msgid "Solved %: "
+msgstr "Решено %: "
+
+#: src/gui/LevelInspector.cc:289
+msgid "Solved #: "
+msgstr "Решено #: "
+
+#: src/gui/LevelInspector.cc:311
+msgid "Version"
+msgstr "Версия"
+
+#: src/gui/LevelInspector.cc:314
+msgid "Score: "
+msgstr "Баллы: "
+
+#: src/gui/LevelInspector.cc:316 src/gui/LevelInspector.cc:320
+msgid "Status: "
+msgstr "Статус: "
+
+#: src/gui/LevelInspector.cc:317
+msgid "Release: "
+msgstr "Выпуск: "
+
+#: src/gui/LevelInspector.cc:318
+msgid "Revision: "
+msgstr "Издание: "
+
+#: src/gui/LevelInspector.cc:321
+msgid "Control: "
+msgstr "Контроль: "
+
+#: src/gui/LevelInspector.cc:322
+msgid "Target: "
+msgstr "Цель: "
+
+#: src/gui/LevelInspector.cc:329 src/gui/LevelInspector.cc:345
+msgid "stable"
+msgstr "стабилен"
+
+#: src/gui/LevelInspector.cc:331 src/gui/LevelInspector.cc:347
+msgid "test"
+msgstr "тестовый"
+
+#: src/gui/LevelInspector.cc:333 src/gui/LevelInspector.cc:349
+msgid "experimental"
+msgstr "эксперимент"
+
+#: src/gui/LevelInspector.cc:343
+msgid "released"
+msgstr "выпущен"
+
+#: src/gui/LevelInspector.cc:355
+msgid "force"
+msgstr "сила"
+
+#: src/gui/LevelInspector.cc:358
+msgid "balance"
+msgstr "балланс"
+
+#: src/gui/LevelInspector.cc:361
+msgid "key"
+msgstr "клавиша"
+
+#: src/gui/LevelInspector.cc:369
+msgid "time"
+msgstr "время"
+
+#: src/gui/LevelInspector.cc:370
+msgid "pushes"
+msgstr "толчков"
+
+#: src/gui/LevelInspector.cc:371
+msgid "moves"
+msgstr "движений"
+
+#: src/gui/LevelInspector.cc:388
+msgid "World Record Holders: "
+msgstr "Лучшие баллы: "
+
+#: src/gui/LevelInspector.cc:449
+msgid "Credits: "
+msgstr "Создатели: "
+
+#: src/gui/LevelInspector.cc:460
+msgid "Dedication: "
+msgstr "Посвящение: "
+
+#: src/gui/LevelInspector.cc:471
+msgid "Level Path: "
+msgstr "Путь уровня: "
+
+#: src/gui/LevelInspector.cc:491
+msgid "Id: "
+msgstr ""
+
+#: src/gui/LevelInspector.cc:496
+msgid "Compatibility: "
+msgstr "Совместим.: "
+
+#: src/gui/LevelInspector.cc:504
+msgid "Annotation: "
+msgstr "Аннотация: "
+
+#: src/gui/LevelInspector.cc:509
+msgid "Rating: "
+msgstr "Рейтинг: "
+
+#: src/gui/LevelInspector.cc:511
+msgid "Average: "
+msgstr "Среднее: "
+
+#: src/gui/GameMenu.cc:46
+msgid "Resume Level"
+msgstr "Продолжить"
+
+#: src/gui/GameMenu.cc:47
+msgid "Restart Level"
+msgstr "Начать сначала"
+
+#: src/gui/GameMenu.cc:49
+msgid "Level Info"
+msgstr "Инфо об уровне"
+
+#: src/gui/GameMenu.cc:50
+msgid "Abort Level"
+msgstr "Прервать уровень"
+
+#: src/lev/Proxy.cc:163
+msgid "Error on auto registration of levelfile: "
+msgstr "Ошибка при авторегистрации файла уровня: "
+
+#: src/lev/Proxy.cc:165
+msgid ""
+"Note: the level will not show up in the \"Auto Folder\" levelpack!\n"
+"\n"
+msgstr ""
+"Уровень не будет показан в \"Авто Папке\" пакета уровней!\n"
+"\n"
+
+#: src/lev/Proxy.cc:167 src/lev/PersistentIndex.cc:342 src/d_models.cc:210
+#: src/d_models.cc:224 src/PreferenceManager.cc:181 src/StateManager.cc:178
+msgid "Continue"
+msgstr "Продолжить"
+
+#: src/lev/PersistentIndex.cc:328
+#, fuzzy
+msgid "Error on  update of levelpack index: \n"
+msgstr "Ошибка при регистрации индекса пакета уровней: \n"
+
+#: src/lev/PersistentIndex.cc:330
+msgid ""
+"Note: the current version will be reloaded!\n"
+"\n"
+msgstr ""
+
+#: src/lev/PersistentIndex.cc:337
+msgid "Error on  registration of levelpack index: \n"
+msgstr "Ошибка при регистрации индекса пакета уровней: \n"
+
+#: src/lev/PersistentIndex.cc:339
+msgid ""
+"Note: the levelpack will not show up!\n"
+"\n"
+msgstr ""
+"Пакет уровней не будет показан!\n"
+"\n"
+
+#: src/lua.cc:792
+#, c-format
+msgid "Cannot find '%s'.\n"
+msgstr "Не найден '%s'.\n"
+
+#: src/lua.cc:793 src/lua.cc:800
+#, c-format
+msgid "Your installation may be incomplete or invalid.\n"
+msgstr "Установка не полная или выполнена с ошибкой.\n"
+
+#: src/lua.cc:799
+#, c-format
+msgid "There was an error loading '%s'.\n"
+msgstr "Ошибка при загрузке '%s'.\n"
+
+#: src/lua.cc:801
+#, c-format
+msgid "Error: '%s'\n"
+msgstr "Ошибка: '%s'\n"
+
+#: src/d_models.cc:209 src/d_models.cc:223
+msgid ""
+"\n"
+"\n"
+"This error may cause the application to behave strange!"
+msgstr ""
+"\n"
+"\n"
+"Эта ошибка может вызвать странное поведение Enigma!"
+
+#  level: "Bye!"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:4
+msgid ""
+"But before this, take a look at the final tutorial level Jacob devised for "
+"you.   See it as an exam, if you want to.   It's quite difficult, so don't "
+"despair if you don't get through it at the first time.   Bye!"
+msgstr ""
+"Перед этим, взгляните на последний консультативный уровень (разработанный "
+"для Вас Якобом). Считайте его экзаменом. Он довольно трудный, так что не "
+"отчаивайтесь если не пройдете его с первого раза. Пока!"
+
+#  level: "Bye!"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:5
+msgid ""
+"Well, I hope you enjoyed this tutorial-pack.   You will see most of these "
+"levels a second time in the Enigma packs, together with many new and much "
+"more difficult ones.   Just don't give up on them!"
+msgstr ""
+"Я надеюсь, что Вам понравился консультативный пакет. Вы увидите многие из "
+"этих уровней повторно в пакетах Enigma вместе со многими новыми, и "
+"значительно более трудными. Просто не забывайте о них!"
+
+#  level: "Floors 2"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:9
+msgid "Don't drown in the swamp."
+msgstr "Не утоните в болоте."
+
+#  level: "Timers"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:13
+msgid ""
+"This oscillating stone is a timer-stone. You cannot interact with it, but "
+"nevertheless be aware when you see one: After some time-period anything "
+"might happen ..."
+msgstr ""
+"Этот колеблющийся камень - 'Камень-Таймер'. Вы не можете взаимодействовать с "
+"ним, но, тем не менее знайте: после некоторого времени, может что-то "
+"случиться..."
+
+#  level: "Timers"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:14
+msgid ""
+"The stones with arrows are one-way-stones. As you might have guessed, you "
+"can only pass them in one direction.                Mazes are cherished "
+"elements of Enigma - you will see lots of them."
+msgstr ""
+"Камни со стрелками - односторонние камни. Как Вы могли догадаться, Вы можете "
+"только проходить через них в одном направлении. Лабиринты частые элементы "
+"Enigma - Вы увидите массу их."
+
+#  level: "Timers"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:15
+msgid ""
+"Well done!     When you have finished this level, let's play some example "
+"levels from the actual Enigma packs!"
+msgstr ""
+"Хорошая работа! Когда Вы завершите этот уровень, давайте сыграем несколько "
+"уровней-примеров из пакетов Enigma!"
+
+#  level: "Movement 4"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:19
+msgid "Don't touch everything!"
+msgstr "Не касайтесь ничего!"
+
+#  level: "Items"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:23
+msgid ""
+"Use the right mouse-button to rotate your inventory,  it's the bar at the "
+"bottom of the screen.   And guess what these three items down there can be "
+"used to."
+msgstr ""
+"Используйте правую кнопку мыши, чтобы прокрутить ваш инвентарь (панель внизу "
+"экрана). И подумайте, для чего использовать эти инструменты."
+
+#  level: "Items"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:24
+msgid ""
+"There are lots of different items to use in Enigma, as well as special "
+"floors and stones.   Let's explore some more of the actual Enigma levels!   "
+"And if you have problems with a level - take a look at the manual:   For "
+"some levels, there are hints."
+msgstr ""
+"Есть много других инструментов в Enigma, также как и специальных покрытий и "
+"камней. Давайте изучим некоторые уровни Enigma! И если будут проблемы с "
+"уровнем - взгляните на руководство: для некоторых уровней есть подсказки."
+
+#  level: "Doors and Triggers"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:28
+msgid ""
+"Those doors on the right block your way to the oxyds ... on the left you see "
+"some triggers. Maybe they are somehow connected?"
+msgstr ""
+"Те двери справа блокируют ваш путь к Oxyd-камням... слева Вы видите "
+"триггеры. Может быть они как-нибудь связаны с камнями?"
+
+#  level: "Floors 1"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:32
+msgid "Friction and acceleration depend on the floor type."
+msgstr "Трение и ускорение зависят от типа покрытий."
+
+#: po/level_i18n.cc:36
+msgid ""
+"Welcome to Enigma!  This tutorial I (Jacob Scott) made will help you learn "
+"how to play."
+msgstr ""
+"Добро пожаловать в Enigma! Эта инструкция, которую я (Якоб Скотт) сделал, "
+"поможет Вам узнать, как играть в эту игру."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:37
+msgid ""
+"You control the black ball.  To pick up an object, just roll over it.  You "
+"can bounce off most walls (try it), but avoid the blue floor near the bottom "
+"of the room (actually, try falling into it and then restarting the level "
+"with the 'Esc' key).  While these messages are being displayed, don't click "
+"any buttons or push any keys or the message will stop."
+msgstr ""
+"Вы управляете черным шаром. Для того, чтобы поднять объект, просто "
+"покрутитесь над предметом. Вы можете отскакивать от большинства стен, но "
+"избегайте синего пола около низа комнаты (действительно, попробуйте войти в "
+"него и затем перезапустите уровень клавишей Esc). Пока эти сообщения "
+"отображаются, не щелкайте кнопки иначе они исчезнут."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:38
+msgid "This is pretty self-explanatory."
+msgstr "Это красиво и не требует разъяснений."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:39
+msgid ""
+"Enigma is full of puzzles of various types.  In the next room, you will "
+"encounter your first one."
+msgstr ""
+"Enigma полна задач различных типов. В соседней комнате Вы столкнетесь c "
+"первой из них."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:40
+msgid ""
+"You can't walk on water!  Try pushing the blocks into the water to get to "
+"the other side."
+msgstr ""
+"Вы не можете идти по воде! Попробуйте столкнуть блоки на воду, чтобы дойти "
+"до другой стороны."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:41
+msgid ""
+"Notice that you can't push a row of two or more blocks.  Also, blocks can't "
+"be on the same squares as grates but you can."
+msgstr ""
+"Обратите внимание, что Вы не можете толкать два или более блоков. И блоки не "
+"могут находиться на тех же квадратах, что и решетки, а Вы можете."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:42
+msgid ""
+"There are different types of blocks here.  Those black blocks sink when they "
+"fall into water.  The tan blocks don't sink but don't form bridges either."
+msgstr ""
+"Здесь есть другие типы блоков. Те черные блоки погружаются в воду. Сплошные "
+"блоки не погружаются и не формируют мосты."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:43
+msgid ""
+"That thing is a top -- it will destroy your ball if they touch.  Also, as "
+"long as you are close enough to it, the top will chase you.  If you die, you "
+"will restart at the beginning of the level (if you have any balls left).  "
+"Try to find a way to get past and into the next room (you can use the blocks "
+"in the center of the room as barricades)."
+msgstr ""
+"Эта штука - 'Топ' - уничтожит Ваш шар, если коснется. Также, если Вы близко "
+"от нее, она погонится за Вами. Если Вы умрете, уровень перезапустится "
+"сначала (даже если у Вас останутся шары). Попробуйте найти путь в следующую "
+"комнату (Вы можете использовать блоки в центре комнаты как баррикады)."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:44
+msgid ""
+"Good job!  Notice that the top can't go beneath that block with a black "
+"outline -- you're safe."
+msgstr ""
+"Хорошая работа! Обратите внимание, что 'Топ' не может проходить под этим "
+"блоком с черной чертой -- там Вы в безопасности."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:45
+msgid "Those are different types of floors.  Try going over them."
+msgstr "Это - другие типы покрытий. Попробуйте пройти по ним."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:46
+msgid ""
+"The grayish floors are slopes.  The white floor is inverse-floor (you will "
+"see)."
+msgstr "Серые покрытия - склоны. Белый пол является инверсным (Увидите)."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:47
+msgid ""
+"Watch what happens when you go over those triggers.  See if you can get the "
+"extra ball."
+msgstr ""
+"Посмотрите, что случается, когда Вы проходите над теми триггерами. Сможете "
+"ли Вы получить дополнительный шар."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:48
+msgid ""
+"That's dynamite.  Try dropping some next to that yellowish wall (and moving "
+"out of the way)."
+msgstr "Это динамит. Попробуйте бросить его около желтой стены (и убегайте)."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:49
+msgid "Try using the spade on the holes caused by the dynamite."
+msgstr "Попробуйте использовать лопату в дырах, образованных динамитом."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:50
+msgid ""
+"Those things are bolders -- try moving one of the tan blocks.  Don't fall "
+"into the water or abyss (the black floor)."
+msgstr ""
+"Это 'Болдеры'. Попробуйте переместить один из сплошных блоков. Не упадите в "
+"воду или пучину."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:51
+msgid ""
+"Take the magic wand and hit a bolder.  Try to let the row of three bolders "
+"pass the large column."
+msgstr ""
+"Возьмите волшебную палочку и поразите 'Болдера'. Позвольте колонке из трех "
+"'Болдеров' пройти большую колонну."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:52
+msgid "Hit it hard enough!"
+msgstr "Поразить его достаточно трудно!"
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:53
+msgid ""
+"It appears to be a simple room, but you're getting an extra ball anyway.  "
+"Maybe there is a reason ..."
+msgstr ""
+"Кажется, что это простая комната, но Вы получите дополнительный шар. Может "
+"быть для этого есть причина..."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:54
+msgid ""
+"Try to get the laser beam to hit that black stone, but don't get hit by it!  "
+"Use the mirrors to direct the beam."
+msgstr ""
+"Попробуйте поразить черный камень лазерным лучом, но не пострадайте от него! "
+"Используйте зеркала, чтобы направить луч."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:55
+msgid ""
+"Many objects change when hit with a laser beam.  Try hitting some of the "
+"coins with the laser beam.  Also, try hitting a block over a coin.  Those "
+"stones to your right are knights -- you need to fight (hit) them with a "
+"sword (in the front of your inventory) to get past."
+msgstr ""
+"Многие объекты изменяются, когда на них направлен лазерный луч. Попробуйте "
+"поразить некоторые монеты лазерным лучом. Также, попробуйте поразить блок "
+"над монетой. Те камни справа от Вас - 'Рыцари' - Вам нужно ударить их мечом "
+"(в Вашем инвентаре), чтобы пройти."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:56
+msgid ""
+"Do you have any umbrellas?  Each one will give you approximately ten seconds "
+"of protection from danger (such as falling)."
+msgstr ""
+"У вас есть зонтики? Каждый из них даст Вам примерно десять секунд защиты от "
+"опасности (такой как невесомость)."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:57
+msgid ""
+"Those black stones are fart stones -- they reset all progress made with the "
+"oxyd stones.  The other stones are the oxyd stones.  Match them up to win!"
+msgstr ""
+"Те черные камни - выхлопные камни - они сбрасывают все действия, сделанные с "
+"Oxyd-камнями. Другие камни - Oxyd-камни. Соответствуйте им до победы!"
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:58
+msgid ""
+"This area at the bottom of the screen is your inventory -- when you pick "
+"things up, they go here (there is a maximum of twelve).  To scroll through "
+"the inventory, use the right mouse button or the 'tab' key.  To drop or use "
+"an object, click the left mouse button.  Some objects, such as documents "
+"(like this one), can't be dropped but are instead used.  Those two balls in "
+"your inventory are your extra lives -- if you die in this level, you will "
+"restart at the beginning of the level if you have any balls left (and you "
+"will lose one of the balls)."
+msgstr ""
+"Эта область внизу экрана - Ваш инвентарь. Когда Вы подбираете вещи, они "
+"переходят сюда (максимум двенадцать). Чтобы прокрутить их, используйте "
+"правую кнопку мыши или клавишу TAB. Чтобы бросить или использовать предмет "
+"щелкните левую кнопку мыши. Некоторые объекты, например, документы (подобно "
+"этому), не могут быть выброшены - взамен этого они используются. Два шара в "
+"Вашем инвентаре - дополнительные жизни - если Вы умираете на этом уровне, он "
+"перезапустится, если у Вас есть шары (потеряете один шар)."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:59
+msgid ""
+"Naturally, you're supposed to go through those closed gates at the top of "
+"the screen.                         Try going down that slope near the "
+"bottom of the room to see what's to the "
+"left.                                                         Don't bother "
+"with that trigger below the abyss yet.                                 If "
+"you could hit that small white ball through the one-way blocks (with the "
+"arrows), it might roll down and stop on that trigger.                  You "
+"will need to go in with it but you can't go through the white one-way "
+"block.                            Take the spoon and use it once the white "
+"ball is through (hit it hard)."
+msgstr ""
+"Естественно, Вы предполагаете пройти через те закрытые ворота наверху "
+"экрана. Попробуйте пойти вниз к уклону, чтобы увидеть, что там слева. Пока "
+"не возитесь с этим триггером ниже пучины. Если Вы сможете ударить небольшой "
+"белый шар, чтобы он прошел через односторонний блок (со стрелками), он "
+"скатится вниз и остановиться на этом триггере. Вам нужно войти с ним, но Вы "
+"не можете пройти через белый односторонний блок. Возьмите ложку и "
+"используйте ее, пока белый шар там (ударьте сильно)."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:60
+msgid ""
+"The stone in the top-right of the room is a switch.  Hit it -- it is "
+"probably useful.  In this case the switch opens and closes a door (Do you "
+"remember a door that you weren't able to open?).  The bluish line is a "
+"window -- bridge the water before you do anything with it."
+msgstr ""
+"Камень в верхнем-праве углу комнаты - ключ. Ударьте его - это нужно. В "
+"данном случае ключ открывает и закрывает дверь (Вы помните дверь, в которую "
+"Вы не могли открыть?). Голубоватая линия является окном - перейдите через "
+"воду прежде, чем Вы сделаете, что-нибудь с ней."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:61
+msgid ""
+"That was a rotor (similar to a top).  Some levels have many rotors and tops "
+"to make them difficult.                            However, maybe this rotor "
+"has a purpose; maybe you could get it on that trigger near where the spoon "
+"was.                      It might be convenient to close the gate."
+msgstr ""
+"Это 'Ротор' (подобный 'Топу'). Некоторые уровни имеют много 'Роторов' и "
+"'Топов', что делает их трудными. Тем не менее, может быть 'Ротор' имеет "
+"определенный маршрут; может быть Вы могли бы узнать это от триггера, около "
+"которого была ложка. Было бы удобно закрыть ворота."
+
+#  level: "Oxyd Stones 3"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:65
+msgid "Some stones look exactly like the Oxyd stones!"
+msgstr "Некоторые камни выглядят точно так же, как Oxyd-камни!"
+
+#  level: "Meditation 1"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:69
+msgid ""
+"Move all small marbles into the holes. Only one marble per hole is allowed."
+msgstr "Переместите все маленькие шары в дырки. По одному шару в дырку."
+
+#  level: "Movement 3"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:73
+msgid "Take your time ..."
+msgstr "Не торопитесь..."
+
+#  level: "Movement 1"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:77
+msgid "Learn to move your black ball properly."
+msgstr "Научитесь перемещать черный шар должным образом."
+
+#  level: "Lasers and Mirrors"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:81
+msgid ""
+"The bright light beam is a laser beam.   Don't get to close to it!   But it "
+"has its uses ...    You can use the mirrors to direct the laser to its "
+"targets.   From these, only the light-gray ones are movable, just try it!"
+msgstr ""
+"Яркий луч - 'Лазерный Луч'. Не подходите к нему! У него есть свое "
+"предназначение... Вы можете использовать зеркала, чтобы направлять лазер в "
+"свои цели. Из них, только светло-серые подвижны, попробуйте!"
+
+#  level: "Movement 5"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:85
+msgid "Levels can be larger than one screen."
+msgstr "Уровни могут быть больше одного экрана."
+
+#  level: "Movement 2"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:92
+msgid "Prepare for even more mouse gymnastics in the next levels."
+msgstr "Приготовьтесь к более плавным перемещениям мыши в следующих уровнях."
+
+#  level: "Floors 3"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:96
+msgid "Careful - you can not swim in the water."
+msgstr "Осторожно - Вы не можете плавать в воде."
+
+#  level: "Blocks and Slopes"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:100
+msgid ""
+"This wooden block is movable and heavy enough to hold down the trigger on "
+"the right.   Try to push it there!"
+msgstr ""
+"Этот деревянный блок - подвижный и достаточно тяжелый для поддержки триггера "
+"включенным. Попробуйте толкнуть его туда!"
+
+#  level: "Blocks and Slopes"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:101
+msgid ""
+"Remember?  There are different kinds of floors.  And these are steep ..."
+msgstr "Помните? Есть различные типы покрытий. А эти - крутые..."
+
+#  level: "Blocks and Slopes"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:102
+msgid ""
+"Is there more one can do with wooden blocks?   Yes!  Just explore the next "
+"levels."
+msgstr ""
+"Есть ли другие штуки, которые можно проделывать с деревянными блоками? Да! "
+"Просто изучите следующие уровни."
+
+#  level: "Oxyd Stones 2"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:106
+msgid "Remember the colors."
+msgstr "Запомните цвета."
+
+#  level: "Oxyd Stones 1"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:110
+msgid ""
+"The blue stones are Oxyd stones. Open them by touching them with your black "
+"marble."
+msgstr "Синие камни являются Oxyd-камнями. Откройте их касаясь черным шаром."
+
+#  level: "Minor Obstacle"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:126
+msgid "Let there be light!"
+msgstr "Да будет свет!"
+
+#  level: "More Speed"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:145
+msgid "You need to be fast!"
+msgstr "Вы должны быть быстрым!"
+
+#  level: "Oxyd Link 68"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:150
+msgid "It's a ring!"
+msgstr "Это кольцо!"
+
+#  level: "Letter Bomb"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:166 po/level_i18n.cc:2722
+msgid "Everything's been counted carefully!"
+msgstr "Все было тщательно подсчитано!"
+
+#  level: "Letter Bomb"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:167 po/level_i18n.cc:2723
+msgid "Parts of the tubes disappear during detonation!"
+msgstr "Части труб исчезают в процессе детонации!"
+
+#  level: "Twin Rooms"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:177
+msgid "Don't believe all that you see!"
+msgstr "Не верьте всему, что Вы видите!"
+
+#  level: "Moonwalking"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:197
+msgid "Free fall with fatal consequences!"
+msgstr ""
+
+#  level: "Scrooge"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:216
+msgid "You really will need every penny!"
+msgstr "Вам действительно нужно каждое пенни!"
+
+#  level: "ATARI Nostalgia"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:220
+msgid "Umbrellas prevent free fall!"
+msgstr "Зонтики предохраняют от падения!"
+
+#  level: "Oxyd 31"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:249
+msgid "Rotaryrotaryrot..."
+msgstr ""
+
+#  level: "Soaring High"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:253
+msgid "No problem! Piece of cake!"
+msgstr "Нет проблем! Кусок торта!"
+
+#  level: "Soaring High"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:254
+msgid "It was easy, wasn't it!"
+msgstr "Это было легко, не так ли!"
+
+#  level: "Oxyd 28"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:259
+msgid "For heaven's sake ... don't drown!"
+msgstr ""
+
+#  level: "Take a Break"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:263
+msgid "Forget the laser, try using force!"
+msgstr "Забудьте лазер, попробуйте использовать силу!"
+
+#  level: "The Amazing Maze"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:279
+msgid "Business hours from 8am to 4pm"
+msgstr "Часы работы с 8 до 16"
+
+#  level: "Oxyd 15"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:290 po/level_i18n.cc:2664
+#, fuzzy
+msgid "It's easier with spikes!"
+msgstr "Это сделать легче с помощью лопаты!"
+
+#  level: "Oxyd 17"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:295
+msgid "Nothing but thieves!! Try the mailbox."
+msgstr ""
+
+#  level: "Is It Easy?"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:473
+msgid " . . . There are more than two . . ."
+msgstr " ... Есть более, чем два ..."
+
+#  level: "Flying"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:495
+msgid "You can fly for a short time if you use the umbrella."
+msgstr "Вы можете летать некоторое время, если используете зонтик."
+
+#  level: "The Document"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:499
+msgid "What do you want the first gate to do?"
+msgstr "Что бы Вам хотелось, чтобы сделал первый вентиль?"
+
+#  level: "The Document"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:500
+msgid "Opposite"
+msgstr "Противоположность"
+
+#  level: "The Document"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:501
+msgid ""
+"If ten equals three, five equals four, two equals three, four equals four, "
+"and thirteen equals eight, what does nine equal?"
+msgstr ""
+"Если десять равно трем, пять равно четырем, два равно трем, четыре равно "
+"четырем, и тринадцать равно восьми, чему равно девять?"
+
+#  level: "The Document"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:502
+msgid "Congratulations!"
+msgstr "Поздравляем!"
+
+#  level: "Welcome"
+#  author: "Daniel Heck" email ""
+#: po/level_i18n.cc:510 po/level_i18n.cc:921 po/level_i18n.cc:1558
+#: po/level_i18n.cc:2039 po/level_i18n.cc:3107 po/level_i18n.cc:3262
+#: po/level_i18n.cc:3461
+msgid "Welcome"
+msgstr "Добро пожаловать"
+
+#  level: "Mirror Room II"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:523
+msgid "Same room, new mirrors ..."
+msgstr "Та же комната, новые зеркала..."
+
+#  level: "Welcome to the Machine"
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:530
+msgid ""
+"Sections which have the same color always turn at the same time and in the "
+"same way."
+msgstr ""
+"Секции, которые имеют тот же цвет всегда находятся в то же самое время и на "
+"том же самом пути."
+
+#  level: "Welcome to the Machine"
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:531
+msgid ""
+"Maintenance code: metal-stone-stone-stone-red-yellow-yellow-red-red-stone-"
+"stone."
+msgstr ""
+"Эксплуатационный код: метал-камень-камень-камень-красный-желтый-желтый-"
+"красный-красный-камень-камень."
+
+#  level: "The Grim Reaper"
+#  author: "Daniel Heck" email ""
+#: po/level_i18n.cc:536
+msgid "The Grim Reaper"
+msgstr "Смерть"
+
+#  level: "The Enigmhanoi Towers"
+#  author: "Alain Busser" email ""
+#  comment: "wordplay between 'enigma' and the 'hanoi towers' solitary game"
+#: po/level_i18n.cc:605
+msgid "The Enigmhanoi Towers"
+msgstr "Ханойская Башня Enigma"
+
+#  level: "The Enigmhanoi Towers"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:607
+msgid "Who speaks, does not know (Lao Tse)"
+msgstr "Тот кто говорит, тот не знает (Лао Цзы)"
+
+#  level: "The Enigmhanoi Towers"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:609
+msgid "The wise man laughs (Lao Tse)"
+msgstr "Мудрый человек смеется (Лао Цзы)"
+
+#  level: "The Enigmhanoi Towers"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:611
+msgid "Who knows, does not speak (Lao Tse)"
+msgstr "Тот кто знает, не говорит (Лао Цзы)"
+
+#  level: "Jump!"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:666 po/level_i18n.cc:1460
+msgid "It's a race!"
+msgstr "Это гонка!"
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#  comment: "because there is a 'w' letter in 'awale' as many 'w' letters have been used in these texts; it is not necessary to translate this feature"
+#: po/level_i18n.cc:717
+msgid "The witch of this switch waits for your wish."
+msgstr "Каретка этого выключателя ждет ваших указаний."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:719
+msgid "The witch of this switch resets the awale game."
+msgstr "Каретка этого выключателя сбрасывает игру."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:721
+msgid ""
+"A turn consists in taking the walnuts of a row behind the windowy walls and "
+"sowing them 1 by 1 in the following rows."
+msgstr ""
+"Поворот состоит в сборе колонки орехов за оконными стенами и засеве их один "
+"за другим в следующих колонках."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:723
+msgid ""
+"Warning: What awaits the wailing warrior at the end of a turn? If there are "
+"2 or 3 walnuts in a row, they are a warm award for the warrior, as are the "
+"walnuts in the rows which are in the way to this row, if they are 2 or 3 per "
+"row."
+msgstr ""
+"Внимание: Что ожидает вопящего воина за поворотом? Если есть 2 или 3 ореха в "
+"колонке, они наградят воина, также как и орехи в колонках, которые на пути к "
+"этой колонке, если их - 2 или 3 в колонке."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:725
+msgid "Warning: If one warrior's walls are empty, this awesome warrior wins."
+msgstr "Внимение: Если стены воина пусты, этот воин выигрывается."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:727
+msgid ""
+"When a warrior has awarded more than half the walnuts, he wins. What does he "
+"win? The way to the waiting oxyds he wants."
+msgstr ""
+"Когда воин насобирал больше половины орехов, он выигрывает. Что он "
+"выигрывает? Путь к Oxyd-камням, который ему необходим."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:729
+msgid "Congratulations! You are the most aware awale player of the valley ..."
+msgstr "Поздравляем! Вы - наиболее знающий игрок долины..."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:731
+msgid ""
+"Lost in the savannah? Don't wait and walk on the way to the reset switch on "
+"the far left ..."
+msgstr ""
+"Заблудились в саванне? Не ждите и идите к переключателю далеко слева..."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:733
+msgid "Validate your choice here."
+msgstr "Подтвердите ваш выбор здесь."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:735
+msgid "Reset the game."
+msgstr "Сбросьте игру."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:737
+msgid ""
+"A turn consists in taking the stones of a row and sowing them 1 by 1 in "
+"one's other rows, counterclockwise, coming back to the beginning."
+msgstr ""
+"Поворот состоит в сборе камней колонки и засева их один за другим в других "
+"колонках, против часовой стрелки, возвращаясь в начало."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:739
+msgid ""
+"At the end of a turn, if the last stone falls in a nonempty row, one takes "
+"the stones of the facing row if there is any, and repeats a turn."
+msgstr ""
+"В конце поворота, если последний камень падает в непустую колонку, берете "
+"камни из первого ряда если они есть и повторяете поворот."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:741
+msgid "A turn begins in one of the leftmost rows, unless impossible."
+msgstr "Поворот начинается в одной из левых колонок, пока не будет возможно."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:743
+msgid ""
+"At the end of the game (if one player cannot move anymore), the player who "
+"has the most stones wins."
+msgstr ""
+"В конце игры (если один игрок не может больше ничего переместить), игрок, "
+"который имеет больше камней - выигрывает."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:745
+msgid "A yellow stone stands for 10 blue stones (then for 2 brown stones)."
+msgstr "Желтый камень замещает 10 синих камней (затем 2 коричневых камня)."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:747
+msgid "A brown stone stands for 5 blue stones."
+msgstr "Коричневый камень замещает 5 синих камней."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:749
+msgid ""
+"This katro game comes from Madagascar; in Easy mode there is an african "
+"Awale."
+msgstr ""
+"Это игра Катро пришла с Мадагаскара; в Легком режиме есть африканский Awale."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:751
+msgid "Only reset or 'Shift+F3' can make things evolve ..."
+msgstr "Только сброс или Shift+F3 может помочь..."
+
+#  level: "Turn Around"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:803
+msgid "Just a hint: Try the easy-mode first ..."
+msgstr "Подсказка: Попробуйте сначала легкий режим..."
+
+#  level: "Turn Around"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:804
+msgid "Don't think too long ... it's easy!"
+msgstr "Не думайте слишком долго ... это легко"
+
+#  level: "Black Holes"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:808
+msgid "Beware! Black holes!"
+msgstr "Берегитесь! Черные дыры!"
+
+#  level: "Enigmastermind"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:813
+msgid "This switch is to validate your guess."
+msgstr "Этот выключатель  - для проверки предположения."
+
+#  level: "Enigmastermind"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:815
+msgid "This switch is to reset the game."
+msgstr "Этот выключатель  - для сброса игры."
+
+#  level: "Enigmastermind"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:817
+msgid ""
+"Each color appears once. Each correct color produces whites in the wrong "
+"place, blacks in the right one."
+msgstr ""
+"Каждый цвет появляется только один раз; каждый хороший цвет дает белые, если "
+"он на неподходящем месте, черный если на подходящем."
+
+#  level: "Pentomino III"
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:824
+msgid "Simply 5*12 ..."
+msgstr "Просто 5*12 ..."
+
+#  level: "Growing Boxes"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:852
+msgid "You'd need a portable box!"
+msgstr "Вам нужен подвижный ящик!"
+
+#  level: "Growing Boxes"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:853
+msgid ""
+"Congratulations! You found a seed! Try to use it behind the grate (and move "
+"away quickly)"
+msgstr ""
+"Поздравляем! Вы обнаружили семя! Попробуйте использовать его за решеткой (и "
+"быстро убегайте)"
+
+#  level: "Growing Boxes"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:854
+msgid ""
+"Remember that you can't fill a closed bridge with a "
+"box ...                                           but maybe you can use the "
+"3rd seed differently!"
+msgstr ""
+"Помните, что Вы не можете заполнить закрытый мост ящиком... но, может быть, "
+"Вы можете использовать как-нибудь третье семя!"
+
+#  level: "Growing Boxes"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:855
+msgid "There are different kinds of seeds ... Try to use them!"
+msgstr "Есть различные типы семян... Попробуйте использовать их!"
+
+#  level: "Growing Boxes"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#  comment: "read from the right"
+#: po/level_i18n.cc:857
+msgid "Noitcerid etisoppo eht yrt! Tuo syaw owt? Rorrim, rorrim ..."
+msgstr "Еинелварпан еогурд етйуборпоп! Адохыв авд. Олакрез, олакрез ..."
+
+#  level: "Robin's Wood"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:868
+msgid ""
+"A Stone, a Tree, and Trees be Three,   --   For to Defeat the Enemy,   --   "
+"Between Might Lay   --   A Secret Way!   --   (If this you see, press Shift-"
+"F3.)"
+msgstr ""
+"Камень, Дерево, и Деревья будет Три, -- Для того, чтобы победить врага нужно "
+"проложить Секретный Путь! -- (Если Вы видите эти строки, нажмите Shift-F3.)"
+
+#  level: "Do It Yourself"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:884
+msgid "Take some money and build yourself the tools you need."
+msgstr "Соберите деньги и создайте нужный Вам инструмент."
+
+#  level: "Buridan"
+#  author: "Alain Busser" email ""
+#  comment: "wordplay between 'right' (converse of left) and 'right' (true); not necessary to translate."
+#: po/level_i18n.cc:893
+msgid "The other document lies and the left wormhole is the right one."
+msgstr "Другой документ лжет и левая дыра является правой."
+
+#  level: "Buridan"
+#  author: "Alain Busser" email ""
+#  comment: "wordplay between 'left (converse of right) and 'been left' (abandonned); not necessary to translate."
+#: po/level_i18n.cc:896
+msgid ""
+"The other document tells the truth and the other wormhole has been left on "
+"the right side."
+msgstr "Другой документ говорит правду и другая дыра - на правой стороне."
+
+#  level: "Easy Shifting.."
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:912
+msgid "Dedicated to my friend Frank."
+msgstr "Посвящается моему другу Фрэнку."
+
+#  level: "Easy Shifting.."
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:913
+msgid "This level is quite straightforward, isn't it? Just continue .. ;-)"
+msgstr "Этот уровень совсем прост, не правда ли? Просто продолжайте... ;-)"
+
+#  level: "Welcome"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:922
+msgid "Welcome to Enigma II"
+msgstr "Добро пожаловать в Enigma II"
+
+#  level: "Road to Eden"
+#  author: "Alain Busser" email ""
+#  comment: "this level has been inspired by the labyrinth of Chartres cathedral, which represents the difficult road that leads to wisdom"
+#: po/level_i18n.cc:946
+msgid "Road to Eden"
+msgstr "Дорога в Эдем"
+
+#  level: "The Fuse"
+#  author: "capkoh" email ""
+#: po/level_i18n.cc:959
+msgid "Dead end!"
+msgstr "Конец пути!"
+
+#  level: "The Fuse"
+#  author: "capkoh" email ""
+#: po/level_i18n.cc:960
+msgid "There are two HIDDEN items!"
+msgstr "Есть два СКРЫТЫХ инструмента!"
+
+#  level: "The Fuse"
+#  author: "capkoh" email ""
+#: po/level_i18n.cc:961
+msgid "Third stone from the rock is the hole!"
+msgstr "Третий камень скалы - дыра!"
+
+#  level: "Knight Moves"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:974
+msgid "So,  where  are  the  knights?  -  you'll  be  sorry  you  asked!"
+msgstr "Так, где - рыцари? - Вы будете сожалеть, что спросили!"
+
+#  level: "Pentomino I"
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:984
+msgid "Five form twelve!"
+msgstr "Пять формирует двенадцать!"
+
+#  level: "Khun Phan"
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:991
+msgid ""
+"One of the puzzle stones needs to be placed onto the trigger "
+"field.                       Guess which ... :)"
+msgstr ""
+"Один из камней должен быть помещен в область триггера. Догадайся какой ... :)"
+
+#  level: "Khun Phan"
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:992
+msgid "The level preview might help ..."
+msgstr "Предпросмотр уровня может помочь..."
+
+#  level: "Laser Paradise"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:996
+msgid "...  now  go  back  and  get  the  hammer!"
+msgstr "... теперь возвращайтесь и возьмите молоток!"
+
+#  level: "Laser Magic"
+#  author: "Petr Machata" email ""
+#: po/level_i18n.cc:1012
+msgid "Give it another try ..."
+msgstr "Попробуйте еще раз..."
+
+#  level: "- Meditation -"
+#  author: "Edward" email ""
+#: po/level_i18n.cc:1028
+msgid "- Meditation -"
+msgstr "- Медитация -"
+
+#  level: "Pentomino V"
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:1056
+msgid "And last not least: 3*20 = 60"
+msgstr "И последний раз не меньше: 3*20=60"
+
+#  level: "Enignimm"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1061
+msgid ""
+"You play against Big Brother; each player in turn deletes 1, 2 or 3 stones; "
+"the one who deletes the last stone LOOSES!!!"
+msgstr ""
+"Вы играете против Большого Брата; каждый игрок удаляет 1, 2 или 3 камня; "
+"тот, который удалит последний камень - проиграл!!!"
+
+#  level: "Enignimm"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1063
+msgid "Now you begin this game."
+msgstr "Сейчас Вы начнете игру."
+
+#  level: "Enignimm"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1065
+msgid "Poor little blackball ... 'SHIFT+F3'!!!"
+msgstr "Бедный маленький черный шар... SHIFT+F3!"
+
+#  level: "Moure-Switches"
+#  author: "Andreas Lochmann" email ""
+#  comment: "The sequence of the four elements is important, as they are connected to the colors of the floor."
+#: po/level_i18n.cc:1077
+msgid "Our full attention this is worth:           Air and Fire, Water, Earth."
+msgstr "Наше внимание нужно заслужить: Воздух и Огонь, Вода, Земля."
+
+#  level: "Moure-Switches"
+#  author: "Andreas Lochmann" email ""
+#  comment: "Just a hint to regard the floor."
+#: po/level_i18n.cc:1080
+msgid ""
+"And if your answer can’t be found           then shame on you, eyes to the "
+"ground!"
+msgstr ""
+"И если Вы попытаетесь вырваться из связей, тогда позор Вам. Опустите глаза!"
+
+#  level: "Pharaoh's Tomb"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:1099
+msgid "Some stones are movable."
+msgstr "Некоторые камни подвижны."
+
+#  level: "Pharaoh's Tomb"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:1100
+msgid "You lost!"
+msgstr "Вы проиграли! "
+
+#  level: "Tool Time"
+#  author: "Barry & Lori Mead" email "bmead15@cox.net"
+#: po/level_i18n.cc:1131
+msgid "Make a Sword, & Umbrella."
+msgstr "Найдите Меч и Зонтик."
+
+#  level: "It's Magic"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:1135
+msgid "Do not use too much magic!"
+msgstr "Не используйте слишком много магии!"
+
+#  level: "Domain of Mysteries"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:1151
+msgid "Press F3 or finish."
+msgstr "Нажмите F3 или заканчивайте"
+
+#  level: "Disk Royal"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1161
+msgid "is  black  always  beautiful?"
+msgstr "Разве черное всегда красивое?"
+
+#  level: "Running Stone"
+#  author: "Christoph & Anita" email ""
+#: po/level_i18n.cc:1363
+msgid "A hammer destroys some black stones."
+msgstr "Молоток разрушает черные камни."
+
+#  level: "Running Stone"
+#  author: "Christoph & Anita" email ""
+#: po/level_i18n.cc:1364
+msgid "Watch out for a disappearing stone."
+msgstr "Следите за исчезающими камнями."
+
+#  level: "What's the Problem?"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:1383
+msgid "Alfred Nobel says: This is definitely a meditation landscape!"
+msgstr "Альфред Нобель говорит: Это определенно пейзаж для медитации!"
+
+#  level: "Bizarro World"
+#  author: "Jacob Scott" email ""
+#  comment: "read from the right"
+#: po/level_i18n.cc:1394
+msgid ".moor txen eht ot teg ot syaw owt era erehT"
+msgstr ".утанмок юущюуделс в итйорп абосопс авд ьтсЕ"
+
+#  level: "How solid?"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:1413
+msgid ""
+"That wasn't fast enough; try "
+"F3.                                                                              "
+"(Or search for non-solid stones, if you "
+"want.)                                                                                                        "
+"(But you won't find "
+"any.)                                                                                                                  "
+"(Really!)"
+msgstr ""
+
+#  level: "How solid?"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:1414
+msgid ""
+"You can believe me: All stones you see in this level are "
+"solid!                                                                                      "
+"You can really believe "
+"me!                                                                               "
+"Really!"
+msgstr ""
+
+#  level: "NO Trespassing"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:1418
+msgid "! -  DANGER  -  NO TRESPASSING  -  DANGER  - !"
+msgstr "! - ОПАСНОСТЬ - нет нарушения прав доступа - ОПАСНОСТЬ - !"
+
+#  level: "The Flagstone Reaper"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:1435
+msgid "The Flagstone Reaper"
+msgstr "Жатка камней"
+
+#  level: "The Flagstone Reaper"
+#  author: "Andreas Lochmann" email ""
+#  comment: "Difficult to translate. If you have no idea, just say: Why on this side does this message sit? The Reaper has a use for it"
+#: po/level_i18n.cc:1438
+msgid ""
+"No hint today ...    Those flagstones pass away ...    The docu stands "
+"alone ...    Why is it so alone?    --    This hint today ...    Why is it "
+"on this side ...    The reaper passing by ...    Could know the reason "
+"why!     (orig. by Herman's Hermits)   "
+msgstr ""
+"Никаких подсказок... Те камни прошли...  Доку одинок... Почему он так "
+"одинок?  - Это подсказка... Почему он на этой стороне...Жатка, прошла... Как "
+"бы узнать причину! (ориг. <<Отшельники>> Германа)"
+
+#  level: "Little Puzzles"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1470
+msgid "Oops ... you're stuck ...     Try again ..."
+msgstr "Оопс... Вы застряли... Попробуйте снова..."
+
+#  level: "Little Puzzles"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1471
+msgid ""
+"Congratulations, you reached this side ...      but can you get to the "
+"oxyds? "
+msgstr ""
+"Поздравляем, Вы достигли этой стороны... но можете ли Вы дойти до oxyd-"
+"камней?"
+
+#  level: "Little Puzzles"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1472
+msgid "Well done!"
+msgstr "Хорошая работа!"
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#  comment: "The persons and objects are from the Agatha-Christie-like game 'Cluedo'; their names tend to change from country to country; Mr. White has been changed to 'Whiteball' to make it more 'enigma'."
+#: po/level_i18n.cc:1496
+msgid ""
+"Your uncle Sir Blackball has been murdered last night in his manor, in one "
+"of his 6 rooms, by one of the weapons which are in the cellar; the suspects "
+"are the shy Mrs Peacock, the secret Colonel Mustard, the absent-minded "
+"Professor Plum, the mysterious Rev. Green, the nurse Mrs Whiteball, who "
+"discovered the corpse, and Miss Scarlett whose beauty might be fatal ... you "
+"must find who killed your uncle, where and how."
+msgstr ""
+"Ваш дядя Сэр Блэкбол был убит прошлой ночью в своем поместье, в одной из 6 "
+"комнат, одним из оружий, которые находятся в подвале; подозреваемые - Миссис "
+"Пикок, секретарь Колонел Мастард, рассеянный Профессор Плам, загадочный Рев. "
+"Грин, сестра Миссис Уайтбол, которая обнаружила труп, и мисс Скарлетт, чья "
+"красота могла быть фатальной... Вы должны найти того, кто убил вашего дядю, "
+"где и как."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1498
+msgid "This room is not the crime scene."
+msgstr "Эта комната - не место совершения преступления."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1500
+msgid "The murderer is not Mrs Peacock."
+msgstr "Убийца - не миссис Пикок."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1502
+msgid "The murderer is not Colonel Mustard."
+msgstr "Убийца - не Колонел Мастард."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1504
+msgid "The murderer is not Professor Plum."
+msgstr "Убийца - не профессор Плам."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1506
+msgid "The murderer is not Reverend Green."
+msgstr "Убийца - не Реверенд Грин."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1508
+msgid "The murderer is not Mrs Whiteball."
+msgstr "Убийца - не миссис Уайтбол."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1510
+msgid "The murderer is not Miss Scarlett."
+msgstr "Убийца - не мисс Скарлетт."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1512
+msgid "Sir Blackball has not been killed with the bomb."
+msgstr "Сэр Блэкбол не был убит бомбой."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1514
+msgid "Sir Blackball has not been killed with the dagger."
+msgstr "Сэр Блэкбол не был убит кинжалом."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1516
+msgid "Sir Blackball has not been killed with poison."
+msgstr "Сэр Блэкбол не был отравлен ядом."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1518
+msgid "Sir Blackball has not been killed with the wrench."
+msgstr "Сэр Блэкбол не был убит ключом."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1520
+msgid "Sir Blackball has not been killed with the candlestick."
+msgstr "Сэр Блэкбол не был убит подсвечником."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1522
+msgid "Sir Blackball has not been killed with the hammer."
+msgstr "Сэр Блэкбол не был убит молотком."
+
+#  level: "Where is it?"
+#  author: "Barry & Lori Mead" email "bmead15@cox.net"
+#: po/level_i18n.cc:1541
+msgid "Paint Ahead!"
+msgstr "Рисуйте впереди!"
+
+#  level: "Welcome"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:1559
+msgid "Welcome to Enigma IV"
+msgstr "Добро пожаловать в Enigma IV"
+
+#  level: "The Dark Outside"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:1578
+msgid "What a pity, and there's so much paint left ..."
+msgstr "Какая жалость, так много краски оставлено ..."
+
+#  level: "Light Switches"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:1603
+msgid "Danger ... laser beams!"
+msgstr "Опасность... лазерные лучи!"
+
+#  level: "Big Adventures"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1619
+msgid "Too many wooden blocks!  Try the other way ..."
+msgstr "Слишком много деревянных блоков! Попробуйте другой способ..."
+
+#  level: "Big Adventures"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1620
+msgid ""
+"Greetings, adventurer!    The road ahead is long and dangerous, so be "
+"careful!"
+msgstr ""
+"Привет, путешественник! Дорога впереди - длинная и опасная, так что будь "
+"осторожен!"
+
+#  level: "Big Adventures"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1621
+msgid "Well done, adventurer!    Good luck!"
+msgstr "Хорошая работа! Удачи!"
+
+#  level: "Big Adventures"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1622
+msgid "Congratulations, adventurer!  You did it!"
+msgstr "Поздравляем, путешественник! Вы сделали это!"
+
+#  level: "Sleeping Serpent"
+#  author: "Raoul Bourquin" email "raoul@users.berlios.de"
+#: po/level_i18n.cc:1635
+msgid "Don't wake it up!"
+msgstr "Не разбудите его!"
+
+#  level: "Run Like Hell"
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:1654
+msgid "Calm down!"
+msgstr "Успокойтесь!"
+
+#  level: "The Life Game"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1665
+msgid "The Life Game"
+msgstr "Игра Жизнь"
+
+#  level: "The Life Game"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1667
+msgid "The nine switches in square serve to configure the initial population."
+msgstr "Девять ключей на площадке служат для задания начальной популяции."
+
+#  level: "The Life Game"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1669
+msgid "START"
+msgstr "СТАРТ"
+
+#  level: "The Life Game"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1671
+msgid "CLEAR"
+msgstr "ОЧИСТИТЬ"
+
+#  level: "Wood robbing"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1685
+msgid "Wood robbing"
+msgstr "Кража древесины"
+
+#  level: "Patterns of Impulse"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:1689
+msgid ""
+"As long as there is motion around the oxyd-stones, you won't reach them.   "
+"So: Don't lose control of the level! It's possible."
+msgstr ""
+"Хотя Вы можете двигаться вокруг oxyd-камней, Вы не достигнете их. И не "
+"теряйте контроля над уровнем! Его можно решить."
+
+#  level: "deja-vu"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1730
+msgid "when  you've  been  particular  places"
+msgstr ""
+
+#  level: "deja-vu"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1732
+msgid "that  you  know  you've  never  seen  before"
+msgstr ""
+
+#  level: "deja-vu"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1734
+msgid "can  you  be  sure?"
+msgstr ""
+
+#  level: "deja-vu"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1736
+msgid "feel  like  I've  been  here  before"
+msgstr ""
+
+#  level: "deja-vu"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1738
+msgid "quote:  Iron  Maiden   -   Deja-Vu"
+msgstr ""
+
+#  level: "deja-vu"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1740
+msgid "for  illmind's  deja  vu  try  the  top  left  corner  ..."
+msgstr ""
+
+#  level: "The Safe"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:1759
+msgid "It's a long way ..."
+msgstr "Это - длинный путь..."
+
+#  level: "Control Panel"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:1769
+msgid "The left-most room is important!"
+msgstr "Самая левая комната - очень важная!"
+
+#  level: "Control Panel"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:1770
+msgid "This is the control panel."
+msgstr "Это - панель управления."
+
+#  level: "Emergency Exit"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:1777
+msgid "Flood Control Dam #3 seems rather unstable. Be quick or be dead."
+msgstr "Кажется, Дамба №3 довольно неустойчива. Будьте быстрее или умрете."
+
+#  level: "Waterworld"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1790
+msgid ""
+"Remember  to  only  move  enough  stones  to  just  look  into  the  next  "
+"room  ..."
+msgstr ""
+"Переместить ровно столько камней, чтобы посмотреть на соседнюю комнату..."
+
+#  level: "Waterworld"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1791
+msgid "You  have  lost  ..."
+msgstr "Вы проиграли..."
+
+#  level: "The Turtle"
+#  author: "Petr Machata" email ""
+#: po/level_i18n.cc:1849
+msgid ""
+"Welcome to the control room. Use the triggers and switches to plan the "
+"movement of the turtle. The switches are, clockwise: Add, Run and Restart."
+msgstr ""
+"Добро пожаловать в управляющую комнату. Используйте триггеры и ключи, чтобы "
+"перемещать черепаху. Ключи - (по часовой стрелке): Добавить, Запустить и "
+"Перезапустить."
+
+#  level: "Block its way!"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1859
+msgid "Don't forget to open the door ..."
+msgstr "Не забудьте открыть дверь..."
+
+#  level: "Block its way!"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1860
+msgid "Good Luck!"
+msgstr "УДАЧИ!"
+
+#  level: "Block its way!"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1861
+msgid "Hurry!"
+msgstr "Поторопись!"
+
+#  level: "Block its way!"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1862
+msgid "Congratulations! (or try again)"
+msgstr "Поздравляем! (или попытайтесь снова)"
+
+#  level: "Block its way!"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1863
+msgid "Almost finished ..."
+msgstr "Почти завершено..."
+
+#  level: "Unfair!"
+#  author: "Petr Machata" email ""
+#: po/level_i18n.cc:1888
+msgid ""
+"I don't believe that you are the Marble. I won't let you pass until you "
+"prove me wrong: you have to be faster than my champion!"
+msgstr ""
+"Я не верю, что Вы - Мраморный Шар. Я не позволю Вам пройти, пока не докажете "
+"мне это: Вы должны быть быстрее моего чемпиона!"
+
+#  level: "Unfair!"
+#  author: "Petr Machata" email ""
+#: po/level_i18n.cc:1889
+msgid "Congratulations! You may pass!"
+msgstr "Поздравляем! Вы можете пройти!"
+
+#  level: "Laser Castle"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:1908
+msgid "A castle lies before you ... beware of guardians!"
+msgstr "Замок лежит перед Вами... берегитесь стражей!"
+
+#  level: "The Sargasso Sea"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:1924
+msgid "This level is much bigger! Press F3!"
+msgstr "Этот уровень значительно больше! Нажмите F3!"
+
+#  level: "The Ditch"
+#  author: "Richi Bützer" email ""
+#: po/level_i18n.cc:1956
+msgid "Risk your life ..."
+msgstr "Рискните жизнью..."
+
+#  level: "- Snow White -"
+#  author: "Petr Machata" email ""
+#: po/level_i18n.cc:1969
+msgid "Look ... they're over there!"
+msgstr "Посмотрите... они там!"
+
+#  level: "Bridge Builders"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1973
+msgid "White helps black, black helps white."
+msgstr "Белый помогет черному, черный помогает белому."
+
+#  level: "Push? Pull!"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:1980
+msgid "Restart with F3 ..."
+msgstr "Перезапустите (F3)..."
+
+#  level: "Automatic Transmission"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:2011
+msgid "The block near the top-left can move."
+msgstr "Блок слева верху можно переместить."
+
+#  level: "White Contrast"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:2027
+msgid ""
+"One  more  and  you  won't  get  this  hammer  until  you  don't  need  it  "
+"anymore!"
+msgstr "Еще немного, и Вы не получите этот молот, пока Вам он не нужен!"
+
+#  level: "Jump And Run"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:2031
+msgid "Watch your step!"
+msgstr "Понаблюдайте за Вашими шагами!"
+
+#  level: "Welcome"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:2040
+msgid "Welcome to Enigma III"
+msgstr "Добро пожаловать в Enigma III"
+
+#  level: "Hidden Danger"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:2053
+msgid "The danger is not visible!!!"
+msgstr "Опасность невидима!!!"
+
+#  level: "Deadend"
+#  author: "Daniel Heck" email ""
+#: po/level_i18n.cc:2057
+msgid "Look closely!"
+msgstr "Взгляните поближе!"
+
+#  level: "esprit 17"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2076
+msgid "Please remember:    42"
+msgstr "Пожалуйста, запомните: 42"
+
+#  level: "esprit 5"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:2092
+msgid "Easy?"
+msgstr "Легко?"
+
+#  level: "Bank-O-Mat"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2105
+msgid "Sorry for inconvenience, the Bank-O-Mat is empty."
+msgstr "Извините за неудобства, Банкомат пуст."
+
+#  level: "esprit 3"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:2133
+msgid "Can you see the hidden oxyd stones?"
+msgstr "Сможете ли Вы увидеть скрытые oxyd-камни?"
+
+#  level: "esprit 52"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2140
+msgid "Sunday, bloody Sunday!"
+msgstr "Воскресенье, кровавое Воскресенье!"
+
+#  level: "esprit 7"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2156
+msgid "Watch out, slippery!"
+msgstr "Внимание, скользко!"
+
+#  level: "esprit 94"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2163
+msgid "If you haven't won, you've lost!"
+msgstr "Если Вы не выиграете, Вы проиграете!"
+
+#  level: "esprit 92"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2170
+msgid "Take the key to the left first!"
+msgstr "Сначала возьмите ключ слева!"
+
+#  level: "esprit 96"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2183
+msgid "It's easier with a shovel!"
+msgstr "Это сделать легче с помощью лопаты!"
+
+#  level: "esprit 8"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2268
+msgid "Umbrellas protect!"
+msgstr "Защита Зонтика!"
+
+#  level: "esprit 73"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2302
+#, fuzzy
+msgid "If you think this is too easy, then play -Bavarian Madness-"
+msgstr "Если Вы думаете, что это - легко, сыграйте в -Баварское Сумашествие-"
+
+#  level: "esprit 59"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2324
+msgid "Watch out!!"
+msgstr "Наблюдайте!!"
+
+#  level: "Demo I18N"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:2377
+msgid "Translate or let it be translated"
+msgstr "Переведите или пусть он будет переведен"
+
+#  level: "Demo I18N"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#  comment: "Let 'right' be ambiguous: correct and opposite of left - if not possible choose correct"
+#: po/level_i18n.cc:2381
+msgid "Read the right document"
+msgstr "Прочитайте правильный документ"
+
+#  level: "Demo I18N"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#  comment: "the correct one and not the right positioned one"
+#: po/level_i18n.cc:2384
+msgid "The right one, not the right one!"
+msgstr "Правый - не правый!"
+
+#  level: "Gardening Work"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:2412
+msgid "Dig in ..."
+msgstr "Закопайте ..."
+
+#  level: "Per.Oxyd 11"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2428
+msgid "Rest on the bright spot for a minute."
+msgstr "Постойте немного на яркой точке."
+
+#  level: "Per.Oxyd 11"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2429
+msgid "You'll do anything you're told!"
+msgstr "Вы должны сделать все, что Вам скажут!"
+
+#  level: "Per.Oxyd 62"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:2434
+msgid "Did you bring your flag?"
+msgstr "Вы принесли Ваш флаг?"
+
+#  level: "Per.Oxyd 28"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:2451
+msgid "Umbreallas protect you against oncomming boulder!"
+msgstr ""
+
+#  level: "Snugly Packed II"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:2461
+msgid "Nothing can stop us!"
+msgstr "Ничто не может остановить нас!"
+
+#  level: "Handle With Care"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:2481
+msgid "Some stones and stone rows can be moved!"
+msgstr "Некоторые камни и колонки камней могут быть перемещены!"
+
+#  level: "Per.Oxyd 27"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:2495
+msgid "If you think that's to easy, try \"Difficulty: Normal\"."
+msgstr ""
+
+#  level: "Per.Oxyd 27"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:2497
+msgid "If you think that's to hard, try \"Difficulty: Easy\"."
+msgstr ""
+
+#  level: "Pipe Dreams"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:2517
+msgid "... did it!"
+msgstr "... сделайте это!"
+
+#  level: "Per.Oxyd 88"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:2567
+msgid "Watch out for water holes!"
+msgstr "Понаблюдайте за водными дырами!"
+
+#  level: "Still Swapping?"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:2584
+msgid "Bricks change!"
+msgstr ""
+
+#  level: "Solvable?"
+#  author: "Barry & Lori Mead" email "bmead15@cox.net"
+#: po/level_i18n.cc:2862
+msgid "Make an umbrella."
+msgstr "Раскройте зонтик."
+
+#  level: "Designed with love"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:2894
+msgid "Did you really think this one was so easy!?"
+msgstr "Вы в самом деле думаете, что это так просто?"
+
+#  level: "Designed with love"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:2896
+msgid "Did you forget something?"
+msgstr "Вы ничего не забыли?"
+
+#  level: "Designed with love"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:2898
+msgid "Go on! There's no way back now!"
+msgstr "Продолжайте! Обратного пути теперь нет!"
+
+#  level: "Designed with love"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:2900
+msgid "STOP! Not this way! There's a short-cut ..."
+msgstr "СТОП! Не этот путь! Есть более короткий путь..."
+
+#  level: "Designed with love"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:2902
+msgid ""
+"There's a trigger one step to the left. If you could keep it depressed, it "
+"would help you a lot if you go back! "
+msgstr ""
+"На шаг слева есть триггер. Если бы Вы могли не нажимать его, он очень помог "
+"бы Вам при возвращении!"
+
+#  level: "Doors forever"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:2921
+msgid "Look carefully at everything!"
+msgstr "Посмотрите тщательно на все!"
+
+#  level: "Doors forever"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:2922
+msgid "Do you need a helping hand?"
+msgstr "Вам нужна рука помощи?"
+
+#  level: "Print 23"
+#  author: "Richi Bützer" email ""
+#: po/level_i18n.cc:2932
+msgid ""
+"If you have never heard about Brainf***, visit e.g. http://en.wikipedia.org/"
+"wiki/Brainfuck before you try to solve this level."
+msgstr ""
+"Если Вы никогда не слышались о Брайанфе, посетите http://en.wikipedia.org/ "
+"wiki/Brainfuck прежде, чем попытаетесь решить этот уровень."
+
+#  level: "Psycho Pushing"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2936
+msgid "If I only had a bag."
+msgstr "Если бы только у меня была сумка."
+
+#  level: "Psycho Pushing"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2937
+msgid "shh ... listen!"
+msgstr "Тсссс. Прислушайтесь!"
+
+#  level: "Blet"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:2942
+msgid ""
+"When you change the color of one square, the colors of the 2 nearest squares "
+"change as well; you must get as many green squares as possible."
+msgstr ""
+"Когда Вы изменяете цвет одного квадрата, цвета 2 ближайших квадратов "
+"изменяются также; Вы должны получить как можно больше зеленых квадратов."
+
+#  level: "Blet"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:2944
+msgid ""
+"You are only allowed to change a color when it is surrounded by the other "
+"color."
+msgstr "Вы можете изменять цвет только тогда, когда он окружен другим цветом."
+
+#  level: "Fatal Attraction II"
+#  author: "Spaceman" email ""
+#: po/level_i18n.cc:2966
+msgid "Don't get attracted!"
+msgstr "Не увлекайтесь!"
+
+#  level: "Hobbyte"
+#  author: "Alain Busser" email ""
+#  comment: "an attempt has been made to imitate the language Aragorn uses in Tolkien's 'the 2 towers', which itself is an imitation of the ancient english Shakespeare wrote; the most faithful way to translate this is then to use a medieval-looking language."
+#: po/level_i18n.cc:2975
+msgid ""
+"Mightie art the Knightes of The Olde Ages who keepe the Elfic Oxyde Stones, "
+"and numerous art the Ghostes who lye in the waye to them; many art the "
+"adventurers who tryed to steale Aylendil the Sworde but none has ever come "
+"back. Hazy is the swampe where the Magick of the Ancients is buryed; the "
+"lair of Whiteballs the dragon thu shalt avoyd in feare of awaken him ..."
+msgstr ""
+"На пути многих Рыцарей Старшего Возраста, хранящих эльфийские Oxyd-камни "
+"попадались многочисленные Приведения; многие авантюристы стремились украсть "
+"Айлендийский меч, но никто не вернулся. Мутное болото поглотило их там, где "
+"похоронены Древние Маги; логовище Уайтболов дракона избегало будить его..."
+
+#  level: "Elaborate"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:2979
+msgid "It is not quite that easy."
+msgstr "Это не совсем легко."
+
+#  level: "Draggers"
+#  author: "Petr Machata" email ""
+#: po/level_i18n.cc:2983
+msgid "This level is symmetric ..."
+msgstr "Этот уровень - симметричный..."
+
+#  level: "Walk The Plank"
+#  author: "Nat Pryce" email ""
+#: po/level_i18n.cc:2987
+msgid ""
+"Here lies Black Ball the pirate, marooned in the year 1802 after travelling "
+"in the wrong direction."
+msgstr ""
+"Здесь лежит Черный шар, оставленный пиратами в 1802 г. во время путешествия "
+"в неправильном направлении."
+
+#  level: "Walk The Plank"
+#  author: "Nat Pryce" email ""
+#: po/level_i18n.cc:2988
+msgid ""
+"To cure sea sickness hold a large bank note between your teeth and lean over "
+"the side."
+msgstr ""
+"Чтобы вылечить морскую болезнь возьмите большую банкноту в зубы и "
+"наклонитесь за борт."
+
+#  level: "The Prison"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:2995
+msgid "Warning ... ... thieves!"
+msgstr "Осторожно ... ... воры!"
+
+#  level: "Send me the keys !"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:3000
+msgid "Send me the keys !"
+msgstr "Пришлите мне ключи!"
+
+#  level: "Send me the keys !"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:3002
+msgid "ALL the keys!!!"
+msgstr "ВСЕ ключи!!!"
+
+#  level: "Tropical Island"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:3012
+msgid ""
+"Why has there always to be an active volcano and a village of marble-eating "
+"inhabitants on a tropical island?"
+msgstr ""
+"Почему на любом тропическом острове всегда есть активный вулкан, если на нем "
+"есть деревня с жителями, которые едят мрамор?"
+
+#  level: "A bayou by you"
+#  author: "Alain Busser" email ""
+#  comment: "alligators=tops, mosquitoes=tops and zombies=death stones"
+#: po/level_i18n.cc:3018
+msgid ""
+"The most dangerous animals of the bayou are the alligators, the "
+"mosquitoes ... and the zombies! (But the zombies at least, don't move ...)"
+msgstr ""
+"Наиболее опасные животные воды - аллигаторы, комары... и зомби! (Но зомби, "
+"по крайней мере, не перемещается...)"
+
+#  level: "Banana Republic"
+#  author: "Alain Busser" email ""
+#  comment: "This is not real spanish, only an ambience"
+#: po/level_i18n.cc:3033
+msgid ""
+"Caramba!! El Dictator has muchos pesos in his cristal safe but muchos costa "
+"guardia too; Hay!! Poor Bola Negra has only frutos and a lasero!!!"
+msgstr ""
+"Черт! Диктатор Эль имеет много песо в кристальном сейфе, но это стоит денег; "
+"Эй!! Бедный Бола Негро имеет только фрукты и лазер!!!"
+
+#  level: "No way out?"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3046
+msgid "No way out?"
+msgstr "Нет выхода?"
+
+#  level: "No way out?"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3047
+msgid "Do you miss something?"
+msgstr "Вы ничего не пропустили?"
+
+#  level: "Pirates Island"
+#  author: "Alain Busser" email ""
+#  comment: "There are coins and wood boxes (pirate's troves) and alimentary junks like seeds, empty bottles and bananas."
+#: po/level_i18n.cc:3053
+msgid "Pirates Island"
+msgstr "Остров Пиратов"
+
+#  level: "Pirates Island"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:3055
+msgid "The pirates have lost several hidden things on this island ..."
+msgstr "Пираты потеряли несколько вещей на этом острове..."
+
+#  level: "Ice-Bomb"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:3077
+msgid ""
+"Remember Seed Puzzle 2? There was a similar problem. Or was it Portable "
+"Laser ...?"
+msgstr ""
+"Помните Загадку о семенах №2? Это - аналогичная задача. Или это был "
+"Портативный Лазер...?"
+
+#  level: "Jumpin' Jack Flash"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:3081
+msgid "This is a meditation landscape: put a small marble into every hole ..."
+msgstr "Это - медитация: поместите каждый маленький шар в каждую дырку..."
+
+#  level: "Welcome"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:3108
+msgid "Welcome to Enigma V"
+msgstr "Добро пожаловать в Enigma V"
+
+#  level: "Life's Cross"
+#  author: "Raoul Bourquin" email "raoul@users.berlios.de"
+#: po/level_i18n.cc:3134
+msgid "Do you need something?"
+msgstr "Вам что-нибудь нужно?"
+
+#  level: "Gods of Enigma II"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3138
+msgid ""
+"You again! We won't let you pass this time! See these Oxyds? You can't reach "
+"them unless you rob our Four Holy Items! But they are well guarded! "
+"Bwahahahaha!"
+msgstr ""
+"Снова Вы! Мы не позволим Вам пройти мимо на этот раз! Видите эти Oxyd-камни? "
+"Вы не сможете достигнуть их пока не возьмете наши Четыре Святых Инструмента! "
+"Но они хорошо охраняются! Ха-Ха-Ха!"
+
+#  level: "Gods of Enigma II"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3139
+msgid ""
+"Fire burns and destroys ... Want to remove blocking stones? Then dig your "
+"way to the Holy Hammer!"
+msgstr ""
+"Огонь сжигает и уничтожает... Хотите удалить блокирующие камни? Тогда "
+"найдите путь к Святому Молоту!"
+
+#  level: "Gods of Enigma II"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3140
+msgid "Try again! Bwahahahaha!"
+msgstr "Попытайтесь снова! Ха-ха-ха!"
+
+#  level: "Gods of Enigma II"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3141
+msgid ""
+"Earth fills and lasts ... Want to replace missing floors? Then build your "
+"way to the Holy Seed!"
+msgstr ""
+"Земля идет вглубь и вширь... Захотелось заменить недостающие перекрытия? "
+"Тогда найдите путь к Святому Семени!"
+
+#  level: "Gods of Enigma II"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3142
+msgid ""
+"Air blows and goes by ... Want to jump across the void? Then make your way "
+"to the Holy Spring!"
+msgstr ""
+"Воздух дует и проходит мимо... Захотелось перепрыгнуть через пустоту? Тогда "
+"найдите путь к Священной Пружине!"
+
+#  level: "Gods of Enigma II"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3143
+msgid ""
+"Water waves and shifts ... Want to trade minds with your partner? Then find "
+"your way to the Holy Yin-Yang!"
+msgstr ""
+"Вода волнуется и движется... Захотелось сравниться умом с вашим партнером? "
+"Тогда найдите путь к Священному Инь-Ян!"
+
+#  level: "Catwalk Meditation"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3154
+msgid "Catwalk Meditation"
+msgstr "Подиум для медитации"
+
+#  level: "Pneumatic Delivery"
+#  author: "Manuel König" email ""
+#: po/level_i18n.cc:3158
+msgid ""
+"This is my first landscape, dedicated to my father. I hope you'll enjoy it!"
+msgstr ""
+"Это - мой первый ландшафт, посвященный моему отцу. Я надеюсь, Вы получите "
+"удовольствие!"
+
+#  level: "Fatal Attraction I"
+#  author: "Spaceman" email ""
+#: po/level_i18n.cc:3162
+msgid "Don't get too attracted!"
+msgstr "Не становитесь слишком увлеченным!"
+
+#  level: "Laser Path"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:3190
+msgid "Try the easy mode first ..."
+msgstr "Попробуйте сначала легкий режим ..."
+
+#  level: "April 1st"
+#  author: "Alain Busser" email ""
+#  comment: "in France it is an habit to tell jokes (what seems true is false) on april 1st, and these jokes are called 'april fishes'."
+#: po/level_i18n.cc:3205
+msgid "April 1st"
+msgstr "1-е апреля"
+
+#  level: "April 1st"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:3207
+msgid "Do you REALLY want to do this???"
+msgstr "Вы ДЕЙСТВИТЕЛЬНО хотите сделать это?"
+
+#  level: "April 1st"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:3209
+msgid ""
+"Didn't your mother tell you that you should not spend your money in such a "
+"careless manner?"
+msgstr ""
+"Ваша мать не говорила Вам, что Вам не следует тратить деньги таким небрежным "
+"способом?"
+
+#  level: "April 1st"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:3211
+msgid "What is the current month?"
+msgstr "Какой сейчас месяц?"
+
+#  level: "April 1st"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:3213
+msgid "What is this level's name?"
+msgstr "Как называется этот уровень?"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3220
+msgid ""
+"Beware, stranger! The ancient gods of Enigma have set many traps to protect "
+"their holy Oxyds! You will have to get through the Four Tests to prove your "
+"worth!"
+msgstr ""
+"Берегись странник! Древние боги Enigma установили много ловушек, чтобы "
+"защитить свои священные Oxyd-камни! Вы должны пройти Четыре Теста, чтобы "
+"доказать, что Вы достойны их!"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3221
+msgid "Prove your speed in the Test of Fire!"
+msgstr "Покажите Вашу скорость в Тесте Огня!"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3222
+msgid "You have proven your worth! The ancients grant you a FLAG!"
+msgstr "Вы доказали, что достойны! Древние предоставляют Вам ФЛАГ!"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3223
+msgid "Prove your intelligence in the Test of Earth!"
+msgstr "Покажите Ваш интеллект в Тесте Земли!"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3224
+msgid "You have proven your worth! The ancients grant you a SPRING!"
+msgstr "Вы доказали, что достойны! Древние предоставляют Вам ПРУЖИНУ!"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3225
+msgid "Prove your dexterity in the Test of Air!"
+msgstr "Докажите Вашу ловкость в Тесте Воздуха!"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3226
+msgid "You have proven your worth! The ancients grant you a NAIL!"
+msgstr "Вы доказали, что достойны! Древние предоставляют Вам ГВОЗДЬ!"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3227
+msgid "Prove your patience in the Test of Water!"
+msgstr "Докажите Ваше терпение в Тесте Воды!"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3228
+msgid ""
+"This can't be! No mortal can reach our Holy Oxyds! Prove yourself once more! "
+"Bwahahahaha!"
+msgstr ""
+"Этого не может быть! Никакой смертный не может получить наши священные Oxyd-"
+"камни! Докажите, что достойны их еще раз! Ха-ха-ха!"
+
+#  level: "Firefox"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#  comment: "Set fire or die"
+#: po/level_i18n.cc:3237
+msgid "Fire or be fired"
+msgstr "Подожги или подожгись сам"
+
+#  level: "Firefox"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#  comment: "Firefox in sense of clever in handling fire"
+#: po/level_i18n.cc:3240
+msgid ""
+"Do you think a bushman would start to search for an extinguisher in the "
+"cellar if a wall of fire were approaching? Be a Firefox - you have the first "
+"5 items to deal with, no more no less!"
+msgstr ""
+"Вы думаете нужно искать огнетушитель пока огонь не настиг Вас? У Вас есть 5 "
+"инструментов для того, чтобы с ним справиться."
+
+#  level: "Firefox"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3242
+msgid ""
+"You can extinguish fire with water. This is a good place to refill your "
+"extinguisher. Be aware, water is rare!"
+msgstr ""
+"Вы можете потушить огонь водой. Хороший способ применения огнетушителя. "
+"Будьте внимательны, воды мало!"
+
+#  level: "Firefox"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3244
+msgid ""
+"OOPS! The maze is broken! Prepare to repair the maze before you destroy it."
+msgstr "Оопс! Головоломка сломана! Отремонтируй ее до того как разрушите."
+
+#  level: "- Meditation -"
+#  author: "Edward" email ""
+#: po/level_i18n.cc:3257
+msgid "Can you relax amid all this chaos?"
+msgstr "Как Вы можете отдыхать в вашей кровати, когда все неспокойно?"
+
+#  level: "Welcome"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:3263
+msgid "Welcome to Enigma VII"
+msgstr "Добро пожаловать в Enigma VII"
+
+#  level: "Free Riders"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3280
+msgid "Free Riders"
+msgstr ""
+
+#  level: "Free Riders"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3282
+msgid "Left or Right Drive?"
+msgstr ""
+
+#  level: "The Wild Hunt"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3299
+msgid "The Wild Hunt"
+msgstr ""
+
+#  level: "Cold Meditation"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3307
+msgid "Freeze by the Power of Light"
+msgstr ""
+
+#  level: "Meditation in Peace"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3330
+msgid "Funeral on Deep Sea"
+msgstr ""
+
+#  level: "Meditation in Peace"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3332
+msgid ""
+"Warning: Do not play this level for more than 10 minutes - you may suffer "
+"sea sickness yourself!"
+msgstr ""
+
+#  level: "jumping ball flash"
+#  author: "illmind" email "illmind@mag-heut.net"
+#: po/level_i18n.cc:3345
+msgid "illmind's jumping ball flash ..."
+msgstr ""
+
+#  level: "jumping ball flash"
+#  author: "illmind" email "illmind@mag-heut.net"
+#: po/level_i18n.cc:3346
+msgid "... of heaven comes the beast from the ..."
+msgstr ""
+
+#  level: "jumping ball flash"
+#  author: "illmind" email "illmind@mag-heut.net"
+#: po/level_i18n.cc:3347
+msgid "... t r a p p e d ..."
+msgstr ""
+
+#  level: "The Passage"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3370
+msgid "Sorry, this switch is currently out of order."
+msgstr ""
+
+#  level: "The Passage"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3372
+msgid "As I already told you, this switch is out of order!"
+msgstr ""
+
+#  level: "The Passage"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3374
+msgid "How often are you going to try this?"
+msgstr ""
+
+#  level: "The Passage"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3376
+msgid "Did anything happen? I'm not sure ..."
+msgstr ""
+
+#  level: "The Passage"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3378
+#, fuzzy
+msgid "Congrats, now it works again!"
+msgstr "Поздравляем! (или попытайтесь снова)"
+
+#  level: "The Passage"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3380
+msgid "No hints available at the moment."
+msgstr ""
+
+#  level: "The Passage"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3382
+msgid "There is a passage right beneath this stone!"
+msgstr ""
+
+#  level: "Chessing Positions"
+#  author: "Raoul Bourquin" email "raoul@users.berlios.de"
+#: po/level_i18n.cc:3386
+msgid "Remember 'Changing Positions'?"
+msgstr "Помните 'Изменение Позиций'?"
+
+#  level: "Houdini"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#  comment: "Escape as unchaining"
+#: po/level_i18n.cc:3392
+msgid "Escape by Chaining Thieves"
+msgstr "Спаситесь, приковывая Воров цепью"
+
+#  level: "Houdini"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#  comment: "Characters of Michael Ende's fantasy novel 'The Neverending Story'"
+#: po/level_i18n.cc:3395
+msgid "Remember Atreyu's horse Atrax!"
+msgstr "Помните о Лошади Атреюса!"
+
+#  level: "Houdini"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3397
+msgid "I am innocent! I've never stolen anything!"
+msgstr "Я невиновен! Я никогда ничего не крал"
+
+#  level: "Houdini"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3399
+msgid "It is said that pirates have taken the treasure."
+msgstr "Говорят, что пираты взяли сокровище."
+
+#  level: "Houdini"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3401
+msgid "Pirates usually hide their treasure!"
+msgstr "Пираты обычно прячут свои сокровища!"
+
+#  level: "Houdini"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3403
+msgid "A closed door gives a better overview!"
+msgstr "Закрытая дверь дает лучший обзор!"
+
+#  level: "Basketball"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3426
+msgid "Pass the ball in time"
+msgstr "Передайте мяч вовремя"
+
+#  level: "Holes!"
+#  author: "Edward" email ""
+#: po/level_i18n.cc:3430
+msgid "Holes!"
+msgstr "Ямы!"
+
+#  level: "Meditation Disturbance"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3447
+msgid "Meditation Disturbance"
+msgstr "Помеха медитации"
+
+#  level: "Meditation Disturbance"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#  comment: "free translatable joke about being hit by a horse"
+#: po/level_i18n.cc:3450
+msgid "Hit by a bolting horse"
+msgstr "Пострадайте от убегающей лошади"
+
+#  level: "Welcome"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:3462
+msgid "Welcome to Enigma VI"
+msgstr "Добро пожаловать в Enigma VI"
+
+#  level: "Hot Hurdle Race"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:3467
+msgid "Hot Hurdle Race"
+msgstr ""
+
+#  level: "Hot Hurdle Race"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:3469
+#, fuzzy
+msgid "Run for your life!"
+msgstr "\"Бегите, чтобы выжить!\""
+
+#  level: "Tandem Chess"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:3480
+msgid "Tandem Chess"
+msgstr ""
+
+#  level: "Tandem Chess"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:3482
+msgid "Work together!"
+msgstr ""
+
+#  level: "Ben Hur"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3487
+msgid "The art of steering a quadriga"
+msgstr "Искусство управления квадрига"
+
+#  level: "Ben Hur"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#  comment: "quater - historical death penalty to be devided in four parts"
+#: po/level_i18n.cc:3490
+msgid "Dropping the spoon redeems from being quartered!"
+msgstr "За пропуск ложки заплатите размещением!"
+
+#  level: "be quick or be dead"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:3503
+msgid "illmind's be quick or be dead"
+msgstr ""
+
+#  level: "One-Way Woods"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3541
+msgid "One-Way Woods"
+msgstr ""
+
+#  level: "One-Way Woods"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3542
+msgid "Recycling by Swapping"
+msgstr ""
+
+#  level: "Procrustes"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:3553
+msgid "Procrustes"
+msgstr "Прокрусты"
+
+#  level: "Just a Maze?"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3569
+msgid "It isn't as easy as it looks."
+msgstr "Это не так легко как выглядит."
+
+#  level: "Oxyd Drilling"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3573
+msgid "Oxyd Drilling"
+msgstr ""
+
+#  level: "Oxyd Drilling"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3575
+msgid "Useful unsuccessful drillings"
+msgstr ""
+
+#  level: "Rotor Guards"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3580
+msgid "Rotor Guards"
+msgstr ""
+
+#  level: "Rotor Guards"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3582
+msgid "Hoisting guards with their own petard"
+msgstr ""
+
+#  level: "Simple Space"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:3587
+msgid "A really annoying Level"
+msgstr ""
+
+#  level: "Dialers"
+#  author: "Edward" email ""
+#: po/level_i18n.cc:3644
+msgid "Dialers"
+msgstr "Наборные устройства"
+
+#  level: "Tarzan"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:3649
+msgid "Hanging around in the Jungle"
+msgstr ""
+
+#  level: "Correspondence Chess"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:3654
+msgid "Correspondence Chess"
+msgstr ""
+
+#  level: "Correspondence Chess"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:3656
+msgid "Send smartly!"
+msgstr ""
+
+#  level: "Edwards Mountain"
+#  author: "Edward" email ""
+#: po/level_i18n.cc:3660
+msgid "Edwards Mountain"
+msgstr "Эдвардские горы"
+
+#  level: "Alcatraz"
+#  author: "Ralf Westram" email ""
+#: po/level_i18n.cc:3664
+msgid "Al Capone's training camp."
+msgstr "Тренировочный лагерь Аль Капоне."
+
+#  level: "Alcatraz"
+#  author: "Ralf Westram" email ""
+#: po/level_i18n.cc:3665
+msgid "There are at least two patterns to break through the wall."
+msgstr "Есть по крайней мере два способа прорваться через стену."
+
+#  level: "Alcatraz"
+#  author: "Ralf Westram" email ""
+#: po/level_i18n.cc:3666
+msgid "It is a well known secret that a few prisioners did escape."
+msgstr "Это хорошо известный секрет для побега нескольких заключенных."
+
+#  level: "Alcatraz"
+#  author: "Ralf Westram" email ""
+#: po/level_i18n.cc:3667
+msgid "A window in the wall would be really nice."
+msgstr "Окно на стене будет действительно хорошим."
+
+#  level: "Revolver"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3672
+msgid "Charging live ammunition"
+msgstr ""
+
+#  level: "No Memory"
+#  author: "Edward" email ""
+#: po/level_i18n.cc:3679
+msgid "No Memory"
+msgstr "Нет памяти"
+
+#  level: "Toreador"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3684
+msgid "Toreador"
+msgstr "Тореадор"
+
+#  level: "Persecution Mania"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3689
+msgid "Persecution Mania"
+msgstr "Мания Преследования"
+
+#  level: "Persecution Mania"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3691
+msgid "A problem shared is a problem halved!"
+msgstr "Разделенная задача - половина задачи!"
+
+#  level: "Magic Trinity"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3696
+msgid "Magic Trinity"
+msgstr ""
+
+#  level: "Blitz Chess"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:3704
+msgid "Blitz Chess"
+msgstr ""
+
+#  level: "Blitz Chess"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:3706
+msgid "Move fast!"
+msgstr ""
+
+#  level: "Pleasure Garden"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3711
+msgid "Pleasure Garden"
+msgstr ""
+
+#  level: "Polar Bears' Paradise"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3740
+msgid "Polar Bears' Paradise"
+msgstr ""
+
+#  level: "Polar Bears' Paradise"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3742
+msgid "Witch Hunt on Ice"
+msgstr ""
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3746
+msgid ""
+"Welcome to Mexico! Eight hours ago, your plane arrived at the Airport of "
+"\"Coatlicue\", which is a small village surrounded by unexplored jungle "
+"terrain. Now you find yourself in front of an impressive temple, which seems "
+"to be a relic of the ancient Aztec empire. But the temple is in surprisingly "
+"good condition ..."
+msgstr ""
+"Добро пожаловать в Чили! Восемь часов назад, Ваш самолет прибыл в аэропорт "
+"\"Ламас\", находящийся в маленькой деревне, окруженной неисследованными "
+"джунглями. Сейчас Вы находитесь напротив впечатляющего храма, который "
+"выглядит реликтом античных Ацтеков. Но храм - в удивительном хорошем "
+"состоянии ..."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3747
+msgid ""
+"Next to the giant doors of the temple you see a chrome sign: \"Restoration "
+"by: G. G. Goshers, A.D. 1998\". A smaller sign beneath says: \"Property of "
+"G. G. Goshers. Trespassing prohibited!\". Now you notice the dog kennels "
+"built up along the front side of the temple. \"Goshers made this ancient "
+"relic a fortress\", you think, \"this cannot be legal, for Goshers received "
+"funding from the UK Government. I'll try to call him to account!\""
+msgstr ""
+"За гигантской дверью храма Вы видите хромированный знак: \"Реставрация Дж. "
+"Г. Гошерса, 1998 от рожд. Христова\". И маленький знак позади гласит: "
+"\"Собственность Дж. Г. Гошерса. Вторжение запрещено!\". Теперь Вы видите "
+"собачьи конуры, построенные вдоль внешней стороны стороны храма. \"Гошерс "
+"сделал этот античный реликт крепостью\", подумали Вы, \"это незаконно для "
+"Гошерса получить лоббирование правительства Виликобритании. Я попытаюсь "
+"позвонить ему, чтобы считаться с этим\""
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3748
+msgid "This guard doesn’t notice me."
+msgstr "Эта охрана, кажется, не очень бдительна."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3749
+msgid ""
+"This lake was obviously made by Goshers. I think the correct way is south."
+msgstr ""
+"Это озеро образовано, очевидно, благодаря Гошерсу. Я думаю, что путь на юг "
+"-  верный."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3750
+msgid ""
+"There's an inscription on the old wall, saying in spanish: \"Careful! What "
+"you touch could be the last thing you touch!\""
+msgstr ""
+"Надпись на старой стене говорит по-испански: \"не касаться всего, что Вы "
+"видите! Это может быть Вашим последним прикосновением!\""
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3751
+msgid "Chrome sign: \"Control of the beast’s cage.\""
+msgstr "Хромированный Знак: \"Управление дикой повозкой.\""
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3752
+msgid "Oooh, this slope is steep! Try not to touch the skull!"
+msgstr "О-о-о, этот уклон крутой! Не касайтесь черепов!"
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3753
+msgid ""
+"This building down there looks like a prison. Let's see if I can determine "
+"its purpose ... Ah, there's another chrome sign. Goshers seems to favour "
+"chrome signs. It says: \"Natives’ prison\"."
+msgstr ""
+"Это здание там внизу похоже на тюрьму. Посмотрим, смогу ли Я понять, для "
+"чего это... Ах, там есть знак. И он также хромированный. Кажется, Гошерс "
+"любитхромированные знаки. Он сообщает: \"Тюрьма уроженцев\"."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3754
+msgid ""
+"Getting beyond the prison building was a really good idea. But now you have "
+"to cross this lake. Be thrifty with those boxes!"
+msgstr ""
+"Выйти из тюрьмы было бы реально хорошей идеей. Но теперь Вы должны пересечь "
+"это озеро. Экономьте ящики!"
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3755
+msgid ""
+"Now, peering through the grilled prison windows, you see a native woman "
+"imprisoned there. Obviously Goshers locked up all the natives, who disturbed "
+"his \"work\"; trying to enter the temple and to get rich from the treasures "
+"of the Aztecs. It might be helpful to be accompanied by someone, who knows "
+"the secrets of the jungle and this temple ..."
+msgstr ""
+"Теперь, пробираясь через решетчатое тюремное окно, Вы увидели женщину, "
+"заключенную в тюрьму. Очевидно, Гошерс запирал всех, кто мешал его \"планам"
+"\", пытаясь войти в храм и получить богатства Ацтеков. Может быть, было бы "
+"неплохо иметь сопровождающего, который знает секреты этого храма..."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3756
+msgid ""
+"Since the white man there freed me from the prison, he certainly cannot be "
+"as evil as this Goshers is. Perhaps he wants to end the mastery of Goshers "
+"and free my people. And even if this is not the case, it's better to be free "
+"than imprisoned. I think I should thank him."
+msgstr ""
+"Так как белый человек освободил меня из тюрьмы, он не может быть таким же "
+"злым, как Гошерс. Возможно, он хочет закончить господство Гошерса и "
+"освободить моих людей. И даже если это не так, лучше быть свободным, чем "
+"быть в тюрьме. Мне кажется, Я должен поблагодарить его."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3757
+msgid ""
+"You meet the English adventurer in the front of the prison. \"Hello, I'm "
+"Xila!\", you tell him in broken English. After he introduced himself as "
+"well, both of you begin to work out a plan against the evil G. G. Goshers."
+msgstr ""
+"Вы встречаете английского путешественника перед тюрьмой. \"Привет, Я - "
+"Ксилла!\", Вы сообщаете ему на ломаном английском. После того, как он "
+"представился, Вы оба начинаете разрабатывать план против Дж. Г. Гошерса."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3758
+msgid ""
+"This is a really hard puzzle. The English man will have to help me, if this "
+"enigma is to be solved."
+msgstr ""
+"Это - действительно трудная задача. Англичанин должен помочь мне, если эта "
+"загадка должна быть решена."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3759
+msgid "You wonder what this switch could trigger."
+msgstr "Вы задаетесь вопросом, что может включить этот выключатель."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3760
+msgid "Xila knows how to drain the lake!"
+msgstr "Ксилла знает как осушить озеро!"
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3761
+msgid "You were lucky to find this hole. It prevents you from drowning."
+msgstr "Счастливчик, Вы обнаружили это дупло. Оно не дает Вам сделать это."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3762
+msgid "This glass stone must fulfill a purpose ..."
+msgstr "Этот стеклянный камень, несомненно, поможет дойти до цели ..."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3763
+msgid "It's funny that such a temple should have a side entrance."
+msgstr "Странно, что такой храм имеет боковой вход."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3764
+msgid "Be careful! There are sensors in the walls."
+msgstr "Будьте осторожны! На стенах - сенсоры."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3765
+msgid ""
+"After the huge doors of the old temple have opened, you see, that the "
+"entrance is protected by 11 knights, armed with spears. These guards are "
+"very dangerous. Without a sword you'll never be able to enter. Be careful. "
+"There are not only knights, but also thieves."
+msgstr ""
+"После того, как огромные двери старого храма открылись, Вы видите, что вход "
+"защищен 11 рыцарями, вооруженными копьями. Эта охрана очень опасна. Без меча "
+"Вы никогда не войдете. Будьте осторожны. Кроме рыцарей есть воры."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3766
+msgid "\"Congratulations. You just managed to enter this old Aztec Temple.\""
+msgstr "\"Поздравляем. Вы удалось войти в этот старый храм Ацтеков.\""
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3767
+msgid ""
+"\"You've been smarter than I expected. But you'll never enter the treasure "
+"room nor escape from here!\""
+msgstr ""
+"\"Вы были умнее, чем Я ожидал. Но Вы никогда не найдете сокровищ и не "
+"выйдете отсюда!\""
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3768
+msgid ""
+"\"I, Goshers, will certainly be able to rid myself of one of my archenemies "
+"by just killing you!\""
+msgstr ""
+"\"Я, Гошерс, отделаюсь от одних из моих заклятых врагов, просто убив Вас!\""
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3769
+msgid "\"Run for your life!\""
+msgstr "\"Бегите, чтобы выжить!\""
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3770
+msgid ""
+"Xila and you just entered the Diamond Room of the old Aztec Temple. By "
+"taking him back to Great Britain and rendering him to the police, you have "
+"ended the evil career of Gerald Gregory Goshers. Congratulations on the "
+"success of your expedition!"
+msgstr ""
+"Ксила и Вы только что вошли в Алмазную Комнату старого храма Ацтеков. Взяв "
+"его в Великобританию и отдав его полиции, зло величества Джеральда Грегори "
+"Гошерса закончится. Поздравляем в успехе вашей экспедиции!"
+
+#  level: "Bodyguard"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3775
+msgid "In the line of thieves"
+msgstr "На линии воров"
+
+#  level: "Bodyguard"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3777
+msgid "Keys from left to right are NE, NW, SE, SW."
+msgstr "Ключи слева направо - СВ, СЗ, ЮВ, ЮЗ."
+
+#  level: ""
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:3808
+msgid "Drop the hammer on side of a pentomino and use the switch!"
+msgstr ""
+
+#  level: ""
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:3809
+msgid "Drop the hammer on side of a pentomino, not beneath it!"
+msgstr ""
+
+#~ msgid "Default"
+#~ msgstr "По умолч."
+
+#  level: "Template 1"
+#  author: "AUTHOR" email ""
+#~ msgid "Template for a simple level."
+#~ msgstr "Образец простого уровня."
+
+#  level: "Template 2"
+#  author: "AUTHOR" email ""
+#~ msgid "Template for a level with the RenderLine method."
+#~ msgstr "Образец уровня с методом RenderLine."
+
+#  level: "Template 3"
+#  author: "AUTHOR" email ""
+#~ msgid "Template for a level coded with the ant library."
+#~ msgstr "Образец уровня, написанного с Ant-библиотекой."
+
+#  level: "How solid?"
+#  author: "Andreas Lochmann" email ""
+#~ msgid ""
+#~ "That wasn't fast enough; try F3.(Or search for non-solid stones, if you "
+#~ "want.)(But you won't find any.)(Really!)"
+#~ msgstr ""
+#~ "Было недостаточно быстро; Нажмите F3.(Или ищите нетвердые камни, если "
+#~ "хотите.)(Но Вы не найдете их.)(На самом деле!)"
+
+#  level: "How solid?"
+#  author: "Andreas Lochmann" email ""
+#~ msgid ""
+#~ "You can believe me: All stones you see in this level are solid!You can "
+#~ "really believe me!Really!"
+#~ msgstr ""
+#~ "Вы можете поверить мне: Все камни, что Вы видите на этом уровне - твердые!"
+#~ "Вы можете действительно поверить мне! На самом деле!"
+
+#  level: "Moonwalking"
+#  author: "Siegfried Fennig" email ""
+#~ msgid "Area closed"
+#~ msgstr "Область закрыта"

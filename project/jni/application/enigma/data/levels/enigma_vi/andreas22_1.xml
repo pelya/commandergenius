@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Pac Marble" el:subtitle="" el:id="andreas22"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Andreas Lochmann" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Andreas Lochmann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+       <el:dependency el:path="lib/andreas_ghosts" el:id="lib/andreas_ghosts" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="00:53"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Generated with the help of BBE 1.05
+-- Remark: This level demonstrates the ghosts-library.
+
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+levelh=13
+levelw=20
+enigma.FlatForce=30
+--enigma.SlopeForce=30
+enigma.ElectricForce=30
+cells={}
+items={}
+actors={}
+stones={}
+actors[" "]=cell{}
+stones[" "]=cell{}
+cells[" "]=cell{}
+items[" "]=cell{}
+cells["!"]=cell{floor="fl-normal"}
+stones["!"]=cell{stone="st-brick"}
+stones["#"]=cell{parent={{file_oxyd,"d"}}}
+cells["!"]=cell{parent={{ghosts_set_rail,1,"fl-gray"}}}
+actors["!"]=cell{parent={{ghosts_set_ghost,"ac-top",1,
+                          ghosts_direction_intelligent,{range=0,force=5,gohome=FALSE}}}}
+function ac_blackball(x,y)
+n=""
+p=0
+f=0
+ if (x==12) and (y==8) then
+  n="ac12x8"
+  p=0
+  mf=1,66666666666667
+ end
+set_actor("ac-blackball",x+0.5,y+0.5,{player=p,name=n,mouseforce=mf})
+end
+actors["#"]=cell{parent={{ac_blackball}}}
+level={"!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!"}
+acmap={"                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "        !!!!        ",
+       "                    ",
+       "            #       ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    "}
+itmap={"                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    "}
+stmap={"!!!!!!!!!##!!!!!!!!!",
+       "!#  !          !  #!",
+       "!   ! !!!!!!!! !   !",
+       "!!! !          ! !!!",
+       "!   !! !!  !! !!   !",
+       "! !    !    !    ! !",
+       "# !!!! !    ! !!!! #",
+       "! !    !!!!!!    ! !",
+       "!   !          !   !",
+       "!!! ! !!!!!!!! ! !!!",
+       "!   ! !      ! !   !",
+       "!#  !   !  !   !  #!",
+       "!!!!!!!!!##!!!!!!!!!"}
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+draw_map(0,0,itmap,items)
+draw_map(0,0,acmap,actors)
+oxyd_shuffle()
+ghosts_init(0,0)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

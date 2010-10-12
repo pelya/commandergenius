@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="esprit 66" el:subtitle="esprit 66" el:id="ss_esp66"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Sven Siggelkow" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Sven Siggelkow</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 39
+levelh = 37
+
+create_world(levelw, levelh)
+
+oxyd_default_flavor = "b"
+fill_floor("fl-woven", 0, 0, levelw,levelh)
+fill_floor("fl-abyss", 10, 13,19 ,11)
+set_actor("ac-blackball", 9.5,2.5)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+      local c = strsub( pattern, i, i)
+      if c == "#" then
+         set_stone("st-bluegray",i-1,line)
+      elseif c == "h" then
+     set_stone("st-bluegray_hole", i-1,line)
+      elseif c == "i" then
+     set_stone("st-bluegray_hole", i-1,line)
+     set_floor("fl-gradient",  i-1,  line, {type=4})
+      elseif c == "j" then
+     set_stone("st-bluegray_hole", i-1,line)
+     set_floor("fl-gradient",  i-1,  line, {type=3})
+      elseif c == "w" then
+     set_stone("st-bluegray_hole", i-1,line)
+     set_item("it-wormhole",i-1,line, {targetx="34.5",targety="33.5",strength=5,range= 0})           --
+      elseif c == "W" then
+     set_stone("st-bluegray_hole", i-1,line)
+     set_item("it-wormhole",i-1,line, {targetx="10.5",targety="11.5",strength=5,range=0})               --
+      elseif c == "k" then
+     set_stone("st-bluegray_hole", i-1,line)
+     set_item("it-key_a",i-1,line)
+      elseif c == "l" then
+     set_stone("st-key_a", i-1,line, {action="callback", target="door"})
+      elseif c == "1" then
+         set_item("it-coin1",i-1,line)
+      elseif c == "2" then
+         set_item("it-coin4",i-1,line)
+      elseif c == "g" then
+         set_stone("st-grate2",i-1,line)
+         set_floor("fl-woven",i-1,line)
+      elseif c == "n" then
+         set_stone("st-grate2",i-1,line)
+         set_item("it-coin1",i-1,line)
+         set_floor("fl-woven",i-1,line)
+      elseif c == "t" then
+         set_stone("st-thief",i-1,line)
+      elseif c == "u" then
+         set_item("it-umbrella",i-1,line)
+      elseif c == "3" then
+         set_stone("st-oneway_black-e",i-1,line,{name="3"})
+      elseif c == "4" then
+         set_stone("st-oneway_black-n",i-1,line,{name="4"})
+      elseif c == "5" then
+         set_stone("st-oneway_black-e",i-1,line,{name="5"})
+      elseif c == "6" then
+         set_stone("st-oneway_black-n",i-1,line,{name="6"})
+      elseif c == "7" then
+         set_stone("st-oneway_black-w",i-1,line,{name="7"})
+      elseif c == "8" then
+         set_stone("st-oneway_black-w",i-1,line,{name="8"})
+      elseif c == "9" then
+         set_stone("st-oneway_black-n",i-1,line,{name="9"})
+      elseif c == "0" then
+         set_stone("st-oneway_black-n",i-1,line,{name="0"})
+      elseif c == "a" then
+         set_stone("st-oneway_black-n",i-1,line,{name="a"})
+      elseif c == "b" then
+         set_stone("st-oneway_black-n",i-1,line,{name="b"})
+      elseif c == "c" then
+         set_stone("st-oneway_black-e",i-1,line,{name="c"})
+      elseif c == "d" then
+         set_stone("st-oneway_black-s",i-1,line,{name="d"})
+      elseif c == "e" then
+         set_stone("st-oneway_black-w",i-1,line,{name="e"})
+      elseif c == "f" then
+         set_stone("st-oneway_black-w",i-1,line,{name="f"})
+      elseif c=="A" then
+         set_stone("st-coinslot", i-1,line,{target="s3", action="callback"})
+      elseif c=="B" then
+         set_stone("st-coinslot", i-1,line,{target="s4", action="callback"})
+      elseif c=="C" then
+         set_stone("st-coinslot", i-1,line,{target="s5", action="callback"})
+      elseif c=="D" then
+         set_stone("st-coinslot", i-1,line,{target="s6", action="callback"})
+      elseif c=="E" then
+         set_stone("st-coinslot", i-1,line,{target="s7", action="callback"})
+      elseif c=="F" then
+         set_stone("st-coinslot", i-1,line,{target="s8", action="callback"})
+      elseif c=="G" then
+         set_stone("st-coinslot", i-1,line,{target="s9", action="callback"})
+      elseif c=="H" then
+         set_stone("st-coinslot", i-1,line,{target="s0", action="callback"})
+      elseif c=="I" then
+         set_stone("st-coinslot", i-1,line,{target="sa", action="callback"})
+      elseif c=="J" then
+         set_stone("st-coinslot", i-1,line,{target="sb", action="callback"})
+      elseif c=="K" then
+         set_stone("st-coinslot", i-1,line,{target="sc", action="callback"})
+      elseif c=="L" then
+         set_stone("st-coinslot", i-1,line,{target="sd", action="callback"})
+      elseif c=="M" then
+         set_stone("st-coinslot", i-1,line,{target="se", action="callback"})
+      elseif c=="N" then
+         set_stone("st-coinslot", i-1,line,{target="sf", action="callback"})
+      elseif c == "O" then
+         oxyd( i-1, line)
+        end
+    end
+end
+
+--              012345678901234567890123456789012345678
+renderLine(00, "#######################################")
+renderLine(01, "#O     1             3               O#")
+renderLine(02, "#u                 u A                #")
+renderLine(03, "#           1        t                #")
+renderLine(04, "#  ######4B#########################  #")
+renderLine(05, "#  #O                5            O#  #")
+renderLine(06, "#  #                 C             #  #")
+renderLine(07, "#  #                 t             #  #")
+renderLine(08, "#  #  ########D6#l###############  #  #")
+renderLine(09, "#  #  #O hwk         t1        O#  #  #")
+renderLine(10, "#  #  #  hhh         E          #  #  #")
+renderLine(11, "tijt  #  hhh         7  1       #  #  #")
+renderLine(12, "tijt  #  #####################  #  #  #")
+renderLine(13, "tijt  #  #      tgt          #  #  #  #")
+renderLine(14, "tijt  #  #      tgt          #  #  #  #")
+renderLine(15, "tijt  #  #    tttgttttttt    #  #  #  #")
+renderLine(16, "tijt  #  #    tngngngngnt    #2 #  #  #")
+renderLine(17, "#  #  #  #    tgngngngngt    #  #  #  #")
+renderLine(18, "#  F  #9G#    tngngngngnt    #H0#IatbJ#")
+renderLine(19, "#  8  #  #    tgngngngngt    #  t  t  #")
+renderLine(20, "thht  #  #    tngngngngnt    #  t  t  #")
+renderLine(21, "thht  #  #    ttttttttttt    t  #  t  #")
+renderLine(22, "thht  #  #                   t  #  #  #")
+renderLine(23, "thht  t  #                   #  #  #  #")
+renderLine(24, "thht  #  #####################  #  #  #")
+renderLine(25, "thht  #              c          #  #  #")
+renderLine(26, "#  #  #              K          #  #  #")
+renderLine(27, "#  #  #O    1       1t    1    O#  #  #")
+renderLine(28, "#  #  ###########ttt#########dL##  #  #")
+renderLine(29, "#  #                 e             #  #")
+renderLine(30, "#  #                 M             #  #")
+renderLine(31, "#  #O 1      1       t 1          O#  #")
+renderLine(32, "#  #################################  #")
+renderLine(33, "#                    f           hhh  #")
+renderLine(34, "#                    N           hhh  #")
+renderLine(35, "#O     1       1     t           hWh O#")
+renderLine(36, "#######################################")
+--              012345678901234567890123456789012345678
+
+
+oxyd_shuffle()
+
+--             > ^ > ^ < < ^ ^ ^ ^ > v < <
+--             3 4 5 6 7 8 9 0 a b c d e f door
+local flags = {0,0,0,0,1,1,0,0,0,0,0,1,1,1,0}
+--             1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
+
+function door()
+flags[15] = 1 - flags[15]
+if flags[15] == 0 then
+    set_stone("st-bluegray",17,12)
+    else
+    enigma.KillStone(17,12)
+end
+end
+
+function s3()
+flags[1] = 1 - flags[1]
+if flags[1] == 0 then
+    SendMessage("3","direction",EAST)
+    else
+    SendMessage("3","direction",WEST)
+end
+end
+
+function s4()
+flags[2] = 1 - flags[2]
+if flags[2] == 0 then
+    SendMessage("4","direction",NORTH)
+    else
+    SendMessage("4","direction",SOUTH)
+end
+end
+
+function s5()
+flags[3] = 1 - flags[3]
+if flags[3] == 0 then
+    SendMessage("5","direction",EAST)
+    else
+    SendMessage("5","direction",WEST)
+end
+end
+
+function s6()
+flags[4] = 1 - flags[4]
+if flags[4] == 0 then
+    SendMessage("6","direction",NORTH)
+    else
+    SendMessage("6","direction",SOUTH)
+end
+end
+
+function s7()
+flags[5] = 1 - flags[5]
+if flags[5] == 0 then
+    SendMessage("7","direction",EAST)
+    else
+    SendMessage("7","direction",WEST)
+end
+end
+
+function s8()
+flags[6] = 1 - flags[6]
+if flags[6] == 0 then
+    SendMessage("8","direction",EAST)
+    else
+    SendMessage("8","direction",WEST)
+end
+end
+
+function s9()
+flags[7] = 1 - flags[7]
+if flags[7] == 0 then
+    SendMessage("9","direction",NORTH)
+    else
+    SendMessage("9","direction",SOUTH)
+end
+end
+
+function s0()
+flags[8] = 1 - flags[8]
+if flags[8] == 0 then
+    SendMessage("0","direction",NORTH)
+    else
+    SendMessage("0","direction",SOUTH)
+end
+end
+
+function sa()
+flags[9] = 1 - flags[9]
+if flags[9] == 0 then
+    SendMessage("a","direction",NORTH)
+    else
+    SendMessage("a","direction",SOUTH)
+end
+end
+
+function sb()
+flags[10] = 1 - flags[10]
+if flags[10] == 0 then
+    SendMessage("b","direction",NORTH)
+    else
+    SendMessage("b","direction",SOUTH)
+end
+end
+
+function sc()
+flags[11] = 1 - flags[11]
+if flags[11] == 0 then
+    SendMessage("c","direction",EAST)
+    else
+    SendMessage("c","direction",WEST)
+end
+end
+
+function sd()
+flags[12] = 1 - flags[12]
+if flags[12] == 0 then
+    SendMessage("d","direction",NORTH)
+    else
+    SendMessage("d","direction",SOUTH)
+end
+end
+
+function se()
+flags[13] = 1 - flags[13]
+if flags[13] == 0 then
+    SendMessage("e","direction",EAST)
+    else
+    SendMessage("e","direction",WEST)
+end
+end
+
+
+function sf()
+flags[14] = 1 - flags[14]
+if flags[14] == 0 then
+    SendMessage("f","direction",EAST)
+    else
+    SendMessage("f","direction",WEST)
+end
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Bizarro World" el:subtitle="" el:id="duffy73"/>
+      <el:version el:score="2" el:release="2" el:revision="1" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw=180
+levelh=90
+
+create_world( levelw, levelh)
+
+enigma.SlopeForce=-20
+
+if not difficult then
+    enigma.ElectricForce=-15
+else
+    enigma.ElectricForce=-20
+end
+
+fill_floor("fl-abyss", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-death", i-1, line)
+        elseif c =="v" then
+            set_stone( "st-greenbrown_move", i-1, line)
+            set_floor("fl-leaves",i-1,line)
+        elseif c =="%" then
+            set_stone( "st-greenbrown", i-1, line)
+        elseif c =="k" then
+            if difficult==false then
+                --            set_stone( "st-greenbrown", i-1, line)
+            else
+                set_stone( "st-greenbrown", i-1, line)
+            end
+        elseif c =="p" then
+            set_floor("fl-leaves",i-1,line)
+            if difficult==false then
+                set_item("it-flagblack",i-1,line)
+            else
+                --            set_item("it-flagblack",i-1,line)
+            end
+        elseif c =="Q" then
+            set_stone( "st-greenbrown", i-1, line)
+            set_floor("fl-hay",i-1,line)
+        elseif c =="&" then
+            set_stone( "st-greenbrown", i-1, line)
+            set_floor("fl-bluegreen",i-1,line)
+            set_item("it-abyss",i-1,line)
+        elseif c =="^" then
+            set_stone( "st-death", i-1, line)
+            set_floor("fl-bluegreen",i-1,line)
+            set_item("it-abyss",i-1,line)
+        elseif c =="$" then
+            set_stone( "st-death", i-1, line)
+            set_floor("fl-leaves",i-1,line)
+        elseif c =="K" then
+            set_stone( "st-greenbrown", i-1, line)
+            set_floor("fl-inverse",i-1,line)
+        elseif c =="P" then
+            set_stone( "st-greenbrown", i-1, line)
+            set_floor("fl-leaves",i-1,line)
+        elseif c =="U" then
+            set_item("it-umbrella",i-1,line)
+            set_floor("fl-inverse",i-1,line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+            set_floor("fl-leaves",i-1,line)
+        elseif c == "*" then
+            set_stone( "st-brownie", i-1, line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c == "~" then
+            set_floor("fl-water",i-1,line)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5)
+            set_floor("fl-leaves",i-1,line)
+        elseif c=="y" then
+            set_actor("ac-whiteball", i-1,line+.5, {mouseforce=0})
+            set_floor("fl-leaves",i-1,line)
+        elseif c=="l" then
+            set_floor("fl-leaves",i-1,line)
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+            set_floor("fl-leaves",i-1,line)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c=="=" then
+            set_floor("fl-space",i-1,line)
+        elseif c=="j" then
+            set_floor("fl-ice",i-1,line)
+        elseif c=="i" then
+            set_floor("fl-inverse",i-1,line)
+        elseif c=="s" then
+            set_floor("fl-swamp",i-1,line)
+        elseif c=="x" then
+            set_floor("fl-bluegreen",i-1,line)
+            set_item("it-abyss",i-1,line)
+        elseif c=="@" then
+            set_floor("fl-abyss_fake",i-1,line)
+        elseif c=="c" then
+            if difficult==false then
+                set_floor("fl-abyss_fake",i-1,line)
+            else
+                set_floor("fl-bluegreen",i-1,line)
+                set_item("it-abyss",i-1,line)
+            end
+        elseif c=="G" then
+            if difficult==false then
+                set_stone( "st-greenbrown", i-1, line)
+            else
+                set_stone( "st-death", i-1, line)
+            end
+        elseif c=="S" then
+            set_floor("fl-leaves",i-1,line)
+            set_item("it-spring1",i-1,line)
+        elseif c=="F" then
+            set_floor("fl-leaves",i-1,line)
+            set_item("it-flagblack",i-1,line)
+        elseif c=="O" then
+            set_floor("fl-leaves",i-1,line)
+            set_item("it-extralife",i-1,line)
+        elseif c =="T" then
+            set_stone( "st-thief", i-1, line)
+            set_floor("fl-space",i-1,line)
+        elseif c == "d" then --1-d
+            set_floor("fl-gradient",  i-1,  line, {type=1})
+        elseif c == "u" then --2-u
+            set_floor("fl-gradient",  i-1,  line, {type=2})
+        elseif c == "r" then --3-r
+            set_floor("fl-gradient",  i-1,  line, {type=3})
+        elseif c == "e" then --4-l
+            set_floor("fl-gradient",  i-1,  line, {type=4})
+        elseif c == "1" then --ur
+            set_floor("fl-gradient",  i-1,  line, {type=11})
+        elseif c == "3" then --dl
+            set_floor("fl-gradient",  i-1,  line, {type=9})
+        elseif c == "7" then --dr
+            set_floor("fl-gradient",  i-1,  line, {type=12})
+        elseif c == "9" then --ul
+            set_floor("fl-gradient",  i-1,  line, {type=10})
+        elseif c =="h" then
+            set_floor("fl-hay",i-1,line)
+        elseif c =="A" then
+            set_floor("fl-hay",i-1,line)
+        elseif c =="B" then
+            set_floor("fl-hay",i-1,line)
+            set_stone("st-invisible",i-1,line)
+        elseif c =="a" then
+            set_floor("fl-hay",i-1,line)
+            set_stone("st-greenbrown_hole",i-1,line)
+        elseif c =="b" then
+            set_floor("fl-hay",i-1,line)
+            set_stone("st-greenbrown",i-1,line)
+        elseif c =="I" then
+            set_stone("st-invisible",i-1,line)
+        elseif c=="M" then
+            set_actor("ac-rotor", i-.5,line+.5, {player=1, mouseforce=0, range=4, force=-5})
+            set_floor("fl-leaves",i-1,line)
+        elseif c=="N" then
+            set_actor("ac-top", i-.5,line+.5, {player=1, mouseforce=0, range=8, force=20})
+            set_floor("fl-inverse",i-1,line)
+        elseif c=="R" then
+            set_stone("st-oneway-e", i-1,line)
+            set_floor("fl-leaves",i-1,line)
+        elseif c=="J" then
+            set_stone("st-break_acwhite",i-1,line)
+        elseif c=="D" then
+            dynamite(i-1,line)
+        elseif c=="t" then
+            hammer(i-1,line)
+        elseif c=="H" then
+            set_stone("st-stone_break",i-1,line)
+        elseif c=="f" then
+            set_stone("st-actorimpulse_invisible",i-1,line)
+        elseif c == "q" then
+            yy1( "black",  i-1, line)
+            set_floor("fl-leaves",i-1,line)
+        elseif c == "w" then
+            yy1( "white",  i-1, line)
+            set_floor("fl-leaves",i-1,line)
+        elseif c=="V" then
+            set_floor("fl-bridge", 80,42, {name="bridgea1",type="xx"})
+            set_floor("fl-abyss_fake",i-1,line)
+            set_item("it-trigger",i-1,line,{invisible=1,action="callback",target="funcc2"})
+        elseif c=="W" then
+            set_floor("fl-bridge", 84,42, {name="bridgeb0",type="xx"})
+            set_item("it-abyss",i-1,line)
+        elseif c=="C" then
+            set_floor("fl-leaves",i-1,line)
+            set_stone("st-switch",i-1,line,{name="switch5",action="callback",target="funcc1"})
+        elseif c=="?" then
+            set_floor("fl-leaves",i-1,line)
+            set_stone("st-chargeplus",i-1,line)
+        elseif c=="/" then
+            set_floor("fl-leaves",i-1,line)
+            set_stone("st-chargeminus",i-1,line)
+        elseif c==":" then
+            set_floor("fl-hay",i-1,line)
+            set_stone("st-chargezero",i-1,line)
+        elseif c==";" then
+            --           set_floor("fl-bridge", i-1,line, {name="bridge1",type=xx})
+            set_floor("fl-leaves",i-1,line)
+            set_stone("st-invisible",i-1,line)
+        elseif c=="2" then
+            set_floor("fl-leaves",i-1,line)
+            set_stone("st-switch",i-1,line,{action="callback",target="funcc3",name="switch1"})
+        elseif c=="4" then
+            set_floor("fl-leaves",i-1,line)
+            set_stone("st-switch",i-1,line,{action="callback",target="funcc4",name="switch2"})
+        elseif c=="5" then
+            set_floor("fl-leaves",i-1,line)
+            set_stone("st-switch",i-1,line,{action="callback",target="funcc5",name="switch3"})
+        elseif c=="6" then
+            set_floor("fl-leaves",i-1,line)
+            set_stone("st-switch",i-1,line,{action="callback",target="funcc6",name="switch4"})
+        elseif c == "m" then
+            set_floor("fl-leaves",i-1,line)
+            document(i-1,line,"text1")
+        end
+    end    
+end
+
+function yy1( color, x, y)
+        stone = format( "st-%s4", color)
+        set_stone( stone, x, y)
+end
+
+renderLine(00,"IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
+renderLine(01,"I         f               f                     f          f        f      f                 f        f              f           f                      f              f  I")
+renderLine(02,"I   f                                                                                                                                                                     I")
+renderLine(03,"I      t      f                                                                                                      f                                                    I")
+renderLine(04,"I                           f         f          f                f        f       f     f              f                          f            f                         I")
+renderLine(05,"I         f                                               f                                                                                                  f      f     I")
+renderLine(06,"If               f                                                                               f                f                                                       I")
+renderLine(07,"I                          f                                                     f                                            f                    D                      I")
+renderLine(08,"I                                      f              f         f     f                                                                        f       f                  I")
+renderLine(09,"I                                                                                                             f                      f                          f         I")
+renderLine(10,"I   f                                                                                                                  f                                                  I")
+renderLine(11,"I                    f                                  D      f               f               f      f                                   f                              fI")
+renderLine(12,"I           f                f          f       f                                                                   f                            f                        I")
+renderLine(13,"If                                                                                     f                                              f                                   I")
+renderLine(14,"I                                                                                                          f                   f                                          I")
+renderLine(15,"I                                f      f                    f            f                                       f                   f            f       f         f    I")
+renderLine(16,"I                                                   f                                                 f                                                                   I")
+renderLine(17,"I     f         f        f                                                         f      f                                                                      f        I")
+renderLine(18,"I                                                                       f                                           f        f                                            I")
+renderLine(19,"I                                 f           f                                                                  D                        f           f               f   I")
+renderLine(20,"I                                                       f        f                                   f                                                                    I")
+renderLine(21,"I    f        f              f                                              f                             f                                    f               f          I")
+renderLine(22,"I                                       f                                                      f                     f             f                                      I")
+renderLine(23,"I                                                                                     f                                                                                  fI")
+renderLine(24,"I                                                          f                                                                               f                              I")
+renderLine(25,"I           f        f                  f         f                f                                       f                                             f                I")
+renderLine(26,"If  f                                                                        f                       f                    f                                       f       I")
+renderLine(27,"I                                             f                                                                                     f           f                         I")
+renderLine(28,"I                                f                                                             f           f           f                                             f    I")
+renderLine(29,"I             f              f                           f         f                f                                              f                                      I")
+renderLine(30,"I    D                                                                                                                                                                    I")
+renderLine(31,"I       f                                                              f                        f       f                                              f       f          I")
+renderLine(32,"I                                      f    f        f                       f          f                                          f                                      I")
+renderLine(33,"I                 f                                                                                               f                           f                      f   fI")
+renderLine(34,"I                                                                                                                         f                                               I")
+renderLine(35,"I     f                 f           f               f             f        f          f           f         f                    f                       f                I")
+renderLine(36,"IIIIIIIIIIIIIIIIIIIIIIIIIIIII%%%%%%%%%%%%%%%%%%%#########%%%%%%%%%%%%%%%%%%%%PPPPPPPPPPPPPPPPPPPQQQQQQQQQQQQ#########################                                     I")
+renderLine(37,"I     f     f       f     f  HJJJJJJJJv        %         % lrrrrreeeeeejj   %FllPlllP~~~~~~~~~~PbAaAAaBaBbablllsss%llllRiiiiiiiiiNUUU              f                      I")
+renderLine(38,"I                            HJJJJJJJJv llllll % llp   #   l            l   %lllPlllP~2wwllww4~PbBBBbaBBBbAAlllsss%ggllRiiiiiiiiiiUUU                           f      f  I")
+renderLine(39,"I                            HJJJJJJJJv lzllSl   lll   ##% leeeerrrrll 3d1  %lllPlllP~wwwllwww~PbAaAaaAaBAAblllsssvlgllRiiiiiiiiiiUUU    f                                I")
+renderLine(40,"I                        f   HJJJJJJJJv llllll %         %           l rie  %lllPlllP~wwwllwww~PbabAbBBaBbablllsssvlgllRiiiiiiiiiiUUU                                     I")
+renderLine(41,"If     f                     HJJJJJJJJv        &xxxxxx^^^%TTTT  7uuuu9 9u7  %lllPlllP~llllllll~P:aBBbbbaBAAblllsssvlgllRiiiiiiiiiiUUU            f                        I")
+renderLine(42,"I               f            %%%%%%%%%%%%%%%%%%&xx@@@x^@@l===T  e7uu9r  l  lRlClVlllWlll?ly/ll;qAABaaAbABaBblllsss%ggllRiiiiiiiiiiUUU                       f             I")
+renderLine(43,"I                               f     #x@@cx@@@cxx@@@x^@@%TT=T  ee79rr llxll%lllPlllP~llllllll~P:bBabAaabaBblllsss%$$$$$iiiiiiiiiiUUU                                     I")
+renderLine(44,"I         f                         f #x@@cx@@@cxx@@@x^cc%===T  ee13rr lxxlx%lllPlllP~wwwllwww~PbAAABBBBBAAbxxxx^m%oooP$iiiiiiiiiiUUU                              f     fI")
+renderLine(45,"If                          f         #xxxxxxxx^^^^^^^^xx%=TTT  e1dd3r llxlx%lllPlllP~wwwllwww~PbBabbaAabbaaxxxx^l$lllo$iiiiiiiiiiUUU   f       f        f                I")
+renderLine(46,"I                                    f#x@@xx@@@xx@@@cxx@@%llllll1dddd3 lxxlx%lllPlllP~5wwllww6~PbAAAAaBAAAABxxxx^M$lllo$iiiiiiiiiiUUU                                     I")
+renderLine(47,"I                                     #x@@xxcccxx@@@cxx@@%llll         llllx%OllPlllP~~~~~~~~~~PbBbaBbbabBabxxxx^qqlllo$iiiiiiiiiNUUU                                     I")
+renderLine(48,"I                 f                  f##GG###############%%%%%%%%%%%%%%%%%%%%PPPPPPPPPPPPPPPPPPPQQQQQQQQQQQQ#########################                            f        I")
+renderLine(49,"I                        f                   f            f         f             f            f             f         f        f                  f                   f  I")
+renderLine(50,"If     f                              f                                                                                                                                   I")
+renderLine(51,"I               D                                                                                                                            f             f              I")
+renderLine(52,"I                                            f                             f                          f                                                          f       fI")
+renderLine(53,"I                                 f                                f                 f                        f        f            f                                     I")
+renderLine(54,"I                     f                                 f                                     f                                                                           I")
+renderLine(55,"If                                                                                                                                                 f                      I")
+renderLine(56,"I                                                                         f                            f                                                                  I")
+renderLine(57,"I                                                             f                                                                 f       f                         f       I")
+renderLine(58,"If                        f                 f                                                                     f                              f         f              I")
+renderLine(59,"I        f                         f                                                                                        f                                             I")
+renderLine(60,"I                                                     f         f          f                     f                                                                       fI")
+renderLine(61,"I                                                                                     f                                                                                   I")
+renderLine(62,"I               f                                                                                                                    f                        f      f    I")
+renderLine(63,"I                                             f                                                         f          f                                  D                   I")
+renderLine(64,"I                           f                                f           f                                                                                                I")
+renderLine(65,"I  f                                                              D                           f                                            f        f                     I")
+renderLine(66,"I                f                   f            f                                                                       f         f                          f         fI")
+renderLine(67,"I                                                                             f                                                                                           I")
+renderLine(68,"If       f                                                            f                 f                      f                                                   f      I")
+renderLine(69,"I                                                                                                    f                                                 f                  I")
+renderLine(70,"I                                                           f                                                                f            f                               I")
+renderLine(71,"I   f        f       f                    f      f                                                                                                              f         I")
+renderLine(72,"I                            f                                            f        f                               f                                                      I")
+renderLine(73,"I                                                                                                                                         f        f      f           f   I")
+renderLine(74,"I                                                      f       f                                 f        f                                                              fI")
+renderLine(75,"If                                      f                                                f                                    f                                           I")
+renderLine(76,"I                            f                                            f                                                                                               I")
+renderLine(77,"I          f       f                                                                                                                                  f           f       I")
+renderLine(78,"I                                                      f         f                                 f          f                        f                               f  I")
+renderLine(79,"I  f                                                                         f                                      f                        f              f             I")
+renderLine(80,"I    D                           f          f                                              f                                      f                                      fI")
+renderLine(81,"I                                                                                                       f                                            f                    I")
+renderLine(82,"If                                                                                                                                                           f            I")
+renderLine(83,"I    f     f             f            f              f            f            f       f            f                f          f               f                    f    I")
+renderLine(84,"IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
+
+
+bridgenumber=1
+bridgenumber2=1
+
+ttt=0
+
+bridge1gone=1
+bridge2gone=0
+bridge1done=0
+bridge2done=0
+
+function timer_callback()
+    if bridge1gone==1 and bridge1done==0 then
+        if ttt==10 then
+            set_floor("fl-abyss_fake",80,42)
+            --set_floor("fl-leaves",80,42)
+            ttt=-1
+            bridge1done=1
+        end
+        ttt=ttt+1
+    end
+    if bridge2gone==1 and bridge2done==0 then
+        if ttt==10 then
+            set_floor("fl-abyss_fake",84,42)
+            --set_floor("fl-leaves",84,42)
+            ttt=-1
+            ttt=-1
+            bridge2done=1
+        end
+        ttt=ttt+1
+    end
+end
+
+funcc1ready=1
+
+ttt2=0
+
+function timer_callback2()
+    ttt2=ttt2+1
+    if ttt2>15 and funcc1ready==0 then
+        SendMessage("switch5","on")
+        funcc1ready=1
+    else
+    end
+end
+
+f1=0
+function funcc1()
+    if funcc1ready==1 then
+        ttt2=0
+        funcc1ready=0
+        if f1==0 then
+            f1=1
+
+            enigma.KillItem(80,42)
+            set_floor("fl-bridge", 80,42, {name="bridgea"..bridgenumber,type="xx"})
+            bridgeaa=enigma.GetNamedObject("bridgea"..bridgenumber)
+            SendMessage(bridgeaa,"close")
+            bridgenumber=bridgenumber+1
+            set_item("it-abyss",80,42)
+            bridge1gone=0
+            bridge1done=0
+
+            enigma.KillItem(84,42)
+            SendMessage(bridgebb,"openclose")
+            --set_floor("fl-abyss_fake",84,42)
+            set_item("it-trigger",84,42,{invisible=1,action="callback",target="funcc2"})
+            bridge2gone=1
+
+        elseif f1==1 then
+            f1=0
+
+            enigma.KillItem(80,42)
+            SendMessage(bridgeaa,"open")
+            --set_floor("fl-abyss_fake",80,42)
+            set_item("it-trigger",80,42,{invisible=1,action="callback",target="funcc2"})
+
+            bridge1gone=1
+
+            enigma.KillItem(84,42)
+            set_floor("fl-bridge", 84,42, {name="bridgeb"..bridgenumber2,type="xx"})
+            bridgebb=enigma.GetNamedObject("bridgeb"..bridgenumber2)
+            SendMessage(bridgebb,"openclose")
+            bridgenumber2=bridgenumber2+1
+            bridge2gone=0
+            bridge2done=0
+
+            set_item("it-abyss",84,42)
+
+
+            set_item("it-abyss",84,42)
+
+        end
+    end
+end
+
+f11=0
+function funcc11()
+    if f11==0 then
+        f11=1
+
+        enigma.KillItem(80,42)
+        set_floor("fl-wood",80,42)
+        set_item("it-abyss",80,42)
+
+        enigma.KillItem(84,42)
+        set_floor("fl-abyss_fake",84,42)
+        set_item("it-trigger",84,42,{invisible=1,action="callback",target="funcc2"})
+
+    elseif f11==1 then
+        f1=0
+
+        enigma.KillItem(80,42)
+        set_floor("fl-abyss_fake",80,42)
+        set_item("it-trigger",80,42,{invisible=1,action="callback",target="funcc2"})
+
+        enigma.KillItem(84,42)
+        set_floor("fl-wood",84,42)
+        set_item("it-abyss",84,42)
+
+    end
+end
+
+function funcc2()
+end
+
+ff3=0
+function funcc3()
+    if ff3==0 then
+        ff3=1
+    elseif ff3==1 then
+        ff3=0
+    end
+    funcc7()
+end
+
+ff4=0
+function funcc4()
+    if ff4==0 then
+        ff4=1
+    elseif ff4==1 then
+        ff4=0
+    end
+    funcc7()
+end
+
+ff5=0
+function funcc5()
+    if ff5==0 then
+        ff5=1
+    elseif ff5==1 then
+        ff5=0
+    end
+    funcc7()
+end
+
+ff6=0
+function funcc6()
+    if ff6==0 then
+        ff6=1
+    elseif ff6==1 then
+        ff6=0
+    end
+    funcc7()
+end
+
+ff7=0
+function funcc7()
+    if ff3==1 and ff4==1 and ff5==1 and ff6==1 then
+        if ff7==0 then
+            ff7=1
+            --   SendMessage(bridge1,"close")
+            set_stone("st-greenbrown_hole",94,42)
+        end
+    else
+        if ff7==1 then
+            ff7=0
+            --      SendMessage(bridge1,"open")
+            set_stone("st-invisible",94,42)
+        end
+    end
+end
+
+set_stone( "st-timer", 179, 0,
+           {target="timer_callback", action="callback",
+            name="timer", interval=0.1} )
+set_stone( "st-timer", 179, 1,
+           {target="timer_callback2", action="callback",
+            name="timer2", interval=0.1} )
+
+oxyd_shuffle()
+
+--bridge1=enigma.GetNamedObject("bridge1")
+
+bridgebb=enigma.GetNamedObject("bridgeb0")
+SendMessage(bridgebb,"close")
+
+--SendMessage("switch1","on")
+--SendMessage("switch2","on")
+--SendMessage("switch3","on")
+--SendMessage("switch4","on")
+SendMessage("switch5","on")
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true" el:comment="read from the right">.moor txen eht ot teg ot syaw owt era erehT</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

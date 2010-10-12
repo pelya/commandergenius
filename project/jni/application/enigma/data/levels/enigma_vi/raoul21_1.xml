@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Cold Way" el:subtitle="" el:id="raoul21"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="raoul@users.berlios.de" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+       <el:dependency el:path="lib/andreas_itemfreeze" el:id="lib/andreas_itemfreeze" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="2:33"/>
+    </el:info>
+    <el:luamain><![CDATA[
+enigma.ConserveLevel = TRUE
+
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+
+levelh=13
+levelw=20
+
+cells={}
+items={}
+stones={}
+
+stones[" "]=cell{}
+cells[" "]=cell{}
+items[" "]=cell{}
+
+cells["!"]=cell{floor="fl-black"}
+cells["-"]=cell{floor="fl-light"}
+cells[" "]=cell{floor="fl-water"}
+
+stones["!"]=cell{stone="st-glass"}
+stones["C"]=cell{stone="st-coffee"}
+stones["L"]=cell{stone="st-likeoxydc"}
+stones["#"]=cell{parent={{file_oxyd,"c"}}}
+stones["$"]=cell{parent={{parent_itemfreeze, ""}}}
+
+items["p"]=cell{item="it-pin"}
+items["e"]=cell{item="it-extralife"}
+items["f"]=cell{item="it-flagblack"}
+
+level={"!!!      !!      !!!",
+       "!!!      !!      !!!",
+       "!!!              !!!",
+       "                    ",
+       "-- -     !!     - --",
+       "--  -   !!!!   -  --",
+       "-   -- !!!!!! --   -",
+       "--  -   !!!!   -  --",
+       "-- -     !!     - --",
+       "                    ",
+       "!!!              !!!",
+       "!!!      !!      !!!",
+       "!!!      !!      !!!"}
+itmap={"                    ",
+       " pe              ee ",
+       " e                e ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "         ee         ",
+       "                    ",
+       "                    ",
+       "                    ",
+       " ee               e ",
+       " f               ee ",
+       "                    "}
+stmap={"!!!!!!!!!!!!!!!!!!!!",
+       "!        !!        !",
+       "! $     !  !     $ !",
+       "!      !    !      !",
+       "!     !#C  C#!     !",
+       "!   C  C    C !    !",
+       "! #   L      L   # !",
+       "!   C  C    C  C   !",
+       "!     !#C  C#!     !",
+       "!      !    !      !",
+       "!       !  !     $ !",
+       "! $      !!        !",
+       "!!!!!!!!!!!!!!!!!!!!"}
+        
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+draw_map(0,0,itmap,items)
+
+oxyd_shuffle()
+
+itemfreeze_init(0,0,0.01)
+
+set_actor("ac-blackball",1.5,1.5,{player=0})
+
+--Doors
+set_item("it-trigger",5,5,{action="callback", target="openway1", invisible=true})
+function openway1()
+    enigma.KillItem(5,5)
+    enigma.KillStone(3,12)
+    set_item("it-trigger",3,12,{action="callback", target="openway3", invisible=true})
+end
+
+set_item("it-trigger",5,7,{action="callback", target="openway2", invisible=true})
+function openway2()
+    enigma.KillItem(5,7)
+    enigma.KillStone(9,11)
+end
+
+function openway3()
+    enigma.KillItem(3,12)
+    enigma.KillStone(10,11)
+end
+
+set_item("it-trigger",14,7,{action="callback", target="openway4", invisible=true})
+function openway4()
+    enigma.KillItem(14,7)
+    enigma.KillStone(16,0)
+    set_item("it-trigger",16,0,{action="callback", target="openway5", invisible=true})
+end
+
+function openway5()
+    enigma.KillItem(16,0)
+    enigma.KillStone(11,2)
+    set_item("it-trigger",11,2,{action="callback", target="openway6", invisible=true})
+end
+
+function openway6()
+    enigma.KillItem(11,2)
+    set_floor("fl-black",10,3)
+end
+
+--traps:
+set_item("it-trigger",5,6,{action="callback", target="trap1", invisible=true})
+function trap1()
+    set_stone("st-glass",4,6)
+    enigma.KillItem(5,6)
+    set_item("it-spoon",5,6)
+end
+
+set_item("it-trigger",14,6,{action="callback", target="trap2", invisible=true})
+function trap2()
+    set_stone("st-glass",15,6)
+    enigma.KillItem(14,6)
+    set_item("it-spoon",14,6)
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

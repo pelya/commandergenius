@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Growing Boxes" el:subtitle="" el:id="luc26"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Lukas Schüller" el:email="Lucky_Luc@web.de" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Lukas Schüller</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+function bad()
+  enigma.SendMessage(enigma.GetNamedObject("bridgeb"),"openclose",nil)
+  enigma.SendMessage(enigma.GetNamedObject("doord"),"openclose",nil)
+end
+function writeLine( line, cells)
+  for i=1, strlen(cells) do
+    local c = strsub(cells,i,i)
+    if(c =="#") then
+      set_stone("st-marble",i-1,line)
+    elseif(c =="h") then
+      set_stone("st-marble_hole",i-1,line)
+    elseif(c =="1") then
+      set_stone("st-greenbrown",i-1,line)
+    elseif(c =="2") then
+      set_stone("st-plain",i-1,line)
+    elseif(c ==".") then
+      set_floor("fl-abyss",i-1,line)
+    elseif(c =="-") then
+      set_floor("fl-bridge",i-1,line,{name="bridgeb"})
+    elseif(c =="s") then
+      set_item("it-seed",i-1,line)
+    elseif(c =="n") then
+      set_item("it-seed_nowood",i-1,line)
+    elseif(c =="v") then
+      set_item("it-seed_volcano",i-1,line)
+    elseif(c =="a") then
+      document(i-1,line,"text1")
+    elseif(c =="b") then
+      document(i-1,line,"text2")
+    elseif(c =="c") then
+      document(i-1,line,"text3")
+    elseif(c =="d") then
+      document(i-1,line,"text4")
+    elseif(c =="e") then
+      document(i-1,line,"text5")
+    elseif(c =="+") then
+      set_stone("st-wood",i-1,line)
+    elseif(c =="x") then
+      set_stone("st-grate1",i-1,line)
+      set_item("it-tinyhill",i-1,line)
+    elseif(c =="=") then
+      set_stone("st-door_a",i-1,line,{name="doord"})
+    elseif(c =="*") then
+      set_stone("st-switch",i-1,line,{action="callback",target="bad"})
+    elseif(c =="o") then
+      oxyd(i-1,line)
+    elseif(c =="0") then
+      set_actor("ac-blackball",i-0.5,line+0.5,{player="0"})
+    end
+  end
+end
+
+CreateWorld(58,13)
+fill_floor("fl-tigris",0,0,58,13)
+----------------------------------
+--Environment
+writeLine(00,"...................#########################+12###########")
+writeLine(01,"...................#..................#     snv        #o#")
+writeLine(02,"...................h.     #..       ..#                # #")
+writeLine(03,"...................h. + + #..       ..#                # #")
+writeLine(04,"...................h.     #..       ..#                # #")
+writeLine(05,"...................h.     #..s####  ..#                # #")
+writeLine(06,"..................sh. 0e+ xa.s=c*#  ..-d               . #")
+writeLine(07,"..................bh.     #..s####  ..#                # #")
+writeLine(08,"...................h.     #..       ..#                # #")
+writeLine(09,"...................h. + + #..       ..#                # #")
+writeLine(10,"...................h.     #..       ..#                # #")
+writeLine(11,"...................#..................#                #o#")
+writeLine(12,"...................#######################################")
+enigma.SendMessage(enigma.GetNamedObject("doord"),"openclose",nil)
+enigma.ConserveLevel = FALSE
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">You'd need a portable box!</el:english>
+      </el:string> 
+      <el:string el:key="text2">
+        <el:english el:translate="true">Congratulations! You found a seed! Try to use it behind the grate (and move away quickly)</el:english>
+      </el:string> 
+      <el:string el:key="text3">
+        <el:english el:translate="true">Remember that you can't fill a closed bridge with a box ...                                           but maybe you can use the 3rd seed differently!</el:english>
+      </el:string> 
+      <el:string el:key="text4">
+        <el:english el:translate="true">There are different kinds of seeds ... Try to use them!</el:english>
+      </el:string> 
+      <el:string el:key="text5">
+        <el:english el:translate="true" el:comment="read from the right">Noitcerid etisoppo eht yrt! Tuo syaw owt? Rorrim, rorrim ...</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

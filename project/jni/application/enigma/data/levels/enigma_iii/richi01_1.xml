@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="The Ditch" el:subtitle="" el:id="richi01"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Richi Bützer" el:email="" el:homepage="enigma.mal2.ch"/>
+      <el:copyright>Copyright © 2005 Richi Bützer</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world(20, 13)
+oxyd_default_flavor="b"
+
+fill_floor("fl-plank")
+fill_floor("fl-water", 12, 1, 2, 11)
+fill_floor("fl-water", 15, 1, 4, 11)
+
+set_item("it-document", 9, 3, {text="text1"})
+
+draw_stones("st-greenbrown", {0, 0}, {0, 1}, 13)
+draw_stones("st-greenbrown", {1, 0}, {1, 0}, 9)
+draw_stones("st-greenbrown", {12, 0}, {1, 0}, 2)
+draw_stones("st-greenbrown", {15, 0}, {1, 0}, 5)
+draw_stones("st-greenbrown", {4, 1}, {0, 1}, 10)
+draw_stones("st-greenbrown", {19, 1}, {0, 1}, 12)
+draw_stones("st-greenbrown", {2, 2}, {0, 1}, 11)
+draw_stones("st-wood", {9, 3}, {0, 1}, 2)
+draw_stones("st-greenbrown", {3, 12}, {1, 0}, 11)
+draw_stones("st-greenbrown", {15, 12}, {1, 0}, 4)
+set_stone("st-laser", 10, 0, {name="laser1", dir=SOUTH, on="1"})
+set_stone("st-laser", 11, 0, {name="laser2", dir=SOUTH, on="1"})
+set_stone("st-wood", 14, 11)
+set_stone("st-greenbrown", 1, 12)
+
+set_actor("ac-blackball", 1.5, 11.5, {player="0", mouseforce="1"})
+
+oxyd(14, 12)
+oxyd(14, 0)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Risk your life ...</el:english>
+        <el:translation el:lang="de">Setze dein Leben aufs Spiel ...</el:translation>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

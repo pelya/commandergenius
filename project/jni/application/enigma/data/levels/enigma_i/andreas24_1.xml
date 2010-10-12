@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Floppy Floors" el:subtitle="" el:id="andreas24"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Andreas Lochmann" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Andreas Lochmann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="00:43" el:difficult="01:11"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Created with the help of BBE 1.05
+
+-- Global variables holding the floor-state
+
+levelh=13
+levelw=20
+myfloor = {}
+myfloor[0] = "fl-abyss"
+myfloor[1] = "fl-samba"
+myfloor[2] = "fl-gray"
+enigma.FlatForce=30
+enigma.SlopeForce=15
+enigma.ElectricForce=30
+enigma.FrictionFactor=1.5
+local x, y, j, k
+
+way = {}
+for j = 1,5 do
+  way[j] = 0
+end
+
+floornumber = {}
+for x = 0, levelw - 1 do
+  floornumber[x] = {}
+  for y = 0, levelh - 1 do
+    floornumber[x][y] = 0
+  end
+end
+
+-- Initialise random connections
+
+trigger = {}
+for j = 1,5 do  trigger[j] = 0  end
+for j = 1,5 do
+  repeat
+    k = random(1,5)
+    if trigger[k] == 0 then
+      trigger[k] = j
+    else
+      k = 0
+    end
+  until k > 0
+end
+
+-- Switch and draw functions
+
+function switch(onoff, sender)
+  local j = trigger[enigma.GetAttrib(sender, "mynumber")]
+  way[j] = 1 - way[j]
+  drawstate(j)
+  oxyd_closeall()
+  oxyd_shuffle()
+end
+
+function drawstate(j)
+  for x = 0, levelw - 1 do
+    for y = 0, levelh - 1 do
+      if (floornumber[x][y] == j) then
+        set_floor(myfloor[way[floornumber[x][y]]], x, y)
+      end
+    end
+  end
+end
+
+-- BBE/ant stuff
+
+function file_oxyd(x,y,f)
+  oxyd_default_flavor=f
+  oxyd(x,y)
+end
+function set_myfloor(x,y,k)
+  floornumber[x][y] = k
+  set_floor(myfloor[way[k]], x, y)
+end
+
+cells={}
+items={}
+stones={}
+stones[" "]=cell{}
+cells[" "]=cell{}
+items[" "]=cell{}
+cells["!"]=cell{floor = myfloor[0]}
+if difficult then
+  cells["#"]=cell{floor = "fl-gradient1"}
+  cells["&"]=cell{floor = "fl-gradient2"}
+  cells["$"]=cell{floor = "fl-gradient3"}
+  cells["%"]=cell{floor = "fl-gradient4"}
+else
+  cells["#"]=cell{floor = myfloor[2]}
+  cells["&"]=cell{floor = myfloor[2]}
+  cells["$"]=cell{floor = myfloor[2]}
+  cells["%"]=cell{floor = myfloor[2]}
+end
+for j = 1, 5 do
+  cells[tostring(j)]=cell{parent={{set_myfloor, j}}}
+  stones[tostring(j)]=cell{stone=
+       {"st-floppy", {action = "callback", target = "switch", mynumber = j}}}
+end
+stones["#"]=cell{parent={{file_oxyd, "b"}}}
+items["!"]=cell{item="it-floppy"}
+level={"!!!!!!!!!!!!!!!!!!!!",
+       "!#%%11111!444422255!",
+       "!#!&!!!!1!4!!4!!!!5!",
+       "!#!&2222122224!!!!5!",
+       "!#!&!!!!1!5!!1!!!!3!",
+       "!#!&!!!!3!5!!1!!!!3!",
+       "!#!&33333!5!!144444!",
+       "!#!&!!!!!!5!!1!!!!1!",
+       "!#!&!!!!!!5!!1!!!!1!",
+       "!#!&444111555333333!",
+       "!#!&!!!!!!!!!2!!!!3!",
+       "!$$&555552222211113!",
+       "!!!!!!!!!!!!!!!!!!!!"}
+itmap={"                    ",
+       "                !   ",
+       "                    ",
+       "                    ",
+       "        !           ",
+       "                    ",
+       "   !                ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "             !      ",
+       "                    ",
+       "                    "}
+stmap={"                    ",
+       "                   #",
+       "  1                 ",
+       "                    ",
+       "  2                 ",
+       "                    ",
+       "  3         #      #",
+       "                    ",
+       "  4                 ",
+       "                    ",
+       "  5                 ",
+       "                   #",
+       "                    "}
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+draw_map(0,0,itmap,items)
+oxyd_shuffle()
+set_actor("ac-blackball", 1.5, 2.5, {mouseforce = 1.667})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

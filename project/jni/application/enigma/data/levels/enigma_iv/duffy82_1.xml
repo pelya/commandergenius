@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Flood Zone" el:subtitle="" el:id="duffy82"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2004 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw=21
+levelh=13
+
+create_world( levelw, levelh)
+enigma.ConserveLevel=FALSE
+
+fill_floor("fl-wood", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-greenbrown", i-1, line)
+        elseif c =="%" then
+            set_stone( "st-greenbrown", i-1, line)
+            set_floor("fl-normal",i-1,line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "*" then
+            set_stone( "st-brownie", i-1, line)
+                elseif c == "!" then
+            abyss(i-1,line)
+        elseif c == "~" then
+           set_floor("fl-water",i-1,line)
+        elseif c=="z" then
+           set_actor("ac-blackball", i-.5,line+.5, {player=0})
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c=="=" then
+            set_floor("fl-space",i-1,line)
+        elseif c=="-" then
+            puzzle(i-1,line,PUZ_0101)
+        elseif c=="i" then
+            puzzle(i-1,line,PUZ_1010)
+        elseif c=="4" then
+            puzzle(i-1,line,PUZ_0100)
+        elseif c=="6" then
+            puzzle(i-1,line,PUZ_0001)
+        elseif c=="j" then
+            puzzle(i-1,line,PUZ_1001)
+        elseif c=="/" then
+            puzzle(i-1,line,PUZ_0110)
+        elseif c=="X" then
+            puzzle(i-1,line,PUZ_1111)
+        elseif c=="m" then
+           set_item("it-magicwand",i-1,line)
+        elseif c=="x" then
+            set_floor("fl-normal",i-1,line)
+        elseif c=="S" then
+           set_stone("st-switch",i-1,line,{action="callback",target="funcc1"})
+         end
+    end    
+end
+
+renderLine(00,"####################")
+renderLine(01,"#                 S#")
+renderLine(02,"#                  #")
+renderLine(03,"#                  #")
+renderLine(04,"# 6j  %%%%%%%%xxx  #")
+renderLine(05,"#  -  %o+% x  xx%  #")
+renderLine(06,"#z i  % +%     %% m#")
+renderLine(07,"#  -  %o+     x%%  #")
+renderLine(08,"# 4/  %%%%%%%%xxx  #")
+renderLine(09,"#                  #")
+renderLine(10,"#                  #")
+renderLine(11,"#                 S#")
+renderLine(12,"####################")
+
+oxyd_shuffle()
+
+ff1=0
+function funcc1()
+if ff1==0 then
+   fill_floor("fl-water",7,5,2,3)
+   fill_floor("fl-water",10,5,1,3)
+   set_floor("fl-water",9,7)
+   fill_floor("fl-water",11,6,1,2)
+   fill_floor("fl-water",12,5,2,3)
+   set_floor("fl-water",14,6)
+ff1=1
+end
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

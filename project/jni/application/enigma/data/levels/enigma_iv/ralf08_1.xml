@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- No Meditation -" el:subtitle="" el:id="ralf08"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Ralf Westram" el:email="amgine@reallysoft.de" el:homepage=""/>
+      <el:copyright>Copyright © 203 Ralf Westram</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ralf" el:id="lib/ralf" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+--debug_mode()
+
+level={
+   "####################",
+   "#__________________#",
+   "#________H___ _____#",
+   "#_____ _____ . ____#",
+   "#____ . _____ _____#",
+   "#_____ _______H____#",
+   "#__________________#",
+   "#____H_______ _____#",
+   "#_____ _____ . ____#",
+   "#____ . _____ _____#",
+   "#_____ ___H________#",
+   "#__________________#",
+   "####################",
+}
+
+cells={}
+
+cells[" "] = cell{floor="fl-red"}
+cells["#"] = cell{parent=cells[" "],stone="st-glass1"}
+cells["_"] = cell{parent=cells[" "],stone="st-pull"}
+cells["H"] = cell{parent=cells[" "],item="it-hollow"}
+cells["."] = cell{parent=cells[" "],actor={"ac-whiteball-small", {player=0, mouseforce=1}}}
+
+rs_create_world(level,cells)
+oxyd_shuffle()
+enigma.ConserveLevel=FALSE
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

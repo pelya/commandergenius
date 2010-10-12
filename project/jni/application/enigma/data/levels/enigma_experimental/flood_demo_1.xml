@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Flood Demo" el:subtitle="Demolevel for libflood" el:id="flood_demo"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="stable"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+       <el:dependency el:path="lib/libflood_1" el:id="lib/libflood" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelh = 13
+levelw = 20
+
+create_world(levelw, levelh)
+
+function renderLine( line, pattern)
+	for i=1, strlen(pattern) do
+		local c = strsub( pattern, i, i)
+  		if c=="x" then
+			oxyd(i-1,line)
+        elseif c=="#" then
+            set_stone("st-glass",i-1,line)
+            set_floor("fl-black",i-1,line)
+        elseif c==" " then
+            set_floor("fl-rough",i-1,line)
+        elseif c=="-" then
+            set_floor("fl-black",i-1,line)
+		end
+	end
+end
+
+renderLine(00 , "####################")
+renderLine(01 , "#------------------#")
+renderLine(02 , "#------------------#")
+renderLine(03 , "#---------------- -#")
+renderLine(04 , "#--      -         #")
+renderLine(05 , "#-     - ----     -#")
+renderLine(06 , "#-          -  ----#")
+renderLine(07 , "#-   ------ -  -  -#")
+renderLine(08 , "#- ---    - --    -#")
+renderLine(09 , "#    -  -      -  -#")
+renderLine(10 , "#- ----------------#")
+renderLine(11 , "#------------------#")
+renderLine(12 , "####################")
+
+oxyd_shuffle()
+set_actor("ac-blackball", 1.5,1.5, {player=0})
+
+-- PART FOR THE LIBFLOOD:
+
+init_flood({"################ #",
+            "##      #       ~ ",
+            "# ~   # ####     #",
+            "#          #  ####",
+            "#   ###### #  #  #",
+            "# ###~   # ##   ~#",
+            "    #  #      # ~#",
+            "# ################"},{1,3},1)
+
+set_stone("st-switch_black",2,2,{action="callback", target="do_flood"})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

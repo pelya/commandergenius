@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="A Cooler Spot in Hell" el:subtitle="" el:id="andreas43"/>
+      <el:version el:score="2" el:release="2" el:revision="3" el:status="released"/>
+      <el:author  el:name="Andreas Lochmann" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Andreas Lochmann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+       <el:dependency el:path="lib/andreas_itemfreeze" el:id="lib/andreas_itemfreeze" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="03:33"/>
+    </el:info>
+    <el:luamain><![CDATA[
+
+levelw=39
+levelh=13
+create_world(levelw, levelh)
+
+mainfloor = "fl-bumps"  --"fl-dunes"
+abyssfloor = "fl-abyss"
+mainstone = "st-bumps"
+blockstone = "st-block"
+secondaryfloor = "fl-bumps"
+fill_floor(mainfloor, 0, 0, levelw, levelh)
+oxyd_default_flavor="a"
+
+function renderLine(line, pattern)
+  for j = 1, strlen(pattern) do
+    local c = strsub(pattern, j, j)
+    if c == " " then
+      set_floor(mainfloor, j-1, line, { secure = true })
+    elseif c == "#" then
+      set_stone(mainstone, j-1, line)
+    elseif c == "." then
+      set_floor(abyssfloor, j-1, line, { burnable = true, ignitable = true,
+                             eternal = true, secure = true, fastfire = true })
+    elseif c == "b" then
+      set_item("it-blackbomb", j-1, line)
+    elseif c == "c" then
+      set_floor(secondaryfloor, j-1, line, { secure = true })
+      set_item("it-blackbomb", j-1, line)
+    elseif c == "d" then
+      set_item("it-dynamite", j-1, line)
+    elseif c == "e" then
+      set_floor(secondaryfloor, j-1, line, { secure = true })
+      set_item("it-dynamite", j-1, line)
+    elseif c == "T" then
+      set_stone(blockstone, j-1, line)
+    elseif c == "-" then
+      set_item("it-burnable_oil", j-1, line)
+    elseif c == "O" then
+      oxyd(j-1, line)
+    elseif c == "K" then
+      set_stone("st-knight", j-1, line)
+    elseif c == "s" then
+      set_item("it-sword", j-1, line)
+    elseif c == "o" then
+      set_actor("ac-blackball", j-1 + 0.5, line + 0.5)
+    elseif c == "I" then
+      set_itemfreeze(j-1, line)
+    elseif c == "J" then
+      set_floor(secondaryfloor, j-1, line, { secure = true })
+      set_itemfreeze(j-1, line)
+    elseif c == "B" then
+      set_item("it-blackbomb", j-1, line)
+      set_itemfreeze(j-1, line)
+    elseif c == "C" then
+      set_floor(secondaryfloor, j-1, line, { secure = true })
+      set_item("it-blackbomb", j-1, line)
+      set_itemfreeze(j-1, line)
+    elseif c == "S" then
+      set_item("it-sword", j-1, line)
+      set_itemfreeze(j-1, line)
+    elseif c == "j" then
+      set_item("it-springboard", j-1, line)
+    elseif c == "G" then
+      set_stone("st-grate", j-1, line)
+    elseif c == "R" then
+      set_stone("st-flrock", j-1, line)
+      set_floor(secondaryfloor, j-1, line, { secure = true })
+    elseif c == "_" then
+      set_floor(secondaryfloor, j-1, line, { secure = true })
+    end
+  end
+end
+
+
+--              012345678901234567890123456789012345678
+renderLine( 0, ".....#...........#....##...........##..")
+renderLine( 1, "...e__ -____.#...c.#.bI  .#######....#.")
+renderLine( 2, "#..__C..#__J ..#__J_#.   .#_____#......")
+renderLine( 3, ".....I..o.c. ..___._#. .-.#_##J_#..   .")
+renderLine( 4, ".OK .dd T.#. .._#..-.. .  #_##R__   S #")
+renderLine( 5, "... -  .b..# .#_#.  ..I.. #C___##..   .")
+renderLine( 6, "...-....s..  .#_#   b# .. #_#_##.......")
+renderLine( 7, "... .      d..#_.. .#_d.. #___#......#.")
+renderLine( 8, ".OK ... ..-..##J#.-.__d.. ##  #......#.")
+renderLine( 9, ".....  I .    __#  .._R.#    ##.....#..")
+renderLine(10, "....  db . dd ### #.__J  RR# #.....#...")
+renderLine(11, "..#. dd ...  .... I __..#..  ....##....")
+renderLine(12, ".....#......#..........................")
+--              012345678901234567890123456789012345678
+
+
+itemfreeze_init(0,0,0.01)
+itemfreeze_test_for_explosion = 1
+itemfreeze_test_for_fire = 1
+itemfreeze_test_for_existence = 1
+itemfreeze_modern_fire = 1
+oxyd_shuffle()
+--display.SetFollowMode(display.FOLLOW_SCROLLING)
+display.SetFollowMode(display.FOLLOW_SMOOTH)
+enigma.ConserveLevel = FALSE
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<index xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd">
+
+  <info enigma="1.00" group="Déjà-vu" location="20500" network="false" owner="Enigma Team" release="1" revision="1" title="Oxyd Extra"/>
+
+  <attributes/>
+
+  <levels>
+    <level _seq="1" _title="Hide and Seek" _xpath="./oxe02_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin22" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="2" _title="Down Hill" _xpath="./oxe03_1" author="Petr Machata" ctrl="force" easy="false" id="oxe03" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="3" _title="Islands" _xpath="./oxe04_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin23" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="4" _title="Buzzer" _xpath="./oxe05_1" author="Petr Machata" ctrl="force" easy="false" id="oxe05" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="5" _title="Escape From Prison" _xpath="./oxe07_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin24" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="6" _title="Shogun" _xpath="./oxe08_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin25" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="7" _title="- Meditation -" _xpath="./oxe10_1" author="anonymous" ctrl="force" easy="false" id="meditation3" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="8" _title="Inverse" _xpath="./oxe11_1" author="Petr Machata" ctrl="force" easy="false" id="oxe11" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="9" _title="Paper Chase" _xpath="./oxe12_1" author="Petr Machata" ctrl="force" easy="false" id="oxe12" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="10" _title="Mirror Moves" _xpath="./oxe13_1" author="Petr Machata" ctrl="force" easy="false" id="oxe13" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="11" _title="Ice Breaker" _xpath="./oxe14_1" author="Petr Machata" ctrl="force" easy="false" id="oxe14" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="12" _title="The Chase" _xpath="./oxe16_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level5c" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="13" _title="Shogun Master" _xpath="./oxe18_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin28" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="14" _title="- Meditation -" _xpath="./oxe20_1" author="" ctrl="force" easy="false" id="meditation4" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="15" _title="The Bug" _xpath="./oxe21_1" author="Petr Machata" ctrl="force" easy="false" id="oxe21" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="16" _title="Remote Control" _xpath="./oxe22_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level5d" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="17" _title="Island of Mirrors" _xpath="./oxe23_1" author="Petr Machata" ctrl="force" easy="false" id="oxe23" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="18" _title="Sheet Of Waters" _xpath="./oxe25_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin29" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="19" _title="Knocking" _xpath="./oxe27_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin64" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="20" _title="Dance With Me" _xpath="./oxe28_1" author="Petr Machata" ctrl="force" easy="false" id="oxe28" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="21" _title="Chain Reaction" _xpath="./oxe29_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin44" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="22" _title="- Meditation -" _xpath="./oxe30_1" author="Petr Machata" ctrl="force" easy="false" id="oxe30" rel="1" rev="0" score="1" target="time" unit="duration"/>
+  </levels>
+
+</index>

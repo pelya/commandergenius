@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Seven Friends" el:subtitle="" el:id="ss16"/>
+      <el:version el:score="2" el:release="2" el:revision="0" el:status="released"/>
+      <el:author  el:name="Sven Siggelkow" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Sven Siggelkow</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+
+cells[" "]=cell{floor="fl-wood"}
+cells["#"]=cell{stone="st-brick"}
+cells["b"]=cell{stone="st-actorimpulse"}
+cells["h"]=cell{parent=cells[" "],item="it-hollow"}
+cells["x"]=cell{actor={"ac-blackball",{player=0,essential=1}}}
+
+level = {
+--  01234567890123456789
+   "#b################b#",--00
+   "b                  b",--01
+   "#  h               #",--02
+   "#                  #",--03
+   "#                  #",--04
+   "#                  #",--05
+   "# x    h           #",--06
+   "#                  #",--07
+   "#        h         #",--08
+   "#                  #",--09
+   "#            h     #",--10
+   "b                  b",--11
+   "#b################b#" --12
+}
+set_default_parent(cells[" "])
+
+create_world_by_map(level,cells)
+
+local top=set_actor("ac-top", 9,5, {mouseforce=0, range=20, force=-20, attacknearest=0})
+local ac1=set_actor("ac-whiteball-small", 9,6, {player=1, mouseforce=1, controllers=1, essential=1})
+local ac2=set_actor("ac-whiteball-small", 9,7, {player=1, mouseforce=1, controllers=1, essential=1})
+local ac3=set_actor("ac-whiteball-small", 9,8, {player=1, mouseforce=1, controllers=1, essential=1})
+local ac4=set_actor("ac-whiteball-small", 9,9, {player=1, mouseforce=1, controllers=1, essential=1})
+local rotor=set_actor("ac-rotor", 9,11, {mouseforce=2, range=10, force=-20, attacknearest=0})
+
+AddRubberBand(top, ac1, 6, 1)
+AddRubberBand(ac1, ac2, 6, 1)
+AddRubberBand(ac2, ac3, 6, 1)
+AddRubberBand(ac3, ac4, 6, 1)
+AddRubberBand(ac4, rotor, 3, 5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

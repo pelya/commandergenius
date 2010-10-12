@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation -" el:subtitle="" el:id="meditation15"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Siegfried Fennig" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2002 Siegfried Fennig</el:copyright>
+      <el:license el:type="Donated to Enigma under the projects license" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 59
+levelh = 13
+
+create_world(levelw, levelh)
+fill_floor("fl-abyss", 0,0, levelw,levelh)
+fill_floor("fl-normal",20,6, 18,1)
+fill_floor("fl-normal",28,2, 2,2)
+fill_floor("fl-normal_x",28,9, 2,2)
+
+draw_floor("fl-gradient", {38,5}, {0,1}, 3, {type=4})
+draw_floor("fl-gradient", {19,5}, {0,1}, 3, {type=3})
+draw_floor("fl-gradient", {22,5}, {1,0}, 1, {type=1})
+draw_floor("fl-gradient", {26,5}, {1,0}, 6, {type=1})
+draw_floor("fl-gradient", {35,5}, {1,0}, 1, {type=1})
+draw_floor("fl-gradient", {22,7}, {1,0}, 1, {type=2})
+draw_floor("fl-gradient", {26,7}, {1,0}, 6, {type=2})
+draw_floor("fl-gradient", {35,7}, {1,0}, 1, {type=2})
+
+draw_floor("fl-gradient", {21,5}, {1,0}, 1, {type=11})
+draw_floor("fl-gradient", {23,5}, {1,0}, 1, {type= 9})
+draw_floor("fl-gradient", {25,5}, {1,0}, 1, {type=11})
+draw_floor("fl-gradient", {32,5}, {1,0}, 1, {type= 9})
+draw_floor("fl-gradient", {34,5}, {1,0}, 1, {type=11})
+draw_floor("fl-gradient", {36,5}, {1,0}, 1, {type= 9})
+draw_floor("fl-gradient", {21,7}, {1,0}, 1, {type=12})
+draw_floor("fl-gradient", {23,7}, {1,0}, 1, {type=10})
+draw_floor("fl-gradient", {25,7}, {1,0}, 1, {type=12})
+draw_floor("fl-gradient", {32,7}, {1,0}, 1, {type=10})
+draw_floor("fl-gradient", {34,7}, {1,0}, 1, {type=12})
+draw_floor("fl-gradient", {36,7}, {1,0}, 1, {type=10})
+
+function dh1( x, y)
+       hollow( x, y)
+       draw_floor("fl-gradient", {x-1,y}, {0,1}, 3, {type=3})
+       set_floor("fl-gradient",   x, y-1,           {type=1})
+       draw_floor("fl-gradient", {x+1,y}, {0,1}, 3, {type=4})
+       set_floor("fl-gradient",   x-1, y-1,         {type=5})
+       set_floor("fl-gradient",   x+1, y-1,         {type=6})
+       draw_floor("fl-normal",   {x,y}, {0,1}, 4)
+end
+
+dh1 (20,2)
+dh1 (24,2)
+dh1 (33,2)
+dh1 (37,2)
+
+function dh2( x, y)
+       hollow( x, y)
+       draw_floor("fl-gradient", {x-1,y-2}, {0,1}, 3,{type=3})
+       set_floor("fl-gradient",   x, y+1,            {type=2})
+       draw_floor("fl-gradient", {x+1,y-2}, {0,1}, 3,{type=4})
+       set_floor("fl-gradient",   x-1, y+1,          {type=7})
+       set_floor("fl-gradient",   x+1, y+1,          {type=8})
+       draw_floor("fl-normal",   {x,y-3}, {0,1}, 4)
+end
+
+dh2 (20,10)
+dh2 (24,10)
+dh2 (33,10)
+dh2 (37,10)
+
+function ac1( x, y)
+       draw_floor("fl-gradient", {x-1,y}, {0,1}, 2, {type=3})
+       draw_floor("fl-gradient", {x, y-1},{1,0}, 2, {type=1})
+       draw_floor("fl-gradient", {x+2,y}, {0,1}, 2, {type=4})
+       set_floor("fl-gradient",   x-1, y-1,         {type=5})
+       set_floor("fl-gradient",   x+2, y-1,         {type=6})
+       set_floor("fl-gradient",   x-1, y+2,         {type=7})
+       set_floor("fl-gradient",   x+2, y+2,         {type=8})
+       draw_floor("fl-gradient", {x,y+2}, {1,0}, 2, {type=2})
+end
+
+ac1 (28,2)
+ac1 (28,9)
+
+set_actor("ac-whiteball-small", 28.5, 2.5, {player=0, mouseforce=1, essential=1})
+set_actor("ac-whiteball-small", 29.5, 2.5, {player=0, mouseforce=1, essential=1})
+set_actor("ac-whiteball-small", 28.5, 3.5, {player=0, mouseforce=1, essential=1})
+set_actor("ac-whiteball-small", 29.5, 3.5, {player=0, mouseforce=1, essential=1})
+
+set_actor("ac-whiteball-small", 28.5, 9.5, {player=0, mouseforce=1, essential=1})
+set_actor("ac-whiteball-small", 29.5, 9.5, {player=0, mouseforce=1, essential=1})
+set_actor("ac-whiteball-small", 28.5, 10.5, {player=0, mouseforce=1, essential=1})
+set_actor("ac-whiteball-small", 29.5, 10.5, {player=0, mouseforce=1, essential=1})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Mas Microban 112" el:subtitle="" el:id="Sokoban/mmic_112"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="David W Skinner" el:email="sasquatch@bentonrea.com" el:homepage="http://users.bentonrea.com/~sasquatch/sokoban/"/>
+      <el:copyright>Copyright © David W Skinner</el:copyright>
+      <el:license el:type="see Lua code below" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ralf_sokoban" el:id="lib/ralf_sokoban" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Converted to enigma format by Ralf Westram with friendly permission from David W Skinner.</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+level={
+  "#########",
+  "#   #   #",
+  "# o...o #",
+  "# o*@*o #",
+  "# o...o #",
+  "#   #   #",
+  "#########",
+}
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+swapStyle = 2
+xsymm = 1
+ysymm = 1
+play_sokoban(level,1235)
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

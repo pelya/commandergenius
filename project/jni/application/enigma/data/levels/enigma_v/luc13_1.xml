@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Moving Puzzles" el:subtitle="" el:id="luc13"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Lukas Schüller" el:email="Lucky_Luc@web.de" el:homepage=""/>
+      <el:copyright>Copyright © 2005 Lukas Schüller</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Functions to open the door
+onepush = 0
+twopush = 0
+threepush = 0
+fourpush = 0
+fivepush = 0
+sixpush = 0
+sevenpush = 0
+eightpush = 0
+ninepush = 0
+tenpush = 0
+elevenpush = 0
+twelvepush = 0
+allpush = 0
+function open_all_doors_a()
+  if(onepush == 0) then
+    allpush = allpush + 1
+    if(allpush == 12) then
+      enigma.SendMessage(enigma.GetNamedObject("door"), "open", nil)
+    end
+    onepush = 1
+  else
+    allpush = allpush - 1
+    enigma.SendMessage(enigma.GetNamedObject("door"), "close", nil)
+    onepush = 0
+  end
+end
+function open_all_doors_b()
+  if(twopush == 0) then
+    allpush = allpush + 1
+    if(allpush == 12) then
+      enigma.SendMessage(enigma.GetNamedObject("door"), "open", nil)
+    end
+    twopush = 1
+  else
+    allpush = allpush - 1
+      enigma.SendMessage(enigma.GetNamedObject("door"), "close", nil)
+    twopush = 0
+   end
+end
+function open_all_doors_c()
+  if(threepush == 0) then
+    allpush = allpush + 1
+    if(allpush == 12) then
+      enigma.SendMessage(enigma.GetNamedObject("door"), "open", nil)
+    end
+    threepush = 1
+  else
+    allpush = allpush - 1
+    enigma.SendMessage(enigma.GetNamedObject("door"), "close", nil)
+    threepush = 0
+  end
+end
+function open_all_doors_d()
+  if(fourpush == 0) then
+    allpush = allpush + 1
+    if(allpush == 12) then
+      enigma.SendMessage(enigma.GetNamedObject("door"), "open", nil)
+    end
+    fourpush = 1
+  else
+    allpush = allpush - 1
+      enigma.SendMessage(enigma.GetNamedObject("door"), "close", nil)
+    fourpush = 0
+   end
+end
+function open_all_doors_e()
+  if(fivepush == 0) then
+    allpush = allpush + 1
+    if(allpush == 12) then
+      enigma.SendMessage(enigma.GetNamedObject("door"), "open", nil)
+    end
+    fivepush = 1
+  else
+    allpush = allpush - 1
+    enigma.SendMessage(enigma.GetNamedObject("door"), "close", nil)
+    fivepush = 0
+  end
+end
+function open_all_doors_f()
+  if(sixpush == 0) then
+    allpush = allpush + 1
+    if(allpush == 12) then
+      enigma.SendMessage(enigma.GetNamedObject("door"), "open", nil)
+    end
+    sixpush = 1
+  else
+    allpush = allpush - 1
+      enigma.SendMessage(enigma.GetNamedObject("door"), "close", nil)
+    sixpush = 0
+   end
+end
+function open_all_doors_g()
+  if(sevenpush == 0) then
+    allpush = allpush + 1
+    if(allpush == 12) then
+      enigma.SendMessage(enigma.GetNamedObject("door"), "open", nil)
+    end
+    sevenpush = 1
+  else
+    allpush = allpush - 1
+    enigma.SendMessage(enigma.GetNamedObject("door"), "close", nil)
+    sevenpush = 0
+  end
+end
+function open_all_doors_h()
+  if(eightpush == 0) then
+    allpush = allpush + 1
+    if(allpush == 12) then
+      enigma.SendMessage(enigma.GetNamedObject("door"), "open", nil)
+    end
+    eightpush = 1
+  else
+    allpush = allpush - 1
+      enigma.SendMessage(enigma.GetNamedObject("door"), "close", nil)
+    eightpush = 0
+   end
+end
+function open_all_doors_i()
+  if(ninepush == 0) then
+    allpush = allpush + 1
+    if(allpush == 12) then
+      enigma.SendMessage(enigma.GetNamedObject("door"), "open", nil)
+    end
+    ninepush = 1
+  else
+    allpush = allpush - 1
+    enigma.SendMessage(enigma.GetNamedObject("door"), "close", nil)
+    ninepush = 0
+  end
+end
+function open_all_doors_j()
+  if(tenpush == 0) then
+    allpush = allpush + 1
+    if(allpush == 12) then
+      enigma.SendMessage(enigma.GetNamedObject("door"), "open", nil)
+    end
+    tenpush = 1
+  else
+    allpush = allpush - 1
+      enigma.SendMessage(enigma.GetNamedObject("door"), "close", nil)
+    tenpush = 0
+   end
+end
+function open_all_doors_k()
+  if(elevenpush == 0) then
+    allpush = allpush + 1
+    if(allpush == 12) then
+      enigma.SendMessage(enigma.GetNamedObject("door"), "open", nil)
+    end
+    elevenpush = 1
+  else
+    allpush = allpush - 1
+    enigma.SendMessage(enigma.GetNamedObject("door"), "close", nil)
+    elevenpush = 0
+  end
+end
+function open_all_doors_l()
+  if(twelvepush == 0) then
+    allpush = allpush + 1
+    if(allpush == 12) then
+      enigma.SendMessage(enigma.GetNamedObject("door"), "open", nil)
+    end
+    twelvepush = 1
+  else
+    allpush = allpush - 1
+      enigma.SendMessage(enigma.GetNamedObject("door"), "close", nil)
+    twelvepush = 0
+   end
+end
+--------------------------------------------------
+-- Environment
+cells={}
+cells[" "]=cell{floor="fl-woven"}
+cells["#"]=cell{stone="st-stone1"}
+cells["x"]=cell{stone="st-grate1"}
+map_cell_meaning("=", cell{stone={"st-door", {name="door", type="h"}}})
+map_cell_meaning("a", cell{item={"it-trigger", {action="callback", target="open_all_doors_a"}}})
+map_cell_meaning("b", cell{item={"it-trigger", {action="callback", target="open_all_doors_b"}}})
+map_cell_meaning("c", cell{item={"it-trigger", {action="callback", target="open_all_doors_c"}}})
+map_cell_meaning("d", cell{item={"it-trigger", {action="callback", target="open_all_doors_d"}}})
+map_cell_meaning("e", cell{item={"it-trigger", {action="callback", target="open_all_doors_e"}}})
+map_cell_meaning("f", cell{item={"it-trigger", {action="callback", target="open_all_doors_f"}}})
+map_cell_meaning("g", cell{item={"it-trigger", {action="callback", target="open_all_doors_g"}}})
+map_cell_meaning("h", cell{item={"it-trigger", {action="callback", target="open_all_doors_h"}}})
+map_cell_meaning("i", cell{item={"it-trigger", {action="callback", target="open_all_doors_i"}}})
+map_cell_meaning("j", cell{item={"it-trigger", {action="callback", target="open_all_doors_j"}}})
+map_cell_meaning("k", cell{item={"it-trigger", {action="callback", target="open_all_doors_k"}}})
+map_cell_meaning("l", cell{item={"it-trigger", {action="callback", target="open_all_doors_l"}}})
+cells["*"]=cell{stone="st-wood"}
+level = {
+  "####################",
+  "#xxxxxxxxxxxxxxxxxx#",
+  "#x               0x#",
+  "#x                x#",
+  "#x                x#",
+  "#x                x#",
+  "#xa b c d         x#",
+  "#x       #        x#",
+  "#x ef g h#        x#",
+  "#x       #        x#",
+  "#xi j k l#       Ox#",
+  "#xxxxxxxx#xxxxxxxxx#",
+  "##################=#",
+  "#####    ######### #",
+  "####     ######### #",
+  "####   . ######### #",
+  "####   .      #### #",
+  "0 ..  ##     x     #",
+  "##... *      x     #",
+  "# ..  ##     x     #",
+  "####   .      ######",
+  "####     ###########",
+  "####     ###########",
+  "#####    ###########",
+  "####################"
+}
+oxyd_default_flavor = "a"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+oxyd_shuffle()
+-------------------------------------------
+-- Puzzles
+-- I took this from Petr Machata's "Twelve Doors"
+--puzzle1
+x0 = 3
+y0 = 2
+puzzle( x0+0, y0+0, PUZ_0001)
+puzzle( x0-1, y0+0, PUZ_0110)
+puzzle( x0-1, y0+1, PUZ_1010)
+puzzle( x0-1, y0+2, PUZ_1100)
+puzzle( x0+0, y0+2, PUZ_0001)
+--puzzle2
+x0 = 4
+y0 = 3
+puzzle( x0+0, y0+0, PUZ_0010)
+puzzle( x0+0, y0+1, PUZ_1110)
+puzzle( x0+0, y0+2, PUZ_1100)
+puzzle( x0+1, y0+2, PUZ_1001)
+puzzle( x0+1, y0+1, PUZ_0011)
+--puzzle3
+x0 = 5
+y0 = 3
+puzzle( x0+0, y0+0, PUZ_0100)
+puzzle( x0+1, y0+0, PUZ_1101)
+puzzle( x0+1, y0-1, PUZ_0010)
+puzzle( x0+2, y0+0, PUZ_0011)
+puzzle( x0+2, y0+1, PUZ_1000)
+--puzzle4
+x0 = 8
+y0 = 3
+puzzle( x0+0, y0+0, PUZ_1000)
+puzzle( x0+0, y0-1, PUZ_0110)
+puzzle( x0+1, y0-1, PUZ_0101)
+puzzle( x0+2, y0-1, PUZ_0011)
+puzzle( x0+2, y0+0, PUZ_1000)
+--puzzle5
+x0 = 9
+y0 = 3
+puzzle( x0+0, y0+0, PUZ_0010)
+puzzle( x0+0, y0+1, PUZ_1010)
+puzzle( x0+0, y0+2, PUZ_1100)
+puzzle( x0+1, y0+2, PUZ_0101)
+puzzle( x0+2, y0+2, PUZ_0001)
+--puzzle6
+x0 = 11
+y0 = 4
+puzzle( x0+0, y0+0, PUZ_1000)
+puzzle( x0+0, y0-1, PUZ_0110)
+puzzle( x0+1, y0-1, PUZ_0101)
+puzzle( x0+2, y0-1, PUZ_0101)
+puzzle( x0+3, y0-1, PUZ_0001)
+--puzzle7
+x0 = 12
+y0 = 4
+puzzle( x0+0, y0+0, PUZ_0010)
+puzzle( x0+0, y0+1, PUZ_1100)
+puzzle( x0+1, y0+1, PUZ_0101)
+puzzle( x0+2, y0+1, PUZ_0101)
+puzzle( x0+3, y0+1, PUZ_0001)
+--puzzle8
+x0 = 16
+y0 = 18
+puzzle( x0+0, y0+0, PUZ_0100)
+puzzle( x0+1, y0+0, PUZ_0001)
+--puzzle9
+x0 = 16
+y0 = 19
+puzzle( x0+0, y0+0, PUZ_0100)
+puzzle( x0+1, y0+0, PUZ_0001)
+--puzzle10
+x0 = 16
+y0 = 17
+puzzle( x0+0, y0+0, PUZ_0100)
+puzzle( x0+1, y0+0, PUZ_0001)
+--puzzle11
+x0 = 12
+y0 = 18
+puzzle( x0+0, y0+0, PUZ_0010)
+puzzle( x0+0, y0+1, PUZ_1000)
+--puzzle12
+x0 = 8
+y0 = 17
+puzzle( x0+0, y0+0, PUZ_0010)
+puzzle( x0+0, y0+1, PUZ_1010)
+puzzle( x0+0, y0+2, PUZ_1000)
+--puzzle13
+x0 = 5
+y0 = 15
+puzzle( x0+0, y0+0, PUZ_0010)
+puzzle( x0+0, y0+1, PUZ_1010)
+puzzle( x0+0, y0+2, PUZ_1010)
+puzzle( x0+0, y0+3, PUZ_1000)
+--puzzle14
+x0 = 5
+y0 = 19
+puzzle( x0+0, y0+0, PUZ_0010)
+puzzle( x0+0, y0+1, PUZ_1010)
+puzzle( x0+0, y0+2, PUZ_1010)
+puzzle( x0+0, y0+3, PUZ_1000)
+--puzzle15
+x0 = 9
+y0 = 18
+puzzle( x0+0, y0+0, PUZ_0100)
+puzzle( x0+1, y0+0, PUZ_0101)
+puzzle( x0+2, y0+0, PUZ_0001)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

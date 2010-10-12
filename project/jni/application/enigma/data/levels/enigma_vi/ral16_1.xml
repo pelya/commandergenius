@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Revolver" el:subtitle="Charging live ammunition" el:id="20070214ral703"/>
+      <el:version el:score="1" el:release="1" el:revision="$Revision: 59 $" el:status="released"/>
+      <el:author  el:name="Ronald Lamprecht" el:email="ral@users.berlios.de"/>
+      <el:copyright>Copyright © 2006 Ronald Lamprecht</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code></el:code>
+      </el:comments>
+      <el:score el:easy="3:02" el:difficult="3:07"/>
+    </el:info>
+    <el:luamain><![CDATA[
+set_oxyd = oxyd
+math_floor = floor
+
+function oxyd( x, y, tiles )
+    return set_oxyd( x, y, "d")
+end
+
+function nothing(x, y, tiles)
+    -- create nothing
+end
+
+function floor( floor_type, attribs )
+    return function( x, y, tiles )
+        return set_floor( floor_type, x, y, attribs or {} )
+    end
+end
+
+function stone( stone_type, attribs )
+    return function( x, y, tiles )
+        return set_stone( stone_type, x, y, attribs or {} )
+    end
+end
+
+function item( item_type, attribs )
+    return function( x, y, tiles )
+        return set_item( item_type, x, y, attribs or {} )
+    end
+end
+
+function actor( actor_type, attribs )
+    return function( x, y, tiles )
+        return set_actor( actor_type, x+0.5, y+0.5, attribs or {} )
+    end
+end
+
+function inherit(tile_type)
+    return function( x, y, tiles )
+        return create_tile( tiles, x, y, tile_type )
+    end
+end
+
+function create_world_from_map( tiles, map )
+    create_world( strlen(map[1]), getn(map) )
+    
+    for y = 1,getn(map) do
+        local line = map[y]
+        for x = 1,strlen(line) do
+            local tile = strchar(strbyte(line,x))
+            create_tile( tiles, x-1, y-1, tile )
+        end
+    end
+end
+
+function create_tile( tiles, x, y, tile_type )
+    local constructors = tiles[tile_type]
+
+    if constructors then
+        for i = 1,getn(constructors) do
+            constructors[i](x,y,tiles)
+        end
+    else
+        error("invalid tile identifier " .. tile_type )
+    end
+end
+
+oxyd_default_flavor = "a"
+
+tiles = {}
+tiles[" "] = {floor("fl-bluegreen")}
+tiles["ab"] = {floor("fl-abyss")}
+tiles["-"] = {floor("fl-concrete")}
+tiles["b"] = {floor("fl-bridge-open", {type="x", name="bridge-left"})}
+tiles["B"] = {floor("fl-bridge-open", {type="x", name="bridge-right"})}
+tiles["br"] = {floor("fl-bridge-open", {type="x"})}
+tiles["."] = {floor("fl-concrete",{eternal=TRUE, initfire=TRUE})}
+tiles["x"] = {inherit(" "), oxyd}
+tiles["d"] = {inherit("ab"), stone("st-door-v")}
+tiles["t"] = {inherit(" "), item("it-trigger", {action="callback", target="trigger"})}
+tiles["s"] = {inherit(" "), item("it-trigger", {action="callback", target="count"})}
+tiles["#"] = {inherit(" "), stone("st-stone2")}
+tiles["g"] = {inherit("."), stone("st-black3")}
+tiles["G"] = {inherit("-"), stone("st-black3")}
+tiles["X"] = {inherit(" "), stone("st-black3")}
+tiles["N"] = {inherit(" "), stone("st-turnstile-n")}
+tiles["S"] = {inherit(" "), stone("st-turnstile-s")}
+tiles["W"] = {inherit(" "), stone("st-turnstile-w")}
+tiles["E"] = {inherit(" "), stone("st-turnstile-e")}
+tiles["T"] = {inherit(" "), stone("st-turnstile-green")}
+
+tiles["1"] = {inherit(" "), actor("ac-blackball", {player=0, name="acBlack"})}
+tiles["h"] = {inherit("s"), actor("ac-horse")}
+if difficult then
+  tiles["r"] = {inherit("br"), actor("ac-rotor", {gohome=FALSE, range=20, force=30})}
+else
+  tiles["r"] = {inherit("br"), actor("ac-rotor", {gohome=FALSE, range=20, force=15})}
+end
+
+function trigger(value, sender)
+    x,y = enigma.GetPos(sender)
+    if (x<9) then
+        fl = enigma.GetFloor(x-2, y)
+        door = enigma.GetStone(x-1, y-1)
+        bridge = enigma.GetFloor(x+15, y+1)
+    else
+        fl = enigma.GetFloor(x+2, y)
+        door = enigma.GetStone(x+1, y+1)
+        bridge = enigma.GetFloor(x-15, y-1)
+    end
+    if (value == 1) then
+        SendMessage(fl, "stopfire")
+        SendMessage(door, "open")
+        SendMessage(bridge, "close")
+    else
+        SendMessage(fl, "forcefire")
+        SendMessage(door, "close")
+        SendMessage(bridge, "open")
+    end
+end
+
+counter = 0
+
+function count(value)
+    bridge_left = enigma.GetNamedObject("bridge-left")
+    bridge_right = enigma.GetNamedObject("bridge-right")
+    if (value == 1) then
+        counter = counter + 1
+        if (counter == 8) then
+            SendMessage(bridge_left, "close")
+            SendMessage(bridge_right, "close")
+        end
+    else
+        counter = counter - 1
+        if (counter == 7) then
+            SendMessage(bridge_left, "open")
+            SendMessage(bridge_right, "open")
+        end
+    end
+end
+
+
+create_world_from_map( tiles, {
+"#x################x#",
+"#G#              #G#",
+"#rd              B-#",
+"#g#t   N    N   t#g#",
+"#rd  #WTE##WTE#  dr#",
+"#g#t #hSh##hSh# t#g#",
+"#rd  ###XxxX###  dr#",
+"#g#t #hNh##hNh# t#g#",
+"#rd  #WTE##WTE#  dr#",
+"#g#t   S    S   t#g#",
+"#-b              dr#",
+"#G#       1      #G#",
+"#x################x#"
+})
+
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Laden scharfer Munition</el:translation>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

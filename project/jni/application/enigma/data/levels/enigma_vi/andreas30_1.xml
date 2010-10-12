@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="The Stable" el:subtitle="" el:id="andreas30"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Andreas Lochmann" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Andreas Lochmann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="02:07"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Constructed with the help of BBE.
+-- Solvable in 35 pushes (or less?).
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+levelh=13
+levelw=20
+enigma.FlatForce=30
+enigma.SlopeForce=30
+enigma.ElectricForce=30
+enigma.ShowMoves=TRUE
+cells={}
+items={}
+actors={}
+stones={}
+actors[" "]=cell{}
+stones[" "]=cell{}
+cells[" "]=cell{floor="fl-leaves"}
+items[" "]=cell{}
+cells["!"]=cell{floor="fl-leavesb"}
+stones["!"]=cell{stone="st-yellow"}
+stones["#"]=cell{parent={{file_oxyd,"a"}}}
+stones["$"]=cell{stone="st-door-v"}
+items["!"]=cell{item="it-trigger"}
+stones["<"]=cell{stone="st-oneway-w"}
+stones["C"]=cell{stone="st-chess_black"}
+function ac_blackball(x,y)
+n=""
+p=0
+f=0
+ if (x==16) and (y==2) then
+  n="ac16x2"
+  p=0
+  mf=1,66666666666667
+ end
+set_actor("ac-blackball",x+0.5,y+0.5,{player=p,name=n,mouseforce=mf})
+end
+actors["!"]=cell{parent={{ac_blackball}}}
+ level={"                    ",
+        "   !!!!!!     !!!!  ",
+        "   !!!!!!    !!!!!  ",
+        "   !!!!!!   !!!!!!  ",
+        "   !!!!!!  !!!!!!!  ",
+        "     !!!!!!!!!!!!!  ",
+        "     !!!!!!!!!!!!!  ",
+        "     !!!!!!!!!!!!!  ",
+        "     !!!!!!!!!!!!!  ",
+        " !!!!!!!!!!!!!      ",
+        " !!!!!!!!!!!!!      ",
+        " !!!!!!!!!!!!!      ",
+        "                    "}
+   acmap={"                    ",
+          "                    ",
+          "                !   ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    "}
+  itmap={"                    ",
+         "                    ",
+         "    !!      !       ",
+         "    !!              ",
+         "                    ",
+         "                    ",
+         "                  ! ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    "}
+ stmap={"                    ",
+        "   !!!!!!     !!#!  ",
+        "   !    !    !!  !  ",
+        "   !    !   !!   !  ",
+        "   !!!  !  !!  C !  ",
+        "     !  !!!!   C !  ",
+        "     !     <  CC !  ",
+        "     !     !  CC !  ",
+        "     !     !!!!!!!  ",
+        " !!!!!!!     !      ",
+        " #$$$$$$     !      ",
+        " !!!!!!!!!!!!!      ",
+        "                    "}
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+draw_map(0,0,itmap,items)
+draw_map(0,0,acmap,actors)
+SetAttrib(enigma.GetItem(4,2),"invisible",FALSE)
+SetAttrib(enigma.GetItem(4,3),"invisible",FALSE)
+SetAttrib(enigma.GetItem(5,2),"invisible",FALSE)
+SetAttrib(enigma.GetItem(5,3),"invisible",FALSE)
+SetAttrib(enigma.GetItem(12,2),"invisible",FALSE)
+SetAttrib(enigma.GetItem(18,6),"invisible",FALSE)
+Signal ("it(4 2)","st(2 10)")
+Signal ("it(4 3)","st(3 10)")
+Signal ("it(5 2)","st(4 10)")
+Signal ("it(5 3)","st(5 10)")
+Signal ("it(12 2)","st(6 10)")
+Signal ("it(18 6)","st(7 10)")
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

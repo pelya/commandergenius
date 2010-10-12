@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Mirror Room" el:subtitle="" el:id="luc12"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Lukas Schüller" el:email="Lucky_Luc@web.de" el:homepage=""/>
+      <el:copyright>Copyright © 2005 Lukas Schüller</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Environment
+CreateWorld(20, 13) 
+draw_border("st-stone2")
+fill_floor("fl-abyss", 0,0, 20,13)
+fill_floor("fl-plank", 2,2, 16,9)
+set_attrib(laser(19,6, FALSE, WEST), "name", "laser")
+set_stone("st-switch", 2,6, {action="onoff", target="laser"})
+
+mirror3(3,4,FALSE,FALSE, 4)
+mirror3(3,6,FALSE,FALSE, 4)
+mirror3(3,8,FALSE,FALSE, 4)
+mirror3(7,4,FALSE,FALSE, 4)
+mirror3(7,6,FALSE,FALSE, 4)
+mirror3(7,8,FALSE,FALSE, 4)
+mirror3(12,4,FALSE,FALSE, 4)
+mirror3(12,6,FALSE,FALSE, 4)
+mirror3(12,8,FALSE,FALSE, 4)
+mirror3(16,4,FALSE,FALSE, 4)
+mirror3(16,6,FALSE,FALSE, 4)
+mirror3(16,8,FALSE,FALSE, 4)
+
+oxyd_default_flavor = "d"
+oxyd(3,0)
+oxyd(7,0)
+oxyd(12,0)
+oxyd(16,0)
+oxyd(3,12)
+oxyd(7,12)
+oxyd(12,12)
+oxyd(16,12)
+oxyd(0,4)
+oxyd(0,8)
+oxyd(19,4)
+oxyd(19,8)
+oxyd_shuffle()
+
+set_actor("ac-blackball",10,5.5, {player=0})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

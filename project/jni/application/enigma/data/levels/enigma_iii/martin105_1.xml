@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Narrow Paths" el:subtitle="" el:id="martin105"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+       <el:dependency el:path="lib/natmaze" el:id="lib/natmaze" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- reused code from ant16.lua
+-- i took these from Nat Pryce's natmaze.lua maps
+function cell_to_level( cellx, celly )
+    return originx + cellx * 2, originy + celly * 2
+end
+
+function render_cell(maze, cellx, celly)
+    x,y = cell_to_level(cellx, celly)
+
+    _n = maze:can_go_north(cellx,celly)
+    _s = maze:can_go_south(cellx,celly)
+    _e = maze:can_go_east(cellx,celly)
+    _w = maze:can_go_west(cellx,celly)
+
+    if _s then
+       cells["|"](x, y+1)
+    end
+
+    if _e then
+      cells["-"](x+1, y)
+    end
+
+    if ( _n and _s and not _e and not _w ) then
+       cells["|"](x, y)
+    elseif ( not _n and not _s and _e and _w ) then
+       cells["-"](x, y)
+    else
+       cells[" "](x, y)
+    end
+ end
+
+-- to get the size of maze
+originx, originy = nil, nil
+mazew, mazeh = nil, nil
+
+function get_limits(x,y)
+   originx = originx or x
+   originy = originy or y
+
+   if (x>originx) then
+      mazew = ceil((x-originx+1)/2)
+   end
+
+   if (y>originy) then
+      mazeh = ceil((y-originy+1)/2)
+   end
+end
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+cells={}
+
+cells[" "]=cell{floor="fl-rock"}
+cells["."]=cell{floor="fl-abyss"}
+cells["|"]=cell{item="it-vstrip"}
+cells["-"]=cell{item="it-hstrip"}
+cells["#"]=cells["."]
+
+cells["o"]=cell{actor={"ac-blackball", {player=0, mouseforce=1}}}
+cells["Z"]=cell{{{get_limits}}}
+
+level = {
+   "#0###############0##",
+   "#Z.................#",
+   "#..................#",
+   "#..................#",
+   "#..................#",
+   "#..................#",
+   "#..................#",
+   "#..................#",
+   "#..................#",
+   "#..................#",
+   "#..................#",
+   "#................Zo#",
+   "#0###############0##"
+}
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+set_default_parent(cells[" "])
+create_world_by_map(level)
+render_maze(new_kruskal_maze(mazew, mazeh), render_cell)
+
+if not difficult then -- easy
+    set_item( "it-umbrella", 1, 1)
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

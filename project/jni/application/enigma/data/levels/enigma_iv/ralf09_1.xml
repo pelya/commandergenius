@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Run Like Hell" el:subtitle="" el:id="ralf09"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Ralf Westram" el:email="amgine@reallysoft.de" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Ralf Westram</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ralf" el:id="lib/ralf" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+--debug_mode()
+
+level={
+   "####o#o#o###o#o#o###",
+   "#  PvPvPvPvPvPvPvP #",
+   "# PvPvPvPvPvPvPvP  #",
+   "#  PvPvPvPvPvPvPvP #",
+   "# PvPvPvPvPvPvPvP  #",
+   "#  PvPvPvPvPvPvPvP #",
+   "# PvPvPvPvPvPvPvP  #",
+   "#  PvPvPvPvPvPvPvP #",
+   "# PvPvPvPvPvPvPvP  #",
+   "#  PvPvPvPvPvPvPvP #",
+   "# PvPvPvPvPvPvPvP  #",
+   "#a P P P P P P P Pd#",
+   "####################",
+}
+
+cells={}
+
+cells["!"] = cell{floor="fl-abyss"}
+cells[" "] = cell{floor="fl-red"}
+
+cells["#"] = cell{parent=cells[" "],stone="st-rock3"}
+cells["P"] = cell{parent=cells[" "],stone="st-pull"}
+cells["@"] = cell{parent=cells[" "],stone="st-brownie"}
+
+cells["^"] = cell{parent=cells[" "],stone="st-bolder-n"}
+cells["v"] = cell{parent=cells[" "],stone="st-bolder-s"}
+cells[">"] = cell{parent=cells[" "],stone="st-bolder-e"}
+cells["<"] = cell{parent=cells[" "],stone="st-bolder-w"}
+
+cells["a"] = cell{parent=cells[" "],actor={"ac-blackball", {player=0}}}
+cells["d"] = cell{{cells[" "],{document, "text1"}}}
+
+cells["o"] = cell{oxyd}
+
+rs_create_world(level,cells)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Calm down!</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

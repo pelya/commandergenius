@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Fight For Your Life" el:subtitle="" el:id="martin96"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+       <el:dependency el:path="lib/natmaze" el:id="lib/natmaze" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- reused code from ant16.lua
+-- i took these from Nat Pryce's natmaze.lua maps
+function cell_to_level( cellx, celly )
+    return originx + cellx * 2, originy + celly * 2
+end
+
+function render_cell(maze, cellx, celly)
+    x,y = cell_to_level(cellx, celly)
+
+    cells["w"](x, y)
+
+    if maze:can_go_south(cellx,celly) then
+       cells["w"](x, y+1)
+    end
+
+    if maze:can_go_east(cellx,celly) then
+       cells["w"](x+1, y)
+    end
+ end
+
+-- to get the size of maze
+originx, originy = nil, nil
+mazew, mazeh = nil, nil
+
+function get_limits(x,y)
+   originx = originx or x
+   originy = originy or y
+
+   if (x>originx) then
+      mazew = ceil((x-originx+1)/2)
+   end
+
+   if (y>originy) then
+      mazeh = ceil((y-originy+1)/2)
+   end
+end
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+cells={}
+
+if (not difficult) then 
+    cells[" "]=cell{floor="fl-bluegray"}
+else
+    cells[" "]=cell{floor="fl-bluegray",stone="st-grate2"}
+end
+cells["."]=cell{floor="fl-water"}
+cells["w"]=cell{stone="st-knight",floor="fl-bluegray"}
+cells["#"]=cell{stone="st-plain"}
+
+cells["o"]=cell{actor={"ac-blackball", {player=0, mouseforce=1}}}
+cells["|"]=cell{item="it-sword"}
+cells["Z"]=cell{{{get_limits}}}
+
+level = {
+   "#0################0#",
+   "#   Z............. #",
+   "#  ............... #",
+   "#  ............... #",
+   "#  ............... #",
+   "#  ............... #",
+   "# o............... #",
+   "#  ............... #",
+   "#  ............... #",
+   "#  ............... #",
+   "#  ............... #",
+   "# |.............Z  #",
+   "#0################0#"
+}
+
+set_default_parent(cells[" "])
+create_world_by_map(level)
+render_maze(new_kruskal_maze(mazew, mazeh), render_cell)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

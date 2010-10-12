@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Kaleidoscope" el:subtitle="" el:id="duffy118"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2004 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+rooms_wide=1
+rooms_high=1
+
+levelw=1+(19*rooms_wide)+1
+levelh=1+(12*rooms_high)
+
+create_world( levelw, levelh)
+
+fill_floor("fl-hay", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-greenbrown", i-1, line)
+        elseif c =="X" then
+            set_stone( "st-death", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "*" then
+            set_stone( "st-brownie", i-1, line)
+                elseif c == "!" then
+            abyss(i-1,line)
+        elseif c == "~" then
+           set_floor("fl-water",i-1,line)
+        elseif c=="z" then
+           set_actor("ac-blackball", i-.5,line+.5, {player=0})
+        elseif c=="y" then
+           set_actor("ac-whiteball", i-1,line+.5, {player=1})
+        elseif c=="S" then
+           set_actor("ac-top", i-.5,line+.5, {range=100,force=5,player=1})
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c=="=" then
+           set_floor("fl-space",i-1,line)
+        elseif c=="T" then
+           set_stone("st-timer",i-1,line,{interval=1,loop=1,action="callback",target="funcctimer"})
+        end
+         end    
+      end
+
+renderLine(00,"XXXXXXXXXXXXXXXXXXXXT")
+renderLine(01,"X     o      o     X ")
+renderLine(02,"X o      XX      o X ")
+renderLine(03,"X                  X ")
+renderLine(04,"X   X  o    o  X   X ")
+renderLine(05,"X                  X ")
+renderLine(06,"XoX  S        z  XoX ")
+renderLine(07,"X                  X ")
+renderLine(08,"X   X  o    o  X   X ")
+renderLine(09,"X                  X ")
+renderLine(10,"X o      XX      o X ")
+renderLine(11,"X     o      o     X ")
+renderLine(12,"XXXXXXXXXXXXXXXXXXXX ")
+
+oxyd_shuffle()
+
+starting=1
+
+
+sandp=3
+bluegreenp=6
+spacep=12
+inversep=18
+leavesp=21
+woodp=25
+tigrisp=27
+ice_001p=31
+metalp=34
+normalp=37
+bumpsp=40
+marblep=42
+saharap=44
+inverse2p=48
+concretep=50
+rough_redp=53
+rough_bluep=56
+swampp=60
+rockp=63
+gravelp=66
+lightp=69
+redp=72
+roughp=75
+hayp=78
+plankp=82
+grayp=85
+brickp=89
+dunesp=92
+springboardp=93
+himalayap=95
+mortarp=97
+blackp=98
+whitep=99
+floor_001p=100
+bluegrayp=103
+wovenp=104
+lightgrayp=105
+darkgrayp=106
+stonep=108
+
+fftimer=0
+skiprandom=0
+
+function funcctimer()
+tryagain=0
+if fftimer==0 then
+skiprandom=1
+fftimer=1
+else
+skiprandom=0
+end
+    for i=0,levelw do
+       for j=0,levelh do
+if skiprandom==0 then
+         changefloor=random(8)
+      else
+changefloor=1
+end
+change(i,j)
+end
+end
+starting=0
+end
+
+function change(i,j)
+      if changefloor==1 then
+         donefloor=0
+if starting==1 and i==14 and j==6 then
+floornum=random(102)-1
+     if floornum>5 then
+     floornum=floornum+6
+end
+else
+floornum=random(108)-1
+end
+         if floornum<sandp and donefloor==0 then
+            set_floor("fl-sand",i,j)
+            donefloor=1
+         end
+         if floornum<bluegreenp and donefloor==0 then
+            set_floor("fl-bluegreen",i,j)
+            donefloor=1
+         end
+         if floornum<spacep and donefloor==0 then
+               set_floor("fl-space",i,j)
+               donefloor=1
+         end
+         if floornum<inversep and donefloor==0 then
+            set_floor("fl-inverse",i,j)
+            donefloor=1
+         end
+         if floornum<leavesp and donefloor==0 then
+            set_floor("fl-leaves",i,j)
+            donefloor=1
+         end
+         if floornum<woodp and donefloor==0 then
+            set_floor("fl-wood",i,j)
+            donefloor=1
+         end
+         if floornum<tigrisp and donefloor==0 then
+            set_floor("fl-tigris",i,j)
+            donefloor=1
+         end
+         if floornum<ice_001p and donefloor==0 then
+            set_floor("fl-ice",i,j)
+            donefloor=1
+         end
+         if floornum<metalp and donefloor==0 then
+            set_floor("fl-metal",i,j)
+            donefloor=1
+         end
+         if floornum<normalp and donefloor==0 then
+            set_floor("fl-normal",i,j)
+            donefloor=1
+         end
+         if floornum<bumpsp and donefloor==0 then
+            set_floor("fl-bumps",i,j)
+            donefloor=1
+         end
+         if floornum<marblep and donefloor==0 then
+            set_floor("fl-marble",i,j)
+            donefloor=1
+         end
+
+
+         if floornum<saharap and donefloor==0 then
+            set_floor("fl-sahara",i,j)
+            donefloor=1
+         end
+
+         if floornum<inverse2p and donefloor==0 then
+            set_floor("fl-inverse2",i,j)
+            donefloor=1
+         end
+
+
+         if floornum<concretep and donefloor==0 then
+            set_floor("fl-concrete",i,j)
+            donefloor=1
+         end
+
+
+         if floornum<rough_redp and donefloor==0 then
+            set_floor("fl-rough-red",i,j)
+            donefloor=1
+         end
+
+
+         if floornum<rough_bluep and donefloor==0 then
+            set_floor("fl-rough-blue",i,j)
+            donefloor=1
+         end
+
+         if floornum<swampp and donefloor==0 then
+            set_floor("fl-swamp",i,j)
+            donefloor=1
+         end
+
+         if floornum<rockp and donefloor==0 then
+            set_floor("fl-rock",i,j)
+            donefloor=1
+         end
+
+         if floornum<gravelp and donefloor==0 then
+            set_floor("fl-gravel",i,j)
+            donefloor=1
+         end
+
+         if floornum<lightp and donefloor==0 then
+            set_floor("fl-light",i,j)
+            donefloor=1
+         end
+
+         if floornum<redp and donefloor==0 then
+            set_floor("fl-red",i,j)
+            donefloor=1
+         end
+
+         if floornum<roughp and donefloor==0 then
+            set_floor("fl-rough",i,j)
+            donefloor=1
+         end
+
+         if floornum<hayp and donefloor==0 then
+            set_floor("fl-hay",i,j)
+            donefloor=1
+         end
+
+         if floornum<plankp and donefloor==0 then
+            set_floor("fl-plank",i,j)
+            donefloor=1
+         end
+
+         if floornum<grayp and donefloor==0 then
+            set_floor("fl-gray",i,j)
+            donefloor=1
+         end
+
+         if floornum<brickp and donefloor==0 then
+            set_floor("fl-brick",i,j)
+            donefloor=1
+         end
+
+         if floornum<dunesp and donefloor==0 then
+            set_floor("fl-dunes",i,j)
+            donefloor=1
+         end
+
+         if floornum<springboardp and donefloor==0 then
+            set_floor("fl-springboard",i,j)
+            donefloor=1
+         end
+
+         if floornum<himalayap and donefloor==0 then
+            set_floor("fl-himalaya",i,j)
+            donefloor=1
+         end
+
+         if floornum<mortarp and donefloor==0 then
+            set_floor("fl-mortar",i,j)
+            donefloor=1
+         end
+
+         if floornum<blackp and donefloor==0 then
+            set_floor("fl-black",i,j)
+            donefloor=1
+         end
+
+         if floornum<whitep and donefloor==0 then
+            set_floor("fl-white",i,j)
+            donefloor=1
+         end
+
+         if floornum<floor_001p and donefloor==0 then
+            set_floor("fl-floor_001",i,j)
+            donefloor=1
+         end
+
+         if floornum<bluegrayp and donefloor==0 then
+            set_floor("fl-bluegray",i,j)
+            donefloor=1
+         end
+
+         if floornum<wovenp and donefloor==0 then
+            set_floor("fl-woven",i,j)
+            donefloor=1
+         end
+
+         if floornum<lightgrayp and donefloor==0 then
+            set_floor("fl-lightgray",i,j)
+            donefloor=1
+         end
+
+         if floornum<darkgrayp and donefloor==0 then
+            set_floor("fl-darkgray",i,j)
+            donefloor=1
+         end
+
+         if floornum<stonep and donefloor==0 then
+            set_floor("fl-stone",i,j)
+            donefloor=1
+         end
+
+-- saharap=44
+-- inverse2p=48
+-- concretep=50
+-- rough-redp=53
+-- rough-bluep=56
+-- swampp=60
+-- rockp=63
+-- gravelp=66
+-- lightp=69
+-- redp=72
+-- roughp=75
+-- hayp=78
+-- plankp=82
+-- grayp=85
+-- brickp=89
+-- dunesp=92
+-- springboardp=94
+
+      end
+end
+
+funcctimer()
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="The Enigmhanoi Towers" el:subtitle="" el:id="alain05"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Alain Busser" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Alain Busser</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="1:12" el:difficult="1:41"/>
+    </el:info>
+    <el:luamain><![CDATA[  
+-- Modified fixed by Raoul
+
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+oxyd_default_flavor = "a"
+draw_border("st-rock1")
+fill_floor("fl-tigris")
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="*" then
+            set_stone( "st-rock1", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+            elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {player=0})
+        elseif c=="a" then
+            document(i-1,line, "text1") 
+        elseif c=="b" then
+            document(i-1,line, "text2") 
+        elseif c=="c" then
+            document(i-1,line, "text3") 
+        elseif c=="+" then
+            set_stone("st-grate1", i-1,line)
+        elseif c=="g" then
+            doorv(i-1,line, {name="door1"})
+        elseif c=="h" then
+            doorv(i-1,line, {name="door2"})
+        elseif c=="f" then
+            set_floor("fl-water",i-1,line)
+        elseif c=="l" then
+            set_floor("fl-leaves",i-1,line)
+             elseif c == "2" then
+                 set_item("it-banana",i-1,line)
+        elseif c == "T" then
+                 set_stone("st-switch",i-1,line, {action="open", target="door1"})
+             elseif c == "S" then
+                 set_stone("st-switch",i-1,line, {action="open", target="door2"})
+        end
+    end    
+end
+
+--               01234567890123456789
+renderLine(00 , "                    ")
+renderLine(01 , "  *    a b c     *  ")
+renderLine(02 , "  *              *  ")
+renderLine(03 , "  * ll +++++ lll *  ")
+renderLine(04 , "  * ll +   + lzl *  ")
+renderLine(05 , "  * ll +   + l l *  ")  
+renderLine(06 , "  g ll +++++ lll h  ")
+renderLine(07 , "  *              *  ")
+renderLine(08 , "  *              *  ")
+renderLine(09 , "  f f        fff f  ")
+renderLine(10 , "  fff ff fff f f f  ")
+renderLine(11 , " of f ff f f fff fo ")
+renderLine(12 , "                    ") 
+--               01234567890123456789
+
+--shogun sektion:
+if difficult then
+ set_stone("st-grate1",8,5)
+ set_stone("st-grate1",10,5)
+ set_stone("st-shogun-sml", 9,5)
+ shogundot3(8,4,{action="openclose", target="door1"})
+ shogundot3(10,4,{action="openclose", target="door2"})
+elseif not difficult then
+ a=random()
+ if a<=0.5 then
+  set_stone("st-grate1",8,5)
+  set_stone("st-grate1",10,4)
+  set_stone("st-shogun-sml", 9,5)
+  shogundot3(8,4,{action="openclose", target="door1"})
+  shogundot3(10,5,{action="openclose", target="door2"})
+ else
+  set_stone("st-grate1",8,4)
+  set_stone("st-grate1",10,5)
+  set_stone("st-shogun-sml", 9,4)
+  shogundot3(8,5,{action="openclose", target="door1"})
+  shogundot3(10,4,{action="openclose", target="door2"})
+ end
+end
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true" el:comment="wordplay between 'enigma' and the 'hanoi towers' solitary game"/>
+        <el:translation el:lang="fr">Les tours d'Enigmhanoi</el:translation>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Who speaks, does not know (Lao Tse)</el:english>
+        <el:translation el:lang="fr">Celui qui parle ne sait pas (Lao Tseu)</el:translation>
+      </el:string> 
+      <el:string el:key="text2">
+        <el:english el:translate="true">The wise man laughs (Lao Tse)</el:english>
+        <el:translation el:lang="fr">L'homme sage rit (Lao Tseu)</el:translation>
+      </el:string> 
+      <el:string el:key="text3">
+        <el:english el:translate="true">Who knows, does not speak (Lao Tse)</el:english>
+        <el:translation el:lang="fr">Celui qui sait ne parle pas (Lao Tseu)</el:translation>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

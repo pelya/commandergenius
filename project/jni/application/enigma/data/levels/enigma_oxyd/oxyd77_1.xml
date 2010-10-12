@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Oxyd 77" el:subtitle="Oxyd 77" el:id="oxyd77"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2005 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd1">
+       <el:dependency el:path="lib/libterrain" el:id="lib/libterrain" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="0:10"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelw = 58
+levelh = 31
+
+create_world(levelw, levelh)
+
+display.SetFollowMode(display.FOLLOW_SCROLLING)
+
+fill_floor("fl-abyss")
+
+draw_ring(1,1,56,29,1)
+draw_ring(2,2,54,27,1)
+draw_ring(3,3,52,25,1)
+
+fill_floor("fl-water",4,4,50,23)
+
+draw_ring(5,5,48,21,0)
+draw_ring(6,6,46,19,0)
+draw_ring(7,7,44,17,0)
+
+draw_full(8,8,7,7,0)
+draw_full(15,8,7,7,1)
+draw_full(22,8,7,7,0)
+draw_full(29,8,7,7,1)
+draw_full(36,8,7,7,0)
+draw_full(43,8,7,7,1)
+
+draw_full(8,16,7,7,1)
+draw_full(15,16,7,7,0)
+draw_full(22,16,7,7,1)
+draw_full(29,16,7,7,0)
+draw_full(36,16,7,7,1)
+draw_full(43,16,7,7,0)
+
+set_floor("fl-gray",11,11)
+set_floor("fl-gray",18,11)
+set_floor("fl-gray",25,11)
+set_floor("fl-gray",32,11)
+set_floor("fl-gray",39,11)
+set_floor("fl-gray",46,11)
+
+set_floor("fl-gray",11,19)
+set_floor("fl-gray",18,19)
+set_floor("fl-gray",25,19)
+set_floor("fl-gray",32,19)
+set_floor("fl-gray",39,19)
+set_floor("fl-gray",46,19)
+
+fill_floor("fl-gray",8,15,42,1)
+
+--oxyds:
+oxyd(18,11)
+oxyd(32,11)
+oxyd(46,11)
+
+oxyd(11,19)
+oxyd(25,19)
+oxyd(39,19)
+
+oxyd_shuffle()
+
+-- Special
+enigma.SlopeForce=50
+set_actor("ac-blackball", 23.5,13.5, {player=0})  
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Wormhole Madness!" el:subtitle="" el:id="edward24"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Edward" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Edward</el:copyright>
+      <el:license el:type="Donated to Enigma under the projects license" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="20:05"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world(58,37)
+
+draw_border("st-glass")
+
+fill_floor("fl-black",0,0,58,37)
+
+for x=20, 38 do for y=13,24 do
+    set_floor("fl-black",x,y,{friction=0.1, mousefactor=0.1})
+end end
+
+draw_stones("st-glass",{19,12},{1,0},19);
+draw_stones("st-glass",{19,12},{0,1},12);
+draw_stones("st-glass",{19,24},{1,0},19);
+draw_stones("st-glass",{38,12},{0,1},13);
+
+draw_stones("st-glass",{19,0},{0,1},12)
+draw_stones("st-glass",{0,14},{1,0},20)
+draw_stones("st-glass",{0,24},{1,0},20)
+draw_stones("st-glass",{21,24},{0,1},12)
+draw_stones("st-glass",{38,24},{0,1},12)
+draw_stones("st-glass",{38,22},{1,0},20)
+draw_stones("st-glass",{38,12},{1,0},20)
+draw_stones("st-glass",{36,0},{0,1},12)
+
+set_stone("st-oneway-e",19,13)
+set_stone("st-oneway-e",19,23)
+set_stone("st-oneway-w",38,13)
+set_stone("st-oneway-w",38,23)
+set_stone("st-oneway-n",20,24)
+set_stone("st-oneway-n",37,24)
+set_stone("st-oneway-s",20,12)
+set_stone("st-oneway-s",37,12)
+
+function set_wormhole_to(tx, ty)
+  local x, y
+  repeat
+    x = random(21,36)
+    y = random(14,22)
+  until enigma.GetItem(x,y) == nil
+  set_item("it-wormhole", x, y, {targetx=tx, targety=ty, strength=10, range=10})
+end
+
+set_wormhole_to(2,2)
+set_wormhole_to(2,18)
+set_wormhole_to(2,35)
+set_wormhole_to(25,2)
+set_wormhole_to(25,35)
+set_wormhole_to(56,2)
+set_wormhole_to(56,18)
+set_wormhole_to(56,35)
+
+set_actor("ac-blackball",29,18.5,{player=0})
+
+function render_stones(line,pattern)
+    for i=1, strlen(pattern) do
+        local c=strsub(pattern,i,i)
+        if c=="#" then
+            set_stone("st-glass",i-1,line)
+        elseif c=="=" then
+            laser(i-1,line, TRUE, EAST)
+        elseif c=="|" then
+            mirrorp(i-1,line,0,1,4)
+        elseif c=="-" then
+            mirrorp(i-1,line,0,1,2)
+        elseif c=="?" then
+            mirrorp(i-1,line,0,0,random(1,4))
+        elseif c=="M" then
+            set_stone("st-brick_magic",i-1,line)
+        elseif c=="X" then
+            oxyd(i-1,line)
+        elseif c=="x" then
+            set_stone("st-brick",i-1,line)
+        elseif c==">" then
+            set_stone("st-oneway",i-1,line,{orientation=EAST})
+        elseif c=="<" then
+            set_stone("st-oneway",i-1,line,{orientation=WEST})
+        elseif c=="^" then
+            set_stone("st-oneway",i-1,line,{orientation=NORTH})
+        elseif c=="v" then
+            set_stone("st-oneway",i-1,line,{orientation=SOUTH})
+        elseif c=="&" then
+            set_stone("st-break_bolder",i-1,line)
+        elseif c=="0" then
+            set_stone("st-knight",i-1,line)
+        end
+    end
+end
+
+function render_items(line,pattern)
+    for i=1, strlen(pattern) do
+        local c=strsub(pattern,i,i)
+        if c=="W" then
+            set_item("it-magicwand",i-1,line)
+        elseif c=="H" then
+            set_item("it-hammer",i-1,line)
+        elseif c=="1" then
+            set_item("it-coin1",i-1,line)
+        elseif c=="2" then
+            set_item("it-coin2",i-1,line)
+        elseif c=="3" then
+            set_item("it-coin4",i-1,line)
+        end
+    end
+end
+
+function render_actors(line,pattern)
+    for i=1, strlen(pattern) do
+        local c=strsub(pattern,i,i)
+        if c=="*" then
+            set_actor("ac-killerball",i-1,line,{mouseforce=0})
+        end
+    end
+end
+
+puzzle2(27,5,PUZ_1100)
+puzzle2(27,6,PUZ_1010)
+puzzle2(27,7,PUZ_1001)
+puzzle2(28,5,PUZ_0110)
+puzzle2(28,7,PUZ_0101)
+puzzle2(29,5,PUZ_0011)
+puzzle2(29,6,PUZ_1010)
+puzzle2(29,7,PUZ_0101)
+
+set_floor("fl-gradient",47,5,{type=13})
+set_floor("fl-gradient",47,7,{type=16})
+set_floor("fl-gradient",46,6,{type=19})
+set_floor("fl-gradient",48,6,{type=18})
+set_floor("fl-gradient",46,5,{type=5})
+set_floor("fl-gradient",48,5,{type=6})
+set_floor("fl-gradient",46,7,{type=7})
+set_floor("fl-gradient",48,7,{type=8})
+
+set_stone("st-coinslot",17,27,{action="openclose",target="door1"})
+set_stone("st-coinslot",18,34,{action="openclose",target="door2"})
+set_stone("st-coinslot",3,30,{action="openclose",target="door3"})
+set_stone("st-coinslot",5,27,{action="openclose",target="door4"})
+set_stone("st-coinslot",9,28,{action="openclose",target="door5"})
+
+set_stone("st-door-h",18,27,{name="door1"})
+set_stone("st-door-h",14,34,{name="door2"})
+set_stone("st-door-v",3,29,{name="door3"})
+set_stone("st-door-h",8,29,{name="door4"})
+set_stone("st-door-h",10,29,{name="door5"})
+
+render_stones(00,"=##################-################-####################-")
+render_stones(01,"#  M        M   M  #                #                    #")
+render_stones(02,"#  M MMM MM   M   M#                #                    #")
+render_stones(03,"#M M M   ?MMMMMMMM?#                #                    #")
+render_stones(04,"#M M M MMM   M   M #                #         x^x        #")
+render_stones(05,"#    M M   M   M   #       PPP      #        x   x       #")
+render_stones(06,"#MMMM  MMMM  M MMMM#       PXP      #        < X >       #")
+render_stones(07,"#   M M MXM M      #       PPP      #        x   x       #")
+render_stones(08,"# M M M MMM M MMMMM#                #         xvx        #")
+render_stones(09,"# M   M M M M M    #                #                    #")
+render_stones(10,"# M  MM M M M M MM #                #                    #")
+render_stones(11,"# M M   M   M   M  x                ?                    #")
+render_stones(12,"# MM  M MMMMMMM M M#O################Ox##################|")
+render_stones(13,"#    MM         M  O                  O                  #")
+render_stones(14,"|#################?#                  #                  #")
+render_stones(15,"#                  #                  #                  #")
+render_stones(16,"#                  #                  #       &&&        #")
+render_stones(17,"#                  #                  #       &X&        #")
+render_stones(18,"#       000        #                  #       &&&        #")
+render_stones(19,"#       0X0        #                  #                  #")
+render_stones(20,"#       000        #                  #                  #")
+render_stones(21,"#                  #                  #                  #")
+render_stones(22,"#                  #                  #?#################|")
+render_stones(23,"#                  O                  O                  #")
+render_stones(24,"|##################xO############x###Ox                  #")
+render_stones(25,"#  x   x   x   x   x ?           ?    #                  #")
+render_stones(26,"#x   x   x   x   x x #                #                  #")
+render_stones(27,"#  xxCxxxxxxxxxxxCDx #                #                  #")
+render_stones(28,"# xx     C   x     x #                #                  #")
+render_stones(29,"#  D xxxDxDx x xxxxx #        #       #         #        #")
+render_stones(30,"#x Cxx   xXx x x   x #       #X# ?    #        #X#       #")
+render_stones(31,"#  x x xxxxx x   x x #        #       #         #        #")
+render_stones(32,"# xx x x   x xxxxx x #                #                  #")
+render_stones(33,"#xxx x   x   x     x #                #                  #")
+render_stones(34,"#  xxxxxxxxxxxDxxxCx #                #                  #")
+render_stones(35,"#                    #                #                  #")
+render_stones(36,"-####################-################-##################|")
+
+render_items(00,"=##################-################-####################-")
+render_items(01,"#  M        M   M  #                #                    #")
+render_items(02,"#  M MMM MM   M   M#                #                    #")
+render_items(03,"#M M M   ?MMMMMMMM?#                #                    #")
+render_items(04,"#M M M MMM   M   M #                #                    #")
+render_items(05,"#    M M   M   M   #       PPP      #                    #")
+render_items(06,"#MMMM  MMMM  M MMMM#       1X1      #          X H       #")
+render_items(07,"#   M M MXM M      #       PWP      #                    #")
+render_items(08,"# M M M MMM M MMMMM#                #          2         #")
+render_items(09,"# M   M M M M M    #                #                    #")
+render_items(10,"# M  MM M M M M MM #                #                    #")
+render_items(11,"# M M   M   M   M  x                ?                    #")
+render_items(12,"# MM  M MMMMMMM M M#O################O###################|")
+render_items(13,"#    MM         M  O                  O                  #")
+render_items(14,"|#################?#                  #                  #")
+render_items(15,"#                  #                  #                  #")
+render_items(16,"#                  #                  #        2         #")
+render_items(17,"#                  #                  #       3X3        #")
+render_items(18,"#       3 2        #                  #        3         #")
+render_items(19,"#        X         #                  #                  #")
+render_items(20,"#       1 2        #                  #                  #")
+render_items(21,"#                  #                  #                  #")
+render_items(22,"#                  #                  #?#################|")
+render_items(23,"#                  O                  O                  #")
+render_items(24,"|###################O############x###O#                  #")
+render_items(25,"#                    ?           ?    #                  #")
+render_items(26,"#                    #                #                  #")
+render_items(27,"#                    #                #                  #")
+render_items(28,"#                    #                #                  #")
+render_items(29,"#                    #        #       #         #        #")
+render_items(30,"#         X          #       #X# ?    #        #X#       #")
+render_items(31,"#                    #        #       #         #        #")
+render_items(32,"#                    #                #                  #")
+render_items(33,"#                    #                #                  #")
+render_items(34,"#                    #                #                  #")
+render_items(35,"#                    #                #                  #")
+render_items(36,"-####################-################-##################|")
+
+render_actors(00,"=##################-################-####################-")
+render_actors(01,"#  M        M   M  #                #                    #")
+render_actors(02,"#  M MMM MM   M   M#                #                    #")
+render_actors(03,"#M M M   ?MMMMMMMM?#                #                    #")
+render_actors(04,"#M M M MMM   M   M #                #                    #")
+render_actors(05,"#    M M   M   M   #       PPP      #         * *        #")
+render_actors(06,"#MMMM  MMMM  M MMMM#       PXP      #          X         #")
+render_actors(07,"#   M M MXM M      #       PWP      #         * *        #")
+render_actors(08,"# M M M MMM M MMMMM#                #                    #")
+render_actors(09,"# M   M M M M M    #                #                    #")
+render_actors(10,"# M  MM M M M M MM #                #                    #")
+render_actors(11,"# M M   M   M   M  x                ?                    #")
+render_actors(12,"# MM  M MMMMMMM M M#O################O###################|")
+render_actors(13,"#    MM         M  O                  O                  #")
+render_actors(14,"|#################?#                  #                  #")
+render_actors(15,"#                  #                  #                  #")
+render_actors(16,"#                  #                  #                  #")
+render_actors(17,"#                  #                  #        X         #")
+render_actors(18,"#                  #                  #                  #")
+render_actors(19,"#        X         #                  #                  #")
+render_actors(20,"#                  #                  #                  #")
+render_actors(21,"#                  #                  #                  #")
+render_actors(22,"#                  #                  #?#################|")
+render_actors(23,"#                  O                  O                  #")
+render_actors(24,"|###################O############x###O#                  #")
+render_actors(25,"#                    ?           ?    #                  #")
+render_actors(26,"#                    #                #                  #")
+render_actors(27,"#                    #                #                  #")
+render_actors(28,"#                    #                #                  #")
+render_actors(29,"#                    #        #       #         #        #")
+render_actors(30,"#         X          #       #X# ?    #        #X#       #")
+render_actors(31,"#                    #        #       #         #        #")
+render_actors(32,"#                    #                #                  #")
+render_actors(33,"#                    #                #                  #")
+render_actors(34,"#                    #                #                  #")
+render_actors(35,"#                    #                #                  #")
+render_actors(36,"-####################-################-##################|")
+
+oxyd_shuffle()    
+]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

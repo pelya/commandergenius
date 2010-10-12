@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Mourning Palace" el:subtitle="" el:id="ant08"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- 2003-01-07
+-- 2003-02-20 -- rewrites
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+function construct(x, y) set_floor("fl-normal", x, y) end
+function destruct(x, y)  set_floor("fl-abyss", x, y) end
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+cells={}
+cells[";"]=cell{floor={face="fl-metal"}}
+cells["'"]=cell{floor={face="fl-normal"}}
+cells[","]=cell{floor={face="fl-tigris"}}
+cells["."]=cell{floor={face="fl-abyss"}}
+cells[" "]=cell{parent={{randomfloor,{cells[","], cells[";"], 10}}}}
+cells["="]=cell{stone={face="st-glass"}}
+cells["O"]=cell{actor={face="ac-blackball", attr={player=0}}}
+
+path = {}
+loco = {}
+cells["!"]=cell{parent={cells["."], {add_multicell, path, 0}}}
+cells["_"]=cell{parent={cells["!"], {add_multicell, path, 1}, cells["'"]}}
+cells["c"]=cell{parent={cells["_"], {add_multicell, loco, construct}}}
+cells["d"]=cell{parent={cells["!"], {add_multicell, loco, destruct}}}
+rail = new_rail(loco, path)
+
+cells["~"]=cell{stone={face="st-timer", attr={action="callback", target="rail", interval=0.15}}}
+cells["0"]=oxyd
+
+level = {
+   "==========================================================",
+   "=!!!!!!!!!!d______c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!=",
+   "=!0                ====================                0!=",
+   "=!!!!!!!!!!!!c_ = !!!!!!!!!!!c______d!!!!!!!!!!!!!!!!!!!!=",
+   "==============_   !==================================== ==",
+   "=!!!!!!!!!!!!=_ = !=!!c______d!!!!!!!!=!!!!!!!!!!!!!!=!!!=",
+   "=!          !=_ = !=!               0!=!           0!=! !=",
+   "=!          !=_ = ! ! !!!!!!!!!!!!!!!!=! !!!!!!!!!!!!=! !=",
+   "=!  0    O  ! _   !=! !================! !============! !=",
+   "=!          !=d = !=! !=!!!!d______c!!!! !=!!d______c!! !=",
+   "=!          !=!   !=! ! !0           0=  ! !0           !=",
+   "=c______d!!!!=!!!!!=!!!=!!!!!!!!!!!!!!!!!!=!!!!!!!!!!!!!!=",
+   "~========================================================="
+}
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+set_default_parent(cells[" "])
+create_world_by_map(level)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

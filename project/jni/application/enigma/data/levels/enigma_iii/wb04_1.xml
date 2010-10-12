@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Bridge Builders" el:subtitle="" el:id="wb4"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jon 'WB' Sneyers" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Jon 'WB' Sneyers</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+
+cells[";"]=cell{floor="fl-tigris"}
+cells[":"]=cell{floor="fl-samba"}
+cells["/"]=cell{floor="fl-stone"}
+cells[" "]=cell{floor="fl-leaves"}
+cells["%"]=cell{floor="fl-sand"}
+cells["w"]=cell{stone="st-wood"}
+cells["i"]=cell{stone="st-stoneimpulse"}
+
+cells["#"]=cell{stone="st-rock3"}
+cells["="]=cell{stone="st-rock6"}
+cells["W"]=cell{stone="st-white4"}
+cells["B"]=cell{stone="st-black4"}
+cells["."]=cell{floor="fl-abyss"}
+cells["@"]=cell{floor="fl-water"}
+
+cells["H"]=cell{stone="st-chameleon"}
+
+cells["&"]=cell{{{oneway, EAST}}}
+
+cells["V"]=cell{parent=cells[" "], stone="st-bolder-s"}
+cells[">"]=cell{parent=cells[" "], stone="st-bolder-e"}
+cells["<"]=cell{parent=cells[" "], stone="st-bolder-w"}
+cells["^"]=cell{parent=cells[" "], stone="st-bolder-n"}
+
+cells["A"]=cell{stone={face="st-door", attr={name="doorA", type="v"}}}
+cells["a"]=cell{item= {face="it-trigger", attr={action="openclose", target="doorA"}}}
+cells["D"]=cell{stone={face="st-door", attr={name="doorB", type="v"}}}
+cells["d"]=cell{item= {face="it-trigger", attr={action="openclose", target="doorB"}}}
+cells["C"]=cell{stone={face="st-door", attr={name="doorC", type="h"}}}
+cells["c"]=cell{item= {face="it-trigger", attr={action="openclose", target="doorC"}}}
+cells["O"]=cell{actor={face="ac-blackball", attr={player=0, essential=1}}}
+cells["o"]=cell{actor={face="ac-whiteball", attr={player=1, essential=1}}}
+cells["0"]=oxyd
+cells["y"]=cell{item= {face="it-yinyang"}}
+cells["+"]=cell{{{document, "text1"}}}
+
+level = {
+--  012345678901234567890123456789012345678
+   "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+   "@%%%%%%%%%%@=0000====0000=@@%%%%%%%%%%@",
+   "@%0   #  y%@=      0     =@@%y # #  0%@",
+   "@% a ###  %@======C= =====@@%  #+#   %@",
+   "@%    #   %WWA =   0 =   DBB%  ###   %@",
+   "@%%%%% %%%%@@= = = = = ===@@%%%% %%%%%@",
+   "@@@@@% %@@@@@=   =d=   =@@@@@@@% %@@@@@",
+   "@%%%%%#%%%%%%====c=  ===%%%%%%%% %%%%%@",
+   "@%### ####0##%@@=   ==%0  #          %@",
+   "@%  # #   # %%BB####WW%%  ###########@@",
+   "@%O #   #   %W w....w B%  #         o%@",
+   "@%%%%%%%%#%%%W w....w B%%%%%%%%%%%%%%%@",
+   "@@@@@@@@@@@@@###....###@@@@@@@@@@@@@@@@",
+--  012345678901234567890123456789012345678
+}
+
+oxyd_default_flavor = "c"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">White helps black, black helps white.</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

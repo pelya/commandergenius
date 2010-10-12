@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="So Many Doors" el:subtitle="Oxyd 93" el:id="level9b"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Siegfried Fennig" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Siegfried Fennig</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd1">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 25
+
+create_world(levelw, levelh)
+draw_border("st-metal")
+fill_floor("fl-leaves")
+
+oxyd_default_flavor = "d"
+
+oxyd ( 4,14)
+oxyd ( 6,14)
+oxyd ( 8,14)
+oxyd (10,14)
+oxyd (12,14)
+oxyd (14,14)
+oxyd (16,14)
+oxyd (18,14)
+
+oxyd_shuffle()
+
+draw_stones("st-metal", { 2,10},{1,0}, 2)
+draw_stones("st-metal", { 4, 3},{0,1}, 3)
+draw_stones("st-metal", { 4, 7},{0,1}, 4)
+draw_stones("st-metal", { 5, 7},{1,0}, 3)
+draw_stones("st-metal", { 6, 5},{1,0}, 3)
+draw_stones("st-metal", { 7, 2},{0,1}, 2)
+draw_stones("st-metal", { 9, 2},{1,0}, 2)
+draw_stones("st-metal", { 9, 4},{0,1}, 2)
+draw_stones("st-metal", {11, 4},{0,1}, 2)
+draw_stones("st-metal", {11, 7},{0,1}, 4)
+draw_stones("st-metal", {12, 3},{0,1}, 2)
+draw_stones("st-metal", {12,10},{1,0}, 3)
+draw_stones("st-metal", {14, 3},{1,0}, 2)
+draw_stones("st-metal", {15, 6},{0,1}, 5)
+draw_stones("st-metal", { 2,12},{1,0}, 7)
+draw_stones("st-metal", {10,12},{1,0}, 9)
+draw_stones("st-metal", { 2,13},{0,1}, 8)
+set_stones("st-metal", {{15,4},{18,5}})
+set_stones("st-block", {{12,6},{14,5},{17,5},{18,10}})
+
+set_stone("st-shogun-s", 5, 4)
+set_stone("st-shogun-s", 6, 8)
+set_stone("st-shogun-s", 8, 2)
+set_stone("st-shogun-s", 9, 7)
+set_stone("st-shogun-s",10, 5)
+set_stone("st-shogun-s",11, 6)
+set_stone("st-shogun-s",15, 2)
+set_stone("st-shogun-s",15, 5)
+set_stone("st-shogun-s",17, 6)
+
+shogundot1( 1, 1, {action="openclose", target="door1"})
+shogundot1( 2, 1, {action="openclose", target="door2"})
+shogundot1( 3, 1, {action="openclose", target="door3"})
+shogundot1( 1, 2, {action="openclose", target="door4"})
+shogundot1( 2, 2, {action="openclose", target="door5"})
+shogundot1( 3, 2, {action="openclose", target="door6"})
+shogundot1( 1, 3, {action="openclose", target="door7"})
+shogundot1( 2, 3, {action="openclose", target="door8"})
+shogundot1( 3, 3, {action="openclose", target="door9"})
+shogundot1( 1, 4, {action="openclose", target="door10"})
+shogundot1( 2, 4, {action="openclose", target="door11"})
+shogundot1( 3, 4, {action="openclose", target="door12"})
+
+set_stone("st-door", 1,12, {name="door1", type="h"})
+set_stone("st-door", 1,13, {name="door2", type="h"})
+set_stone("st-door", 1,14, {name="door3", type="h"})
+set_stone("st-door", 1,15, {name="door4", type="h"})
+set_stone("st-door", 1,16, {name="door5", type="h"})
+set_stone("st-door", 1,17, {name="door6", type="h"})
+set_stone("st-door", 1,18, {name="door7", type="h"})
+set_stone("st-door", 1,19, {name="door8", type="h"})
+set_stone("st-door", 1,20, {name="door9", type="h"})
+set_stone("st-door", 5, 5, {name="door10", type="h"})
+set_stone("st-door",10, 4, {name="door11", type="h"})
+set_stone("st-door",13, 3, {name="door12", type="h"})
+
+set_attrib(laser( 9,12, TRUE, NORTH), "name", "laser1")
+
+set_actor("ac-blackball",9.5,6.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

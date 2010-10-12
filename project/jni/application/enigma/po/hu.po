@@ -1,0 +1,4177 @@
+# Hungarian translation for Enigma.
+# Copyright (C) 2005, 2006, 2007 Máté Lehel Juhász
+# This file is distributed under the same license as the Enigma package.
+# Máté Lehel Juhász <jmatel@cs.elte.hu>, 2005, 2006, 2007.
+#
+#: po/level_i18n.cc:3628
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma 1.00\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-12-13 19:40+0100\n"
+"PO-Revision-Date: 2007-03-17\n"
+"Last-Translator: Máté Lehel Juhász <jmatel@cs.elte.hu>\n"
+"Language-Team: Hungarian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/server.cc:144 src/server.cc:158 src/gui/LevelInspector.cc:199
+msgid "Server Error: could not load level '"
+msgstr "Kiszolgáló hiba: nem tudta betölteni a következő pályát: '"
+
+#: src/client.cc:66
+#, c-format
+msgid "Mouse speed: %d"
+msgstr "Egér sebessége: %d"
+
+#: src/client.cc:77
+msgid "Another nameless level"
+msgstr "Még egy névtelen pálya"
+
+#: src/client.cc:81
+msgid " by "
+msgstr ", készítette "
+
+#: src/client.cc:475
+msgid "Left mouse button:"
+msgstr "Bal egérgomb:"
+
+#: src/client.cc:475
+msgid "Activate/drop leftmost inventory item"
+msgstr "Bal oldali kézben lévő elem működésbe hozása/leejtése"
+
+#: src/client.cc:476
+msgid "Right mouse button:"
+msgstr "Jobb egérgomb:"
+
+#: src/client.cc:476
+msgid "Rotate inventory items"
+msgstr "Kézben lévő elemek váltogatása"
+
+#: src/client.cc:477 src/gui/LevelMenu.cc:166 src/gui/ScreenshotViewer.cc:34
+msgid "Escape:"
+msgstr "Esc:"
+
+#: src/client.cc:477
+msgid "Show game menu"
+msgstr "Játék menü megjelenítése"
+
+#: src/client.cc:478
+msgid "F1:"
+msgstr "F1:"
+
+#: src/client.cc:478 src/gui/LevelMenu.cc:167 src/gui/ScreenshotViewer.cc:35
+msgid "Show this help"
+msgstr "Ennek a súgó-képernyőnek a megjelenítése"
+
+#: src/client.cc:479
+msgid "F3:"
+msgstr "F3:"
+
+#: src/client.cc:479
+msgid "Kill current marble"
+msgstr "Jelenlegi golyó összetörése"
+
+#: src/client.cc:480
+msgid "Shift+F3:"
+msgstr "Shift+F3:"
+
+#: src/client.cc:480
+msgid "Restart the current level"
+msgstr "Jelenlegi pálya újrakezdése"
+
+#: src/client.cc:481
+msgid "F4:"
+msgstr "F4:"
+
+#: src/client.cc:481
+msgid "Skip to next level"
+msgstr "Ugrás a következő pályára"
+
+#: src/client.cc:482 src/gui/LevelPackComposer.cc:50
+msgid "F5:"
+msgstr "F5:"
+
+#: src/client.cc:483
+#, fuzzy
+msgid "F6:"
+msgstr "F9:"
+
+#: src/client.cc:483
+msgid "Jump back to last level"
+msgstr ""
+
+#: src/client.cc:484
+msgid "F10:"
+msgstr "F10:"
+
+#: src/client.cc:484
+msgid "Make screenshot"
+msgstr "Pillanatkép készítése"
+
+#: src/client.cc:485
+msgid "Left/right arrow:"
+msgstr "Bal/jobb nyíl:"
+
+#: src/client.cc:485
+msgid "Change mouse speed"
+msgstr "Egér sebességének állítása"
+
+#: src/client.cc:486
+msgid "Alt+x:"
+msgstr "Alt+x:"
+
+#: src/client.cc:486
+msgid "Return to level menu"
+msgstr "Visszatérés a pályák menübe"
+
+#: src/client.cc:497
+msgid "Skip to next level for best score hunt"
+msgstr "Ugrás a következő pályára legjobb pontszám vadászathoz"
+
+#: src/client.cc:498
+msgid "Skip to next unsolved level"
+msgstr "Ugrás a következő megoldatlan szintre"
+
+#: src/client.cc:651
+msgid "Too slow for "
+msgstr "Lassú hozzá képest: "
+
+#: src/client.cc:656
+msgid "You are slow today.. [Ctrl-A]"
+msgstr "Ma Ön lassú... [Ctrl-A]"
+
+#: src/client.cc:728
+msgid "Exactly the world record of "
+msgstr "Pontosan az ő világcsúcsát teljesítette: "
+
+#: src/client.cc:730
+msgid "Great! A new world record!"
+msgstr "Nagyszerű! Új világcsúcs!"
+
+#: src/client.cc:735
+msgid "Again your personal record..."
+msgstr "Ismét az Ön egyéni csúcsa..."
+
+#: src/client.cc:741
+msgid "New personal record - better than par!"
+msgstr "Új egyéni csúcs - jobb mint a par!"
+
+#: src/client.cc:743
+msgid "New personal record, but over par!"
+msgstr "Új egyéni csúcs, de a par fölött!"
+
+#: src/client.cc:745
+msgid "New personal record!"
+msgstr "Új egyéni csúcs!"
+
+#: src/client.cc:756
+msgid "Your record, "
+msgstr "Az Ön egyéni csúcsa, "
+
+#: src/client.cc:763
+msgid "behind world record."
+msgstr "idővel maradt le a világcsúcstól."
+
+#: src/client.cc:765
+msgid "behind your record."
+msgstr "idővel maradt le az egyéni csúcstól."
+
+#: src/client.cc:773
+msgid "Level finished - better than par!"
+msgstr "Pálya befejezve - jobb mint a par!"
+
+#: src/client.cc:775
+msgid "Level finished, but over par!"
+msgstr "Pálya befejezve, de a par fölött!"
+
+#: src/client.cc:777
+msgid "Level finished!"
+msgstr "Pálya befejezve!"
+
+#: src/client.cc:780
+msgid " Cheater!"
+msgstr " Csaló!"
+
+#: src/client.cc:809
+#, c-format
+msgid "Enigma pack %s - level #%d: %s"
+msgstr "Enigma csomag: %s - %d. Engima pálya: %s"
+
+#: src/client.cc:819
+msgid "Your record: "
+msgstr "Az Ön egyéni csúcsa: "
+
+#: src/client.cc:821
+msgid "World record to beat: "
+msgstr "A megdöntendő világcsúcs:"
+
+#: src/main.cc:279
+#, c-format
+msgid "Error in configuration file.\n"
+msgstr "Hiba a konfigurációs fájlban.\n"
+
+#: src/main.cc:515 src/main.cc:538
+#, c-format
+msgid "Error Home directory does not exist.\n"
+msgstr "Hiba: A 'Home' könyvtár nem létezik.\n"
+
+#: src/main.cc:530
+#, c-format
+msgid "Error Application Data directory does not exist.\n"
+msgstr "Hiba: Az 'Application Data' könyvtár nem létezik.\n"
+
+#: src/main.cc:558 src/main.cc:607
+#, c-format
+msgid "Error in XML initialization.\n"
+msgstr "Hiba az XML inicializálása során.\n"
+
+#: src/main.cc:683
+#, c-format
+msgid ""
+"Mac OS X upgrade from Enigma 1.00\n"
+"\n"
+"The default user data path has changed from\n"
+"  %s \n"
+"\n"
+"to the visible data path\n"
+"  %s \n"
+"\n"
+"If ok Enigma will move your data to this new location.\n"
+"Note that you have to restart Enigma once for completion of this update."
+msgstr ""
+
+#: src/main.cc:684
+msgid "OK"
+msgstr ""
+
+#: src/main.cc:684 src/gui/OptionsMenu.cc:123
+msgid "Never"
+msgstr "soha"
+
+#: src/main.cc:684
+msgid "Remind"
+msgstr ""
+
+#: src/main.cc:834
+msgid ""
+"Fatal Error that causes the application to quit:\n"
+"\n"
+msgstr ""
+"Végzetes hiba, az alkalmazás kilép:\n"
+"\n"
+
+#: src/main.cc:836 src/gui/MainMenu.cc:227
+msgid "Quit"
+msgstr "Kilépés"
+
+#: src/gui/MainMenu.cc:70 src/gui/MainMenu.cc:219 src/gui/LevelPackMenu.cc:62
+msgid "Start Game"
+msgstr "Játék kezdete"
+
+#: src/gui/MainMenu.cc:71
+msgid "Join Game"
+msgstr "Csatlakozás játékhoz"
+
+#: src/gui/MainMenu.cc:72 src/gui/OptionsMenu.cc:317
+#: src/gui/ScreenshotViewer.cc:34
+msgid "Back"
+msgstr "Vissza"
+
+#: src/gui/MainMenu.cc:110
+msgid "Main developers of the 1.0 release:"
+msgstr "Az 1.0-s kiadás fő fejlesztői:"
+
+#: src/gui/MainMenu.cc:111
+msgid "  RONALD LAMPRECHT (lead)"
+msgstr "  RONALD LAMPRECHT (vezető)"
+
+#: src/gui/MainMenu.cc:115
+msgid "Special Thanks To:"
+msgstr "Különleges köszönet:"
+
+#: src/gui/MainMenu.cc:116
+msgid "  DANIEL HECK (project founder)"
+msgstr "  DANIEL HECK (projekt alapító)"
+
+#: src/gui/MainMenu.cc:117
+msgid "  MEINOLF SCHNEIDER (game idea, level design)"
+msgstr "  MEINOLF SCHNEIDER (játékötlet, pályaterv)"
+
+#: src/gui/MainMenu.cc:119
+msgid "Please refer to the manual or the next pages for full credits."
+msgstr ""
+"Az alkotók részletes listájához forduljon a kézikönyvhöz vagy a következő "
+"oldalakhoz."
+
+#: src/gui/MainMenu.cc:121
+msgid "Home Page: http://www.nongnu.org/enigma"
+msgstr "Honlap: http://www.nongnu.org/enigma"
+
+#: src/gui/MainMenu.cc:122
+msgid "Contact: enigma-devel@nongnu.org"
+msgstr "Elérés: enigma-devel@nongnu.org"
+
+#: src/gui/MainMenu.cc:124
+msgid "Enigma is free software and may be distributed under the"
+msgstr "Az Enigma szabad szoftver, és a GNU General Public License"
+
+#: src/gui/MainMenu.cc:125
+msgid "terms of the GNU General Public License, version 2."
+msgstr "2. változat kikötéseinek értelmében lehet terjeszteni."
+
+#: src/gui/MainMenu.cc:127
+#, fuzzy
+msgid "Copyright (C) 2002-2007 Daniel Heck and contributors."
+msgstr "Copyright (C) 2002-2006 Daniel Heck és közreműködők."
+
+#: src/gui/MainMenu.cc:129
+msgid "Main developer of all releases:"
+msgstr "Az összes kiadás fő fejlesztői:"
+
+#: src/gui/MainMenu.cc:143
+msgid "Special Thanks:"
+msgstr "Különleges köszönet:"
+
+#: src/gui/MainMenu.cc:156
+msgid "Contributors:"
+msgstr "Közreműködtek:"
+
+#: src/gui/MainMenu.cc:220 src/gui/LevelMenu.cc:64
+msgid "Level Pack"
+msgstr "Pályacsomag"
+
+#: src/gui/MainMenu.cc:222
+msgid "Network Game"
+msgstr "Hálózati játék"
+
+#: src/gui/MainMenu.cc:223
+msgid "Editor"
+msgstr "Szerkesztő"
+
+#: src/gui/MainMenu.cc:225 src/gui/GameMenu.cc:48
+msgid "Options"
+msgstr "Beállítások"
+
+#: src/gui/MainMenu.cc:226
+msgid "Credits"
+msgstr "Készítők"
+
+#: src/gui/MainMenu.cc:316
+msgid "Preferences Path:"
+msgstr "Beállítások útvonala (Preferences Path):"
+
+#: src/gui/MainMenu.cc:326
+msgid "User Path:"
+msgstr "Felhasználói útvonal (User Path):"
+
+#: src/gui/MainMenu.cc:336
+msgid "User Image Path:"
+msgstr "Felhasználói képek útvonala (User Image Path):"
+
+#: src/gui/MainMenu.cc:346
+msgid "System Path:"
+msgstr "Rendszer útvonal (System Path):"
+
+#: src/gui/MainMenu.cc:356
+msgid "Resource Paths:"
+msgstr "Erőforrások útvonalai (Resource Paths):"
+
+#: src/gui/MainMenu.cc:366
+msgid "L10n Path:"
+msgstr "Lokalizációs útvonal (L10n Path):"
+
+#: src/gui/OptionsMenu.cc:72 src/gui/OptionsMenu.cc:93
+msgid "muted"
+msgstr "néma"
+
+#: src/gui/OptionsMenu.cc:110
+msgid "Music in game"
+msgstr "Zene a játékban"
+
+#: src/gui/OptionsMenu.cc:110
+msgid "No music in game"
+msgstr "Nincs zene a játékban"
+
+#: src/gui/OptionsMenu.cc:115 src/gui/OptionsMenu.cc:119
+#: src/gui/OptionsMenu.cc:218
+msgid "Yes"
+msgstr "Igen"
+
+#: src/gui/OptionsMenu.cc:115 src/gui/OptionsMenu.cc:119
+#: src/gui/OptionsMenu.cc:218
+msgid "No"
+msgstr "Nem"
+
+#: src/gui/OptionsMenu.cc:123
+msgid "Auto"
+msgstr "magától"
+
+#: src/gui/OptionsMenu.cc:206
+msgid "reversed"
+msgstr "fordított"
+
+#: src/gui/OptionsMenu.cc:207
+msgid "mono"
+msgstr "monó"
+
+#: src/gui/OptionsMenu.cc:208
+msgid "normal"
+msgstr "sztereó"
+
+#: src/gui/OptionsMenu.cc:271 src/gui/LevelInspector.cc:335
+#: src/gui/LevelInspector.cc:351 src/gui/LevelInspector.cc:364
+msgid "unknown"
+msgstr "ismeretlen"
+
+#: src/gui/OptionsMenu.cc:336
+msgid "Language: "
+msgstr "Nyelv: "
+
+#: src/gui/OptionsMenu.cc:337
+msgid "Fullscreen: "
+msgstr "Teljes képernyő: "
+
+#: src/gui/OptionsMenu.cc:338
+msgid "Video mode: "
+msgstr "Videó mód: "
+
+#: src/gui/OptionsMenu.cc:339
+msgid "Gamma correction: "
+msgstr "Gamma korrekció: "
+
+#: src/gui/OptionsMenu.cc:340
+msgid "Mouse speed: "
+msgstr "Egér sebessége: "
+
+#: src/gui/OptionsMenu.cc:349
+msgid "Sound volume: "
+msgstr "Hangerő: "
+
+#: src/gui/OptionsMenu.cc:350
+msgid "Sound set: "
+msgstr "Hangkészlet: "
+
+#: src/gui/OptionsMenu.cc:351
+msgid "Music volume: "
+msgstr "Zene hangereje: "
+
+#: src/gui/OptionsMenu.cc:352
+msgid "Stereo: "
+msgstr "Csatornák: "
+
+#: src/gui/OptionsMenu.cc:353
+msgid "Ratings update: "
+msgstr "Minősítés frissítése: "
+
+#: src/gui/OptionsMenu.cc:367
+msgid "User name: "
+msgstr "Felhasználó neve: "
+
+#: src/gui/OptionsMenu.cc:368
+msgid "User path: "
+msgstr "Felhasználói útvonal: "
+
+#: src/gui/OptionsMenu.cc:369
+msgid "User image path: "
+msgstr "Képek útvonala: "
+
+#: src/gui/LevelMenu.cc:62 src/gui/LevelPackMenu.cc:63
+msgid "Main Menu"
+msgstr "Főmenü"
+
+#: src/gui/LevelMenu.cc:166
+msgid "Skip to main menu"
+msgstr "Ugrás a főmenübe"
+
+#: src/gui/LevelMenu.cc:169
+msgid "Arrows:"
+msgstr "Nyilak:"
+
+#: src/gui/LevelMenu.cc:169
+msgid "Select level"
+msgstr "Pálya választása"
+
+#: src/gui/LevelMenu.cc:170
+msgid "Return:"
+msgstr "Return:"
+
+#: src/gui/LevelMenu.cc:170 src/gui/LevelMenu.cc:175
+msgid "Play selected level"
+msgstr "Kiválasztott pálya játszása"
+
+#: src/gui/LevelMenu.cc:171
+msgid "Back/Space:"
+msgstr "Visszatörlés/Szóköz:"
+
+#: src/gui/LevelMenu.cc:171
+msgid "Previous/next levelpack"
+msgstr "Előző/következő pályacsomag"
+
+#: src/gui/LevelMenu.cc:172
+msgid "Mark current level as Unsolved"
+msgstr "Jelenlegi pálya bejelölése mint 'Megoldatlan'"
+
+#: src/gui/LevelMenu.cc:174
+msgid "Alt+Return:"
+msgstr "Alt+Return:"
+
+#: src/gui/LevelMenu.cc:174
+msgid "Switch between fullscreen and window"
+msgstr "Váltás teljes képernyő és ablak között"
+
+#: src/gui/LevelMenu.cc:175 src/gui/LevelPackMenu.cc:48
+msgid "Left click:"
+msgstr "Bal egérgomb:"
+
+#: src/gui/LevelMenu.cc:176 src/gui/LevelPackMenu.cc:49
+msgid "Right or control click:"
+msgstr "Jobb egérgomb vagy Ctrl:"
+
+#: src/gui/LevelMenu.cc:176
+msgid "Inspect selected level"
+msgstr "Kiválasztott pálya megvizsgálása"
+
+#: src/gui/LevelMenu.cc:193
+msgid "Select next level for world record hunt"
+msgstr "Következő pálya világcsúcs-vadászathoz"
+
+#: src/gui/LevelMenu.cc:195
+msgid "Select next unsolved level"
+msgstr "Következő megoldatlan pálya"
+
+#: src/gui/LevelMenu.cc:244
+msgid "You are not allowed to play this level yet."
+msgstr "Ezt a pályát még nem játszhatja."
+
+#: src/gui/LevelMenu.cc:280 src/gui/LevelPackComposer.cc:350
+#, c-format
+msgid "%s: %d levels"
+msgstr "%s: %d pálya"
+
+#: src/gui/LevelMenu.cc:296
+#, c-format
+msgid "%d%% best"
+msgstr "%d%% legjobb"
+
+#: src/gui/LevelMenu.cc:301
+#, c-format
+msgid "%d%% par, hcp %.1f"
+msgstr "%d%% par, hcp %.1f"
+
+#: src/gui/LevelMenu.cc:305
+#, c-format
+msgid "%d%% solved"
+msgstr "%d%% megoldott"
+
+#: src/gui/LevelMenu.cc:340
+#, c-format
+msgid "Your time: %d:%02d"
+msgstr "Az Ön ideje: %d:%02d"
+
+#: src/gui/LevelMenu.cc:346
+msgid "That's world record."
+msgstr "Ez a világcsúcs"
+
+#: src/gui/LevelMenu.cc:348
+#, c-format
+msgid "That's %d:%02d below world record."
+msgstr "Ez %d:%02d idővel van a világcsúcs alatt."
+
+#: src/gui/LevelMenu.cc:358
+#, c-format
+msgid "World record: %d:%02d"
+msgstr "Világcsúcs: %d:%02d"
+
+#: src/gui/LevelMenu.cc:360
+#, c-format
+msgid "Par: %d:%02d World record: %d:%02d"
+msgstr "Par: %d:%02d Világcsúcs: %d:%02d"
+
+#: src/gui/LevelMenu.cc:374
+#, c-format
+msgid "World record by %s: %d:%02d"
+msgstr "%s tartja a világcsúcsot: %d:%02d"
+
+#: src/gui/LevelMenu.cc:377
+#, c-format
+msgid "Par: %d:%02d World record by %s: %d:%02d"
+msgstr "Par: %d:%02d %s tartja a világcsúcsot: %d:%02d"
+
+#: src/gui/LevelMenu.cc:407
+msgid "No further unsolved level available!"
+msgstr "Nincs további elérhető megoldatlan pálya!"
+
+#: src/gui/LevelPackComposer.cc:42
+msgid "Shift click:"
+msgstr "Shift és egérgomb:"
+
+#: src/gui/LevelPackComposer.cc:42
+msgid "Add to clipboard"
+msgstr "Vagólapra helyezés"
+
+#: src/gui/LevelPackComposer.cc:43
+msgid "Shift delete:"
+msgstr "Shift és törlés:"
+
+#: src/gui/LevelPackComposer.cc:43
+msgid "Clear clipboard"
+msgstr "Vágólap törlése"
+
+#: src/gui/LevelPackComposer.cc:44
+msgid "F8:"
+msgstr "F8:"
+
+#: src/gui/LevelPackComposer.cc:44
+msgid "Insert clipboard as reference"
+msgstr "Vágólap tartalmának beillesztése hivatkozásként"
+
+#: src/gui/LevelPackComposer.cc:45
+msgid "F9:"
+msgstr "F9:"
+
+#: src/gui/LevelPackComposer.cc:45
+msgid "Insert clipboard as copy"
+msgstr "Vágólap tartalmának bemásolása"
+
+#: src/gui/LevelPackComposer.cc:47
+msgid "Alt left arrow:"
+msgstr "Alt és balra nyíl:"
+
+#: src/gui/LevelPackComposer.cc:47
+msgid "Exchange level with predecessor"
+msgstr "Pálya kicserélése a megelőzővel"
+
+#: src/gui/LevelPackComposer.cc:48
+msgid "Alt right arrow:"
+msgstr "Alt és jobbra nyíl:"
+
+#: src/gui/LevelPackComposer.cc:48
+msgid "Exchange level with successor"
+msgstr "Pálya kicserélése a rákövetkezővel"
+
+#: src/gui/LevelPackComposer.cc:49
+msgid "Delete:"
+msgstr "Törlés:"
+
+#: src/gui/LevelPackComposer.cc:49
+msgid "Delete level"
+msgstr "Pálya törlése"
+
+#: src/gui/LevelPackComposer.cc:50
+#, fuzzy
+msgid "Update index from levels"
+msgstr "A jegyzék frissítése"
+
+#: src/gui/LevelPackComposer.cc:55
+msgid "F10"
+msgstr "F10"
+
+#: src/gui/LevelPackComposer.cc:56
+msgid "Move clipboard levels"
+msgstr "Vágólapon lévő pályák mozgatása"
+
+#: src/gui/LevelPackComposer.cc:120 src/gui/LevelPackConfig.cc:306
+#: src/gui/LPGroupConfig.cc:99 src/gui/SearchMenu.cc:58
+msgid "Undo"
+msgstr "Vissza"
+
+#: src/gui/LevelPackComposer.cc:121 src/gui/LevelPackConfig.cc:307
+#: src/gui/LPGroupConfig.cc:100 src/gui/LevelInspector.cc:178
+#: src/gui/HelpMenu.cc:34
+msgid "Ok"
+msgstr "Ok"
+
+#: src/gui/LevelPackComposer.cc:364
+#, c-format
+msgid "Clipboard: %d levels"
+msgstr "Vágólap: %d pálya"
+
+#: src/gui/LevelPackConfig.cc:154
+msgid "Levelpack:"
+msgstr "Pályacsomag:"
+
+#: src/gui/LevelPackConfig.cc:155
+msgid "Owner:"
+msgstr "Tulajdonos:"
+
+#: src/gui/LevelPackConfig.cc:156 src/gui/LPGroupConfig.cc:55
+msgid "Group:"
+msgstr "Csoport:"
+
+#: src/gui/LevelPackConfig.cc:157
+msgid "Location"
+msgstr "Elhelyezkedés"
+
+#: src/gui/LevelPackConfig.cc:158
+msgid "in [All Packs]:"
+msgstr "az [All Packs]-ben:"
+
+#: src/gui/LevelPackConfig.cc:215
+msgid "Edit Metadata"
+msgstr "Adatok átírása"
+
+#: src/gui/LevelPackConfig.cc:218
+msgid "Release:"
+msgstr "Kiadás:"
+
+#: src/gui/LevelPackConfig.cc:219
+msgid "Revision:"
+msgstr "Átdolgozás:"
+
+#: src/gui/LevelPackConfig.cc:220
+msgid "Compatibility:"
+msgstr "Kompatibilitás:"
+
+#: src/gui/LevelPackConfig.cc:221
+msgid "Default Location:"
+msgstr "Alapelhelyezkedés:"
+
+#: src/gui/LevelPackConfig.cc:222
+msgid "Level types:"
+msgstr "Pályatípusok:"
+
+#: src/gui/LevelPackConfig.cc:297
+msgid "Please reasign levelpack to another group for group deletion"
+msgstr ""
+"A csoport törléséhez, kérem, helyezze át a pályacsomagot egy másik csoportba"
+
+#: src/gui/LevelPackConfig.cc:300
+msgid "Compose Pack"
+msgstr "Csomag felállása"
+
+#: src/gui/LevelPackConfig.cc:302
+msgid "Update Pack"
+msgstr "Csomag frissítése"
+
+#: src/gui/LevelPackConfig.cc:381
+msgid ""
+"Error: empty title not allowed - press \"Undo\" to exit without modifications"
+msgstr ""
+"Hiba: az üres cím nem engedélyezett - nyomjon a \"Vissza\"-ra, hogy kilépjen "
+"változtatások nélkül"
+
+#: src/gui/LevelPackConfig.cc:393
+msgid "Error: use only \"a-zA-Z0-9 _-#\" for levelpack title"
+msgstr "Hiba: csak \"a-zA-Z0-9 _-#\" jeleket használjon a pályacsomag címéhez"
+
+#: src/gui/LevelPackConfig.cc:402
+msgid "Error: title already in use - choose another title"
+msgstr "Hiba: a cím már foglalt - válasszon másik címet"
+
+#: src/gui/LevelPackMenu.cc:46
+msgid "Left column:"
+msgstr "Bal oldali oszlop:"
+
+#: src/gui/LevelPackMenu.cc:46
+msgid "Levelpack groups"
+msgstr "Pályacsomag-csoportok"
+
+#: src/gui/LevelPackMenu.cc:47
+msgid "Right columns:"
+msgstr "Jobb oldali oszlop:"
+
+#: src/gui/LevelPackMenu.cc:47
+msgid "Levelpacks of selected group"
+msgstr "A kiválasztott csoporton belüli pályacsomagok"
+
+#: src/gui/LevelPackMenu.cc:48
+msgid "Select group or levelpack"
+msgstr "Csoport vagy pályacsomag választása"
+
+#: src/gui/LevelPackMenu.cc:49
+msgid "Configure group or levelpack"
+msgstr "Csoport vagy pályacsomag beállítása"
+
+#: src/gui/LevelPackMenu.cc:60
+msgid "New Group"
+msgstr "Új csoport"
+
+#: src/gui/LevelPackMenu.cc:61 src/gui/SearchMenu.cc:59
+msgid "Search"
+msgstr "Keresés"
+
+#: src/gui/LPGroupConfig.cc:63
+msgid "Position:"
+msgstr "Elhelyezkedés:"
+
+#: src/gui/LPGroupConfig.cc:97
+msgid "New Pack"
+msgstr "Új pályacsomag"
+
+#: src/gui/LPGroupConfig.cc:98
+msgid "Delete Group"
+msgstr "Csoport törlése"
+
+#: src/gui/LPGroupConfig.cc:128
+msgid ""
+"Error: empty group name not allowed - press \"Undo\" to exit without "
+"modifications"
+msgstr ""
+"Hiba: üres csoportnév nem engedélyezett - nyomjon a \"Vissza\"-ra, hogy "
+"kilépjen módosítások nélkül"
+
+#: src/gui/LPGroupConfig.cc:139
+msgid "Error: group name is a duplicate of an existing group"
+msgstr "Hiba: a csoport neve megegyezik egy már létező csoportéval"
+
+#: src/gui/LPGroupConfig.cc:144
+msgid "Error: \"Every group\" is a reserved group name"
+msgstr "Hiba: az \"Every group\" csoportnév másra van fenntartva"
+
+#: src/gui/LPGroupConfig.cc:149
+msgid "Error: group name must not be enclosed in square brackets"
+msgstr "Hiba: a csoport neve nem lehet szögletes zárójelekbe bezárva"
+
+#: src/gui/LPGroupConfig.cc:205
+msgid "Error: group not empty"
+msgstr "Hiba: a csoport nem üres"
+
+#: src/gui/ScreenshotViewer.cc:36
+msgid "Page Up:"
+msgstr "Page Up:"
+
+#: src/gui/ScreenshotViewer.cc:36
+msgid "Show previous screenshot"
+msgstr "Előző pillanatkép"
+
+#: src/gui/ScreenshotViewer.cc:37
+msgid "Page Down:"
+msgstr "Page Down:"
+
+#: src/gui/ScreenshotViewer.cc:37
+msgid "Show next screenshot"
+msgstr "Következő pillanatkép"
+
+#: src/gui/ScreenshotViewer.cc:105
+msgid "No screenshot available:"
+msgstr "Nincs elérhető pillanatkép:"
+
+#: src/gui/SearchMenu.cc:40
+msgid "Shallow Search:"
+msgstr "Felületes keresés:"
+
+#. TRANSLATORS: the translation can have double size of the english text
+#: src/gui/SearchMenu.cc:42
+msgid "case independent search in title, author, filename"
+msgstr ""
+"keresés a címek, alkotók és fájlnevek közt, nagybetű és kisbetű különbségére "
+"tekintet nélkül"
+
+#: src/gui/LevelInspector.cc:179
+msgid "Screenshot"
+msgstr "Pillanatkép"
+
+#: src/gui/LevelInspector.cc:227
+msgid "Level: "
+msgstr "Pálya: "
+
+#: src/gui/LevelInspector.cc:229 src/gui/LevelInspector.cc:287
+msgid "Author: "
+msgstr "Alkotó: "
+
+#: src/gui/LevelInspector.cc:230
+msgid "Contact: "
+msgstr "Elérhetőség: "
+
+#: src/gui/LevelInspector.cc:231
+msgid "Homepage: "
+msgstr "Honlap: "
+
+#: src/gui/LevelInspector.cc:252
+msgid "Public Ratings"
+msgstr "Ált. minősítés"
+
+#: src/gui/LevelInspector.cc:254
+msgid "Intelligence: "
+msgstr "Gondolkodás: "
+
+#: src/gui/LevelInspector.cc:255
+msgid "Dexterity: "
+msgstr "Ügyesség: "
+
+#: src/gui/LevelInspector.cc:256
+msgid "Patience: "
+msgstr "Türelem: "
+
+#: src/gui/LevelInspector.cc:257
+msgid "Knowledge: "
+msgstr "Ismeret: "
+
+#: src/gui/LevelInspector.cc:258
+msgid "Speed: "
+msgstr "Gyorsaság: "
+
+#: src/gui/LevelInspector.cc:259
+msgid "Difficulty: "
+msgstr "Nehézség: "
+
+#: src/gui/LevelInspector.cc:280
+msgid "Scores"
+msgstr "Pontszámok"
+
+#: src/gui/LevelInspector.cc:283
+msgid "You: "
+msgstr "Ön: "
+
+#: src/gui/LevelInspector.cc:284
+msgid "World: "
+msgstr "Világ: "
+
+#. TRANSLATORS: PAR = professional average rate - an expression used by golfers
+#: src/gui/LevelInspector.cc:286
+msgid "PAR: "
+msgstr "PAR: "
+
+#: src/gui/LevelInspector.cc:288
+msgid "Solved %: "
+msgstr "Megoldva %: "
+
+#: src/gui/LevelInspector.cc:289
+msgid "Solved #: "
+msgstr "Megoldva #: "
+
+#: src/gui/LevelInspector.cc:311
+msgid "Version"
+msgstr "Verzió"
+
+#: src/gui/LevelInspector.cc:314
+msgid "Score: "
+msgstr "Jelzés: "
+
+#: src/gui/LevelInspector.cc:316 src/gui/LevelInspector.cc:320
+msgid "Status: "
+msgstr "Állapot: "
+
+#: src/gui/LevelInspector.cc:317
+msgid "Release: "
+msgstr "Kiadás: "
+
+#: src/gui/LevelInspector.cc:318
+msgid "Revision: "
+msgstr "Átdolgozás: "
+
+#: src/gui/LevelInspector.cc:321
+msgid "Control: "
+msgstr "Irányítás: "
+
+#: src/gui/LevelInspector.cc:322
+msgid "Target: "
+msgstr "Cél: "
+
+#: src/gui/LevelInspector.cc:329 src/gui/LevelInspector.cc:345
+msgid "stable"
+msgstr "stabil"
+
+#: src/gui/LevelInspector.cc:331 src/gui/LevelInspector.cc:347
+msgid "test"
+msgstr "próba"
+
+#: src/gui/LevelInspector.cc:333 src/gui/LevelInspector.cc:349
+msgid "experimental"
+msgstr "kísérleti"
+
+#: src/gui/LevelInspector.cc:343
+msgid "released"
+msgstr "kiadott"
+
+#: src/gui/LevelInspector.cc:355
+msgid "force"
+msgstr "erő"
+
+#: src/gui/LevelInspector.cc:358
+msgid "balance"
+msgstr "egyensúly"
+
+#: src/gui/LevelInspector.cc:361
+msgid "key"
+msgstr "kulcs"
+
+#: src/gui/LevelInspector.cc:369
+msgid "time"
+msgstr "idő"
+
+#: src/gui/LevelInspector.cc:370
+msgid "pushes"
+msgstr "mozdítások"
+
+#: src/gui/LevelInspector.cc:371
+msgid "moves"
+msgstr "lépések"
+
+#: src/gui/LevelInspector.cc:388
+msgid "World Record Holders: "
+msgstr "Világcsúcstartók: "
+
+#: src/gui/LevelInspector.cc:449
+msgid "Credits: "
+msgstr "Köszönet: "
+
+#: src/gui/LevelInspector.cc:460
+msgid "Dedication: "
+msgstr "Ajánlás: "
+
+#: src/gui/LevelInspector.cc:471
+msgid "Level Path: "
+msgstr "Elérési út: "
+
+#: src/gui/LevelInspector.cc:491
+msgid "Id: "
+msgstr ""
+
+#: src/gui/LevelInspector.cc:496
+msgid "Compatibility: "
+msgstr "Kompatibilitás: "
+
+#: src/gui/LevelInspector.cc:504
+msgid "Annotation: "
+msgstr "Jegyzet: "
+
+#: src/gui/LevelInspector.cc:509
+msgid "Rating: "
+msgstr "Minősítés: "
+
+#: src/gui/LevelInspector.cc:511
+msgid "Average: "
+msgstr "Átlag: "
+
+#: src/gui/GameMenu.cc:46
+msgid "Resume Level"
+msgstr "Folytatás"
+
+#: src/gui/GameMenu.cc:47
+msgid "Restart Level"
+msgstr "Újrakezdés"
+
+#: src/gui/GameMenu.cc:49
+msgid "Level Info"
+msgstr "Pálya adatai"
+
+#: src/gui/GameMenu.cc:50
+msgid "Abort Level"
+msgstr "Megszakítás"
+
+#: src/lev/Proxy.cc:163
+msgid "Error on auto registration of levelfile: "
+msgstr "Hiba a pályafájl automatikus regisztrálása során: "
+
+#: src/lev/Proxy.cc:165
+msgid ""
+"Note: the level will not show up in the \"Auto Folder\" levelpack!\n"
+"\n"
+msgstr ""
+"Megjegyzés: a pálya nem fog megjelenni az \"Auto Folder\" pályacsomagban!\n"
+"\n"
+
+#: src/lev/Proxy.cc:167 src/lev/PersistentIndex.cc:342 src/d_models.cc:210
+#: src/d_models.cc:224 src/PreferenceManager.cc:181 src/StateManager.cc:178
+msgid "Continue"
+msgstr "Folytatás"
+
+#: src/lev/PersistentIndex.cc:328
+#, fuzzy
+msgid "Error on  update of levelpack index: \n"
+msgstr "Hiba a pályacsomag mutatójának betöltése során: \n"
+
+#: src/lev/PersistentIndex.cc:330
+msgid ""
+"Note: the current version will be reloaded!\n"
+"\n"
+msgstr ""
+
+#: src/lev/PersistentIndex.cc:337
+msgid "Error on  registration of levelpack index: \n"
+msgstr "Hiba a pályacsomag mutatójának betöltése során: \n"
+
+#: src/lev/PersistentIndex.cc:339
+msgid ""
+"Note: the levelpack will not show up!\n"
+"\n"
+msgstr ""
+"Megjegyzés: a pályacsomag nem fog megjelenni!\n"
+"\n"
+
+#: src/lua.cc:792
+#, c-format
+msgid "Cannot find '%s'.\n"
+msgstr "A '%s' nem található.\n"
+
+#: src/lua.cc:793 src/lua.cc:800
+#, c-format
+msgid "Your installation may be incomplete or invalid.\n"
+msgstr "Az Ön telepítése nem teljes vagy érvénytelen lehet.\n"
+
+#: src/lua.cc:799
+#, c-format
+msgid "There was an error loading '%s'.\n"
+msgstr "Hiba történt a '%s' betöltése során.\n"
+
+#: src/lua.cc:801
+#, c-format
+msgid "Error: '%s'\n"
+msgstr "Hiba: '%s'\n"
+
+#: src/d_models.cc:209 src/d_models.cc:223
+msgid ""
+"\n"
+"\n"
+"This error may cause the application to behave strange!"
+msgstr ""
+"\n"
+"\n"
+"Ez a hiba az alkalmazás szokatlan viselkedésével járhat!"
+
+#  level: "Bye!"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:4
+msgid ""
+"But before this, take a look at the final tutorial level Jacob devised for "
+"you.   See it as an exam, if you want to.   It's quite difficult, so don't "
+"despair if you don't get through it at the first time.   Bye!"
+msgstr ""
+"Előtte nézze meg az utolsó oktató pályát, amit Jacob tervezett Önnek. "
+"Tekintse vizsgának, ha gondolja.  Elég nehéz, úgyhogy ne keseredjen el, ha "
+"nem jut rajta keresztül elsőre.  Viszlát!"
+
+#  level: "Bye!"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:5
+msgid ""
+"Well, I hope you enjoyed this tutorial-pack.   You will see most of these "
+"levels a second time in the Enigma packs, together with many new and much "
+"more difficult ones.   Just don't give up on them!"
+msgstr ""
+"Hát, remélem élvezte ezt a oktatócsomagot.   Viszont fogja látni ismét "
+"ezeket a pályákat az Enigma csomagokban, sok új és jóval nehezebb pályával "
+"együtt. Csak ne adja fel őket!"
+
+#  level: "Floors 2"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:9
+msgid "Don't drown in the swamp."
+msgstr "Meg ne fulladjon a mocsárban!"
+
+#  level: "Timers"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:13
+msgid ""
+"This oscillating stone is a timer-stone. You cannot interact with it, but "
+"nevertheless be aware when you see one: After some time-period anything "
+"might happen ..."
+msgstr ""
+"Ez az oszcilláló kő egy időzítő kő. Nem tud vele kapcsolatba lépni, de "
+"tudjon róla, ha lát egyet: Egy bizonyos időtartam után bármi történhet..."
+
+#  level: "Timers"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:14
+msgid ""
+"The stones with arrows are one-way-stones. As you might have guessed, you "
+"can only pass them in one direction.                Mazes are cherished "
+"elements of Enigma - you will see lots of them."
+msgstr ""
+"A nyilas kövek egyirányú kövek. Amint azt kitalálhatta, csak egy irányban "
+"lehet átmenni rajtuk.                Az útvesztők az Enigma nagy becsben "
+"tartott elemei, sokkal fog találkozni."
+
+#  level: "Timers"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:15
+msgid ""
+"Well done!     When you have finished this level, let's play some example "
+"levels from the actual Enigma packs!"
+msgstr ""
+"Jó munka volt!     Amikor befejezi ezt pályát, játsszon néhány példapályával "
+"a valódi Enigma csomagokból!"
+
+#  level: "Movement 4"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:19
+msgid "Don't touch everything!"
+msgstr "Ne érintsen meg mindent!"
+
+#  level: "Items"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:23
+msgid ""
+"Use the right mouse-button to rotate your inventory,  it's the bar at the "
+"bottom of the screen.   And guess what these three items down there can be "
+"used to."
+msgstr ""
+"A képernyő alján látható sorban a kézben lévő elemek vannak, váltogatásukhoz "
+"használja a jobb egérgombot!   Találja ki, mire használható ez a három elem "
+"ott lent."
+
+#  level: "Items"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:24
+msgid ""
+"There are lots of different items to use in Enigma, as well as special "
+"floors and stones.   Let's explore some more of the actual Enigma levels!   "
+"And if you have problems with a level - take a look at the manual:   For "
+"some levels, there are hints."
+msgstr ""
+"Rengeteg különféle használható elem van az Enigma-ban, továbbá speciális "
+"padlók és kövek.  Tegyünk felfedezőutat néhány további Enigma pályán! Ha "
+"baja akadna egy pályával, tekintse meg a kézikönyvet:  Egyes pályákhoz "
+"útmutató is található."
+
+#  level: "Doors and Triggers"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:28
+msgid ""
+"Those doors on the right block your way to the oxyds ... on the left you see "
+"some triggers. Maybe they are somehow connected?"
+msgstr ""
+"A jobb oldalon lévő ajtók elállják az oxydokhoz vezető utat... a bal oldalon "
+"lát néhány váltót. Lehet, hogy van valami kapcsolat köztük?"
+
+#  level: "Floors 1"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:32
+msgid "Friction and acceleration depend on the floor type."
+msgstr "A súrlódás és a gyorsulás a padló típusán múlik."
+
+#: po/level_i18n.cc:36
+msgid ""
+"Welcome to Enigma!  This tutorial I (Jacob Scott) made will help you learn "
+"how to play."
+msgstr ""
+"Üdvözlöm az Engimában!  Ez az oktatópálya, amit én (Jacob Scott) "
+"készítettem, segíteni fog Önnek a játék megtanulásában."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:37
+msgid ""
+"You control the black ball.  To pick up an object, just roll over it.  You "
+"can bounce off most walls (try it), but avoid the blue floor near the bottom "
+"of the room (actually, try falling into it and then restarting the level "
+"with the 'Esc' key).  While these messages are being displayed, don't click "
+"any buttons or push any keys or the message will stop."
+msgstr ""
+"Ön a fekete golyót irányítja.  Egy tárgy felvételéhez guruljon át azon.  A "
+"legtöbb falról visszapattan a golyó (próbálja ki!), de kerülje el a kék "
+"talajt a szoba alsó felén (tulajdonképpen próbáljon beleesni, és azután "
+"kezdje elölről a pályát az 'Esc' gombbal).  Amíg ezek az üzenetek futnak, ne "
+"nyomjon meg semmilyen gombot, mert akkor az üzenet véget ér."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:38
+msgid "This is pretty self-explanatory."
+msgstr "Ez eléggé magáért beszél."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:39
+msgid ""
+"Enigma is full of puzzles of various types.  In the next room, you will "
+"encounter your first one."
+msgstr ""
+"Az Enigma tele van különféle típusú rejtvényekkel.  A következő szobában "
+"találkozik az elsővel."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:40
+msgid ""
+"You can't walk on water!  Try pushing the blocks into the water to get to "
+"the other side."
+msgstr ""
+"Nem tud a vizen járni!  Ahhoz, hogy a túloldalra jusson, próbálja benyomni a "
+"dobozokat a vízbe!"
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:41
+msgid ""
+"Notice that you can't push a row of two or more blocks.  Also, blocks can't "
+"be on the same squares as grates but you can."
+msgstr ""
+"Vegye észre, hogy egy legalább két dobozból álló sort nem képes eltolni. "
+"Aztán egy doboz nem lehet egy mezőn egy ráccsal, de Ön igen."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:42
+msgid ""
+"There are different types of blocks here.  Those black blocks sink when they "
+"fall into water.  The tan blocks don't sink but don't form bridges either."
+msgstr ""
+"Itt többféle doboz található.  Azok a fekete dobozok elsüllyednek, ha vízbe "
+"esnek.  A barna dobozok nem süllyednek el, de nem is lehet belőlük hidat "
+"építeni."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:43
+msgid ""
+"That thing is a top -- it will destroy your ball if they touch.  Also, as "
+"long as you are close enough to it, the top will chase you.  If you die, you "
+"will restart at the beginning of the level (if you have any balls left).  "
+"Try to find a way to get past and into the next room (you can use the blocks "
+"in the center of the room as barricades)."
+msgstr ""
+"Az ott egy pörgettyű -- összezúzza az Ön golyóját, ha megérinti.  Amíg elég "
+"közel van hozzá, a pörgettyű üldözni fogja Önt.  Amennyiben a golyója "
+"eltörik, a pályát az elejéről kezdi újra (ha maradt még golyó).  Próbálja "
+"valamilyen módon kikerülni a pörgettyűt, és jusson át a következő szobába "
+"(használhatja torlaszként a szoba közepén található tömböket)."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:44
+msgid ""
+"Good job!  Notice that the top can't go beneath that block with a black "
+"outline -- you're safe."
+msgstr ""
+"Jó munka volt!  Vegye észre, hogy a pörgettyű nem tud a fekete keretes doboz "
+"alá bemenni -- Ön biztonságban van."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:45
+msgid "Those are different types of floors.  Try going over them."
+msgstr "Azok különböző fajtájú padlók.  Próbáljon keresztülmenni rajtuk."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:46
+msgid ""
+"The grayish floors are slopes.  The white floor is inverse-floor (you will "
+"see)."
+msgstr ""
+"A szürkés padlók lejtők.  A fehér padló fordító hatású (majd meglátja)."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:47
+msgid ""
+"Watch what happens when you go over those triggers.  See if you can get the "
+"extra ball."
+msgstr ""
+"Figyelje meg, mi történik, amikor rááll a váltókra.  Meg tudja szerezni az "
+"extra labdát?"
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:48
+msgid ""
+"That's dynamite.  Try dropping some next to that yellowish wall (and moving "
+"out of the way)."
+msgstr ""
+"Az dinamit.  Ejtsen le néhányat amellé a sárgás fal mellé (és menjen el az "
+"útból)!"
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:49
+msgid "Try using the spade on the holes caused by the dynamite."
+msgstr "Használja az ásót azon a lyukon, amit a dinamit ütött!"
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:50
+msgid ""
+"Those things are bolders -- try moving one of the tan blocks.  Don't fall "
+"into the water or abyss (the black floor)."
+msgstr ""
+"Azok ott görgőkövek -- próbálja elmozdítani valamelyik barna dobozt!  Ne "
+"zuhanjon a vízbe vagy a szakadékba (a fekete padló)!"
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:51
+msgid ""
+"Take the magic wand and hit a bolder.  Try to let the row of three bolders "
+"pass the large column."
+msgstr ""
+"Vegye el a varázspálcát, és üssön meg egy görgőkövet!  Próbálja meg elérni, "
+"hogy a három görgőkő sora elhagyja a nagy oszlopot!"
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:52
+msgid "Hit it hard enough!"
+msgstr "Üsse meg erősen!"
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:53
+msgid ""
+"It appears to be a simple room, but you're getting an extra ball anyway.  "
+"Maybe there is a reason ..."
+msgstr ""
+"Ez egyszerű szobának tűnik, mégis kap egy extra golyót. Talán van valami "
+"oka..."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:54
+msgid ""
+"Try to get the laser beam to hit that black stone, but don't get hit by it!  "
+"Use the mirrors to direct the beam."
+msgstr ""
+"Érje el, hogy a lézersugár eltalálja a fekete követ anélkül, hogy Önt is "
+"eltalálná!  A sugár irányításához használja a tükröket!"
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:55
+msgid ""
+"Many objects change when hit with a laser beam.  Try hitting some of the "
+"coins with the laser beam.  Also, try hitting a block over a coin.  Those "
+"stones to your right are knights -- you need to fight (hit) them with a "
+"sword (in the front of your inventory) to get past."
+msgstr ""
+"Egyes tárgyak átalakulnak, ha eltalálja azokat egy lézersugár.  Próbálja meg "
+"néhány érméjét kitenni a lézernek!  Próbáljon meg egy dobozt átnyomni egy "
+"érme felett!  Azok a kövek Öntől jobbra lovagok -- meg kell küzdenie velük "
+"(megérinteni őket) egy karddal (ami a kézben lévő elemek közt az első kell "
+"legyen), hogy keresztül juthasson rajtuk."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:56
+msgid ""
+"Do you have any umbrellas?  Each one will give you approximately ten seconds "
+"of protection from danger (such as falling)."
+msgstr ""
+"Van ernyője?  Minden egyes ernyő nagyjából tíz másodpercnyi védelmet nyújt a "
+"veszélyek ellen (többek közt a lezuhanástól)."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:57
+msgid ""
+"Those black stones are fart stones -- they reset all progress made with the "
+"oxyd stones.  The other stones are the oxyd stones.  Match them up to win!"
+msgstr ""
+"Azok a fekete kövek durrogó kövek -- minden megtalált oxydot ismét "
+"elfednek.  A többi kő oxyd kő.  Keresse meg a párokat, ezzel megnyeri a "
+"pályát!"
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:58
+msgid ""
+"This area at the bottom of the screen is your inventory -- when you pick "
+"things up, they go here (there is a maximum of twelve).  To scroll through "
+"the inventory, use the right mouse button or the 'tab' key.  To drop or use "
+"an object, click the left mouse button.  Some objects, such as documents "
+"(like this one), can't be dropped but are instead used.  Those two balls in "
+"your inventory are your extra lives -- if you die in this level, you will "
+"restart at the beginning of the level if you have any balls left (and you "
+"will lose one of the balls)."
+msgstr ""
+"A képernyő alján található terület az Ön kezében lévő elemeket tartalmazza. "
+"Amikor felvesz egy tárgyat, oda kerül (legfeljebb 12 lehet kézben). "
+"Használja a jobb egérgombot vagy a 'tab' billentyűt, hogy válogasson köztük. "
+"Nyomja meg a bal egérgombot, hogy leejtse vagy használja a kiválasztott "
+"elemet. Bizonyos tárgyakat, például a dokumentumokat (mint ez) nem lehet "
+"leejteni, hanem használni kell őket.  Az a két golyó a kézben lévő elemek "
+"közt extra élet. Amennyiben meghal ezen a pályán, az elején fogja elölről "
+"kezdeni, ha van még golyója (és egyet közülük elveszt)."
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:59
+msgid ""
+"Naturally, you're supposed to go through those closed gates at the top of "
+"the screen.                         Try going down that slope near the "
+"bottom of the room to see what's to the "
+"left.                                                         Don't bother "
+"with that trigger below the abyss yet.                                 If "
+"you could hit that small white ball through the one-way blocks (with the "
+"arrows), it might roll down and stop on that trigger.                  You "
+"will need to go in with it but you can't go through the white one-way "
+"block.                            Take the spoon and use it once the white "
+"ball is through (hit it hard)."
+msgstr ""
+"Természetesen a képernyő tetején található bezárt kapukon kellene tovább "
+"mennie.                         Menjen le a szoba alján található lejtőn, "
+"hogy lássa, mi van "
+"balra.                                                         Ne törődjön "
+"egyelőre a szakadék alatti váltóval!                                 Ha át "
+"tudná gurítani azt a kis fehér golyót az egyirányú falakon (amin a nyíl "
+"van), talán az legurulna, és a váltón állna meg.                  Önnek vele "
+"együtt kell bemennie, de nem tud átjutni a fehér egyirányú "
+"falon.                            Vegye el a kanalat, és használja, amint a "
+"fehér golyó eljutott a végére (üsse meg erősen)!"
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:60
+msgid ""
+"The stone in the top-right of the room is a switch.  Hit it -- it is "
+"probably useful.  In this case the switch opens and closes a door (Do you "
+"remember a door that you weren't able to open?).  The bluish line is a "
+"window -- bridge the water before you do anything with it."
+msgstr ""
+"A szoba jobb felső sarkában található kő egy kapcsoló.  Üsse meg erősen -- "
+"valószínűleg hasznos.  Ekkor a kapcsoló egy ajtót nyit/zár (Emlékszik egy "
+"ajtóra, amit nem volt képes kinyitni?).  A kékes vonal egy ablak -- építsen "
+"hidat a víz felett, mielőtt bármit is kezdene vele!"
+
+#  level: "Advanced Tutorial"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:61
+msgid ""
+"That was a rotor (similar to a top).  Some levels have many rotors and tops "
+"to make them difficult.                            However, maybe this rotor "
+"has a purpose; maybe you could get it on that trigger near where the spoon "
+"was.                      It might be convenient to close the gate."
+msgstr ""
+"Az egy rotor volt (olyan, mint a pörgettyű).  Bizonyos pályákon sok rotor és "
+"pörgettyű van, hogy megnehezítsék azokat.                            De "
+"lehet, hogy ennek a rotornak van valami célja. Talán eljuttathatná arra a "
+"váltóra, ami a fehér kanál közelében volt.                      Célszerű "
+"lehet előtte bezárni a kaput."
+
+#  level: "Oxyd Stones 3"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:65
+msgid "Some stones look exactly like the Oxyd stones!"
+msgstr "Egyes kövek pontosan úgy néznek ki, mint az Oxyd kövek!"
+
+#  level: "Meditation 1"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:69
+msgid ""
+"Move all small marbles into the holes. Only one marble per hole is allowed."
+msgstr ""
+"Vigye mindegyik kis golyót a lyukakba. Egy lyukba csak egy golyót vihet."
+
+#  level: "Movement 3"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:73
+msgid "Take your time ..."
+msgstr "Nem kell sietni..."
+
+#  level: "Movement 1"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:77
+msgid "Learn to move your black ball properly."
+msgstr "Tanulja meg helyesen irányítani a fekete golyót!"
+
+#  level: "Lasers and Mirrors"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:81
+msgid ""
+"The bright light beam is a laser beam.   Don't get to close to it!   But it "
+"has its uses ...    You can use the mirrors to direct the laser to its "
+"targets.   From these, only the light-gray ones are movable, just try it!"
+msgstr ""
+"A világos fénysugár egy lézernyaláb.   Ne menjen túl közel hozzá!   Megvan a "
+"maga haszna...    A lézert a tükrök segítségével irányíthatja célba. Ezek "
+"közül csak a világosszürkék elmozdíthatóak, próbálja csak ki!"
+
+#  level: "Movement 5"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:85
+msgid "Levels can be larger than one screen."
+msgstr "Egy pálya nagyobb is lehet, mint egy képernyő."
+
+#  level: "Movement 2"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:92
+msgid "Prepare for even more mouse gymnastics in the next levels."
+msgstr "Készüljön fel még több egértornára a következő pályákon!"
+
+#  level: "Floors 3"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:96
+msgid "Careful - you can not swim in the water."
+msgstr "Vigyázzon - nem tud úszni a vízben!"
+
+#  level: "Blocks and Slopes"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:100
+msgid ""
+"This wooden block is movable and heavy enough to hold down the trigger on "
+"the right.   Try to push it there!"
+msgstr ""
+"Ez a fadoboz elmozdítható és elég nehéz ahhoz, hogy a jobb oldalon látható "
+"váltót lenyomja.   Próbálja meg odanyomni!"
+
+#  level: "Blocks and Slopes"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:101
+msgid ""
+"Remember?  There are different kinds of floors.  And these are steep ..."
+msgstr "Emlékszik?  Különféle padlók vannak.  És ezek meredekek..."
+
+#  level: "Blocks and Slopes"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:102
+msgid ""
+"Is there more one can do with wooden blocks?   Yes!  Just explore the next "
+"levels."
+msgstr ""
+"Lehet mást is csinálni a fadobozokkal?   Igen!  Fedezze fel a követező "
+"pályákat!"
+
+#  level: "Oxyd Stones 2"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:106
+msgid "Remember the colors."
+msgstr "Emlékezzen a színekre!"
+
+#  level: "Oxyd Stones 1"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:110
+msgid ""
+"The blue stones are Oxyd stones. Open them by touching them with your black "
+"marble."
+msgstr ""
+"A kék kövek Oxyd kövek. Úgy nyithatja ki ezeket, hogy megérinti őket a "
+"fekete golyóval."
+
+#  level: "Minor Obstacle"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:126
+msgid "Let there be light!"
+msgstr "Legyen világosság!"
+
+#  level: "More Speed"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:145
+msgid "You need to be fast!"
+msgstr "Gyorsnak kell lennie!"
+
+#  level: "Oxyd Link 68"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:150
+msgid "It's a ring!"
+msgstr "Ez egy gyűrű!"
+
+#  level: "Letter Bomb"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:166 po/level_i18n.cc:2722
+msgid "Everything's been counted carefully!"
+msgstr "Mindent gondosan kiszámoltunk!"
+
+#  level: "Letter Bomb"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:167 po/level_i18n.cc:2723
+msgid "Parts of the tubes disappear during detonation!"
+msgstr "A robbantások hatósugarába kerülő csődarabok eltűnnek"
+
+#  level: "Twin Rooms"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:177
+msgid "Don't believe all that you see!"
+msgstr "Ne higgyen el mindent, amit lát!"
+
+#  level: "Moonwalking"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:197
+msgid "Free fall with fatal consequences!"
+msgstr "Szabadesés végzetes következményekkel!"
+
+#  level: "Scrooge"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:216
+msgid "You really will need every penny!"
+msgstr "Tényleg minden fillérre szüksége lesz!"
+
+#  level: "ATARI Nostalgia"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:220
+msgid "Umbrellas prevent free fall!"
+msgstr "Az ernyő megóv a szabadeséstől!"
+
+#  level: "Oxyd 31"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:249
+msgid "Rotaryrotaryrot..."
+msgstr "Forgóforgófor..."
+
+#  level: "Soaring High"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:253
+msgid "No problem! Piece of cake!"
+msgstr "Semmi baj! Gyerekjáték!"
+
+#  level: "Soaring High"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:254
+msgid "It was easy, wasn't it!"
+msgstr "Könnyű volt, nem?"
+
+#  level: "Oxyd 28"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:259
+msgid "For heaven's sake ... don't drown!"
+msgstr "Az ég szerelmére... meg ne fulladjon!"
+
+#  level: "Take a Break"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:263
+msgid "Forget the laser, try using force!"
+msgstr "Felejtse el a lézert, próbálja erővel!"
+
+#  level: "The Amazing Maze"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:279
+msgid "Business hours from 8am to 4pm"
+msgstr "Nyitvatartás nyolctól négyig"
+
+#  level: "Oxyd 15"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:290 po/level_i18n.cc:2664
+#, fuzzy
+msgid "It's easier with spikes!"
+msgstr "Egyszerűbb ásóval!"
+
+#  level: "Oxyd 17"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:295
+msgid "Nothing but thieves!! Try the mailbox."
+msgstr "Semmi más, csak tolvajok! Próbálja a levélszekrényt!"
+
+#  level: "Is It Easy?"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:473
+msgid " . . . There are more than two . . ."
+msgstr " . . . Kettőnél több van . . ."
+
+#  level: "Flying"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:495
+msgid "You can fly for a short time if you use the umbrella."
+msgstr "Esernyővel egy rövid ideig tud repülni."
+
+#  level: "The Document"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:499
+msgid "What do you want the first gate to do?"
+msgstr "Mit tegyen az első kapu? (Mondja angolul!)"
+
+#  level: "The Document"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:500
+msgid "Opposite"
+msgstr "Az ellentéte (Mondja angolul!)"
+
+#  level: "The Document"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:501
+msgid ""
+"If ten equals three, five equals four, two equals three, four equals four, "
+"and thirteen equals eight, what does nine equal?"
+msgstr ""
+"Ha az egy egyenlő hárommal, a három egyenlő öttel, a hat egyenlő hárommal, a "
+"nyolc egyenlő öttel, a harminc pedig egyenlő héttel, mennyi lesz a húsz? "
+"(Mondja angolul!)"
+
+#  level: "The Document"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:502
+msgid "Congratulations!"
+msgstr "Gratulálok!"
+
+#  level: "Welcome"
+#  author: "Daniel Heck" email ""
+#: po/level_i18n.cc:510 po/level_i18n.cc:921 po/level_i18n.cc:1558
+#: po/level_i18n.cc:2039 po/level_i18n.cc:3107 po/level_i18n.cc:3262
+#: po/level_i18n.cc:3461
+msgid "Welcome"
+msgstr "Üdvözöljük!"
+
+#  level: "Mirror Room II"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:523
+msgid "Same room, new mirrors ..."
+msgstr "Ugyanaz a szoba, új tükrök..."
+
+#  level: "Welcome to the Machine"
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:530
+msgid ""
+"Sections which have the same color always turn at the same time and in the "
+"same way."
+msgstr ""
+"Azok a részek, melyeknek azonos a színük, mindig azonos időben és ugyanolyan "
+"módon váltanak."
+
+#  level: "Welcome to the Machine"
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:531
+msgid ""
+"Maintenance code: metal-stone-stone-stone-red-yellow-yellow-red-red-stone-"
+"stone."
+msgstr "Karbantartó kód: fém-kő-kő-kő-piros-sárga-sárga-piros-piros-kő-kő."
+
+#  level: "The Grim Reaper"
+#  author: "Daniel Heck" email ""
+#: po/level_i18n.cc:536
+msgid "The Grim Reaper"
+msgstr "A Nagy Kaszás"
+
+#  level: "The Enigmhanoi Towers"
+#  author: "Alain Busser" email ""
+#  comment: "wordplay between 'enigma' and the 'hanoi towers' solitary game"
+#: po/level_i18n.cc:605
+msgid "The Enigmhanoi Towers"
+msgstr "Enigmhanoi Tornyai"
+
+#  level: "The Enigmhanoi Towers"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:607
+msgid "Who speaks, does not know (Lao Tse)"
+msgstr "Aki beszél, nem tud (Lao-ce)"
+
+#  level: "The Enigmhanoi Towers"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:609
+msgid "The wise man laughs (Lao Tse)"
+msgstr "A bölcs nevet (Lao-ce)"
+
+#  level: "The Enigmhanoi Towers"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:611
+msgid "Who knows, does not speak (Lao Tse)"
+msgstr "Aki tud, nem beszél (Lao-ce)"
+
+#  level: "Jump!"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:666 po/level_i18n.cc:1460
+msgid "It's a race!"
+msgstr "Indul a verseny!"
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#  comment: "because there is a 'w' letter in 'awale' as many 'w' letters have been used in these texts; it is not necessary to translate this feature"
+#: po/level_i18n.cc:717
+msgid "The witch of this switch waits for your wish."
+msgstr "Ezzel a kapcsolóval fejezheti be a lépést"
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:719
+msgid "The witch of this switch resets the awale game."
+msgstr "Ezzel a kapcsolóval kezdheti elölről az awale játékot"
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:721
+msgid ""
+"A turn consists in taking the walnuts of a row behind the windowy walls and "
+"sowing them 1 by 1 in the following rows."
+msgstr ""
+"Egy kör abból áll, hogy a játékos elvesz egy sor követ, és egyesével "
+"szétosztja azokat a többi sorban, az óramutató járásával ellenkező irányban."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:723
+msgid ""
+"Warning: What awaits the wailing warrior at the end of a turn? If there are "
+"2 or 3 walnuts in a row, they are a warm award for the warrior, as are the "
+"walnuts in the rows which are in the way to this row, if they are 2 or 3 per "
+"row."
+msgstr ""
+"Egy kör végén, ha az utolsó kő egy nemüres sorba kerül, a játékos elveszi a "
+"szemközti sorból az összes követ (ha van), és újrakezdi a kört."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:725
+msgid "Warning: If one warrior's walls are empty, this awesome warrior wins."
+msgstr "Amelyik játékos fala kiürül, az nyer."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:727
+msgid ""
+"When a warrior has awarded more than half the walnuts, he wins. What does he "
+"win? The way to the waiting oxyds he wants."
+msgstr ""
+"A játék végén (amikor valamelyik játékos nem tud lépni) az a játékos nyer, "
+"akinek a legtöbb köve van."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:729
+msgid "Congratulations! You are the most aware awale player of the valley ..."
+msgstr "Gratulálunk! Soha ne avuljon el awale tudása!"
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:731
+msgid ""
+"Lost in the savannah? Don't wait and walk on the way to the reset switch on "
+"the far left ..."
+msgstr "Ha vesztett, nyomja meg az újrakezdő gombot a pálya bal felén, hátul!"
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:733
+msgid "Validate your choice here."
+msgstr "Itt érvényesítheti a választását."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:735
+msgid "Reset the game."
+msgstr "A játék újrakezdése."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:737
+msgid ""
+"A turn consists in taking the stones of a row and sowing them 1 by 1 in "
+"one's other rows, counterclockwise, coming back to the beginning."
+msgstr ""
+"Egy kör abból áll, hogy a játékos elvesz egy sor követ, és egyesével "
+"szétosztja azokat a többi sorban, az óramutató járásával ellenkező irányban."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:739
+msgid ""
+"At the end of a turn, if the last stone falls in a nonempty row, one takes "
+"the stones of the facing row if there is any, and repeats a turn."
+msgstr ""
+"Egy kör végén, ha az utolsó kő egy nemüres sorba kerül, a játékos elveszi a "
+"szemközti sorból az összes követ (ha van), és újrakezdi a kört."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:741
+msgid "A turn begins in one of the leftmost rows, unless impossible."
+msgstr "Egy kör valamelyik bal oldali sorban kezdődik, ha lehetséges."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:743
+msgid ""
+"At the end of the game (if one player cannot move anymore), the player who "
+"has the most stones wins."
+msgstr ""
+"A játék végén (amikor valamelyik játékos nem tud lépni) az a játékos nyer, "
+"akinek a legtöbb köve van."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:745
+msgid "A yellow stone stands for 10 blue stones (then for 2 brown stones)."
+msgstr "Egy sárga kő 10 kék kőnek felel meg (ami 2 barna kőnek)."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:747
+msgid "A brown stone stands for 5 blue stones."
+msgstr "Egy barna kő 5 kék kőnek felel meg."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:749
+msgid ""
+"This katro game comes from Madagascar; in Easy mode there is an african "
+"Awale."
+msgstr ""
+"Ez a katro játék Madagaszkárról származik. Egyszerű módban van egy afrikai "
+"Awale."
+
+#  level: "Enigmawale"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:751
+msgid "Only reset or 'Shift+F3' can make things evolve ..."
+msgstr "Csak az újrakezdés vagy a 'Shift+F3' hozhat változást..."
+
+#  level: "Turn Around"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:803
+msgid "Just a hint: Try the easy-mode first ..."
+msgstr "Egy tipp: Próbálja először az egyszerű módot!"
+
+#  level: "Turn Around"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:804
+msgid "Don't think too long ... it's easy!"
+msgstr "Ne gondolkozzon túl sokáig ... egyszerű!"
+
+#  level: "Black Holes"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:808
+msgid "Beware! Black holes!"
+msgstr "Vigyázzon! Fekete lyukak!"
+
+#  level: "Enigmastermind"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:813
+msgid "This switch is to validate your guess."
+msgstr "Ezzel a kapcsolóval ellenőrizheti a tippjét."
+
+#  level: "Enigmastermind"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:815
+msgid "This switch is to reset the game."
+msgstr "Ezzel a kapcsolóval újrakezdheti a játékot."
+
+#  level: "Enigmastermind"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:817
+msgid ""
+"Each color appears once. Each correct color produces whites in the wrong "
+"place, blacks in the right one."
+msgstr ""
+"Minden szín legfeljebb egyszer fordul elő. Minden eltalált színért, amelyik "
+"nincsen jó helyen, kap egy fehéret, és amelyik jó helyen van, azért egy "
+"feketét."
+
+#  level: "Pentomino III"
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:824
+msgid "Simply 5*12 ..."
+msgstr "Egyszerűen 5*12..."
+
+#  level: "Growing Boxes"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:852
+msgid "You'd need a portable box!"
+msgstr "Egy hordozható dobozra volna szüksége!"
+
+#  level: "Growing Boxes"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:853
+msgid ""
+"Congratulations! You found a seed! Try to use it behind the grate (and move "
+"away quickly)"
+msgstr ""
+"Gratulálok! Talált egy magot! Használja a rács mögött (és gyorsan menjen el)"
+
+#  level: "Growing Boxes"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:854
+msgid ""
+"Remember that you can't fill a closed bridge with a "
+"box ...                                           but maybe you can use the "
+"3rd seed differently!"
+msgstr ""
+"Ne felejtse, hogy egy bezárt hidat nem tud dobozzal "
+"betömni...                                           de talán a harmadik "
+"magot másra lehetne használni!"
+
+#  level: "Growing Boxes"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:855
+msgid "There are different kinds of seeds ... Try to use them!"
+msgstr "Több különböző fajtájú mag van... Próbálja ki őket!"
+
+#  level: "Growing Boxes"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#  comment: "read from the right"
+#: po/level_i18n.cc:857
+msgid "Noitcerid etisoppo eht yrt! Tuo syaw owt? Rorrim, rorrim ..."
+msgstr "Nabnyári őzeknelle za ajlábórp! Túik ték? Mörküt, mörküt..."
+
+#  level: "Robin's Wood"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:868
+msgid ""
+"A Stone, a Tree, and Trees be Three,   --   For to Defeat the Enemy,   --   "
+"Between Might Lay   --   A Secret Way!   --   (If this you see, press Shift-"
+"F3.)"
+msgstr ""
+"Egy kő, egy fa, és fából három,  --  Hogy a gazt legyőzze, barátom,  --  "
+"Hogyha kutat  --  Lelhet utat  --  (S nyomjon Shift-F3-at, ne várjon!)"
+
+#  level: "Do It Yourself"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:884
+msgid "Take some money and build yourself the tools you need."
+msgstr "Vigyen némi pénzt, és készítse el magának a szükséges eszközöket!"
+
+#  level: "Buridan"
+#  author: "Alain Busser" email ""
+#  comment: "wordplay between 'right' (converse of left) and 'right' (true); not necessary to translate."
+#: po/level_i18n.cc:893
+msgid "The other document lies and the left wormhole is the right one."
+msgstr "A másik dokumentum hazudik, a bal oldali féreglyuk a jobb."
+
+#  level: "Buridan"
+#  author: "Alain Busser" email ""
+#  comment: "wordplay between 'left (converse of right) and 'been left' (abandonned); not necessary to translate."
+#: po/level_i18n.cc:896
+msgid ""
+"The other document tells the truth and the other wormhole has been left on "
+"the right side."
+msgstr "A másik dokumentum igazat mond, a jobb oldali féreglyuk balul üt ki."
+
+#  level: "Easy Shifting.."
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:912
+msgid "Dedicated to my friend Frank."
+msgstr "Barátomnak, Franknak ajánlva."
+
+#  level: "Easy Shifting.."
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:913
+msgid "This level is quite straightforward, isn't it? Just continue .. ;-)"
+msgstr "Ez a pálya egészen egyértelmű, nem? Csak folytassa .. ;-)"
+
+#  level: "Welcome"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:922
+msgid "Welcome to Enigma II"
+msgstr "Üdvözöljük az Enigma II-ben!"
+
+#  level: "Road to Eden"
+#  author: "Alain Busser" email ""
+#  comment: "this level has been inspired by the labyrinth of Chartres cathedral, which represents the difficult road that leads to wisdom"
+#: po/level_i18n.cc:946
+msgid "Road to Eden"
+msgstr "Az Édenbe vezető út"
+
+#  level: "The Fuse"
+#  author: "capkoh" email ""
+#: po/level_i18n.cc:959
+msgid "Dead end!"
+msgstr "Az út vége!"
+
+#  level: "The Fuse"
+#  author: "capkoh" email ""
+#: po/level_i18n.cc:960
+msgid "There are two HIDDEN items!"
+msgstr "Két REJTETT elem van!"
+
+#  level: "The Fuse"
+#  author: "capkoh" email ""
+#: po/level_i18n.cc:961
+msgid "Third stone from the rock is the hole!"
+msgstr "A sziklától a harmadik kő a lyuk!"
+
+#  level: "Knight Moves"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:974
+msgid "So,  where  are  the  knights?  -  you'll  be  sorry  you  asked!"
+msgstr "Tehát akkor, hol vannak a lovagok? -  Bánni fogja, hogy megkérdezte!"
+
+#  level: "Pentomino I"
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:984
+msgid "Five form twelve!"
+msgstr "Ötből tizenkettő!"
+
+#  level: "Khun Phan"
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:991
+msgid ""
+"One of the puzzle stones needs to be placed onto the trigger "
+"field.                       Guess which ... :)"
+msgstr ""
+"Az egyik kirakós követ a váltómezőre kell helyezni.                       "
+"Találja ki, melyiket... :)"
+
+#  level: "Khun Phan"
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:992
+msgid "The level preview might help ..."
+msgstr "Az előkép segíthet..."
+
+#  level: "Laser Paradise"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:996
+msgid "...  now  go  back  and  get  the  hammer!"
+msgstr "... most menjen vissza a kalapácsért!"
+
+#  level: "Laser Magic"
+#  author: "Petr Machata" email ""
+#: po/level_i18n.cc:1012
+msgid "Give it another try ..."
+msgstr "Próbálja újra..."
+
+#  level: "- Meditation -"
+#  author: "Edward" email ""
+#: po/level_i18n.cc:1028
+msgid "- Meditation -"
+msgstr "- Meditáció -"
+
+#  level: "Pentomino V"
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:1056
+msgid "And last not least: 3*20 = 60"
+msgstr "Végül, de nem utolsó sorban: 3*20 = 60"
+
+#  level: "Enignimm"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1061
+msgid ""
+"You play against Big Brother; each player in turn deletes 1, 2 or 3 stones; "
+"the one who deletes the last stone LOOSES!!!"
+msgstr ""
+"Ön a Nagy Testvér ellen játszik. A játékosok felváltva 1, 2 vagy 3 követ "
+"tüntetnek el. Amelyik játékos az utolsó követ tűnteti el, az VESZÍT!!!"
+
+#  level: "Enignimm"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1063
+msgid "Now you begin this game."
+msgstr "Most Ön kezd."
+
+#  level: "Enignimm"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1065
+msgid "Poor little blackball ... 'SHIFT+F3'!!!"
+msgstr "Szegény kis fekete golyó ... 'SHIFT+F3'!!!"
+
+#  level: "Moure-Switches"
+#  author: "Andreas Lochmann" email ""
+#  comment: "The sequence of the four elements is important, as they are connected to the colors of the floor."
+#: po/level_i18n.cc:1077
+msgid "Our full attention this is worth:           Air and Fire, Water, Earth."
+msgstr ""
+"Teljes figyelmünket fordítsuk ezekre:           Levegő és Tűz, Víz, Föld."
+
+#  level: "Moure-Switches"
+#  author: "Andreas Lochmann" email ""
+#  comment: "Just a hint to regard the floor."
+#: po/level_i18n.cc:1080
+msgid ""
+"And if your answer can’t be found           then shame on you, eyes to the "
+"ground!"
+msgstr "Ha minden próba kárba vészen,           szégyenkezve a földre nézzen!"
+
+#  level: "Pharaoh's Tomb"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:1099
+msgid "Some stones are movable."
+msgstr "Egyes kövek elmozdíthatók."
+
+#  level: "Pharaoh's Tomb"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:1100
+msgid "You lost!"
+msgstr "Vesztett!"
+
+#  level: "Tool Time"
+#  author: "Barry & Lori Mead" email "bmead15@cox.net"
+#: po/level_i18n.cc:1131
+msgid "Make a Sword, & Umbrella."
+msgstr "Készítsen egy kardot és egy esernyőt!"
+
+#  level: "It's Magic"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:1135
+msgid "Do not use too much magic!"
+msgstr "Ne használjon túl sok varázslatot!"
+
+#  level: "Domain of Mysteries"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:1151
+msgid "Press F3 or finish."
+msgstr "Nyomjon F3-at vagy fejezze be!"
+
+#  level: "Disk Royal"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1161
+msgid "is  black  always  beautiful?"
+msgstr "mindig szép a fekete?"
+
+#  level: "Running Stone"
+#  author: "Christoph & Anita" email ""
+#: po/level_i18n.cc:1363
+msgid "A hammer destroys some black stones."
+msgstr "Egy kalapács bizonyos fekete köveket összetör."
+
+#  level: "Running Stone"
+#  author: "Christoph & Anita" email ""
+#: po/level_i18n.cc:1364
+msgid "Watch out for a disappearing stone."
+msgstr "Ügyeljen egy eltűnő kőre!"
+
+#  level: "What's the Problem?"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:1383
+msgid "Alfred Nobel says: This is definitely a meditation landscape!"
+msgstr "Alfred Nobel azt mondja: Ez bizonyára egy meditációs terep"
+
+#  level: "Bizarro World"
+#  author: "Jacob Scott" email ""
+#  comment: "read from the right"
+#: po/level_i18n.cc:1394
+msgid ".moor txen eht ot teg ot syaw owt era erehT"
+msgstr ".abábozs őzektevök a tahtuj notú téK"
+
+#  level: "How solid?"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:1413
+msgid ""
+"That wasn't fast enough; try "
+"F3.                                                                              "
+"(Or search for non-solid stones, if you "
+"want.)                                                                                                        "
+"(But you won't find "
+"any.)                                                                                                                  "
+"(Really!)"
+msgstr ""
+"Ez nem volt elég gyors, próbálja az F3-"
+"at.                                                                              "
+"(Vagy keressen nem tömör köveket, ha úgy "
+"gondolja.)                                                                                                        "
+"(De úgysem fog "
+"találni.)                                                                                                                  "
+"(Komolyan!)"
+
+#  level: "How solid?"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:1414
+msgid ""
+"You can believe me: All stones you see in this level are "
+"solid!                                                                                      "
+"You can really believe "
+"me!                                                                               "
+"Really!"
+msgstr ""
+"Elhiheti nekem: Minden kő, amit ezen a pályán lát, "
+"tömör!                                                                                      "
+"Komolyan hihet "
+"nekem!                                                                               "
+"Komolyan!"
+
+#  level: "NO Trespassing"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:1418
+msgid "! -  DANGER  -  NO TRESPASSING  -  DANGER  - !"
+msgstr "! -  VESZÉLY  -  TILOS AZ ÁTJÁRÁS  -  VESZÉLY  - !"
+
+#  level: "The Flagstone Reaper"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:1435
+msgid "The Flagstone Reaper"
+msgstr "A Járdakő Kaszás"
+
+#  level: "The Flagstone Reaper"
+#  author: "Andreas Lochmann" email ""
+#  comment: "Difficult to translate. If you have no idea, just say: Why on this side does this message sit? The Reaper has a use for it"
+#: po/level_i18n.cc:1438
+msgid ""
+"No hint today ...    Those flagstones pass away ...    The docu stands "
+"alone ...    Why is it so alone?    --    This hint today ...    Why is it "
+"on this side ...    The reaper passing by ...    Could know the reason "
+"why!     (orig. by Herman's Hermits)   "
+msgstr ""
+"Nincs tipp ma kész...    A sok kő elenyész...    A levél itten áll...    "
+"Mire föl a magány?    --    E tipp ma itt ...    De mért pont e helyen?    A "
+"közelgő kaszás...    Megmondja, nem vitás!     (Herman's Hermits alapján "
+"félre fordítva)   "
+
+#  level: "Little Puzzles"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1470
+msgid "Oops ... you're stuck ...     Try again ..."
+msgstr "Hoppá... beragadt... Próbálja újra..."
+
+#  level: "Little Puzzles"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1471
+msgid ""
+"Congratulations, you reached this side ...      but can you get to the "
+"oxyds? "
+msgstr ""
+"Gratulálunk, elérte ezt az oldalt...      De vajon el tud-e jutni az "
+"oxydokhoz?"
+
+#  level: "Little Puzzles"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1472
+msgid "Well done!"
+msgstr "Jó munka!"
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#  comment: "The persons and objects are from the Agatha-Christie-like game 'Cluedo'; their names tend to change from country to country; Mr. White has been changed to 'Whiteball' to make it more 'enigma'."
+#: po/level_i18n.cc:1496
+msgid ""
+"Your uncle Sir Blackball has been murdered last night in his manor, in one "
+"of his 6 rooms, by one of the weapons which are in the cellar; the suspects "
+"are the shy Mrs Peacock, the secret Colonel Mustard, the absent-minded "
+"Professor Plum, the mysterious Rev. Green, the nurse Mrs Whiteball, who "
+"discovered the corpse, and Miss Scarlett whose beauty might be fatal ... you "
+"must find who killed your uncle, where and how."
+msgstr ""
+"Az ön nagybátyját, Sir Blackballt megölték múlt éjszaka a házában, annak 6 "
+"szobájának valamelyikében, a pincében található 6 fegyver valamelyikével. A "
+"gyanúsítottak a félénk Mrs Peacock, a titkos Colonel Mustard, a szórakozott "
+"Professor Plum, a rejtélyes Rev. Green, Mrs Whiteball, a nővér, aki a "
+"holttestet megtalálta, és Miss Scarlett, akinek szépsége halálos lehet... "
+"Önnek kell kiderítenie, ki ölte meg a nagybátyját, hol, és mikor."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1498
+msgid "This room is not the crime scene."
+msgstr "Ez a szoba nem a tett színhelye."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1500
+msgid "The murderer is not Mrs Peacock."
+msgstr "Nem Mrs Peacock a gyilkos."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1502
+msgid "The murderer is not Colonel Mustard."
+msgstr "Nem Colonel Mustard a gyilkos."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1504
+msgid "The murderer is not Professor Plum."
+msgstr "Nem Professor Plum a gyilkos."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1506
+msgid "The murderer is not Reverend Green."
+msgstr "Nem Reverend Green a gyilkos."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1508
+msgid "The murderer is not Mrs Whiteball."
+msgstr "Nem Mrs Whiteball a gyilkos."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1510
+msgid "The murderer is not Miss Scarlett."
+msgstr "Nem Miss Scarlett a gyilkos."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1512
+msgid "Sir Blackball has not been killed with the bomb."
+msgstr "Sir Blackballt nem bombával ölték meg."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1514
+msgid "Sir Blackball has not been killed with the dagger."
+msgstr "Sir Blackballt nem a tőrrel ölték meg."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1516
+msgid "Sir Blackball has not been killed with poison."
+msgstr "Sir Blackballt nem méreggel ölték meg."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1518
+msgid "Sir Blackball has not been killed with the wrench."
+msgstr "Sir Blackballt nem a franciakulccsal ölték meg."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1520
+msgid "Sir Blackball has not been killed with the candlestick."
+msgstr "Sir Blackballt nem a gyertyatartóval ölték meg."
+
+#  level: "Cluenigma"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1522
+msgid "Sir Blackball has not been killed with the hammer."
+msgstr "Sir Blackballt nem a kalapáccsal ölték meg."
+
+#  level: "Where is it?"
+#  author: "Barry & Lori Mead" email "bmead15@cox.net"
+#: po/level_i18n.cc:1541
+msgid "Paint Ahead!"
+msgstr "Festék a láthatáron!"
+
+#  level: "Welcome"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:1559
+msgid "Welcome to Enigma IV"
+msgstr "Üdvözöljük az Enigma IV-ben!"
+
+#  level: "The Dark Outside"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:1578
+msgid "What a pity, and there's so much paint left ..."
+msgstr "Milyen kár, pedig olyan sok festék maradt..."
+
+#  level: "Light Switches"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:1603
+msgid "Danger ... laser beams!"
+msgstr "Veszély... lézersugár!"
+
+#  level: "Big Adventures"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1619
+msgid "Too many wooden blocks!  Try the other way ..."
+msgstr "Túl sok a fadoboz! Próbálja a másik irányban..."
+
+#  level: "Big Adventures"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1620
+msgid ""
+"Greetings, adventurer!    The road ahead is long and dangerous, so be "
+"careful!"
+msgstr ""
+"Üdvözlet, kalandor!   Az Ön előtt álló út hosszú és veszélyes, legyen hát "
+"óvatos!"
+
+#  level: "Big Adventures"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1621
+msgid "Well done, adventurer!    Good luck!"
+msgstr "Jó munka volt, kalandor!    Sok szerencsét!"
+
+#  level: "Big Adventures"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1622
+msgid "Congratulations, adventurer!  You did it!"
+msgstr "Gratulálunk, kalandor!  Megcsinálta!"
+
+#  level: "Sleeping Serpent"
+#  author: "Raoul Bourquin" email "raoul@users.berlios.de"
+#: po/level_i18n.cc:1635
+msgid "Don't wake it up!"
+msgstr "Ne ébressze fel!"
+
+#  level: "Run Like Hell"
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:1654
+msgid "Calm down!"
+msgstr "Nyugodjon meg!"
+
+#  level: "The Life Game"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1665
+msgid "The Life Game"
+msgstr "Az Életjáték"
+
+#  level: "The Life Game"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1667
+msgid "The nine switches in square serve to configure the initial population."
+msgstr ""
+"A négyzet alakban álló kapcsolók a kezdeti populáció beállítására szolgálnak."
+
+#  level: "The Life Game"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1669
+msgid "START"
+msgstr "START"
+
+#  level: "The Life Game"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1671
+msgid "CLEAR"
+msgstr "TÖRLÉS"
+
+#  level: "Wood robbing"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:1685
+msgid "Wood robbing"
+msgstr "Erdei rablás"
+
+#  level: "Patterns of Impulse"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:1689
+msgid ""
+"As long as there is motion around the oxyd-stones, you won't reach them.   "
+"So: Don't lose control of the level! It's possible."
+msgstr ""
+"Amíg mozgás van az oxyd kövek körül, nem fogja azokat elérni.   Tehát ne "
+"veszítse el vezérlését a pálya felett! Megoldható."
+
+#  level: "deja-vu"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1730
+msgid "when  you've  been  particular  places"
+msgstr "amikor bizonyos helyeken járt"
+
+#  level: "deja-vu"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1732
+msgid "that  you  know  you've  never  seen  before"
+msgstr "amiről tudja, hogy azelőtt soha nem látott"
+
+#  level: "deja-vu"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1734
+msgid "can  you  be  sure?"
+msgstr "hogyan is lehetne biztos benne?"
+
+#  level: "deja-vu"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1736
+msgid "feel  like  I've  been  here  before"
+msgstr "úgy érzem, itt már jártam"
+
+#  level: "deja-vu"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1738
+msgid "quote:  Iron  Maiden   -   Deja-Vu"
+msgstr "idézet: Iron Maiden - Deja-Vu"
+
+#  level: "deja-vu"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1740
+msgid "for  illmind's  deja  vu  try  the  top  left  corner  ..."
+msgstr "illmind deja-vu-jéhez próbálja a bal felső sarkot..."
+
+#  level: "The Safe"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:1759
+msgid "It's a long way ..."
+msgstr "Hosszú az út..."
+
+#  level: "Control Panel"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:1769
+msgid "The left-most room is important!"
+msgstr "A legbaloldalibb szoba fontos!"
+
+#  level: "Control Panel"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:1770
+msgid "This is the control panel."
+msgstr "Ez a vezérlő pult."
+
+#  level: "Emergency Exit"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:1777
+msgid "Flood Control Dam #3 seems rather unstable. Be quick or be dead."
+msgstr ""
+"A hármas számú árvízszabályozó gát igen ingatagnak tűnik. Siessen, vagy "
+"meghal."
+
+#  level: "Waterworld"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1790
+msgid ""
+"Remember  to  only  move  enough  stones  to  just  look  into  the  next  "
+"room  ..."
+msgstr ""
+"Ne felejtse, hogy éppen csak annyi követ mozdítson, hogy a következő szobába "
+"be tudjon nézni..."
+
+#  level: "Waterworld"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:1791
+msgid "You  have  lost  ..."
+msgstr "Vesztett..."
+
+#  level: "The Turtle"
+#  author: "Petr Machata" email ""
+#: po/level_i18n.cc:1849
+msgid ""
+"Welcome to the control room. Use the triggers and switches to plan the "
+"movement of the turtle. The switches are, clockwise: Add, Run and Restart."
+msgstr ""
+"Üdvözöljük a vezérlőteremben. A váltók és a kapcsolók segítségével "
+"tervezheti meg a teknős útját. A kapcsolók, az óramutató járásának "
+"megfelelően: Hozzátesz, Futtat és Újrakezd."
+
+#  level: "Block its way!"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1859
+msgid "Don't forget to open the door ..."
+msgstr "Ne felejtse el kinyitni az ajtót..."
+
+#  level: "Block its way!"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1860
+msgid "Good Luck!"
+msgstr "Sok szerencsét!"
+
+#  level: "Block its way!"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1861
+msgid "Hurry!"
+msgstr "Siessen!"
+
+#  level: "Block its way!"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1862
+msgid "Congratulations! (or try again)"
+msgstr "Gratulálunk! (vagy próbálja újra)"
+
+#  level: "Block its way!"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1863
+msgid "Almost finished ..."
+msgstr "Majdnem kész..."
+
+#  level: "Unfair!"
+#  author: "Petr Machata" email ""
+#: po/level_i18n.cc:1888
+msgid ""
+"I don't believe that you are the Marble. I won't let you pass until you "
+"prove me wrong: you have to be faster than my champion!"
+msgstr ""
+"Nem hiszem el, hogy Ön a Golyó. Nem engedem tovább, amíg be nem bizonyítja, "
+"hogy tévedek: gyorsabb kell legyen, mint a bajnokom!"
+
+#  level: "Unfair!"
+#  author: "Petr Machata" email ""
+#: po/level_i18n.cc:1889
+msgid "Congratulations! You may pass!"
+msgstr "Gratulálok! Tovább mehet!"
+
+#  level: "Laser Castle"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:1908
+msgid "A castle lies before you ... beware of guardians!"
+msgstr "Egy kastély áll Ön előtt... óvakodjon az őröktől!"
+
+#  level: "The Sargasso Sea"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:1924
+msgid "This level is much bigger! Press F3!"
+msgstr "Ez a pálya sokkal nagyobb! Nyomjon F3-at!"
+
+#  level: "The Ditch"
+#  author: "Richi Bützer" email ""
+#: po/level_i18n.cc:1956
+msgid "Risk your life ..."
+msgstr "Tegye kockára életét..."
+
+#  level: "- Snow White -"
+#  author: "Petr Machata" email ""
+#: po/level_i18n.cc:1969
+msgid "Look ... they're over there!"
+msgstr "Nézze... ott vannak!"
+
+#  level: "Bridge Builders"
+#  author: "Jon 'WB' Sneyers" email ""
+#: po/level_i18n.cc:1973
+msgid "White helps black, black helps white."
+msgstr "A fehér segíti a feketét, a fekete segíti a fehéret."
+
+#  level: "Push? Pull!"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:1980
+msgid "Restart with F3 ..."
+msgstr "Kezdje újra F3-mal..."
+
+#  level: "Automatic Transmission"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:2011
+msgid "The block near the top-left can move."
+msgstr "A balfelső sarokban található tömb elmozdítható."
+
+#  level: "White Contrast"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:2027
+msgid ""
+"One  more  and  you  won't  get  this  hammer  until  you  don't  need  it  "
+"anymore!"
+msgstr "Még egy, és nem fogja megkapni a kalapácsot, csak mikor már nem kell!"
+
+#  level: "Jump And Run"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:2031
+msgid "Watch your step!"
+msgstr "Vigyázzon, hova lép!"
+
+#  level: "Welcome"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:2040
+msgid "Welcome to Enigma III"
+msgstr "Üdvözöljük az Enigma III-ban!"
+
+#  level: "Hidden Danger"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:2053
+msgid "The danger is not visible!!!"
+msgstr "A veszély nem látható!!!"
+
+#  level: "Deadend"
+#  author: "Daniel Heck" email ""
+#: po/level_i18n.cc:2057
+msgid "Look closely!"
+msgstr "Nézze meg jobban!"
+
+#  level: "esprit 17"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2076
+msgid "Please remember:    42"
+msgstr "Ne felejtse:    42"
+
+#  level: "esprit 5"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:2092
+msgid "Easy?"
+msgstr "Könnyű?"
+
+#  level: "Bank-O-Mat"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2105
+msgid "Sorry for inconvenience, the Bank-O-Mat is empty."
+msgstr "Elnézést kérünk a kellemetlenségekért, a pénzautomata üres."
+
+#  level: "esprit 3"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:2133
+msgid "Can you see the hidden oxyd stones?"
+msgstr "Látja az elrejtett oxyd köveket?"
+
+#  level: "esprit 52"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2140
+msgid "Sunday, bloody Sunday!"
+msgstr "Szombat, nyavalyás szombat!"
+
+#  level: "esprit 7"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2156
+msgid "Watch out, slippery!"
+msgstr "Vigyázzon, csúszós!"
+
+#  level: "esprit 94"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2163
+msgid "If you haven't won, you've lost!"
+msgstr "Ha nem nyert, vesztett!"
+
+#  level: "esprit 92"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2170
+msgid "Take the key to the left first!"
+msgstr "Először a bal oldali kulcsot vegye el!"
+
+#  level: "esprit 96"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2183
+msgid "It's easier with a shovel!"
+msgstr "Könnyebb ásóval!"
+
+#  level: "esprit 8"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2268
+msgid "Umbrellas protect!"
+msgstr "Az ernyők védenek!"
+
+#  level: "esprit 73"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2302
+msgid "If you think this is too easy, then play -Bavarian Madness-"
+msgstr "Ha azt gondolja, ez túl könnyű, játsszon 'Bavarian Madness'-t!"
+
+#  level: "esprit 59"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2324
+msgid "Watch out!!"
+msgstr "Vigyázzon!!"
+
+#  level: "Demo I18N"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:2377
+msgid "Translate or let it be translated"
+msgstr "Fordítsa le, vagy hagyja, hogy lefordítsák!"
+
+#  level: "Demo I18N"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#  comment: "Let 'right' be ambiguous: correct and opposite of left - if not possible choose correct"
+#: po/level_i18n.cc:2381
+msgid "Read the right document"
+msgstr "Olvassa el a jobb dokumentumot!"
+
+#  level: "Demo I18N"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#  comment: "the correct one and not the right positioned one"
+#: po/level_i18n.cc:2384
+msgid "The right one, not the right one!"
+msgstr "A jót, nem a jobb oldalit!"
+
+#  level: "Gardening Work"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:2412
+msgid "Dig in ..."
+msgstr "Lásson neki!"
+
+#  level: "Per.Oxyd 11"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2428
+msgid "Rest on the bright spot for a minute."
+msgstr "Maradjon a világos mezőn egy percig."
+
+#  level: "Per.Oxyd 11"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2429
+msgid "You'll do anything you're told!"
+msgstr "Bármit megtenne, amit Önnek mondanak!"
+
+#  level: "Per.Oxyd 62"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:2434
+msgid "Did you bring your flag?"
+msgstr "Elhozta a zászlóját?"
+
+#  level: "Per.Oxyd 28"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:2451
+msgid "Umbreallas protect you against oncomming boulder!"
+msgstr "Az ernyő megvédi Önt a közeledő görgőkőtől"
+
+#  level: "Snugly Packed II"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:2461
+msgid "Nothing can stop us!"
+msgstr "Semmi sem állíthat meg minket!"
+
+#  level: "Handle With Care"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:2481
+msgid "Some stones and stone rows can be moved!"
+msgstr "Bizonyos kövek és kősorok elmozdíthatóak!"
+
+#  level: "Per.Oxyd 27"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:2495
+msgid "If you think that's to easy, try \"Difficulty: Normal\"."
+msgstr "Ha túl könnyűnek találja, próbálja rendes nehézséggel"
+
+#  level: "Per.Oxyd 27"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:2497
+msgid "If you think that's to hard, try \"Difficulty: Easy\"."
+msgstr "Ha túl nehéznek találja, prólja egyszerű nehézséggel"
+
+#  level: "Pipe Dreams"
+#  author: "Siegfried Fennig" email ""
+#: po/level_i18n.cc:2517
+msgid "... did it!"
+msgstr "... megcsinálta!"
+
+#  level: "Per.Oxyd 88"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:2567
+msgid "Watch out for water holes!"
+msgstr "Ügyeljen a vizes lyukakra!"
+
+#  level: "Still Swapping?"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:2584
+msgid "Bricks change!"
+msgstr "A kövek változnak!"
+
+#  level: "Solvable?"
+#  author: "Barry & Lori Mead" email "bmead15@cox.net"
+#: po/level_i18n.cc:2862
+msgid "Make an umbrella."
+msgstr "Készítsen ernyőt!"
+
+#  level: "Designed with love"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:2894
+msgid "Did you really think this one was so easy!?"
+msgstr "Komolyan azt gondolta, hogy ez olyan könnyű?"
+
+#  level: "Designed with love"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:2896
+msgid "Did you forget something?"
+msgstr "Elfelejtett valamit?"
+
+#  level: "Designed with love"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:2898
+msgid "Go on! There's no way back now!"
+msgstr "Menjen tovább! Már nincsen visszaút!"
+
+#  level: "Designed with love"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:2900
+msgid "STOP! Not this way! There's a short-cut ..."
+msgstr "ÁLLJON! Ne erre menjen! Van egy rövidebb út..."
+
+#  level: "Designed with love"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:2902
+msgid ""
+"There's a trigger one step to the left. If you could keep it depressed, it "
+"would help you a lot if you go back! "
+msgstr ""
+"Van egy váltó egy lépéssel balra. Ha lenyomva tudná tartani, sokat segítene, "
+"ha vissza kellene mennie!"
+
+#  level: "Doors forever"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:2921
+msgid "Look carefully at everything!"
+msgstr "Mindent alaposan nézzen meg!"
+
+#  level: "Doors forever"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:2922
+msgid "Do you need a helping hand?"
+msgstr "Szüksége van segítségre?"
+
+#  level: "Print 23"
+#  author: "Richi Bützer" email ""
+#: po/level_i18n.cc:2932
+msgid ""
+"If you have never heard about Brainf***, visit e.g. http://en.wikipedia.org/"
+"wiki/Brainfuck before you try to solve this level."
+msgstr ""
+"Ha még nem hallott a Brainf*** programozási nyelvről, nézze meg például a "
+"Wikipédián, mielőtt ezt a pályát megpróbálja megoldani!"
+
+#  level: "Psycho Pushing"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2936
+msgid "If I only had a bag."
+msgstr "Bárcsak volna egy zsákom!"
+
+#  level: "Psycho Pushing"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:2937
+msgid "shh ... listen!"
+msgstr "csitt... figyeljen!"
+
+#  level: "Blet"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:2942
+msgid ""
+"When you change the color of one square, the colors of the 2 nearest squares "
+"change as well; you must get as many green squares as possible."
+msgstr ""
+"Amikor egy mező színét megváltoztatja, a két legközelebbi mező színe is "
+"megváltozik. A lehető legtöbb mezőt kell zöldre változtatni."
+
+#  level: "Blet"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:2944
+msgid ""
+"You are only allowed to change a color when it is surrounded by the other "
+"color."
+msgstr ""
+"Csak akkor szabad megváltoztatni egy színt, ha a másik szín veszi körül."
+
+#  level: "Fatal Attraction II"
+#  author: "Spaceman" email ""
+#: po/level_i18n.cc:2966
+msgid "Don't get attracted!"
+msgstr "Ne váljon vonzóvá!"
+
+#  level: "Hobbyte"
+#  author: "Alain Busser" email ""
+#  comment: "an attempt has been made to imitate the language Aragorn uses in Tolkien's 'the 2 towers', which itself is an imitation of the ancient english Shakespeare wrote; the most faithful way to translate this is then to use a medieval-looking language."
+#: po/level_i18n.cc:2975
+msgid ""
+"Mightie art the Knightes of The Olde Ages who keepe the Elfic Oxyde Stones, "
+"and numerous art the Ghostes who lye in the waye to them; many art the "
+"adventurers who tryed to steale Aylendil the Sworde but none has ever come "
+"back. Hazy is the swampe where the Magick of the Ancients is buryed; the "
+"lair of Whiteballs the dragon thu shalt avoyd in feare of awaken him ..."
+msgstr ""
+"Nagyok a régi idők lovagjai, akik a tündék oxydköveit birtokolják, és sokan "
+"vannak a szellemek, kik a hozzájuk vezető úton állnak lesben. Rengetegen "
+"vannak a kalandorok, kik megpróbálták ellopni Elendilt, a kardot, de egy sem "
+"tért vissza. Ködös a mocsár, ahol az ősök varázsa el van ásva. Kerülje el a "
+"Fehérgolyók odvát, ahol a sárkány lakik, félve, hogy felébred..."
+
+#  level: "Elaborate"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:2979
+msgid "It is not quite that easy."
+msgstr "Annyira azért nem könnyű."
+
+#  level: "Draggers"
+#  author: "Petr Machata" email ""
+#: po/level_i18n.cc:2983
+msgid "This level is symmetric ..."
+msgstr "Ez a pálya szimmetrikus..."
+
+#  level: "Walk The Plank"
+#  author: "Nat Pryce" email ""
+#: po/level_i18n.cc:2987
+msgid ""
+"Here lies Black Ball the pirate, marooned in the year 1802 after travelling "
+"in the wrong direction."
+msgstr ""
+"Itt nyugszik Fekete Golyó, a kalóz, akit ittrekedt 1802-ben, miután rossz "
+"irányba utazott."
+
+#  level: "Walk The Plank"
+#  author: "Nat Pryce" email ""
+#: po/level_i18n.cc:2988
+msgid ""
+"To cure sea sickness hold a large bank note between your teeth and lean over "
+"the side."
+msgstr ""
+"A tengeri betegség gyógyításához tartson egy hatalmas bankjegyet a fogai "
+"közt, és hajoljon ki oldalt!"
+
+#  level: "The Prison"
+#  author: "Martin Hawlisch" email ""
+#: po/level_i18n.cc:2995
+msgid "Warning ... ... thieves!"
+msgstr "Figyelmeztetés ... ... tolvajok!"
+
+#  level: "Send me the keys !"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:3000
+msgid "Send me the keys !"
+msgstr "Küldje el a kulcsokat!"
+
+#  level: "Send me the keys !"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:3002
+msgid "ALL the keys!!!"
+msgstr "MINDEN kulcsot!"
+
+#  level: "Tropical Island"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:3012
+msgid ""
+"Why has there always to be an active volcano and a village of marble-eating "
+"inhabitants on a tropical island?"
+msgstr ""
+"Miért kell egy trópusi szigeten mindig legyen egy működő vulkán és egy golyó-"
+"evő bennszülöttekből álló falu?"
+
+#  level: "A bayou by you"
+#  author: "Alain Busser" email ""
+#  comment: "alligators=tops, mosquitoes=tops and zombies=death stones"
+#: po/level_i18n.cc:3018
+msgid ""
+"The most dangerous animals of the bayou are the alligators, the "
+"mosquitoes ... and the zombies! (But the zombies at least, don't move ...)"
+msgstr ""
+"A mocsár legveszélyesebb lényei az aligátorok, a szúnyogok... és a zombik! "
+"(de a zombik legalább nem mozognak...)"
+
+#  level: "Banana Republic"
+#  author: "Alain Busser" email ""
+#  comment: "This is not real spanish, only an ambience"
+#: po/level_i18n.cc:3033
+msgid ""
+"Caramba!! El Dictator has muchos pesos in his cristal safe but muchos costa "
+"guardia too; Hay!! Poor Bola Negra has only frutos and a lasero!!!"
+msgstr ""
+"Caramba! A diktátornak sok a pesoja a kristály páncélszekrényében, de sok a "
+"parti őre is. Hay, szegény fekete golyónak csak fruttója van és lézere!"
+
+#  level: "No way out?"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3046
+msgid "No way out?"
+msgstr "Nincs kiút?"
+
+#  level: "No way out?"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3047
+msgid "Do you miss something?"
+msgstr "Hiányzik valami?"
+
+#  level: "Pirates Island"
+#  author: "Alain Busser" email ""
+#  comment: "There are coins and wood boxes (pirate's troves) and alimentary junks like seeds, empty bottles and bananas."
+#: po/level_i18n.cc:3053
+msgid "Pirates Island"
+msgstr "Kalóz Sziget"
+
+#  level: "Pirates Island"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:3055
+msgid "The pirates have lost several hidden things on this island ..."
+msgstr "A kalózok több rejtett tárgyat elhagytak ezen a szigeten..."
+
+#  level: "Ice-Bomb"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:3077
+msgid ""
+"Remember Seed Puzzle 2? There was a similar problem. Or was it Portable "
+"Laser ...?"
+msgstr ""
+"Emlékszik a 'Seed Puzzle 2'-re? Volt egy hasonló feladat. Vagy csak egy "
+"hordozható lézer volt? ..."
+
+#  level: "Jumpin' Jack Flash"
+#  author: "Sven Siggelkow" email ""
+#: po/level_i18n.cc:3081
+msgid "This is a meditation landscape: put a small marble into every hole ..."
+msgstr "Ez egy meditációs terep, helyezzen egy kis golyót minden lyukba..."
+
+#  level: "Welcome"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:3108
+msgid "Welcome to Enigma V"
+msgstr "Üdvözöljük az Engima V-ben!"
+
+#  level: "Life's Cross"
+#  author: "Raoul Bourquin" email "raoul@users.berlios.de"
+#: po/level_i18n.cc:3134
+msgid "Do you need something?"
+msgstr "Kellene valami?"
+
+#  level: "Gods of Enigma II"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3138
+msgid ""
+"You again! We won't let you pass this time! See these Oxyds? You can't reach "
+"them unless you rob our Four Holy Items! But they are well guarded! "
+"Bwahahahaha!"
+msgstr ""
+"Ismét Ön! Ezúttal nem engedjük túljutni! Látja ezeket az Oxydokat? Nem "
+"érheti el őket, hacsak nem rabolja el a Négy Szent Elemet! Ám azokat jól "
+"őrzik! Hahahahaha!"
+
+#  level: "Gods of Enigma II"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3139
+msgid ""
+"Fire burns and destroys ... Want to remove blocking stones? Then dig your "
+"way to the Holy Hammer!"
+msgstr ""
+"A tűz éget és pusztít... El akarja mozdítani a torlaszt képző köveket? Akkor "
+"ássa ki az utat a Szent Kalapácshoz!"
+
+#  level: "Gods of Enigma II"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3140
+msgid "Try again! Bwahahahaha!"
+msgstr "Próbálja újra! Hahahahaha!"
+
+#  level: "Gods of Enigma II"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3141
+msgid ""
+"Earth fills and lasts ... Want to replace missing floors? Then build your "
+"way to the Holy Seed!"
+msgstr ""
+"A föld betölt és kitart... Ki akarja cserélni a hiányzó talajt? Akkor építse "
+"meg az utat a Szent Maghoz!"
+
+#  level: "Gods of Enigma II"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3142
+msgid ""
+"Air blows and goes by ... Want to jump across the void? Then make your way "
+"to the Holy Spring!"
+msgstr ""
+"A levegő fúj és tovaszáll... Át akarja ugrani az űrt? Akkor tegye meg az "
+"utat a szent rugóhoz!"
+
+#  level: "Gods of Enigma II"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3143
+msgid ""
+"Water waves and shifts ... Want to trade minds with your partner? Then find "
+"your way to the Holy Yin-Yang!"
+msgstr ""
+"A víz hullámzik és emelkedik... Elmét akar cserélni a partnerével? Akkor "
+"találja meg az utat a Szent Jin-Janghoz!"
+
+#  level: "Catwalk Meditation"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3154
+msgid "Catwalk Meditation"
+msgstr "Palló meditáció"
+
+#  level: "Pneumatic Delivery"
+#  author: "Manuel König" email ""
+#: po/level_i18n.cc:3158
+msgid ""
+"This is my first landscape, dedicated to my father. I hope you'll enjoy it!"
+msgstr "Ez az első terepem, apámnak ajánlva. Remélem, Ön élvezni fogja!"
+
+#  level: "Fatal Attraction I"
+#  author: "Spaceman" email ""
+#: po/level_i18n.cc:3162
+msgid "Don't get too attracted!"
+msgstr "Ne váljon túl vonzóvá!"
+
+#  level: "Laser Path"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:3190
+msgid "Try the easy mode first ..."
+msgstr "Próbálja először az egyszerű módot..."
+
+#  level: "April 1st"
+#  author: "Alain Busser" email ""
+#  comment: "in France it is an habit to tell jokes (what seems true is false) on april 1st, and these jokes are called 'april fishes'."
+#: po/level_i18n.cc:3205
+msgid "April 1st"
+msgstr "Április elseje"
+
+#  level: "April 1st"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:3207
+msgid "Do you REALLY want to do this???"
+msgstr "TÉNYLEG ezt akarja csinálni?"
+
+#  level: "April 1st"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:3209
+msgid ""
+"Didn't your mother tell you that you should not spend your money in such a "
+"careless manner?"
+msgstr ""
+"Az Ön anyukája soha nem mondta, hogy nem szabad a pénzét ilyen "
+"meggondolatlan módon költeni?"
+
+#  level: "April 1st"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:3211
+msgid "What is the current month?"
+msgstr "Mi a mostani hónap?"
+
+#  level: "April 1st"
+#  author: "Alain Busser" email ""
+#: po/level_i18n.cc:3213
+msgid "What is this level's name?"
+msgstr "Mi a pálya neve?"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3220
+msgid ""
+"Beware, stranger! The ancient gods of Enigma have set many traps to protect "
+"their holy Oxyds! You will have to get through the Four Tests to prove your "
+"worth!"
+msgstr ""
+"Vigyázzon, idegen! Az Engima ősi istenei rengeteg csapdát állítottak fel, "
+"hogy megvédjék szent Oxydjaikat! Ki kell állnia a Négy Próbát, hogy "
+"megmutassa, méltó az Oxydokra!"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3221
+msgid "Prove your speed in the Test of Fire!"
+msgstr "Mutassa be gyorsaságát a Tűz Próbáján!"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3222
+msgid "You have proven your worth! The ancients grant you a FLAG!"
+msgstr "Ön méltónak bizonyult! Az ősök egy ZÁSZLÓT adományoznak Önnek!"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3223
+msgid "Prove your intelligence in the Test of Earth!"
+msgstr "Mutassa be gondolkodását a Föld Próbáján!"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3224
+msgid "You have proven your worth! The ancients grant you a SPRING!"
+msgstr "Ön méltónak bizonyult! Az ősök egy RUGÓT adományoznak Önnek!"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3225
+msgid "Prove your dexterity in the Test of Air!"
+msgstr "Mutassa be ügyességét a Levegő Próbáján!"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3226
+msgid "You have proven your worth! The ancients grant you a NAIL!"
+msgstr "Ön méltónak bizonyult! Az ősök egy SZÖGET adományoznak Önnek!"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3227
+msgid "Prove your patience in the Test of Water!"
+msgstr "Mutassa be türelmét a Víz Próbáján!"
+
+#  level: "Gods of Enigma"
+#  author: "moonpearl" email ""
+#: po/level_i18n.cc:3228
+msgid ""
+"This can't be! No mortal can reach our Holy Oxyds! Prove yourself once more! "
+"Bwahahahaha!"
+msgstr ""
+"Ez nem lehetséges! Nincs az a halandó, aki elérheti a mi Szent Oxydjainkat! "
+"Bizonyítson még egyszer! Hahahahaha!"
+
+#  level: "Firefox"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#  comment: "Set fire or die"
+#: po/level_i18n.cc:3237
+msgid "Fire or be fired"
+msgstr "Tüzeljen vagy égjen!"
+
+#  level: "Firefox"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#  comment: "Firefox in sense of clever in handling fire"
+#: po/level_i18n.cc:3240
+msgid ""
+"Do you think a bushman would start to search for an extinguisher in the "
+"cellar if a wall of fire were approaching? Be a Firefox - you have the first "
+"5 items to deal with, no more no less!"
+msgstr ""
+"Gondolja, hogy egy busman elkezdene egy tűzoltókészüléket keresni a "
+"pincében, amikor egy lángfal közeledik felé? Legyen hát a 'tűz mestere'! "
+"Rendelkezésére áll az első 5 elem, se több, se kevesebb!"
+
+#  level: "Firefox"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3242
+msgid ""
+"You can extinguish fire with water. This is a good place to refill your "
+"extinguisher. Be aware, water is rare!"
+msgstr ""
+"A tüzet vízzel tudja eloltani. Ez a hely alkalmas a tűzoltókészüléke "
+"újratöltésére. De ne felejtse, a víz ritka."
+
+#  level: "Firefox"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3244
+msgid ""
+"OOPS! The maze is broken! Prepare to repair the maze before you destroy it."
+msgstr ""
+"Hoppá! A labirintus elromlott! Kezdje el megjavítani, mielőtt elpusztítja!"
+
+#  level: "- Meditation -"
+#  author: "Edward" email ""
+#: po/level_i18n.cc:3257
+msgid "Can you relax amid all this chaos?"
+msgstr "Képes Ön pihenni a káosz közepén?"
+
+#  level: "Welcome"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:3263
+msgid "Welcome to Enigma VII"
+msgstr "Üdvözöljük az Enigma VII-ben!"
+
+#  level: "Free Riders"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3280
+msgid "Free Riders"
+msgstr ""
+
+#  level: "Free Riders"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3282
+msgid "Left or Right Drive?"
+msgstr ""
+
+#  level: "The Wild Hunt"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3299
+msgid "The Wild Hunt"
+msgstr ""
+
+#  level: "Cold Meditation"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3307
+msgid "Freeze by the Power of Light"
+msgstr ""
+
+#  level: "Meditation in Peace"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3330
+msgid "Funeral on Deep Sea"
+msgstr ""
+
+#  level: "Meditation in Peace"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3332
+msgid ""
+"Warning: Do not play this level for more than 10 minutes - you may suffer "
+"sea sickness yourself!"
+msgstr ""
+
+#  level: "jumping ball flash"
+#  author: "illmind" email "illmind@mag-heut.net"
+#: po/level_i18n.cc:3345
+msgid "illmind's jumping ball flash ..."
+msgstr ""
+
+#  level: "jumping ball flash"
+#  author: "illmind" email "illmind@mag-heut.net"
+#: po/level_i18n.cc:3346
+msgid "... of heaven comes the beast from the ..."
+msgstr ""
+
+#  level: "jumping ball flash"
+#  author: "illmind" email "illmind@mag-heut.net"
+#: po/level_i18n.cc:3347
+msgid "... t r a p p e d ..."
+msgstr ""
+
+#  level: "The Passage"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3370
+msgid "Sorry, this switch is currently out of order."
+msgstr ""
+
+#  level: "The Passage"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3372
+msgid "As I already told you, this switch is out of order!"
+msgstr ""
+
+#  level: "The Passage"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3374
+msgid "How often are you going to try this?"
+msgstr ""
+
+#  level: "The Passage"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3376
+msgid "Did anything happen? I'm not sure ..."
+msgstr ""
+
+#  level: "The Passage"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3378
+#, fuzzy
+msgid "Congrats, now it works again!"
+msgstr "Gratulálunk! (vagy próbálja újra)"
+
+#  level: "The Passage"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3380
+msgid "No hints available at the moment."
+msgstr ""
+
+#  level: "The Passage"
+#  author: "JuSt" email ""
+#: po/level_i18n.cc:3382
+msgid "There is a passage right beneath this stone!"
+msgstr ""
+
+#  level: "Chessing Positions"
+#  author: "Raoul Bourquin" email "raoul@users.berlios.de"
+#: po/level_i18n.cc:3386
+msgid "Remember 'Changing Positions'?"
+msgstr "Emlékszik a 'Changing Positions'-ra?"
+
+#  level: "Houdini"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#  comment: "Escape as unchaining"
+#: po/level_i18n.cc:3392
+msgid "Escape by Chaining Thieves"
+msgstr "Meneküljön a tolvajok láncolásával"
+
+#  level: "Houdini"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#  comment: "Characters of Michael Ende's fantasy novel 'The Neverending Story'"
+#: po/level_i18n.cc:3395
+msgid "Remember Atreyu's horse Atrax!"
+msgstr "Emlékezzen Atráskó lovára!"
+
+#  level: "Houdini"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3397
+msgid "I am innocent! I've never stolen anything!"
+msgstr "Ártatlan vagyok! Soha nem loptam semmit!"
+
+#  level: "Houdini"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3399
+msgid "It is said that pirates have taken the treasure."
+msgstr "Azt mondják, hogy a kalózok elvitték a kincset."
+
+#  level: "Houdini"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3401
+msgid "Pirates usually hide their treasure!"
+msgstr "A kalózok általában elrejtik a kincsüket."
+
+#  level: "Houdini"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3403
+msgid "A closed door gives a better overview!"
+msgstr "Egy bezárt ajtó jobb átlátást nyújt."
+
+#  level: "Basketball"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3426
+msgid "Pass the ball in time"
+msgstr "Passzolja időben a labdát!"
+
+#  level: "Holes!"
+#  author: "Edward" email ""
+#: po/level_i18n.cc:3430
+msgid "Holes!"
+msgstr "Lyukak!"
+
+#  level: "Meditation Disturbance"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3447
+msgid "Meditation Disturbance"
+msgstr "Meditáció zavarás"
+
+#  level: "Meditation Disturbance"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#  comment: "free translatable joke about being hit by a horse"
+#: po/level_i18n.cc:3450
+msgid "Hit by a bolting horse"
+msgstr "Belesújtott a ló"
+
+#  level: "Welcome"
+#  author: "Raoul Bourquin" email ""
+#: po/level_i18n.cc:3462
+msgid "Welcome to Enigma VI"
+msgstr "Üdvözöljük az Enigma VI-ben!"
+
+#  level: "Hot Hurdle Race"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:3467
+msgid "Hot Hurdle Race"
+msgstr "Forró akadályfutás"
+
+#  level: "Hot Hurdle Race"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:3469
+msgid "Run for your life!"
+msgstr "\"Fusson, ha kedves az élete!\""
+
+#  level: "Tandem Chess"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:3480
+msgid "Tandem Chess"
+msgstr ""
+
+#  level: "Tandem Chess"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:3482
+msgid "Work together!"
+msgstr ""
+
+#  level: "Ben Hur"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3487
+msgid "The art of steering a quadriga"
+msgstr "A kvadriga kormányzásának művészete"
+
+#  level: "Ben Hur"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#  comment: "quater - historical death penalty to be devided in four parts"
+#: po/level_i18n.cc:3490
+msgid "Dropping the spoon redeems from being quartered!"
+msgstr "Megmenekül a felnégyeléstől, ha elejti a kanalat!"
+
+#  level: "be quick or be dead"
+#  author: "illmind" email "support@mag-heut.net"
+#: po/level_i18n.cc:3503
+msgid "illmind's be quick or be dead"
+msgstr "illmind 'legyen gyors vagy halott' pályája"
+
+#  level: "One-Way Woods"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3541
+msgid "One-Way Woods"
+msgstr ""
+
+#  level: "One-Way Woods"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3542
+msgid "Recycling by Swapping"
+msgstr ""
+
+#  level: "Procrustes"
+#  author: "Andreas Lochmann" email ""
+#: po/level_i18n.cc:3553
+msgid "Procrustes"
+msgstr "Prokrusztész"
+
+#  level: "Just a Maze?"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3569
+msgid "It isn't as easy as it looks."
+msgstr "Nem olyan könnyű, mint amilyennek látszik."
+
+#  level: "Oxyd Drilling"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3573
+msgid "Oxyd Drilling"
+msgstr ""
+
+#  level: "Oxyd Drilling"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3575
+msgid "Useful unsuccessful drillings"
+msgstr ""
+
+#  level: "Rotor Guards"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3580
+msgid "Rotor Guards"
+msgstr ""
+
+#  level: "Rotor Guards"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3582
+msgid "Hoisting guards with their own petard"
+msgstr ""
+
+#  level: "Simple Space"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:3587
+msgid "A really annoying Level"
+msgstr "Egy igazán bosszantó pálya"
+
+#  level: "Dialers"
+#  author: "Edward" email ""
+#: po/level_i18n.cc:3644
+msgid "Dialers"
+msgstr "Hívók"
+
+#  level: "Tarzan"
+#  author: "Ulf Stegemann" email "ulf-enigma@zeitform.de"
+#: po/level_i18n.cc:3649
+msgid "Hanging around in the Jungle"
+msgstr "A dzsungelban lődörögve"
+
+#  level: "Correspondence Chess"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:3654
+msgid "Correspondence Chess"
+msgstr ""
+
+#  level: "Correspondence Chess"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:3656
+msgid "Send smartly!"
+msgstr ""
+
+#  level: "Edwards Mountain"
+#  author: "Edward" email ""
+#: po/level_i18n.cc:3660
+msgid "Edwards Mountain"
+msgstr "Edwards-hegy"
+
+#  level: "Alcatraz"
+#  author: "Ralf Westram" email ""
+#: po/level_i18n.cc:3664
+msgid "Al Capone's training camp."
+msgstr "Al Capone kiképző tábora."
+
+#  level: "Alcatraz"
+#  author: "Ralf Westram" email ""
+#: po/level_i18n.cc:3665
+msgid "There are at least two patterns to break through the wall."
+msgstr "Legalább két módon lehet kitörni a falon."
+
+#  level: "Alcatraz"
+#  author: "Ralf Westram" email ""
+#: po/level_i18n.cc:3666
+msgid "It is a well known secret that a few prisioners did escape."
+msgstr "Nyílt titok, hogy néhány rabnak sikerült megszöknie."
+
+#  level: "Alcatraz"
+#  author: "Ralf Westram" email ""
+#: po/level_i18n.cc:3667
+msgid "A window in the wall would be really nice."
+msgstr "Igazán szép volna, ha lenne a falon ablak."
+
+#  level: "Revolver"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3672
+msgid "Charging live ammunition"
+msgstr ""
+
+#  level: "No Memory"
+#  author: "Edward" email ""
+#: po/level_i18n.cc:3679
+msgid "No Memory"
+msgstr "Nincs Memória"
+
+#  level: "Toreador"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3684
+msgid "Toreador"
+msgstr "Torreádor"
+
+#  level: "Persecution Mania"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3689
+msgid "Persecution Mania"
+msgstr "Üldözési Mánia"
+
+#  level: "Persecution Mania"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3691
+msgid "A problem shared is a problem halved!"
+msgstr "Feleakkora a baj, ha megosztjuk mással"
+
+#  level: "Magic Trinity"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3696
+msgid "Magic Trinity"
+msgstr ""
+
+#  level: "Blitz Chess"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:3704
+msgid "Blitz Chess"
+msgstr "Villámsakk"
+
+#  level: "Blitz Chess"
+#  author: "Lukas Schüller" email "Lucky_Luc@web.de"
+#: po/level_i18n.cc:3706
+msgid "Move fast!"
+msgstr "Lépjen gyorsan!"
+
+#  level: "Pleasure Garden"
+#  author: "Jacob Scott" email ""
+#: po/level_i18n.cc:3711
+msgid "Pleasure Garden"
+msgstr ""
+
+#  level: "Polar Bears' Paradise"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3740
+msgid "Polar Bears' Paradise"
+msgstr ""
+
+#  level: "Polar Bears' Paradise"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3742
+msgid "Witch Hunt on Ice"
+msgstr ""
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3746
+msgid ""
+"Welcome to Mexico! Eight hours ago, your plane arrived at the Airport of "
+"\"Coatlicue\", which is a small village surrounded by unexplored jungle "
+"terrain. Now you find yourself in front of an impressive temple, which seems "
+"to be a relic of the ancient Aztec empire. But the temple is in surprisingly "
+"good condition ..."
+msgstr ""
+"Üdvözöljük Mexikóban! Nyolc órával ezelőtt megérkezett az Ön repülőgépe "
+"\"Coatlicue\" repterére, egy kis faluba, amit felfedezetlen őserdő vesz "
+"körül. Most egy lenyűgöző templom előtt találja magát, amiről úgy tűnik, az "
+"ősi azték korokból maradt hátra. De a templom meglepően jó állapotban van..."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3747
+msgid ""
+"Next to the giant doors of the temple you see a chrome sign: \"Restoration "
+"by: G. G. Goshers, A.D. 1998\". A smaller sign beneath says: \"Property of "
+"G. G. Goshers. Trespassing prohibited!\". Now you notice the dog kennels "
+"built up along the front side of the temple. \"Goshers made this ancient "
+"relic a fortress\", you think, \"this cannot be legal, for Goshers received "
+"funding from the UK Government. I'll try to call him to account!\""
+msgstr ""
+"A templom hatalmas ajtaja mellett egy krómozott feliratot lát: \"Felújította "
+"G. G. Goshers, i. sz. 1998\". Az alatta lévő kisebbik tábla azt mondja: \"G. "
+"G. Goshers tulajdona. Tilos az átjárás!\". Most veszi észre a templom oldala "
+"mellett felépült kutyaólakat. A következőkre gondol: \"Goshers erődítménnyé "
+"alakította át ezt az ősi maradványt. Ez nem lehet törvényes, hiszen Goshers "
+"a brit kormánytól kapott támogatást. Felelősségre fogom vonni!"
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3748
+msgid "This guard doesn’t notice me."
+msgstr "Ez az őr nem vesz észre engem."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3749
+msgid ""
+"This lake was obviously made by Goshers. I think the correct way is south."
+msgstr ""
+"Ezt a tavat nyilván Goshers készítette. Azt hiszem, a helyes út délre van."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3750
+msgid ""
+"There's an inscription on the old wall, saying in spanish: \"Careful! What "
+"you touch could be the last thing you touch!\""
+msgstr ""
+"Egy felirat van az öreg falon, ami azt mondja spanyolul: \"Vigyázzon! Ha "
+"valamihez hozzáér, lehet, hogy az utolsó is lesz egyben!\""
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3751
+msgid "Chrome sign: \"Control of the beast’s cage.\""
+msgstr "Krómozott felirat: \"A vad ketrecének vezérlője\""
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3752
+msgid "Oooh, this slope is steep! Try not to touch the skull!"
+msgstr "Hoppá, ez a lejtő meredek! Próbálja nem megérinteni a koponyát!"
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3753
+msgid ""
+"This building down there looks like a prison. Let's see if I can determine "
+"its purpose ... Ah, there's another chrome sign. Goshers seems to favour "
+"chrome signs. It says: \"Natives’ prison\"."
+msgstr ""
+"Ez az épület itt lent börtönnek tűnik. Lássuk csak, kitalálom-e, milyen célt "
+"szolgál... Á, itt is van egy krómozott felirat. Azt írja: \"A bennszülöttek "
+"börtön\"."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3754
+msgid ""
+"Getting beyond the prison building was a really good idea. But now you have "
+"to cross this lake. Be thrifty with those boxes!"
+msgstr ""
+"Igazán jó ötlet volt megkerülni a börtön épületét. De most át kell jutni "
+"ezen a tavon. Takarékoskodjon azokkal a dobozokkal!"
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3755
+msgid ""
+"Now, peering through the grilled prison windows, you see a native woman "
+"imprisoned there. Obviously Goshers locked up all the natives, who disturbed "
+"his \"work\"; trying to enter the temple and to get rich from the treasures "
+"of the Aztecs. It might be helpful to be accompanied by someone, who knows "
+"the secrets of the jungle and this temple ..."
+msgstr ""
+"Most a börtön rácsozott ablakán keresztül megpillant egy bebörtönzött "
+"bennszülött nőt. Nyilvánvalóan Goshers minden bennszülöttet bezárt, aki "
+"zavarta őt a \"munkájában\", hogy bejusson a templomba, és megszerezze az "
+"aztékok kincseit. Talán jól jöhet egy olyan ember társasága, aki ismeri az "
+"őserdőnek és ennek a templomnak a titkait..."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3756
+msgid ""
+"Since the white man there freed me from the prison, he certainly cannot be "
+"as evil as this Goshers is. Perhaps he wants to end the mastery of Goshers "
+"and free my people. And even if this is not the case, it's better to be free "
+"than imprisoned. I think I should thank him."
+msgstr ""
+"Mivel az a fehér ember megszabadított a börtönből, biztosan nem lehet olyan "
+"gonosz, mint Goshers. Talán véget akar vetni Goshers uralmának, és "
+"felszabadítani a népemet. És ha nem is ez a helyzet, akkor is jobb szabadnak "
+"lenni, mint bebörtönözve. Azt hiszem, illene megköszönönnöm neki."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3757
+msgid ""
+"You meet the English adventurer in the front of the prison. \"Hello, I'm "
+"Xila!\", you tell him in broken English. After he introduced himself as "
+"well, both of you begin to work out a plan against the evil G. G. Goshers."
+msgstr ""
+"A börtön előtt találkozik az angol kalandorral. \"Üdv, én Xila vagyok!\", "
+"mondja neki tört angolsággal. Miután ő is bemutatkozott, Önök ketten "
+"hozzálátnak egy terv kidolgozásához a gonosz G. G. Goshers ellen."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3758
+msgid ""
+"This is a really hard puzzle. The English man will have to help me, if this "
+"enigma is to be solved."
+msgstr ""
+"Ez egy nagyon nehéz rejtvény. Az angolnak segítenie kell nekem, ha ezt az "
+"enigmát meg akarom oldani."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3759
+msgid "You wonder what this switch could trigger."
+msgstr "Ön eltöpreng, kapcsol be ez a kapcsoló."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3760
+msgid "Xila knows how to drain the lake!"
+msgstr "Xila tudja, hogyan kell lecsapolni a tavat!"
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3761
+msgid "You were lucky to find this hole. It prevents you from drowning."
+msgstr "Szerencse, hogy megtalálta ezt az üreget. Megóvja Önt a fulladástól."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3762
+msgid "This glass stone must fulfill a purpose ..."
+msgstr "Ennek az üvegkőnek biztosan van valamilyen célja..."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3763
+msgid "It's funny that such a temple should have a side entrance."
+msgstr "Szokatlan, hogy egy ilyen templomnak oldalbejárata legyen."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3764
+msgid "Be careful! There are sensors in the walls."
+msgstr "Legyen óvatos! A falakban érzékelők vannak!"
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3765
+msgid ""
+"After the huge doors of the old temple have opened, you see, that the "
+"entrance is protected by 11 knights, armed with spears. These guards are "
+"very dangerous. Without a sword you'll never be able to enter. Be careful. "
+"There are not only knights, but also thieves."
+msgstr ""
+"Miután a templom hatalmas kapuja kinyílt, látja, hogy a bejáratot 11 "
+"lándzsás lovag őrzi. Ezek a lovagok nagyon veszélyesek. Kard nélkül sose "
+"lesz képes bejutni. Legyen óvatos, nem csak lovagok, hanem tolvajok is "
+"vannak itt."
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3766
+msgid "\"Congratulations. You just managed to enter this old Aztec Temple.\""
+msgstr "\"Gratulálunk. Sikerült bejutnia ebbe az ősi azték templomba.\""
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3767
+msgid ""
+"\"You've been smarter than I expected. But you'll never enter the treasure "
+"room nor escape from here!\""
+msgstr ""
+"\"Ön okosabb volt, mint vártam. De soha nem fog eljutni a kincseskamrába, "
+"sem kijutni innen!\""
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3768
+msgid ""
+"\"I, Goshers, will certainly be able to rid myself of one of my archenemies "
+"by just killing you!\""
+msgstr ""
+"\"Én, Goshers, biztosan megszabadulok főellenségeim egyikétől, amint megölöm "
+"magát!\""
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3769
+msgid "\"Run for your life!\""
+msgstr "\"Fusson, ha kedves az élete!\""
+
+#  level: "The Aztec Temple"
+#  author: "Dominik Lehmann" email ""
+#: po/level_i18n.cc:3770
+msgid ""
+"Xila and you just entered the Diamond Room of the old Aztec Temple. By "
+"taking him back to Great Britain and rendering him to the police, you have "
+"ended the evil career of Gerald Gregory Goshers. Congratulations on the "
+"success of your expedition!"
+msgstr ""
+"Xila és Ön éppen most léptek be a Gyémántterembe az ősi azték templomban. "
+"Azzal, hogy visszavitte Gerald Gregory Goshers-t Nagy Britanniába, és átadta "
+"őt a rendőrségnek, egyben véget is vetett gonosz pályafutásának. Gratulálunk "
+"az expedíció sikeréhez!"
+
+#  level: "Bodyguard"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3775
+msgid "In the line of thieves"
+msgstr "A tolvajok sorában"
+
+#  level: "Bodyguard"
+#  author: "Ronald Lamprecht" email "ral@users.berlios.de"
+#: po/level_i18n.cc:3777
+msgid "Keys from left to right are NE, NW, SE, SW."
+msgstr "A kulcsok balról jobbra: ÉK, ÉNy, DK, DNy."
+
+#  level: ""
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:3808
+msgid "Drop the hammer on side of a pentomino and use the switch!"
+msgstr "Ejtse le a kalapácsot egy pentomino oldalán, és használja a kapcsolót!"
+
+#  level: ""
+#  author: "Ralf Westram" email "amgine@reallysoft.de"
+#: po/level_i18n.cc:3809
+#, fuzzy
+msgid "Drop the hammer on side of a pentomino, not beneath it!"
+msgstr "Ejtse le a kalapácsot egy pentomino oldalán, és használja a kapcsolót!"
+
+#~ msgid "Default"
+#~ msgstr "alap"
+
+#~ msgid "Template for a simple level."
+#~ msgstr "Sablon egyszerű pályához"
+
+#~ msgid "Template for a level with the RenderLine method."
+#~ msgstr "Sablon RenderLine metódussal készült pályához"
+
+#~ msgid "Template for a level coded with the ant library."
+#~ msgstr "Sablon az 'ant' könyvtárral lekódolt pályához"
+
+#~ msgid "Level with all floors of Enigma 1.00!"
+#~ msgstr "Egy pálya, az Enigma 1.00 összes padlójával!"
+
+#~ msgid "Level with all items of Enigma 1.00!"
+#~ msgstr "Egy pálya, az Enigma 1.00 összes elemével!"
+
+#~ msgid "Level with all stones of Enigma 1.00!"
+#~ msgstr "Egy pálya, az Enigma 1.00 összes kövével!"
+
+#~ msgid "Area closed"
+#~ msgstr "Lezárt terület"
+
+#, fuzzy
+#~ msgid "Chromed sign: "
+#~ msgstr "Köszönet: "
+
+#~ msgid "Skip to next non-par level"
+#~ msgstr "Ugrás a következő nem par szintre"
+
+#~ msgid "behind best time."
+#~ msgstr "idővel maradt le a legjobb időtől."
+
+#~ msgid "Your best time: "
+#~ msgstr "Az Ön legjobb ideje: "
+
+#~ msgid "Project maintainer:"
+#~ msgstr "Projekt fenntartó:"
+
+#~ msgid "  JOHANNES FORTMANN (graphics), JEREMY SAWICKI (oxydlib),"
+#~ msgstr "  JOHANNES FORTMANN (grafika), JEREMY SAWICKI (oxydlib),"
+
+#~ msgid "  NAT PRYCE & JOHN 'WB' SNEYERS (levels)"
+#~ msgstr "  NAT PRYCE & JOHN 'WB' SNEYERS (pályák)"
+
+#~ msgid "the accompanying COPYING.GPL for details."
+#~ msgstr "forduljon a mellékelt COPYING.GPL-hez."
+
+# note "Megoldottak kihagyása: " would be nicer, doesn't fit however
+#~ msgid "Skip solved levels: "
+#~ msgstr "Készek kihagyása: "
+
+#~ msgid "Time hunt: "
+#~ msgstr "Idővadászat: "
+
+#~ msgid "Select next non-par level"
+#~ msgstr "Következő nem par pálya"
+
+#~ msgid "That's par."
+#~ msgstr "Ez par."
+
+#~ msgid "Par: %d:%02d"
+#~ msgstr "Par: %d:%02d"
+
+#~ msgid "Difficulty: Easy"
+#~ msgstr "Szint: Egyszerű"
+
+#~ msgid "Difficulty: Normal"
+#~ msgstr "Szint: Rendes"
+
+#~ msgid "Best: "
+#~ msgstr "Legjobb: "
+
+#~ msgid "Tournament"
+#~ msgstr "Mérkőzés"
+
+#~ msgid "Training"
+#~ msgstr "Gyakorlás"

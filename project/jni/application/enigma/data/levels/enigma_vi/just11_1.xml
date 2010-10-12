@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="The Passage" el:subtitle="" el:id="just11"/>
+      <el:version el:score="1" el:release="1" el:revision="6" el:status="released"/>
+      <el:author  el:name="JuSt" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 JuSt</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+       <el:dependency el:path="lib/libpuzzle" el:id="lib/libpuzzle" el:release="2" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="4:24"/>
+    </el:info>
+    <el:luamain><![CDATA[
+enigma.ConserveLevel = FALSE
+
+create_world(39, 25)
+
+-- Code
+switched = 0
+function trapped()
+    switched = switched + 1
+    if switched == 1 then
+        document(37, 10, "text2")
+    elseif switched == 2 then
+        document(37, 10, "text3")
+    elseif switched == 3 then
+        document(37, 10, "text4")
+        SendMessage ("laser1", "on")
+    elseif switched == 4 then
+        document(37, 10, "text5")
+        set_stone("st-blue-sand",37,7)
+    else
+        switched = 4
+    end
+end
+
+function bolder_run()
+    SendMessage ("bolder1", "direction", NORTH)
+end
+
+-- Floor Layer
+fill_floor("fl-mortar")
+draw_checkerboard_floor("fl-swamp", "fl-mortar", 33, 1, 3, 12)
+draw_floor("fl-water", {1, 8}, {1, 0}, 11)
+draw_floor("fl-water", {13, 8}, {1, 0}, 6)
+fill_floor("fl-inverse", 26, 13, 12, 3)
+fill_floor("fl-water", 1, 14, 3, 4)
+
+-- Item Layer
+set_item("it-seed", 33, 2)
+set_item("it-document", 37, 3, {text="text6"})
+set_item("it-document", 12, 7, {text="text7"})
+set_item("it-cross", 12, 8)
+set_item("it-document", 37, 10, {text="text1"})
+set_item("it-magicwand", 16, 14)
+set_item("it-coin1", 17, 15)
+set_item("it-trigger", 1, 18, {action="openclose", target="vortex1", invisible=FALSE})
+set_item("it-trigger", 32, 11, {action="callback", target="bolder_run", invisible=TRUE})
+set_item("it-vortex-closed", 3, 19, {name="vortex1", targetx="2.5", targety="22.5", strength="0"})
+set_item("it-coin1", 9, 21)
+set_item("it-cross", 2, 22)
+set_item("it-blocker", 26, 2)
+
+-- Stone Layer
+oxyd_default_flavor = "b"
+oxyd(2, 23)
+oxyd(3, 22)
+oxyd(1, 22)
+oxyd(2, 21)
+SetDefaultAttribs("st-glass", {type="0"})
+draw_stones("st-blue-sand", {0, 0}, {1, 0}, 39)
+draw_stones("st-blue-sand", {0, 1}, {0, 1}, 7)
+draw_stones("st-blue-sand", {19, 1}, {0, 1}, 2)
+draw_stones("st-blue-sand", {29, 1}, {1, 0}, 3)
+draw_stones("st-death", {32, 1}, {0, 1}, 10)
+draw_stones("st-blue-sand", {38, 1}, {0, 1}, 10)
+draw_stones("st-blue-sand", {21, 2}, {1, 0}, 3)
+draw_stones("st-death", {36, 2}, {0, 1}, 10)
+draw_stones("st-blue-sand", {21, 3}, {-1, 1}, 3)
+draw_stones("st-blue-sand", {25, 3}, {0, 1}, 6)
+draw_stones("st-blue-sand", {27, 3}, {1, 0}, 3)
+draw_stones("st-blue-sand", {23, 4}, {0, 1}, 3)
+draw_stones("st-blue-sand", {27, 5}, {0, 1}, 8)
+draw_stones("st-blue-sand", {19, 6}, {1, 0}, 2)
+draw_stones("st-blue-sand", {19, 7}, {1, 1}, 2)
+draw_stones("st-blue-sand", {21, 8}, {1, 0}, 2)
+draw_stones("st-blue-sand", {0, 9}, {0, 1}, 16)
+draw_stones("st-blue-sand", {19, 9}, {0, 1}, 8)
+draw_stones("st-blue-sand", {20, 10}, {1, 0}, 2)
+draw_stones("st-blue-sand", {25, 10}, {0, 1}, 3)
+draw_stones("st-blue-sand", {28, 11}, {0, 1}, 2)
+draw_stones("st-blue-sand", {30, 11}, {0, 1}, 2)
+draw_stones("st-blue-sand", {1, 12}, {1, 0}, 4)
+draw_stones("st-blue-sand", {6, 12}, {1, 0}, 13)
+draw_stones("st-blue-sand", {20, 12}, {1, 0}, 4)
+draw_stones("st-blue-sand", {31, 12}, {1, 0}, 3)
+draw_stones("st-blue-sand", {35, 12}, {1, 0}, 4)
+draw_stones("st-blue-sand", {6, 13}, {-1, 1}, 3)
+draw_stones("st-blue-sand", {1, 9}, {1, 0}, 11)
+draw_stones("st-blue-sand", {13, 9}, {1, 0}, 6)
+set_stone("st-grate1", 12, 9)
+draw_stones("st-wood", {14, 13}, {0, 1}, 4)
+draw_stones("st-wood", {16, 13}, {1, 1}, 2)
+draw_stones("st-blue-sand", {38, 13}, {0, 1}, 12)
+draw_stones("st-death", {1, 14}, {1, 0}, 2)
+draw_stones("st-wood", {17, 15}, {0, 1}, 2)
+draw_stones("st-death", {2, 16}, {1, 0}, 2)
+draw_stones("st-blue-sand", {4, 16}, {0, 1}, 9)
+draw_stones("st-wood", {15, 16}, {1, 0}, 2)
+draw_stones("st-brick_magic", {32, 16}, {1, 0}, 2)
+fill_stones("st-glass", 27, 17, 3, 4)
+fill_stones("st-glass", 31, 17, 2, 5)
+draw_stones("st-glass", {33, 17}, {0, 1}, 7, {type="0"})
+draw_border("st-glass", 35, 17, 3, 7)
+draw_stones("st-blue-sand", {19, 18}, {0, 1}, 7)
+draw_stones("st-glass", {34, 18}, {0, 1}, 3, {type="0"})
+draw_stones("st-glass", {36, 18}, {0, 1}, 2, {type="0"})
+draw_stones("st-glass", {26, 21}, {1, 1}, 3, {type="0"})
+fill_stones("st-glass", 28, 21, 3, 2)
+draw_stones("st-glass", {31, 22}, {0, 1}, 2, {type="0"})
+draw_stones("st-glass", {34, 22}, {0, 1}, 2, {type="0"})
+draw_stones("st-blue-sand", {1, 24}, {1, 0}, 3)
+draw_stones("st-blue-sand", {5, 24}, {1, 0}, 14)
+draw_stones("st-blue-sand", {20, 24}, {1, 0}, 18)
+set_stones("st-blue-sand", {{25, 1}, {27, 1}, {19, 4}, {21, 4}, {24, 4}, {22, 6}, {24, 8}, {31, 9}, {23, 10}, {26, 12}, {29, 12}, {4, 14}, {6, 14}})
+set_stones("st-death", {{34, 1}, {33, 4}, {35, 6}, {33, 8}, {35, 10}})
+set_stones("st-turnstile-n", {{30, 2}, {29, 8}}, {type=north})
+set_stones("st-turnstile", {{30, 3}, {28, 5}, {30, 6}, {29, 9}}, {type=main})
+set_stones("st-turnstile-e", {{29, 5}, {31, 6}, {30, 9}}, {type=east})
+set_stones("st-turnstile-s", {{28, 6}, {30, 7}, {29, 10}}, {type=south})
+set_stone("st-laser", 0, 8, {dir=EAST, on="1"})
+set_stone("st-lightpassenger", 12, 8)
+set_stone("st-laser", 19, 8, {dir=WEST, name="laser1", on="0"})
+set_stone("st-turnstile-w", 28, 9, {type=west})
+set_stone("st-bolder", 26, 11, {name="bolder1", direction=SOUTH})
+set_stone("st-switch", 38, 11, {action="callback", target="trapped", on="1"})
+set_stones("st-glass", {{34, 12}, {26, 18}, {30, 19}, {36, 21}, {29, 23}, {32, 23}}, {type="0"})
+set_stones("st-wood", {{18, 13}, {15, 14}, {18, 16}})
+set_stones("st-brick_magic", {{26, 16}, {27, 16}, {28, 16}, {29, 16}, {30, 16}, {31, 16}, {34, 16}, {35, 16}, {36, 16}, {37, 16}, {26, 17}, {26, 19}, {26, 20}, {26, 22}, {26, 23}})
+set_stone("st-brick", 25, 17)
+set_stones("st-pmirror", {{30, 17}, {25, 18}, {36, 22}, {30, 23}}, {movable=FALSE, transparent=TRUE, orientation="4"})
+set_stones("st-3mirror", {{34, 17}, {30, 18}}, {movable=FALSE, transparent=TRUE, orientation="2"})
+set_stone("st-3mirror", 30, 20, {movable=FALSE, transparent=TRUE, orientation="4"})
+set_stones("st-pmirror", {{36, 20}, {25, 21}, {27, 21}, {27, 23}}, {movable=FALSE, transparent=TRUE, orientation="2"})
+set_stone("st-pmirror", 34, 21, {movable=FALSE, transparent=TRUE, orientation="1"})
+set_stone("st-laser", 32, 22, {dir=EAST, on="1"})
+set_stone("st-oneway", 25, 9, {orientation=EAST})
+set_stone("st-oneway", 27, 2, {orientation=EAST})
+set_stones("st-blocker", {{26, 3}, {26, 9}})
+draw_stones("st-grate1", {7, 13}, {1, 1}, 11)
+draw_stones("st-grate1", {8, 13}, {1, 1}, 11)
+draw_stones("st-grate1", {9, 13}, {1, 1}, 10)
+draw_stones("st-grate1", {10, 13}, {1, 1}, 9)
+draw_stones("st-grate1", {11, 13}, {1, 0}, 3)
+draw_stones("st-grate1", {7, 14}, {1, 1}, 10)
+draw_stones("st-grate1", {12, 14}, {1, 0}, 2)
+fill_stones("st-grate1", 5, 15, 3, 2)
+draw_stones("st-grate1", {8, 16}, {0, 1}, 2)
+fill_stones("st-grate1", 5, 17, 2, 7)
+draw_stones("st-grate1", {9, 17}, {0, 1}, 3)
+draw_stones("st-grate1", {15, 17}, {1, 0}, 4)
+draw_stones("st-grate1", {16, 18}, {1, 0}, 3)
+draw_stones("st-grate1", {7, 19}, {0, 1}, 2)
+draw_stones("st-grate1", {17, 19}, {1, 0}, 2)
+draw_stones("st-grate1", {11, 21}, {1, 0}, 3)
+draw_stones("st-grate1", {7, 22}, {0, 1}, 2)
+fill_stones("st-grate1", 12, 22, 3, 2)
+draw_stones("st-grate1", {8, 23}, {1, 0}, 4)
+set_stones("st-grate1", {{13, 15}, {11, 19}, {18, 20}, {15, 23}, {13, 8}, {9, 21}})
+
+puzzle ({"#     ",
+         "## #  ",
+         " # #  ",
+         " #####",
+         "## #  ",
+         " #### "}, {7, 17}, "redpuzzle", "permutation")
+
+-- Actor Layer
+set_actor("ac-blackball", 12.5, 6.5, {player="0", mouseforce="1"})
+
+oxyd_shuffle()
+  ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Sorry, this switch is currently out of order.</el:english>
+        <el:translation el:lang="de">Dieser Schalter ist momentan leider außer Betrieb.</el:translation>
+      </el:string>
+      <el:string el:key="text2">
+        <el:english el:translate="true">As I already told you, this switch is out of order!</el:english>
+        <el:translation el:lang="de">Ich habe Dir doch bereits mitgeteilt, dass dieser Schalter nicht funktioniert!</el:translation>
+      </el:string>
+      <el:string el:key="text3">
+        <el:english el:translate="true">How often are you going to try this?</el:english>
+        <el:translation el:lang="de">Wie oft willst Du es denn noch versuchen?</el:translation>
+      </el:string>
+      <el:string el:key="text4">
+        <el:english el:translate="true">Did anything happen? I'm not sure ...</el:english>
+        <el:translation el:lang="de">Tat sich da was? Ich bin nicht sicher ...</el:translation>
+      </el:string>
+      <el:string el:key="text5">
+        <el:english el:translate="true">Congrats, now it works again!</el:english>
+        <el:translation el:lang="de">Glückwunsch, jetzt funktioniert er wieder!</el:translation>
+      </el:string>
+      <el:string el:key="text6">
+        <el:english el:translate="true">No hints available at the moment.</el:english>
+        <el:translation el:lang="de">Zur Zeit sind keine Tips verfügbar.</el:translation>
+      </el:string>
+      <el:string el:key="text7">
+        <el:english el:translate="true">There is a passage right beneath this stone!</el:english>
+        <el:translation el:lang="de">Es gibt einen Durchgang direkt unter diesem Stein!</el:translation>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

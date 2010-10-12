@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Easy Shifting.." el:subtitle="" el:id="ralf01"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Ralf Westram" el:email="amgine@reallysoft.de" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Ralf Westram</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+floortile1 = "fl-hay"
+floortile2 = "fl-rough"
+walltile = "st-greenbrown"
+wallhole = "st-greenbrown_hole"
+
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+oxyd_default_flavor = "b"       -- Default flavor for oxyd stones.
+
+draw_border(walltile)
+fill_floor(floortile1)
+fill_floor(floortile2, 0, 0,3,3)
+fill_floor(floortile2,17, 0,3,3)
+fill_floor(floortile2, 0,10,3,3)
+fill_floor(floortile2,17,10,3,3)
+
+px = 0
+py = 0
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone(walltile, i, line)
+        elseif c == "%" then
+            set_stone(wallhole, i, line)
+        elseif c == "&" then
+            set_stone( "st-invisible_magic", i, line)
+        elseif c == "d" then
+           set_stone( "st-death", i, line)
+        elseif c == "m" then
+           set_item( "it-magicwand", i, line)
+        elseif c == "$" then
+            set_stone( "st-brownie", i, line)
+        elseif c == "@" then
+            px = i
+            py = line
+        end
+    end
+end
+
+--               123456789012345678
+renderLine(  1, "o    |   |       o")
+renderLine(  2, "   ###   #  dmd   ")
+renderLine(  3, "#&##.....##%###%##")
+renderLine(  4, "   %%.#.##   &  | ")
+renderLine(  5, "   *# # # $#### #*")
+renderLine(  6, "   ## $$$ $   &&#%")
+renderLine(  7, "   #  # @ #=# #   ")
+renderLine(  8, "   #=### ## # ##=#")
+renderLine(  9, "   #  |     $$ #  ")
+renderLine( 10, "   # ###  ###  &  ")
+renderLine( 11, "o  #  *#  #*%  # o")
+
+set_item( "it-trigger", 5, 3, {action="openclose",target="door1"})
+set_item( "it-trigger", 6, 3, {action="openclose",target="door2"})
+set_item( "it-trigger", 7, 3, {action="openclose",target="door3"})
+set_item( "it-trigger", 8, 3, {action="openclose",target="door4"})
+set_item( "it-trigger", 9, 3, {action="openclose",target="door5"})
+set_item( "it-trigger", 6, 4, {action="openclose",target="door6"})
+set_item( "it-trigger", 8, 4, {action="openclose",target="door7"})
+
+set_stone(   "st-door", 7, 9, {name="door1", type="v"})
+set_stone(   "st-door", 5, 8, {name="door2", type="h"})
+set_stone(   "st-door",17, 4, {name="door3", type="v"})
+set_stone(   "st-door",17, 8, {name="door4", type="h"})
+set_stone(   "st-door",10, 1, {name="door5", type="v"})
+set_stone(   "st-door",12, 7, {name="door6", type="h"})
+set_stone(   "st-door", 6, 1, {name="door7", type="v"})
+
+set_attrib( laser(4,5,TRUE,WEST), "name", "laser")
+set_stone("st-switch", 7,11, {action="onoff", target="laser"})
+document(12,11, "text1")
+document(18,5, "text2")
+set_actor("ac-blackball", px+0.5 , py+0.5)
+
+oxyd(1,11)
+oxyd(18,11)
+oxyd(1,1)
+oxyd(18,1)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Dedicated to my friend Frank.</el:english>
+      </el:string> 
+      <el:string el:key="text2">
+        <el:english el:translate="true">This level is quite straightforward, isn't it? Just continue .. ;-)</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

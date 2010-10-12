@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Temple of Gold" el:subtitle="" el:id="duffy151"/>
+      <el:version el:score="1" el:release="1" el:revision="4" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+        <el:dependency el:path="lib/libpuzzle" el:id="lib/libpuzzle" el:release="2" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:credits el:showinfo="true" el:showstart="false">Ronald Lamprecht for fixes, some patterns and difficult mode</el:credits>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+rooms_wide=5
+rooms_high=5
+
+levelw=1+(19*rooms_wide)
+levelh=1+(12*rooms_high)
+
+create_world( levelw, levelh)
+enigma.SlopeForce=50
+enigma.BumperForce=1000
+
+oxyd_default_flavor="d"
+
+fill_floor("fl-sahara", 0,0,levelw,levelh)
+
+if enigma.CreatingPreview then
+    set_actor("ac-blackball", 29.5, 20.5)
+end
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-yellow", i-1, line)
+        elseif c =="?" then
+            set_stone( "st-yellow", i-1, line)
+            abyss(i-1,line)
+        elseif c =="H" then
+            set_stone( "st-rock3_break", i-1, line)
+        elseif c =="P" then
+            set_stone( "st-brownie", i-1, line,{name="rubberbrownie"})
+        elseif c =="p" then
+            set_actor("ac-horse", i-1,line,{name="rubberhorse"})
+        elseif c =="@" then
+            set_stone( "st-rock3_move", i-1, line)
+            set_item("it-blackbomb",i-1,line)
+        elseif c =="X" then
+            set_stone( "st-death", i-1, line)
+        elseif c =="/" then
+            set_stone( "st-chameleon", i-1, line)
+        elseif c =="&" then
+            set_stone( "st-stoneimpulse", i-1, line)
+        elseif c =="F" then
+            set_stone( "st-likeoxydd", i-1, line)
+        elseif c =="f" then
+            set_stone( "st-actorimpulse_invisible", i-1, line)
+        elseif c =="h" then
+            set_stone( "st-rock3", i-1, line)
+        elseif c =="b" then
+            set_stone( "st-black4", i-1, line)
+--            set_item( "it-burnable", i-1, line)
+        elseif c =="B" then
+            set_stone( "st-bug", i-1, line)
+        elseif c =="a" then
+            set_stone( "st-door_b", i-1, line,{name="d1"})
+        elseif c ==">" then
+            set_stone("st-coinslot",i-1,line,{action="openclose",target="d2"})
+        elseif c =="<" then
+            doorh(i-1,line,{name="d2"})
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "*" then
+            set_stone( "st-brownie", i-1, line)
+        elseif c == "$" then
+            set_stone( "st-brownie", i-1, line)
+            set_floor("fl-swamp",i-1,line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c == "S" then
+            set_floor("fl-swamp",i-1,line)
+        elseif c == "I" then
+            fill_floor("fl-inverse",i-1,line-1,19,12)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-1,line+.5, {player=0})
+        elseif c=="R" then
+            set_actor("ac-rotor", i-.5,line+.5, {controllers=0,range=5,force=30})
+        elseif c=="T" then
+            set_actor("ac-top", i-.5,line+.5, {controllers=0,range=5,force=80})
+        elseif c=="q" then
+            set_actor("ac-rotor", i-.5,line, {controllers=0,range=5,force=110})
+        elseif c=="U" then
+            set_actor("ac-bug", i-1,line+.5)
+        elseif c=="y" then
+            set_actor("ac-whiteball", i-1,line+.5, {player=1})
+        elseif c == "g" then
+            set_stone("st-grate1", i-1, line)
+--            set_item( "it-cross", i-1, line)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c=="Y" then
+        if not difficult then
+                set_stone( "st-wood", i-1, line)
+        end
+        elseif c =="V" then
+            set_item("it-wormhole",i-1,line,{strength=0,targetx="13.5",targety="3.5"})
+            set_stone( "st-brownie", i-1, line)
+        elseif c =="W" then
+            set_item("it-wormhole",i-1,line,{strength=0,targetx="31.5",targety="18.5"})
+        elseif c =="Q" then
+            set_item("it-wormhole",i-1,line,{strength=0,targetx="70.5",targety="31.5"})
+        elseif c =="N" then
+            set_item("it-wormhole",i-1,line,{strength=0,targetx="5.5",targety="28.5"})
+        elseif c =="A" then
+            set_item("it-trigger",i-1,line,{action="openclose",target="d1"})
+        elseif c =="t" then
+            set_item("it-trigger",i-1,line,{invisible=1,action="on",target="l1"})
+        elseif c =="L" then
+            set_attrib(laser(i-1,line, FALSE, WEST), "name", "l1")
+        elseif c ==":" then
+            mirrorp(i-1,line,0,1,2)
+        elseif c ==";" then
+            mirrorp(i-1,line,0,0,2)
+        elseif c =="v" then
+            set_item("it-seed_volcano",i-1,line)
+        elseif c =="s" then
+            set_item("it-seed",i-1,line)
+        elseif c =="c" then
+            set_item("it-coin1",i-1,line)
+        elseif c =="." then
+            set_item("it-hammer",i-1,line)
+        elseif c =="J" then
+            set_item("it-springboard",i-1,line)
+        elseif c =="O" then
+            set_item("it-extralife",i-1,line)
+        elseif c =="C" then
+            set_item("it-cherry",i-1,line)
+        elseif c =="," then
+            set_item("it-blackbomb",i-1,line)
+        elseif c =="%" then
+            set_item("it-blackbomb",i-1,line)
+            set_stone("st-wood",i-1,line)
+        elseif c =="w" then
+            set_stone("st-oneway-w", i-1,line)
+        elseif c =="8" then
+            set_stone("st-puzzle", i-1,line, {connections=PUZ_0010})
+        elseif c =="j" then
+            set_stone("st-puzzle", i-1,line, {connections=PUZ_1001})
+            abyss(i-1,line)
+        elseif c =="-" then
+            set_stone("st-puzzle", i-1,line, {connections=PUZ_0101})
+            abyss(i-1,line)
+        elseif c =="_" then
+            set_stone("st-puzzle", i-1,line, {connections=PUZ_0101})
+        elseif c =="i" then
+            set_stone("st-puzzle", i-1,line, {connections=PUZ_1010})
+        elseif c =="2" then
+            set_stone("st-puzzle", i-1,line, {connections=PUZ_1000})
+        elseif c =="k" then
+            set_stone("st-puzzle", i-1,line, {connections=PUZ_0110})
+        elseif c == "u" then
+            set_floor("fl-gradient",  i-1,  line, {type=2})
+        elseif c == "r" then
+            set_floor("fl-gradient",  i-1,  line, {type=3})
+        elseif c == "d" then
+            set_floor("fl-gradient",  i-1,  line, {type=1})
+        elseif c == "l" then
+            set_floor("fl-gradient",  i-1,  line, {type=4})
+        elseif c == "1" then
+            set_floor("fl-gradient",  i-1,  line, {type=6})
+        elseif c == "3" then
+            set_floor("fl-gradient",  i-1,  line, {type=5})
+        elseif c == "7" then
+            set_floor("fl-gradient",  i-1,  line, {type=8})
+        elseif c == "9" then
+            set_floor("fl-gradient",  i-1,  line, {type=7})
+
+        elseif c =="x" then
+            set_floor("fl-sahara",i-1,line,{name="puzzleedge"})
+        elseif c =="Z" then
+            set_floor("fl-sahara",i-1,line,{name="puzzlepart"})
+
+        elseif c =="E" then
+            set_item("it-trigger",i-1,line,{action="openclose",target="d3"})
+        elseif c =="e" then
+            doorh(i-1,line,{name="d3"})
+        elseif c =="M" then
+            set_item("it-trigger",i-1,line,{action="openclose",target="d4"})
+        elseif c =="m" then
+            doorh(i-1,line,{name="d4"})
+
+        elseif c =="n" and not difficult then
+            set_stone( "st-black4", i-1, line)
+        elseif c == "~" then
+            set_item("it-blackbomb",i-1,line)
+            if not difficult then
+                set_stone( "st-wood", i-1, line)
+            end
+        elseif c ==")" and not difficult then
+            set_item("it-blackbomb",i-1,line)
+        elseif c =="(" and not difficult then
+            set_item("it-cherry",i-1,line)
+
+        elseif c =="G" and difficult then
+            set_floor( "fl-abyss", i-1, line)
+--        elseif c =="K" then
+        elseif c == "^"  and difficult then
+            set_stone( "st-wood", i-1, line)
+
+        elseif c =="|" and difficult then
+            set_stone("st-coinslot",i-1,line,{action="openclose",target="d5"})
+        elseif c =="D" and difficult then
+            doorh(i-1,line,{name="d5"})
+        elseif c =="=" then
+            set_floor("fl-bridge-open",i-1,line,{type="x"})
+
+        elseif c =="4" and difficult then
+            set_item("it-wormhole",i-1,line,{targetx=9.5, targety=18.5, strength=0})
+        elseif c =="6" and difficult then
+            set_item("it-trigger",i-1,line,{action="callback",target="trigger"})
+        elseif c =="0" and difficult then
+            set_floor("fl-abyss",i-1,line)
+--            set_floor("fl-bridge-open",i-1,line,{type="x"})
+        end
+    end
+end
+
+counter = 0
+
+function trigger(onoff)
+    if (onoff == 1) then
+        counter = counter + 1
+        if (counter == 4) then
+            draw_checkerboard_floor ("fl-abyss", "fl-sahara", 8, 17, 3, 3)
+            set_floor("fl-sahara", 9,18)
+        end
+    else
+        counter = counter - 1
+        if (counter == 3) then
+            draw_checkerboard_floor ("fl-sahara", "fl-abyss", 8, 17, 3, 3)
+        end
+    end
+end
+
+renderLine(00,"################################################################################################")
+renderLine(01,"#       t          #H  H  H  H    H H H H  HH            #               ,,,#I                 #")
+renderLine(02,"#       t       W  #H H HH H  H H HH H H HH^ H           #               ,,,#                  #")
+renderLine(03,"#       t          # HTH  H HH HH H HHHH H  H            #               ,%,#           (      #")
+renderLine(04,"#       t          # H HH HHFH   HH  HH H HH             #               ,,@,                  #")
+renderLine(05,"#********###########H    HH   HH H HH   H                #              Y,,,#                  #")
+renderLine(06,"#        *         # HH HHoHTHF H HH HH HH               #               %,,#                  #")
+renderLine(07,"#        *       s # H H  HTH HH H HH HHH                #               ,,,#                  #")
+renderLine(08,"#        *         #H HTHH HFH  H HH HH H                #               ,,,#   (              #")
+renderLine(09,"#        *         #H HH HH H HHT   H  H               g                 ~,,#             C    #")
+renderLine(10,"#        #vvvvvvvv## H H  H H HH HHH HHH                 #               ,,,#                  #")
+renderLine(11,"#        #;:::::::L#H H H  H H H H H  HH                 #               ,,,#                  #")
+renderLine(12,"############################################ ###################################################")
+renderLine(13,"#6                6#       * *  *     #                  ##  # #    #     # #                  #")
+renderLine(14,"#  bbbbbbbbbbbbbb  #       * * **     #                  # #  # # #  #  #  ##                  #")
+renderLine(15,"#  b    000     b  #h      **V* *                        #       #  #  # #  #                  #")
+renderLine(16,"#  b    0o0     b  # h    *  * *      #                  ##  # #   #  #   #                 JJ8#")
+renderLine(17,"#  b  00 G 00   b  #  h    *****      #                  # #  #  #   #  #  ##!!!!!!!!!!!!!----j#")
+renderLine(18,"#  b  0FGOGF0 4 b  #   h              #         R        #  #  #  # # #  #  #!!!!!!!!!!!!!!!!!!#")
+renderLine(19,"#  b  00 G 00   b  #    h             #                  #   #  #  #   #  #     )         # JJ #")
+renderLine(20,"#  b    0F0     b  #     a       ######                  # #  #  #   #  #  ##      P  2   #    #")
+renderLine(21,"#  b    000     b  #      h      #A   #                     #  #  # #  #  # #          k  #    #")
+renderLine(22,"#  bbbbbbbbbbbbbb          h     #    #                  # # #   # #  #  #  #     _ p     #    #")
+renderLine(23,"#6                6#        h    n    #                  ##    #    #   #   #             #    #")
+renderLine(24,"################################################## ########################################    #")
+renderLine(25,"#                  #                  #                  !    X             #!!!!              #")
+renderLine(26,"#                  #                  #                  !    X           O #!!!!              #")
+renderLine(27,"#   Q              b                  #                  !    X             #!!!!              #")
+renderLine(28,"#    3dd1          #                  #                  #    X##|D#<>#######!E!!              #")
+renderLine(29,"#    r31l          #                  #                  #    X    #        #!!!!              #")
+renderLine(30,"#    r97l          #         z        g                  #    X    #        #!!!!              #")
+renderLine(31,"#    9uu7          #                  #          Z       #    X    #  31    #!!!!              #")
+renderLine(32,"#                  #                  #                  #    X    #  97    #!M!!              #")
+renderLine(33,"#                  #                  #                  #    X    #        #!!!!              #")
+renderLine(34,"#                  #                  #                  #    X    #    N   #!!!!              #")
+renderLine(35,"#                  #                  #                  #         b        #!!!!              #")
+renderLine(36,"###### ###################BBB############## #####################################e########m#####")
+renderLine(37,"#       !!!!       #              !!!!#      !!!!        #                  #   # #      # #   #")
+renderLine(38,"#       !!!!       #           + !!!!!#      !!!!        #                  # # # # #### # # # #")
+renderLine(39,"#       !!!!       #          +!!!!!!!#       !!!!   +   #     x            # # # # #    # # # #")
+renderLine(40,"#       !!!!       #         + !!!!!!!#       !!!!   +            F         # # # # # #### # # #")
+renderLine(41,"#       !!!!       #        +!!!!!!!!!#    +  !!!!       #                  # #   # #      # # #")
+renderLine(42,"#     J !!!! J     #       + !!!?!!!!!#   +    !!!!      #      F   o       # ##### ######## # #")
+renderLine(43,"#       !!!!       #      +!!!!!!     #        !!!!      #                  #     #          # #")
+renderLine(44,"#       !!!!       #       !!!!!!     #        !!!!!  c  #        F         ##### ############ #")
+renderLine(45,"#       !!!!       #     !!!!!!!      #         !!!!     #                  #     #   #      # #")
+renderLine(46,"#       !!!!       #    !!!!!!!    .  #         !!!!!    #                  # ##### # # #### # #")
+renderLine(47,"#       !!!!       #   !!!!!!!!       #         !!!!!    #                  #       # #    #   #")
+renderLine(48,"############# ############################# ########## ##############################b#### #####")
+renderLine(49,"#ffffffffffff fffff#                  #      #           #     X///////     #SSSSSSS#   b&$SSSS#")
+renderLine(50,"#f                f#                  #      # ###########     X///////     #SSSSSSS#    #$SSSS#")
+renderLine(51,"#f  3dddddddddd1  f#       =G=        #      # #   # # X #     X///////     #SSSSSSS#  q #SSSSS#")
+renderLine(52,"#f  r3dddddddd1l  f#       GFG        #      # # X # #   #     ////////     #SSSSSSS#    #SSSSS#")
+renderLine(53,"#f  rr3dddddd1ll  f#     =GG^GG=      #      # # # # # X #     ////////     #SSSSSSS######SSSSS#")
+renderLine(54,"#f  rrr   U  lll  f#     GF^c^FG             # # # X # # #     X///////      SSSSSSSSSSSSSSSSSS#")
+renderLine(55,"#f  rr9uuuuuu7ll  f#     =GG^GG=      #      # X #   # # #     X///////     #SSSSSSSSSSSSSSSSSS#")
+renderLine(56,"#f  r9uuuuuuuu7l  f#       GoG        #      #   # X # #       X///////     #SSSSSSSSSSSSSSSSSS#")
+renderLine(57,"#f  9uuuuuuuuuu7  f#       =G=        #      # X # # # # #     X///////     #SSSSSSSSSSSSSSSSSS#")
+renderLine(58,"#f                f#                  #      # # # # X # #     X///////     #SSSSSSSSSSSSSSSSSS#")
+renderLine(59,"#ffffffffffffffffff#                  #      # # # #   # #     X///////     #SSSSSSSSSSSSSSSSSS#")
+renderLine(60,"################################################################################################")
+
+oxyd_shuffle()
+
+AddRubberBand (enigma.GetNamedObject("rubberhorse"), enigma.GetNamedObject("rubberbrownie"), 5, 6, 0)
+
+puzzle_shuffle = "none"
+if (difficult) then
+    puzzle_shuffle = "permutation"
+end
+puzzle({"  ###  ",
+        "  # #  ",
+        "### ###",
+        "#     #",
+        "### ###",
+        "  # #  ",
+        "  ###  "}, {enigma.GetPos(enigma.GetNamedObject("puzzleedge"))},
+        "redpuzzle", puzzle_shuffle)
+
+pex,pey = enigma.GetPos(enigma.GetNamedObject("puzzleedge"))
+ppx,ppy = enigma.GetPos(enigma.GetNamedObject("puzzlepart"))
+set_stone("st-puzzle", ppx,ppy, {oxyd=1,
+    connections = enigma.GetAttrib(enigma.GetStone(pex+4, pey+6), "connections")})
+enigma.KillStone(pex+4, pey+6)
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

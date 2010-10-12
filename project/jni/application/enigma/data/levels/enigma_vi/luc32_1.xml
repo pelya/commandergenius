@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Blitz Chess" el:subtitle="Move fast!" el:id="luc322006"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Lukas Schüller" el:email="Lucky_Luc@web.de" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Lukas Schüller</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+CreateWorld(20,13)
+fill_floor("fl-wood")
+
+function writeLine( line, cells)
+  for i=1, strlen(cells) do
+    local c = strsub(cells,i,i)
+    if(c ==".") then
+      set_floor("fl-abyss",i-1,line)
+    elseif(c =="#") then
+      set_stone("st-greenbrown",i-1,line)
+    elseif(c =="x") then
+      set_item("it-trigger",i-1,line)
+    elseif(c =="o") then
+      set_stone("st-switch",i-1,line)
+    elseif(c =="e") then
+      set_stone("st-laser-e",i-1,line)
+    elseif(c =="n") then
+      set_stone("st-laser-n",i-1,line)
+    elseif(c =="b") then
+      set_floor("fl-bridge",i-1,line,{type="x"})
+    elseif(c =="l") then
+      set_stone("st-lightpassenger",i-1,line,{interval=0.001})
+    elseif(c =="/") then
+      set_stone("st-mirror-p\\",i-1,line)
+    elseif(c =="<") then
+      set_stone("st-mirror-3>",i-1,line)
+    elseif(c =="k") then
+      set_stone("st-chess_black",i-1,line)
+    elseif(c =="s") then
+      set_floor("fl-swamp",i-1,line)
+    elseif(c =="t") then
+      set_floor("fl-thief",i-1,line)
+    elseif(c =="w") then
+      set_item("it-wormhole",i-1,line,{targetx=8.5,targety=6.5,range=0.5})
+    elseif(c =="O") then
+      oxyd(i-1,line)
+    elseif(c =="0") then
+      set_actor("ac-blackball",i-0.5,line+0.5,{player="0"})
+    end
+  end
+end
+
+writeLine(00,"......#.............")
+writeLine(01,".O....x.....   .ttt.")
+writeLine(02,".<....  b    / .t.t.")
+writeLine(03,".O.x..  .....  .t.t.")
+writeLine(04,"... .. ..k  . ..t.t.")
+writeLine(05,".el    s. . ./..w.t.")
+writeLine(06,".....  .    ......t.")
+writeLine(07,"......  .. ..   ..t.")
+writeLine(08,".       ..    . ..t.")
+writeLine(09,". ....n   ..... ..t.")
+writeLine(10,". .   ...       ..t.")
+writeLine(11,".   .  o..........0.")
+writeLine(12,"....................")
+
+SetAttrib(enigma.GetStone(1,5),"init",FALSE)
+SetAttrib(enigma.GetStone(6,9),"init",FALSE)
+
+Signal ("st(7 11)","st(1 5)")
+Signal ("it(3 3)","st(6 9)")
+Signal ("it(6 1)","fl(8 2)")
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Blitzschach</el:translation>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Ziehe schnell!</el:translation>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

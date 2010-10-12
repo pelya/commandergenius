@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Your Friend, the Light" el:subtitle="" el:id="just15"/>
+      <el:version el:score="1" el:release="1" el:revision="2" el:status="released"/>
+      <el:author  el:name="JuSt" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 JuSt</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="1:32"/>
+    </el:info>
+    <el:luamain><![CDATA[
+enigma.ConserveLevel = FALSE
+
+create_world(20, 25)
+oxyd_default_flavor="b"
+
+-- Code
+function open_door()
+     SendMessage ("door1", "open")
+     SendMessage ("laser4", "off")
+end
+
+function switch_lasers_0()
+     SendMessage ("laser10", "onoff")
+     SendMessage ("laser20", "onoff")
+end
+
+function switch_lasers_1()
+     SendMessage ("laser11", "onoff")
+     SendMessage ("laser21", "onoff")
+end
+
+function switch_lasers_2()
+     SendMessage ("laser12", "onoff")
+     SendMessage ("laser22", "onoff")
+end
+
+function switch_lasers_3()
+     SendMessage ("laser13", "onoff")
+     SendMessage ("laser23", "onoff")
+end
+
+function switch_lasers_4()
+     SendMessage ("laser14", "onoff")
+     SendMessage ("laser24", "onoff")
+end
+
+function switch_lasers_5()
+     SendMessage ("laser15", "onoff")
+end
+
+-- Floor Layer
+fill_floor("fl-stone")
+draw_floor("fl-water", {2, 2}, {1, 0}, 8)
+draw_floor("fl-water", {12, 2}, {1, 0}, 7)
+draw_floor("fl-water", {2, 3}, {0, 1}, 3)
+draw_floor("fl-water", {18, 3}, {0, 1}, 3)
+draw_floor("fl-water", {2, 8}, {0, 1}, 5)
+draw_floor("fl-water", {18, 8}, {0, 1}, 2)
+draw_floor("fl-water", {3, 11}, {1, 0}, 6)
+draw_floor("fl-water", {11, 11}, {1, 0}, 7)
+fill_floor("fl-black", 1, 14, 8, 10)
+fill_floor("fl-black", 9, 20, 10, 4)
+
+-- Item Layer
+set_item("it-trigger", 18, 11, {action="callback", target="open_door", invisible=FALSE})
+set_item("it-trigger", 10, 13, {action="close", target="door1", invisible=TRUE})
+set_item("it-trigger", 11, 17, {action="callback", target="switch_lasers_5", invisible=FALSE})
+set_item("it-trigger", 12, 17, {action="callback", target="switch_lasers_4", invisible=FALSE})
+set_item("it-trigger", 13, 17, {action="callback", target="switch_lasers_3", invisible=FALSE})
+set_item("it-trigger", 14, 17, {action="callback", target="switch_lasers_2", invisible=FALSE})
+set_item("it-trigger", 15, 17, {action="callback", target="switch_lasers_1", invisible=FALSE})
+set_item("it-trigger", 16, 17, {action="callback", target="switch_lasers_0", invisible=FALSE})
+set_item("it-trigger", 18, 21, {action="open", target="door2", invisible=FALSE})
+
+-- Stone Layer
+oxyd(19, 14)
+oxyd(18, 13)
+draw_stones("st-marble", {0, 0}, {0, 1}, 2)
+draw_stones("st-marble", {3, 0}, {1, 0}, 15)
+draw_stones("st-marble", {0, 3}, {0, 1}, 7)
+draw_stones("st-marble", {19, 3}, {0, 1}, 11)
+draw_stones("st-marble", {0, 12}, {0, 1}, 7)
+fill_stones("st-marble", 2, 12, 5, 2)
+draw_stones("st-marble", {7, 12}, {1, 0}, 3)
+fill_stones("st-marble", 11, 12, 7, 2)
+draw_stones("st-marble", {8, 13}, {1, 0}, 2)
+draw_stones("st-marble", {9, 14}, {0, 1}, 5)
+draw_stones("st-marble", {17, 14}, {0, 1}, 2)
+draw_stones("st-marble", {19, 15}, {0, 1}, 8)
+draw_stones("st-marble", {10, 19}, {1, 0}, 4)
+draw_stones("st-marble", {15, 19}, {1, 0}, 4)
+draw_stones("st-marble", {2, 24}, {1, 0}, 5)
+draw_stones("st-marble", {8, 24}, {1, 0}, 6)
+draw_stones("st-marble", {15, 24}, {1, 0}, 5)
+set_stones("st-marble", {{19, 0}, {18, 12}, {0, 20}, {0, 22}, {0, 24}, {16, 14}})
+draw_stones("st-grate1", {3, 3}, {1, 0}, 8)
+draw_stones("st-grate1", {12, 3}, {1, 0}, 6)
+draw_stones("st-grate1", {3, 4}, {0, 1}, 3)
+draw_stones("st-grate1", {17, 4}, {0, 1}, 3)
+draw_stones("st-grate1", {3, 8}, {0, 1}, 3)
+draw_stones("st-grate1", {17, 8}, {0, 1}, 3)
+draw_stones("st-grate1", {4, 10}, {1, 0}, 6)
+draw_stones("st-grate1", {11, 10}, {1, 0}, 6)
+--draw_stones("st-glass", {1, 1}, {1, 0}, 2)
+draw_stones("st-glass3", {2, 14}, {1, 1}, 5)
+draw_stones("st-glass3", {4, 14}, {1, 1}, 3)
+draw_stones("st-glass3", {2, 16}, {1, 1}, 3)
+draw_stones("st-glass3", {2, 20}, {1, 1}, 4)
+draw_stones("st-glass3", {4, 20}, {1, 1}, 3)
+draw_stones("st-glass3", {8, 20}, {1, 1}, 3)
+draw_stones("st-glass3", {10, 20}, {1, 1}, 3)
+draw_stones("st-glass3", {1, 21}, {1, 1}, 3)
+draw_stones("st-glass3", {15, 22}, {1, 1}, 2)
+draw_stones("st-glass3", {17, 22}, {1, 1}, 2)
+draw_stones("st-pmirror", {8, 5}, {0, 1}, 3, {movable=TRUE, transparent=FALSE, orientation="3"})
+set_stones("st-pmirror", {{1, 0}, {19, 2}, {0, 10}}, {movable=FALSE, transparent=FALSE, orientation="4"})
+set_stones("st-pmirror", {{2, 0}, {19, 1}, {0, 11}}, {movable=FALSE, transparent=FALSE, orientation="2"})
+set_stones("st-glass3", {{6, 14}, {8, 14}, {8, 16}, {2, 18}, {8, 18}, {6, 20}, {12, 20}, {15, 20}, {17, 20}, {8, 22}, {1, 23}})
+set_stone("st-door", 18, 15, {name="door2", type="h"})
+set_stone("st-door", 10, 12, {name="door1", type="h"})
+set_stone("st-laser", 18, 0, {dir=SOUTH, on="1"})
+set_stone("st-laser", 0, 2, {dir=EAST, on="1"})
+set_stone("st-laser", 18, 10, {dir=NORTH, on="1"})
+set_stone("st-laser", 1, 12, {name="laser4", dir=NORTH, on="1"})
+set_stone("st-laser",  1, 13, {name="laser10", dir=SOUTH, on="0"})
+set_stone("st-laser",  1, 24, {name="laser20", dir=NORTH, on="1"})
+set_stone("st-laser",  0, 19, {name="laser11", dir=EAST,  on="0"})
+set_stone("st-laser",  9, 19, {name="laser21", dir=WEST,  on="1"})
+set_stone("st-laser",  7, 13, {name="laser12", dir=SOUTH, on="0"})
+set_stone("st-laser",  7, 24, {name="laser22", dir=NORTH, on="1"})
+set_stone("st-laser",  0, 23, {name="laser13", dir=EAST,  on="0"})
+set_stone("st-laser", 19, 23, {name="laser23", dir=WEST,  on="1"})
+set_stone("st-laser", 14, 24, {name="laser14", dir=NORTH, on="0"})
+set_stone("st-laser", 14, 19, {name="laser24", dir=SOUTH, on="1"})
+set_stone("st-laser",  0, 21, {name="laser15", dir=EAST,  on="0"})
+if difficult then
+    set_stone("st-lightpassenger", 1, 14, {interval=0.2})
+else
+    set_stone("st-lightpassenger", 1, 14, {interval=0.4})
+end
+set_stone("st-lightpassenger", 18, 8, {interval=0.1})
+
+-- Actor Layer
+set_actor("ac-blackball", 10.5, 7.5, {player="0", mouseforce="1"})
+
+oxyd_shuffle()
+  ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

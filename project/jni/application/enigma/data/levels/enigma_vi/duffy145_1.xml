@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Idempotency" el:subtitle="" el:id="duffy145"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+rooms_wide=1
+rooms_high=1
+
+levelw=1+(19*rooms_wide)
+levelh=1+(12*rooms_high)
+
+create_world( levelw, levelh)
+enigma.ConserveLevel=FALSE
+
+fill_floor("fl-normal", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-yellow", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c == "~" then
+            set_floor("fl-water",i-1,line)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {player=0})
+        elseif c=="@" then
+            set_stone("st-turnstile",i-1,line)
+        elseif c=="8" then
+            set_stone("st-turnstile-n",i-1,line)
+        elseif c=="6" then
+            set_stone("st-turnstile-e",i-1,line)
+        elseif c=="2" then
+            set_stone("st-turnstile-s",i-1,line)
+        elseif c=="4" then
+            set_stone("st-turnstile-w",i-1,line)
+        elseif c=="A" then
+            doorv(i-1,line,{name="A"})
+        elseif c=="B" then
+            doorv(i-1,line,{name="B"})
+        elseif c=="C" then
+            doorv(i-1,line,{name="C"})
+        elseif c=="D" then
+            doorv(i-1,line,{name="D"})
+        elseif c=="E" then
+            doorv(i-1,line,{name="E"})
+        elseif c=="F" then
+            doorv(i-1,line,{name="F"})
+        elseif c=="G" then
+            doorv(i-1,line,{name="G"})
+        elseif c=="H" then
+            doorv(i-1,line,{name="H"})
+        elseif c=="I" then
+            doorv(i-1,line,{name="I"})
+        elseif c=="J" then
+            doorv(i-1,line,{name="J"})
+        elseif c=="a" then
+            doorv(i-1,line,{name="a"})
+        elseif c=="b" then
+            doorv(i-1,line,{name="b"})
+        elseif c=="c" then
+            doorv(i-1,line,{name="c"})
+        elseif c=="d" then
+            doorv(i-1,line,{name="d"})
+        elseif c=="e" then
+            doorv(i-1,line,{name="e"})
+        elseif c=="f" then
+            doorv(i-1,line,{name="f"})
+        elseif c=="$" then
+            doorv(i-1,line,{name="g"})
+        elseif c=="h" then
+            doorv(i-1,line,{name="h"})
+        elseif c=="i" then
+            doorv(i-1,line,{name="i"})
+        elseif c=="j" then
+            doorv(i-1,line,{name="j"})
+        elseif c=="k" then
+            set_item("it-trigger",i-1,line,{action="callback",target="funcc1"})
+        elseif c=="l" then
+            set_item("it-trigger",i-1,line,{action="callback",target="funcc2"})
+        elseif c=="m" then
+            set_item("it-trigger",i-1,line,{action="callback",target="funcc3"})
+        elseif c=="n" then
+            set_item("it-trigger",i-1,line,{invisible=1,action="callback",target="funcc4"})
+            set_floor("fl-water",i-1,line)
+        elseif c=="`" then
+            set_item("it-trigger",i-1,line,{action="callback",target="funcc5"})
+        elseif c=="p" then
+            set_item("it-trigger",i-1,line,{invisible=1,action="callback",target="funcc6"})
+            set_floor("fl-water",i-1,line)
+        elseif c=="q" then
+            set_item("it-trigger",i-1,line,{action="callback",target="funcc7"})
+        elseif c=="r" then
+            set_item("it-trigger",i-1,line,{action="callback",target="funcc8"})
+        elseif c=="s" then
+            set_item("it-trigger",i-1,line,{action="callback",target="funcc9"})
+        elseif c=="t" then
+            set_item("it-trigger",i-1,line,{action="callback",target="funcc10"})
+        end
+    end
+end
+
+renderLine(00,"####################")
+renderLine(01,"# AB CD EF GH IJ  o#")
+renderLine(02,"# ##################")
+renderLine(03,"#     l   `   r    #")
+renderLine(04,"#####4@6#4@6#4@6####")
+renderLine(05,"#   8 2 8 2 8 2 8  #")
+renderLine(06,"#z#k@6#4@n#p@6#4@s##")
+renderLine(07,"#   2 8 2 8 2 8 2  #")
+renderLine(08,"#####4@6#4@6#4@6####")
+renderLine(09,"#     m   q   t    #")
+renderLine(10,"# ##################")
+renderLine(11,"# ab cd ef $h ij  o#")
+renderLine(12,"####################")
+
+oxyd_shuffle()
+
+A=enigma.GetNamedObject("A")
+B=enigma.GetNamedObject("B")
+C=enigma.GetNamedObject("C")
+D=enigma.GetNamedObject("D")
+E=enigma.GetNamedObject("E")
+F=enigma.GetNamedObject("F")
+G=enigma.GetNamedObject("G")
+H=enigma.GetNamedObject("H")
+I=enigma.GetNamedObject("I")
+J=enigma.GetNamedObject("J")
+
+a=enigma.GetNamedObject("a")
+b=enigma.GetNamedObject("b")
+c=enigma.GetNamedObject("c")
+d=enigma.GetNamedObject("d")
+e=enigma.GetNamedObject("e")
+f=enigma.GetNamedObject("f")
+g=enigma.GetNamedObject("g")
+h=enigma.GetNamedObject("h")
+i=enigma.GetNamedObject("i")
+j=enigma.GetNamedObject("j")
+
+enigma.SendMessage(A,"open",nil)
+enigma.SendMessage(B,"open",nil)
+enigma.SendMessage(C,"open",nil)
+enigma.SendMessage(D,"open",nil)
+enigma.SendMessage(E,"open",nil)
+enigma.SendMessage(F,"open",nil)
+enigma.SendMessage(G,"open",nil)
+enigma.SendMessage(H,"open",nil)
+enigma.SendMessage(I,"open",nil)
+enigma.SendMessage(J,"open",nil)
+
+enigma.SendMessage(a,"open",nil)
+enigma.SendMessage(b,"open",nil)
+enigma.SendMessage(c,"open",nil)
+enigma.SendMessage(d,"open",nil)
+enigma.SendMessage(e,"open",nil)
+enigma.SendMessage(f,"open",nil)
+enigma.SendMessage(g,"open",nil)
+enigma.SendMessage(h,"open",nil)
+enigma.SendMessage(i,"open",nil)
+enigma.SendMessage(j,"open",nil)
+
+function funcc1()
+    enigma.SendMessage(A,"openclose",nil)
+    enigma.SendMessage(a,"openclose",nil)
+end
+
+function funcc2()
+    enigma.SendMessage(B,"openclose",nil)
+    enigma.SendMessage(b,"openclose",nil)
+end
+
+function funcc3()
+    enigma.SendMessage(C,"openclose",nil)
+    enigma.SendMessage(c,"openclose",nil)
+end
+
+function funcc4()
+    enigma.SendMessage(D,"openclose",nil)
+    enigma.SendMessage(d,"openclose",nil)
+end
+
+function funcc5()
+    enigma.SendMessage(E,"openclose",nil)
+    enigma.SendMessage(e,"openclose",nil)
+end
+
+function funcc6()
+    enigma.SendMessage(F,"openclose",nil)
+    enigma.SendMessage(f,"openclose",nil)
+end
+
+function funcc7()
+    enigma.SendMessage(G,"openclose",nil)
+    enigma.SendMessage(g,"openclose",nil)
+end
+
+function funcc8()
+    enigma.SendMessage(H,"openclose",nil)
+    enigma.SendMessage(h,"openclose",nil)
+end
+
+function funcc9()
+    enigma.SendMessage(I,"openclose",nil)
+    enigma.SendMessage(i,"openclose",nil)
+end
+
+function funcc10()
+    enigma.SendMessage(J,"openclose",nil)
+    enigma.SendMessage(j,"openclose",nil)
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

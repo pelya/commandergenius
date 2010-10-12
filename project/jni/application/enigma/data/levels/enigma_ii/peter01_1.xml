@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Beam0r" el:subtitle="" el:id="peter_001"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Peter Santo" el:email="enigma@exaweb.de" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Peter Santo</el:copyright>
+      <el:license el:type="public domain" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- This level is public domain
+-- My first Enigma level. It is not too difficult, 
+-- but I like finding solutions for laser beam puzzles.
+-- Feb.'06: Replaced some characters to get pure ASCII, Raoul 
+
+display.SetFollowMode(display.FOLLOW_SCROLLING)
+
+oxyd_default_flavor = "b"
+
+cells={}
+cells[" "]=cell{floor = "fl-acblack"}
+cells["!"]=cell{parent=cells[" "], stone="st-glass"}
+cells["#"]=cell{parent={cells[" "], {oxyd}}}
+
+cells["+"]=cell{parent=cells[" "], stone={"st-laser-e", {name="laser"}}}
+
+cells["0"]=cell{parent=cells[" "], stone={"st-coinslot", {target = "laser", action = "onoff"}}}
+
+cells["$"]=cell{parent=cells[" "], item={"it-coin1"}}
+
+cells["a"]=cell{parent=cells[" "], stone={"st-pmirror", {name="mirror1"}}}
+cells["b"]=cell{parent=cells[" "], stone={"st-pmirror", {name="mirror2"}}}
+cells["c"]=cell{parent=cells[" "], stone={"st-pmirror", {name="mirror3"}}}
+cells["d"]=cell{parent=cells[" "], stone={"st-pmirror", {name="mirror4"}}}
+cells["e"]=cell{parent=cells[" "], stone={"st-pmirror", {name="mirror5"}}}
+cells["f"]=cell{parent=cells[" "], stone={"st-pmirror", {name="mirror6"}}}
+cells["g"]=cell{parent=cells[" "], stone={"st-pmirror", {name="mirror7"}}}
+cells["h"]=cell{parent=cells[" "], stone={"st-pmirror", {name="mirror8"}}}
+cells["i"]=cell{parent=cells[" "], stone={"st-pmirror", {name="mirror9"}}}
+cells["j"]=cell{parent=cells[" "], stone={"st-pmirror", {name="mirror10"}}}
+cells["k"]=cell{parent=cells[" "], stone={"st-pmirror", {name="mirror11"}}}
+
+cells["A"]=cell{parent=cells[" "],item={"it-trigger", {action="turn", target="mirror1"}}}
+cells["B"]=cell{parent=cells[" "],item={"it-trigger", {action="turn", target="mirror2"}}}
+cells["C"]=cell{parent=cells[" "],item={"it-trigger", {action="turn", target="mirror3"}}}
+cells["D"]=cell{parent=cells[" "],item={"it-trigger", {action="turn", target="mirror4"}}}
+cells["E"]=cell{parent=cells[" "],item={"it-trigger", {action="turn", target="mirror5"}}}
+cells["F"]=cell{parent=cells[" "],item={"it-trigger", {action="turn", target="mirror6"}}}
+cells["G"]=cell{parent=cells[" "],item={"it-trigger", {action="turn", target="mirror7"}}}
+cells["H"]=cell{parent=cells[" "],item={"it-trigger", {action="turn", target="mirror8"}}}
+cells["I"]=cell{parent=cells[" "],item={"it-trigger", {action="turn", target="mirror9"}}}
+cells["J"]=cell{parent=cells[" "],item={"it-trigger", {action="turn", target="mirror10"}}}
+cells["K"]=cell{parent=cells[" "],item={"it-trigger", {action="turn", target="mirror11"}}}
+
+cells["&"]=cell{parent=cells[" "], actor={"ac-blackball",{player=0}}}
+
+level={"   #   #   #   #    ",
+       "  #a   b   c   d#   ",
+       "                    ",
+       "  +    e   f   g    ",
+       "                    ",
+       "  #h   i   j   k#   ",
+       "   #   #   #   #    ",
+       "     !!!!!!!!!      ",
+       "     !A$B$C$D!      ",
+       "     !$$$$$$$!      ",
+       "     0$$E&F$G!      ",
+       "     !$$$$$$$!      ",
+       "     !H$I$J$K!      "}
+       
+create_world_by_map(level)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>
+
+

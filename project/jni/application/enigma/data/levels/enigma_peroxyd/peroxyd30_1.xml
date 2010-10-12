@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation - " el:subtitle="Per.Oxyd 30" el:id="peroxyd30"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2005 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="per.oxyd">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="0:10"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelw = 20
+levelh = 13
+create_world(levelw, levelh)
+enigma.ConserveLevel = TRUE
+
+-- FLOOR --
+fill_floor("fl-abyss", 0,0,20,13)
+
+draw_floor("fl-gray",{2,2},{1,0},16)
+draw_floor("fl-gray",{2,6},{1,0},16)
+draw_floor("fl-gray",{2,10},{1,0},16)
+
+draw_floor("fl-gradient1",{2,1},{1,0},16)
+draw_floor("fl-gradient1",{2,5},{1,0},16)
+draw_floor("fl-gradient1",{2,9},{1,0},16)
+
+draw_floor("fl-gradient2",{2,3},{1,0},16)
+draw_floor("fl-gradient2",{2,7},{1,0},16)
+draw_floor("fl-gradient2",{2,11},{1,0},16)
+
+set_floor("fl-gradient5",1,1)
+set_floor("fl-gradient5",1,5)
+set_floor("fl-gradient5",1,9)
+
+set_floor("fl-gradient7",1,3)
+set_floor("fl-gradient7",1,7)
+set_floor("fl-gradient7",1,11)
+
+set_floor("fl-gradient6",18,1)
+set_floor("fl-gradient6",18,5)
+set_floor("fl-gradient6",18,9)
+
+set_floor("fl-gradient8",18,3)
+set_floor("fl-gradient8",18,7)
+set_floor("fl-gradient8",18,11)
+
+set_floor("fl-gradient3",1,2)
+set_floor("fl-gradient3",1,6)
+set_floor("fl-gradient3",1,10)
+set_floor("fl-gradient4",18,2)
+set_floor("fl-gradient4",18,6)
+set_floor("fl-gradient4",18,10)
+
+-- ITEMS --
+set_item("it-hollow", 15,2, {essential=1})
+set_item("it-hollow", 10,6, {essential=1})
+set_item("it-hollow", 4,10, {essential=1})
+
+-- ACTORS --
+if not difficult then
+ ac1=set_actor("ac-whiteball-small", 10,2.5,{player=0,essential=1})
+ ac2=set_actor("ac-whiteball-small", 10,6.5,{player=0,essential=1})
+ ac3=set_actor("ac-whiteball-small", 10,10.5,{player=0,essential=1})
+else
+ ac1=set_actor("ac-whiteball-small", 10,2.5,{essential=1,controllers=2})
+ ac2=set_actor("ac-whiteball-small", 10,6.5,{player=0,essential=1})
+ ac3=set_actor("ac-whiteball-small", 10,10.5,{essential=1,controllers=2})
+end
+
+AddRubberBand(ac1,ac2,4,3)
+AddRubberBand(ac2,ac3,4,3)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Island of Mirrors" el:subtitle="Oxyd Extra 23" el:id="oxe23"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2002 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd.extra">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+num = 0
+function engine(x, y, delta, faces, attribs, modattrib, modvalues)
+   local it = {}
+   it.state = 1
+
+   num = num +1
+   local fname = "switchfunc"..num
+
+   attribs[1].action = "callback"
+   attribs[1].target = fname
+
+   local x2, y2 = x+delta[1], y+delta[2]
+   set_stone(faces[1], x, y, attribs[1])
+   it.tgt = set_stone(faces[2], x2, y2, attribs[2])
+
+   local func0 = function()
+            -- switch
+            it.state = it.state +1
+            if (it.state>getn(modvalues)) then
+               it.state = 1
+            end
+            -- set state of desired target object
+            kill_stone(x2, y2)
+            attribs[2][modattrib] = modvalues[it.state]
+            set_stone(faces[2], x2, y2, attribs[2])
+            --set_attrib(it.tgt, modattrib, modvalues[it.state])
+         end
+
+   setglobal(fname, func0)
+end
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+local dlt  = {11,0} -- delta
+local mir3 = {"st-switch", "st-3mirror"}
+local mirp = {"st-switch", "st-pmirror"}
+local lsr =  {"st-switch", "st-laser"}
+local trn = {transparent=TRUE,  movable = TRUE}
+local ntr = {transparent=FALSE, movable = FALSE}
+
+cells={}
+cells["."] = abyss
+cells["0"] = oxyd
+cells[" "] = cell{floor="fl-samba"}
+cells["#"] = cell{stone="st-rock5"}
+cells["O"] = cell{actor={"ac-blackball", {player=0}}}
+
+cells["A"] = cell{{{engine, dlt, mir3, {{},{orientation=3}}, "orientation", {3,4}}}}
+cells["B"] = cell{{{engine, dlt, mirp, {{},{orientation=2}}, "orientation", {2,3}}}}
+cells["C"] = cell{{{engine, dlt, mir3, {{},{orientation=1}}, "orientation", {1,2}}}}
+cells["D"] = cell{{{engine, dlt, mir3, {{},{orientation=1}}, "orientation", {1,2}}}}
+cells["E"] = cell{{{engine, dlt, mirp, {{},{transparent=TRUE, orientation=1}}, "orientation", {1,2}}}}
+cells["F"] = cell{{{engine, dlt, mir3, {{},{orientation=2}}, "orientation", {2,3}}}}
+cells["G"] = cell{{{engine, dlt, mirp, {{},{orientation=1}}, "orientation", {1,2}}}}
+cells["H"] = cell{{{engine, dlt, mir3, {{},{orientation=2}}, "orientation", {2,3}}}}
+cells["L"] = cell{stone={"st-laser", {on=FALSE, dir=NORTH, name="laser1"}}}
+cells["S"] = cell{{{switch, "laser1", "onoff"}}}
+
+level = {
+   "....................",
+   "....................",
+   ".#...#.......0...0..",
+   ".       ....       .",
+   ". A B C ....       0",
+   ".       #...       .",
+   ". D E F ...0       .",
+   ".  O    ....       .",
+   "# G   H ....       0",
+   ".       ....       .",
+   "....S...#......L.0..",
+   "....................",
+   "....................",
+}
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+oxyd_default_flavor="c"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

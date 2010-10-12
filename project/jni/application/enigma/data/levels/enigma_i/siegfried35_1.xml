@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation -" el:subtitle="" el:id="meditation14"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Siegfried Fennig" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2002 Siegfried Fennig</el:copyright>
+      <el:license el:type="Donated to Enigma under the projects license" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+fill_floor("fl-space",0,0, 20,13)
+fill_floor("fl-inverse",5,3, 10,7)
+fill_floor("fl-inverse",2,6, 3,1)
+fill_floor("fl-inverse",15,6, 3,1)
+
+fill_floor("fl-inverse",3,4, 1,1)
+fill_floor("fl-inverse",3,8, 1,1)
+fill_floor("fl-inverse",16,4, 1,1)
+fill_floor("fl-inverse",16,8, 1,1)
+
+draw_floor("fl-gradient", {2,2}, {1,0},16, {type=1})
+draw_floor("fl-gradient", {1,3}, {0,1}, 7, {type=3})
+draw_floor("fl-gradient", {2,10}, {1,0},16, {type=2})
+draw_floor("fl-gradient", {18,3}, {0,1}, 7, {type=4})
+draw_floor("fl-gradient", {1,2}, {1,0}, 1, {type=5})
+draw_floor("fl-gradient", {18,2}, {1,0}, 1, {type=6})
+draw_floor("fl-gradient", {1,10}, {1,0}, 1, {type=7})
+draw_floor("fl-gradient", {18,10}, {1,0}, 1, {type=8})
+
+set_item("it-hollow", 3,4)
+set_item("it-hollow", 3,8)
+set_item("it-hollow", 16,4)
+set_item("it-hollow", 16,8)
+
+shogundot3 (16,1)
+shogundot2 (2,3)
+shogundot1 (0,7)
+shogundot1 (15,8)
+shogundot3 (4,11)
+
+set_actor("ac-whiteball-small", 9,   6.5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small", 9.5, 6.5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small", 10,   6.5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small", 10.5, 6.5, {player=0, mouseforce=1})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

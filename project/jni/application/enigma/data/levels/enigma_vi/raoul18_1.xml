@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation -" el:subtitle="" el:id="raoul18"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="raoul@users.berlios.de" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+
+fill_floor("fl-water",0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c=="x" then
+            set_item("it-hollow",i-1,line)
+            set_floor("fl-black",i-1,line)
+        elseif c=="s" then
+            set_item("it-springboard",i-1,line)
+            set_floor("fl-black",i-1,line)
+        elseif c=="#" then
+            set_stone("st-glass",i-1,line)
+        elseif c=="o" then
+            set_floor("fl-black",i-1,line)
+        end
+    end
+end
+
+if difficult then
+    x = math.random()
+    if x < 0.25 then
+        renderLine(00 , "                    ")
+        renderLine(01 , " #####        ##### ")
+        renderLine(02 , " #ooo#        #ooo# ")
+        renderLine(03 , " #oxo          oso# ")
+        renderLine(04 , " #ooo  ##  ##  ooo# ")
+        renderLine(05 , " ##ooo  ####  ooo## ")
+        renderLine(06 , "  #oxo        oso#  ")
+        renderLine(07 , " ##ooo  ####  ooo## ")
+        renderLine(08 , " #ooo  ##  ##  ooo# ")
+        renderLine(09 , " #oxo          oso# ")
+        renderLine(10 , " #ooo#        #ooo# ")
+        renderLine(11 , " #####        ##### ")
+        renderLine(12 , "                    ")
+    else
+        renderLine(00 , "                    ")
+        renderLine(01 , " #####        ##### ")
+        renderLine(02 , " #ooo#        #ooo# ")
+        renderLine(03 , " #oxo          oso# ")
+        renderLine(04 , " #ooo##      ##ooo# ")
+        renderLine(05 , " ##ooo#      #ooo## ")
+        renderLine(06 , "  #oxo        oso#  ")
+        renderLine(07 , " ##ooo#      #ooo## ")
+        renderLine(08 , " #ooo##      ##ooo# ")
+        renderLine(09 , " #oxo          oso# ")
+        renderLine(10 , " #ooo#        #ooo# ")
+        renderLine(11 , " #####        ##### ")
+        renderLine(12 , "                    ")
+    end
+else
+    x = math.random()
+    if x < 0.25 then
+        renderLine(00 , "                    ")
+        renderLine(01 , " #####        ##### ")
+        renderLine(02 , " #ooo##########ooo# ")
+        renderLine(03 , " #oxo   oooo   oso# ")
+        renderLine(04 , " #ooo          ooo# ")
+        renderLine(05 , " ##ooo   oo   ooo## ")
+        renderLine(06 , "  #oxo   oo   oso#  ")
+        renderLine(07 , " ##ooo   oo   ooo## ")
+        renderLine(08 , " #ooo          ooo# ")
+        renderLine(09 , " #oxo   oooo   oso# ")
+        renderLine(10 , " #ooo##########ooo# ")
+        renderLine(11 , " #####        ##### ")
+        renderLine(12 , "                    ")
+    else
+        renderLine(00 , "                    ")
+        renderLine(01 , " ################## ")
+        renderLine(02 , " #ooo  o    o  ooo# ")
+        renderLine(03 , " #oxo  o    o  oso# ")
+        renderLine(04 , " #ooo  oo  oo  ooo# ")
+        renderLine(05 , " ##ooo  o  o  ooo## ")
+        renderLine(06 , "  #oxo  o  o  oso#  ")
+        renderLine(07 , " ##ooo  o  o  ooo## ")
+        renderLine(08 , " #ooo  oo  oo  ooo# ")
+        renderLine(09 , " #oxo  o    o  oso# ")
+        renderLine(10 , " #ooo  o    o  ooo# ")
+        renderLine(11 , " ################## ")
+        renderLine(12 , "                    ")
+    end
+end
+
+-- Actors:
+set_actor("ac-whiteball-small", 17.5,3.5, {player=0, essential=1})
+set_actor("ac-whiteball-small", 15.5,6.5, {player=0, essential=1})
+set_actor("ac-whiteball-small", 17.5,9.5, {player=0, essential=1})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

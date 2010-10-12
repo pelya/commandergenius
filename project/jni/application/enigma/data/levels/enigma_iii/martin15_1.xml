@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Black Is Beautiful" el:subtitle="" el:id="martin15"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world( levelw, levelh)
+
+fill_floor("fl-concrete", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-glass1", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "x" then
+            fakeoxyd( i-1, line)
+        elseif c == "$" then
+            set_stone( "st-death", i-1, line)
+        end
+    end
+end
+
+-- Floor:   " "
+-- Border:  "#"
+-- Oxyd:    "o"
+-- Death:   "$"
+
+renderLine(  0, "####o###o##o###o####")
+renderLine(  1, "#x    x      x    x#")
+renderLine(  2, "# xx xxx xx xxx xx #")
+renderLine(  3, "# x   x      x   x #")
+renderLine(  4, "o   $   x  x   $   o")
+renderLine(  5, "# x   x      x   x #")
+renderLine(  6, "#xxx    $$$$    xxx#")
+renderLine(  7, "# x   x      x   x #")
+renderLine(  8, "o   $   x  x   $   o")
+renderLine(  9, "# x   x      x   x #")
+renderLine( 10, "# xx xxx xx xxx xx #")
+renderLine( 11, "#x    x      x    x#")
+renderLine( 12, "####o###o##o###o####")
+
+oxyd_shuffle()
+
+set_actor("ac-blackball", 10.5, 5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

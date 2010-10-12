@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:noNamespaceSchemaLocation='preferences.xsd'>
+  <properties>
+    <property key="MouseSpeed" value="7.0"/>
+    <property key="FullScreen" value="0"/>
+    <property key="InGameMusic" value="0"/>
+    <property key="VideoMode" value="0"/>
+    <property key="Gamma" value="1.0"/>
+    <property key="SoundSet" value="0"/>
+    <property key="SoundVolume" value="1.0"/>
+    <property key="MusicVolume" value="1.0"/>
+    <property key="StereoSeparation" value="10.0"/>
+    <property key="MenuMusicFile" value="sound/menu.s3m"/>
+    <property key="LevelMusicFile" value="sound/Emilie.xm"/>
+    <property key="Language" value=""/>
+    <property key="RatingsAutoUpdate" value="0"/>
+    <property key="_MacUpdate1.00" value="1"/>
+  </properties>
+</preferences>
+

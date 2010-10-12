@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="All Floors" el:subtitle="Testlevel with all Floors" el:id="floors"/>
+      <el:version el:score="1" el:release="1" el:revision="2" el:status="stable"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelh = 13
+levelw = 100
+
+create_world(levelw, levelh)
+enigma.ConserveLevel = TRUE
+display.SetFollowMode(display.FOLLOW_SCROLLING)
+
+-- DESIGN --
+floor="fl-black"
+wall="st-glass"
+
+-- FLOOR --
+fill_floor(floor, 0,0,levelw,levelh)
+
+-- STONES --
+draw_border(wall)
+
+-- ITEMS --
+set_item("it-document", 10, 6, {text="text1"})
+
+-- ACTORS --
+set_actor("ac-blackball", 4.5,4.5, {player=0})
+set_actor("ac-whiteball", 6.5,4.5, {player=1})
+set_item("it-yinyang",4,4)
+set_item("it-yinyang",6,4)
+
+-- Funktionen
+-- VARS
+floorlist={"fl-abyss_fake", "fl-black", "fl-bluegray", "fl-bluegreen", "fl-bluegreenx", "fl-brick", "fl-bumps", "fl-concrete", "fl-darkgray", "fl-dunes", "fl-floor_001", "fl-gravel", "fl-gray", "fl-hay", "fl-himalaya", "fl-leaves", "fl-leavesb", "fl-leavesc1", "fl-leavesc2", "fl-leavesc3", "fl-leavesc4", "fl-leavesd1", "fl-leavesd2", "fl-leavesd3", "fl-leavesd4", "fl-leavese1", "fl-leavese2", "fl-leavese3", "fl-leavese4", "fl-light", "fl-lightgray", "fl-marble", "fl-metal1", "fl-metal2", "fl-metal3", "fl-metal4", "fl-metal5", "fl-metal6", "fl-mortar", "fl-normal", "fl-normal_x", "fl-plank", "fl-red", "fl-rock", "fl-rough", "fl-rough_medium", "fl-rough_slow", "fl-rough-blue", "fl-rough-red", "fl-sahara", "fl-samba", "fl-samba1", "fl-samba2", "fl-sand", "fl-springboard", "fl-stone", "fl-stwood", "fl-stwood1", "fl-stwood2", "fl-tigris", "fl-trigger", "fl-white", "fl-wood", "fl-woven", "fl-abyss", "fl-acblack", "fl-acwhite", "fl-bridge-closed", "fl-gradient1", "fl-gradient2", "fl-gradient3", "fl-gradient4", "fl-gradient5", "fl-gradient6", "fl-gradient7", "fl-gradient8", "fl-gradient9", "fl-gradient10", "fl-gradient11", "fl-gradient12", "fl-gradient13", "fl-gradient14", "fl-gradient15", "fl-gradient16", "fl-ice", "fl-inverse", "fl-inverse2", "fl-nomouse", "fl-space", "fl-space-force", "fl-swamp", "fl-thief", "fl-water"}
+
+------
+nr=1
+for i=1,table.getn(floorlist) do
+      nr = nr+1
+      set_stone("st-switch",1+i,3, {action="callback", target="sw"..nr, name="switch"..nr})
+      func = "function sw"..nr.."() flnr="..i.."; setfloor(flnr) ; end"
+      dostring(func)
+end
+
+function setfloor(flnr)
+ floor=floorlist[flnr]
+ fldo=floorlist[flnr]
+ draw_floor(floor,{1+flnr,5},{0,1},5)
+ set_item("it-document", 1+flnr, 1, {text=fldo})
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="false">Level with all floors of Enigma 1.01!</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

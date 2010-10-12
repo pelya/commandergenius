@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Slalom Skiing" el:subtitle="" el:id="martin93"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelh = 10 
+create_world( 20, levelh*13-levelh+1)
+
+fill_floor("fl-ice")
+
+if not difficult then
+    wall_stone = "st-actorimpulse_invisible"
+else
+    wall_stone = "st-death_invisible"
+end
+
+draw_border(wall_stone)
+
+oxyd(10,3)
+oxyd(11,levelh*12)
+
+for y = 1, levelh-1 do
+    x = random(1,level_width-7)
+    draw_stones(wall_stone, {0,y*12}, {1,0}, x)
+    draw_stones(wall_stone, {level_width-1,y*12}, {-1,0}, level_width-(x+6))
+    set_stone("st-actorimpulse_invisible", x, y*12)
+    set_stone("st-actorimpulse_invisible", x+5, y*12)
+    set_item("it-flagwhite", x, y*12)
+    set_item("it-flagblack", x+5, y*12)
+end
+
+set_actor("ac-blackball",10.5, 1.5)
+
+enigma.AddConstantForce(0,5)
+display.SetFollowMode(display.FOLLOW_SCREENSCROLLING)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

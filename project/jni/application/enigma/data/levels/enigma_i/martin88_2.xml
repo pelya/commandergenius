@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Growing The Doors" el:subtitle="" el:id="martin88"/>
+      <el:version el:score="2" el:release="2" el:revision="1" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+fill_floor("fl-rough")
+
+oxyd_default_flavor = "b"
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+      local c = strsub( pattern, i, i)
+      if c =="#" then
+         set_stone("st-plain",i-1,line)
+      elseif c == "O" then
+         oxyd( i-1, line)
+      elseif c == "+" then
+         set_stone("st-shogun-s",i-1,line)
+      elseif c == " " then
+         set_floor("fl-sand", i-1, line)
+      end
+    end
+end
+
+set_stone("st-door_b", 1,7, {type="v", name="door1"})
+set_stone("st-door_b", 6,9, {type="v", name="door2"})
+set_stone("st-door_b",14,7, {type="v", name="door3"})
+set_stone("st-door_b",11,4, {type="v", name="door4"})
+
+set_stone("st-door_b", 8,2, {type="v", name="floor8"})
+set_stone("st-door_b", 8,3, {type="v", name="floor11"})
+set_stone("st-door_b", 8,4, {type="v", name="floor15"})
+set_stone("st-door_b", 8,5, {type="v", name="floor5"})
+set_stone("st-door_b", 8,6, {type="v", name="floor10"})
+set_stone("st-door_b", 8,7, {type="v", name="floor14"})
+set_stone("st-door_b", 9,7, {type="v", name="floor3"})
+set_stone("st-door_b",10,7, {type="v", name="floor9"})
+set_stone("st-door_b",10,6, {type="v", name="floor13"})
+set_stone("st-door_b",10,5, {type="v", name="floor16"})
+set_stone("st-door_b",10,4, {type="v", name="floor7"})
+set_stone("st-door_b",10,10, {type="v", name="floor12"})
+set_stone("st-door_b", 9,10, {type="v", name="floor1"})
+set_stone("st-door_b", 8,10, {type="v", name="floor2"})
+set_stone("st-door_b", 7,10, {type="v", name="floor4"})
+set_stone("st-door_b", 7, 9, {type="v", name="floor6"})
+
+set_item("it-shogun-s", 2, 2, {target="door1", action="openclose"})
+set_item("it-shogun-s", 2, 1, {target="floor1", action="openclose"})
+set_item("it-shogun-s", 4, 1, {target="floor7", action="openclose"})
+set_item("it-shogun-s", 5, 1, {target="floor3", action="openclose"})
+set_item("it-shogun-s", 5, 2, {target="floor4", action="openclose"})
+
+set_item("it-shogun-s", 1,11, {target="floor2", action="openclose"})
+set_item("it-shogun-s", 2,11, {target="floor6", action="openclose"})
+set_item("it-shogun-s", 3,11, {target="door2", action="openclose"})
+set_item("it-shogun-s", 4,11, {target="floor12", action="openclose"})
+
+set_item("it-shogun-s",16,10, {target="floor8", action="openclose"})
+set_item("it-shogun-s",16,11, {target="floor9", action="openclose"})
+set_item("it-shogun-s",17,11, {target="floor10", action="openclose"})
+set_item("it-shogun-s",18,11, {target="door3", action="openclose"})
+set_item("it-shogun-s",18,10, {target="floor11", action="openclose"})
+
+set_item("it-shogun-s",14,3, {target="floor5", action="openclose"})
+set_item("it-shogun-s",14,4, {target="floor13", action="openclose"})
+set_item("it-shogun-s",15,3, {target="floor14", action="openclose"})
+set_item("it-shogun-s",15,4, {target="floor15", action="openclose"})
+set_item("it-shogun-s",16,3, {target="door4", action="openclose"})
+set_item("it-shogun-s",16,4, {target="floor16", action="openclose"})
+
+renderLine( 0, "####################")
+renderLine( 1, "##----##O######---##")
+renderLine( 2, "##--+-#O O##-+-+---#")
+renderLine( 3, "###--+## ###-#-+-#-#")
+renderLine( 4, "#-+--+-# #  -#-+-#-#")
+renderLine( 5, "#-#+##-# # #---+-+-#")
+renderLine( 6, "#------# O ##---####")
+renderLine( 7, "# ######   ### #####")
+renderLine( 8, "#-----######-------#")
+renderLine( 9, "##+-+-  ###---#+#+-#")
+renderLine(10, "#--++##    -++---+-#")
+renderLine(11, "#----######--###---#")
+renderLine(12, "####################")
+
+oxyd_shuffle()
+
+set_actor("ac-blackball", 4.5, 6.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

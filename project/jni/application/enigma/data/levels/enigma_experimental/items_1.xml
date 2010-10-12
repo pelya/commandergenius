@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="All Items" el:subtitle="Testlevel with all Items" el:id="items"/>
+      <el:version el:score="1" el:release="1" el:revision="3" el:status="stable"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006, 2007 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelw = 120
+levelh = 13
+create_world(levelw, levelh)
+enigma.ConserveLevel = TRUE
+display.SetFollowMode(display.FOLLOW_SCROLLING)
+
+-- DESIGN --
+boden="fl-black"
+wand="st-glass"
+
+-- FLOOR --
+fill_floor(boden, 0,0,levelw,levelh)
+
+-- STONES --
+draw_border(wand)
+
+-- ITEMS --
+set_item("it-document", 10, 6, {text="text1"})
+
+-- ACTORS --
+set_actor("ac-blackball", 4.5,4.5, {player=0})
+set_actor("ac-whiteball", 6.5,4.5, {player=1})
+set_item("it-yinyang",4,4)
+set_item("it-yinyang",6,4)
+
+-- Funktionen
+-- VARS
+itemlist={"it-abyss", "it-bag", "it-banana", "it-blackbomb", "it-blocker", "it-booze", "it-booze-broken", "it-brake", "it-brush", "it-burnable", "it-burnable_ash", "it-burnable_burning", "it-burnable_fireproof", "it-burnable_ignited", "it-burnable_oil", "it-changefloor", "it-cherry", "it-coffee", "it-coin1", "it-coin2", "it-coin4", "it-crack0", "it-crack1", "it-crack2", "it-crack3", "it-cross", "it-death", "it-document", "it-drop", "it-dynamite", "it-extinguisher", "it-extinguisher_medium", "it-extinguisher_empty", "it-extralife", "it-flagblack", "it-flagwhite", "it-floppy", "it-glasses", "it-glasses-broken", "it-hammer", "it-hill", "it-hollow", "it-hstrip", "it-inversesensor", "it-key", "it-landmine", "it-magicwand", "it-magnet", "it-magnet-on", "it-odometer", "it-pencil", "it-pin", "it-pipe-e", "it-pipe-es", "it-pipe-h", "it-pipe-n", "it-pipe-ne", "it-pipe-s", "it-pipe-sw", "it-pipe-v", "it-pipe-w", "it-pipe-wn", "it-puller-n", "it-puller-e", "it-puller-s", "it-puller-w", "it-ring", "it-rubberband", "it-seed", "it-seed_nowood", "it-seed_volcano", "it-sensor", "it-shogun-l", "it-shogun-m", "it-shogun-s", "it-spade", "it-spoon", "it-spring1", "it-spring2", "it-springboard", "it-squashed", "it-surprise", "it-sword", "it-tinyhill", "it-tinyhollow", "it-trigger", "it-umbrella", "it-vortex-closed", "it-vortex-open", "it-vstrip", "it-weight", "it-whitebomb", "it-wormhole", "it-wormhole-off", "it-wrench", "it-yinyang" }
+
+------
+nr=1
+for i=1,table.getn(itemlist) do
+      nr = nr+1
+      set_stone("st-switch",1+i,3, {action="callback", target="sw"..nr, name="switch"..nr})
+      func = "function sw"..nr.."() itnr="..i.."; settem(itnr) ; end"
+      dostring(func)
+end
+
+function settem(itnr)
+ item= itemlist[itnr]
+ itdo=itemlist[itnr]
+ set_item(item,1+itnr,5)
+ set_item("it-document", 1+itnr, 1, {text=itdo})
+end
+
+--Laser:
+set_stone("st-laser", 115, 3, {name="laser1", dir=SOUTH, on="0"})
+set_stone("st-switch", 115,1, {action="onoff", target="laser1"})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="false">Level with all items of Enigma 1.01!</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

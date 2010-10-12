@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Swamp Stomp" el:subtitle="" el:id="ralf11"/>
+      <el:version el:score="2" el:release="2" el:revision="1" el:status="released"/>
+      <el:author  el:name="Ralf Westram" el:email="amgine@reallysoft.de" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Ralf Westram</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ralf" el:id="lib/ralf" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+--debug_mode()
+
+--   7  0  1
+--   6  +  2
+--   5  4  3
+
+level={
+   "!!!###o######o###!!!",
+   "!!!# 567    123 #!!!",
+   "!!!#  B         #!!!",
+   "####            ####",
+   "#   b%%%%%%%%%%b   #",
+   "#5  %%%%%%%%%%%%  7#",
+   "o4  %%%%%%%%%%%%  0o",
+   "#3  %%%%%%%%%%%%  1#",
+   "#   b%%%%%%%%%%b   #",
+   "####            ####",
+   "!!!#         W  #!!!",
+   "!!!# 765    321 #!!!",
+   "!!!###o######o###!!!",
+}
+
+blocker="st-white4"
+--blocker="st-black4" --testing only
+
+cells={}
+
+cells["!"] = cell{floor="fl-space"}
+cells[" "] = cell{floor="fl-red"}
+cells["%"] = cell{floor="fl-swamp"}
+cells["#"] = cell{floor="fl-rough-blue",stone="st-glass"}
+
+if (difficult) then
+   cells["b"] = cell{parent=cells["%"], stone=blocker}
+
+   cells["0"] = cell{parent=cells[" "],stone=blocker}
+   cells["1"] = cells["0"]
+   cells["2"] = cells["0"]
+   cells["3"] = cells["0"]
+   cells["4"] = cells["0"]
+   cells["5"] = cells["0"]
+   cells["6"] = cells["0"]
+   cells["7"] = cells["0"]
+else
+   cells[" "] = cell{floor="fl-normal"}
+   cells["b"] = cells["%"]
+
+   cells["0"] = cell{parent={{gradient,SLOPE_N       }},stone=blocker}
+   cells["1"] = cell{parent={{gradient,SLOPE_SMALL_NE}},stone=blocker}
+   cells["2"] = cell{parent={{gradient,SLOPE_E       }},stone=blocker}
+   cells["3"] = cell{parent={{gradient,SLOPE_SMALL_SE}},stone=blocker}
+   cells["4"] = cell{parent={{gradient,SLOPE_S       }},stone=blocker}
+   cells["5"] = cell{parent={{gradient,SLOPE_SMALL_SW}},stone=blocker}
+   cells["6"] = cell{parent={{gradient,SLOPE_W       }},stone=blocker}
+   cells["7"] = cell{parent={{gradient,SLOPE_SMALL_NW}},stone=blocker}
+end
+
+cells["B"] = cell{parent=cells[" "],actor={"ac-blackball", {player=0,essential=1}}}
+cells["W"] = cell{parent=cells[" "],actor={"ac-whiteball", {essential=1,controllers=0}}}
+cells["o"] = cell{oxyd}
+
+rs_create_world(level,cells)
+enigma.AllowTogglePlayer = FALSE
+enigma.ConserveLevel = TRUE
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

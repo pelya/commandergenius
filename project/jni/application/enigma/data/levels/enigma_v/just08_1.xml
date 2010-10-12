@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="No way out?" el:subtitle="" el:id="just08"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="JuSt" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2005 JuSt</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Level had been automatically created with Star.LUA Editor v0.32 beta
+
+create_world(134, 37)
+oxyd_default_flavor="b"
+
+-- Code
+function init()
+     lasers=3
+     ls1=0 
+     ls2=0
+     ls3=0
+     light=1
+     SendMessage("door36","open")
+end
+
+function func1()
+     SendMessage ("door6", "openclose")
+     SendMessage ("door36", "openclose")
+end
+
+function func2()
+     SendMessage ("door36","open")
+     SendMessage ("timer1","on")
+end
+
+function switches()
+     sw1=GetAttrib(enigma.GetNamedObject("switch8"),"on")
+     sw2=GetAttrib(enigma.GetNamedObject("switch13"),"on")
+     sw3=GetAttrib(enigma.GetNamedObject("switch11"),"on")
+     sw4=GetAttrib(enigma.GetNamedObject("switch12"),"on")
+     if sw1==1 and sw2==1 and sw3==1 and sw4==1 then
+          SendMessage("door35","open")
+     else
+          SendMessage("door35","close")
+     end
+     if ls1==1 and ls2==1 and ls3==1 then
+          SendMessage("door32","open")
+     else
+          SendMessage("door32","close")
+     end
+end
+
+function lsi1()
+     ls1=1-ls1
+end
+
+function lsi2()
+     ls2=1-ls2
+end
+
+function lsi3()
+     ls3=1-ls3
+end
+
+function funcl1()
+     lasers=lasers-1
+     if lasers==0 then
+          SendMessage("laser1","on")
+          SendMessage("laser2","on")
+          SendMessage("laser3","on")
+          lasers=4
+     elseif lasers==2 then
+          SendMessage("laser1","off")
+          SendMessage("laser2","off")
+          SendMessage("laser3","off")
+     end
+end
+
+function killdoc()
+     kill_item(20,30)
+end
+
+function licht()
+     light=1-light
+     if light==1 then
+          draw_floor("fl-abyss_fake", {70, 26}, {0, 1}, 9)
+          draw_floor("fl-abyss_fake", {71, 26}, {1, 0}, 2)
+          draw_floor("fl-abyss_fake", {62, 27}, {0, 1}, 5)
+          draw_floor("fl-abyss_fake", {63, 27}, {1, 1}, 4)
+          draw_floor("fl-abyss_fake", {64, 27}, {1, 1}, 5)
+          draw_floor("fl-abyss_fake", {72, 27}, {0, 1}, 3)
+          draw_floor("fl-abyss_fake", {73, 29}, {0, 1}, 4)
+          set_floor("fl-abyss_fake", 68, 30)
+          draw_floor("fl-abyss_fake", {61, 31}, {0, 1}, 3)
+          draw_floor("fl-abyss_fake", {68, 32}, {0, 1}, 3)
+          set_floor("fl-abyss_fake", 74, 32)
+          draw_floor("fl-abyss_fake", {59, 33}, {1, 0}, 2)
+          set_floor("fl-abyss_fake", 69, 34)
+     else
+          draw_floor("fl-inverse", {70, 26}, {0, 1}, 9)
+          draw_floor("fl-inverse", {71, 26}, {1, 0}, 2)
+          draw_floor("fl-inverse", {62, 27}, {0, 1}, 5)
+          draw_floor("fl-inverse", {63, 27}, {1, 1}, 4)
+          draw_floor("fl-inverse", {64, 27}, {1, 1}, 5)
+          draw_floor("fl-inverse", {72, 27}, {0, 1}, 3)
+          draw_floor("fl-inverse", {73, 29}, {0, 1}, 4)
+          set_floor("fl-inverse", 68, 30)
+          draw_floor("fl-inverse", {61, 31}, {0, 1}, 3)
+          draw_floor("fl-inverse", {68, 32}, {0, 1}, 3)
+          set_floor("fl-inverse", 74, 32)
+          draw_floor("fl-inverse", {59, 33}, {1, 0}, 2)
+          set_floor("fl-inverse", 69, 34)
+     end
+end
+
+-- Floor Layer
+fill_floor("fl-samba")
+draw_floor("fl-light", {0, 0}, {1, 0}, 134)
+draw_floor("fl-light", {0, 1}, {1, 0}, 134)
+draw_floor("fl-light", {0, 2}, {1, 0}, 134)
+draw_floor("fl-light", {0, 3}, {1, 0}, 134)
+draw_floor("fl-light", {0, 4}, {1, 0}, 134)
+draw_floor("fl-light", {0, 5}, {1, 0}, 134)
+draw_floor("fl-light", {0, 6}, {0, 1}, 7)
+draw_floor("fl-gradient", {1, 6}, {1, 0}, 132, {type=FLAT_FORCE_E})
+draw_floor("fl-light", {133, 6}, {0, 1}, 7)
+fill_floor("fl-light", 1, 7, 132, 6)
+fill_floor("fl-abyss", 59, 25, 3, 6)
+fill_floor("fl-abyss", 62, 25, 2, 2)
+draw_floor("fl-black", {64, 25}, {0, 1}, 4)
+draw_floor("fl-abyss", {65, 25}, {1, 0}, 10)
+fill_floor("fl-ice", 99, 25, 8, 8)
+fill_floor("fl-abyss", 65, 26, 5, 2)
+draw_floor("fl-black", {70, 26}, {0, 1}, 9)
+draw_floor("fl-black", {71, 26}, {1, 0}, 2)
+fill_floor("fl-abyss", 73, 26, 2, 3)
+draw_floor("fl-swamp", {125, 26}, {1, 0}, 4)
+draw_floor("fl-black", {62, 27}, {0, 1}, 5)
+set_floor("fl-black", 63, 27)
+draw_floor("fl-abyss", {71, 27}, {0, 1}, 9)
+draw_floor("fl-black", {72, 27}, {0, 1}, 3)
+draw_floor("fl-swamp", {128, 27}, {0, 1}, 8)
+draw_floor("fl-abyss", {63, 28}, {0, 1}, 8)
+draw_floor("fl-black", {65, 28}, {1, 1}, 4)
+draw_floor("fl-abyss", {66, 28}, {1, 0}, 4)
+draw_floor("fl-swamp", {125, 28}, {0, 1}, 7)
+draw_floor("fl-abyss", {64, 29}, {0, 1}, 7)
+set_floor("fl-black", 65, 29)
+set_floor("fl-abyss", 65, 30)
+draw_floor("fl-abyss", {67, 29}, {1, 0}, 3)
+draw_floor("fl-black", {73, 29}, {0, 1}, 4)
+draw_floor("fl-abyss", {74, 29}, {0, 1}, 3)
+set_floor("fl-black", 66, 30)
+set_floor("fl-black", 68, 30)
+draw_floor("fl-abyss", {69, 30}, {0, 1}, 4)
+draw_floor("fl-abyss", {72, 30}, {0, 1}, 6)
+draw_floor("fl-swamp", {130, 30}, {0, 1}, 5)
+fill_floor("fl-abyss", 59, 31, 2, 2)
+draw_floor("fl-black", {61, 31}, {0, 1}, 3)
+fill_floor("fl-abyss", 65, 31, 3, 5)
+set_floor("fl-water", 31, 32)
+draw_floor("fl-abyss", {62, 32}, {0, 1}, 4)
+draw_floor("fl-black", {68, 32}, {0, 1}, 3)
+set_floor("fl-black", 74, 32)
+draw_floor("fl-water", {28, 33}, {1, 0}, 2)
+draw_floor("fl-black", {59, 33}, {1, 0}, 2)
+fill_floor("fl-abyss", 73, 33, 2, 3)
+fill_floor("fl-abyss", 59, 34, 3, 2)
+set_floor("fl-black", 69, 34)
+set_floor("fl-swamp", 124, 34)
+set_floor("fl-swamp", 129, 34)
+draw_floor("fl-abyss", {68, 35}, {1, 0}, 3)
+
+-- Item Layer
+set_item("it-yinyang", 1, 6)
+set_item("it-document", 2, 6, {text="text1"})
+set_item("it-trigger", 132, 6, {action="callback", target="func1", invisible=TRUE})
+set_item("it-trigger", 133, 6, {action="callback", target="init", invisible=FALSE})
+set_item("it-extralife", 58, 25)
+set_item("it-brush", 113, 25)
+set_item("it-magnet", 101, 26, {name="magnet14", on="0"})
+set_item("it-magnet", 104, 26, {name="magnet15", on="0"})
+set_item("it-trigger", 108, 29, {action="onoff", target="magnet14", invisible=FALSE})
+set_item("it-trigger", 110, 29, {action="onoff", target="magnet15", invisible=FALSE})
+set_item("it-extralife", 115, 29)
+set_item("it-document", 20, 30, {text="text2"})
+set_item("it-trigger", 41, 30, {action="callback", target="funcl1", invisible=FALSE})
+set_item("it-trigger", 54, 30, {action="callback", target="funcl1", invisible=FALSE})
+set_item("it-yinyang", 132, 30)
+set_item("it-magnet", 101, 31, {name="magnet17", on="0"})
+set_item("it-magnet", 104, 31, {name="magnet16", on="0"})
+set_item("it-trigger", 108, 31, {action="onoff", target="magnet17", invisible=FALSE})
+set_item("it-trigger", 110, 31, {action="onoff", target="magnet16", invisible=FALSE})
+set_item("it-trigger", 114, 31, {action="openclose", target="door36", invisible=FALSE})
+draw_items("it-seed", {29, 34}, {0, 1}, 2)
+set_item("it-trigger", 123, 34, {action="callback", target="func2", invisible=FALSE})
+set_item("it-floppy", 122, 35)
+set_item("it-flagwhite", 129, 35)
+
+-- Stone Layer
+oxyd(19, 30)
+oxyd(42, 23)
+draw_border("st-rock3", 0, 5, 134, 3)
+draw_border("st-stone2", 0, 24, 19, 13)
+draw_stones("st-stone2", {19, 24}, {1, 0}, 22)
+draw_stones("st-glass", {41, 24}, {1, 1}, 4, {type="0"})
+draw_stones("st-stone2", {42, 24}, {1, 0}, 9)
+draw_stones("st-stone2", {52, 24}, {1, 0}, 12)
+draw_stones("st-stone2", {65, 24}, {1, 0}, 69)
+fill_stones("st-stone2", 1, 25, 17, 11)
+draw_stones("st-stone2", {19, 25}, {0, 1}, 5)
+draw_stones("st-stone2", {38, 25}, {0, 1}, 5)
+SetDefaultAttribs("st-glass", {type="0"})
+fill_stones("st-glass", 39, 25, 3, 2)
+draw_stones("st-glass", {43, 25}, {1, 0}, 14, {type="0"})
+draw_stones("st-stone2", {57, 25}, {0, 1}, 5)
+draw_stones("st-stone2", {76, 25}, {0, 1}, 5)
+draw_stones("st-stonebrush", {81, 25}, {0, 1}, 2)
+draw_stones("st-stonebrush", {83, 25}, {0, 1}, 7)
+draw_stones("st-stonebrush", {92, 25}, {0, 1}, 5)
+draw_stones("st-stone2", {95, 25}, {0, 1}, 5)
+draw_stones("st-stone2", {98, 25}, {0, 1}, 9)
+draw_stones("st-stone2", {107, 25}, {0, 1}, 9)
+draw_stones("st-stone2", {114, 25}, {0, 1}, 5)
+draw_stones("st-death", {118, 25}, {0, 1}, 9)
+draw_stones("st-wood", {122, 25}, {0, 1}, 2)
+draw_stones("st-stone2", {124, 25}, {0, 1}, 9)
+draw_stones("st-stone2", {125, 25}, {1, 0}, 3)
+fill_stones("st-stone2", 129, 25, 2, 5)
+fill_stones("st-stone2", 131, 25, 3, 5)
+draw_stones("st-stone2", {32, 26}, {0, 1}, 6)
+draw_stones("st-glass", {42, 26}, {1, 1}, 3, {type="0"})
+draw_stones("st-glass", {44, 26}, {1, 0}, 5, {type="0"})
+draw_stones("st-glass", {50, 26}, {1, 0}, 7, {type="0"})
+draw_stones("st-stonebrush", {78, 26}, {1, 1}, 4)
+draw_stones("st-stonebrush", {85, 26}, {1, 0}, 6)
+draw_stones("st-death", {116, 26}, {0, 1}, 6)
+draw_stones("st-stone2", {22, 27}, {0, 1}, 7)
+draw_stones("st-stone2", {36, 27}, {0, 1}, 3)
+SetDefaultAttribs("st-glass", {type="0"})
+fill_stones("st-glass", 39, 27, 2, 3)
+draw_stones("st-pmirror", {41, 27}, {1, 0}, 2, {movable=FALSE, transparent=FALSE, orientation="2"})
+draw_stones("st-glass", {46, 27}, {1, 0}, 5, {type="0"})
+draw_stones("st-glass", {52, 27}, {1, 0}, 5, {type="0"})
+draw_stones("st-stonebrush", {85, 27}, {0, 1}, 3)
+draw_stones("st-stonebrush", {90, 27}, {-1, 1}, 3)
+draw_stones("st-death", {121, 27}, {0, 1}, 9)
+fill_stones("st-stone2", 126, 27, 2, 10)
+draw_stones("st-stone2", {27, 28}, {0, 1}, 6)
+draw_stones("st-stone2", {28, 28}, {1, 0}, 4)
+SetDefaultAttribs("st-glass", {type="0"})
+fill_stones("st-glass", 41, 28, 3, 2)
+draw_stones("st-glass", {46, 28}, {0, 1}, 2, {type="0"})
+SetDefaultAttribs("st-glass", {type="0"})
+fill_stones("st-glass", 48, 28, 3, 2)
+draw_stones("st-glass", {52, 28}, {0, 1}, 2, {type="0"})
+SetDefaultAttribs("st-glass", {type="0"})
+fill_stones("st-glass", 54, 28, 3, 2)
+draw_stones("st-stonebrush", {77, 28}, {1, 1}, 2)
+draw_stones("st-death", {112, 29}, {0, 1}, 3)
+draw_stones("st-stonebrush", {81, 30}, {0, 1}, 4)
+draw_stones("st-stonebrush", {88, 30}, {0, 1}, 5)
+draw_stones("st-stone2", {129, 30}, {0, 1}, 4)
+draw_stones("st-stone2", {133, 30}, {0, 1}, 7)
+draw_stones("st-stone2", {19, 31}, {0, 1}, 6)
+draw_stones("st-stone2", {33, 31}, {1, 0}, 4)
+draw_stones("st-stone2", {38, 31}, {0, 1}, 6)
+SetDefaultAttribs("st-glass", {type="0"})
+fill_stones("st-glass", 39, 31, 3, 4)
+SetDefaultAttribs("st-glass", {type="0"})
+fill_stones("st-glass", 43, 31, 4, 5)
+draw_stones("st-glass", {48, 31}, {0, 1}, 5, {type="0"})
+SetDefaultAttribs("st-glass", {type="0"})
+fill_stones("st-glass", 50, 31, 7, 5)
+draw_stones("st-stone2", {57, 31}, {0, 1}, 6)
+draw_stones("st-stone2", {76, 31}, {0, 1}, 6)
+draw_stones("st-stonebrush", {77, 31}, {1, 0}, 3)
+draw_stones("st-stonebrush", {84, 31}, {1, 0}, 3)
+draw_stones("st-stonebrush", {90, 31}, {0, 1}, 5)
+draw_stones("st-stonebrush", {92, 31}, {0, 1}, 5)
+draw_stones("st-stone2", {95, 31}, {0, 1}, 6)
+draw_stones("st-stone2", {114, 31}, {0, 1}, 6)
+fill_stones("st-stone2", 131, 31, 2, 6)
+draw_stones("st-grate1", {35, 32}, {0, 1}, 2)
+draw_stones("st-stone2", {23, 33}, {1, 0}, 4)
+draw_stones("st-stone2", {30, 33}, {0, 1}, 4)
+draw_stones("st-glass", {42, 33}, {0, 1}, 3, {type="0"})
+draw_stones("st-glass", {49, 33}, {0, 1}, 3, {type="0"})
+draw_stones("st-stonebrush", {78, 33}, {1, 0}, 3)
+draw_stones("st-stonebrush", {82, 33}, {1, 0}, 6)
+draw_stones("st-stone2", {99, 33}, {1, 0}, 8)
+draw_stones("st-death", {116, 33}, {1, 0}, 2)
+draw_stones("st-wood", {25, 34}, {0, 1}, 2)
+fill_stones("st-grate1", 28, 34, 2, 2)
+draw_stones("st-stone2", {22, 35}, {0, 1}, 2)
+draw_stones("st-stone2", {34, 35}, {0, 1}, 2)
+draw_stones("st-glass", {39, 35}, {1, 0}, 2, {type="0"})
+fill_stones("st-stone2", 123, 35, 3, 2)
+draw_stones("st-stone2", {128, 35}, {0, 1}, 2)
+draw_stones("st-stone2", {130, 35}, {0, 1}, 2)
+draw_stones("st-stone2", {20, 36}, {1, 0}, 2)
+draw_stones("st-stone2", {23, 36}, {1, 0}, 7)
+draw_stones("st-stone2", {31, 36}, {1, 0}, 3)
+draw_stones("st-stone2", {35, 36}, {1, 0}, 3)
+draw_stones("st-stone2", {39, 36}, {1, 0}, 3)
+draw_stones("st-stone2", {43, 36}, {1, 0}, 2)
+draw_stones("st-stone2", {46, 36}, {1, 0}, 7)
+draw_stones("st-stone2", {54, 36}, {1, 0}, 3)
+draw_stones("st-stone2", {58, 36}, {1, 0}, 18)
+draw_stones("st-stone2", {77, 36}, {1, 0}, 18)
+draw_stones("st-stone2", {96, 36}, {1, 0}, 18)
+draw_stones("st-stone2", {115, 36}, {1, 0}, 8)
+set_stone("st-timer", 66, 18, {action="callback", target="licht", interval="1", name="timer3", loop="1"})
+set_stone("st-timer", 104, 18, {action="callback", target="switches", interval="0.1", name="timer2", loop="1"})
+set_stone("st-timer", 123, 18, {action="close", target="door36", interval="10", name="timer1", loop="0"})
+set_stone("st-laserswitch", 40, 23, {action="callback", target="killdoc", on="1", name="switch21"})
+set_stone("st-3mirror", 41, 23, {movable=FALSE, transparent=FALSE, orientation="1"})
+set_stone("st-laserswitch", 51, 24, {action="callback", target="lsi1", on="1", name="switch16"})
+set_stone("st-switch", 64, 24, {action="openclose", target="door33", on="0", name="switch21"})
+set_stones("st-stone2", {{22, 25}, {34, 27}, {34, 29}, {34, 32}, {129, 36}})
+set_stones("st-turnstile-n", {{26, 25}, {28, 25}, {23, 26}, {24, 28}, {25, 30}, {30, 31}}, {type=north})
+set_stone("st-oneway", 33, 25, {orientation=WEST, name="oneway20"})
+set_stone("st-oneway", 34, 25, {orientation=SOUTH, name="oneway18"})
+set_stone("st-oneway", 35, 25, {orientation=NORTH, name="oneway16"})
+set_stone("st-oneway", 36, 25, {orientation=NORTH, name="oneway13"})
+set_stone("st-oneway", 37, 25, {orientation=EAST, name="oneway14"})
+set_stones("st-stonebrush", {{94, 25}, {79, 26}, {93, 27}, {79, 28}, {81, 28}, {88, 28}, {90, 28}, {86, 29}, {94, 29}, {93, 31}, {94, 33}, {78, 34}, {84, 34}, {82, 35}, {86, 35}, {93, 35}})
+set_stone("st-switch", 99, 25, {action="on", on="0", name="switch8"})
+set_stone("st-switch", 106, 25, {action="on", on="0", name="switch13"})
+set_stones("st-turnstile-w", {{25, 26}, {27, 26}}, {type=west})
+set_stones("st-turnstile", {{26, 26}, {28, 26}, {23, 27}, {24, 29}, {30, 29}, {28, 30}, {25, 31}, {28, 32}, {30, 32}}, {type=main})
+set_stone("st-oneway", 33, 26, {orientation=SOUTH, name="oneway19"})
+set_stone("st-oneway", 34, 26, {orientation=WEST, name="oneway17"})
+set_stone("st-oneway", 35, 26, {orientation=EAST, name="oneway15"})
+set_stone("st-oneway", 36, 26, {orientation=SOUTH, name="oneway12"})
+set_stone("st-oneway", 37, 26, {orientation=WEST, name="oneway11"})
+set_stone("st-laser", 49, 26, {name="laser3", dir=SOUTH, on="1"})
+set_stones("st-wood", {{120, 26}, {128, 26}, {92, 30}, {33, 33}, {123, 33}, {118, 35}})
+set_stones("st-turnstile-e", {{24, 27}, {29, 30}, {29, 32}, {31, 32}}, {type=east})
+set_stones("st-turnstile-s", {{26, 27}, {28, 27}, {24, 30}, {30, 30}, {25, 32}}, {type=south})
+set_stone("st-oneway", 33, 27, {orientation=SOUTH, name="oneway10"})
+set_stone("st-oneway", 35, 27, {orientation=SOUTH, name="oneway8"})
+set_stones("st-pmirror", {{45, 27}, {51, 27}, {53, 28}, {49, 32}, {47, 35}}, {movable=FALSE, transparent=FALSE, orientation="2"})
+set_stone("st-oneway", 34, 28, {orientation=WEST, name="oneway9"})
+set_stones("st-pmirror", {{47, 28}, {42, 32}}, {movable=FALSE, transparent=FALSE, orientation="4"})
+set_stone("st-floppy", 78, 28, {action="openclose", target="door34", on="0"})
+set_stone("st-oneway", 33, 29, {orientation=WEST, name="oneway5"})
+set_stone("st-oneway", 35, 29, {orientation=NORTH, name="oneway6"})
+set_stone("st-oneway", 37, 29, {orientation=NORTH, name="oneway22"})
+set_stone("st-glass", 44, 29, {type="0"})
+set_stone("st-oneway", 34, 30, {orientation=SOUTH, name="oneway7"})
+set_stone("st-oneway", 36, 30, {orientation=WEST, name="oneway21"})
+set_stone("st-door_a", 38, 30, {name="door32"})
+set_stone("st-door_a", 57, 30, {name="door33"})
+set_stone("st-door_a", 76, 30, {name="door34"})
+set_stone("st-door_a", 95, 30, {name="door35"})
+set_stone("st-door_a", 114, 30, {name="door36"})
+set_stone("st-door_a", 131, 30, {name="door6"})
+set_stone("st-oneway", 37, 31, {orientation=NORTH, name="oneway20"})
+set_stones("st-death", {{115, 31}, {117, 34}})
+set_stone("st-switch", 99, 32, {action="on", on="0", name="switch11"})
+set_stone("st-switch", 106, 32, {action="on", on="0", name="switch12"})
+set_stone("st-grate1", 34, 33)
+set_stone("st-swap", 33, 34)
+set_stone("st-stoneimpulse", 34, 34, {name="stoneimpulse3"})
+set_stone("st-stoneimpulse", 35, 34, {name="stoneimpulse4"})
+set_stone("st-laser", 41, 35, {name="laser1", dir=EAST, on="1"})
+set_stone("st-laserswitch", 42, 36, {action="callback", target="lsi2", on="1", name="switch2"})
+set_stone("st-laser", 45, 36, {name="laser2", dir=NORTH, on="1"})
+set_stone("st-laserswitch", 53, 36, {action="callback", target="lsi3", on="1", name="switch4"})
+
+-- Actor Layer
+set_actor("ac-horse", 106.5, 29.5)
+set_actor("ac-blackball", 124.5, 6.5, {player=0, mouseforce=0.2})
+set_actor("ac-whiteball", 132.5, 30.5, {player=1, mouseforce=1, essential=1})
+
+-- oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">No way out?</el:english>
+      </el:string> 
+      <el:string el:key="text2">
+        <el:english el:translate="true">Do you miss something?</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

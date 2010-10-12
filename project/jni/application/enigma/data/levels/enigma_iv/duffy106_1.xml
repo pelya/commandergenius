@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Under the Radar" el:subtitle="" el:id="duffy106"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2004 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+rooms_wide=1
+rooms_high=1
+
+levelw=1+(19*rooms_wide)
+levelh=1+(12*rooms_high)
+
+create_world( levelw, levelh)
+enigma.SlopeForce=18.5
+
+fill_floor("fl-metal", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-greenbrown", i-1, line)
+        elseif c =="Q" then
+           set_stone( "st-blue-sand", i-1, line,{name="b1"})
+        elseif c == "o" then
+            oxyd( i-1, line)
+            abyss(i-1,line)
+        elseif c == "*" then
+            set_stone( "st-brownie", i-1, line)
+                elseif c == "!" then
+            abyss(i-1,line)
+        elseif c == "~" then
+           set_floor("fl-water",i-1,line)
+        elseif c=="z" then
+           set_actor("ac-blackball", i-.5,line+.5, {player=0})
+            set_floor("fl-gradient",  i-1,  line, {type=4})
+        elseif c=="y" then
+           set_actor("ac-whiteball", i-1,line+.5, {player=1})
+        elseif c=="A" then
+           set_actor("ac-rotor", i-.5,line+.5, {range=0,force=0,player=1,name="r1"})
+            set_floor("fl-gradient",  i-1,  line, {type=3})
+        elseif c=="B" then
+           set_actor("ac-rotor", i-.5,line+.5, {range=0,force=0,player=1,name="r2"})
+            set_floor("fl-gradient",  i-1,  line, {type=3})
+        elseif c=="C" then
+           set_actor("ac-rotor", i-.5,line+.5, {range=0,force=0,player=1,name="r3"})
+            set_floor("fl-gradient",  i-1,  line, {type=3})
+        elseif c=="D" then
+           set_actor("ac-rotor", i-.5,line+.5, {range=0,force=0,player=1,name="r4"})
+            set_floor("fl-gradient",  i-1,  line, {type=3})
+        elseif c=="E" then
+           set_actor("ac-rotor", i-.5,line+.5, {range=0,force=0,player=1,name="r5"})
+            set_floor("fl-gradient",  i-1,  line, {type=3})
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c=="=" then
+            set_floor("fl-space",i-1,line)
+        elseif c == "d" then --1-d
+            set_floor("fl-gradient",  i-1,  line, {type=1})
+        elseif c == "u" then --2-u
+            set_floor("fl-gradient",  i-1,  line, {type=2})
+        elseif c == "r" then --3-r
+            set_floor("fl-gradient",  i-1,  line, {type=3})
+        elseif c == "l" then --4-l
+            set_floor("fl-gradient",  i-1,  line, {type=4})
+        elseif c == "1" then --ur
+            set_floor("fl-gradient",  i-1,  line, {type=11})
+        elseif c == "3" then --dl
+            set_floor("fl-gradient",  i-1,  line, {type=9})
+        elseif c == "7" then --dr
+            set_floor("fl-gradient",  i-1,  line, {type=12})
+        elseif c == "9" then --ul
+            set_floor("fl-gradient",  i-1,  line, {type=10})
+         end
+    end    
+end
+
+renderLine(00,"!!!!!!!o!o!o!o!!!!!!")
+renderLine(01,"!!!!!!!rrrErrr!!!!!!")
+renderLine(02,"!!!!!!9rrrDrrr3!!!!!")
+renderLine(03,"!!!!ouu9rrCrr3ddo!!!")
+renderLine(04,"!!!!!uuu9rBr3ddd!!!!")
+renderLine(05,"!!!!ouuuu9A3ddddo!!!")
+renderLine(06,"!!!!!uuuuuQddddd!!!!")
+renderLine(07,"!!!!ouuuu7l1ddddo!!!")
+renderLine(08,"!!!!!uuu7lll1ddd!!!!")
+renderLine(09,"!!!!ouu7lllll1ddo!!!")
+renderLine(10,"!!!!!!7llzllll1!!!!!")
+renderLine(11,"!!!!!!!lllllll!!!!!!")
+renderLine(12,"!!!!!!!o!o!o!o!!!!!!")
+
+oxyd_shuffle()
+
+b1=enigma.GetNamedObject("b1")
+r1=enigma.GetNamedObject("r1")
+r2=enigma.GetNamedObject("r2")
+r3=enigma.GetNamedObject("r3")
+r4=enigma.GetNamedObject("r4")
+r5=enigma.GetNamedObject("r5")
+
+AddRubberBand(r1,b1,200,1.2)
+AddRubberBand(r1,r2,200,1)
+AddRubberBand(r2,r3,200,1)
+AddRubberBand(r3,r4,200,1)
+AddRubberBand(r4,r5,200,1)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

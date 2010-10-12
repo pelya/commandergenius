@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Symmetry" el:subtitle="" el:id="ant31"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+multiplayer_mode()
+
+cells={}
+use_cells(cells, "O")
+
+cells[" "]=cell{}
+cells["-"]=cell{{{gradient, FLAT_FORCE_S}}}
+cells["_"]=cell{{{gradient, FLAT_FORCE_N}}}
+cells["#"]=cell{stone="st-metal"}
+cells["%"]=cell{stone="st-scissors"}
+cells["w"]=cell{stone="st-white4"}
+cells["b"]=cell{stone="st-black4"}
+
+stones={}
+actors={}
+cells["?"]=cell{{{add_multistone, "st-metal", stones}}}
+cells["2"]=cell{{{add_multiactor, "ac-whiteball", actors, {player=1, mouseforce=0}}}}
+cells["O"]=cell{{{add_multiobject, actors, cells["O"]}}}
+
+slopes={}
+pivots={}
+cells["*"]=cell{{{add_multicell, slopes, 1}}}
+cells["&"]=cell{{{add_multicell, pivots, slopes}, cells["~"]}}
+
+level = {
+   "#0#0#0#0###DDDDDDDD#",
+   "#bbbbbbbb##XXXXXXXX#",
+   "#******************#",
+   "#*&  ?  ****  %  &*#",
+   "#*   O  *##*      *#",
+   "#*      *##*      *#",
+   "#*      *##*      *#",
+   "#*      *##*      *#",
+   "#*      *##*  2   *#",
+   "#*   %  ****  ?   *#",
+   "#******************#",
+   "#XXXXXXXX##wwwwwwww#",
+   "#DDDDDDDD###0#0#0#0#"
+}
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+set_default_parent(function(x,y) if (x>=10) then cells["_"](x,y) else cells["-"](x,y) end end)
+oxyd_default_flavor = "d"
+create_world_by_map(level)
+
+add_rubber_band_pairs(actors, stones, 10, 0)
+
+spread_tag(pivots)
+render_slopes(slopes)
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

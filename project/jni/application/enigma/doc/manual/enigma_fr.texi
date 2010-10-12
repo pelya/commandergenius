@@ -1,0 +1,1423 @@
+\input texinfo                              @c -*- texinfo -*-
+@afourpaper
+
+@c @include{version.texi}
+@set VERSION 1.00
+
+@copying
+Copyright @copyright{} 2003, 2004, 2005, 2006 Daniel Heck and other contributors
+
+La copie et la distribution de ce fichier, avec ou sans modification,
+sont autoris@'es sans royalty @`a condition que la notice de copyright
+et la pr@'esente notice soient pr@'eserv@'ees.
+@end copying
+
+@setfilename enigma.info
+@settitle Enigma Manual
+@titlepage
+@center @image{images/logo}
+@center @titlefont{Manuel Enigma}
+@center for version @value{VERSION}
+@sp 2
+@center Copyright @copyright{} 2003, 2004, 2005, 2006 Daniel Heck (@email{dheck@@gmx.de})
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+@end titlepage
+
+@contents
+
+@ifnottex
+@node Haut, Introduction, (dir), (dir)
+@top Enigma
+
+Ce manuel d@'ecrit comment installer Enigma et y jouer.  Il correspond
+@`a Enigma version @value{VERSION}.
+
+Copyright @copyright{} 2003, 2004, 2005, 2006 Daniel Heck and other contributors
+
+La copie et la distribution de ce fichier, avec ou sans modification,
+sont autoris@'es sans royalty @`a condition que la notice de copyright
+et la pr@'esente notice soient pr@'eserv@'ees.
+@c @insertcopying
+@end ifnottex
+
+@menu
+* Introduction::                Comment commencer
+* Le jeu::                    Comment jouer @`a Enigma
+* Quelques objets du jeu::           Description de quelques objets du jeu
+* Expertise::             Options @'elabor@'es et administration
+* Triche::                    Astuces pour certains niveaux difficiles
+* Cr@'edits::                     Cr@'edits et 'Saints-Clouds
+
+@end menu
+
+@node Introduction, Le jeu, Haut, Haut
+@chapter Introduction
+
+@menu
+* A propos::                       Certains faits sur Enigma
+* Installation::                Se procurer et installer Enigma
+* Distribuer Enigma::         Donnez des copies @`a vos amis !
+@end menu
+
+
+@node A propos, Installation, Introduction, Introduction
+@section A propos d'Enigma
+
+Enigma n'est pas vraiment un jeu d'esprit.  Enigma est en r@'ealit@'e une
+immense collection de jeux d'esprit, et chacun de ses 550 uniques niveaux
+d@'efie l'intelligence, la dext@'erit@'e et la volont@'e des joueurs de
+mani@`ere in@'edite.  Enigma est facile @`a apprendre, ludique et parfois
+difficile.  On peut y jouer @`a tout @^age.  Il contient des centaines de
+niveaux. Et comme si ce n'@'etait pas assez, il est gratuit. Si vous aimez les
+jeux d'esprit et que vous avez le geste s@^ur, Enigma vous occupera pendant des
+heures.
+
+L'object du jeu est de trouver et d@'evoiler des paires de pierres
+@samp{Oxydes} de m@^eme couleur. Simple? Oui. Facile? Certes non!  Des pi@`eges
+cach@'es, d'immenses labyrinthes, des rayons laser, et surtout des @'enigmes @`a
+s'arracher les cheveux bloqueront le chemin qui vous m@`ene aux Oxydes.
+Les objets du jeu (il y en a des centaines), agissent de mani@`ere inattendue, et
+comme la plupart ob@'eissent aux lois de la physique (du moins la physique un peu
+sp@'eciale d'Enigma), les contr@^oler avec la souris n'est pas toujours ais@'e
+@enddots{}
+
+A l'origine, le projet Enigma a @'et@'e fond@'e pour perp@'etuer l'esprit des jeux de la
+s@'erie des 'Oxyd , lorsque leur @'editeur a d@'ecid@'e en 2002 de quitter le monde du
+jeu. Les amateurs d'Oxyd trouveront @`a Enigma un air familier. Mais au cours des
+ans, Enigma a phagocyt@'e des id@'ees d'innombrables autres jeux, en leur donnant
+son propre style.
+@c Avez-vous d@'ej@`a jou@'e @`a Sokoban
+@c en poussant des cavaliers ?
+@c R@'eminiscez-vous quelques niveaux seuls, ou
+@c comme Sokoban en paquets de nombreux niveaux.
+
+Enigma existe pour Windows, Mac OS X, et la plupart des Linux et autres Unix
+modernes. Il a @'et@'e traduit en plusieurs langues. M@^eme ce manuel est
+disponible en plusieurs langues (@emph{et cette phrase est autor@'ef@'erentielle; enfin la
+phrase pr@'ec@'edente; quoique la pr@'esente phrase aussi}).
+
+Sur @uref{http://www.nongnu.org/enigma, homepage}, vous trouverez des copies
+d'@'ecran, des t@'el@'echargements, des news, et la version la plus r@'ecente de ce
+manuel: @uref{http://www.nongnu.org/enigma/manual, manual}.
+On peut joindre les d@'eveloppeurs par email @`a @email{enigma-devel@@nongnu.org}.
+
+Enigma est un logiciel libre: vous @^etes encourag@'es @`a le copier et en faire
+cadeau autour de vous (@ref{Distribuer Enigma}).  Enigma est d@'evelopp@'e
+par un petit groupe de volontaires, qui y consacrent leurs loisirs.
+Si vous aimez ce jeu n'h@'esitez pas @`a envoyer un email. C'est probablement la
+seule r@'ecompense qu'auront ses cr@'eateurs.
+
+
+@node Installation, Distribuer Enigma, A propos, Introduction
+@section Installation
+
+La derni@`ere version d'Enigma peut @^etre t@'el@'echarg@'ee @`a
+@uref{http://www.nongnu.org/enigma/download.html, Download
+Page}. On y trouve des packages pour les syst@`emes d'exploitation suivants:
+
+@table @strong
+@item Windows
+Il suffit d'ex@'ecuter apr@`es t@'el@'echargement, le fichier @file{.exe} .
+
+@item Unix
+Des binaires existent pour des Linux comme SUSE,
+Redhat, ou Debian. Pour les autres, il faudra compiler le source.
+
+@item Mac OS X
+Pas d'installation n@'ecessaire pour la version OS X , il faut juste ex@'ecuter le
+fichier @file{.dmg} ou @file{.tar.gz} .
+
+@end table
+
+La page 'download contient en g@'en@'eral des informations plus d@'etaill@'ees ou plus
+r@'ecentes . Si Enigma ne fonctionnait pas sur votre ordinateur, ne vous g@^enez
+pas pour demander @`a la liste postale d'Enigma
+(@email{enigma-devel@@nongnu.org}).
+
+@node Distribuer Enigma,  , Installation, Introduction
+@section Distribuer Enigma
+
+Enigma est un logiciel libre plac@'e sous la licence
+GNU General Public License (GPL).  Cette licence accompagne toutes les versions
+d'Enigma (ou bien dans @file{COPYING} ou alors dans
+@file{COPYING.txt}).  Si tout ce que vous voulez est @emph{jouer @`a} Enigma, vous
+n'aurez pas besoin de lire ce texte l@'egal r@'edig@'e en anglais. En substance, il
+dit ceci: Jouez @`a Enigma tant que vous voulez, et n'oubliez pas de le
+distribuer autour de vous !
+
+Si vous d@'esirez modifer Enigma ou contribuer @`a son d@'eveloppement futur,
+ @emph{lisez} la license, au moins une fois dans votre vie.
+La GPL assure que Enigma restera un logiciel libre dans le futur.
+En particulier, si vous modifiez Enigma ou distribuez une version modifi@'ee,
+vous ne devez emp@^echer quiconque d'utiliser, modifier, et distribuer
+Enigma et ses deriv@'es.
+
+Les deux paragraphes pr@'ec@'edents ne remplacent pas la vraie license,
+mais la r@'esument.  Si vous avez des doutes, consultez la
+GPL ou demandez.
+
+@node Le jeu, Quelques objets du jeu, Introduction, Haut
+@chapter Le jeu
+
+@menu
+* Pour commencer::             Naviguer dans les menus et commencer un jeu
+* R@`egles du jeu::           Comment jouer @`a Enigma
+* Contr@^oles::                   Commandes clavier et souris
+@end menu
+
+
+@node Pour commencer, R@`egles du jeu, Le jeu, Le jeu
+@section Pour commencer
+
+Apr@`es avoir lanc@'e Enigma, vous voyez le menu principal, avec lequel vous pouvez
+commencer un nouveau jeu, r@'egler quelques options, ou quitter le jeu. Les
+sections suivantes couvrent rapidement le menu des niveaux et le menu des
+options; tout le reste devrait @^etre auto-explicatoire. Pour beaucoup de menus,
+il y a une aide en ligne, qu'on trouve en pressant la touche @key{F1} .
+
+@menu
+* Le menu des niveaux::              Choisir le prochain niveau
+* Le menu des paquets de niveaux::         Choisir un paquet de niveaux
+* Options de jeu::                Adaptez Enigma @`a vos go@^uts
+* L'inspecteur des niveaux::         Informations d@'etaill@'ees sur un niveau
+@end menu
+
+
+@node Le menu des niveaux, Options de jeu, Pour commencer, Pour commencer
+@subsection Le menu des niveaux
+
+En cliquant sur ``Commencer partie'' dans le menu principal, on d@'ecouvre le
+menu des niveaux, qui ressemble @`a ceci:
+
+@image{images/levelmenu,,7cm}
+
+Cet @'ecran est divis@'e en trois parties: Celle du haut contient des informations
+@`a propos du niveau et du paquet de niveaux courants, celle du milieu montre une
+vue a@'erienne des niveaux actuellement disponibles, et celle du bas est une
+rang@'ee de boutons (comme mon visage ).
+
+On peut se d@'eplacer dans la liste des niveaux en utilisant les boutons en forme
+de fl@`eches sur la droite, ou bien en utilisant les fl@`eches du clavier. Pour
+commencer un nouveau jeu, il suffit de cliquer sur son image, ou de faire
+ @key{Entr@'ee}.
+
+Enigma a deux r@'eglages de difficult@'e : ``facile'' et ``normal.''  Pour
+alterner entre les deux, il faut utiliser le bouton avec des m@'edailles en bas:
+ Lorsque la m@'edaille est en argent et accompagn@'ee d'une plume, le r@'eglage est
+ sur ``facile'', et  quand elle est en or, le mode de jeu est plus difficile.
+
+Les niveaux ne poss@`edent pas tous un mode ``facile''; ceux qui en ont un sont
+rep@'er@'es par une plume ou une m@'edaille d'argent selon qu'ils ont d@'ej@`a @'et@'e
+r@'esolus ou non.
+
+La touche @key{F5} ou le clic sur le bouton
+@key{>>|} qui est en bas, permettent d'aller au niveau suivant. Le sens du mot
+``suivant'' dans la phrase pr@'ec@'edente d@'epend du mode s@'electionn@'e avec le bouton
+le plus @`a gauche de la rang@'ee du bas:
+
+@itemize @bullet
+@item
+Une sph@`ere noire signifie ``vraiment le prochain''. On va au niveau qui suit,
+que celui-ci soit r@'esolu ou non.
+
+@item
+@c TODO: ``ready for awarding? also: use verb instead of -ing
+Les m@'edailles signifient ``Prochain niveau non r@'esolu''; c'est en effet @`a
+celui-l@`a que l'on se rend en cliquant sur le bouton @key{>>|} .
+
+@item
+La sph@`ere noire en vitesse supraluminique est pour le mode ``par'' (acronyme
+pour ``professional average rating''). La performance professionnelle moyenne
+devrait @^etre @`a port@'ee d'un joueur dou@'e, et les niveaux pour lesquels v@^otre
+propre score est en-dessous du PAR sont marqu@'es par cette boule noire @`a grande
+vitesse. Dans ce mode le clic sur @key{>>|}  vous fait aller au prochain niveau
+pour lequel votre score est inf@'erieur ou @'egal au PAR de ce niveau.
+
+@item
+La plan@`ete bleue repr@'esente la chasse au record du monde. Si votre propre score
+est le meilleur de la plan@`ete, le niveau est marqu@'e par ce symbole. Et si vous
+s@'electionnez ce mode, le niveau courant sera jou@'e et rejou@'e jusqu'@`a ce que vous
+ayez battu ledit record du monde.
+
+@c Certes il est difficile de battre un record du monde. Mais on peut
+@c utiliser ce mode pour s'entra@^iner @`a un niveau particulier.
+@end itemize
+
+Il se peut qu'un niveau soit aussi marqu@'e par un triangle rouge surmont@'e d'un
+point d'exclamation (en haut @`a gauche). Cela arrive lorsque le niveau a @'et@'e
+modifi@'e apr@`es que vous l'avez r@'esolu. Vous le verrez probablement apr@`es une
+mise @`a niveau d'Enigma.
+
+On peut naviguer dans le menu des niveaux avec les touches suivantes:
+
+@table @kbd
+@item @key{Echap}
+Retourne au menu pr@'ec@'edent
+
+@item @key{F1}
+Affiche l'aide en ligne
+
+@item @key{F5}
+Saute au prochain niveau, comme le fait le bouton @key{>>|}
+
+@item fl@`eches
+Change le niveau s@'electionn@'e
+
+@item @key{Entr@'ee}
+Joue le niveau s@'electionn@'e
+
+@item @key{Espace}
+Va au prochain paquet de niveaux
+
+@item @key{Backspace}
+Va au paquet de niveaux pr@'ec@'edent
+
+@end table
+
+@node Le menu des paquets de niveaux, Options de jeu, Le menu des niveaux, Pour commencer
+@subsection Le menu des paquets de niveaux
+
+Enigma contient tellement de niveaux qu'ils ont @'et@'e organis@'es en ``paquets de
+niveaux''; et comme chaque version d'Enigma a vu na@^itre de nouveaux niveaux,
+on a organis@'e les paquets de niveaux en ``groupes''. Cette organisation est
+plus simple @`a l'usage qu'@`a la description.
+
+Pour s@'electionner un paquet de niveaux, il faut cliquer sur  ``Pack de niveaux''
+qui est dans le menu principal et dans le menu des niveaux.
+
+Ce menu montre les groupes dans la colonne de gauche et les paquets de niveaux
+du groupe courant dans la colonne de droite. Les groupes actuellement fournis
+avec Enigma sont les suivants:
+
+@itemize @bullet
+@item @b{Enigma} - niveaux qui n'ont @'et@'e @'ecrits que pour Enigma
+@item @b{D@'ej@`a-vu} - que vous pourriez avoir d@'ej@`a vu avant
+@item @b{Sokoban}
+@item @b{Facets} - tris sp@'eciaux @`a partir des niveaux pr@'ec@'edents
+@item @b{User} - niveaux et paquets personnels comme par exemple l'historique
+et les paquets faits par l'utilisateur.
+@item @b{Development} - patrons et niveaux pas finis par l'@'equipe d'Enigma
+@item @b{All Packs} - La totale
+@end itemize
+
+Un clic sur le bouton gauche s@'electionne un paquet de niveaux.
+
+Pour des descriptions plus d@'etaill@'ees sur les paquets de niveaux voyez
+@ref{Paquets utilisateur}.
+
+@node Options de jeu, L'inspecteur des niveaux, Le menu des paquets de niveaux, Pour commencer
+@subsection Options de jeu
+
+Le menus des options vous permet d'adapter Enigma @`a vos pr@'ef@'erences.
+
+@table @strong
+@item Langue
+Choisir la langue pour les menus et si possible pour les documents qui sont
+dans le niveau.
+
+@item Plein Ecran
+Alterne entre les modes plein @'ecran et fen@^etre.
+@kbd{Alt-@key{Entr@'ee}} a le m@^eme effet, m@^eme en dehors du menu des options.
+@emph{Note:} Sur certains syst@`emes il faut retourner au menu principal pour
+pouvoir retourner au mode plein @'ecran.
+
+@item Mode vid@'eo
+Ce bouton permet de changer le mode vid@'eo utilis@'e par Enigma; il ne prend effet
+que lorsque l'on retourne au menu principal.
+
+@item Correction gamma
+Si n@'ecessaire, permet de r@'egler la luminosit@'e de l'@'ecran.
+
+@item Vitesse souris
+D@'etermine @`a quelle vitesse la boule acc@'el@`ere quand on bouge la souris.
+Les fl@`eches gauche et droite permettent de changer la vitesse de la souris
+durant le jeu.
+
+@item Volume sonore
+R@`egle le volume des effets sonores durant le jeu.
+
+@item Jeu de sons
+Ce bouton vous permet de choisir le jeu d'effets sonores qu'Enigma va utiliser
+pendant le jeu.  Si vous utilisez Enigma avec les fichiers de donn@'ee d'Oxyd,
+cette option vous permet d'utiliser les sons d'Oxyd dans tout le jeu.
+
+@item Volume musique
+Le volume de la musique de fond qui passe dans les menus.
+
+@c @item Musique dans le jeu
+@c Enigma peut jouer de la musique pendant le jeu.  Ou pas. Selon.
+
+@item St@'er@'eo
+Alterne entre la st@'er@'eo ``normale'' , la st@'er@'eo``invers@'ee'' , et la mono (non,
+pas la monitrice, la monophonie).
+
+@item Mise @`a jour records
+Si mis sur @samp{Auto} Enigma essayera r@'eguli@`erement de charger des scores ce
+qui mettra @`a jour les donn@'ees de score, records du monde, PAR etc.
+@xref{Homologuer les scores}.
+
+@item Nom utilisateur
+Entrez votre nom ou alias qui sera attach@'e @`a enigma.score si vous le mettez @`a
+jour. @xref{Homologuer les scores}.
+
+@item Chemin utilisateur
+L@`a o@`u Enigma enregistre toutes vos donn@'ees utilisateur. Voir le manuel de
+r@'ef@'erence pour plus de d@'etail.
+
+@item Chemin images
+L@`a o@`u Enigma enregistre toutes vos images. Voir le manuel de
+r@'ef@'erence pour plus de d@'etail.
+
+@end table
+
+@node L'inspecteur des niveaux, ,Options de jeu, Pour commencer
+@subsection L'inspecteur des niveaux
+
+Pour lire des informations sur le niveau courant vous pouvez utiliser
+l'inspecteur des niveaux. Pour cela il faut cliquer-droit ou faire control-clic
+sur l'image du niveau dans le menu des niveaux.
+
+Vous pouvez comparer vos scores au record du monde, au par, au score de l'auteur.
+Il y a m@^eme des statistiques sur combien de joueurs ont r@'esolu ce niveau.
+
+Vous pouvez aussi entrer une petite annotation sur le niveau, et le noter.
+
+Sur certains syst@`emes, cette annotation ne peut @^etre entr@'ee qu'avec des codes
+ASCII.
+
+La note traduit votre impression personnelle sur le niveau. @samp{-} veut dire
+pas d'opinion. 0 - tr@`es mauvais, 5 - moyen, 10 - le meilleur des meilleurs. La
+note sera exp@'edi@'ee avec vos scores (@ref{Homologuer les scores}).
+
+Enfin l'inspecteur des niveaux permet de voir les captures d'@'ecran prises durant
+le jeu (@ref{Contr@^oles}).
+
+@node R@`egles du jeu, Contr@^oles, Pour commencer, Le jeu
+@section R@`egles du jeu
+
+@menu
+* Paysages normaux::
+* Paysages @`a deux joueurs::
+* Paysages de m@'editation::
+@end menu
+
+
+@node Paysages normaux, Paysages @`a deux joueurs, R@`egles du jeu, R@`egles du jeu
+@subsection Paysages normaux
+
+L'id@'ee de base d'Enigma est simple: Dans la plupart des niveaux vous contr@^olez
+une boule de billard noire (@emph{ou plut@^ot  une sph@`ere, vu sa fragilit@'e et le
+bruit qu'elle fait en se brisant}) qui doit trouver et ``ouvrir'' des paires de
+pierres appel@'ees @emph{Oxydes}.  Les oxydes ferm@'ees ressemblent @`a ceci
+(il y a quatre variantes pour l'aspect, mais le comportement est le m@^eme):
+
+@image{images/st-oxyds,,0.7cm}
+
+Quand vous touchez une oxyde avec la boule noire, elle s'ouvre et r@'ev@`ele un motif
+color@'e.  Chaque niveau comprend deux oxydes de chaque couleur.  Vous devez toucher
+successivement deux oxydes de la m@^eme couleur pour les ouvrir d@'efinitivement -- si
+elles ne sont pas de la m@^eme couleur, la premi@`ere se referme . Vous avez r@'eussi
+un niveau lorsque vous avez ouvert toutes les paires d'oxydes qu'il contient .
+L'image suivante montre une paire d'oxydes vertes d@'ej@`a ouvertes. Le point
+d'interrogation @`a l'int@'erieur de l'oxyde bleue montre que l'autre oxyde bleue
+est toujours cach@'ee quelque part.
+
+@image{images/intro-oxyd,,3cm}
+
+@emph{Au fait: Si ce n'est d@'ej@`a fait, le moment est appropri@'e pour d@'emarrer
+Enigma et essayer quelques niveaux!}
+
+Il suffit de passer par-dessus un objet pour le ramasser. L'inventaire en bas de
+l'@'ecran montre la liste des outils dont vous disposez. Au d@'ebut d'un nouveau jeu
+vous n'avez que deux vies suppl@'ementaires. L'image suivante montre un inventaire
+contenant une pelle, un morceau de papier, deux b@^atons de dynamite, vos deux vies
+suppl@'ementaires, et un parapluie:
+
+@image{images/intro-inventory,,1cm}
+
+L'objet le plus @`a gauche de l'inventaire peut @^etre actionn@'e en cliquant avec le
+bouton gauche: Il sera d@'epos@'e sur le sol ou accomplira une certaine action. Par
+exemple, la dynamite prend feu quand on la d@'epose, et les ressorts vont propulser
+la boule noire. Un clic avec le bouton droit ou le bouton central de la souris
+r@'earrange les objets de l'inventaire.
+
+Si, pour une quelconque raison, vous ne d@'esirez pas prendre un objet, passez
+dessus tout en laissant appuy@'e le bouton gauche de la souris. Cela peut servir en certaines
+occasions.
+
+Beaucoup de pierres peuvent @^etre boug@'ees en les poussant suffisamment fort. La
+plus utile des pierres mobiles est certainement celle qui est en bois, et qui
+peut servir @`a construire des ponts au-dessus de l'eau et de l'ab@^ime. Cette image
+montre comment on peut construire un pont en empilant des blocs de bois dans
+l'eau:
+
+@image{images/intro-plank,,4cm}
+
+Certains objets peuvent se transformer, en les @'eclairant avec un laser ou en
+les @'ecrasant avec des pierres mobiles; et certaines pierres ont un comportement
+diff@'erent si on les actionne avec un des outils de l'inventaire: L'exemple le
+plus connu est la baguette magique.
+
+Surtout ne vous laissez pas d@'ecourager par l'apparente complexit@'e du jeu -- le
+comportement de la plupart des objets devient @'evident au moment ad@'equat. Certains
+des objets les plus @'etranges sont d@'ecrits au  @ref{Quelques objets du jeu}.
+
+@node Paysages @`a deux joueurs, Paysages de m@'editation, Paysages normaux, R@`egles du jeu
+@subsection Paysages @`a deux joueurs
+
+H@'elas non: Ce n'est pas un jeu en r@'eseau; il n'y a d'ailleurs pas de niveaux
+avec vraiment deux joueurs, mais des niveaux @`a un joueur peuvent comporter
+deux boules pilotables par ledit joueur: La d@'ej@`a connue boule noire, et une
+autre qui est blanche; un tel niveau se reconna@^it @`a la pr@'esence d'un objet
+en forme de 'yin-yang' dans l'inventaire; cet objet permet de choisir laquelle
+des deux boules on souhaite piloter:
+
+@image{images/intro-twoplayer,,7cm}
+
+@node Paysages de m@'editation,  , Paysages @`a deux joueurs, R@`egles du jeu
+@subsection Paysages de m@'editation
+
+Dans les niveaux dits de m@'editation v@^otre r@^ole est tr@`es diff@'erent: Au lieu de
+chercher des oxydes qui se correspondent, vous devez placer des petites boules
+blanches dans des creux du sol. Le niveau est termin@'e d@`es que chaque petite boule
+blanche @emph{s'est immobilis@'ee} dans son petit nid douillet.
+
+@image{images/intro-meditation,,3cm}
+
+Ceci dit, toutes les boules blanches sont actionn@'ees par la souris et un
+mouvement brusque de celle-ci peut faire sortir certaines d'entre elles de leur
+trou. Pour r@'eussir un niveau de m@'editation, il faut un geste assur@'e et beaucoup
+de patience (d'o@`u le nom de m@'editation donn@'e @`a ces niveaux !).
+
+@node Contr@^oles,  , R@`egles du jeu, Le jeu
+@section Contr@^oles
+
+Voici une liste des contr@^oles actifs en phase de jeu (pas besoin de les
+apprendre par coeur, cette liste est disponible par un appui sur la touche
+@key{F1} .):
+
+@table @kbd
+@item clic gauche
+Utilisation du premier outil de l'inventaire
+
+@item clic droit/ bouton du milieu
+Rotation de l'inventaire des outils
+
+@item @key{Echap}
+Retour au menu principal
+
+@item @key{F1}
+Affichage de l'aide
+
+@item @key{F3}
+Suicide de la boule noire
+
+@item @key{Shift-F3}
+Recommence le niveau
+
+@item @key{F4}
+Paysage suivant
+
+@item @key{F5}
+Prochain paysage non r@'esolu
+
+@item @key{F10}
+Prend une photo du paysage
+
+@item @key{Fl@`eche gauche}
+Diminuer la vitesse de la souris
+
+@item @key{Fl@`eche droite}
+Augmenter la vitesse de la souris
+
+@item Alt-@key{Entr@'ee}
+Affichage plein @'ecran ou fen@^etr@'e
+
+
+@item Alt-X
+Retour @`a l'@'ecran des niveaux
+@end table
+
+@node Quelques objets du jeu, Expertise, Le jeu, Haut
+@chapter Quelques objets du jeu
+
+Il y a des dizaines d'objets diff@'erents dans le jeu Enigma. Ici seuls quelques-uns
+sont d@'ecrits. Si vous d@'ebutez en Enigma, c'est une bonne id@'ee de commencer par
+les niveaux du package ``tutorial'': Au d@'emarrage du jeu, cliquer sur
+``Pack de niveaux'', puis sur le bouton ``Enigma'' en haut @`a gauche, puis
+``Tutoriel'' @`a droite. En les jouant dans l'ordre, ``Oxyd Stones 1'' etc. le
+tutoriel vous montrera les objets et id@'ees les plus importants du jeu, et certains
+des niveaux les plus faciles d'Enigma.
+
+@menu
+* Outils::
+* Pierres::
+@end menu
+
+@c @node Objets sp@'eciaux,,,
+@c @section Objets sp@'eciaux
+
+@c @node Pr@'edateurs,,,
+@c @subsection Pr@'edateurs
+
+@node Outils, Pierres, Quelques objets du jeu, Quelques objets du jeu
+@section Outils
+
+@menu
+* Explosifs::                  Dynamite et bombes
+* Parapluies::
+* Drapeaux::                      Placer le point de r@'esurrection
+@end menu
+
+@node Explosifs, Parapluies, Outils, Outils
+@subsection Explosifs
+Il y a trois sortes d'explosifs, que voici du moins dangereux au plus redoutable:
+
+@image{images/it-explosives,,0.7cm}
+
+Le b@^aton de dynamite ne d@'etruit que les objets les plus fragiles; son utilit@'e
+est essentiellement de mettre le feu aux bombes, mais elle peut aussi servir @`a
+faire fondre des morceaux de glace . La bombe noire (la plus courante)
+est suffisamment puissante pour cr@'eer un crat@`ere et d@'etuire les pierres
+avoisinantes. La bombe blanche est thermonucl@'eaire: Elle a la puissance de 5
+bombes noires, et peut donc d@'etruire la boule noire m@^eme si elle n'est pas
+tr@`es pr@`es: Il y int@'er@^et @`a s'@'eloigner tr@`es vite si elle est
+allum@'ee !
+
+@node Parapluies, Drapeaux, Explosifs, Outils
+@subsection Parapluies
+
+@image{images/it-umbrella,,0.7cm}
+
+Une fois actionn@'e, le parapluie conf@`ere @`a la boule noire, l'immunit@'e,
+mais pendant 10 secondes seulement. Son effet est annonc@'e par un halo blanc
+autour de la boule noire, constant pendant 7 secondes, puis clignotant pendant
+les 3 derni@`eres secondes: Ce clignotement signifie donc qu'on est en fin
+d'immunit@'e.
+
+@node Drapeaux,  , Parapluies, Outils
+@subsection Drapeaux
+
+@image{images/it-flags,,0.7cm}
+
+Les drapeaux permettent de g@'erer le karma des boules: Normalement si une boule
+qui a encore des vies en r@'eserve meurt, elle ressuscite au point de d@'epart
+du niveau; si on a pr@'ealablement d@'epos@'e un drapeau quelque part, ce n'est
+plus le cas: La boule r@'eappara@^it @`a l'endroit du drapeau. La couleur du
+drapeau est conforme @`a celle de la boule sur laquelle il agit.
+
+@c @node T@'el@'eporteurs, Elastiques, Drapeaux, Outils
+@c @subsection T@'el@'eporteurs
+
+@c @node Elastiques,  , T@'el@'eporteurs, Outils
+@c @subsection Elastiques
+
+@node Pierres,  , Outils, Quelques objets du jeu
+@section Pierres
+
+@menu
+* Pierres mortelles::
+* Pierres d'@'echange::
+* Miroirs::
+* Pierres @`a sens unique::
+* Pierres Shogun::
+* Eboulis::
+* Pi@`eces de puzzle::
+* Bo@^ites postales::
+@end menu
+
+@node Pierres mortelles, Pierres d'@'echange, Pierres, Pierres
+@subsection Pierres mortelles
+
+@image{images/st-lethal,,0.7cm}
+
+Il y a deux sortes de @emph{t@^etes de mort}: Celle qui est repr@'esent@'ee ci-dessus,
+et une variante que seules les boules noires porteuses de lunettes peuvent voir.
+Au moindre contact, elles tuent les boules.
+
+Le @emph{chevalier noir} est @'egalement mortel pour les boules d@'esarm@'ees.
+Il y a des tueurs mobiles: Les 'tops' (toupies) et les 'rotors' (croix
+tournantes); ils sont attir@'es par leur victime, laquelle a de pr@'ef@'erence
+une forme sph@'erique et une couleur noire @enddots{}
+
+@node Pierres d'@'echange, Miroirs, Pierres mortelles, Pierres
+@subsection Pierres d'@'echange
+
+@image{images/st-swap,,0.7cm}
+
+En espace ext@'erieur, une pierre d'@'echange est immobile. Mais si on la pousse
+vers une pierre adjacente, elle @'echange sa position avec celle de sa voisine,
+elle est donc utile pour 'faire bouger' des pierres immobiles. Mais elle-m@^eme
+ne peut @^etre boug@'ee que gr@^ace @`a un @'echange avec des pierres 'normales'.
+
+@c @node Lasers, Miroirs, Pierres d'@'echange, Pierres
+@c @subsection Lasers
+
+@c Both interesting and da
+
+@node Miroirs, Pierres @`a sens unique, Pierres d'@'echange, Pierres
+@subsection Miroirs
+
+@image{images/st-mirrors,,0.7cm}
+
+Les miroirs (@`a droite sur la photo) r@'efl@'echissent les rayons laser, soit
+en arri@`ere s'ils sont perpendiculaires @`a ceux-ci, soit @`a angle droit s'ils
+font un angle de 45 degr@'es par rapport @`a ceux-ci. Les prismes (@`a gauche) sont
+plus complexes: Chaque face agit comme un miroir, mais si le rayon tombe sur
+l'angle droit du prisme, il se divise en deux. Les prismes et miroirs peuvent
+@^etre soit semi-transparents (aux extr@'emit@'es de la photo; dans ce cas, le
+rayon est divis@'e en deux, une partie qui est r@'efl@'echie et une partie qui
+est transmise) soit opaques (au milieu de la photo). Ils peuvent @^etre soit
+mobiles (en les poussant fort avec la boule noire) soit immobiles. Mais dans les
+deux cas on peut les orienter en les touchant avec la boule. La manipulation des
+prismes et miroirs est dangereuse pour les boules noires si elle est men@'ee pr@`es
+d'un laser allum@'e @enddots{}
+
+@node Pierres @`a sens unique, Pierres Shogun, Miroirs, Pierres
+@subsection Pierres @`a sens unique
+
+@image{images/st-oneway,,0.7cm}
+
+On ne peut les traverser que dans un seul sens. Des labyrinthes entiers peuvent
+@^etre construits avec des pierres @`a sens unique, mais le plus souvent ils servent
+@`a vous obliger @`a finir une partie du niveau avant d'attaquer la suivante.
+
+Une pierre @`a sens unique vous bloque vraiment? Peut-@^etre une baguette magique
+vous servira-t-elle @enddots{}
+
+@node Pierres Shogun, Eboulis, Pierres @`a sens unique, Pierres
+@subsection Pierres Shogun
+
+@image{images/st-shogun,,0.7cm}
+
+Certains niveaux ont des cercles bleus par terre; ceux-ci actionnent quelque chose
+(ouverture de porte, allumage de lasers etc.) s'ils sont recouverts par des pierres
+@emph{shogun}. Il y a trois sortes de pierres shogun: La plus petite (@`a gauche sur le
+portrait de famille) actionne les petits cercles bleus. Pour les cercles de taille
+moyenne, il faut r@'ealiser l'empilement que l'on voit au milieu de la photo, en
+pla@,{c}ant @emph{d'abord} un shogun de taille moyenne, puis un petit shogun par-dessus.
+De fa@,{c}on g@'en@'erale, on ne peut empiler un shogun que sur shogun plus grand que
+lui, ou sur un sol nu. Pour les plus grands cercles bleus, il faut r@'ealiser
+l'empilement de droite en amenant d'abord un grand shogun, puis en le recouvrant
+par un shogun moyen, et enfin en recouvrant le tout par un petit.
+
+@node Eboulis, Pi@`eces de puzzle, Pierres Shogun, Pierres
+@subsection Eboulis
+
+@image{images/st-bolder,,0.7cm}
+
+Les @'eboulis ne bougent que dans une direction, indiqu@'ee par la fl@`eche qui est
+peinte dessus. Ils ne s'arr@^etent que lorsqu'ils heurtent une autre pierre. Ils
+peuvent barrer v@^otre chemin et vous devrez trouver un moyen de vous en
+d@'ebarrasser. Mais vous, n'embarrassez pas leur chemin, ou ils vous d@'etruiraient.
+
+Mais ils peuvent aussi @^etre utiles: Ils ouvrent des oxydes quand ils les heurtent.
+Et vous pouvez les rediriger de plusieurs mani@`eres @enddots{}
+
+@node Pi@`eces de puzzle, Bo@^ites postales, Eboulis, Pierres
+@subsection Pi@`eces de puzzle
+
+Les pi@`eces de puzzle peuvent @^etre assembl@'ees pour faire un puzzle complet. Elles
+ont des sortes de prises sur leurs c@^ot@'es pour les assembler. Une fois l'assemblage
+termin@'e, on peut le pousser d'un bloc comme des pierres uniques, ce qui permet
+par exemple de construire des ponts en pr@'efabriqu@'e au-dessus de l'eau ou de
+l'ab@^ime.
+
+Lorsqu'on les touche avec une baguette magique, leur comportement est diff@'erent:
+Si le bloc est complet, il explose imm@'ediatement. Sinon la rang@'ee ou la colonne
+de pi@`eces de puzzle dont fait partie celle qui a @'et@'e touch@'ee, est d@'ecal@'ee
+circulairement soit dans le sens horizontal soit dans le sens vertical.
+
+Il y a une variante rare des pi@`eces de puzzle, que l'on trouve surtout dans les
+niveaux de Oxyd 1, et que l'on reconna@^it @`a leur couleur orange (au lieu de bleue).
+Ces pierres sont immobiles, et leur comportement est celui que la baguette magique
+conf@`ere aux pi@`eces de puzzle bleues: Explosion si le puzzle est complet, et d@'ecalage
+circulaire d'une rang@'ee ou d'une colonne sinon.
+
+@node Bo@^ites postales,  , Pi@`eces de puzzle, Pierres
+@subsection Bo@^ites postales
+
+@image{images/st-mail,,0.7cm}
+
+La bo@^ite aux lettres est une pierre en g@'en@'eral prolong@'ee par un tuyau
+form@'e de puzzles; @`a chaque contact avec une bo@^ite aux lettres, la boule
+noire exp@'edie au bout de ce tuyau, l'outil le plus @`a gauche de son inventaire.
+Mais une fois qu'un objet autre qu'un puzzle a @'et@'e exp@'edi@'e, la poste est
+bloqu@'ee. En g@'en@'eral on doit construire le tuyau en exp@'ediant ses morceaux
+par la poste.
+
+@c @node Tourniquets, Eboulis, Pi@`eces de puzzle, Pierres
+@c @subsection Tourniquets
+
+
+
+@c @node Eboulis, Elastiques et ciseaux, Tourniquets, Pierres
+@c @subsection Eboulis
+
+
+@c @node Elastiques et ciseaux,  , Eboulis, Pierres
+@c @subsection Elastiques et ciseaux
+
+@node Expertise, Triche, Quelques objets du jeu, Haut
+@chapter Expertise
+
+@menu
+* Paquets utilisateur::            Historique, r@'esultats recherche et Auto
+* Sauvegardes::                      Que sauvegarder pour la s@'ecurit@'e
+* Homologuer les scores::          Que le monde sache comme vous r@'eussissez
+* Mise @`a jour::             Mettre @`a jour les scores et les niveaux
+@end menu
+
+@node Paquets utilisateur, Sauvegardes, Expertise, Expertise
+@section Paquets utilisateur
+
+@ref{Le menu des paquets de niveaux} en dit plus sur le sujet. Le groupe
+@samp{User} contient trois paquets de niveaux, initialement vides:
+@samp{Auto Folder}, @samp{History} and @samp{Search Result}.
+
+En cliquant sur le bouton @samp{Search} dans le menu des paquets de niveaux,
+vous pouvez effectuer une recherche dans l'ensemble des niveaux. Pour cela, placez
+la souris au-dessus de la zone de texte, puis entrez la cha@^ine de caract@`eres @`a
+chercher. Vous pouvez effectuer une recherche par auteur, par titre ou par nom de
+fichier. La cha@^ine peut @^etre entr@'ee en minuscules sans changer le r@'esultat. Par
+exemple, vous pouvez entrer ``jump''. Le r@'esultat de la recherche est fourni sous
+la forme d'un paquet de niveaux appel@'e ``Search Results''.
+
+Le paquet de niveaux @samp{History} est automatiquement mis @`a jour chaque fois
+que vous jouez un niveau. Cela peut @^etre utile si vous cherchez un niveau auquel
+vous jouates la semaine derni@`ere sans savoir quels mots-cl@'es entrer pour le
+rechercher.
+
+@samp{Auto Folder} est un paquet de niveaux dont vous pouvez vous servir pour
+ajouter de nouveaux niveaux, par exemple que vous avez t@'el@'echarg@'es, ou cr@'e@'es
+vous-m@^eme. Ces niveaux devraient @^etre plac@'es dans @samp{levels/auto} ou dans
+@samp{User Path} comme indiqu@'e dans @ref{Options de jeu}. Les niveaux qui sont
+dans ce dossier sont automatiquement charg@'es au d@'emarrage d'Enigma.
+
+Bien d'autres aspects utiles d'Enigma d@'epassent le cadre de ce manuel. Consultez
+le manuel de r@'ef@'erence pour plus de d@'etails.
+
+@node Sauvegardes, Homologuer les scores, Paquets utilisateur, Expertise
+@section Sauvegardes
+
+Si vous craignez qu'une d@'efaillance de v@^otre disque dur vous fasse perdre tous
+vos scores, ou si vous voulez transf@'erer ceux-ci vers un autre ordinateur, voici
+quelques informations sur l'@'etat d'Enigma. Premi@`erement, jetez un oeil sur
+@samp{User Path} dans le menu @ref{Options de jeu} .  Vous pouvez vous contenter
+de sauvegarder tout le dossier -- les fichiers importants @'etant @samp{enigma.score}
+et @samp{state.xml}.
+
+@node Homologuer les scores, Mise @`a jour, Sauvegardes, Expertise
+@section Homologuer les scores
+
+Si vous voulez homologuer vos scores, vous devez envoyer le fichier @samp{enigma.score}
+situ@'e dans le dossier @samp{User Path}. La page d'accueil vous donnera les d@'etails
+sur la mani@`ere de proc@'eder.
+
+Pour la mise @`a jour automatique des records du monde, il suffit d'activer
+l'option @samp{Ratings Update}.
+
+@node Mise @`a jour, , Homologuer les scores, Expertise
+@section Mise @`a jour
+
+Si vous n'avez pas personnalis@'e v@^otre ancienne version d'Enigma, il vous suffit
+de la d@'esinstaller avant d'installer la nouvelle version. Ainsi vos scores seront
+automatiquement mis @`a jour.
+
+Mais si vous avez ajout@'e des niveaux @`a v@^otre ancienne version d'Enigma, vous
+devrez les sauvegarder avant la d@'esinstallation. Ensuite vous pouvez tranquillement
+d@'esinstaller avant d'installer la nouvelle version.
+
+@c TODO: too technical (HOMEless, environment variable)@item
+@c TODO: split in two sentences
+L'ancien fichier @samp{~/.enigmarc2} pour les syst@`emes qui ont un environnement
+@samp{HOME} ou @samp{.../Application Data/enigmarc.lua2} pour les
+Windows sans HOME (@emph{des fen@^etres sans maison? Comment cela se peut-il?})
+est automatiquement converti au nouveau format de fichier. Vous pouvez supprimer
+l'ancien fichier d@`es que vous avez r@'eussi ne serait-ce qu'un seul niveau de Enigma 1.00.
+
+Pour utiliser des niveaux que vous avez r@'ecup@'er@'es de l'ancienne version d'Enigma,
+consultez le manuel de r@'ef@'erence.
+
+@node Triche, Cr@'edits, Expertise, Haut
+@chapter Triche
+
+Ce chapitre contient des indices pour certains des niveaux les plus difficiles.
+On vous conseille vraiment de ne @emph{pas} lire les indices tant que vous n'@^etes pas
+compl@`etement bloqu@'es.  Certains niveaux sont vraiment difficiles (m@^eme les
+champions d'Enigma ne peuvent les r@'esoudre en moins de quelques heures).
+Certains niveaux sont plus faciles en mode 'facile' (@ref{Le menu des niveaux}).
+
+@menu
+* Tutoriel::                    Promenade dans `Advanced tutorial'
+* Indices::                       Indices pour plusieurs niveaux
+@end menu
+
+@node Tutoriel, Indices, Triche, Triche
+@section Promenade dans `Advanced tutorial'
+
+Cette section a @'et@'e @'ecrite par Jakob Scott, le cr@'eateur des niveaux 'tutorial'.
+Les niveaux du chapitre 'tutorial' sont cens@'es @^etre faciles, @`a l'exception du
+dernier d'entre eux ('advanced tutorial'), auquel les paragraphes suivants sont
+consacr@'es. Premier conseil: Lire tous les documents de chaque chambre d@`es qu'on
+y entre. Le but de ce jeu est donc de trouver, et toucher, toutes les oxydes du niveau,
+lequel est divis@'e en une vingtaine de chambres, regroup@'ees en trois zones: La zone 1
+est compos@'ee de chambres o@`u on montre les @'el@'ements de base et certains sols de
+Enigma. La zone 2 est plus agressive, avec l'@'elaboration de strat@'egies parfois
+destin@'ees @`a @'echapper @`a des ennemis. La zone 3 montre des interactions plus
+complexes entre objets Enigma. Dans ce niveau, les oxydes sont regroup@'ees dans
+la chambre @`a laquelle on acc@`ede @`a la fin de la zone 3.
+
+@subsection Zone 1
+
+Au d@'epart, on est dans une chambre ferm@'ee par une porte en haut, contenant un peu
+d'eau en bas @`a gauche, et un trou dans le mur droit.
+
+Chambre 1: Traverser ce trou pour aller dans la chambre 2.
+
+Chambre 2: Il suffit d'@'eviter les t@^etes de mort pour traverser cette chambre.
+
+Chambre 3: Fabriquer un pont au-dessus de l'eau avec les morceaux de bois; frapper
+les pierres noires @`a droite; @'ecarter les pierres mordor@'ees du chemin (par
+exemple en les poussant vers la gauche), puis faire un pont vers la droite avec
+deux morceaux de bois.
+
+Chambre 4: Aller vers la toupie; quand elle entre en chasse,
+la mener vers la gauche jusqu'@`a avoir les pierres centrales entre elle (@`a gauche)
+et la boule noire; entrer dans la chambre suivante.
+
+Chambre 5: Le seul danger sont  les t@^etes de mort du bas: Cette chambre montre
+certains sols: Dans l'ordre, le  m@'etal a des propri@'et@'es analogues au sol verdoyant
+vu juqu'ici, le sol rouge frotte plus, la glace frotte moins et l'espace sid@'eral ne
+frotte pas du tout, au point qu'il est impossible de changer de direction quand on
+le traverse.
+
+Chambre 6: La pente ne pose aucun probl@`eme; aller vers la gauche en utilisant le
+sol invers@'e (quand on essaye d'aller vers la gauche, on va vers la droite etc.);
+au besoin, retourner le mulot peut aider.
+
+Chambre 7: Commencer par gagner une vie  suppl@'ementaire en posant la pierre mobile sur
+la trappe du bas; la pousser d'abord  un carreau vers le haut puis six carreaux vers la
+gauche; ensuite la pousser 5 carreaux  plus bas et 2 carreaux vers la droite; ramasser
+une autre vie suppl@'ementaire puis actionner l'autre trappe en y posant la pierre mobile,
+ce qui ouvre la porte @`a gauche vers la chambre suivante.
+
+Chambre 8: Prendre la dynamite et l'allumer devant les pierres jaunes, ce qui lib@`ere le
+passage; la b@^eche n'est pas n@'ecessaire mais on peut exp@'erimenter avec.
+
+Chambre 9: Pousser la pierre mobile la plus basse vers la gauche; les @'eboulis allant
+vers la droite bloquent le chemin; en d@'epla@,{c}ant la pierre mobile la plus @`a droite,
+on laisse l'@'eboulis se produire; ramasser la baguette magique en faisant attention
+@`a ne pas encore actionner un @'eboulis avec, puis pousser la pierre qui est au-dessus
+de l'eau. Ensuite placer la baguette magique en t@^ete de l'inventaire pour qu'elle soit
+active, et s'en servir sur les trois @'eboulis du haut, en faisant attention @`a
+ne pas se faire ensevelir; pousser la pierre de gauche pour entrer dans la chambre
+suivante.
+
+Chambre 10: Actionner l'interrupteur; pousser les deux pierres mordor@'ees dans l'eau;
+aller vers la gauche; pousser vers la gauche le bloc de bois du milieu, puis celui qui
+@'etait juste au-dessus de lui, dans l'eau; pousser les autres morceaux de bois dans l'eau
+en une ligne pour fabriquer un pont; d@'efoncer la fen@^etre @`a grande vitesse (attention
+aux d@'ebris de verre); r@'ecup@'erer une vie suppl@'ementaire et traverser le pont de
+bois jusqu'@`a la premi@`ere chambre; passer par la porte d@'esormais ouverte.
+
+@subsection Zone 2
+
+Dans la zone 2 on rencontre des rotors, qui ne sont pas tr@`es amicaux avec la boule noire;
+il s'agit de les amener @`a faire ce qu'on veut leur faire faire tout en s'en pr@'eservant.
+Jeter un coup d'oeil (sans bouger pour l'instant la pierre mobile); il s'agit de traverser
+les trois portes en haut.
+
+Porte 1: Frapper la boule blanche sur la gauche pour lib@'erer celle-ci (attention @`a ne
+pas traverser le sens unique noir); ramasser la cuill@`ere puis pousser la boule blanche
+au travers du sens unique blanc, suffisamment fort pour qu'elle ne reste pas bloqu@'ee en
+chemin; maintenant traverser le sens unique noir et pousser la boule blanche au travers
+du corridor; la pousser au travers du sens unique blanc, suffisamment fort pour qu'elle ne
+reste pas dans le sens interdit. Une fois que la boule blanche a travers@'e, utiliser la
+cuill@`ere: On est de retour au d@'ebut du niveau, et plus enferm@'e; traverser la porte:
+La premi@`ere des portes du haut est d@'esormais ouverte.
+
+Porte 2: Pousser la pierre mobile qui se trouve @`a droite de la chambre vers la droite,
+et courir; un document comportant des informations int@'eressantes devrait @^etre apparu
+dans la porte qui s@'epare les zones 1 et 2; amener le rotor (par la m@^eme technique que
+pour la toupie) au-dessus du mur qui est @`a droite de la porte; retraverser la porte,
+puis le pont vers la chambre du bas; actionner l'interrupteur pour refermer la porte,
+puis retourner dans la chambre du d@'epart. Longer le mur du haut de droite @`a gauche
+pour amener le rotor @`a gauche, puis longer le mur de gauche vers le bas pour faire
+descendre le rotor le long du mur gauche, jusqu'@`a ce qu'on ne l'entende plus bouger.
+Il devrait avoir actionn@'e une trappe; actionner l'interrupteur pour rouvrir la porte et
+retourner dans la zone 2: La porte du milieu devrait @^etre ouverte.
+
+Porte 3: Pousser la pierre mobile qui a servi d'antre au rotor sur la trappe qui se trouve
+dans la chambre de d@'epart du rotor; retourner dans la chambre de gauche: La troisi@`eme
+porte est ouverte. Traverser les trois portes.
+
+@subsection Zone 3
+
+Chambre 1: Il faut que le rayon du laser atteigne la pierre noire: Pousser le miroir qui
+est en bas @`a gauche, d'un carreau vers le bas et le toucher doucement jusqu'@`a ce qu'il
+soit orient@'e comme ceci: '\'; pousser le miroir qui est en haut @`a gauche de 8 carreaux
+vers la gauche et un carreau vers le bas, puis l'orienter comme ceci: '/'; pousser le
+miroir qui est en haut @`a droite de 2 carreaux vers le haut et 3 carreaux vers la droite,
+puis l'orienter ainsi: '/'. Actionner l'interrupteur pour allumer le laser, tout en
+@'evitant son rayon; quand le pont sur la droite est construit, le traverser vers la
+droite.
+
+Chambre 2: Ramasser quelques pi@`eces; retourner dans la chambre pr@'ec@'edente; en
+@'eteignant, puis rallumant, le laser, irradier avec son rayon, une des pi@`eces de
+monnaie: Elle se se transforme en parapluie; ramasser ce parapluie apr@`es avoir @'eteint
+le laser, puis recommencer avec une autre pi@`ece pour obtenir un autre parapluie. Poser
+une pi@`ece @`a c@^ot@'e d'un des miroirs puis pousser ce miroir pour @'ecraser la pi@`ece;
+reprendre la pi@`ece et l'irradier avec le rayon du laser pour la transformer en un
+marteau. Irradier le marteau avec le laser (en l'@'eteignant puis le rallumant) pour
+obtenir une @'ep@'ee; ramasser l'@'ep@'ee. (Au besoin, en @'ecrasant d'autres pi@`eces 2
+fois avec les miroirs, puis en @'eclairant les pi@`eces d'or obtenues avec le laser, on
+peut obtenir des vies suppl@'ementaires). Remettre les miroirs dans leur position initiale,
+puis rallumer le laser, pour pouvoir retourner dans la chambre avec les chevaliers; y aller.
+Mettre l'@'ep@'ee en t@^ete d'inventaire puis toucher 4 fois chaque chevalier. On peut
+passer.
+
+Chambre 3: Actionner un parapluie pour traverser l'ab@^ime des chambres en bas puis @`a
+droite; si le halo clignote, actionner l'autre parapluie.
+
+Chambre 4: Toucher les oxydes dans l'ordre pour les activer, tout en @'evitant les
+pierres p@'eteuses, dont l'odeur pestilentielle referme toutes les oxydes.
+
+
+@node Indices,  , Tutoriel, Triche
+@section Indices pour plusieurs niveaux
+
+@table @strong
+
+@item I/6: Welcome to the Machine
+Le message pr@`es du coin en haut @`a droite contient un indice important.
+
+@item I/8: Easy?
+Commencer par placer le premier shogun dans le coin en haut @`a gauche, puis le
+deuxi@`eme shogun @emph{au-dessus} du cercle bleu de droite
+
+@item I/31: Where Am I?
+Si le petit Poucet n'avait pas de pain, il ramasserait des morceaux de bois.
+
+@item I/32: The Grim Reaper
+C'est une histoire sans queue ni t@^ete: Quelle est la t@^ete d'une souris apr@`es un t@^ete-@`a-queue?
+
+@item I/43: Sokoban Revival
+C'@'etait le tout premier niveau du Sokoban originel: Il ne peut donc @^etre si dur !
+
+@item I/65: Lasers 101
+Pousser deux miroirs vers le haut et un vers le bas.
+
+@item I/72: Way to Go
+L'un des cercles bleus se comporte diff@'eremment.
+
+@item I/80: Meditation
+Alignez les boules blanches horizontalement.
+
+@item II/15: Knock Knock
+Ce niveau est @`a se taper la t@^ete dans le mur.
+
+@item II/27: Twelve doors
+M@^eme apr@`es avoir ouvert les douze portes, vous ne pouvez toujours pas passer? Vous
+avez du rater quelque chose !
+
+@item II/40: Space Meditation
+D@'ej@`a entendu parler du probl@`eme des trois corps?
+
+@item II/44: Pharaos' Tombs
+Une astuce pour ce niveau se trouve dans ``Easy shifting'.
+
+@item II/56: Easy Shifting @enddots{}
+Une astuce pour ce niveau se trouve dans ``Running Rings''.
+
+@item II/57: Floppy Swapping
+1) Commencer par chercher la disquette et la baguette magique (ils sont n@'ecessaires); 2)
+Toujours les garder avec soi; 3) Certaines pierres se ressemblent comme les deux P@^oles
+mais sont comme Pierre et Paul.
+
+@item II/59: The Disappearing Block
+Encombrez le laser.
+
+@item II/65: Laser Magic
+Exp@'erimentez des m@'etamorphoses !
+
+@item II/69: Question of Speed
+Qui @emph{s@`eme} le vent r@'ecolte la temp@^ete.
+
+@item II/77: Push Your Way
+Commencez par trouver la baguette magique.
+
+@item II/97: Tool Time
+Ne mettez pas les outils dangereux @`a la port@'ee des enfants.
+
+@item II/99: Domain of Mysteries
+Grimpez pr@'ecautionneusement l'@'echelle.
+
+@item II/100: Patterns
+Y a-t-il de l'@'echo?
+
+@item III/14: Use the PIN
+Utilisez le code PIN, ou votre encyclop@'edie si vous n'arrivez pas @`a retenir le num@'ero.
+
+@item III/16: Control Panel
+Le document de la chambre de gauche vous montre comment arranger les pierres sur les
+premi@`eres rang@'ees de trappes; @`a partir de l@`a, utilisez le code de couleurs de la chambre
+de gauche.
+
+@item III/22: Portable Laser
+Ne laissez pas le laser vous @emph{griller}!
+
+@item III/27: Tricks and Traps
+Pas moyen de quitter le premier @'ecran? Commencez par le petit cercle bleu. Pas moyen
+de trouver la derni@`ere oxyde? Activez 3 grands cercles bleus du premier @'ecran et un petit
+cercle bleu du troisi@`eme @'ecran.
+
+@item III/28: Wells
+Peur de mourir?
+
+@item III/29: Push? Pull!
+Un @'echange vers le haut-- Un @'echange vers le bas-- Un puzzle vers la droite-- et on continue!
+
+@item III/40: Snow White
+Trois petits eskimos -- Perdus sur la banquise--
+Ne trouvaient plus leurs igloos -- Enneig@'es par la bise.
+
+@item III/43: The Ditch
+Pour r@'esoudre ce niveau, il vous faut briser une vie.
+
+@item III/95: Jump and Run
+Un ressort est cach@'e sous un miroir.
+
+@item IV/6: TNT Shortage?
+Le marteau est plus utile que la dynamite.
+
+@item IV/17: Flood Gates
+Inonder pr@'ecautionneusement certaines zones peut s'av@'erer utile; ne pas quitter la
+premi@`ere chambre avant d'avoir actionn@'e l'un des interrupteurs du bas.
+
+@item IV/25: Light Switches
+Encombrez les lasers si vous n'@^etes pas assez rapides.
+
+@item IV/27: Robbery
+Entrez dans la banque en passant par un sol fragile.
+
+@item IV/34: Running Rings
+Une astuce pour ce niveau se trouve dans ``Pharao's Tomb''.
+
+@item IV/39: How Many Spirals?
+Il y a des gens qui sautent par la fen@^etre lors d'un incendie; faites le contraire.
+
+@item IV/47: Just Moving Blocks?
+Trop de morceaux de bois? Comment en enlever un?
+
+@item IV/48: Artillery
+Le boulet de canon peut aussi servir @`a ouvrir des oxydes.
+
+@item IV/54: Fire Safety
+Le trigger vous g@^ene-t-il? D@'etruisez-le!
+
+@item IV/64: The Flagstone Reaper
+Il calcule.
+
+@item IV/65: Little Bit of Everything
+Utilisez F3.
+
+@item V/15: Solvable?
+Est-ce-que WNSE vous @'evoque quelque chose?
+
+@item V/16: Draggers
+OK, ce niveau est diabolique. Il y a une graine pr@`es du d@'epart.
+
+@item V/22: Space Pirates
+Celui-l@`a est difficile.  Allumez une bombe pr@`es du stock de bois.
+
+@item V/32: Walk the Plank
+M@^eme un pirate ne ma@^itrise pas ce niveau?  Il y a un autre chemin, plus facile celui-l@`a.
+
+@item V/34: Island of Safety
+Commencez par analyser les centaines.
+
+@item V/45: Psycho Pushing
+Frappez et sauvez-vous.
+
+@item V/58: Now What?
+Quand vous avez vu la croix, que devrait montrer le r@'eseau ensuite?
+
+@item V/78: Don't Be Greedy
+Une aide figure quelque part ailleurs dans ce manuel.
+
+@item V/89: Ice-bomb
+Une aide figure quelque part sous l'oxyde.
+
+@item V/91: Firefox
+Le sol br@^ule plus vite.
+
+@item VI/8: Orbitting
+Ne laissez rien toucher les bords.
+
+@item VI/23: Prepare Your Defense
+Le laser ne transforme pas que les outils.
+
+@item esprit 43
+Faites un sacrifice au volcan.
+
+@item esprit 52
+Jouez-le le bon jour.
+
+@item esprit 100
+D@'etruisez le coin.
+
+@item Oxyd Magnum 99 (level 22): Letter bomb
+Faites un attentat sur les bo@^ites au lettres.
+
+@item PerOxyd 49 (level 22): Hidden Treasure
+Assurez-vous un acc@`es @`a la chambre avec l'interrupteur; ensuite cherchez le second
+@'ecran avec le ``tr@'esor cach@'e''.
+
+@end table
+
+@node Cr@'edits,  , Triche, Haut
+@chapter Cr@'edits
+
+@menu
+* D@'eveloppeurs principaux::
+* Remerciements sp@'eciaux::
+* Contributeurs::
+* Logiciels utilis@'es::
+@end menu
+
+
+@node D@'eveloppeurs principaux, Remerciements sp@'eciaux, Cr@'edits, Cr@'edits
+@section D@'eveloppeurs principaux
+
+@table @strong
+
+@item Raoul Bourquin
+Administration et conception de niveaux, plus d'autres choses inestimables
+
+@item Siegfried Fennig
+Conception de niveaux, graphismes
+
+@item Martin Hawlisch
+Conception de niveaux, graphismes, programmation
+
+@item Daniel Heck
+Principal d@'eveloppeur, graphismes, documentation
+
+@item Ronald Lamprecht
+XML, interface graphique, portabilit@'e, programmation du noyau, documentation
+
+@item Andreas Lochmann
+Programmation, administration des niveaux, conception de niveaux, documentation
+
+@item Petr Machata
+Conception de niveaux, programmation
+
+@item Nat Pryce
+Conception de niveaux
+
+@item Jacob Scott
+Conception de niveaux
+
+@item Sven Siggelkow
+Conception de niveaux et expertise en Oxyd
+
+@item Ralf Westram
+Programmation, conception de niveaux
+@end table
+
+
+@node Remerciements sp@'eciaux, Contributeurs, D@'eveloppeurs principaux, Cr@'edits
+@section Remerciements sp@'eciaux
+
+@table @strong
+@item Johannes Fortmann
+Portage Mac OS X , un peu de programmation, graphismes
+
+@item Dustin Norlander
+Auteur de la police ``Dustismo''
+
+@item Jeremy Sawicki
+Ing@'eni@'erie inverse sur le format de fichier d'Oxyd, Oxydlib
+
+@item Erich Schubert
+paquets Debian/Ubuntu
+
+@item Meinolf Schneider
+Id@'ee initiale du jeu --@emph{Merci}!
+
+@item Andrew ``Necros'' Sega
+Musique du menu (@emph{Pentagonal Dreams})
+
+@c waiting for licence to add the sounds
+@c @item ``Cellar of Rats''
+@c Sound effects
+
+@item David W. Skinner
+Beaucoup de niveau Sokoban, de
+@uref{http://users.bentonrea.com/~sasquatch/sokoban}
+
+
+@end table
+
+@node Contributeurs, Logiciels utilis@'es, Remerciements sp@'eciaux, Cr@'edits
+@section Contributeurs
+
+Pour diverses contributions, merci @`a:
+
+@itemize @bullet
+
+@item
+Roberto Bardin (conception de niveaux)
+
+@item
+Alain Busser (conception de niveaux, traduction fran@,{c}aise, la pr@'esente version du manuel)
+(@emph{autor@'ef@'erence quand tu nous tiens}!)
+
+@item
+Guy Busser (conception de niveaux)
+
+@item
+Richi B@"utzer (conception de niveaux)
+
+@item
+capkoh (conception de niveaux)
+
+@item
+Serge Dremuk (traduction russe)
+
+@item
+Xerxes M. Dynatos (conception de niveaux)
+
+@item
+Edward (conception de niveaux)
+
+@item
+Stephanie Fabian (d@'etection inestimable de bogues)
+
+@item
+Roberto Garc@'ia (traduction espagnole)
+
+@item
+Edwin Groothuis (portage FreeBSD)
+
+@item
+Immanuel Herrmann (conception de niveaux)
+
+@item
+illmind (conception de niveaux)
+
+@item
+M@'at@'e Lehel Juh@'asz (traduction hongroise)
+
+@item
+Samuele Kaplun (traduction italienne)
+
+@item
+Jens-Christian Korth (conception de niveaux)
+
+@item
+Manuel K@"onig (conception de niveaux, d@'etection de bogues)
+
+@item
+Markus Laire (conception de niveaux)
+
+@item
+Dominik Lehmann (conception de niveaux)
+
+@item
+Edward Leuf (Feedback, d@'etection de bogues)
+
+@item
+Ingo van Lil (Feedback, d@'etection de bogues)
+
+@item
+Frank van der Loo (traduction n@'eerlandaise)
+
+@item
+Sidney Markowitz (portage Mac OS X )
+
+@item
+moonpearl (conception de niveaux)
+
+@item
+Krishnamurti Lelis Lima Vieira Nunes (traduction portugaise)
+
+@item
+Daniel Nylander (traduction su@'edoise)
+
+@item
+Peter Santo (conception de niveaux)
+
+@item
+Lukas Sch@"uller (conception de niveaux)
+
+@item
+Achim Settelmeier (sp@'ecification RPM)
+
+@item
+Jon Sneyers (conception de niveaux)
+
+@item
+Spaceman (conception de niveaux)
+
+@item
+Ulf Stegemann (conception de niveaux)
+
+@item
+J@"urgen Sticht (conception de niveaux)
+
+@item
+Mikke Surakka (traduction finlandaise)
+
+@item
+Andrzej Szombierski (conception de niveaux)
+
+@item
+Tacvek (mise @`a niveau Lua 5.1)
+
+@item
+Michael Terry (fichier .desktop)
+
+@item
+Ray Wick (conception de niveaux)
+
+@item
+Joe Wreschnig (page Manual)
+
+@end itemize
+
+@node Logiciels utilis@'es,  , Contributeurs, Cr@'edits
+@section Logiciels utilis@'es
+
+@table @strong
+
+@item SDL
+@uref{http://www.libsdl.org/}
+
+@item SDL_image
+@uref{http://www.libsdl.org/SDL_image}
+
+@item SDL_mixer
+@uref{http://www.libsdl.org/SDL_mixer}
+
+@item Lua
+@uref{http://www.lua.org}
+
+@item Oxydlib
+@uref{http://www.sawicki.us/oxyd}
+
+@item toLua++
+@uref{http://www.codenix.com/~tolua}
+
+@item zipios
+@uref{http://zipios.sourceforge.net}
+
+@item Xerces C++
+@uref{http://xml.apache.org/xerces-c}
+
+@end table
+
+@bye

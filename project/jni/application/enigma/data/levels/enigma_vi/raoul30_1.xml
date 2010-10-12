@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Industrial Puzzles" el:subtitle="" el:id="raoul30"/>
+      <el:version el:score="1" el:release="1" el:revision="4" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+       <el:dependency el:path="lib/libpuzzle" el:id="lib/libpuzzle" el:release="2" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="4:54"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelh = 13
+levelw = 20
+create_world(levelw, levelh)
+
+enigma.ConserveLevel = FALSE
+
+fill_floor("fl-brick")
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c=="#" then
+            set_stone("st-brick",i-1, line)
+        elseif c=="M" then
+            set_stone("st-brick_magic",i-1, line)
+        elseif c=="S" then
+            set_stone("st-brick_magic",i-1, line)
+            set_floor("fl-abyss",i-1, line)
+            set_item("it-seed",i-1, line)
+        elseif c=="O" then
+            set_stone("st-stoneimpulse",i-1, line)
+        elseif c=="o" then
+            set_stone("st-stoneimpulse-hollow",i-1, line)
+            set_floor("fl-abyss",i-1, line)
+        elseif c=="G" then
+            set_stone("st-glass",i-1, line)
+        elseif c=="g" then
+            set_stone("st-glass_move",i-1, line)
+        elseif c=="X" then
+            set_stone("st-grate1",i-1, line)
+        elseif c=="x" then
+            set_stone("st-grate1",i-1, line)
+            set_floor("fl-abyss",i-1, line)
+        elseif c=="s" then
+            set_stone("st-grate1",i-1, line)
+            set_item("it-seed",i-1, line)
+        elseif c=="m" then
+            set_stone("st-mail-w",i-1, line)
+        elseif c=="(" then
+            set_stone("st-oneway_black-w",i-1, line)
+        elseif c=="d" then
+            set_stone("st-oneway-s",i-1, line)
+        elseif c=="P" then
+            set_stone("st-polarswitch",i-1, line,{on=FALSE})
+        elseif c=="p" then
+            set_stone("st-polarswitch",i-1, line,{on=TRUE})
+        elseif c=="R" then
+            set_stone("st-rubberband",i-1, line)
+        elseif c=="L" then
+            set_stone("st-laser-e",i-1, line,{on=TRUE})
+        elseif c=="l" then
+            set_stone("st-laser-w",i-1, line,{on=FALSE, name="la_2"})
+        elseif c==">" then
+            set_stone("st-mirror-3>",i-1, line)
+        elseif c=="<" then
+            set_stone("st-mirror-3<",i-1, line)
+        elseif c=="v" then
+            set_stone("st-mirror-3v",i-1, line)
+        elseif c=="^" then
+            set_stone("st-mirror-3^",i-1, line)
+        elseif c=="|" then
+            set_stone("st-mirror-p|t",i-1, line)
+        elseif c=="*" then
+            set_stone("st-oxyd",i-1, line,{flavour="c", color="1"})
+        elseif c=="K" then
+            set_stone("st-key",i-1, line,{keycode="5", action="on", target="la_2"})
+        elseif c=="k" then
+            set_stone("st-key",i-1, line,{keycode="4", action="open", target="door_1"})
+        elseif c=="D" then
+            set_stone("st-door_a",i-1, line,{name="door_1"})
+
+        elseif c==" " then
+            set_floor("fl-brick",i-1, line)
+        elseif c=="2" then
+            set_floor("fl-brick",i-1, line)
+            set_item("it-crack2",i-1, line)
+        elseif c=="-" then
+            set_floor("fl-abyss",i-1, line)
+        elseif c=="i" then
+            set_floor("fl-abyss",i-1, line)
+            set_item("it-vstrip",i-1, line)
+        elseif c=="j" then
+            set_floor("fl-abyss",i-1, line)
+            set_item("it-hstrip",i-1, line)
+        end
+    end
+end
+
+renderLine(00 , "#####vMM|||MMvPGGOOO")
+renderLine(01 , "#XX.#X   2   MXG   O")
+renderLine(02 , "#X.i x R #O# M X.. O")
+renderLine(03 , "#.j     OO   g   ..G")
+renderLine(04 , "*#  #S# # - g g   GG")
+renderLine(05 , "PX   -#   -G>>pG  X>")
+renderLine(06 , "D##O#-#OOOGX>p<XG#dM")
+renderLine(07 , "<s    o    Gp<<G  XP")
+renderLine(08 , "GG  #SO O   gXg   #*")
+renderLine(09 , "G.. -   #O   g   ..#")
+renderLine(10 , "O ..     ### M  .. #")
+renderLine(11 , "O  .GX(      M #.  k")
+renderLine(12 , "OOOGG^lLMMMMM^m###K#")
+
+-- Items --
+set_item("it-magicwand",1,2)
+set_item("it-puller-w",18,1)
+set_item("it-document",9,0)
+set_item("it-vortex-closed",10,1)
+set_item("it-key",1,11,{keycode="5"})
+set_item("it-key",18,11,{keycode="4"})
+set_item("it-key",0,8,{keycode="3"})
+
+local t = 0
+function set_grate()
+    if t==0 then
+        set_stone("st-grate1",5, 9)
+    end
+    t = 1
+end
+
+set_item("it-trigger",4,5,{action="callback", target="set_grate"})
+
+set_floor("fl-bridge-closed",13,4,{name="br3"})
+set_item("it-trigger",10,3,{action="open", target="br3"})
+
+-- Stones --
+set_stone("st-turnstile-green",17,11)
+set_stone("st-turnstile-e",18,11)
+set_stone("st-turnstile-n",18,1)
+
+-- Puzzles --
+puzzle({"#",
+        "#"},{1,10},"bluepuzzle","none")
+
+puzzle({"#",
+        "+"},{2,11},"bluepuzzle","none")
+puzzle({"#",
+        "+"},{17,1},"bluepuzzle","none")
+puzzle({"#",
+        "+"},{18,10},"bluepuzzle","none")
+puzzle({"+",
+        "#"},{18,1},"bluepuzzle","none")
+
+puzzle({"  #",
+        " ##",
+        "## "},{1,1},"redpuzzle","none")
+puzzle({"#  ",
+        "## ",
+        " ##"},{16,1},"redpuzzle","permutation")
+puzzle({"## ",
+        " ##",
+        "  #"},{1,9},"redpuzzle","permutation")
+puzzle({" ##",
+        "## ",
+        "#  "},{16,9},"redpuzzle","permutation")
+
+-- Special
+set_actor("ac-blackball", 1.5,1.5, {player=0})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

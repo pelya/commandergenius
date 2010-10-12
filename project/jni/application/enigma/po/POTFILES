@@ -1,0 +1,23 @@
+     ../src/server.cc \
+     ../src/client.cc \
+     ../src/main.cc \
+     ../src/gui/MainMenu.cc \
+     ../src/gui/OptionsMenu.cc \
+     ../src/gui/LevelMenu.cc \
+     ../src/gui/LevelWidget.cc \
+     ../src/gui/LevelPackComposer.cc \
+     ../src/gui/LevelPackConfig.cc \
+     ../src/gui/LevelPackMenu.cc \
+     ../src/gui/LPGroupConfig.cc \
+     ../src/gui/ScreenshotViewer.cc \
+     ../src/gui/SearchMenu.cc \
+     ../src/gui/LevelInspector.cc \
+     ../src/gui/HelpMenu.cc \
+     ../src/gui/GameMenu.cc \
+     ../src/lev/Proxy.cc \
+     ../src/lev/PersistentIndex.cc \
+     ../src/lua.cc \
+     ../src/d_models.cc \
+     ../src/PreferenceManager.cc \
+     ../src/StateManager.cc \
+     ../po/level_i18n.cc

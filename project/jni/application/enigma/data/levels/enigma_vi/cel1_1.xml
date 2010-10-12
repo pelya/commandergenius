@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Quadropolis" el:subtitle="Combined effort level 1" el:id="cel2007_364"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Johannes Laire, Jacob Scott, Raoul Bourquin, Andreas Lochmann" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Johannes Laire, Jacob Scott, Raoul Bourquin, Andreas Lochmann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- CUSTOMIZE THIS TEMPLATE HERE ------------------------------------------------
+--------------------------------------------------------------------------------
+-- Declare basic layout first
+-- How many rooms in the horizontal direction?
+rooms_h = 5
+-- How many rooms in the vertical direction?
+rooms_v = 1
+
+-- The wormholesdata:
+wormholes = {{{18,1},{1.5,1.5}}, {{18,11},{1.5,1.5}}, {{18,11},{18.5,9.5}}, {{2,9},{10,6.5}}}
+
+--------------------------------------------------------------------------------
+-- BASIC MULTIPLE ROOM LOGIC ---------------------------------------------------
+--------------------------------------------------------------------------------
+-- Roomhandling:
+-- rooms stores all the coordinates (offsets) for the rooms.
+-- The dataformat is:
+-- rooms = {rooms_row_1, rooms_row_2, rooms_row_3, ...}
+-- where rooms_row_n = {room1, room2, room3, ...}
+-- where roomn = {top_left_x, top_left_y}
+
+-- calculate the room coordinates
+function generate_rooms(rooms_h, rooms_v)
+    rooms = {}
+    for r=1, rooms_v do
+        table.insert(rooms,{})
+        for c=1, rooms_h do
+            table.insert(rooms[r],{})
+            rooms[r][c][1] = (c-1)*38
+            rooms[r][c][2] = (r-1)*24
+        end
+    end
+    return rooms
+end
+--------------------------------------------------------------------------------
+-- TRANSPORT LOGIC -------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- wormholes stores the data about the wormholes to get from one room inte the next.
+-- The dataformat is:
+-- wormholes = {room1, room2, room3, ...}
+-- where roomn = {wormhole_coordinates, target_coordinates}
+-- where *_coordinates = {x, y}
+-- x and y are measured relative to the rooms, starting with 0!
+--wormholes = {{{x,y},{tx,ty}},{{x,y},{tx,ty}},{{x,y},{tx,ty}}, ...}
+
+function set_wormholes(wh)
+    for r=1, rooms_v do
+        for c=1, rooms_h do
+            -- calculate the room-number
+            local room_number = (r-1)*rooms_h + c
+
+            -- the last room has no wormhole (no exit):
+            if room_number == rooms_v*rooms_h then
+                -- Note: we will leave the two loops here and never an their "normal" end!
+                return
+            end
+
+            -- the offsets for the rooms:
+            local ox, oy = c, r
+            local this_room = rooms[oy][ox]
+
+            if ox == rooms_h then
+                ox = 1
+                oy = oy+1
+            else
+                ox = ox+1
+            end
+
+            local next_room = rooms[oy][ox]
+
+            -- calculate the targets:
+            local this_vortex = wh[room_number]
+
+            -- are there enough data?
+            if this_vortex == nil then
+                error("Not enough data for all wormholes found!")
+            end
+
+            local target_pos = {}
+            target_pos[1] = next_room[1]+this_vortex[2][1]
+            target_pos[2] = next_room[2]+this_vortex[2][2]
+
+            -- Set the vortex:
+            set_item("it-vortex-open", this_room[1]+this_vortex[1][1],
+                                       this_room[2]+this_vortex[1][2],
+                                       {name="wh_"..tostring(room_number),
+                                        targetx=target_pos[1],
+                                        targety=target_pos[2]})
+        end
+    end
+end
+--------------------------------------------------------------------------------
+-- BUILD BASIC LEVEL STRUCTURE -------------------------------------------------
+--------------------------------------------------------------------------------
+-- Calculate the coordinates for the rooms:
+rooms = generate_rooms(rooms_h, rooms_v)
+
+-- Calculate the world size:
+total_world_w = rooms_h*20 + (rooms_h-1)*18
+total_world_h = rooms_v*13 + (rooms_v-1)*11
+
+-- Create the world:
+create_world(total_world_w, total_world_h)
+
+-- Fill the WHOLE world with abyss:
+fill_floor("fl-abyss")
+
+-- set the wormholes:
+set_wormholes(wormholes)
+
+--------------------------------------------------------------------------------
+-- ROOMS SECTION ---------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- ROOM TEMPLATE:
+--local offset = rooms[row][column]
+--local l_x = offset[1]
+--local l_y = offset[2]
+--------------------------------------------------------------------------------
+-- INSERT ROOMS BELOW THIS LINE ------------------------------------------------
+--------------------------------------------------------------------------------
+-- First Room ------------------------------------------------------------------
+local offset = rooms[1][1]
+
+cells={}
+cells[" "]=cell{floor="fl-leavesb"}
+cells["X"]=cell{stone="st-camouflage"}
+--cells["+"]=cell{actor="ac-blackball"}
+cells["."]=cell{item="it-sensor",floor="fl-leavesb"}
+cells["c"]=cell{stone="st-chess_black"}
+cells["w"]=cell{stone="st-puzzle-ew"}
+cells["e"]=cell{stone="st-puzzle-e"}
+cells["n"]=cell{stone="st-puzzle-nw"}
+cells["s"]=cell{stone="st-puzzle-s"}
+cells["1"]=cell{stone="st-puzzle2-ne"}
+cells["2"]=cell{stone="st-puzzle2-new"}
+cells["3"]=cell{stone="st-puzzle2-nw"}
+cells["5"]=cell{stone="st-puzzle2-nesw"}
+cells["6"]=cell{stone="st-puzzle2-nsw"}
+cells["7"]=cell{stone="st-puzzle2-es"}
+cells["8"]=cell{stone="st-puzzle2-esw"}
+cells["9"]=cell{stone="st-puzzle2-sw"}
+cells["<"]=cell{stone="st-puzzle2-e"}
+cells["-"]=cell{stone="st-puzzle2-ew"}
+cells["t"]=cell{stone="st-thief"}
+cells["r"]=cell{item={"it-crack2"},{floor="fl_leavesb"}}
+cells["R"]=cell{item={"it-crack3"},{floor="fl_leavesb"}}
+cells["G"]=cell{floor={"fl-bridge-open",{name="G"}}}
+cells["F"]=cell{stone={"st-door-v",{name="F"}},floor={"fl-bridge-open",{name="D"}}}
+cells["I"]=cell{stone={"st-door-h",{name="I"}},floor={"fl-bridge-open",{name="B"}}}
+cells["J"]=cell{stone={"st-door-v",{name="J"}},floor={"fl-bridge-open",{name="H"}}}
+cells["Y"]=cell{floor={"fl-bridge-open",{name="Y"}}}
+cells["Q"]=cell{stone={"st-door-h",{name="Q"}},floor={"fl-bridge-open",{name="O"}}}
+cells["L"]=cell{stone={"st-door-h",{name="L"}},floor={"fl-bridge-open",{name="V"}}}
+cells["M"]=cell{stone={"st-door-h",{name="M"}},floor={"fl-bridge-open",{name="K"}}}
+cells["P"]=cell{stone={"st-door-h",{name="P"}},floor={"fl-bridge-open",{name="A"}}}
+cells["a"]=cell{item={"it-trigger",{action="openclose", target="A"}}}
+cells["b"]=cell{item={"it-trigger",{action="openclose", target="B"}}}
+cells["d"]=cell{item={"it-trigger",{action="openclose", target="D"}}}
+cells["f"]=cell{item={"it-trigger",{action="openclose", target="F"}}}
+cells["g"]=cell{item={"it-trigger",{action="openclose", target="G"}}}
+cells["h"]=cell{item={"it-trigger",{action="openclose", target="H"}}}
+cells["i"]=cell{item={"it-trigger",{action="openclose", target="I"}}}
+cells["j"]=cell{item={"it-trigger",{action="openclose", target="J"}}}
+cells["k"]=cell{item={"it-trigger",{action="openclose", target="K"}}}
+cells["l"]=cell{item={"it-trigger",{action="openclose", target="L"}}}
+cells["m"]=cell{item={"it-trigger",{action="openclose", target="M"}}}
+cells["o"]=cell{item={"it-trigger",{action="openclose", target="O"}}}
+cells["p"]=cell{item={"it-trigger",{action="openclose", target="P"}}}
+cells["q"]=cell{item={"it-trigger",{action="openclose", target="Q"}}}
+cells["v"]=cell{item={"it-trigger",{action="openclose", target="V"}},stone="st-chess_black"}
+cells["y"]=cell{item={"it-trigger",{action="openclose", target="Y"}}}
+
+
+room1 = {
+ "XXXXXXXXXXXXXXXXXXXX",
+ "X  c X     .Rjc  X X",
+ "XbXc X   XX.R.c  XQX",
+ "X ccgX  hc  .X X XLX",
+ "X.df XGXXXXXXX  iXMX",
+ "XrXXXX       J  XXPX",
+ "X.Xy R      sXXIXv X",
+ "X ac XXXewwwn   Xk X",
+ "XXXX7<6X   t  X F  X",
+ "X  8923X t   XXXXX X",
+ "X 1 X-5X    t  ct YX",
+ "X      X  t   opmlqX",
+ "XXXXXXXXXXXXXXXXXXXX"
+}
+
+set_default_parent(cells[" "])
+
+-- As we already created the world, we can't use create_world_by_map(...) !!
+-- To use draw_map(...) instead should be a suitable workaround:
+draw_map(offset[1], offset[2], room1, cells)
+--------------------------------------------------------------------------------
+-- Second Room -----------------------------------------------------------------
+local offset = rooms[1][2]
+xduffy = offset[1]
+yduffy = offset[2]
+
+function renderLineDuffy( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+            if c =="#" then
+            set_stone( "st-rock6",xduffy+i-1, yduffy+line)
+            set_floor("fl-black",xduffy+i-1,yduffy+line)
+        elseif c=="z" then
+            set_item("it-sensor",xduffy+i-1,yduffy+line,{action="callback",target="floorreset"})
+            set_floor("fl-rough",xduffy+i-1,yduffy+line)
+        elseif c=="W" then
+            set_floor("fl-black",xduffy+i-1,yduffy+line)
+        elseif c==" " then
+            set_floor("fl-black",xduffy+i-1,yduffy+line)
+        elseif c=="b" then
+            set_floor("fl-bluegreen",xduffy+i-1,yduffy+line)
+            set_item("it-sensor",xduffy+i-1,yduffy+line,{action="callback",target="floor1"})
+        elseif c=="r" then
+            set_floor("fl-red",xduffy+i-1,yduffy+line)
+            set_item("it-sensor",xduffy+i-1,yduffy+line,{action="callback",target="floor2"})
+        elseif c=="g" then
+            set_floor("fl-leaves",xduffy+i-1,yduffy+line)
+            set_item("it-sensor",xduffy+i-1,yduffy+line,{action="callback",target="floor3"})
+        elseif c=="y" then
+            set_floor("fl-sand",xduffy+i-1,yduffy+line)
+            set_item("it-sensor",xduffy+i-1,yduffy+line,{action="callback",target="floor4"})
+        end
+    end
+end
+
+renderLineDuffy(00,"####################")
+renderLineDuffy(01,"#z   b # g #     b #")
+renderLineDuffy(02,"####y#r#r# # #r###r#")
+renderLineDuffy(03,"# r  g b #y#y#  b  #")
+renderLineDuffy(04,"# #b##g# #   b  ## #")
+renderLineDuffy(05,"#g# b  #y##g### #  #")
+renderLineDuffy(06,"# y ##r#  # # #g# ##")
+renderLineDuffy(07,"###  # ## # r    g #")
+renderLineDuffy(08,"#b## g y  #r##y### #")
+renderLineDuffy(09,"#  y #r##g#  g  b  #")
+renderLineDuffy(10,"#r##g#  # ## ## #y##")
+renderLineDuffy(11,"#    y    by b#r# W#")
+renderLineDuffy(12,"####################")
+
+-- The name of the wormhole @ room n is: "wh_n", see set_wormholes(...).
+wduffy = enigma.GetNamedObject("wh_2")
+
+current=0
+old=0
+
+function floor1()
+    old=current
+    current=1
+    floorcheck()
+end
+
+function floor2()
+    old=current
+    current=2
+    floorcheck()
+end
+
+function floor3()
+    old=current
+    current=3
+    floorcheck()
+end
+
+function floor4()
+    old=current
+    current=4
+    floorcheck()
+end
+
+function floorcheck()
+    diff=current-old
+    if diff~=1 and diff~=-3 then
+        SendMessage(wduffy,"close")
+    end
+end
+
+function floorreset()
+    current=0
+    old=0
+    SendMessage(wduffy,"open")
+end
+--------------------------------------------------------------------------------
+-- Third Room ------------------------------------------------------------------
+local offset = rooms[1][3]
+l_x = offset[1]
+l_y = offset[2]
+
+fill_floor("fl-abyss",l_x,l_y,20,13)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c=="#" then
+            set_stone("st-redrock",l_x+i-1, l_y+line)
+
+        elseif c=="G" then
+            set_stone("st-glass",l_x+i-1, l_y+line)
+        elseif c=="g" then
+            set_stone("st-glass_move",l_x+i-1, l_y+line)
+
+        elseif c=="B" then
+            set_stone("st-wood",l_x+i-1, l_y+line)
+            set_floor("fl-metal",l_x+i-1, l_y+line)
+        elseif c=="b" then
+            --set_stone("st-wood",l_x+i-1, l_y+line)
+            set_floor("fl-metal",l_x+i-1, l_y+line)
+
+        elseif c=="L" then
+            set_stone("st-laser-s",l_x+i-1, l_y+line, {on=TRUE})
+        elseif c=="1" then
+            set_stone("st-mirror-p/",l_x+i-1, l_y+line)
+        elseif c=="2" then
+            set_stone("st-mirror-p\\",l_x+i-1, l_y+line)
+
+        elseif c=="P" then
+            set_stone("st-polarswitch",l_x+i-1, l_y+line, {on=TRUE})
+        elseif c=="T" then
+            set_stone("st-laserswitch",l_x+i-1, l_y+line, {action="openclose", target="door1"})
+
+        elseif c=="X" then
+            set_stone("st-door_a",l_x+i-1, l_y+line, {name="door1"})
+            set_floor("fl-metal",l_x+i-1, l_y+line)
+
+        elseif c=="-" then
+            set_floor("fl-metal",l_x+i-1, l_y+line)
+
+        elseif c=="s" then
+            set_floor("fl-metal",l_x+i-1, l_y+line)
+            set_item("it-seed",l_x+i-1, l_y+line)
+        end
+    end
+end
+
+renderLine(00 , "###L################")
+renderLine(01 , "#--P    1 GGG2     #")
+renderLine(02 , "#-sg--   -B--g--b- #")
+renderLine(03 , "#1g1B-  GB-B-g-B-B #")
+renderLine(04 , "#G-B-B  G-b  2G2B- #")
+renderLine(05 , "#G--B-  G--    G-- #")
+renderLine(06 , "#2gg2   2gg2   2gg2#")
+renderLine(07 , "# --G    --G  -B--G#")
+renderLine(08 , "# -b2G2  B-G  B-B-G#")
+renderLine(09 , "# B-B-g-B-BG  -B1g1#")
+renderLine(10 , "# -B--g--b-   --g--#")
+renderLine(11 , "#     2GGG 1    P-X#")
+renderLine(12 , "################T###")
+
+--------------------------------------------------------------------------------
+-- 4th Room --------------------------------------------------------------------
+local offset = rooms[1][4]
+l_x = offset[1]
+l_y = offset[2]
+levelw=20
+levelh=13
+sig = "cle14"   -- signature of this room, used to identify doors
+
+-- Entry-point is 18.5, 9.5
+
+notgoodfloor = "fl-abyss"
+mainfloor = "fl-wood"
+upperfloor = "fl-stwood"
+bridgetype = "y"
+fill_floor(mainfloor, l_x+0, l_y+0, 20, 13)
+
+-- Note: The following function works with real coordinates!
+
+function set_bigblue(x, y)
+ -- When setting an st-bigbluesand with this function, it "merges"
+ -- it with any adjacent st-bigbluesand. For this, the adjacent
+ -- stone will be redrawn, too (don't fear, no recursion!).
+ -- Which isn't too efficient during level startup, but it allows
+ -- constructions during runtime.
+ local conn = 1
+ local cono = 1
+ local st
+ if (y > 0) then
+   st = enigma.GetStone(x, y - 1)
+   if st then
+     if enigma.GetKind(st) == "st-bigbluesand" then
+       conn = conn + 8
+       cono = enigma.GetAttrib(st, "connections") + 2
+       set_stone("st-bigbluesand-n", x, y - 1, {connections = cono})
+     end
+   end
+ end
+ if (y < levelh - 1) then
+   st = enigma.GetStone(x, y + 1)
+   if st then
+     if enigma.GetKind(st) == "st-bigbluesand" then
+       conn = conn + 2
+       cono = enigma.GetAttrib(st, "connections") + 8
+       set_stone("st-bigbluesand-n", x, y + 1, {connections = cono})
+     end
+   end
+ end
+ if (x > 0) then
+   st = enigma.GetStone(x - 1, y)
+   if st then
+     if enigma.GetKind(st) == "st-bigbluesand" then
+       conn = conn + 1
+       cono = enigma.GetAttrib(st, "connections") + 4
+       set_stone("st-bigbluesand-n", x - 1, y, {connections = cono})
+     end
+   end
+ end
+ if (x < levelw - 1) then
+   st = enigma.GetStone(x + 1, y)
+   if st then
+     if enigma.GetKind(st) == "st-bigbluesand" then
+       conn = conn + 1
+       cono = enigma.GetAttrib(st, "connections") + 4
+       set_stone("st-bigbluesand-n", x + 1, y, {connections = cono})
+     end
+   end
+ end
+ set_stone("st-bigbluesand-n", x, y, {connections = conn})
+end
+
+function renderLine(line, pattern)
+ for j = 1, strlen(pattern) do
+   local c = strsub(pattern, j, j)
+   if c == " " then
+     set_floor(mainfloor, l_x + j-1, l_y + line)
+     --if random() >= 0.8 then
+     --  set_item("it-burnable_fireproof", l_x + j-1, l_y + line)
+     --end
+   elseif c == "#" then
+     set_bigblue(l_x + j-1, l_y + line)
+   elseif c == "$" then
+     set_stone("st-blue-sand", l_x + j-1, l_y + line)
+     --set_stone("st-switch", l_x + j-1, l_y + line)
+   elseif string.find("ABC", c) then
+     set_stone("st-door-v", l_x + j-1, l_y + line,
+               {name = sig.."door"..string.upper(c)})
+   elseif string.find("ab", c) then
+     set_stone("st-switch", l_x + j-1, l_y + line,
+               {action = "callback", target = sig.."function"..string.upper(c)})
+   elseif c == "c" then
+     set_item("it-trigger", l_x + j-1, l_y + line,
+              {action = "callback", target = sig.."function"..string.upper(c)})
+     set_floor(upperfloor, l_x + j-1, l_y + line)
+   elseif string.find("defg", c) then
+     set_floor("fl-bridge-open", l_x + j-1, l_y + line,
+               {name = sig.."bridge"..string.upper(c), type = bridgetype})
+   elseif c == "*" then
+     set_floor(notgoodfloor, l_x + j-1, l_y + line)
+   elseif c == "w" then
+     set_item("it-wormhole", l_x + j-1, l_y + line,
+              {strength = 0, targetx = l_x + 9.5, targety = l_y + 5.5})
+     set_floor(upperfloor, l_x + j-1, l_y + line)
+   elseif c == "W" then
+     set_actor("ac-whiteball", l_x + j-1 + 0.5, l_y + line + 0.5)
+     set_floor(upperfloor, l_x + j-1, l_y + line)
+   elseif c == "-" then
+     set_item("it-hstrip", l_x + j-1, l_y + line)
+     set_floor(notgoodfloor, l_x + j-1, l_y + line)
+   elseif c == "I" then
+     set_item("it-vstrip", l_x + j-1, l_y + line)
+     set_floor(notgoodfloor, l_x + j-1, l_y + line)
+   elseif c == "+" then
+     set_floor(upperfloor, l_x + j-1, l_y + line)
+   end
+ end
+end
+
+function cle14functionA()
+ SendMessage(sig.."doorA", "open")
+ SendMessage(sig.."bridgeD", "close")
+ SendMessage(sig.."bridgeF", "close")
+ enigma.SetAttrib(enigma.GetNamedObject(sig.."flash11"), "hit_factor", 0)
+end
+function cle14functionB()
+ SendMessage(sig.."doorB", "open")
+ SendMessage(sig.."bridgeE", "close")
+ SendMessage(sig.."bridgeG", "close")
+ enigma.SetAttrib(enigma.GetNamedObject(sig.."flash21"), "hit_factor", 0)
+ enigma.SetAttrib(enigma.GetNamedObject(sig.."flash22"), "hit_factor", 0)
+end
+function cle14functionC()
+ SendMessage(sig.."doorC", "openclose")
+end
+
+--              01234567890123456789
+renderLine( 0, "####$####$###$######")
+renderLine( 1, "#c*+++*+----w*+++*W#")
+renderLine( 2, "#+*+*+*I******+*+*+#")
+renderLine( 3, "#+*+*+*+----+*+*+*+#")
+renderLine( 4, "#+*+*+******I*+*+*+#")
+renderLine( 5, "#+++*+++e+fgd++*+++#")
+renderLine( 6, "$###$####b###a#####$")
+renderLine( 7, "#   #    #   #     #")
+renderLine( 8, "#   #    #   #     #")
+renderLine( 9, "#   C ## B   A     #")
+renderLine(10, "#   #    #   #     #")
+renderLine(11, "#   #    #   #     #")
+renderLine(12, "####$####$###$######")
+--              01234567890123456789
+
+set_stone("st-flash", l_x+16, l_y+9, {name = sig.."flash11", hit_factor = 150.0,
+         hit_distortion_xx = -1, hit_distortion_xy = 0,
+         hit_distortion_yx =  0, hit_distortion_yy = 1})
+
+set_stone("st-flash", l_x+11, l_y+8, {name = sig.."flash21", hit_factor = 150.0,
+         hit_distortion_xx =  0, hit_distortion_xy = 0,
+         hit_distortion_yx =  0, hit_distortion_yy = 1})
+set_stone("st-flash", l_x+11, l_y+10, {name = sig.."flash22", hit_factor = 150.0,
+         hit_distortion_xx =  0, hit_distortion_xy = 1,
+         hit_distortion_yx =  0, hit_distortion_yy = 0})
+
+set_stone("st-flash", l_x+6, l_y+8, {name = sig.."flash31", hit_factor = 150.0,
+         hit_distortion_xx =  0, hit_distortion_xy = 1,
+         hit_distortion_yx =  0, hit_distortion_yy = 1})
+set_stone("st-flash", l_x+7, l_y+8, {name = sig.."flash32", hit_factor = 150.0,
+         hit_distortion_xx =  0, hit_distortion_xy = -1,
+         hit_distortion_yx =  0, hit_distortion_yy = 1})
+set_stone("st-flash", l_x+6, l_y+10, {name = sig.."flash33", hit_factor = 150.0,
+         hit_distortion_xx =  0, hit_distortion_xy = -1,
+         hit_distortion_yx =  0, hit_distortion_yy = 1})
+set_stone("st-flash", l_x+7, l_y+10, {name = sig.."flash34", hit_factor = 150.0,
+         hit_distortion_xx =  0, hit_distortion_xy = 1,
+         hit_distortion_yx =  0, hit_distortion_yy = 1})
+--------------------------------------------------------------------------------
+-- 5th Room --------------------------------------------------------------------
+local offset = rooms[1][5]
+l_x = offset[1]
+l_y = offset[2]
+
+fill_floor("fl-normal",l_x,l_y,20,13)
+draw_border("st-metal",l_x,l_y,20,13)
+
+oxyd(l_x+6, l_y+2)
+oxyd(l_x+4, l_y+4)
+oxyd(l_x+2, l_y+6)
+oxyd(l_x+4, l_y+8)
+oxyd(l_x+6, l_y+10)
+
+oxyd(l_x+13, l_y+2)
+oxyd(l_x+15, l_y+4)
+oxyd(l_x+17, l_y+6)
+oxyd(l_x+15, l_y+8)
+oxyd(l_x+13, l_y+10)
+
+oxyd_shuffle()
+--------------------------------------------------------------------------------
+-- GENERAL STUFF BESIDE THE ROOMS ----------------------------------------------
+-- The actor(s), that start in the first room and have to get to the oxyd room:
+set_actor("ac-blackball", 1.5,11.5, {player=0})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

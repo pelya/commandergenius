@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Meditation 2" el:subtitle="" el:id="m_tutor/m_med2"/>
+      <el:version el:score="2" el:release="2" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+cells[" "]=cell{floor="fl-leavesb"}
+cells["1"]=cell{floor="fl-leaves"}
+cells["2"]=cell{floor="fl-leavesc1"}
+cells["3"]=cell{floor="fl-leavesc2"}
+cells["4"]=cell{floor="fl-leavesc3"}
+cells["5"]=cell{floor="fl-leavesc4"}
+cells["6"]=cell{floor="fl-leavesd1"}
+cells["7"]=cell{floor="fl-leavesd2"}
+cells["8"]=cell{floor="fl-leavesd3"}
+cells["9"]=cell{floor="fl-leavesd4"}
+cells["#"]=cell{stone="st-likeoxyda"}
+cells["o"]=cell{actor={"ac-whiteball-small", {player=0}}}
+cells["+"]=cell{item="it-hollow"}
+
+if (not difficult) then 
+    cells["q"]=cells["1"]
+    cells["*"]=cells["1"]
+else
+    cells["q"]=cell{actor={"ac-whiteball-small", {player=0}}}
+    cells["*"]=cell{item="it-hollow"}
+end
+
+level = {
+   "####################",
+   "#                  #",
+   "# 2111111111111114 #",
+   "# 1*16  8116  81*1 #",
+   "# 311  # 11 #  115 #",
+   "#  81  # 11 #  16  #", 
+   "### 1 ## 11 ## 1 ###",
+   "#  91 #  11  # 17  #",
+   "# 211 # 2qq4 # 114 #",
+   "# 1+1 # 1oo1 # 1+1 #",
+   "# 315 # 3115 # 315 #",
+   "#     #      #     #",
+   "####################"
+}
+
+set_default_parent(cells["1"])
+create_world_by_map(level,cells)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

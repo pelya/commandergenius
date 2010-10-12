@@ -1,0 +1,64 @@
+Release notes for Zipios++ 0.1.5
+--------------------------------
+New features:
+  - Support for Visual C++ 6
+  - VFS feature finished
+  - Support for writing zip archives (pre-beta!)
+
+Bug fixes:
+  - Code reorganized and many minor bug fixes
+
+Changes:
+  - flex/lex is no longer required
+
+
+
+Release notes for Zipios++ 0.1.4
+--------------------------------
+Bug fixes: 
+  - A bug in a code fragment used in all the test programs for copying
+    data from an istream to an ostream has been fixed
+  - A nasty and embarrasing bug in ZipInputStreambuf and
+    InflateInputStreambuf that prevented zip entries containing the character
+    255 from being correctly decompressed has been fixed
+
+
+
+Release notes for Zipios++ 0.1.3
+--------------------------------
+Changes:
+  - Changed the license to GNU Lesser General Public License
+
+
+
+Release notes for Zipios++ 0.1.2
+--------------------------------
+New features:
+  - ZipFile can now be used to read zip files embedded in other files. The
+    static method ZipFile::openEmbeddedZipFile() can be used to open zip 
+    files embedded in another file with the binary appendzip, which is 
+    also part of the Zipios++ distribution
+
+
+Bug fixes:
+  Installation:
+   - Header files are now installed (under (usr/include/)zipios++/)
+   - The library libzipios.a is now installed
+   - The test binaries are no longer installed
+   - Renamed config.h to zipios-config.h to avoid file name collisions
+
+  Building:
+   - Added a switch --with-std-compliant-iostream (and --without-...) 
+     to the configure script, such that the library can be build against 
+     the old iostream.h library, even if a newer std compliant iostream 
+     implementation is available in iostream
+
+  Source:
+   - Most functions now throw exceptions (reflected in the documentation)
+     instead of printing error messages to stderr
+   - Fixes to make the library compile and work with gcc 2.95.2
+
+
+Missing features and known bugs:
+  - DirectoryCollection::entries() end DirectoryCollection::size() are
+    not implemented yet

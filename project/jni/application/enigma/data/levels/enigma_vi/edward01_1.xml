@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="No Memory" el:subtitle="" el:id="edward01"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Edward" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Edward</el:copyright>
+      <el:license el:type="Donated to Enigma under the projects license" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="2:17"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world(20,13)
+
+fill_floor("fl-black",0,0,20,13)
+
+function renderLine(line,pattern)
+    for i=1, strlen(pattern) do
+        local c=strsub(pattern,i,i)
+        if c=="#" then
+            set_stone("st-block",i-1,line)
+        elseif c=="0" then
+            set_actor("ac-blackball",i-1,line+.5,{player=0})
+        elseif c=="X" then
+            oxyd(i-1,line)
+        elseif c=="x" then
+            set_stone("st-fakeoxyd",i-1,line)
+        end
+    end
+end
+
+renderLine(00,"## ######  ###### ##")
+renderLine(01,"#                  #")
+renderLine(02,"                    ")
+renderLine(03,"#                  #")
+renderLine(04,"#                  #")
+renderLine(05,"#                  #")
+renderLine(06,"          0         ")
+renderLine(07,"#                  #")
+renderLine(08,"#                  #")
+renderLine(09,"#                  #")
+renderLine(10,"                    ")
+renderLine(11,"#                  #")
+renderLine(12,"## ######  ###### ##")
+
+-- code for placing 10 oxyds randomly and fill the remaining positions with st-fart:
+pos_list = {{2,0},{9,0},{10,0},{17,0},{0,2},{19,2},{9,5},{10,5},{0,6},{19,6},{9,7},{10,7},{0,10},{19,10},{2,12},{9,12},{10,12},{17,12}}
+
+for i=0,9 do
+    repeat
+        r=random(1,18)
+    until
+        pos_list[r] ~= nil
+    oxyd(pos_list[r][1],pos_list[r][2])
+    pos_list[r] = nil
+end
+
+for i=1,18 do
+    if pos_list[i]~= nil then
+        set_stone("st-fart",pos_list[i][1],pos_list[i][2])
+    end
+end
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

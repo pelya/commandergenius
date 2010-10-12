@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Dependants" el:subtitle="" el:id="ant25"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- 2003-02-10 -- keeping up to date with latest additions to ant.lua
+cells={}
+
+cells[" "]=cell{floor={face="fl-sahara"}}
+cells["#"]=cell{stone={face="st-rock3"}}
+
+puzzles = {}
+cells["*"]=cell{parent={{add_multicell, puzzles}}}
+
+smallmarbles={}
+bigmarbles={}
+cells["y"]=cell{item={face="it-yinyang"}}
+cells["o"]=cell{parent={cells[" "],{add_multiactor, "ac-whiteball-small", smallmarbles, {mouseforce=0, essential=1}}}}
+cells["O"]=cell{parent={cells["y"],{add_multiactor, "ac-blackball", bigmarbles, {player=0, essential=1}}}}
+cells["Q"]=cell{parent={cells["y"],{add_multiactor, "ac-whiteball", bigmarbles, {player=1, essential=1}}}}
+
+cells["A"]=cell{stone={face="st-door", attr={name="doorA", type="h"}}}
+cells["B"]=cell{stone={face="st-door", attr={name="doorB", type="h"}}}
+cells["a"]=cell{item={face="it-trigger", attr={action="openclose", target="doorA"}}}
+cells["b"]=cell{item={face="it-trigger", attr={action="openclose", target="doorB"}}}
+
+cells["0"]=oxyd
+
+level = {
+   "##########################################################",
+   "#                  #O                 #                  #",
+   "#                  #                  #                  #",
+   "#                  #A##################                  #",
+   "#                  # a         ********************      #",
+   "#                  0           *   *  0                  #",
+   "#                  0           * o *  0                  #",
+   "#                  0           *   *  0                  #",
+   "#               ********************b #                  #",
+   "#                  ##################B#                  #",
+   "#                  #                  #                  #",
+   "#                  #                 Q#                  #",
+   "##########################################################"
+}
+
+set_default_parent(cells[" "])
+create_world_by_map(level)
+render_puzzles(puzzles);
+add_rubber_bands(smallmarbles, bigmarbles, 10)
+oxyd_shuffle()
+enigma.ConserveLevel = FALSE
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

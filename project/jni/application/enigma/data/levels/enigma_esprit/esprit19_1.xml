@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Skydiver" el:subtitle="esprit 19" el:id="martin13"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 0036 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw =  20
+levelh = 121
+
+create_world( levelw, levelh)
+
+fill_floor("fl-gray", 0,0,levelw,levelh)
+stone = "st-metal"
+
+draw_border( stone)
+oxyd(  2,72)
+oxyd(  4,93)
+oxyd( 14,40)
+oxyd( 17,58)
+
+oxyd_shuffle()
+
+set_stone( stone, 5, levelh-3)
+set_stone( stone,14, levelh-3)
+
+oneway( 3, 1, enigma.WEST)
+oneway( 6, 1, enigma.WEST)
+oneway(13, 1, enigma.EAST)
+oneway(16, 1, enigma.EAST)
+oneway( 4, levelh-3, enigma.SOUTH)
+oneway( 3, levelh-2, enigma.EAST)
+oneway(15, levelh-3, enigma.SOUTH)
+oneway(16, levelh-2, enigma.WEST)
+
+draw_stones( stone, { 3,2}, {0,1}, levelh-4)
+draw_stones( stone, { 6,2}, {0,1}, levelh-4)
+draw_stones( stone, {13,2}, {0,1}, levelh-4)
+draw_stones( stone, {16,2}, {0,1}, levelh-4)
+
+set_stone( "st-death", 7, 10)
+set_stone( "st-death",12, 23)
+set_stone( "st-death", 7, 45)
+set_stone( "st-death",12, 57)
+set_stone( "st-death", 7, 71)
+set_stone( "st-death",12, 84)
+set_stone( "st-death", 7, 96)
+
+set_item( "it-hollow", 9, 35)
+set_item( "it-hollow",11, 65)
+set_item( "it-hollow",10, 77)
+set_item( "it-hollow", 8, 90)
+set_item( "it-hill",  10,107)
+set_item( "it-hill",   8,117)
+
+enigma.AddConstantForce(0,25)
+set_actor("ac-blackball", 9, levelh-2)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Dancers" el:subtitle="" el:id="ant14"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- 2003-02-10 -- keeping up to date with latest additions to ant.lua
+
+count_revert = nil
+revert_dir = nil
+
+function revert_bolders()
+   --open/close all doors in map
+   send_group_message(doors, "openclose", nil)
+
+   --on every odd triggger invert bolder dir
+   if (not(count_revert)) then
+      if (revert_dir)
+      then send_group_message(bolders, "direction",EAST)
+      else send_group_message(bolders, "direction",WEST)
+      end
+      revert_dir = not(revert_dir)
+   end
+
+   count_revert = not(count_revert)
+end
+
+cells={}
+
+cells[" "]=cell{floor="fl-marble"}
+cells["."]=cell{floor="fl-water"}
+cells["#"]=cell{parent=cells["."],stone="st-marble"}
+cells["V"]=cell{{{laser, TRUE, SOUTH}}}
+cells["^"]=cell{{{laser, TRUE, NORTH}}}
+cells["+"]=cell{item={"it-trigger", {action="callback", target="revert_bolders"}}}
+
+bolders = {}
+doors   = {}
+cells[">"]=cell{{{add_multistone, "st-bolder-e", bolders}}}
+cells["="]=cell{{{add_multistone, "st-door_a", doors, {type="h"}}, cells["."]}}
+
+cells["0"]=oxyd
+cells["O"]=cell{actor={"ac-blackball", {player=0}}}
+
+level = {
+   "#########V##########",
+   "#.......#=#........#",
+   "#..0............0..#",
+   "#+.>     >       ..#",
+   "#......... ........#",
+   "#..0...... .....0..#",
+   "#..>   O >       ..#",
+   "#..0..... ......0..#",
+   "#........ .........#",
+   "#..>     >       .+#",
+   "#..0............0..#",
+   "#........#=#.......#",
+   "##########^#########"
+}
+
+oxyd_default_flavor="c"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

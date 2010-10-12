@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation -" el:subtitle="esprit 70" el:id="ss_esp70"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Sven Siggelkow" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Sven Siggelkow</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world(20, 13)
+enigma.SlopeForce = 10
+fill_floor("fl-abyss")
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+      local c = strsub( pattern, i, i)
+      if c ==   "#" then
+         set_stone("st-greenbrown",i-1,line)
+      elseif c=="H" then
+         set_floor("fl-gray",i-1,line)
+         hollow(i-1,line)
+      elseif c=="1" then
+     set_floor("fl-gradient",  i-1,  line, {type=2})
+      elseif c=="2" then
+     set_floor("fl-gradient",  i-1,  line, {type=1})
+      elseif c=="3" then
+     set_floor("fl-gradient",  i-1,  line, {type=3})
+      elseif c=="4" then
+     set_floor("fl-gradient",  i-1,  line, {type=4})    
+      elseif c=="a" then
+         set_stone("st-actorimpulse_invisible",i-1,line)
+     set_floor("fl-gradient",  i-1,  line, {type=2})
+      elseif c=="b" then
+         set_stone("st-actorimpulse_invisible",i-1,line)      
+     set_floor("fl-gradient",  i-1,  line, {type=1})
+      elseif c=="c" then
+         set_stone("st-actorimpulse_invisible",i-1,line)      
+     set_floor("fl-gradient",  i-1,  line, {type=3})
+      elseif c=="d" then
+         set_stone("st-actorimpulse_invisible",i-1,line)      
+     set_floor("fl-gradient",  i-1,  line, {type=4})               
+      elseif c=="M" then
+         set_stone("st-greenbrown",i-1,line)
+        end
+    end
+end
+--              01234567890123456789
+renderLine(00, "###  ### ###########")
+renderLine(01, "#a#  #H# #H3333333c#")
+renderLine(02, "#1#  #2# ###########")
+renderLine(03, "#1#  #2#            ")
+renderLine(04, "#1#  #2#            ")  
+renderLine(05, "#1#  #2#            ")
+renderLine(06, "#1#  #2#            ")
+renderLine(07, "#1#  #2#            ")
+renderLine(08, "#1#  #2#            ")
+renderLine(09, "#1#  #2#            ")
+renderLine(10, "#1#  #2# ###########")
+renderLine(11, "#H#  #b# #d4444444H#")
+renderLine(12, "###  ### ###########")
+--              01234567890123456789
+
+set_actor("ac-whiteball-small", 1.5, 5.5, {player=0})
+set_actor("ac-whiteball-small",6.5, 5.5, {player=0})
+set_actor("ac-whiteball-small", 14.5, 1.5, {player=0})
+set_actor("ac-whiteball-small",14.5, 11.5, {player=0})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

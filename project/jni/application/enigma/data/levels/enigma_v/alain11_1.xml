@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="April 1st" el:subtitle="" el:id="alain11"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Alain Busser" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Alain Busser</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd1">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="0:04"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Set oxyd1-compatibility-mode to suppress water-heating-animation
+--  Andreas Sep.'06
+
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+oxyd_default_flavor = "a"
+fill_floor("fl-woven", 0,0, level_width,level_height)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="w" then
+            set_floor("fl-water", i-1, line)
+        elseif c=="b" then
+               set_item("it-burnable_fireproof",i-1,line)
+--            set_item("it-burnable",i-1,line)
+        elseif c=="A" then
+            set_floor("fl-abyss_fake",i-1,line)
+        elseif c=="a" then
+            set_floor("fl-abyss",i-1,line)
+        elseif c=="B" then
+            set_floor("fl-bridge-closed",i-1,line,{name="br1"})
+            set_item("it-trigger",i-1,line,{invisible=1,action="callback",target="func1"})
+        elseif c=="p" then
+            set_item("it-coin1",i-1,line)
+        elseif c=="q" then
+            set_item("it-key_a",i-1,line)
+        elseif c=="P" then
+            set_stone("st-coinslot",i-1,line,{action="callback", target="func3"}) 
+        elseif c=="Q" then
+            set_stone("st-key_a",i-1,line,{action="callback", target="func2"})
+        elseif c=="d" then
+            document(i-1,line,"text1")
+        elseif c=="D" then
+            document(i-1,line,"text2")
+        elseif c=="e" then
+            document(i-1,line,"text3")
+        elseif c=="E" then
+            document(i-1,line,"text4")
+        elseif c == "o" then
+            oxyd( i-1, line)
+          elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {name="ac0"})
+        end
+    end    
+end
+
+month=enigma.date("%B")
+                              
+function func1()
+        SendMessage("br1", "open")
+end
+
+function func2()
+    set_item("it-burnable_ignited",7,6)
+    set_item("it-burnable_ignited",7,7)
+    set_item("it-burnable_ignited",15,4)
+    set_item("it-burnable_ignited",15,5)
+    set_item("it-burnable_ignited",15,6)
+    set_item("it-burnable_ignited",15,7)
+    set_item("it-burnable_ignited",15,8)
+end
+
+function func3()
+    for i=1,300 do
+        xx=random(20)
+        yy=random(13)
+        set_floor("fl-water",xx,yy)
+    end
+end
+
+function apr1()
+
+        if month == "April" then        
+
+--               01234567890123456789
+renderLine(00 , "wwwwwwwwwwwwwwwwwwww")
+renderLine(01 , "wwwww   dQp wwwwwwww")
+renderLine(02 , "wwwb          wwwww ")
+renderLine(03 , "ww  b          www  ")
+renderLine(04 , "w    b          w   ")
+renderLine(05 , "  o  b          a   ")  
+renderLine(06 , "      b         B  o")
+renderLine(07 , "      b   z     A   ")
+renderLine(08 , "     b          w   ")
+renderLine(09 , "ww  b          www  ")
+renderLine(10 , "wwwb          wwwww ")
+renderLine(11 , "wwwww   DPq wwwwwwww")
+renderLine(12 , "wwwwwwwwwwwwwwwwwwww") 
+--               01234567890123456789
+
+    else
+
+--               01234567890123456789
+renderLine(00 , "wwwwwwwwwwwwwwwwwwww")
+renderLine(01 , "wwwww       wwwwwwww")
+renderLine(02 , "wwwb          wwwww ")
+renderLine(03 , "ww  b    e     www  ")
+renderLine(04 , "w    b          w   ")
+renderLine(05 , "  o  b          a   ")  
+renderLine(06 , "      b   z     a  o")
+renderLine(07 , "      b         a   ")
+renderLine(08 , "     b          w   ")
+renderLine(09 , "ww  b    E     www  ")
+renderLine(10 , "wwwb          wwwww ")
+renderLine(11 , "wwwww       wwwwwwww")
+renderLine(12 , "wwwwwwwwwwwwwwwwwwww") 
+--               01234567890123456789
+
+    end
+end
+
+apr1()
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true" el:comment="in France it is an habit to tell jokes (what seems true is false) on april 1st, and these jokes are called 'april fishes'."/>
+        <el:translation el:lang="fr">Poisson d'avril.</el:translation>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Do you REALLY want to do this???</el:english>
+        <el:translation el:lang="fr">Vous y tenez VRAIMENT???</el:translation>
+      </el:string> 
+      <el:string el:key="text2">
+        <el:english el:translate="true">Didn't your mother tell you that you should not spend your money in such a careless manner?</el:english>
+        <el:translation el:lang="fr">Votre maman ne vous a jamais dit de ne pas gaspiller ainsi votre argent?.</el:translation>
+      </el:string> 
+      <el:string el:key="text3">
+        <el:english el:translate="true">What is the current month?</el:english>
+        <el:translation el:lang="fr">Quel mois sommes-nous?</el:translation>
+      </el:string> 
+      <el:string el:key="text4">
+        <el:english el:translate="true">What is this level's name?</el:english>
+        <el:translation el:lang="fr">Quel est le titre de ce jeu?</el:translation>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

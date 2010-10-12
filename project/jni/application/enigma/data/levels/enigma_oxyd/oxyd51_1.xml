@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Jump Pads" el:subtitle="Oxyd 51" el:id="siegfried88"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Siegfried Fennig" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Siegfried Fennig</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd1">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 39
+levelh = 25
+
+create_world(levelw, levelh)
+enigma.ConserveLevel = FALSE
+oxyd_default_flavor = "d"
+fill_floor("fl-abyss")
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+      local c = strsub( pattern, i, i)
+      if c == "r" then
+         set_stone("st-rock1",i-1,line)
+      elseif c == "o" then
+         oxyd( i-1, line)
+      elseif c == "S" then
+         springboard(i-1,line)
+      elseif c == "g" then
+         set_floor("fl-gray",i-1,line)
+      elseif c == "n" then
+         set_floor("fl-gradient",i-1,line,{type=22})
+      elseif c == "e" then
+         set_floor("fl-gradient",i-1,line,{type=23})
+      elseif c == "s" then
+         set_floor("fl-gradient",i-1,line,{type=21})
+      elseif c == "w" then
+         set_floor("fl-gradient",i-1,line,{type=24})
+      elseif c == "b" then
+         basis(i-1,line)
+      elseif c == "a" then
+         set_actor("ac-blackball", i-.5,line+.5)
+        end
+    end
+end
+
+function basis(x, y)
+       fill_floor("fl-gray", x, y, 3, 3)
+end
+
+function springboard(x, y)
+       set_floor("fl-springboard", x, y)
+       set_item("it-springboard", x, y)
+end
+
+--                        1         2         3
+--              012345678901234567890123456789012345678
+renderLine(00, "  o                                    ")
+renderLine(01, " b  rrrrrrrrrr   b  rrrrrrrrrrrr   b   ")
+renderLine(02, "  a eeeeeeeSee      eeeeeeeeeSee      o")
+renderLine(03, "    rrrrrrrrrr      rrrrrrrrrrrr       ")
+renderLine(04, "                 rgr               rsr ")
+renderLine(05, "     b     rrrrrrrgrb     rrrrrrrr rsr ")
+renderLine(06, "           wSwwwwwgr      Swwwwwgr rsr ")
+renderLine(07, " rnr       rrrrrrrrr      rrrrrrgr rsr ")
+renderLine(08, " rnr rgr         rggggr        rgr rsr ")
+renderLine(09, " rSr rgr         rsrrrr        rgr rsr ")
+renderLine(10, " rnr rgr         rsr           rgr rsr ")
+renderLine(11, " rnr rgr         rsr           rgr rsr ")
+renderLine(12, " rnr rgr         rsr           rgr rsr ")
+renderLine(13, " rnr rgr         rsr           rgr rsr ")
+renderLine(14, " rnr rgr         rsr           rgr rsr ")
+renderLine(15, " rnr rgr         rsr           rgr rSr ")
+renderLine(16, " rnr rgr         rSr           rgr rsr ")
+renderLine(17, " rnr rgr         rsr           rgr rsr ")
+renderLine(18, " rnr rgrrrrrrrrr     b  rrrrrrrrgr     ")
+renderLine(19, " rnr ogeeeeeeeeS        gggggggggo     ")
+renderLine(20, " rnr rrrrrrrrrrr        rrrrrrrrrr     ")
+renderLine(21, " b     rrrrrrrrrrb     rrrrrrrrrrrrb   ")
+renderLine(22, "o      wwSwwwwwww      wwSwwwwwwwww    ")
+renderLine(23, "       rrrrrrrrrr      rrrrrrrrrrrr    ")
+renderLine(24, "                                    o  ")
+--              012345678901234567890123456789012345678
+--                        1         2         3
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

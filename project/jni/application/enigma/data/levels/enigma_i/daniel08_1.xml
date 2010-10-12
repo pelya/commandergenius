@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Lasers 101" el:subtitle="" el:id="lasers101"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Daniel Heck" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2002 Daniel Heck</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 58
+levelh = 13
+
+create_world(levelw, levelh)
+draw_border("st-greenbrown")
+fill_floor("fl-leaves")
+
+draw_floor("fl-abyss", {3,0}, {0,1}, level_height)
+draw_floor("fl-abyss", {54,0}, {0,1}, level_height)
+abyss(3,3)
+
+oxyd(1,1)
+oxyd(level_width-2,level_height-2)
+oxyd(level_width-2, 1)
+oxyd(1,level_height-2)
+--oxyd_shuffle()
+
+mirror3(29,6,TRUE,FALSE, 4)
+mirrorp(26,6,TRUE,FALSE, 4)
+mirrorp(32,6,TRUE,FALSE, 2)
+
+set_attrib(laser(29,0, FALSE, SOUTH), "name", "laser")
+set_stone("st-switch", 29,12, {action="onoff", target="laser"})
+
+set_actor("ac-blackball", 30,10)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

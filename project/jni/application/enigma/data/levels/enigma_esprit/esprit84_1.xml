@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="esprit 84" el:subtitle="esprit 84" el:id="ss_esp84"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Sven Siggelkow" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Sven Siggelkow</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 25
+create_world(levelw, levelh)
+oxyd_default_flavor = "b"
+set_actor("ac-blackball", 9.5,5.5)
+fill_floor("fl-space",0,0,levelw,levelh)
+fill_floor("fl-metal",1,1,levelw-2,levelh-2)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+      local c = strsub( pattern, i, i)
+      if c ==   "#" then
+         set_stone("st-actorimpulse_invisible", i-1,line)
+      elseif c=="I" then
+         set_stone("st-invisible", i-1,line) 
+       
+      elseif c=="0" then
+     set_item("it-crack0", i-1,line)   
+      elseif c=="1" then
+     set_item("it-crack1", i-1,line)   
+      elseif c=="R" then
+     --set_actor("ac-rotor", i-1+0.5,line+0.5, {mouseforce=1, range=50, force=20})
+     set_actor("ac-rotor", i-1+0.5,line+0.5, {range=50, force=20})
+      elseif c=="O" then
+     oxyd(i-1,line)
+        end
+    end  
+end
+--               01234567890123456789
+renderLine(00 , "#I#I#I#III#I#I#II###")
+renderLine(01 , "I                  I")
+renderLine(02 , "I  O    1    1  0  I")
+renderLine(03 , "I  1               #")
+renderLine(04 , "#     1            #")  
+renderLine(05 , "#             O    I")
+renderLine(06 , "I          1  0    #")
+renderLine(07 , "#  O  0            I")
+renderLine(08 , "I                  #")
+renderLine(09 , "I       0 0   O    #")
+renderLine(10 , "#      0 0      11 #")
+renderLine(11 , "#                  I")
+renderLine(12 , "#00  01     0      I")
+renderLine(13 , "I                  #")
+renderLine(14 , "I       0  1   1   #")
+renderLine(15 , "I   O              I")
+renderLine(16 , "#      0       O   I")
+renderLine(17 , "I       1          #")
+renderLine(18 , "I   O         00   I")
+renderLine(19 , "I  0   0         0 #")
+renderLine(20 , "#                  I")
+renderLine(21 , "I   1         O    #")
+renderLine(22 , "I   0   0 0     00 I")
+renderLine(23 , "I                 RI")
+renderLine(24 , "##III##III#I##IIII##")
+--               01234567890123456789
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

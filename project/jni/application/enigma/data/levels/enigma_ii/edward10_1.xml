@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation -" el:subtitle="" el:id="edward10"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Edward" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Edward</el:copyright>
+      <el:license el:type="Donated to Enigma under the projects license" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="0:19"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world(20,13)
+
+fill_floor("fl-abyss",0,0,20,13)
+
+function renderLine(line,pattern)
+    for i=1, strlen(pattern) do
+        local c=strsub(pattern,i,i)
+        if c=="#" then
+            set_floor("fl-wood",i-1,line)
+        elseif c=="+" then
+            set_floor("fl-gradient",i-1,line,{type="22"})
+        elseif c=="*" then
+            set_floor("fl-wood",i-1,line)
+            set_item("it-wormhole",i-1,line,{targetx=7.5,targety=8.5})
+        elseif c=="0" then
+            set_floor("fl-wood",i-1,line)
+            set_item("it-wormhole",i-1,line,{targetx=12.5,targety=8.5})            
+        elseif c=="O" then
+            set_floor("fl-wood",i-1,line)
+            set_item("it-hollow",i-1,line)
+        elseif c=="o" then
+            set_floor("fl-wood",i-1,line)
+            set_actor("ac-whiteball-small",(i-1)+.5,line+.5,{player=0, essential=1})
+        elseif c=="-" then
+            set_floor("fl-wood",i-1,line)
+        end
+    end
+end
+
+renderLine(00,"                    ")
+renderLine(01,"         ##         ")
+renderLine(02,"         *0         ")
+renderLine(03,"    ############    ")
+renderLine(04,"  ################  ")
+renderLine(05,"  ################  ")
+renderLine(06,"   ####OOOOOO####   ")
+renderLine(07,"   ###++----++###   ")
+renderLine(08,"   ###+o----o+###   ")
+renderLine(09,"   o# +      + #o   ")
+renderLine(10,"      +      +      ")
+renderLine(11,"      o      o      ")
+renderLine(12,"                    ")
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

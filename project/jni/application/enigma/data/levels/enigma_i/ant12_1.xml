@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Black Lava" el:subtitle="" el:id="ant12"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- 2003-02-10 -- keeping up to date with latest additions to ant.lua
+
+cells={}
+
+cells["n"]=cell{floor={face="fl-normal"}}
+
+grada1=cell{{{gradient, 5}}}
+grada2=cell{{{gradient, 6}}}
+grada3=cell{{{gradient, 7}}}
+grada4=cell{{{gradient, 8}}}
+gradb1=cell{{{gradient, 9}}}
+gradb2=cell{{{gradient, 10}}}
+gradb3=cell{{{gradient, 11}}}
+gradb4=cell{{{gradient, 12}}}
+gradc1=cell{{{gradient, 21}}}
+gradc2=cell{{{gradient, 22}}}
+gradc3=cell{{{gradient, 23}}}
+gradc4=cell{{{gradient, 24}}}
+
+gradaa=cell{{{randomfloor,{grada1, grada2, grada3, grada4}}}}
+gradbb=cell{{{randomfloor,{gradb1, gradb2, gradb3, gradb4}}}}
+gradcc=cell{{{randomfloor,{gradc1, gradc2, gradc3, gradc4}}}}
+
+cells[" "]=cell{{{randomfloor,{gradaa, gradbb, gradcc}}}}
+
+cells["#"]=cell{stone="st-rock6"}
+cells["D"]=cell{stone="st-death"}
+cells["0"]=oxyd
+cells["O"]=cell{parent=cells["n"],actor={"ac-blackball", {player=0}}}
+
+level = {
+   "####################",
+   "#O       ##       n#",
+   "#        ##        #",
+   "0  D  D  DD  D  D  0",
+   "#                  #",
+   "#                  #",
+   "0  D  D      D  D  0",
+   "#                  #",
+   "#                  #",
+   "0  D  D  DD  D  D  0",
+   "#        ##        #",
+   "#n       ##       n#",
+   "####################"
+}
+
+oxyd_default_flavor = "b"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

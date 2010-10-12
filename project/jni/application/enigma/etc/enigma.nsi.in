@@ -1,0 +1,329 @@
+;Based on: NSIS Modern User Interface - "Multilingual Example Script" Written by Joost Verburg
+
+;===================================================
+;Include Modern UI
+  !include "MUI.nsh"
+;Include NSIS Logic Library
+  !include 'LogicLib.nsh'
+;Include Word Functions Header
+  !include "WordFunc.nsh"
+  !insertmacro WordReplace
+  !insertmacro WordAdd
+  !insertmacro un.WordReplace
+  !insertmacro un.WordAdd
+
+;===================================================
+;General
+
+  !define NAME "Enigma"
+  !define COMPANY "Enigma Devel"
+  !define WEBSITE "http://www.nongnu.org/enigma"
+  !define VERSION "@VERSION@"
+  !define VERSION4 "${VERSION}.0.0" ; x.x.x.x
+  !define LEGALCOPYRIGHT "Program is under GPL license"
+  !define INSTALLER_REGISTRY_ROOT "HKLM"
+  !define INSTALLER_REGISTRY_KEY "Software\Enigma"
+
+  ; Source directory
+  !define SDIR ".\"
+
+  ;Name and file
+  Name "${NAME} ${VERSION}"
+  OutFile "Enigma-${VERSION}.exe"
+  SetCompressor /SOLID lzma
+
+  ;Default installation folder
+  InstallDir "$PROGRAMFILES\Enigma"
+  ;InstallDirRegKey ${INSTALLER_REGISTRY_ROOT} ${INSTALLER_REGISTRY_KEY} "Install_Dir" ; this is handled with in .oninit
+  
+  ;Vista redirects $SMPROGRAMS to all users without this
+  RequestExecutionLevel admin
+
+;===================================================
+;Variables
+
+  Var MUI_TEMP
+  Var STARTMENU_FOLDER
+
+;===================================================
+;Interface Settings
+
+  !define MUI_ABORTWARNING
+  !define MUI_WELCOMEFINISHPAGE_BITMAP "enigma-inst-welcome.bmp" ;164x314 bmp
+  !define MUI_UNWELCOMEFINISHPAGE_BITMAP "enigma-inst-welcome.bmp"
+  ; !define MUI_TEXT_WELCOME_INFO_TEXT "text"
+  !define MUI_WELCOMEPAGE_TEXT "$(ProgramDesc)\r\n\r\n$(^ClickNext)"
+  !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\modern-install-blue-full.ico"
+  !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall-blue-full.ico"
+
+;===================================================
+;Language Selection Dialog Settings
+
+  ;Remember the installer language
+  !define MUI_LANGDLL_REGISTRY_ROOT ${INSTALLER_REGISTRY_ROOT}
+  !define MUI_LANGDLL_REGISTRY_KEY ${INSTALLER_REGISTRY_KEY}
+  !define MUI_LANGDLL_REGISTRY_VALUENAME "Installer Language"
+  !define MUI_LANGDLL_ALWAYSSHOW
+
+;===================================================
+;Pages
+
+  !define MUI_PAGE_CUSTOMFUNCTION_PRE WelcomePagePre ; hack for link on welcomepage
+  !define MUI_PAGE_CUSTOMFUNCTION_SHOW WelcomePageShow
+  !insertmacro MUI_PAGE_WELCOME
+  ; !insertmacro MUI_PAGE_COMPONENTS ; There's currently only 1 component, so we don't need this
+  
+  !define MUI_PAGE_CUSTOMFUNCTION_LEAVE DirectoryPageLeave
+  !insertmacro MUI_PAGE_DIRECTORY
+  
+  ;Start Menu Folder Page Configuration
+  !define MUI_STARTMENUPAGE_REGISTRY_ROOT "${INSTALLER_REGISTRY_ROOT}"
+  !define MUI_STARTMENUPAGE_REGISTRY_KEY "${INSTALLER_REGISTRY_KEY}"
+  !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "Start Menu Folder"
+  !define MUI_STARTMENUPAGE_DEFAULTFOLDER "Enigma"
+  
+  !insertmacro MUI_PAGE_STARTMENU Application $STARTMENU_FOLDER
+
+  ;Page that asks for creating an icon on the desktop
+  Page custom CustomOptionsPage
+
+  !insertmacro MUI_PAGE_INSTFILES
+
+  ;finish page configuration
+  !define MUI_FINISHPAGE_RUN enigma.exe
+  ;MUI_FINISHPAGE_RUN_TEXT "text"
+  !define MUI_FINISHPAGE_RUN_NOTCHECKED
+
+  !insertmacro MUI_PAGE_FINISH
+  
+  !insertmacro MUI_UNPAGE_WELCOME
+  ; !insertmacro MUI_UNPAGE_CONFIRM
+  !insertmacro MUI_UNPAGE_DIRECTORY
+  UninstPage custom Un.CustomOptionsPage
+  !insertmacro MUI_UNPAGE_INSTFILES
+  !insertmacro MUI_UNPAGE_FINISH
+
+;===================================================
+;Languages
+
+  !include "enigma-inst-lang.nsh"
+
+
+;===================================================
+;Reserve Files
+  
+  ;If you are using solid compression, files that are required before
+  ;the actual installation should be stored first in the data block,
+  ;because this will make your installer start faster.
+  
+  ReserveFile "enigma-inst-welcome.bmp"
+  ReserveFile "enigma-inst-opt.ini"
+  !insertmacro MUI_RESERVEFILE_INSTALLOPTIONS
+  !insertmacro MUI_RESERVEFILE_LANGDLL
+
+;===================================================
+;Installer Sections
+
+Section "Enigma"
+SectionIn RO
+  ; install for all users
+  SetShellVarContext all
+  ; Set output path to the installation directory.
+  SetOutPath $INSTDIR
+  RMDir /r "$INSTDIR" ; delete the inst. dir. with all its contents
+  ; Add files
+  File /r "${SDIR}\data"
+  File /r "${SDIR}\images"
+  File /r "${SDIR}\manual"
+  File /r "${SDIR}\reference"
+  File    "${SDIR}\*.*"
+
+  ; Write the installation path into the registry
+  WriteRegStr ${INSTALLER_REGISTRY_ROOT} ${INSTALLER_REGISTRY_KEY} "LastDirectory" "$INSTDIR"
+  ; Write the uninstall keys for Windows
+  Var /GLOBAL UninstallRegKey
+  StrCpy $UninstallRegKey "Software\Microsoft\Windows\CurrentVersion\Uninstall\Enigma"
+  WriteRegStr HKLM $UninstallRegKey "DisplayName" "Enigma"
+  WriteRegStr HKLM $UninstallRegKey "UninstallString" '"$INSTDIR\uninstall.exe"'
+  WriteRegStr HKLM $UninstallRegKey "InstallLocation" "$INSTDIR"
+  WriteRegStr HKLM $UninstallRegKey "Publisher" "${COMPANY}"
+  WriteRegStr HKLM $UninstallRegKey "URLInfoAbout" "${WEBSITE}"
+  WriteRegStr HKLM $UninstallRegKey "DisplayVersion" "${VERSION}"
+  WriteRegDWORD HKLM $UninstallRegKey "NoModify" 1
+  WriteRegDWORD HKLM $UninstallRegKey "NoRepair" 1
+
+  WriteUninstaller "uninstall.exe"
+
+  !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
+    CreateDirectory "$SMPROGRAMS\$STARTMENU_FOLDER"
+    CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Enigma.lnk" "$INSTDIR\enigma.exe"
+    CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Documentation.lnk" "$INSTDIR\index.html"
+    CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall.lnk" "$INSTDIR\uninstall.exe"
+  !insertmacro MUI_STARTMENU_WRITE_END
+
+  ;Read a value from an InstallOptions INI file
+  !insertmacro MUI_INSTALLOPTIONS_READ $R1 "enigma-inst-opt.ini" "Field 1" "State"
+  
+  ;Create desktop shortcut if check box was checked
+  StrCmp $R1 "1" "" +2
+     CreateShortCut "$DESKTOP\Enigma.lnk" "$INSTDIR\enigma.exe" "" "$INSTDIR\enigma.exe" 0
+
+  ; the following code adds the version + inst. directory to the list of all Enigma installations
+  ReadRegStr $R2 ${INSTALLER_REGISTRY_ROOT} ${INSTALLER_REGISTRY_KEY} "DirectoriesList"
+  ${WordAdd} "$R2" "|" "+${VERSION}:$INSTDIR" $R3
+  WriteRegStr ${INSTALLER_REGISTRY_ROOT} ${INSTALLER_REGISTRY_KEY} "DirectoriesList" $R3
+
+SectionEnd
+
+;===================================================
+;Installer Functions
+
+Function .onInit
+
+  !insertmacro MUI_LANGDLL_DISPLAY
+  ;Extract InstallOptions INI files
+  !insertmacro MUI_INSTALLOPTIONS_EXTRACT "enigma-inst-opt.ini"
+
+  ReadRegStr $R4 ${INSTALLER_REGISTRY_ROOT} ${INSTALLER_REGISTRY_KEY} "Install_Dir" ; key used prior to version 1.01
+  ReadRegStr $R5 ${INSTALLER_REGISTRY_ROOT} ${INSTALLER_REGISTRY_KEY} "LastDirectory"
+
+  ;Get installation folder from registry if available
+  ${If} $R5 != ""
+    StrCpy $INSTDIR $R5
+  ${ElseIf} $R4 != ""
+    StrCpy $INSTDIR $R4
+  ${EndIf}
+
+FunctionEnd
+
+Function CustomOptionsPage
+  !insertmacro MUI_INSTALLOPTIONS_WRITE "enigma-inst-opt.ini" "Field 1" "Text" $(DesktopIcon)
+  !insertmacro MUI_INSTALLOPTIONS_WRITE "enigma-inst-opt.ini" "Field 2" "Text" $(^ClickInstall)
+  ${WordReplace} $(^ComponentsSubCaption) ": " "" "+" $R0
+  !insertmacro MUI_HEADER_TEXT $R0 "$(^ComponentsSubText2_NoInstTypes)"
+  !insertmacro MUI_INSTALLOPTIONS_DISPLAY "enigma-inst-opt.ini"
+FunctionEnd
+
+Function WelcomePagePre
+   !insertmacro MUI_INSTALLOPTIONS_WRITE "ioSpecial.ini" "Field 3" "Bottom" "175"
+   !insertmacro MUI_INSTALLOPTIONS_WRITE "ioSpecial.ini" "Field 4" "Type" "Link"
+   !insertmacro MUI_INSTALLOPTIONS_WRITE "ioSpecial.ini" "Field 4" "Text" "www.enigma-game.org"
+   !insertmacro MUI_INSTALLOPTIONS_WRITE "ioSpecial.ini" "Field 4" "Left" "120"
+   !insertmacro MUI_INSTALLOPTIONS_WRITE "ioSpecial.ini" "Field 4" "Right" "315"
+   !insertmacro MUI_INSTALLOPTIONS_WRITE "ioSpecial.ini" "Field 4" "Top" "175"
+   !insertmacro MUI_INSTALLOPTIONS_WRITE "ioSpecial.ini" "Field 4" "Bottom" "185"
+   !insertmacro MUI_INSTALLOPTIONS_WRITE "ioSpecial.ini" "Field 4" "State" ${WEBSITE}
+   !insertmacro MUI_INSTALLOPTIONS_WRITE "ioSpecial.ini" "Settings" "Numfields" "4"
+FunctionEnd
+
+Function WelcomePageShow
+  ; Thanks to pengyou ; Fix colors of added link control ; See http://forums.winamp.com/showthread.php?s=&threadid=205674
+  Push $0
+  GetDlgItem $0 $MUI_HWND 1203
+  SetCtlColors $0 "0000FF" "FFFFFF"
+  CreateFont $1 "$(^Font)" "$(^FontSize)" "400" /UNDERLINE
+  SendMessage $0 ${WM_SETFONT} $1 1 
+  Pop $0
+FunctionEnd
+
+Function DirectoryPageLeave
+   IfFileExists $INSTDIR\*.* FolderExists endfunction
+   FolderExists:
+      IfFileExists $INSTDIR\Enigma.exe FileDoesExist FileDoesNotexist
+      FileDoesExist:
+        MessageBox MB_YESNO|MB_DEFBUTTON2 "$(OldInstallSure) $(OldInstallDesc) $(OldInstallDesc2)" IDYES endfunction IDNO clickno
+      FileDoesNotexist:
+        MessageBox MB_YESNO|MB_DEFBUTTON2 "$(OldInstallMaybe) $(OldInstallDesc)" IDYES endfunction IDNO clickno
+   clickno:
+    Abort
+   endfunction:
+FunctionEnd
+
+;===================================================
+;Uninstaller Section
+
+Section "Uninstall"
+
+  ; uninstall for all users
+  SetShellVarContext all
+
+  ; remove start-menu items
+  !insertmacro MUI_STARTMENU_GETFOLDER Application $MUI_TEMP
+
+  Delete "$SMPROGRAMS\$MUI_TEMP\Enigma.lnk"
+  Delete "$SMPROGRAMS\$MUI_TEMP\Documentation.lnk"
+  Delete "$SMPROGRAMS\$MUI_TEMP\Uninstall.lnk"
+  
+  ;Delete empty start menu parent directories
+  StrCpy $MUI_TEMP "$SMPROGRAMS\$MUI_TEMP"
+  startMenuDeleteLoop:
+	ClearErrors
+    RMDir $MUI_TEMP
+    GetFullPathName $MUI_TEMP "$MUI_TEMP\.."
+    IfErrors startMenuDeleteLoopDone
+    StrCmp $MUI_TEMP $SMPROGRAMS startMenuDeleteLoopDone startMenuDeleteLoop
+  startMenuDeleteLoopDone:
+
+  ; remove desktop shortcut
+  Delete "$DESKTOP\Enigma.lnk"
+
+  ; read a value from an InstallOptions INI file
+  !insertmacro MUI_INSTALLOPTIONS_READ $R7 "enigma-inst-opt.ini" "Field 1" "State"
+
+  ; remove Enigma user data if check box was checked
+  SetShellVarContext current ; Enigma's user data is stored for the current user
+  StrCmp $R7 "1" "" +2
+      RMDir /r "$APPDATA\Enigma"
+  SetShellVarContext all ; get back to all users
+
+  ; the following code removes the version + inst. directory from the list of all Enigma installations
+  ReadRegStr $R8 ${INSTALLER_REGISTRY_ROOT} ${INSTALLER_REGISTRY_KEY} "DirectoriesList"
+  ;MessageBox MB_OK "R8: $R8"
+  ${un.WordAdd} "$R8" "|" "-${VERSION}:$INSTDIR" $R9
+  ;MessageBox MB_OK "R9: $R9"
+  WriteRegStr ${INSTALLER_REGISTRY_ROOT} ${INSTALLER_REGISTRY_KEY} "DirectoriesList" $R9
+
+  ; remove registry keys only if there's no other version of Enigma installed
+  StrCmp $R9 "" nonewinst donotdelete
+  nonewinst:
+  ReadRegStr $R6 ${INSTALLER_REGISTRY_ROOT} ${INSTALLER_REGISTRY_KEY} "Install_Dir"
+  StrCmp $R6 "" deleteit 0
+  StrCmp $R6 "$INSTDIR" deleteit donotdelete
+  deleteit:
+  DeleteRegKey ${INSTALLER_REGISTRY_ROOT} "Software\Microsoft\Windows\CurrentVersion\Uninstall\Enigma"
+  DeleteRegKey ${INSTALLER_REGISTRY_ROOT} ${INSTALLER_REGISTRY_KEY}
+  donotdelete:
+  
+  ; remove application directory with all its contents
+  RMDir /r "$INSTDIR"
+SectionEnd
+
+;===================================================
+;Uninstaller Functions
+
+Function un.onInit
+  !insertmacro MUI_UNGETLANGUAGE
+  ;Extract InstallOptions INI files
+  !insertmacro MUI_INSTALLOPTIONS_EXTRACT "enigma-inst-opt.ini"
+FunctionEnd
+
+Function Un.CustomOptionsPage
+  !insertmacro MUI_INSTALLOPTIONS_WRITE "enigma-inst-opt.ini" "Field 1" "Text" $(DeleteUserdata)
+  !insertmacro MUI_INSTALLOPTIONS_WRITE "enigma-inst-opt.ini" "Field 2" "Text" $(^ClickUninstall)
+  !insertmacro MUI_INSTALLOPTIONS_WRITE "enigma-inst-opt.ini" "Field 1" "State" "0" ; default: unchecked
+  ${un.WordReplace} $(^UnComponentsSubCaption) ": " "" "+" $R0
+  !insertmacro MUI_HEADER_TEXT $R0 "$(^UnComponentsSubText2_NoInstTypes)"
+  !insertmacro MUI_INSTALLOPTIONS_DISPLAY "enigma-inst-opt.ini"
+FunctionEnd
+
+;===================================================
+;Version Information
+
+  VIProductVersion "${VERSION4}"
+  VIAddVersionKey /LANG=0 "ProductName" "${NAME} ${VERSION}"
+  VIAddVersionKey /LANG=0 "FileDescription" "${NAME} Installer"
+  VIAddVersionKey /LANG=0 "CompanyName" "${COMPANY}"
+  VIAddVersionKey /LANG=0 "FileVersion" "${VERSION}"
+  VIAddVersionKey /LANG=0 "LegalCopyright" "${LEGALCOPYRIGHT}"
+
+;===================================================

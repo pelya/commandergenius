@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Widgets in the Attic" el:subtitle="Tidy up the Attic" el:id="duffy158"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+rooms_wide=1
+rooms_high=2
+
+levelw=1+(19*rooms_wide)
+levelh=1+(12*rooms_high)
+
+create_world( levelw, levelh)
+enigma.ConserveLevel=FALSE
+
+fill_floor("fl-hay", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-rock5", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+            abyss(i-1,line)
+        elseif c == "*" then
+            set_stone( "st-brownie", i-1, line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c == "~" then
+            set_floor("fl-water",i-1,line)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {player=0})
+        elseif c=="y" then
+            set_actor("ac-whiteball", i-1,line+.5, {player=1})
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c=="=" then
+            set_floor("fl-space",i-1,line)
+        elseif c=="V" then
+            set_item("it-wormhole",i-1,line,{strength=0,targetx="3.5",targety="21.5"})
+        elseif c=="a" then
+            set_item("it-trigger",i-1,line,{action="callback",target="funcc1"})
+        elseif c=="b" then
+            set_item("it-trigger",i-1,line,{action="callback",target="funcc2"})
+        elseif c=="c" then
+            set_item("it-trigger",i-1,line,{action="callback",target="funcc3"})
+        elseif c=="d" then
+            set_item("it-trigger",i-1,line,{action="callback",target="funcc4"})
+        end
+    end    
+end
+
+renderLine(00,"####################")
+renderLine(01,"#                  #")
+renderLine(02,"#                  #")
+renderLine(03,"#    #### ####     #")
+renderLine(04,"#    #a  V  b#     #")
+renderLine(05,"#    # * * * #     #")
+renderLine(06,"#    # *+*+* #     #")
+renderLine(07,"#    # * + * #     #")
+renderLine(08,"#    #d  *  c#     #")
+renderLine(09,"#    #########     #")
+renderLine(10,"#                  #")
+renderLine(11,"#                  #")
+renderLine(12,"############### ####")
+renderLine(13,"#o! ** **  *** * * #")
+renderLine(14,"#!! **  * * * *  * #")
+renderLine(15,"#!!  **  * *** **  #")
+renderLine(16,"#o!  ** * * * * * *#")
+renderLine(17,"###  ** * *  * *** #")
+renderLine(18,"#    ** *** **  *  #")
+renderLine(19,"#    **   ** * * **#")
+renderLine(20,"#     *** ** ** * *#")
+renderLine(21,"#  z  ***   ** *** #")
+renderLine(22,"#            ***   #")
+renderLine(23,"#                  #")
+renderLine(24,"####################")
+
+ff1=0
+function funcc1()
+    if ff1==0 then
+        ff1=1
+    else
+        ff1=0
+    end
+    funcccheck()
+end
+
+ff2=0
+function funcc2()
+    if ff2==0 then
+        ff2=1
+    else
+        ff2=0
+    end
+    funcccheck()
+end
+
+ff3=0
+function funcc3()
+    if ff3==0 then
+        ff3=1
+    else
+        ff3=0
+    end
+    funcccheck()
+end
+
+ff4=0
+function funcc4()
+    if ff4==0 then
+        ff4=1    else
+        ff4=0
+    end
+    funcccheck()
+end
+
+ffc=0
+function funcccheck()
+    if ff1+ff2+ff3+ff4>0 and ffc==0 then
+        enigma.KillItem(9,4)
+        ffc=1
+    else
+        if ff1+ff2+ff3+ff4==0 and ffc==1 then
+            set_item("it-wormhole",9,4,{strength=0,targetx=3.5,targety=21.5})
+            ffc=0
+        end
+    end
+end
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

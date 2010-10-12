@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Protected Exhibition" el:subtitle="" el:id="duffy156"/>
+      <el:version el:score="1" el:release="1" el:revision="2" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.01">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:credits el:showinfo="true" el:showstart="false">Ronald Lamprecht for idea and solution of difficult mode</el:credits>
+        <el:code>Lua 5.1 and XML</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+rooms_wide=1
+rooms_high=1
+
+levelw=1+(19*rooms_wide)+2
+levelh=1+(12*rooms_high)
+
+create_world( levelw, levelh)
+
+fill_floor("fl-bluegray", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-rock1", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "O" then
+            if difficult then
+                oxyd( i-1, line)
+            else
+                set_stone("st-rock1", i-1, line)
+            end
+        elseif c == "T" and difficult then
+            set_floor("fl-thief",i-1,line)
+        elseif c == "*" then
+            set_stone( "st-brownie", i-1, line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c == "~" then
+            set_floor("fl-water",i-1,line)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {player=0})
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c=="=" then
+            set_floor("fl-space",i-1,line)
+        elseif c=="s" then
+            set_stone("st-stoneimpulse",i-1,line)
+        elseif c=="N" then
+            set_stone("st-laser",i-1,line,{dir=NORTH,on=TRUE})
+        elseif c=="E" then
+            set_stone("st-laser",i-1,line,{dir=EAST,on=TRUE})
+        elseif c=="S" then
+            set_stone("st-laser",i-1,line,{dir=SOUTH,on=TRUE})
+        elseif c=="W" then
+            set_stone("st-laser",i-1,line,{dir=WEST,on=TRUE})
+        end
+    end
+end
+
+renderLine(00,"####################")
+renderLine(01,"#o~     S  S     ~o#")
+renderLine(02,"#~~              ~~#")
+renderLine(03,"# T      ##      T #")
+renderLine(04,"#      +    +      #")
+renderLine(05,"O~N   #  ++  #   N~O")
+renderLine(06,"# ~~E   +  +   W~~ #")
+renderLine(07,"O~S   #  ++  #   S~O")
+renderLine(08,"#      +    +      #")
+renderLine(09,"# T      ##      T #")
+renderLine(10,"#~~ z            ~~#")
+renderLine(11,"#o~     N  N     ~o#")
+renderLine(12,"####################")
+
+oxyd_shuffle()
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

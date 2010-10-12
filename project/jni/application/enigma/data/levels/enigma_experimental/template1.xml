@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Template 1" el:subtitle="" el:id="template1"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="stable"/>
+      <el:author  el:name="AUTHOR" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © YEAR AUTHOR</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelh = 13
+levelw = 20
+
+create_world(levelw, levelh)
+
+-- DESIGN --
+floor="fl-sahara"
+wall="st-glass"
+
+-- FLOOR --
+fill_floor(floor, 0,0,levelw,levelh)
+
+-- STONES --
+draw_border(wall)
+
+-- ITEMS --
+set_item("it-document", 10, 6, {text="text1"})
+
+-- ACTORS --
+set_actor("ac-blackball", 4.5,4.5, {player=0})
+
+-- OXYD --
+oxyd(1,1)
+oxyd(1,11)
+oxyd(18,1)
+oxyd(18,11)
+
+oxyd_default_flavor = "d"
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="false">Template for a simple level.</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

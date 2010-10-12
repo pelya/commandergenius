@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Oxydrings" el:subtitle="" el:id="raoul13"/>
+      <el:version el:score="1" el:release="1" el:revision="2" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="raoul@users.berlios.de" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/libpuzzle" el:id="lib/libpuzzle" el:release="2" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="0:05"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- YAPSL (Yet Another PuzzleStone Level)
+-- GENERAL --
+levelw = 20
+levelh = 13
+create_world(levelw, levelh)
+enigma.ConserveLevel = FALSE
+
+-- DESIGN --
+boden="fl-abyss_fake"
+wand="st-glass"
+bodenk="fl-normal"
+
+-- FLOOR --
+fill_floor(boden, 0,0,levelw,levelh)
+
+fill_floor(bodenk,2,2,3,3)
+fill_floor(bodenk,2,8,3,3)
+fill_floor(bodenk,15,2,3,3)
+fill_floor(bodenk,15,8,3,3)
+
+--holes:
+--self
+set_item("it-wormhole",4,4,{targetx="3.5",targety="4.5",strength="1",range="1"})
+set_item("it-wormhole",15,4,{targetx="15.5",targety="3.5",strength="1",range="1"})
+set_item("it-wormhole",15,8,{targetx="16.5",targety="8.5",strength="1",range="1"})
+set_item("it-wormhole",4,8,{targetx="4.5",targety="9.5",strength="1",range="1"})
+--clock
+set_item("it-wormhole",4,2,{targetx="17.5",targety="3.5",strength="1",range="1"})
+set_item("it-wormhole",17,4,{targetx="16.5",targety="10.5",strength="1",range="1"})
+set_item("it-wormhole",15,10,{targetx="2.5",targety="9.5",strength="1",range="1"})
+set_item("it-wormhole",2,8,{targetx="3.5",targety="2.5",strength="1",range="1"})
+--counterclock
+set_item("it-wormhole",2,4,{targetx="3.5",targety="10.5",strength="1",range="1"})
+set_item("it-wormhole",4,10,{targetx="17.5",targety="9.5",strength="1",range="1"})
+set_item("it-wormhole",17,8,{targetx="16.5",targety="2.5",strength="1",range="1"})
+set_item("it-wormhole",15,2,{targetx="2.5",targety="3.5",strength="1",range="1"})
+--cross
+set_item("it-wormhole",17,2,{targetx="3.5",targety="8.5",strength="1",range="1"})
+set_item("it-wormhole",2,10,{targetx="16.5",targety="4.5",strength="1",range="1"})
+set_item("it-wormhole",2,2,{targetx="15.5",targety="9.5",strength="1",range="1"})
+set_item("it-wormhole",17,10,{targetx="4.5",targety="3.5",strength="1",range="1"})
+
+-- ACTORS --
+actor1=set_actor("ac-blackball", 4.5,4.5, {player=0})
+
+-- OXYD --
+oxyd(3,3)
+oxyd(3,9)
+oxyd(16,3)
+oxyd(16,9)
+oxyd_default_flavor = "d"
+oxyd_shuffle()
+
+-- RINGS --
+puzzle({"####         ####",
+        "#  #         #  #",
+        "#  ###########  #",
+        "####         ####",
+        "  #           #  ",
+        "  #           #  ",
+        "####         ####",
+        "#  ###########  #",
+        "#  #         #  #",
+        "####         ####"},{2,2},"bluepuzzle","none")
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

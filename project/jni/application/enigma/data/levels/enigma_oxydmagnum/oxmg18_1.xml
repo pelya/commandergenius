@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Oxyd Magnum Gold 18" el:subtitle="Oxyd Magnum Gold 18" el:id="oxydmagnumgold18"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Edward" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Edward</el:copyright>
+      <el:license el:type="Donated to Enigma under the projects license" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd.magnum">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world(20,20)
+
+fill_floor("fl-brick",0,0,20,20)
+
+function magnumGold(line,pattern)
+    for i=1, strlen(pattern) do
+        local c=strsub(pattern,i,i)
+        if c=="A" then
+            set_stone("st-bigbrick-es",i-1,line)
+        elseif c=="B" then
+            set_stone("st-bigbrick-sw",i-1,line)
+        elseif c=="C" then
+            set_stone("st-bigbrick-ne",i-1,line)
+        elseif c=="D" then
+            set_stone("st-bigbrick-nw",i-1,line)
+        elseif c=="X" then
+            oxyd(i-1,line)
+        elseif c=="O" then
+            set_stone("st-stoneimpulse",i-1,line)
+        elseif c=="6" then
+            set_item("it-whitebomb",i-1,line)
+        elseif c=="W" then
+            set_stone("st-wood",i-1,line)
+        elseif c=="#" then
+            set_stone("st-rock3_movebreak",i-1,line)
+        elseif c=="H" then
+            set_item("it-hammer",i-1,line)
+        elseif c=="I" then
+            set_item("it-dynamite",i-1,line)
+        elseif c=="@" then
+            set_stone("st-grate1",i-1,line)
+        elseif c=="0" then
+            set_actor("ac-blackball",i-1,line,{player=0})
+        elseif c=="*" then
+            set_floor("fl-abyss",i-1,line)
+        end
+    end
+end
+
+magnumGold(00,"ABABABABABABABABABAB")
+magnumGold(01,"CDCDCDCDCDCDCDCDCDCD")
+magnumGold(02,"ABXO######@O@   HXAB")
+magnumGold(03,"CD OXOOOOO# #OOOOOCD")
+magnumGold(04,"AB* O@@@@@@O@OOOOOAB")
+magnumGold(05,"CD W #OOOOOO OOOOOCD")
+magnumGold(06,"AB O@@       OOOOOAB")
+magnumGold(07,"CD O       @@@@@@XCD")
+magnumGold(08,"AB O       OOOOOOOAB")
+magnumGold(09,"CD O       O@@@@@@CD")
+magnumGold(10,"AB O     0 6@@@@@@AB")
+magnumGold(11,"CD OO#OOO@@#@@@@@@CD")
+magnumGold(12,"AB O6   O@@O@@@@@@AB")
+magnumGold(13,"CD O#   O@@O@@@@@@CD")
+magnumGold(14,"ABWWOO  O@@OOOO@OOAB")
+magnumGold(15,"CD**WO XO@XO   @WXCD")
+magnumGold(16,"AB#OOOOOOOOO   @IXAB")
+magnumGold(17,"CDXOX#######   OOOCD")
+magnumGold(18,"ABABABABABABABABABAB")
+magnumGold(19,"CDCDCDCDCDCDCDCDCDCD")
+
+oxyd_shuffle()
+display.SetFollowMode(display.FOLLOW_SCROLLING)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

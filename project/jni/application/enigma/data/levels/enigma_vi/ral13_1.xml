@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Ben Hur" el:subtitle="The art of steering a quadriga" el:id="20061011ral390"/>
+      <el:version el:score="1" el:release="1" el:revision="$Revision: 58 $" el:status="released"/>
+      <el:author  el:name="Ronald Lamprecht" el:email="ral@users.berlios.de"/>
+      <el:copyright>Copyright © 2006 Ronald Lamprecht</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code></el:code>
+      </el:comments>
+      <el:score el:easy="2:24" el:difficult="3:21"/>
+    </el:info>
+    <el:luamain><![CDATA[
+enigma.ConserveLevel = FALSE
+
+set_oxyd = oxyd
+math_floor = floor
+
+function oxyd( x, y, tiles )
+    return set_oxyd( x, y )
+end
+
+function nothing(x, y, tiles)
+    -- create nothing
+end
+
+function floor( floor_type, attribs )
+    return function( x, y, tiles )
+        return set_floor( floor_type, x, y, attribs or {} )
+    end
+end
+
+function stone( stone_type, attribs )
+    return function( x, y, tiles )
+        return set_stone( stone_type, x, y, attribs or {} )
+    end
+end
+
+function item( item_type, attribs )
+    return function( x, y, tiles )
+        return set_item( item_type, x, y, attribs or {} )
+    end
+end
+
+function actor( actor_type, attribs )
+    return function( x, y, tiles )
+        return set_actor( actor_type, x+0.5, y+0.5, attribs or {} )
+    end
+end
+
+function inherit(tile_type)
+    return function( x, y, tiles )
+        return create_tile( tiles, x, y, tile_type )
+    end
+end
+
+function create_world_from_map( tiles, map )
+    create_world( strlen(map[1]), getn(map) )
+    
+    for y = 1,getn(map) do
+        local line = map[y]
+        for x = 1,strlen(line) do
+            local tile = strchar(strbyte(line,x))
+            create_tile( tiles, x-1, y-1, tile )
+        end
+    end
+end
+
+function create_tile( tiles, x, y, tile_type )
+    local constructors = tiles[tile_type]
+
+    if constructors then
+        for i = 1,getn(constructors) do
+            constructors[i](x,y,tiles)
+        end
+    else
+        error("invalid tile identifier " .. tile_type )
+    end
+end
+
+oxyd_default_flavor = "a"
+
+tiles = {}
+tiles[" "] = {floor("fl-hay")}
+tiles["x"] = {inherit(" "), oxyd}
+tiles["#"] = {inherit(" "), stone("st-rock1")}
+tiles["-"] = tiles["#"] 
+
+tiles["s"] = {inherit(" "), item("it-spoon")}
+tiles["t"] = {inherit(" "), item("it-document", {text="quater"})}
+tiles["1"] = {inherit(" "), actor("ac-blackball", {player=0, name="acBlack"})}
+
+tiles["h"] = {inherit(" "), stone("st-chess_black", {name="horse1"})}
+tiles["H"] = {inherit(" "), stone("st-chess_black", {name="horse2"})}
+
+if difficult then
+    tiles["d"] = {inherit(" "), stone("st-chess_black", {name="horse3"})}
+    tiles["D"] = {inherit(" "), stone("st-chess_black", {name="horse4"})}
+else
+    tiles["d"] = tiles[" "]
+    tiles["D"] = tiles[" "]
+end
+
+create_world_from_map( tiles, {
+"####x##########x####",
+"#           d      #",
+"#           h t1   #",
+"x           H s    x",
+"#           D      #",
+"#    -        -    #",
+"#    --x----x--    #",
+"#    -        -    #",
+"#                  #",
+"x                  x",
+"#                  #",
+"#                  #",
+"####x##########x####"
+})
+
+if difficult then
+    AddRubberBand (enigma.GetNamedObject("acBlack"), enigma.GetNamedObject("horse1"), 200, 3.5, 1)
+    AddRubberBand (enigma.GetNamedObject("acBlack"), enigma.GetNamedObject("horse2"), 200, 3.5, 1)
+    AddRubberBand (enigma.GetNamedObject("acBlack"), enigma.GetNamedObject("horse3"), 200, 3.5, 1)
+    AddRubberBand (enigma.GetNamedObject("acBlack"), enigma.GetNamedObject("horse4"), 200, 3.5, 1)
+else
+    AddRubberBand (enigma.GetNamedObject("acBlack"), enigma.GetNamedObject("horse1"), 200, 3, 1)
+    AddRubberBand (enigma.GetNamedObject("acBlack"), enigma.GetNamedObject("horse2"), 200, 3, 1)
+end
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Die Kunst des Lenkens einer Quadriga</el:translation>
+      </el:string>
+      <el:string el:key="quater">
+        <el:english el:translate="true" el:comment="quater - historical death penalty to be devided in four parts">Dropping the spoon redeems from being quartered!</el:english>
+        <el:translation el:lang="de">Den Löffel abzugeben erlöst einen von einer Vierteilung!</el:translation>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="library">
+      <el:identity el:title="" el:id="lib/libflood"/>
+      <el:version el:score="1" el:release="1" el:revision="6" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="false" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- REFERENCE --
+---------------
+-- Parameters:
+--
+-- land_map: Charmap containig the landscape with the (un)floodable floors
+-- Allowed chars: "#" : unfloodable
+--                " " : floodable, not yet flooded
+--                "~" : flooded (is water)
+--
+-- top_left: Array with the real levelcoordinates of the top left corner.
+-- 
+-- flood_method: Method to determine the next tiles.
+-- This can be: 1 : only examine the north, east, south and west field
+--              2 : examine all 8 neighbour fields
+--
+-- Used Globals (interesting for programmers only):
+-- flood_map: Arraymap with the current state of the flood, starts as copy of land_map
+-- flood_front: Coordinates of all tiles to examine in this step
+-- to_flood: All tiles that will be flooded at the end of this step
+
+-- Defaults:
+-- Declare all as local to avoid a conflict with variables maybe used by the levelauthors
+local land_map = nil
+local top_left = nil
+local flood_method = nil
+local flood_map = nil
+local flood_front = nil
+local to_flood = nil
+
+function init_flood(new_map, corner, method)
+    -- Set defaults if no values are given:
+    if new_map ~= nil then
+        land_map = new_map
+    else
+        land_map = {"~"}
+    end
+    if corner ~= nil then
+        top_left = corner
+    else
+        top_left = {0,0}
+    end
+    if flood_method ~= nil then
+        flood_method = method
+    else
+        flood_method = 1
+    end
+
+    -- Is the map bigger than 0 x 0 ?
+    local x, y = get_map_size(land_map)
+    if x < 1 or y < 1 then
+        error("init_flood(new_map, corner, method): Map "..tostring(x).." x "..tostring(y).." is too small!\n")
+    end
+    -- Is the map rectangular?
+    is_rectangular()
+    -- Test top_left corner for valid koordinates
+    -- We do not test, if the map is bigger than the level!
+    -- The bottom right corner may lie outside of the level -> flood_it will raise an error ...
+    if top_left[1] < 0 or top_left[2] < 0 then
+        error("init_flood(new_map, corner, method): Invalid value for top left map corner! "..tostring(top_left[1])..";"..tostring(top_left[2]).."\n")
+    end
+    -- Valid flood method?
+    if flood_method ~= 1 and flood_method ~= 2 then
+        error("init_flood(new_map, corner, method): Invalid value for method: "..tostring(method).."! Values are 1 or 2.\n")
+    end
+
+    -- Build up the flood_map table.
+    build_up_flood_map(land_map)
+    -- Build up the data for a new flood_front.
+    new_flood_front()
+    search_initial_water()
+    -- Now draw the initial waterspots.
+    flood_it(flood_front,top_left)
+    return 0
+end
+
+function do_flood()
+    -- Create a new global to_flood.
+    new_to_flood()
+    -- Iterate over all elements in flood_front to find the tiles, we have to flood.
+    local flood_front_size = table.getn(flood_front)
+    -- DEBUG:
+    --print("Flood Front has size: "..tostring(flood_front_size))
+    
+    local k,v
+    for k,v in pairs(flood_front) do
+        local akt_pos = flood_front[k]
+        if flood_method == 1 then
+            examine_field_nesw(akt_pos[1], akt_pos[2])
+        elseif flood_method == 2 then
+            examine_field_all8(akt_pos[1], akt_pos[2])
+        end
+    end
+
+    -- Write the to_flood to flood_front.
+    clear_flood_front()
+    copy_to_flood_to_flood_front()
+    -- We don't need to update the flood_map, because we updated it in
+    -- examine_field_neighbour(x,y). This improves performance a big bit!
+    --update_flood_map()
+    -- FLOOD!
+    flood_it(to_flood,top_left)
+    return 0
+end
+--------------------------------------------------------------------------------
+-- Export public functions:
+-- Not yet used
+--init_flood = init_flood
+--do_flood = do_flood
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Get the dimensions of the land_map:
+function get_map_size(land_map)
+    local y_size=table.getn(land_map)
+    local x_size=string.len(land_map[1])
+    return x_size, y_size
+end
+
+-- Get the dimensions of the flood_map:
+function get_flood_map_size(flood_map)
+    local y_size=table.getn(flood_map)
+    local x_size=table.getn(flood_map[1])
+    return x_size, y_size
+end
+
+-- This function is not used anymore
+function is_inside_map(x,y)
+    -- Test, if x and y are inside the flood_map. If no, raise an error.
+    local x_size, y_size = get_flood_map_size(flood_map)
+    if x > x_size then
+        error("is_inside_map(x,y): x is not inside the map! "..tostring(x).."\n")
+    end
+    if y > y_size then
+        error("is_inside_map(x,y): y is not inside the map! "..tostring(y).."\n")
+    end
+end
+
+function is_on_border(x,y)
+    -- Test, if x and y are on the flood_map border.
+    local x_size, y_size = get_flood_map_size(flood_map)
+    local on_left, on_right, on_top, on_bottom = false, false, false, false
+    if x == 1 then
+        -- is on left border
+        on_left = true
+    end
+    if x == x_size then
+        -- is on right border
+        on_right = true
+    end
+    if y == 1 then
+        -- is on top border
+        on_top = true
+    end
+    if y == y_size then
+        -- is on bottom border
+        on_bottom = true
+    end
+    return on_left, on_right, on_top, on_bottom
+end
+
+function is_rectangular()
+    local x_size, y_size = get_map_size(land_map)
+    -- Length of the first line in the map:
+    local buffer = string.len(land_map[1])
+    local i, temp
+    for i=1, y_size do
+        temp = string.len(land_map[i])
+        if temp ~= buffer then
+            error("init_flood(new_map, corner, method): Map is not rectangular!\n")
+        end
+    end
+    return 0
+end
+--------------------------------------------------------------------------------
+function get_specific_char(x,y)
+    local akt_line = land_map[y]
+    local this_char = string.sub(akt_line,x,x)
+    return this_char
+end
+
+function parse_this_char(akt_char)
+    if akt_char == "#" then
+        -- Unfloodable
+        return 0
+    elseif akt_char == " " then
+        -- Floodable, not yet flooded
+        return 1
+    elseif akt_char == "~" then
+        -- Floodable, flooded
+        return 2
+    else
+        error("init_flood(new_map, corner, method): Illegal char \""..akt_char.."\" in the map! Valid chars are: [#, ,~].\n")
+    end
+end
+
+function build_up_flood_map(land_map)
+    -- new global:
+    flood_map={}
+    local x_size, y_size = get_map_size(land_map)
+    -- build up the flood_map table:
+    local i,j
+    for i=1, y_size do
+        -- each line is a table:
+        flood_map[i]={}
+        for j=1, x_size do
+            local akt_char = get_specific_char(j,i)
+            flood_map[i][j] = parse_this_char(akt_char)
+        end
+    end
+    return 0
+end
+--------------------------------------------------------------------------------
+function modify_flood_map(x,y,type)
+    -- Not needed, calls from within this lib are valid
+    --is_inside_map(x,y)
+    -- type valid?
+    --if type ~= 0 and type ~= 1 and type ~= 2 then
+    --    error("modify_flood_map(x,y,type): Illegal type! "..tostring(type).."\n")
+    --end
+    flood_map[y][x] = type
+    return 0
+end
+--------------------------------------------------------------------------------
+function new_flood_front()
+    -- new global:
+    flood_front = {}
+    return 0
+end
+
+function add_to_flood_front(x,y)
+    local this_pos = {x,y}
+    table.insert(flood_front,this_pos)
+    return 0
+end
+--------------------------------------------------------------------------------
+function search_initial_water()
+    local x_size, y_size = get_flood_map_size(flood_map)
+    local has_any_water = 0
+    local i,j
+    for i=1, y_size do
+        for j=1, x_size do
+            if flood_map[i][j] == 2 then
+                has_any_water = has_any_water+1
+                add_to_flood_front(j,i)
+            end
+        end
+    end
+    if has_any_water == 0 then
+        error("init_flood(new_map, corner, method): No water found! Please set at least 1 water tile!\n")
+    end
+    return 0
+end
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+function new_to_flood()
+    -- new global:
+    to_flood = {}
+    return 0
+end
+
+function add_to_flood(x,y)
+    local this_pos = {x,y}
+    table.insert(to_flood,this_pos)
+    return 0
+end
+--------------------------------------------------------------------------------
+---F-L-O-O-D---M-E-T-H-O-D-S----------------------------------------------------
+-- Method 1:
+function examine_field_nesw(x,y)
+    -- Check, if x or y is out of the flood_map bounds
+    -- Not needed, calls from within this lib are valid
+    --is_inside_map(x,y)
+
+    local on_left, on_right, on_top, on_bottom = is_on_border(x,y)
+    -- NORTH
+    if not on_top then
+        examine_field_neighbour(x,y-1)
+    end
+    -- EAST
+    if not on_right then
+        examine_field_neighbour(x+1,y)
+    end
+    -- SOUTH
+    if not on_bottom then
+        examine_field_neighbour(x,y+1)
+    end
+    -- WEST
+    if not on_left then
+        examine_field_neighbour(x-1,y)
+    end
+    return 0
+end
+
+-- Method 2:
+function examine_field_all8(x,y)
+    -- Check, if x or y is out of the flood_map bounds
+    -- Not needed, calls from within this lib are valid
+    --is_inside_map(x,y)
+
+    local on_left, on_right, on_top, on_bottom = is_on_border(x,y)
+    -- NORTH
+    if not on_top then
+        examine_field_neighbour(x,y-1)
+        -- Check also for north-west and north-east
+        if not on_left then
+            examine_field_neighbour(x-1,y-1)
+        end
+        if not on_right then
+            examine_field_neighbour(x+1,y-1)
+        end
+    end
+    -- EAST
+    if not on_right then
+        examine_field_neighbour(x+1,y)
+    end
+    -- SOUTH
+    if not on_bottom then
+        examine_field_neighbour(x,y+1)
+        -- Check also for south-west and south-east
+        if not on_left then
+            examine_field_neighbour(x-1,y+1)
+        end
+        if not on_right then
+            examine_field_neighbour(x+1,y+1)
+        end
+    end
+    -- WEST
+    if not on_left then
+        examine_field_neighbour(x-1,y)
+    end
+    return 0
+end
+--------------------------------------------------------------------------------
+function examine_field_neighbour(x,y)
+    -- What sort of floor is the examined position?
+    if flood_map[y][x] == 0 then
+        -- DEBUG:
+        --print("Stone found at: "..tostring(x)..";"..tostring(y).."\n")
+    elseif flood_map[y][x] == 1 then
+        -- the only case we have to do something
+        -- DEBUG:
+        --print("Floodable ground found at: "..tostring(x)..";"..tostring(y).."\n")
+        add_to_flood(x,y)
+        -- Mark field as flooded in flood_map here will improve performance!!
+        modify_flood_map(x, y, 2)
+    elseif flood_map[y][x] == 2 then
+        -- DEBUG:
+        --print("Water found at: "..tostring(x)..";"..tostring(y).."\n")
+    -- If there are more possibilities, add more elseifs here.
+    -- We need no default-error, because flood_map IS clean.
+    -- Errors were detected in parse_this_char().
+    end
+end
+--------------------------------------------------------------------------------
+function clear_flood_front()
+    -- Just recreate the var.
+    new_flood_front()
+    return 0
+end
+
+function copy_to_flood_to_flood_front()
+    local tab_size = table.getn(to_flood)
+    for i=1, tab_size do
+        local temp = to_flood[i]
+        local temp_x = temp[1]
+        local temp_y = temp[2]
+        add_to_flood_front(temp_x,temp_y)
+    end
+    return 0
+end
+
+-- Fill the flood_map with the additional flooded fields. This is obsolete since
+-- we add the fields just when they are detected.
+function update_flood_map()
+    local tab_size = table.getn(flood_front)
+    for i=1, tab_size do
+        local temp = to_flood[i]
+        local temp_x = temp[1]
+        local temp_y = temp[2]
+        modify_flood_map(temp_x, temp_y, 2)
+    end
+    return 0
+end
+--------------------------------------------------------------------------------
+function flood_it(map,top_left)
+    local k, v
+    for k,v in pairs(map) do
+        local akt_pos = map[k]
+        set_floor("fl-water", top_left[1]+akt_pos[1]-1, top_left[2]+akt_pos[2]-1)
+    end
+end
+--------------------------------------------------------------------------------
+---E--N--D------O--F------L--I--B--F--L--O--O--D--------------------------------
+--------------------------------------------------------------------------------
+    ]]></el:luamain>
+    <el:i18n>
+    </el:i18n>
+  </el:protected>
+</el:level>

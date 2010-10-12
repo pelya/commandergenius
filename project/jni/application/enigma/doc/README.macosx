@@ -1,0 +1,193 @@
+Building Enigma under MacOS X 10.4 and 10.3.9
+
+Overview:
+---------
+
+Enigma is built from the command line using make. There is a make
+target that will create a Mac OS application bundle in a compressed
+disk image file, enigma.dmg. That file can be copied to a Mac without
+any special runtime environment having to be installed, and the Enigma
+app simply dropped into a folder to be ready to run.
+
+You do need some other packages installed in order to build Enigma on
+your MacOS X system.
+
+Building under MacOS 10.4:
+-------------------------
+
+The easiest way to install what you need under MacOS 10.4 is to use
+the Fink environment and use it to install SDL, SDL_mixer, SDL_image,
+SDL_ttf, and Xerces-c. DarwinPorts provides a similar environment and
+set of packages as Fink, but as of this writing we have not tried it
+for building Enigma. Neither have we tried the older version of Fink
+that runs on 10.3.9.
+
+As of this writing, xerces-c is only in the unstable package tree of
+fink. The fink FAQ describes how to temporarily switch to using
+unstable so that you can install a package from there even though you
+are in general using the stable tree.
+
+The Fink install of Xerces-c does not build the static library
+libxerces-c.a so the following additional steps are necessary.
+
+1. If you have not yet installed xerces-c, install it and some
+associated packages using the -k option to keep the build directories
+for a later step:
+ 
+  fink -k install xerces-c xerces-c-dev xerces-c-shlibs
+
+If you already installed them, rebuild the using the -k option
+
+  fink -k rebuild xerces-c xerces-c-dev xerces-c-shlibs
+
+2. The xerces-c source tree can now be found under /sw/src/fink.build/
+in a directory that corresponds to the version of xerces that you
+installed. cd to it and set the XERCESCROOT environment variable as in
+the following example:
+
+  cd /sw/src/fink.build/ xerces-c-2.7.0-1002/xerces-c-src_2_7_0
+  export XERCESCROOT=`pwd`
+
+Put the following in an executable file in the
+$XERCESCROOT/src/xercesc directory, cd to that directory and run it,
+using sudo if fink is configured to always build as root.
+
+   #!/bin/sh
+   make -n XML_LIB_DIR=$XERCESCROOT/lib/dummy |
+     grep 'c++ .*\.dylib' |
+     tr \  \\n |
+     grep '\.o$' |
+     ( cd ../../obj ; xargs ar rcs $XERCESCROOT/lib/libxerces-c.a )
+   
+Then 
+
+    sudo cp $XERCESCROOT/lib/libxerces-c.a /sw/lib/
+    sudo ranlib /sw/lib/libxerces-c.a
+
+If you do use Fink or DarwinPorts, as long as the required additional
+libraries are consistently placed in the same directory, e.g.,
+/usr/fink/lib, then the Enigma build scripts should work. There will
+be a problem if you install, for example, SDL in /usr/fink/lib and
+Xerces-c in /usr/local/lib.
+
+Once the Fink packages are installed, follow step 7 below to build
+Enigma.
+
+Building under 10.3.9, or under 10.4 without Fink:
+--------------------------------------------------
+
+Here are steps I used to build Enigma under MacOS 10.3.9 that already
+had X-11 installed (I use OpenOffice, so whatever that needs was there
+already), using svn trunk. I can't say for sure if having X-11 installed
+made any difference. I mention it in case that is a necessary prerequisite.
+
+1. Very important for building a number of unix projects in 10.3.9 is
+   to downgrade QuickTime 7.0.4 to version 7.0.1 using
+   http://www.apple.com/support/downloads/quicktime701reinstallerforquicktime704.html
+
+   The QuickTime 7.0.4 upgrade was pushed out as part of a 10.3.9
+   software update. It installs a version of libstdc++ that was built
+   with a newer version of gcc than the 3.3 that ships with MacOS
+   10.3.9, resulting in various linker errors when trying to build
+   many projects ported from unix that used to build fine. The
+   downgrade fixes that.
+   
+   The downgrade is not necessary to build in MacOS 10.4.
+
+   If you continue to get mysterious linker errors under 10.3.9 you
+   can also try reinstalling xcode 1.5. Some people said it restored
+   some files messed up by a software update. I tried it at one point
+   earlier before I found out about the QuickTime problem and it
+   didn't by itself help, so I can't say for sure if it that really is
+   also necessary.
+
+2. I earlier installed, for some other projects, gettext, freetype,
+   and libpng, so I can't say for sure if any of the other required
+   libraries requires one or more of them. If you see errors about
+   anything like that missing when you try the next steps, download the
+   source of whichever you need from its project web site, and use
+     ./configure ; make ; sudo make install
+
+3. (10.3.9 only) Download latest versions of autoconf (2.59) and automake
+   (1.9.6). The versions included in 10.3.9 are too old. Build and install
+   them from sources using
+     ./configure ; make ; sudo make install 
+
+4. Install binary packages of SDL, SDL-devel, SDL_mixer, SDL_image, and
+   SDL_ttf, available from http://libsdl.org in the links under
+   Download. I used SDL 1.2, the current stable build at the time,
+   downloading http://www.libsdl.org/release/SDL-1.2.9.dmg and
+   http://www.libsdl.org/release/SDL-devel-1.2.9.pkg.tar.gz and found
+   the other packages at the Libraries link under Downloads:
+
+   http://www.libsdl.org/projects/SDL_mixer
+   http://www.libsdl.org/projects/SDL_image
+   http://www.libsdl.org/projects/SDL_ttf
+
+   In each case download both the source and the MacOSX binary
+   package. For this step install the binary packages into the
+   /Library directory (which is the default).
+
+5. Download the source tarballs (see previous step) of SDL, SDL_mixer,
+   SDL_image, and SDL_ttf. Unpack them somewhere convenient, then
+   build and install each of them, starting with SDL.
+
+   All of them installed fine using
+     ./configure ; make ; sudo make install
+
+6. Download the source tarball of xerces-c from
+      http://xml.apache.org/dist/xerces-c/stable/
+   I got version 2.7.0 and unpacked it in /usr/local/src. Change
+   references to those in the following commands to match your
+   circumstances:
+
+   export XERCESCROOT=/usr/local/src/xerces-c-src_2_7_0
+   cd /usr/local/src/xerces-c-src_2_7_0/src/xercesc
+   ./configure
+   make
+   sudo make install
+
+6(a) Then I had to do the following important step, which create a
+   static link library, as the MacOSX version of the xerces-c 2.7
+   build does not do that. Put the following in an executable file
+   in the $XERCESCROOT/src/xercesc directory, cd to that directory
+   and run it.
+
+   #!/bin/sh
+   make -n XML_LIB_DIR=$XERCESCROOT/lib/dummy |
+     grep 'c++ .*\.dylib' |
+     tr \  \\n |
+     grep '\.o$' |
+     ( cd ../../obj ; xargs ar rcs $XERCESCROOT/lib/libxerces-c.a )
+   
+  Then
+
+    sudo cp $XERCESCROOT/lib/libxerces-c.a /usr/local/lib/
+    sudo ranlib /usr/local/lib/libxerces-c.a
+
+7. Once all the above are all installed, build a Mac
+   application bundle from the command line by cd to the root directory of
+   the Enigma source tree (i.e., the directory above src) and running the
+   commands:
+
+     ./autogen.sh
+     ./configure
+     make
+     make macapp
+
+  The first line is only necessary if you are starting from the svn
+  sources. If you downloaded a release tarball, it should already have
+  had autogen.sh run and you can start with ./configure.
+
+  The final line builds a Mac OS X application bundle called
+  Enigma.app and a compressed disk image containing it called
+  enigma.dmg, both in the etc/ directory under the source tree root.
+
+ You should be able to copy the enigma.dmg file to a Mac running
+ 10.3.9 that has not had the various libraries required for building
+ Enigma installed, open the disk image, and drop the Enigma app into
+ any disk folder, e.g., Applications, to install Enigma.
+
+I have tested this only by building under 10.3.9 and running on
+10.3.9. Someone should update this file once they have tried building
+on 10.4 and tested the resulting application on both 10.3.9 and 10.4.

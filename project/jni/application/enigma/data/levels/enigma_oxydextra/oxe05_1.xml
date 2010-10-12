@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Buzzer" el:subtitle="Oxyd Extra 5" el:id="oxe05"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd.extra">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+cells["."]=abyss
+cells[" "]=cell{floor="fl-rough"}
+cells["#"]=cell{stone="st-rock3"}
+
+doors={}
+
+-- Workaround
+-- To avoid an error in ant.xml
+-- Commented out by Raoul, oct 06 to repair this level for Enigma 1.0
+--open_doors=cell{{{send_group_message, doors, "openclose", nil; mode=-1}}}
+--close_trap=cell{{{send_message_named, "bridgeA", "close", nil; mode=-1}}}
+
+function open_doors()
+    SendMessage("bridgeA", "openclose")
+    SendMessage("doorA", "openclose")
+end
+
+function close_trap()
+    SendMessage("bridgeA","close")
+end
+-- /Workaround
+
+cells["T"]=cell{{{add_multifloor, "fl-bridge", doors, {name="bridgeA"}}}}
+cells["|"]=cell{{{add_multistone, "st-door", doors, {type="v", name="doorA"}}}}
+
+cells["C"]=cell{stone={"st-coinslot", {action="openclose", target="doorA"}}}
+cells["t"]=cell{item= {"it-trigger",  {action="openclose", target="doorA"}}}
+cells["S"]=cell{stone={"st-switch",   {action="callback",  target="open_doors"}}}
+cells["%"]=cell{{cells["#"], close_trap}}
+
+cells["f"]=cell{item="it-floppy"}
+cells["s"]=cell{item="it-sword"}
+cells["d"]=cell{item="it-dynamite"}
+cells["k"]=cell{item="it-key"}
+cells["c"]=cell{item={"it-coin1"}}
+
+cells["O"]=cell{actor={"ac-blackball", {player=0}}}
+
+cells["0"]=cell{stone={"st-oxyd", {flavor="d", color="0"}}}
+cells["1"]=cell{stone={"st-oxyd", {flavor="d", color="1"}}}
+cells["2"]=cell{stone={"st-oxyd", {flavor="d", color="2"}}}
+cells["3"]=cell{stone={"st-oxyd", {flavor="d", color="3"}}}
+
+level = {
+   "#######################################",
+   "#      f          ###                 #",
+   "#                 ###                 #",
+   "#k           s    C##                 #",
+   "#  0  1           ###           2  3  #",
+   "#                 ###                 #",
+   "#   t     c       T|                  #",
+   "#           O     ###                 #",
+   "#  0  1           ###           2  3  #",
+   "#           d     S##                 #",
+   "#                 ###                 #",
+   "#                 ###                 #",
+   "######################################%"
+}
+
+set_default_parent(cells[" "])
+create_world_by_map(level)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="esprit 32" el:subtitle="esprit 32" el:id="ss_esp32"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Sven Siggelkow" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Sven Siggelkow</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- problem: trigger under grates -> Killstone doesn't work, therefore fl-abyss
+
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+oxyd_default_flavor = "b"
+set_actor("ac-blackball", 10,6.5)
+fill_floor("fl-woven",0,0,levelw,levelh)
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+      local c = strsub( pattern, i, i)
+      if c ==   "#" then
+         set_stone("st-fakeoxyd", i-1,line)
+      elseif c=="." then                 
+         set_item("it-extralife", i-1,line)
+      elseif c=="G" then                 
+         set_stone("st-grate2", i-1,line)
+         set_floor("fl-abyss", i-1,line)
+      elseif c=="g" then                 
+         set_stone("st-grate2", i-1,line)
+         set_floor("fl-black", i-1,line)         
+      elseif c=="O" then
+     oxyd(i-1,line)
+        end
+    end  
+end
+--               01234567890123456789
+renderLine(00 , "####################")
+renderLine(01 , "# O  #  #..#  #  # #")
+renderLine(02 , "# G  G .G. g  g  G #")
+renderLine(03 , "# #  O  #  #  #  # #")
+renderLine(04 , "# g  G  G  G  G  G #")  
+renderLine(05 , "# #  #  O  #  #  # #")
+renderLine(06 , "# G  G  G  G  G  g #")
+renderLine(07 , "# #  #  #  O  #  # #")
+renderLine(08 , "# G  G  G  G  G  G #")
+renderLine(09 , "# #  #  #  #  O  # #")
+renderLine(10 , "# G  g  g .G  G  G #")
+renderLine(11 , "# #  #  #..#  # .O #")
+renderLine(12 , "####################")
+--               01234567890123456789
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

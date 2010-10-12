@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Eternal Circulation" el:subtitle="" el:id="raoul03"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="raoul@users.berlios.de" el:homepage=""/>
+      <el:copyright>Copyright © 2005 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="0:07"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelw = 20
+levelh = 20
+create_world(levelw, levelh)
+enigma.ConserveLevel = FALSE
+display.SetFollowMode(display.FOLLOW_SMOOTH)
+
+-- FLOOR --
+fill_floor("fl-water", 0,0,levelw,levelh)
+
+-- STONES --
+draw_stones("st-glass",{0,0},{1,0},20)
+draw_stones("st-glass",{0,0},{0,1},20)
+draw_stones("st-glass",{19,0},{0,1},20)
+draw_stones("st-glass",{0,19},{1,0},20)
+
+-- ecken
+set_floor("fl-gradient5",1 ,1)
+set_floor("fl-gradient7",1 ,18)
+set_floor("fl-gradient6",18 ,1)
+set_floor("fl-gradient8",18 ,18)
+
+-- rand
+draw_floor("fl-gradient3",{1,2},{0,1},16)
+draw_floor("fl-gradient1",{2,1},{1,0},16)
+draw_floor("fl-gradient2",{2,18},{1,0},16)
+draw_floor("fl-gradient4",{18,2},{0,1},16)
+
+-- 1. kreis
+set_floor("fl-gradient5",2 ,2)
+set_floor("fl-gradient7",2 ,8)
+set_floor("fl-gradient6",8 ,2)
+set_floor("fl-gradient8",8 ,8)
+draw_floor("fl-gradient3",{2,3},{0,1},5)
+draw_floor("fl-gradient1",{3,2},{1,0},5)
+draw_floor("fl-gradient2",{3,8},{1,0},5)
+draw_floor("fl-gradient4",{8,3},{0,1},5)
+set_floor("fl-gradient12",4 ,4)
+set_floor("fl-gradient11",4 ,6)
+set_floor("fl-gradient10",6 ,4)
+set_floor("fl-gradient9",6 ,6)
+set_floor("fl-gradient2",5 ,4)
+set_floor("fl-gradient4",4 ,5)
+set_floor("fl-gradient1",5 ,6)
+set_floor("fl-gradient3",6 ,5)
+draw_floor("fl-gradient3",{3,3},{1,0},4)
+draw_floor("fl-gradient1",{7,3},{0,1},4)
+draw_floor("fl-gradient4",{4,7},{1,0},4)
+draw_floor("fl-gradient2",{3,4},{0,1},4)
+set_floor("fl-gradient7",9,8)
+set_floor("fl-gradient8",10,8)
+set_floor("fl-gradient6",8,9)
+set_floor("fl-gradient8",8,10)
+set_floor("fl-gradient5",9,11)
+set_floor("fl-gradient6",10,11)
+set_floor("fl-gradient5",11,9)
+set_floor("fl-gradient7",11,10)
+
+-- 2. kreis
+set_floor("fl-gradient5",2 ,11)
+set_floor("fl-gradient7",2 ,17)
+set_floor("fl-gradient6",8 ,11)
+set_floor("fl-gradient8",8 ,17)
+draw_floor("fl-gradient3",{2,12},{0,1},5)
+draw_floor("fl-gradient1",{3,11},{1,0},5)
+draw_floor("fl-gradient2",{3,17},{1,0},5)
+draw_floor("fl-gradient4",{8,12},{0,1},5)
+set_floor("fl-gradient12",4 ,13)
+set_floor("fl-gradient11",4 ,15)
+set_floor("fl-gradient10",6 ,13)
+set_floor("fl-gradient9",6 ,15)
+set_floor("fl-gradient2",5 ,13)
+set_floor("fl-gradient4",4 ,14)
+set_floor("fl-gradient1",5 ,15)
+set_floor("fl-gradient3",6 ,14)
+draw_floor("fl-gradient3",{3,12},{1,0},4)
+draw_floor("fl-gradient1",{7,12},{0,1},4)
+draw_floor("fl-gradient4",{4,16},{1,0},4)
+draw_floor("fl-gradient2",{3,13},{0,1},4)
+
+-- 3. kreis
+set_floor("fl-gradient5",11 ,2)
+set_floor("fl-gradient7",11 ,8)
+set_floor("fl-gradient6",17 ,2)
+set_floor("fl-gradient8",17 ,8)
+draw_floor("fl-gradient3",{11,3},{0,1},5)
+draw_floor("fl-gradient1",{12,2},{1,0},5)
+draw_floor("fl-gradient2",{12,8},{1,0},5)
+draw_floor("fl-gradient4",{17,3},{0,1},5)
+set_floor("fl-gradient12",13 ,4)
+set_floor("fl-gradient11",13 ,6)
+set_floor("fl-gradient10",15 ,4)
+set_floor("fl-gradient9",15 ,6)
+set_floor("fl-gradient2",14 ,4)
+set_floor("fl-gradient4",13 ,5)
+set_floor("fl-gradient1",14 ,6)
+set_floor("fl-gradient3",15 ,5)
+draw_floor("fl-gradient3",{12,3},{1,0},4)
+draw_floor("fl-gradient1",{16,3},{0,1},4)
+draw_floor("fl-gradient4",{13,7},{1,0},4)
+draw_floor("fl-gradient2",{12,4},{0,1},4)
+
+-- 4. kreis
+set_floor("fl-gradient5",11 ,11)
+set_floor("fl-gradient7",11 ,17)
+set_floor("fl-gradient6",17 ,11)
+set_floor("fl-gradient8",17 ,17)
+draw_floor("fl-gradient3",{11,12},{0,1},5)
+draw_floor("fl-gradient1",{12,11},{1,0},5)
+draw_floor("fl-gradient2",{12,17},{1,0},5)
+draw_floor("fl-gradient4",{17,12},{0,1},5)
+set_floor("fl-gradient12",13 ,13)
+set_floor("fl-gradient11",13 ,15)
+set_floor("fl-gradient10",15 ,13)
+set_floor("fl-gradient9",15 ,15)
+set_floor("fl-gradient2",14 ,13)
+set_floor("fl-gradient4",13 ,14)
+set_floor("fl-gradient1",14 ,15)
+set_floor("fl-gradient3",15 ,14)
+draw_floor("fl-gradient3",{12,12},{1,0},4)
+draw_floor("fl-gradient1",{16,12},{0,1},4)
+draw_floor("fl-gradient4",{13,16},{1,0},4)
+draw_floor("fl-gradient2",{12,13},{0,1},4)
+
+-- balken
+set_floor("fl-gradient7",9,8)
+set_floor("fl-gradient8",10,8)
+
+set_floor("fl-gradient6",8,9)
+set_floor("fl-gradient8",8,10)
+
+set_floor("fl-gradient5",9,11)
+set_floor("fl-gradient6",10,11)
+
+set_floor("fl-gradient5",11,9)
+set_floor("fl-gradient7",11,10)
+
+--
+set_floor("fl-gradient7",9,17)
+set_floor("fl-gradient8",10,17)
+
+set_floor("fl-gradient6",17,9)
+set_floor("fl-gradient8",17,10)
+
+set_floor("fl-gradient5",9,2)
+set_floor("fl-gradient6",10,2)
+
+set_floor("fl-gradient5",2,9)
+set_floor("fl-gradient7",2,10)
+
+-- mitte
+set_floor("fl-gradient5",9 ,9)
+set_floor("fl-gradient7",9 ,10)
+set_floor("fl-gradient6",10 ,9)
+set_floor("fl-gradient8",10 ,10)
+
+-- ACTORS --
+local ac1=set_actor("ac-blackball", 10,10, {player=0})
+
+set_actor("ac-killerball", 3,3 , {essential=0,controllers=0})
+set_actor("ac-killerball", 3,12, {essential=0,controllers=0})
+set_actor("ac-killerball", 12,3, {essential=0,controllers=0})
+set_actor("ac-killerball", 12,12, {essential=0,controllers=0})
+
+if difficult then
+ set_actor("ac-killerball", 7,7 , {essential=0,controllers=0})
+ set_actor("ac-killerball", 7,16 , {essential=0,controllers=0})
+ set_actor("ac-killerball", 16,7, {essential=0,controllers=0})
+ set_actor("ac-killerball", 16,16, {essential=0,controllers=0})
+end
+
+-- OXYD --
+oxyd(5,5)
+oxyd(14,5)
+oxyd(5,14)
+oxyd(14,14)
+oxyd_default_flavor = "d"
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

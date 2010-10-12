@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<index xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd">
+
+  <info enigma="1.00" group="Facets" location="15100" network="false" owner="Enigma Team" release="1" revision="2" title="Enigma 0.92 - 1"/>
+
+  <attributes/>
+
+  <levels>
+    <level _seq="1" _title="Welcome" _xpath="enigma_i/welcome_2" author="Daniel Heck" ctrl="force" easy="true" id="welcome" rel="2" rev="4" score="2" target="time" unit="duration"/>
+    <level _seq="2" _title="Is It Easy?" _xpath="enigma_i/martin06_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin06" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="3" _title="Pharaoh's Tomb" _xpath="enigma_ii/siegfried13_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level4d" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="4" _title="Feel Your Way" _xpath="enigma_i/siegfried06_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level3a" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="5" _title="Sokoban Revival" _xpath="enigma_i/martin04_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin04" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="6" _title="Black Is Beautiful" _xpath="enigma_iii/martin15_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin15" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="7" _title="Round Trip" _xpath="enigma_ii/martin35_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin35" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="8" _title="Light Switches" _xpath="enigma_i/martin08_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin08" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="9" _title="Floppy Swapping" _xpath="enigma_ii/martin19_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin19" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="10" _title="- Meditation -" _xpath="enigma_i/siegfried33_1" author="anonymous" ctrl="force" easy="false" id="meditation1" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="11" _title="Push Them In" _xpath="enigma_ii/nat05_1" author="Andreas Persenius, Nat Pryce" ctrl="force" easy="false" id="nat5" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="12" _title="It's Magic" _xpath="enigma_ii/martin27_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin27" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="13" _title="Ice Skating" _xpath="enigma_i/siegfried22_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level7a" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="14" _title="Lasers 101" _xpath="enigma_i/daniel08_1" author="Daniel Heck" ctrl="force" easy="false" id="lasers101" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="15" _title="The Grim Reaper" _xpath="enigma_i/daniel11_1" author="Daniel Heck" ctrl="force" easy="true" id="space" rel="1" rev="3" score="1" target="time" unit="duration"/>
+    <level _seq="16" _title="Knock Knock!" _xpath="enigma_ii/nat03_1" author="Nat Pryce" ctrl="force" easy="false" id="nat3" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="17" _title="Slalom Skiing" _xpath="enigma_ii/martin93_1" author="Martin Hawlisch" ctrl="force" easy="true" id="martin93" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="18" _title="Puzzle Hacker" _xpath="enigma_i/ant01_1" author="Petr Machata" ctrl="force" easy="false" id="ant01" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="19" _title="Sok It To 'Em" _xpath="enigma_i/nat07_1" author="Nat Pryce" ctrl="force" easy="false" id="nat7" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="20" _title="- Meditation -" _xpath="enigma_i/siegfried39_1" author="anonymous" ctrl="force" easy="false" id="meditation6" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="21" _title="Push? Pull!" _xpath="enigma_iii/siegfried01_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level1c" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="22" _title="Way To Go" _xpath="enigma_i/daniel09_1" author="Daniel Heck" ctrl="force" easy="false" id="mirrors" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="23" _title="The Doors" _xpath="enigma_i/siegfried11_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level4a" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="24" _title="Water Holes" _xpath="enigma_ii/siegfried10_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level3f" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="25" _title="Black Holes" _xpath="enigma_ii/siegfried03_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level2a" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="26" _title="Tubes" _xpath="enigma_i/siegfried09_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level3e" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="27" _title="Archipelago" _xpath="enigma_i/martin12_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin12" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="28" _title="Swap Swap" _xpath="enigma_iii/siegfried02_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level1f" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="29" _title="Push your way" _xpath="enigma_ii/siegfried12_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level4b" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="30" _title="- Meditation -" _xpath="enigma_i/siegfried38_1" author="anonymous" ctrl="force" easy="false" id="meditation5" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="31" _title="Bridgebuilder" _xpath="enigma_iii/siegfried20_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level6b" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="32" _title="Space Pirates" _xpath="enigma_v/siegfried19_2" author="Siegfried Fennig" ctrl="force" easy="false" id="level6a" rel="2" rev="0" score="2" target="time" unit="duration"/>
+    <level _seq="33" _title="Mission Impossible" _xpath="enigma_i/martin14_1" author="Martin Hawlisch" ctrl="force" easy="true" id="martin14" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="34" _title="Send More Money" _xpath="enigma_ii/siegfried18_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level5f" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="35" _title="Slippery Slopes" _xpath="enigma_i/martin38_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin38" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="36" _title="Not Hard Atoll" _xpath="enigma_i/martin33_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin33" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="37" _title="Twelve Doors" _xpath="enigma_ii/nat06_1" author="Nat Pryce" ctrl="force" easy="false" id="nat6" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="38" _title="Running Rings" _xpath="enigma_iv/siegfried14_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level4f" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="39" _title="esprit 92" _xpath="enigma_esprit/esprit92_1" author="Sven Siggelkow" ctrl="force" easy="false" id="ss_esp92" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="40" _title="- Meditation -" _xpath="enigma_oxyd/oxyd30_1" author="Siegfried Fennig" ctrl="force" easy="false" id="meditation9" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="41" _title="Chain Reaction" _xpath="enigma_iv/siegfried17_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level5e" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="42" _title="The Prison" _xpath="enigma_v/martin30_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin30" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="43" _title="Indoor Pool" _xpath="enigma_ii/nat01_1" author="Nat Pryce" ctrl="force" easy="false" id="nat1" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="44" _title="The Racetrack" _xpath="enigma_i/martin31_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin31" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="45" _title="The Sargasso Sea" _xpath="enigma_iii/martin17_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin17" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="46" _title="Moonwalking" _xpath="enigma_oxyd/oxyd52_1" author="Ulf Stegemann" ctrl="force" easy="false" id="20060629ulf006" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="47" _title="Painting" _xpath="enigma_ii/siegfried21_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level6d" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="48" _title="Tricks &amp; Traps" _xpath="enigma_iii/siegfried04_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level2d" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="49" _title="Duck and Cover" _xpath="enigma_i/nat02_1" author="Nat Pryce" ctrl="force" easy="false" id="nat2" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="50" _title="Eraser Please!" _xpath="enigma_ii/martin39_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin39" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="51" _title="Uhh-Steady!" _xpath="enigma_i/siegfried05_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level2f" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="52" _title="Watery Grave" _xpath="enigma_i/martin37_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin37" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="53" _title="Break and Enter" _xpath="enigma_v/siegfried16_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level5b" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="54" _title="Jump And Run" _xpath="enigma_iii/siegfried40_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level6c" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="55" _title="Back And Forth" _xpath="enigma_ii/martin26_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin26" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="56" _title="Hidden Treasure" _xpath="enigma_peroxyd/peroxyd49_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level6f" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="57" _title="Mossy Paths" _xpath="enigma_i/martin02_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin02" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="58" _title="Light Barriers" _xpath="enigma_ii/qq01_1" author="Andrzej Szombierski" ctrl="force" easy="false" id="qq1" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="59" _title="- Meditation -" _xpath="enigma_oxyd/oxyd10_1" author="Daniel Heck" ctrl="force" easy="false" id="daniel1" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="60" _title="Good Luck!" _xpath="enigma_i/siegfried08_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level3d" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="61" _title="Mirror Shop" _xpath="enigma_v/siegfried25_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level9a" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="62" _title="Stomp Stomp" _xpath="enigma_ii/qq03_1" author="Andrzej Szombierski" ctrl="force" easy="false" id="qq3" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="63" _title="Find The Way Out" _xpath="enigma_peroxyd/peroxyd46_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level2c" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="64" _title="Basement" _xpath="enigma_i/siegfried26_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level9c" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="65" _title="Ingrowing" _xpath="enigma_i/ant18_1" author="Petr Machata" ctrl="force" easy="false" id="ant18" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="66" _title="Escher's World" _xpath="enigma_i/ant09_1" author="Petr Machata" ctrl="force" easy="false" id="ant09" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="67" _title="Impulsive" _xpath="enigma_i/ant13_1" author="Petr Machata" ctrl="force" easy="false" id="ant13" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="68" _title="Magritte" _xpath="enigma_iv/nat37_1" author="Nat Pryce" ctrl="force" easy="false" id="natmaze6" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="69" _title="- Meditation -" _xpath="enigma_ii/siegfried34_1" author="anonymous" ctrl="force" easy="false" id="meditation13" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="70" _title="Pools" _xpath="enigma_ii/martin70_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin70" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="71" _title="Light Switches" _xpath="enigma_iv/siegfried24_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level8e" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="72" _title="A Narrow Path" _xpath="enigma_i/martin66_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin66" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="73" _title="MetaPuzzle" _xpath="enigma_iv/ant03_1" author="Petr Machata" ctrl="force" easy="false" id="ant03" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="74" _title="Space Tubes" _xpath="enigma_i/duffy13_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy13" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="75" _title="The Cage" _xpath="enigma_v/qq02_1" author="Andrzej Szombierski" ctrl="force" easy="false" id="qq2" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="76" _title="Sentinels" _xpath="enigma_ii/siegfried23_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level8d" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="77" _title="The Tomb" _xpath="enigma_iv/ant04_1" author="Petr Machata" ctrl="force" easy="false" id="ant04" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="78" _title="Desert Ruins" _xpath="enigma_i/nat32_1" author="Nat Pryce" ctrl="force" easy="false" id="natmaze1" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="79" _title="- Meditation -" _xpath="enigma_i/siegfried35_1" author="Siegfried Fennig" ctrl="force" easy="false" id="meditation14" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="80" _title="Black Lava" _xpath="enigma_i/ant12_1" author="Petr Machata" ctrl="force" easy="false" id="ant12" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="81" _title="Flood Gates" _xpath="enigma_iv/nat08_1" author="Nat Pryce" ctrl="force" easy="false" id="nat8" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="82" _title="Balancing Act" _xpath="enigma_i/nat09_1" author="Nat Pryce" ctrl="force" easy="false" id="nat9" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="83" _title="Automaton Magic" _xpath="enigma_ii/ant07_1" author="Petr Machata" ctrl="force" easy="false" id="ant07" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="84" _title="Sheet Of Ice" _xpath="enigma_v/martin58_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin58" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="85" _title="No Trespassing" _xpath="enigma_peroxyd/peroxydlink65_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level7c" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="86" _title=".J.U.M.P." _xpath="enigma_i/martin60_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin60" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="87" _title="Walk The Plank" _xpath="enigma_v/nat04_1" author="Nat Pryce" ctrl="force" easy="false" id="nat4" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="88" _title="Shipwreck" _xpath="enigma_v/nat33_1" author="Nat Pryce" ctrl="force" easy="false" id="natmaze2" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="89" _title="- Meditation -" _xpath="enigma_ii/ant16_1" author="Petr Machata" ctrl="force" easy="false" id="ant16" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="90" _title="Dancers" _xpath="enigma_ii/ant14_1" author="Petr Machata" ctrl="force" easy="false" id="ant14" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="91" _title="Running Stone" _xpath="enigma_iv/christophanita01_1" author="Christoph &amp; Anita" ctrl="force" easy="false" id="christophanita_runningstone" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="92" _title="Where's The Gardener?" _xpath="enigma_i/siegfried28_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level9e" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="93" _title="Over the Lake" _xpath="enigma_iv/siegfried27_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level9d" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="94" _title="Follow the Leader" _xpath="enigma_ii/martin71_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin71" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="95" _title="Bumperball" _xpath="enigma_iii/duffy15_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy15" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="96" _title="Where am I?" _xpath="enigma_i/martin68_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin68" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="97" _title="Space Travels" _xpath="enigma_i/siegfried30_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level10b" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="98" _title="Gopher It" _xpath="enigma_ii/nat34_1" author="Nat Pryce" ctrl="force" easy="false" id="natmaze3" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="99" _title="- Meditation -" _xpath="enigma_i/ant24_1" author="Petr Machata" ctrl="force" easy="false" id="ant24" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="100" _title="Spiders" _xpath="enigma_v/ant26_1" author="Petr Machata" ctrl="force" easy="false" id="ant26" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="101" _title="Meditation Puzzle" _xpath="enigma_iv/duffy01_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy1" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="102" _title="Come To Me" _xpath="enigma_ii/ant20_1" author="Petr Machata" ctrl="force" easy="false" id="ant20" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="103" _title="Corridors" _xpath="enigma_ii/siegfried29_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level9f" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="104" _title="Dustwalkers" _xpath="enigma_ii/ant06_1" author="Petr Machata" ctrl="force" easy="false" id="ant06" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="105" _title="Laser Spiral" _xpath="enigma_ii/duffy03_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy3" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="106" _title="Everhungry" _xpath="enigma_iii/ant32_1" author="Petr Machata" ctrl="force" easy="false" id="ant32" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="107" _title="The Turtle" _xpath="enigma_iii/ant05_1" author="Petr Machata" ctrl="force" easy="false" id="ant05" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="108" _title="Grow Your Own" _xpath="enigma_iii/nat36_1" author="Nat Pryce" ctrl="force" easy="false" id="natmaze5" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="109" _title="- Meditation -" _xpath="enigma_ii/siegfried37_1" author="Siegfried Fennig" ctrl="force" easy="false" id="meditation16" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="110" _title="Draggers" _xpath="enigma_v/ant21_1" author="Petr Machata" ctrl="force" easy="false" id="ant21" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="111" _title="The Disappearing Block" _xpath="enigma_ii/duffy02_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy2" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="112" _title="Space Fishing" _xpath="enigma_iii/martin73_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin73" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="113" _title="Robbery" _xpath="enigma_iv/ant29_2" author="Petr Machata" ctrl="force" easy="false" id="ant29" rel="2" rev="1" score="2" target="time" unit="duration"/>
+    <level _seq="114" _title="Go!" _xpath="enigma_iv/ant02_1" author="Petr Machata" ctrl="force" easy="false" id="ant02" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="115" _title="Laser Magic" _xpath="enigma_ii/ant30_1" author="Petr Machata" ctrl="force" easy="false" id="ant30" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="116" _title="Cannonball" _xpath="enigma_iv/ant11_1" author="Petr Machata" ctrl="force" easy="false" id="ant11" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="117" _title="Islands" _xpath="enigma_i/duffy10_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy10" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="118" _title="Space Walk" _xpath="enigma_iii/nat35_2" author="Nat Pryce" ctrl="force" easy="false" id="natmaze4" rel="2" rev="0" score="2" target="time" unit="duration"/>
+    <level _seq="119" _title="- Meditation -" _xpath="enigma_i/siegfried36_1" author="Siegfried Fennig" ctrl="force" easy="false" id="meditation15" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="120" _title="Jump!" _xpath="enigma_i/duffy07_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy7" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="121" _title="Checkerboard" _xpath="enigma_iii/duffy08_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy8" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="122" _title="Circularity" _xpath="enigma_iv/ant10_1" author="Petr Machata" ctrl="force" easy="false" id="ant10" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="123" _title="Just Moving Blocks?" _xpath="enigma_iv/duffy05_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy5" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="124" _title="Slinky-Racing" _xpath="enigma_iv/duffy14_1" author="Jacob Scott" ctrl="force" easy="true" id="duffy14" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="125" _title="Boulder-Puzzle" _xpath="enigma_iv/duffy06_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy6" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="126" _title="Wild" _xpath="enigma_iii/ant28_1" author="Petr Machata" ctrl="force" easy="false" id="ant28" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="127" _title="The Document" _xpath="enigma_i/duffy04_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy4" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="128" _title="Double-Maze" _xpath="enigma_iii/duffy09_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy9" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="129" _title="- Meditation -" _xpath="enigma_peroxyd/peroxydlink60_2" author="Siegfried Fennig" ctrl="force" easy="false" id="meditation17" rel="2" rev="1" score="2" target="time" unit="duration"/>
+    <level _seq="130" _title="Chained" _xpath="enigma_iv/ant22_1" author="Petr Machata" ctrl="force" easy="false" id="ant22" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="131" _title="Just a Maze?" _xpath="enigma_vi/duffy12_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy12" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="132" _title="The Race" _xpath="enigma_iv/duffy11_1" author="Jacob Scott" ctrl="force" easy="true" id="duffy11" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="133" _title="Double-Spiral" _xpath="enigma_iv/duffy17_2" author="Jacob Scott" ctrl="force" easy="false" id="duffy17" rel="2" rev="1" score="2" target="time" unit="duration"/>
+    <level _seq="134" _title="Mourning Palace" _xpath="enigma_iv/ant08_1" author="Petr Machata" ctrl="force" easy="false" id="ant08" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="135" _title="Control Panel" _xpath="enigma_iii/duffy16_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy16" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="136" _title="Dependants" _xpath="enigma_iii/ant25_1" author="Petr Machata" ctrl="force" easy="false" id="ant25" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="137" _title="Question of Speed" _xpath="enigma_ii/siegfried32_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level11b" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="138" _title="Pain" _xpath="enigma_iv/ant27_1" author="Petr Machata" ctrl="force" easy="false" id="ant27" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="139" _title="- Meditation -" _xpath="enigma_iv/ant23_1" author="Petr Machata" ctrl="force" easy="false" id="ant23" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="140" _title="Domain of Mysteries" _xpath="enigma_ii/siegfried31_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level11a" rel="1" rev="0" score="1" target="time" unit="duration"/>
+  </levels>
+
+</index>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Playing with Lasers" el:subtitle="" el:id="just09_1"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="JuSt" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2005 JuSt</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="0:26"/>
+    </el:info>
+    <el:luamain><![CDATA[
+enigma.ConserveLevel=FALSE
+
+create_world(20, 13)
+oxyd_default_flavor="b"
+
+-- Floor Layer
+fill_floor("fl-rock")
+set_floor("fl-water", 12, 5)
+
+-- Item Layer
+set_item("it-magicwand", 10, 5)
+set_item("it-trigger", 15, 10, {action="off", target="laser2", invisible=FALSE})
+
+-- Stone Layer
+oxyd(14, 11)
+oxyd(4, 6)
+draw_stones("st-rock1", {0, 0}, {0, 1}, 8)
+draw_stones("st-rock1", {2, 0}, {1, 0}, 17)
+draw_stones("st-rock1", {19, 2}, {0, 1}, 11)
+draw_stones("st-rock1", {0, 11}, {0, 1}, 2)
+draw_stones("st-rock1", {13, 11}, {0, 1}, 2)
+draw_stones("st-rock1", {1, 12}, {1, 0}, 17)
+draw_stones("st-rock1", {13, 9}, {1, 0}, 4)
+set_stones("st-rock1", {{19, 0}, {0, 9}})
+set_stone("st-rock1", 16, 10)
+set_stone("st-rock1", 16, 12)
+
+draw_border("st-glass", 3, 5, 3, 3)
+draw_stones("st-glass", {13, 4}, {1, 0}, 4, {type="0"})
+draw_stones("st-glass", {16, 5}, {0, 1}, 2, {type="0"})
+set_stones("st-glass", {{13, 6}, {15, 6}}, {type="0"})
+set_stone("st-glass_move", 14, 6)
+
+set_stone("st-pmirror", 10, 3, {movable=TRUE, transparent=FALSE, orientation="3"})
+
+set_stone("st-wood", 13, 5)
+
+set_stone("st-lightpassenger", 4, 8, {name="bolder3", direction=EAST})
+
+set_stone("st-stoneimpulse_movable", 14, 5, {name="stoneimpulse16"})
+set_stone("st-stoneimpulse", 15, 5, {name="stoneimpulse15"})
+
+set_stone("st-laser", 1, 0, {name="laser6", dir=SOUTH, on="1"})
+set_stone("st-laser", 17, 7, {name="laser3", dir=SOUTH, on="1"})
+set_stone("st-laser", 19, 1, {name="laser7", dir=WEST, on="1"})
+set_stone("st-laser", 0, 8, {name="laser1", dir=EAST, on="1"})
+set_stone("st-laser", 16, 11, {name="laser4", dir=EAST, on="1"})
+set_stone("st-laser", 0, 10, {name="laser2", dir=EAST, on="1"})
+set_stone("st-laser", 18, 12, {name="laser8", dir=NORTH, on="1"})
+
+fill_stones("st-grate1", 2, 9, 10, 3)
+draw_stones("st-grate1", {2, 2}, {1, 0}, 16)
+draw_stones("st-grate1", {2, 3}, {0, 1}, 5)
+draw_stones("st-grate1", {17, 4}, {0, 1}, 3)
+draw_stones("st-grate1", {6, 7}, {1, 0}, 6)
+draw_stones("st-grate1", {15, 7}, {1, 0}, 2)
+
+-- Actor Layer
+set_actor("ac-blackball", 10.5, 5.5, {player="0", mouseforce="1"})
+
+oxyd_shuffle()
+  ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

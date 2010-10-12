@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Speed Meditation" el:subtitle="Beware of Bumps and Radar Impulses" el:id="duffy148"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw=50
+levelh=30
+
+create_world( levelw, levelh)
+
+fill_floor("fl-bluegreen", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-greenbrown", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c=="w" then
+            set_actor("ac-whiteball-small", i-.5,line+.5, {player=0, mouseforce=1, essential=1})
+        elseif c=="H" then
+            set_item("it-hollow",i-1,line)
+        elseif c=="h" then
+            set_item("it-hill",i-1,line)
+        elseif c=="S" then
+            set_stone("st-stoneimpulse-hollow",i-1,line)
+        elseif c=="s" then
+            set_stone("st-stoneimpulse",i-1,line,{name="s1"})
+        end
+    end
+end
+
+-- Floor:  " "
+-- Border: "#"
+-- Oxyd:   "o"
+
+renderLine(00,"####################")
+renderLine(01,"# sH#              #")
+renderLine(02,"# ShSSSSSSSSSSSSSS #")
+renderLine(03,"# ShShhhhhhhHhhhhS #")
+renderLine(04,"# ShShSSSSSSSSSShS #")
+renderLine(05,"#wShSHSHhhhhhhhShS #")
+renderLine(06,"# ShShSSSSSSSSHShS #")
+renderLine(07,"#wShShhHhhhhhhhShS #")
+renderLine(08,"# ShSSSSSSSSSSSShS #")
+renderLine(09,"#wShhhhHhhhhhHhhhS #")
+renderLine(10,"# SSSSSSSSSSSSSSSS #")
+renderLine(11,"#w w w w w         #")
+renderLine(12,"####################")
+
+oxyd_shuffle()
+
+set_stone("st-timer", 20,0, {loop=0, action="trigger", target="s1", interval=3})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

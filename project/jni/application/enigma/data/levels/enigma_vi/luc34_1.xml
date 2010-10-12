@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Tandem Chess" el:subtitle="Work together!" el:id="luc342007"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Lukas Schüller" el:email="Lucky_Luc@web.de" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Lukas Schüller</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="true"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+CreateWorld(20,13)
+fill_floor("fl-leaves")
+oxyd_default_flavor="a"
+
+enigma.ConserveLevel=FALSE
+
+function flip_black(onoff,sender)
+  local x,y=enigma.GetPos(sender)
+  if(enigma.GetStone(x,y) ~= nil) then
+    myst=enigma.GetStone(x,y)
+    if(enigma.GetKind(myst) == "st-chess") then
+      if(enigma.GetAttrib(myst,"color") == 1) then
+        SendMessage(myst,"flip")
+      end
+    end
+  end
+end
+
+function flip_white(onoff,sender)
+  local x,y=enigma.GetPos(sender)
+  if(enigma.GetStone(x,y) ~= nil) then
+    myst=enigma.GetStone(x,y)
+    if(enigma.GetKind(myst) == "st-chess") then
+      if(enigma.GetAttrib(myst,"color") == 0) then
+        SendMessage(myst,"flip")
+      end
+    end
+  end
+end
+
+function writeLine( line, cells)
+  for i=1, strlen(cells) do
+    local c = strsub(cells,i,i)
+    if(c =="#") then
+      set_stone("st-metal",i-1,line)
+    elseif(c =="|") then
+      set_stone("st-door-v",i-1,line)
+    elseif(c =="b") then
+      set_stone("st-black4",i-1,line)
+    elseif(c =="w") then
+      set_stone("st-white4",i-1,line)
+    elseif(c =="K") then
+      set_stone("st-chess_black",i-1,line)
+    elseif(c =="B") then
+      set_item("it-trigger",i-1,line,{invisible="1",action="callback",target="flip_black"})
+      set_floor("fl-black",i-1,line)
+    elseif(c =="W") then
+      set_item("it-trigger",i-1,line,{invisible="1",action="callback",target="flip_white"})
+      set_floor("fl-white",i-1,line)
+    elseif(c =="x") then
+      set_item("it-trigger",i-1,line)
+    elseif(c =="O") then
+      oxyd(i-1,line)
+    elseif(c =="0") then
+      set_actor("ac-blackball",i-0.5,line+0.5,{player="0"})
+      set_item("it-yinyang",i-1,line)
+    elseif(c =="1") then
+      set_actor("ac-whiteball",i-0.5,line+0.5,{player="1"})
+      set_item("it-yinyang",i-1,line)
+    end
+  end
+end
+
+writeLine(00,"####################")
+writeLine(01,"#   b  #    x # x# O")
+writeLine(02,"# ###  #   #  |  | #")
+writeLine(03,"# ww   b #B#bw#  # O")
+writeLine(04,"# ### ######bw######")
+writeLine(05,"# #K  ## x#   # #  #")
+writeLine(06,"#      b b| # #    #")
+writeLine(07,"# W # ##w##       ##")
+writeLine(08,"#     ##  # B  ##  #")
+writeLine(09,"#   1 ww    #   #  #")
+writeLine(10,"# 0   ##   ##wW    #")
+writeLine(11,"#     ##         # #")
+writeLine(12,"####################")
+
+Signal("it(9 5)","st(10 6)")
+Signal("it(12 1)","st(14 2)")
+Signal("it(16 1)","st(17 2)")
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Tandemschach</el:translation>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Arbeitet zusammen!</el:translation>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

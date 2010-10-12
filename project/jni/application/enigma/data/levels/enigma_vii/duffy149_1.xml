@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Exclusive Pole Positions" el:subtitle="" el:id="duffy149"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+rooms_wide=2
+rooms_high=2
+
+levelw=1+(19*rooms_wide)
+levelh=1+(12*rooms_high)
+
+create_world( levelw, levelh)
+
+fill_floor("fl-bluegreen", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-greenbrown", i-1, line)
+        elseif c =="@" then
+            set_stone( "st-greenbrown", i-1, line)
+            abyss(i-1,line)
+        elseif c =="s" then
+            set_stone( "st-stoneimpulse", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c=="z" then
+           set_actor("ac-blackball", i,line, {player=0})
+        elseif c=="a" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funcc1"})
+        elseif c=="b" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funcc2"})
+        elseif c=="c" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funcc3"})
+        elseif c=="d" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funcc4"})
+        elseif c=="e" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funcc5"})
+        elseif c=="f" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funcc6"})
+        elseif c=="g" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funcc7"})
+        elseif c=="h" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funcc8"})
+        elseif c=="i" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funcc9"})
+        elseif c=="j" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funcc10"})
+        elseif c=="k" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funcc11"})
+        elseif c=="l" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funcc12"})
+        elseif c=="r" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funccremove"})
+        elseif c == "D" then
+            puzzle(i-1,line,PUZ_0010)
+        elseif c == "9" then
+            puzzle(i-1,line,PUZ_1100)
+        elseif c == "7" then
+            puzzle(i-1,line,PUZ_1001)
+        elseif c == "=" then
+            puzzle(i-1,line,PUZ_0101)
+        elseif c == "I" then
+            puzzle(i-1,line,PUZ_1010)
+        end
+    end
+end
+
+function yy1( color, x, y)
+    stone = format( "st-%s4", color)
+    set_stone( stone, x, y)
+end
+
+-- Floor:  " "
+-- Border: "#"
+-- Oxyd:   "o"
+
+renderLine(00,"####################@@@@@@@@@@@@@@@@@@@")
+renderLine(01,"#                                     @")
+renderLine(02,"# 9===============7#@@@@@@@@@@@@@@@@  @")
+renderLine(03,"#                  #!!!!!!!!!!!!!!!@ @@")
+renderLine(04,"#                  #!!!!!!!!!!!!!!!@ @!")
+renderLine(05,"#                  #!!!!!!!!!!!!!!!@ @!")
+renderLine(06,"#                  #!!!!!!!!!!!!!!!@ @!")
+renderLine(07,"#        z         #!!!!!!!!!!!!!!!@ @!")
+renderLine(08,"#                  #!!!!!!!!!!!!!!!@ @!")
+renderLine(09,"#                  #@@@@@@@@@@@@@@@@ @!")
+renderLine(10,"#                                    @!")
+renderLine(11,"#                  #@@@@@@@@@@@@@@@  @!")
+renderLine(12,"# #####      #######!!!!!!!!!!!!!!@@@@!")
+renderLine(13,"#                  #!!!!!!!!!!!!!!!!!!!")
+renderLine(14,"#                  #!!!!!!!!!!!!!!!!!!!")
+renderLine(15,"#                  ##########!!!!!!!!!!")
+renderLine(16,"#       abcd       #        #!!!!!!!!!!")
+renderLine(17,"#       efgh       #  D  I  #!!!!!!!!!!")
+renderLine(18,"#       ijkl       ##########!!!!!!!!!!")
+renderLine(19,"#               D  #!!!!!!!!!!!!!!!!!!!")
+renderLine(20,"#                  #!!!!!!!!!!!!!!!!!!!")
+renderLine(21,"#!                !#!!!!!!!!!!!!!!!!!!!")
+renderLine(22,"#!!!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!!")
+renderLine(23,"#r!!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!!")
+renderLine(24,"##oooooooooooooooo##!!!!!!!!!!!!!!!!!!!")
+
+oxyd_shuffle()
+
+b1 =1
+b2 =1
+b3 =1
+b4 =1
+b5 =1
+b6 =0
+b7 =0
+b8 =0
+b9 =0
+b10=0
+b11=0
+b12=1
+b13=1
+b14=1
+b15=1
+b16=1
+
+br=1
+
+ff1=0
+function funcc1()
+    if ff1==1 then
+        ff1=0
+    elseif ff1==0 then
+        block1()
+        block2()
+        block3()
+        block4()
+        ff1=1
+    end
+end
+
+ff2=0
+function funcc2()
+    if ff2==1 then
+        ff2=0
+    elseif ff2==0 then
+        block3()
+        block5()
+        block13()
+        block14()
+        ff2=1
+    end
+end
+
+ff3=0
+function funcc3()
+    if ff3==1 then
+        ff3=0
+    elseif ff3==0 then
+        block6()
+        block7()
+        block8()
+        block10()
+        ff3=1
+    end
+end
+
+ff4=0
+function funcc4()
+    if ff4==1 then
+        ff4=0
+    elseif ff4==0 then
+        block2()
+        block12()
+        block13()
+        block15()
+        ff4=1
+    end
+end
+
+ff5=0
+function funcc5()
+    if ff5==1 then
+        ff5=0
+    elseif ff5==0 then
+        block1()
+        block8()
+        block13()
+        block15()
+        ff5=1
+    end
+end
+
+ff6=0
+function funcc6()
+    if ff6==1 then
+        ff6=0
+    elseif ff6==0 then
+        block3()
+        block12()
+        block14()
+        block15()
+        ff6=1
+    end
+end
+
+ff7=0
+function funcc7()
+    if ff7==1 then
+        ff7=0
+    elseif ff7==0 then
+        block7()
+        block9()
+        block11()
+        block13()
+        ff7=1
+    end
+end
+
+ff8=0
+function funcc8()
+    if ff8==1 then
+        ff8=0
+    elseif ff8==0 then
+        block1()
+        block5()
+        block14()
+        block16()
+        ff8=1
+    end
+end
+
+ff9=0
+function funcc9()
+    if ff9==1 then
+        ff9=0
+    elseif ff9==0 then
+        block6()
+        block8()
+        block11()
+        block16()
+        ff9=1
+    end
+end
+
+ff10=0
+function funcc10()
+    if ff10==1 then
+        ff10=0
+    elseif ff10==0 then
+        block2()
+        block3()
+        block4()
+        block5()
+        ff10=1
+    end
+end
+
+ff11=0
+function funcc11()
+    if ff11==1 then
+        ff11=0
+    elseif ff11==0 then
+        block6()
+        block7()
+        block8()
+        block10()
+        ff11=1
+    end
+end
+
+ff12=0
+function funcc12()
+    if ff12==1 then
+        ff12=0
+    elseif ff12==0 then
+        block10()
+        block12()
+        block14()
+        block16()
+        ff12=1
+    end
+end
+
+ffr=0
+function funccremove()
+    if ffr==1 then
+        ffr=0
+    elseif ffr==0 then
+        blockremove()
+    ffr=1
+    end
+end
+
+function block1()
+    if b1==0 then
+        set_stone( "st-greenbrown", 2, 12)
+    b1=1
+    elseif b1==1 then
+        enigma.KillStone(2,12)
+    b1=0
+    end
+end
+
+function block2()
+    if b2==0 then
+        set_stone( "st-greenbrown", 3, 12)
+    b2=1
+    elseif b2==1 then
+        enigma.KillStone(3,12)
+    b2=0
+    end
+end
+
+function block3()
+    if b3==0 then
+        set_stone( "st-greenbrown", 4, 12)
+    b3=1
+    elseif b3==1 then
+        enigma.KillStone(4,12)
+    b3=0
+    end
+end
+
+function block4()
+    if b4==0 then
+        set_stone( "st-greenbrown", 5, 12)
+    b4=1
+    elseif b4==1 then
+        enigma.KillStone(5,12)
+    b4=0
+    end
+end
+
+function block5()
+    if b5==0 then
+        set_stone( "st-greenbrown", 6, 12)
+    b5=1
+    elseif b5==1 then
+        enigma.KillStone(6,12)
+    b5=0
+    end
+end
+
+function block6()
+    if b6==0 then
+        set_stone( "st-greenbrown", 7, 12)
+    b6=1
+    elseif b6==1 then
+        enigma.KillStone(7,12)
+    b6=0
+    end
+end
+
+function block7()
+    if b7==0 then
+        set_stone( "st-greenbrown", 8, 12)
+    b7=1
+    elseif b7==1 then
+        enigma.KillStone(8,12)
+    b7=0
+    end
+end
+
+function block8()
+    if b8==0 then
+        set_stone( "st-greenbrown", 9, 12)
+    b8=1
+    elseif b8==1 then
+        enigma.KillStone(9,12)
+    b8=0
+    end
+end
+
+function block9()
+    if b9==0 then
+        set_stone( "st-greenbrown", 10, 12)
+    b9=1
+    elseif b9==1 then
+        enigma.KillStone(10,12)
+    b9=0
+    end
+end
+
+function block10()
+    if b10==0 then
+        set_stone( "st-greenbrown", 11, 12)
+    b10=1
+    elseif b10==1 then
+        enigma.KillStone(11,12)
+    b10=0
+    end
+end
+
+function block11()
+    if b11==0 then
+        set_stone( "st-greenbrown", 12, 12)
+    b11=1
+    elseif b11==1 then
+        enigma.KillStone(12,12)
+    b11=0
+    end
+end
+
+function block12()
+    if b12==0 then
+        set_stone( "st-greenbrown", 13, 12)
+    b12=1
+    elseif b12==1 then
+        enigma.KillStone(13,12)
+    b12=0
+    end
+end
+
+function block13()
+    if b13==0 then
+        set_stone( "st-greenbrown", 14, 12)
+    b13=1
+    elseif b13==1 then
+        enigma.KillStone(14,12)
+    b13=0
+    end
+end
+
+function block14()
+    if b14==0 then
+        set_stone( "st-greenbrown", 15, 12)
+    b14=1
+    elseif b14==1 then
+        enigma.KillStone(15,12)
+    b14=0
+    end
+end
+
+function block15()
+    if b15==0 then
+        set_stone( "st-greenbrown", 16, 12)
+    b15=1
+    elseif b15==1 then
+        enigma.KillStone(16,12)
+    b15=0
+    end
+end
+
+function block16()
+    if b16==0 then
+        set_stone( "st-greenbrown", 17, 12)
+    b16=1
+    elseif b16==1 then
+        enigma.KillStone(17,12)
+    b16=0
+    end
+end
+
+function blockremove()
+    if br==0 then
+        set_stone( "st-greenbrown", 19, 17)
+    br=1
+    elseif br==1 then
+        enigma.KillStone(19,17)
+    br=0
+    end
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

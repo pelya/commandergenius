@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd"
+  xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Still Swapping?"
+        el:subtitle="Per.Oxyd 8"
+        el:id="20060629ulf007"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Ulf Stegemann" el:email="ulf-enigma@zeitform.de"
+        el:homepage="http://ulf.zeitform.de"/>
+      <el:copyright>Copyright © 2006 Ulf Stegemann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="per.oxyd"/>
+      <el:modes el:easy="false" el:single="true" el:network="false" el:control="force"
+        el:scoreunit="duration" el:scoretarget="time"/>
+      <el:score el:easy="-" el:difficult="01:28"/>
+    </el:info>
+    <el:luamain><![CDATA[
+
+-- GENERAL --
+levelw = 20
+levelh = 13
+enigma.ConserveLevel=TRUE
+
+-- LANDSCAPE --
+create_world(levelw, levelh)
+fill_floor("fl-plank",0,0,level_width,level_height)
+draw_floor("fl-abyss",{0,0},{1,0},20)
+draw_floor("fl-abyss",{0,12},{1,0},20)
+draw_border("st-rock5",0,1,level_width,level_height-2)
+
+-- STONES --
+draw_stones("st-rock5",{8,2},{0,1},2)
+draw_stones("st-rock5",{14,2},{0,1},3)
+draw_stones("st-rock5",{17,2},{0,1},2)
+set_stone("st-rock5",1,4)
+draw_stones("st-rock5",{3,4},{1,0},5)
+set_stone("st-rock5",13,4)
+draw_stones("st-rock5",{3,5},{0,1},4)
+draw_stones("st-rock5",{6,6},{0,1},3)
+draw_stones("st-rock5",{17,5},{0,1},2)
+set_stone("st-rock5",18,6)
+draw_stones("st-rock5",{4,8},{1,0},2)
+set_stone("st-rock5",14,7)
+draw_stones("st-rock5",{12,8},{1,1},3)
+draw_stones("st-rock5",{9,9},{1,0},3)
+set_stone("st-rock5",15,9)
+set_stone("st-rock5",3,10)
+set_stone("st-rock5",9,10)
+
+-- GRATES --
+set_stone("st-grate1",7,2)
+draw_stones("st-grate1",{8,4},{1,0},3)
+set_stone("st-grate1",12,4)
+set_stone("st-grate1",18,5)
+draw_stones("st-grate1",{4,7},{1,0},2)
+draw_stones("st-grate1",{2,8},{0,2},2)
+draw_stones("st-grate1",{15,6},{0,1},2)
+draw_stones("st-grate1",{12,9},{1,-1},2)
+draw_stones("st-grate1",{14,8},{0,1},2)
+
+-- ONE-WAYS --
+set_stone("st-oneway_black-n",7,3)
+set_stone("st-oneway_black-s",2,4)
+set_stone("st-oneway_black-e",6,5)
+set_stone("st-oneway_black-w",14,5)
+set_stone("st-oneway_black-w",17,4)
+set_stone("st-oneway_black-n",16,6)
+
+-- SWAPPER --
+set_stone("st-swap",11,4)
+set_stone("st-swap",14,6)
+set_stone("st-swap",15,8)
+set_stone("st-swap",2,9)
+
+-- ITEMS --
+set_item("it-document",11,6,{text="text1"})
+
+-- OXYDS --
+oxyd_default_flavor = "a"
+oxyd(1,2)
+oxyd(9,2)
+oxyd(16,2)
+oxyd(18,2)
+oxyd(4,5)
+oxyd(10,6)
+oxyd(10,10)
+oxyd(18,10)
+oxyd_shuffle()
+
+-- ACTOR --
+set_actor("ac-blackball",10.5,7.5)
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english>Bricks change!</el:english>
+        <el:translation el:lang="de">Steine ändern sich!</el:translation>
+      </el:string>
+     </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="esprit 22" el:subtitle="esprit 22" el:id="ss_esp22"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Sven Siggelkow" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Sven Siggelkow</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 58
+levelh = 37
+
+create_world(levelw, levelh)
+
+oxyd_default_flavor = "b"
+fill_floor("fl-rough-blue", 0, 0, levelw,levelh)
+set_actor("ac-blackball", 29,6.5)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+      local c = strsub( pattern, i, i)
+      if c == "#" then
+         set_stone("st-rock3",i-1,line)
+      elseif c == "b" then                      
+     set_stone("st-rock3_break", i-1,line)
+      elseif c == "g" then                      
+     set_stone("st-grate1", i-1,line)
+      elseif c == "^" then                      
+     set_stone("st-oneway_black-n", i-1,line)
+      elseif c=="1" then    
+     set_item("it-coin1", i-1,line)
+      elseif c == "h" then
+     hammer(i-1,line)
+      elseif c=="d" then    
+     set_item("it-dynamite", i-1,line)
+      elseif c == "K" then                      
+     set_stone("st-rock3_hole", i-1,line)
+     set_actor("ac-rotor", i-.5,line+.5, {range=8, force=40})
+      elseif c == "O" then
+         oxyd( i-1, line)
+        end
+    end
+end
+
+--              0123456789012345678901234567890123456789012345678901234567
+renderLine(00, "##########################################################")
+renderLine(01, "#                bbb                  #bb                #")
+renderLine(02, "#                bbb 1                #bb                #")
+renderLine(03, "#                bbb                  #bb                #")
+renderLine(04, "#                bbb                  #b#                #")
+renderLine(05, "#                bbb                  bb#                #")
+renderLine(06, "#        O       bbb                  b##      O         #")
+renderLine(07, "#                bbb                  bb#                #")
+renderLine(08, "#                bbb                  #b#bbbbbbbbbbbbbbbb#")
+renderLine(09, "#                bbb     1            #b#bbbbbbbbbbbbbbbb#")
+renderLine(10, "#                bbb   1        1   1 #bbbbbbbbbbbbbbbbbb#")
+renderLine(11, "#                bbb               1  #bbbbbbbbbbbbbbbbbb#")
+renderLine(12, "#bbbbbbbbbbbbbbbbbb#########gg#################^^#########")
+                                                                         
+renderLine(13, "#                  #                ddKbbbb##bbb##bbbbbbb#")
+renderLine(14, "#                  #                ddbbb###bb#######bbbb#")
+renderLine(15, "#                  #                ddb#bb#bb#########bbb#")
+renderLine(16, "#                  #                ddbb##bb#bbbbbbbbbbbb#")
+renderLine(17, "#                  #                  bb#                #")
+renderLine(18, "#        O         #        O         bb#      O         #")
+renderLine(19, "#                  #                  bb#                #")
+renderLine(20, "#         h        #                  bbb                #")
+renderLine(21, "#                  #                  bbbbb#bbbbb#bbbbb#b#")
+renderLine(22, "#                  #                  bbbbbbbbbbbbbbb#bbb#")
+renderLine(23, "#                  #                  bbbbbbbbbb#b#bbbbbb#")
+renderLine(24, "#########gg#################^^###########bb#bbb#bbb#b#b#b#")
+                                                                         
+renderLine(25, "#                  #bbbbbbbbbbbbbbbbbbbbbbbbb#bbbbbb#bbbb#")
+renderLine(26, "#                  #bbbbbbbbbbbbbbbbbbbbbbbbbbb###bbbb#bb#")
+renderLine(27, "#                  #                  bbbb#bbb#bb#bb#b#bb#")
+renderLine(28, "#                  #                  bbbb#bb#bb#bb#bbb#b#")
+renderLine(29, "#                  g                  bbbbbbbbbbbbbbbbbbb#")
+renderLine(30, "#        O         g        O         bbb      O         #")
+renderLine(31, "#                  g                  bbb                #")
+renderLine(32, "#                  #                  b#b                #")
+renderLine(33, "#                  #                  b#b                #")
+renderLine(34, "#                  #                  b#b                #")
+renderLine(35, "#                  #                  bbb                #")
+renderLine(36, "##########################################################")
+--              0123456789012345678901234567890123456789012345678901234567
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

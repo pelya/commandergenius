@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Open Path" el:subtitle="" el:id="duffy152"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+rooms_wide=1
+rooms_high=1
+
+levelw=1+(19*rooms_wide)
+levelh=1+(12*rooms_high)
+
+create_world( levelw, levelh)
+enigma.ConserveLevel=FALSE
+enigma.Brittleness=0
+
+fill_floor("fl-normal", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-invisible", i-1, line)
+            abyss(i-1,line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+            abyss(i-1,line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c=="z" then
+           set_actor("ac-blackball", i-.5,line+.5, {player=0})
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c==" " then
+            abyss(i-1,line)
+        elseif c=="1" then
+           set_item("it-crack3",i-1,line)
+        elseif c=="2" then
+           set_item("it-crack2",i-1,line)
+        elseif c=="3" then
+           set_item("it-crack1",i-1,line)
+        elseif c=="0" then
+           set_item("it-crack0",i-1,line)
+        elseif c=="s" then
+           set_item("it-seed",i-1,line)
+        end
+    end
+end
+
+renderLine(00,"####################")
+renderLine(01,"#o                o#")
+renderLine(02,"# qq+q qq 2q       #")
+renderLine(03,"# q++  +   qq qqqq #")
+renderLine(04,"# q+q  qqq1q  q  g #")
+renderLine(05,"# q+qq   q    2    #")
+renderLine(06,"# z+qq+  qq q+qq 2 #")
+renderLine(07,"# q+q+   q  q q  q #")
+renderLine(08,"# q++q      q q  q #")
+renderLine(09,"# qqqqqq q    q  q #")
+renderLine(10,"#      qq qqqq qqq #")
+renderLine(11,"#o                o#")
+renderLine(12,"####################")
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

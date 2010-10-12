@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Just another pretty level" el:subtitle="" el:id="edward26"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Edward" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Edward</el:copyright>
+      <el:license el:type="Donated to Enigma under the projects license" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="1:27" el:difficult="1:57"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world(21,21)
+
+fill_floor("fl-abyss",0,0,21,21)
+
+oxyd_default_flavor = "d"
+
+function renderLine(line,pattern)
+    for i=1, strlen(pattern) do
+        local c=strsub(pattern,i,i)
+        if c=="#" then
+            set_stone("st-metal",i-1,line)
+        elseif c=="=" then
+            set_floor("fl-normal",i-1,line)
+        elseif c=="X" then
+            oxyd(i-1,line)
+        elseif c=="-" then
+            set_floor("fl-gradient",i-1,line,{type=random(21,24)})
+        elseif c==">" then
+            set_floor("fl-gradient",i-1,line,{type=3})
+        elseif c=="<" then
+            set_floor("fl-gradient",i-1,line,{type=4})
+        elseif c=="v" then
+            set_floor("fl-gradient",i-1,line,{type=1})
+        elseif c=="^" then
+            set_floor("fl-gradient",i-1,line,{type=2})
+        elseif c=="W" then
+            set_stone("st-break_acwhite",i-1,line)
+            set_floor("fl-normal",i-1,line)
+        elseif c=="B" then
+            set_stone("st-break_acblack",i-1,line)
+            set_floor("fl-normal",i-1,line)
+        elseif c=="[" then
+            set_floor("fl-gradient",i-1,line,{type=5})
+        elseif c=="]" then
+            set_floor("fl-gradient",i-1,line,{type=6})
+        elseif c=="(" then
+            set_floor("fl-gradient",i-1,line,{type=7})
+        elseif c==")" then
+            set_floor("fl-gradient",i-1,line,{type=8})
+        elseif c=="{" then
+            set_floor("fl-gradient",i-1,line,{type=9})
+        elseif c=="}" then
+            set_floor("fl-gradient",i-1,line,{type=10})
+        elseif c=="W" then
+            set_stone("st-break_acwhite",i-1,line)
+            set_floor("fl-normal",i-1,line)
+        elseif c=="B" then
+            set_stone("st-break_acblack",i-1,line)
+            set_floor("fl-normal",i-1,line)
+        elseif c=="w" then
+            set_stone("st-white1",i-1,line)
+            set_floor("fl-normal",i-1,line)
+        elseif c=="b" then
+            set_stone("st-black1",i-1,line)
+            set_floor("fl-normal",i-1,line)
+        end
+    end
+end
+
+if not difficult then
+    renderLine(00,"                     ")
+    renderLine(01," Xvv]# #----==== =X  ")
+    renderLine(02," >==<# #----   =WBW= ")
+    renderLine(03," >==<#X#----== =B=#  ")
+    renderLine(04," (^^)#=#----  WBW=#  ")
+    renderLine(05," >==<#=#----==B  =#  ")
+    renderLine(06," >==<#=#----  W  -#  ")
+    renderLine(07," >==<#=#----===< =#  ")
+    renderLine(08," >==<# #-####>=< =#  ")
+    renderLine(09," >==<>=#-#   >=< =#  ")
+    renderLine(10," >==<>=#-#   >=< =#  ")
+    renderLine(11," >==<>=#-#   >=< =#  ")
+    renderLine(12," >==<>=#-#   >=< =#  ")
+    renderLine(13," >==<>=vvvvvv{=< =#  ")
+    renderLine(14," >==<>=========< =#  ")
+    renderLine(15," >==<(^^^^^^^^^) =#  ")
+    renderLine(16," [vv]##########===#  ")
+    renderLine(17," >==<#        #####  ")
+    renderLine(18,"   =<#               ")
+    renderLine(19," X ^)#               ")
+    renderLine(20,"                     ")
+
+    set_floor("fl-bridge-open",2,18,{name="lower"})
+    set_item("it-trigger",19,2,{action="openclose",target="lower"})
+    set_floor("fl-bridge-closed",6,8,{name="upper"})
+    set_item("it-trigger",16,4,{action="openclose",target="upper"})
+else
+    renderLine(00,"                     ")
+    renderLine(01," Xwv]# #----wwwwbwX  ")
+    renderLine(02," ww=<# #----bbbwWBW= ")
+    renderLine(03," >==<#X#----wwbwBw#  ")
+    renderLine(04," (^^)#=#----bbWBWw#  ")
+    renderLine(05," >==<#=#----wwBwbw#  ")
+    renderLine(06," >==<#=#----bbWwbw#  ")
+    renderLine(07," >==<#=#----ww=<bw#  ")
+    renderLine(08," >==<#b#-####>=<bw#  ")
+    renderLine(09," >==<>=#-#   >=<bw#  ")
+    renderLine(10," >==<>=#-#   >=<bw#  ")
+    renderLine(11," >==<>=#-#   >=<bw#  ")
+    renderLine(12," >==<>=#-#   >=<bw#  ")
+    renderLine(13," >==<>=vvvvvv{=<bw#  ")
+    renderLine(14," >==<>=========<bw#  ")
+    renderLine(15," >==<(^^^^^^^^^)bw#  ")
+    renderLine(16," [vv]##########www#  ")
+    renderLine(17," >==<#        #####  ")
+    renderLine(18," bb=<#               ")
+    renderLine(19," Xb^)#               ")
+    renderLine(20,"                     ")
+
+    set_floor("fl-bridge-open",6,8,{name="upper"})
+    set_item("it-trigger",19,2,{action="openclose",target="upper"})
+end
+
+set_actor("ac-blackball",3.5,17.5,{player=0})
+set_actor("ac-whiteball",3.5,3.5,{player=1})
+set_item("it-yinyang",3,17)
+set_item("it-yinyang",3,3)
+set_item("it-hammer",8,1)
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

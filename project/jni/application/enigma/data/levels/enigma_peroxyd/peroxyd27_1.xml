@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd"
+  xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Per.Oxyd 27"
+        el:subtitle="Per.Oxyd 27"
+        el:id="20060629ulf008"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Ulf Stegemann" el:email="ulf-enigma@zeitform.de"
+        el:homepage="http://ulf.zeitform.de"/>
+      <el:copyright>Copyright © 2006 Ulf Stegemann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="per.oxyd"/>
+      <el:modes el:easy="true" el:single="true" el:network="false" el:control="force"
+        el:scoreunit="duration" el:scoretarget="time"/>
+      <el:score el:easy="00:18" el:difficult="00:27"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelw = 20
+levelh = 13
+enigma.ConserveLevel=TRUE
+
+-- LANDSCAPE --
+create_world(levelw, levelh)
+fill_floor("fl-abyss",0,0, level_width,level_height)
+
+-- FLOORS --
+draw_floor("fl-concrete",{7,2},{1,0},12)
+draw_floor("fl-concrete",{1,3},{1,0},7)
+draw_floor("fl-concrete",{1,4},{0,1},5)
+draw_floor("fl-concrete",{1,9},{1,0},7)
+draw_floor("fl-concrete",{7,10},{1,0},10)
+set_floor("fl-concrete",16,9)
+draw_floor("fl-concrete",{16,8},{1,0},3)
+draw_floor("fl-concrete",{18,3},{0,1},5)
+set_floor("fl-swamp",8,3)
+draw_floor("fl-swamp",{10,3},{1,0},7)
+draw_floor("fl-swamp",{2,4},{1,0},16)
+draw_floor("fl-swamp",{2,5},{1,0},4)
+draw_floor("fl-swamp",{7,5},{1,0},3)
+set_floor("fl-swamp",13,5)
+draw_floor("fl-swamp",{15,5},{1,0},3)
+draw_floor("fl-swamp",{2,6},{1,0},8)
+draw_floor("fl-swamp",{13,6},{1,0},4)
+set_floor("fl-swamp",2,7)
+draw_floor("fl-swamp",{4,7},{1,0},3)
+draw_floor("fl-swamp",{8,7},{1,0},2)
+draw_floor("fl-swamp",{13,7},{1,0},5)
+draw_floor("fl-swamp",{2,8},{1,0},12)
+set_floor("fl-swamp",15,8)
+draw_floor("fl-swamp",{8,9},{1,0},3)
+draw_floor("fl-swamp",{12,9},{1,0},4)
+
+-- STONES --
+local rb2=set_stone("st-grate1",11,6,{name="grate"})
+
+-- OXYDS --
+oxyd_default_flavor = "a"
+oxyd(18,1)
+oxyd(6,2)
+oxyd(0,3)
+oxyd(1,10)
+oxyd(12,11)
+oxyd(17,9)
+oxyd_shuffle()
+
+-- ACTOR --
+local rb1=set_actor("ac-blackball",9.5,6.5,{name="blackball"})
+
+-- DIFFICULTY --
+if (not difficult) then -- easy
+  AddRubberBand(rb1,rb2,4,2,0)
+  set_item("it-document",9,6,{text="text1"})
+else
+  AddRubberBand(rb1,rb2,7,2,0)
+  enigma.ConserveLevel=FALSE
+  set_item("it-document",9,6,{text="text2"})
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english>If you think that's to easy, try "Difficulty: Normal".</el:english>
+        <el:translation el:lang="de">Falls Dir das zu einfach ist, versuche die normale Schwierigkeitstufe.</el:translation>
+      </el:string>
+      <el:string el:key="text2">
+        <el:english>If you think that's to hard, try "Difficulty: Easy".</el:english>
+        <el:translation el:lang="de">Falls Dir das zu schwer ist, versuche die leichte Schwierigkeitstufe.</el:translation>
+      </el:string>
+     </el:i18n>
+  </el:protected>
+</el:level>

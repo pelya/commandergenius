@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Correspondence Chess" el:subtitle="Send smartly!" el:id="luc352007"/>
+      <el:version el:score="1" el:release="1" el:revision="3" el:status="released"/>
+      <el:author  el:name="Lukas Schüller" el:email="Lucky_Luc@web.de" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Lukas Schüller</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+CreateWorld(20,13)
+oxyd_default_flavor="d"
+enigma.ConserveLevel=FALSE
+
+fill_floor("fl-samba")
+
+function writeLine( line, cells)
+    for i=1, strlen(cells) do
+        local c = strsub(cells,i,i)
+        if(c =="#") then
+            set_stone("st-glass",i-1,line)
+        elseif(c =="=") then
+            set_stone("st-door-h",i-1,line)
+        elseif(c =="D") then
+            set_stone("st-death",i-1,line)
+        elseif(c =="w") then
+            set_stone("st-wood",i-1,line)
+        elseif(c =="<") then
+            set_stone("st-oneway-w",i-1,line)
+            set_item("it-cross",i-1,line)
+        elseif(c ==">") then
+            set_stone("st-oneway-e",i-1,line)
+        elseif(c =="K") then
+            set_stone("st-chess_black",i-1,line)
+        elseif(c =="E") then
+            set_stone("st-mail-e",i-1,line)
+        elseif(c =="W") then
+            set_stone("st-bolder-w",i-1,line)
+            set_item("it-trigger",i-1,line)
+        elseif(c =="X") then
+            set_stone("st-glass",i-1,line)
+            set_item("it-cherry",i-1,line)
+        elseif(c =="t") then
+            set_floor("fl-thief",i-1,line)
+        elseif(c =="x") then
+            set_floor("fl-swamp",i-1,line)
+        elseif(c ==".") then
+            set_item("it-seed",i-1,line)
+        elseif(c =="!") then
+            if not difficult then
+                set_item("it-seed",i-1,line)
+            else
+                set_item("it-seed_volcano",i-1,line)
+            end
+        elseif(c =="p") then
+            set_item("it-puller-s",i-1,line)
+        elseif(c =="*") then
+            set_item("it-trigger",i-1,line)
+        elseif(c =="1") then
+            set_item("it-pipe-v",i-1,line)
+        elseif(c =="2") then
+            set_item("it-pipe-h",i-1,line)
+        elseif(c =="3") then
+            set_item("it-pipe-wn",i-1,line)
+        elseif(c =="4") then
+            set_item("it-pipe-es",i-1,line)
+        elseif(c =="5") then
+            set_item("it-pipe-ne",i-1,line)
+        elseif(c =="6") then
+            set_item("it-pipe-sw",i-1,line)
+        elseif(c =="O") then
+            oxyd(i-1,line)
+        elseif(c =="0") then
+            set_actor("ac-blackball",i-0.5,line+0.5,{player="0"})
+        end
+    end
+end
+
+writeLine(00,"DDDD#O##############")
+writeLine(01,"Dttt#=#1xxxxxxx#*wW#")
+writeLine(02,"DtDt#0xxxxxxxxx##x##")
+writeLine(03,"DtDt>xxKxxxx1xxxxx3#")
+writeLine(04,"Dt###xxxxx2xxxxxx1x#")
+writeLine(05,"Dt#p<x1x#xxxxxxx#xx#")
+writeLine(06,"#=#=###xxx1xxxxxxx1#")
+writeLine(07,"#.1645#3xxx#xx1xxxx#")
+writeLine(08,"#4.512#xx#xxxxxxxxx#")
+writeLine(09,"#16!34Exxxxxxxxxx#x#")
+writeLine(10,"#541.6#xxxxx3xxxx#X#")
+writeLine(11,"O1343.#x6xxxxxxxxX*X")
+writeLine(12,"##################X#")
+
+Signal("it(18 1)","st(3 6)")
+Signal("it(16 1)","st(1 6)")
+Signal("it(18 11)","st(5 1)")
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Fernschach</el:translation>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Verschicke geschickt!</el:translation>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

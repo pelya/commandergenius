@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Good Company" el:subtitle="Per.Oxyd Link 3" el:id="level10a"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Siegfried Fennig" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Siegfried Fennig</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="per.oxyd">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="true"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 58
+levelh = 13
+
+create_world(levelw, levelh)
+draw_border("st-rock4")
+fill_floor("fl-samba")
+
+oxyd_default_flavor = "c"
+
+oxyd ( 1,11)
+oxyd ( 2, 5)
+oxyd ( 9, 1)
+oxyd (15, 1)
+oxyd (42,11)
+oxyd (48,11)
+oxyd (55, 7)
+oxyd (56, 1)
+
+oxyd_shuffle()
+
+fill_floor("fl-abyss", 23, 4, 12, 5)
+fill_floor("fl-abyss", 20, 6,  3, 1)
+fill_floor("fl-abyss", 35, 6,  3, 1)
+
+draw_stones( "st-rock4", { 1,10}, {1,0}, 5)
+draw_stones( "st-rock4", { 5, 9}, {1,0}, 5)
+draw_stones( "st-rock4", { 9, 8}, {1,0}, 6)
+draw_stones( "st-rock4", {14, 7}, {1,0},10)
+draw_stones( "st-rock4", {23, 8}, {1,0}, 4)
+draw_stones( "st-rock4", {26, 9}, {1,0}, 6)
+draw_stones( "st-rock4", {31, 8}, {1,0}, 4)
+draw_stones( "st-rock4", {34, 7}, {1,0}, 5)
+draw_stones( "st-rock4", {19, 5}, {1,0}, 5)
+draw_stones( "st-rock4", {23, 4}, {1,0}, 4)
+draw_stones( "st-rock4", {26, 3}, {1,0}, 6)
+draw_stones( "st-rock4", {31, 4}, {1,0}, 4)
+draw_stones( "st-rock4", {34, 5}, {1,0},10)
+draw_stones( "st-rock4", {43, 4}, {1,0}, 6)
+draw_stones( "st-rock4", {48, 3}, {1,0}, 5)
+draw_stones( "st-rock4", {52, 2}, {1,0}, 5)
+draw_stones( "st-rock4", {19, 6}, {1,0}, 1)
+draw_stones( "st-rock4", {38, 6}, {1,0}, 1)
+
+set_item("it-yinyang", 25, 9)
+set_item("it-yinyang", 32, 3)
+
+local ac1=set_actor("ac-blackball", 25.5, 9.5)
+local ac2=set_actor("ac-whiteball", 32.5, 3.5)
+
+AddRubberBand(ac1, ac2, 25, 1)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

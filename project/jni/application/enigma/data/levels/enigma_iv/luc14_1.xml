@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Pull it!" el:subtitle="" el:id="luc14"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Lukas Schüller" el:email="Lucky_Luc@web.de" el:homepage=""/>
+      <el:copyright>Copyright © 2005 Lukas Schüller</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Environment
+CreateWorld(20, 13) 
+draw_border("st-yellow")
+fill_floor("fl-sand", 0,0, 20,13)
+set_stone("st-pull", 1,11)
+set_stone("st-pull", 1,2)
+draw_stones("st-yellow", {2,1}, {0,1}, 3)
+draw_stones("st-yellow", {9,10}, {0,1}, 2)
+draw_stones("st-yellow", {11,10}, {0,1}, 2)
+draw_stones("st-wood", {18,10}, {0,1}, 2)
+set_stone("st-door", 1,3, {type="h", name="doora"})
+set_stone("st-door", 10,10, {type="h", name="doorb"})
+set_item("it-trigger", 1,1, {action="openclose", target="doorb"})
+set_item("it-trigger", 18,1, {action="openclose", target="doora"})
+set_item("it-puller-w", 1,5)
+set_item("it-puller-w", 2,7)
+set_item("it-puller-s", 2,5)
+set_item("it-puller-s", 1,6)
+set_item("it-puller-e", 2,6)
+set_item("it-puller-e", 1,7)
+oxyd_default_flavor = "c"
+oxyd(10,12)
+oxyd(19,11)
+oxyd_shuffle()
+set_actor("ac-blackball", 10,6.5, {player=0})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="It's Magic" el:subtitle="" el:id="martin27"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Dec.05: Changed floor back to fl-brick, Andreas
+-- Oct.06: Moved Actor by (1;-1), Raoul
+
+levelw = 20
+levelh = 13
+
+create_world( levelw, levelh)
+--fill_floor( "fl-leavesb", 0, 0, levelw, levelh)
+fill_floor( "fl-brick", 0, 0, levelw, levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c == "o" then
+            oxyd( i-1, line)
+    elseif c == "#" then
+        set_stone( "st-brick", i-1, line)
+        elseif c == "*" then
+            set_stone( "st-glass", i-1, line)
+    elseif c == "!" then
+        set_stone( "st-brick_magic", i-1, line)
+        end
+    end
+end
+
+renderLine(  0, "#o#######o########o#")
+renderLine(  1, "#!     !*!        !#")
+renderLine(  2, "#*!!!! !**!!!!!!  !#")
+renderLine(  3, "#  ! ! !*     !  ! #")
+renderLine(  4, "#  !   !!!!!! !  !*#")
+renderLine(  5, "#!   !      ! ! !!!#")
+renderLine(  6, "#*!! !!!! !        #")
+renderLine(  7, "#!   !      ! ! !!!#")
+renderLine(  8, "#  !   !!!!!! !  !*#")
+renderLine(  9, "#  ! ! !*     !  ! #")
+renderLine( 10, "#*!!!! !**!!!!!!  !#")
+renderLine( 11, "#!     !*!        !#")
+renderLine( 12, "#o#######o########o#")
+
+oxyd_shuffle()
+
+set_item( "it-magicwand", 6,7)
+set_stone( "st-switch", 19,6,{on=TRUE,action="onoff", target="laser"})
+set_attrib( laser(0,6,TRUE, EAST), "name", "laser")
+mirrorp( 1,3,FALSE,FALSE,4)
+mirrorp( 1,9,FALSE,FALSE,4)
+mirrorp( 9,3,FALSE,FALSE,4)
+mirrorp( 9,9,FALSE,FALSE,4)
+mirror3( 9,6,FALSE,TRUE,2)
+mirror3(18,3,FALSE,FALSE,2)
+mirror3(18,9,FALSE,FALSE,2)
+
+document( 15,8, "text1")
+set_actor("ac-blackball", 16.5, 8.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Do not use too much magic!</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

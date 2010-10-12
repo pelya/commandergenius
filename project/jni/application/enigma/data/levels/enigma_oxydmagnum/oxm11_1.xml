@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Marbles &amp; Mountains" el:subtitle="Oxyd Magnum 11" el:id="oxm011"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd.magnum">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+cells={}
+cells[" "]=cell{floor="fl-normal"}
+cells["#"]=cell{stone="st-greenbrown"}
+cells["v"]=cell{item= "it-tinyhollow"}
+cells["^"]=cell{item= "it-hill"}
+cells["+"]=cell{item= "it-tinyhill"}
+cells["o"]=cell{actor={"ac-killerball", {player=0, controllers=1,mouseforce=1}; mode=2}, parent=cells["+"]}
+cells["O"]=cell{actor={"ac-blackball", {player=0}; mode=2}}
+
+
+slopes={}
+pivots={}
+cells["*"]=cell{{{add_multicell, slopes, 1}}}
+cells["&"]=cell{{{add_multicell, pivots, slopes}, cells[" "]}}
+
+level = {
+   "####################",
+   "#******************#",
+   "#*v   ^  &   ^   v*#",
+   "#*  0          0  *#",
+   "#*       +o       *#",
+   "#*                *#",
+   "#* ^   0  O 0   ^ *#",
+   "#*                *#",
+   "#*       +o       *#",
+   "#*  0          0  *#",
+   "#*v   ^      ^   v*#",
+   "#******************#",
+   "####################"
+}
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+set_default_parent(cells[" "])
+oxyd_default_flavor = "c"
+create_world_by_map(level)
+spread_tag(pivots)
+render_slopes(slopes, 1)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

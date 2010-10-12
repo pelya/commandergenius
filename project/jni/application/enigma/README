@@ -1,0 +1,102 @@
+About Enigma
+============
+
+Enigma is a unique puzzle game, with influences from almost every game
+genre.  Your objective is easily explained: you control a small black
+marble with your mouse and have to find and uncover all pairs of
+identical Oxyd stones in each landscape.  Simple? Yes.  Easy? It would
+be, if it weren't for hidden traps, vast mazes, insurmountable
+obstacles and innumerable puzzles blocking your direct way to the Oxyd
+stones... If you like puzzle games and have a steady hand, Enigma's
+more than 500 levels will probably keep you busy for hours on end.
+
+Enigma is developed by a small group of volunteers, and help is always
+appreciated.  If you like Enigma and want to contribute to its future,
+you are welcome to join us on our development mailing list at
+
+    http://mail.nongnu.org/mailman/listinfo/enigma-devel
+
+or simply send email to 
+
+    enigma-devel@nongnu.org
+
+Every kind of contribution is welcome, whether it is programming,
+documentation, graphics, sound effects, or simply good advice.
+
+
+The official Enigma homepage can be found at
+
+    http://www.nongnu.org/enigma/
+
+If you have any questions, suggestions, or contributions, feel free to
+send email to the mailing list.  Have fun!
+
+    The Enigma Team
+
+
+Playing Enigma
+==============
+
+Please refer to the user manual for instructions on how to play Enigma,
+or simply start with the tutorial levels included with the game.
+
+
+Installation
+============
+
+Installation on Windows and Mac OS X is straightforward: Simply download
+the appropriate .exe or .dmg file and start it with a double click.
+
+Things get a little more complicated for other operating systems,
+please refer to Enigma's download page
+
+       http://www.nongnu.org/enigma/download.html
+       
+for up-to-date information.  If you are running some kind of Unix system,
+you have always the option of compiling Enigma yourself; this is
+explained in the next section.
+
+There may or may not be binaries for the Linux distribution of your choice,
+and they may or may not work on your computer.  This is not our fault:
+packaging a Linux version that works everywhere is almost impossible,
+thanks to countless subtle and not-so-subtle differences between each
+and every Linux distribution.  Please complain to your vendor if this
+bugs you.
+
+
+Compiling Enigma
+================
+
+This section briefly describes how to compile Enigma on a Unix
+machine.  If you want to build Enigma on Windows or Mac OS X, please
+see the documentation in `doc/README.mingw32' and `doc/README.macosx',
+respectively.
+
+For a list of libraries and programs that must be installed to compile
+Enigma, please refer to `doc/REQUIREMENTS' for a complete list.
+
+Once you have everything installed, building Enigma is as easy as typing
+
+    ./configure && make && make install
+
+in the enigma directory.
+
+
+Copying
+=======
+
+Enigma is free software.  You may copy and modify it under the terms
+of the GNU General Public License, Version 2 or, at your option, any
+later version.  For details, please refer to the accompanying
+COPYING file.
+
+  Please refer to the ACKNOWLEDGEMENTS file that comes with Enigma for
+copyright information and licensing terms of external dependencies and
+contributions to this project.
+
+  To my best of our knowledge the included sound effects are either in the
+public domain or freely distributable.  We weren't able to pin down the
+exact origin of each sound file -- the copyrights of which we are aware
+are collected in soundsets/enigma/README.  Please refer to this list
+before using the samples in your productions. 
+

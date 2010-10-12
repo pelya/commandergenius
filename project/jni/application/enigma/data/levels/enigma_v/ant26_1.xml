@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Spiders" el:subtitle="" el:id="ant26"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+
+cells["."]=abyss
+cells[" "]=cell{floor="fl-himalaya"}
+
+cells["#"]=cell{stone="st-metal"}
+cells["="]=cell{stone="st-glass"}
+
+actors={}
+cells["y"]=cell{item={face="it-yinyang"}}
+cells["O"]=cell{parent={cells["y"],{add_multiactor, "ac-blackball", actors, {player=0}}}}
+cells["Q"]=cell{parent={cells["y"],{add_multiactor, "ac-whiteball", actors, {player=1}}}}
+
+cells["A"]=cell{item={face="it-trigger", attr={action="trigger", target="oxydA"}}}
+cells["B"]=cell{item={face="it-trigger", attr={action="trigger", target="oxydB"}}}
+cells["C"]=cell{item={face="it-trigger", attr={action="trigger", target="oxydC"}}}
+cells["D"]=cell{item={face="it-trigger", attr={action="trigger", target="oxydD"}}}
+cells["E"]=cell{item={face="it-trigger", attr={action="trigger", target="oxydE"}}}
+cells["F"]=cell{item={face="it-trigger", attr={action="trigger", target="oxydF"}}}
+cells["G"]=cell{item={face="it-trigger", attr={action="trigger", target="oxydG"}}}
+cells["H"]=cell{item={face="it-trigger", attr={action="trigger", target="oxydH"}}}
+cells["I"]=cell{item={face="it-trigger", attr={action="trigger", target="oxydI"}}}
+cells["J"]=cell{item={face="it-trigger", attr={action="trigger", target="oxydJ"}}}
+
+cells["a"]=cell{stone={face="st-oxyd", attr={flavor="b", color="0", name="oxydA"}}}
+cells["b"]=cell{stone={face="st-oxyd", attr={flavor="b", color="1", name="oxydB"}}}
+cells["c"]=cell{stone={face="st-oxyd", attr={flavor="b", color="2", name="oxydC"}}}
+cells["d"]=cell{stone={face="st-oxyd", attr={flavor="b", color="3", name="oxydD"}}}
+cells["e"]=cell{stone={face="st-oxyd", attr={flavor="b", color="4", name="oxydE"}}}
+cells["f"]=cell{stone={face="st-oxyd", attr={flavor="b", color="0", name="oxydF"}}}
+cells["g"]=cell{stone={face="st-oxyd", attr={flavor="b", color="1", name="oxydG"}}}
+cells["h"]=cell{stone={face="st-oxyd", attr={flavor="b", color="2", name="oxydH"}}}
+cells["i"]=cell{stone={face="st-oxyd", attr={flavor="b", color="3", name="oxydI"}}}
+cells["j"]=cell{stone={face="st-oxyd", attr={flavor="b", color="4", name="oxydJ"}}}
+
+level = {
+   "####################",
+   "#.   .=.    .=.   .#",
+   "#. A .=. af .=. F .#",
+   "#.   .=.    .=.   .#",
+   "#. B .=. bg .=. G .#",
+   "#.  O.=.    .=.   .#",
+   "#. C .=. ch .=. H .#",
+   "#.   .=.    .=.Q  .#",
+   "#. D .=. di .=. I .#",
+   "#.   .=.    .=.   .#",
+   "#. E .=. ej .=. J .#",
+   "#.   .=.    .=.   .#",
+   "####################"
+}
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+set_default_parent(cells[" "])
+create_world_by_map(level)
+add_rubber_bands(actors, actors, 10, 11)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

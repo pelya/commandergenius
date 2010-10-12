@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Mountain Climbing" el:subtitle="" el:id="joe10"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Joseph Dunne" el:email="josephdunne1993@hotmail.com" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Joseph Dunne</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:score el:easy="1:45" el:difficult="2:30"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+cells[" "]=cell{floor="fl-sahara"}
+cells["`"]=cell{floor="fl-red"}
+cells[","]=cell{floor="fl-leaves"}
+cells["-"]=cell{floor="fl-space"}
+cells["w"]=cell{floor="fl-gradient2"}
+cells["y"]=cell{floor="fl-gradient7"}
+cells["d"]=cell{floor="fl-gradient3"}
+cells["n"]=cell{floor="fl-gradient5"}
+cells["x"]=cell{floor="fl-gradient1"}
+cells["v"]=cell{floor="fl-gradient6"}
+cells["a"]=cell{floor="fl-gradient4"}
+cells["r"]=cell{floor="fl-gradient8"}
+cells["e"]=cell{floor="fl-gradient10"}
+cells["c"]=cell{floor="fl-gradient9"}
+cells["z"]=cell{floor="fl-gradient11"}
+cells["q"]=cell{floor="fl-gradient12"}
+cells["0"]=cell{floor="fl-abyss"}
+cells["&"]=cell{stone="st-yellow"}
+cells["8"]=cell{stone="st-puzzle-n"}
+cells["2"]=cell{stone="st-puzzle-s"}
+cells["#"]=cell{stone="st-blue-sand"}
+cells["%"]=cell{stone="st-brick"}
+cells["I"]=cell{stone="st-actorimpulse"}
+cells["B"]=cell{stone="st-break_gray"}
+cells["$"]=cell{stone="st-wood"}
+cells["o"]=cell{actor={"ac-whiteball-small", {player=0, essential=1}}}
+cells["T"]=cell{actor="ac-top"}
+cells["+"]=cell{item="it-hollow"}
+cells["H"]=cell{item="it-hammer"}
+cells["F"]=cell{item="it-flagwhite"}
+cells["*"]=cell{item="it-tinyhollow"}
+cells["["]=cell{item="it-tinyhill"}
+cells["]"]=cell{item="it-hill"}
+cells[">"]=cell{item="it-dynamite"}
+
+if difficult then -- Normal Mode level = {"------------------------------------------------------------------------------------------------",
+"------------------------------------------------------------------------------------------------",
+"-------------------------------------------------------------------------------`--`-`-``-```----",
+"-------------------------------------------------------------------------------``-`-`-`--`------",
+"-------------------------------------------------------------------------------`-``-`-`--```----",
+"-------------------------------------------------------------------------------`--`-`-`--`------",
+"-------------------------------------------------------------------------------`--`-`-``-```----",
+"------------------------------------------------------------------------------------------------",
+"------------------------------------------------------------------------------------------------",
+"-----------------------------------------------------------------------------------#####--------",
+"-----------------------------------------------------------------------------------#+ +#--------",
+"-----------------------------------------------------------------------------------## ##--------",
+"##################################################################################### ##########",
+"#nxxxxxxxxv d d T qwwwr&e     qwe    a#dqwe   qr&dqwwweTqwe    a&nv&nv&nv&nv#000````````````000#",
+"#d        zxc d  Ta#   &d     a&d    a#da&d   a&&da&&&d a#d    zxczxczxczxca#xxxxxxxxxxxxxxxxxx#",
+"#d    qwwe    d   a#   &d     a&d   Ta#da&dqwwr&nca&nxc a#d   qwe qwwwwwwwwr#xxxxxxxxxxxxxxxxxx#",
+"#d    a&&d    ywwwa#   &d  qwwr&ywwe a#da&da&&&&d a&d   a#d   a&d aqwwwwwwww#xxxxxxxxxxxxxxxxxx#",
+"#d    a  d        a# T &d  a&&&&&&&d a#da&dzxxxxc a&dqwwr#ywwezxc aa        #xxxxxxxxxxxxxxxxxx#",
+"#d    a&&d qwe    a#    d  zxxv&nxxc a#da&d qwwwe a&da&&&#   d    aa qwwwwww#xxxx&&&&&&&&&&&&&&#",
+"#d    zxxc a&d    a#nxxxc     a&d qwea#da&d a&&&yea&dzxxv#   d    aa a     T#xxx0&0xxxxxxxxxxxx#",
+"#ywwe      zxc    a#d   qwweT a&d a&da#da&d a&&&&dzxc   a#nxxc    aa a qwwww#xxxx&xxxxxxxxxx0xx#",
+"#   d             a#d   a&&d  zxc a&da#da&d zv&nxcqwwwwea#d    qweaa a a   T#xxxx&xxxxxxxxxxxxx#",
+"#o  d             a#d   a&&d      a&da#da&d  a&d  a&&&&da#d    a&daa0a0a0qww#xxxx&xxx&xxxxxxxxx#",
+"# o ywwwwwwwwwwwwwr#d   zxxc      a&dzxca&d  zxc  zxxxxca#ywwwwr&yra0a0a0a``#xxxx&xxx&xxxxxxxxx#",
+"###########################################################################`#xxxx&xxx&xxxxxxxxx#",
+"#&&&&&&&&&&&&&&&&&&#nxxxxxxxxxxxxxxc   T   &&            #nxxxv&&d  qwwea```#xxxx&xxx&xxxxxxxxx#",
+"#&nxxxxxxxxxxxxxxv&#d nxxxxxxxv      q# nxx&&xxxxxxxxxxv #d   zv&d  a&&da```#0xxx&xxx&xxxxxxxxx#",
+"#&dnxxxxxxxxxxxxva&#d d0000000a qwe  a# d q&&enxxvqwwe a #d qwezxc  a&&dzxxx#xxxx&xxx&xxxxx0xxx#",
+"#&ddnxxxxxxxxxxvaa&#d ywwwwwwwr a d  a# d a&&dd00aa&&d a #d a&ywwe  a&&ywwwe#xxxx&xxx&0xxxxxxxx#",
+"#&ddd0000000000aaa&#dnxvqwwwwe  zxc  a#&d zxxcywwrzxxc a #d a&&&&dT a&&&&&&d#xxxx&x0x&xxxxxxxxx#",
+"#&ddd0000000000aaa&#dd0aa&&&&dT qwwwwr# d nxxvqwweqwwe a&#d zxxxxc  a&&&&&&d#xxxx&xxx&xxx0xxxxx#",
+"#&ddd0000000000aaa&#dd0aa&--&ywwr&&&&&# d d00aa&&da&&d a #d qeqwwwe zxv&nxxv#xxxx&xxx&xxxxxxxxx#",
+"#&ddywwww&&wwwwraa&#dd0aa&--&&&&&&---&# d d00aa&&da&&d a #d &da&&&ywwea&dqwr#xxxx&xx0&xxxxxxxxx#",
+"#&dywwwww&&wwwwwra&#dd0aa&&&&nxxv&&&&&# d ywwrz&&czxxc a #d zczxv&&&&da&da&&#xx0xxxxx&xxxxxxxxx#",
+"#&ywwwwww&&wwwww&zx#cywrzxxxxc  zxxxxv# ywwwwww&&wwwwwwr #dTqwe zxxxxczxczxv#xxxxxxxx&xxxxxxxxx#",
+"#        &&&&&&&&     qwwwwwwwwwwwwwwr#        &&         ywr&ywwwwwwwwwwwwr#xxxxx0xx&xxxxxxxxx#",
+"# ###########################################################################&&&&&&&&&xxxxxxxxx#",
+"#   dnxv&&&dnxxxxxv#--------&```````````zxxxxxxxxxxxxxxxv#nxxxxxxxxxxxxxxxxvnxxxxxxxv&x0xxxxxxx#",
+"### dd0a   ddnxxxva#--------&`````````#eqwwwwwwwwwwwwwwea#dqwwwwwwwwwwwwwwwryenxxxxva&xxxxxxxxx#",
+"#xxxcd0a   dddnxvaa#--------&```------#da&&&&&&&&&&&&&&da#da&&&&&&&&&&&&&&&&#ddnxxvaa&xxxxxx0xx#",
+"#nxvnc0a   dddd0aaa#--```---&&&&------#da&nxxxxc0zxxxv&da#da&nxxxxxxxxxxxxxv#&&&00aaa&xxxxxxxxx#",
+"#d0ad  a  &&&&&0aaa#--```-------------#da&d nxvqwenxvz&da#da&ywwwwwwwwwwwwea#ddd00aaa&xxxxxxxxx#",
+"#ywrywwr  &dddd0aaa#------------------#da&dHd0aa dd0a  da#da&&&&& 0 &&&&&&da#dddqeaaa&xx0xxxxxx#",
+"#&&&&&&&&&&dddywraa#-----------```----#da&d ywrzxcywrq&da#dzxxxxxxxxxxxxv&da#dddzcaaa&xxxxxxxxx#",
+"#&zxxxxxxxvddywwwra#&&   &-----```----#da&ywwwwe0qwwwr&da#ywwwwwwwwwwwwwr&da#ddd00&&&&xxxxxxxxv#",
+"#eqwwwwwwwrcywwwwwr#     &-----```----#da&&&&&&&&&&&&&&da#&&&&&&&&&&&&&&&&da#ddywwrzxxxxxxxxxva#",
+"#dz&&&&&&&&&&&&&&&&#   &&&------------#dzxxxxxxxxxxxxxxcz#nxxxxxxxxxxxxxxxca#dywwwwwwwwwwwwwwra#",
+"#ywwwwwwwwwwwwwwr      &&&------------#ywwwwwwwwwwwwwwwe Bywwwwwwwwwwwwwwwwr#ywwwwwwwwwwwwwwwwr#",
+"################################################################################################", }else -- Easy Mode level = {"------------------------------------------------------------------------------------------------",
+"------------------------------------------------------------------------------------------------",
+"-------------------------------------------------------------------------------&--&-&-&&-&&&----",
+"-------------------------------------------------------------------------------&&-&-&-&--&------",
+"-------------------------------------------------------------------------------&-&&-&-&--&&&----",
+"-------------------------------------------------------------------------------&--&-&-&--&------",
+"-------------------------------------------------------------------------------&--&-&-&&-&&&----",
+"------------------------------------------------------------------------------------------------",
+"------------------------------------------------------------------------------------###---------",
+"-----------------------------------------------------------------------------------##+##--------",
+"-----------------------------------------------------------------------------------#   #--------",
+"-----------------------------------------------------------------------------------## ##--------",
+"##################################################################################### ##########",
+"#nxxxxxxxxvTd     qwwwwwe     qwe    a#dqwe   qr&dqwwwe qwe    a&nv&nv&nv&nv#``````````````````#",
+"#d        zxc     a#    d     a&d    a#da&d   a&&da&&&d a#d    zxczxczxczxca#xxxxxxxxxxxxxxxxxx#",
+"#d    qwwe        a#    d     a&d   Ta#da&dqwwr&nca&nxc a#d   qwe qwwwwwwwwr#xxxxxxxxxxxxxxxxxx#",
+"#d    a  d        a#    d  qwwr&ywwe a#da&da&&&&d a&d T a#d   a&d aqwwwwwwww#xxxxxxxxxxxxxxxxxx#",
+"#d    a  d        a#    d  a&&&&&&&d a#da&dzxxxxc a&dqwwr#ywwezxc aa        #xxxxxxxxxxxxxxxxxx#",
+"#d    a  d qwe    a#    d  zxxv&nxxc a#da&d qwwwe a&da&&&#   d    aa qwwwwww#xxxxxxxxxxxxxxxxxx#",
+"#d    zxxc aTd    a#nxxxc     a&d qwea#da&d a&&&yea&dzxxv#   d    aa aT     #xxxxxxxxxxxxxxxxxx#",
+"#ywwe      zxc    a#d   qwwe  a&d a&da#da&d a&&&&dzxc   a#nxxc    aa a qwwww#xxxxxxxxxxxxxxxxxx#",
+"#   d             a#d   a&&d  zxc a&da#da&d zv&nxcqwwwwea#d    qweaa a aT   #xxxxxxxxxxxxxxxxxx#",
+"#   d             a#d   a&&d      a&da#da&d  a&d  a&&&&da#d    a&daa a a qww#xxxxxxxxxxxxxxxxxx#",
+"#o  ywwwwwwwwwwwwwr#d   zxxc T    a&dzxca&d  zxc  zxxxxca#ywwwwr&yra a a a``#xxxxxxxxxxxxxxxxxx#",
+"###########################################################################`#xxxxxxxxxxxxxxxxxx#",
+"#&&&&&&&&&&&&&&&&&&#nxxxxxxxxxxxxxxc   T      &          #nxxxv&&d  qwwea```#xxxxxxxxxxxxxxxxxx#",
+"#&nxxxxxxxxxxxxxxv&#d nxxxxxxxv      q# nxxxxxxxxxxxxxxv #d   zv&d  a&&da```#xxxxxxxxxxxxxxxxxx#",
+"#&dnxxxxxxxxxxxxva&#d d0000000a qwe  a# d qwwenxxvqwwe a #d qwezxc  a&&dzxxx#xxxxxxxxxxxxxx0xxx#",
+"#&ddnxxxxxxxxxxvaa&#d ywwwwwwwr a d  a# d a&&dd00aa&&d a #d a&ywwe  a&&ywwwe#xxxxxxxxx0xxxxxxxx#",
+"#&dddnxxxxxxxxvaaa&#dnxvqwwwwe  zxc  a#&d zxxcywwrzxxc a #d a&&&&dT a&&&&&&d#xxxxxx0xxxxxxxxxxx#",
+"#&dddd00000000aaaa&#dd0aa&&&&dT qwwwwr# d qwweqwweqwwe a&#d zxxxxc  a&&&&&&d#xxxxxxxxxxxxxxxxxx#",
+"#&dddywww&&wwwraaa&#dd0aa&--&dqea&&&&&# d a&&da&&da&&d a #ywweqwwwe zxv&nxxv#xxxxxxxxxxxxxxxxxx#",
+"#&ddywwww&&wwwwraa&#dd0aa&--&dada&---&# d a&&da&&da&&d a #&&&da&&&ywwea&dqwr#xxxxxxxxxxxxxxxxxx#",
+"#&dywwwww&&wwwwwra&#dd0aa&&&&dzca&&&&&# d zxxczxxczxxc a #nxxczxv&&&&da&da&&#xxxxxxxxxxxxxxxxxx#",
+"#&ywwwwww&&wwwww&zx#cywrzxxxxc  zxxxxv# ywwwwwwwwwwwwwwr #d qwe zxxxxczxczxv#xxxxxxxxxxxxxxxxxx#",
+"#        &&&&&&&&     qwwwwwwwwwwwwwwr#          &        ywr&ywwwwwwwwwwwwr#xxxxxxxxxxxxxxxxxx#",
+"# ###########################################################################&&&&&&&&&xxxxxxxxx#",
+"#   dnxv&&&dnxxxxxv#---------```````````zxxxxxxxxxxxxxxxv#nxxxxxxxxxxxxxxxxvnxxxxxxxv&x0xxxxxxx#",
+"#   dd0a   dd00000a#---------`````````#eqwwwwwwwwwwwwwwea#dqwwwwwwwwwwwwwwwryenxxxxva&xxxxxxxxx#",
+"#xxxcd0a   dd0&&&0a#---------```------#da&&&&&&&&&&&&&&da#da&&&&&&&&&&&&&&&&#ddnxxvaa&xxxxxx0xx#",
+"#nxvnc0a   dd0&-&0a#--```-------------#da&nxxxxxxxxxxv&da#da&nxxxxxxxxxxxxxv#ddd00aaa&xxxxxxxxx#",
+"#d ad00a   dd0&-&0a#--```-------------#da&d    nxvnxvz&da#da&ywwwwwwwwwwwwea#ddd00aaa&xxxxxxxxx#",
+"#ywrywwr   dd0&-&0a#------------------#da&d H  d0ad0a  da#da&&&&& & &&&&&&da#ddd00aaa&xx0xxxxxx#",
+"#&         dd0&&&0a#------``---```----#da&d    ywrywrq&da#dzxxxxxxxxxxxxv&da#ddd00aaa&xxxxxxxxx#",
+"#&         dd00000a#&&  --``---```----#da&ywwwwwwwwwwr&da#ywwwwwwwwwwwwwr&da#ddd00aazxxxxxxxxxv#",
+"#xxxxxxxxxxcd000qwr#    -------```----#da&&&&&&&&&&&&&&da#&&&&&&&&&&&&&&&&da#ddywwrzxxxxxxxxxva#",
+"#nxxxxxxxxxxcqwea  #   &--------------#dzxxxxxxxxxxxxxxcz#nxxxxxxxxxxxxxxxca#dywwwwwwwwwwwwwwra#",
+"#ywwwwwwwwwwwwwwr      &--------------#ywwwwwwwwwwwwwwwe Bywwwwwwwwwwwwwwwwr#ywwwwwwwwwwwwwwwwr#",
+"################################################################################################", }end
+
+set_default_parent(cells[" "])
+create_world_by_map(level,cells)
+enigma.ConserveLevel=0
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

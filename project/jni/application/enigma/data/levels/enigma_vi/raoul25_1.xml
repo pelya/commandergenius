@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Oiltrace" el:subtitle="Mark stones burnable" el:id="raoul25"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="1:38"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelh = 13
+levelw = 20
+
+create_world(levelw, levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+          if c=="O" then
+            oxyd(i-1,line)
+            set_floor("fl-water",i-1,line)
+
+        elseif c=="#" then
+            set_stone("st-plain",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+        elseif c=="X" then
+            set_stone("st-plain_break",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+        elseif c=="B" then
+            set_stone("st-plain_move",i-1,line)
+            set_floor("fl-sahara",i-1,line,{secure=true})
+            set_item("it-burnable_oil",i-1,line)
+        elseif c=="F" then
+            set_stone("st-firebreak",i-1,line)
+            set_floor("fl-sahara",i-1,line,{secure=true})
+        elseif c=="Y" then
+            set_stone("st-break_invisible",i-1,line)
+            set_floor("fl-sahara",i-1,line,{secure=true})
+        elseif c=="G" then
+            set_stone("st-grate1",i-1,line)
+            set_floor("fl-sahara",i-1,line,{secure=true})
+            set_item("it-burnable_oil",i-1,line)
+        elseif c=="Z" then
+            set_stone("st-plain_break",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+            set_item("it-cross",i-1,line)
+        elseif c=="H" then
+            set_stone("st-grate1",i-1,line)
+            set_floor("fl-water",i-1,line,{secure=true})
+
+        elseif c==" " then
+            set_floor("fl-sahara",i-1,line)
+        elseif c=="~" then
+            set_floor("fl-water",i-1,line)
+
+        elseif c=="h" then
+            set_item("it-hammer",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+        elseif c=="d" then
+            set_item("it-dynamite",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+        elseif c=="p" then
+            set_item("it-pencil",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+        elseif c=="b" then
+            set_item("it-brush",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+        elseif c=="c" then
+            set_item("it-cross",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+
+        elseif c=="o" then
+            set_item("it-burnable_oil",i-1,line)
+            set_floor("fl-sahara",i-1,line,{secure=true})
+        end
+    end    
+end
+
+renderLine(00 , "####################")
+renderLine(01 , "#  #ppp# #GGo~#~oGG#")
+renderLine(02 , "#  #~p~#oBG~o~~oo~G#")
+renderLine(03 , "#  #~b##o#o~o~oo~oo#")
+renderLine(04 , "#  #~d#oo#o~ooo~oo~#")
+renderLine(05 , "#  ##X#o~#oo~###B###")
+renderLine(06 , "#o    #o~#~o##oGGoo#")
+renderLine(07 , "#oo  h#oo#oo#o~HH~o#")
+renderLine(08 , "#F#ZZ###o#o~#GHOOHG#")
+renderLine(09 , "#oooooc#o#ooBGHOOHG#")
+renderLine(10 , "#o~~~###oBY~#o~HH~o#")
+renderLine(11 , "#oooooooo#~~#ooGGo##")
+renderLine(12 , "###################~")
+
+oxyd_shuffle()
+
+set_actor("ac-blackball", 2,2, {player=0})                    
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

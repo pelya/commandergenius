@@ -1,0 +1,1560 @@
+\input texinfo                              @c -*- texinfo -*-
+@afourpaper
+@documentlanguage de
+
+@set VERSION 1.01
+
+@copying
+Copyright @copyright{} 2003, 2004, 2005, 2006, 2007 Daniel Heck und Beitragende
+
+Das Kopieren und Verteilen dieser Datei, mit oder ohne @"Anderungen, ist
+gestattet, unter der Voraussetzung, dass obiger Copyright-Vermerk und
+dieser Abschnitt erhalten bleiben.
+@end copying
+
+@setfilename enigma.info
+@settitle Enigma Handbuch
+@titlepage
+@center @image{images/logo}
+@sp 1
+@center @titlefont{Enigma Handbuch}
+@center f@"ur Version @value{VERSION}
+@sp 2
+@center Copyright @copyright{} 2003, 2004, 2005, 2006, 2007 Daniel Heck (@email{dheck@@gmx.de})
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+@end titlepage
+
+@contents
+
+@ifnottex
+@node Top, Einleitung, (dir), (dir)
+@top Enigma
+
+Dieses Handbuch beschreibt die Installation und das Spielprinzip von
+Enigma.  Es bezieht sich auf Enigma Version @value{VERSION}.
+
+Copyright @copyright{} 2003, 2004, 2005, 2006, 2007 Daniel Heck und Beitragende
+
+Das Kopieren und Verteilen dieser Datei, mit oder ohne @"Anderungen, ist
+gestattet, unter der Voraussetzung, dass obiger Copyright-Vermerk und
+dieser Abschnitt erhalten bleiben.
+@c @insertcopying
+@end ifnottex
+
+@menu
+* Einleitung::                  Allgemeine Informationen @"uber Enigma
+* Das Spiel::                   Spielprinzipien
+* Einige Spielobjekte::         Beschreibung einiger Objekte im Spiel
+* Fortgeschrittene Themen::     Weitere Features und Verwaltung
+* Tipps und Tricks::            Tipps f@"ur einige schwierige Levels
+* Autoren und Danksagungen::    Credits und `Thank You's
+@end menu
+
+@node Einleitung, Das Spiel, Top, Top
+@chapter Einleitung
+
+@menu
+* Ueber Enigma::                Einige Fakten @"uber Enigma
+* Installation::                Woher und wie installiert man Enigma
+* Verbreiten von Enigma::       Geben Sie Kopien an Ihre Freunde weiter!
+@end menu
+
+
+@node Ueber Enigma, Installation, Einleitung, Einleitung
+@section @"Uber Enigma
+
+Zu sagen, Enigma sei ein R@"atselspiel, ist eine
+Untertreibung. Tats@"achlich ist Enigma eine riesige Sammlung von
+R@"atseln, jede seiner 550 einzigartigen Landschaften fordert die
+Intelligenz, Geschicklichkeit und wahre Willensst@"arke seines Spielers
+aufs Neue. Enigma ist einfach zu erlernen, herausfordernd zu spielen
+und schwer zu schlagen. Es ist f@"ur fast alle Altersklassen
+geeignet. Es enth@"alt Hunderte von Landschaften (Leveln). Und als ob
+das noch nicht genug w@"are, ist es zudem vollst@"andig frei. Wenn Sie
+Puzzle- und R@"atselspiele m@"ogen, und eine ruhige Hand haben, wird Sie
+Enigma wahrscheinlich f@"ur Stunden nicht aus seinem Bann lassen.
+
+Das Ziel des Spieles ist es, Paare identisch gef@"arbter
+@samp{Oxydsteine} zu finden und aufzudecken. Einfaches Prinzip?
+Bestimmt. Einfach zu meistern? Sicherlich nicht! Versteckte Fallen,
+riesige Labyrinthe, Laserstrahlen und nicht zuletzt zahllose haarige
+R@"atsel blockieren f@"ur gew@"ohnlich den direkten Weg zu den
+Oxydsteinen. Enigmas Spielobjekte (von denen Hunderte existieren,
+so dass keine Langeweile aufkommen kann) interagieren auf viele
+unerwartete Weisen, and da viele von ihnen den Gesetzen der Physik
+gehorchen (bzw. Enigmas spezieller Version der Physik), ist es nicht
+immer einfach, sie mit der Maus zu kontrollieren @enddots{}
+
+Das urspr@"ungliche Ziel des Enigma-Projektes war es, den Geist der
+Oxyd-Spiele-Serie am Leben zu erhalten, nachdem ihr Verleger 2002
+entschied, das Spielegesch@"aft zu verlassen. Fans dieses ber@"uhmten
+Spiels werden ihre D@'ej@`a-vus erleben. Aber @"uber die Jahre hat
+Enigma auch die Ideen zahlloser weiterer ber@"uhmter Spiele in sich
+aufgenommen und ihnen seinen eigenen, ganz pers@"onlichen Twist
+hinzugef@"ugt.
+
+Enigma gibt es f@"ur Windows, Mac OS X und die meisten Linux- und
+Unixversionen. Es wurde in viele Sprachen @"ubersetzt, sogar dieses
+Handbuch ist in mehreren Sprachen erh@"altlich.
+
+Die offizielle @uref{http://www.nongnu.org/enigma, Homepage} von Enigma
+versucht, die wichtigsten Informationen rund um Enigma zu sammeln: Hier
+finden Sie Bildschirmfotos, die aktuellsten Versionen, Informationen
+@"uber die Weiterentwicklung von Enigma und au@ss{}erdem die aktuellste
+Ausgabe dieses @uref{http://www.nongnu.org/enigma/manual, Handbuchs}.
+Die Entwickler von Enigma k@"onnen jederzeit unter der Email-Adresse
+@email{enigma-devel@@nongnu.org} erreicht werden.
+
+Enigma ist freie Software, d.h. Sie sind ausdr@"ucklich dazu
+aufgefordert, m@"oglichst viele Kopien an Ihre Freunde zu verteilen
+(@pxref{Verbreiten von Enigma}).  Enigma wird von einer kleinen Gruppe
+von Freiwilligen entwickelt, und wir alle arbeiten in unserer Freizeit.
+Wenn Ihnen das Spiel gef@"allt, w@"urden wir uns @"uber eine kleine
+Email an die oben genannte Adresse sehr freuen, sozusagen als kleine
+Anerkennung und Belohnung f@"ur die unz@"ahligen Stunden, die wir in
+Enigma investiert haben.
+
+
+@node Installation, Verbreiten von Enigma, Ueber Enigma, Einleitung
+@section Installation
+
+Die aktuellste Version von Enigma findet sich stets auf der offiziellen
+@uref{http://www.nongnu.org/enigma/download.html, Download-Seite}. Diese
+Seite stellt Pakete f@"ur die folgenden Betriebssysteme bereit:
+
+@table @strong
+@item Windows
+Die Windows-Version von Enigma wird in Form eines einfachen
+Installationsprogrammes vertrieben, das Enigma auf Ihrem Computer
+einrichtet.  Laden Sie bitte einfach die bereitgestellte Datei auf Ihren
+Computer und f@"uhren Sie sie aus, um die Installation zu starten.
+
+@item Unix
+Vorgefertigte Pakete existieren f@"ur einige verbreitete
+Linux-Distributionen wie SUSE, Redhat und Debian.  F@"ur andere
+Unix-@"ahnliche Betriebssysteme steht ist das Neukompilieren der
+Quellcodes sicher die einfachste L@"osung.
+
+@item Mac OS X
+Unter OS X ist keine Installation n@"otig; entpacken Sie einfach die
+bereitgestellt @file{.dmg} or @file{.tar.gz} und kopieren Sie die
+enthaltene Applikation an den von Ihnen gew@"unschten Ort.
+@end table
+
+Die Download-Seite enth@"alt @"ublicherweise detailliertere und aktuellere
+Informationen (allerdings nur auf Englisch).  Falls Sie Probleme haben,
+Enigma auf Ihrem Rechner zum Laufen zu bringen, z@"ogern Sie bitte nicht,
+uns unter @email{enigma-devel@@nongnu.org} um Unterst@"utzung zu bitten.
+
+@node Verbreiten von Enigma,  , Installation, Einleitung
+@section Verbreiten von Enigma
+
+Enigma ist freie Software und darf gem@"a@ss{} den Bedingungen der GNU General
+Public License (GPL) verbreitet werden.  Die englische Fassung dieser
+Lizenz ist jeder Kopie von Enigma beigelegt, die Datei hei@ss{}t
+entweder @file{COPYING} oder @file{COPYING.txt}.  F@"ur den Fall, dass Sie
+Enigma lediglich @emph{spielen} wollen, m@"ussen Sie die Lizenz eigentlich
+nicht studieren (Sie h@"atten es ja vermutlich ohnehin nicht getan).  F@"ur
+Sie besagt die Lizenz im Wesentlichen: Spielen Sie Enigma so viel Sie
+wollen, so lange Sie wollen und geben Sie auf jeden Fall allen Ihren
+Freunden eine Kopie!
+
+Falls Sie dagegen @"Anderungen an Enigma vornehmen oder an der weiteren
+Entwicklung teilnehmen m@"ochten, nehmen Sie sich bitte die Zeit, die
+Lizenz durchzulesen.  Die GPL gew@"ahrleistet, dass Enigma auch in
+Zukunft freie Software bleiben wird und ohne zus@"atzliche
+Einschr@"ankungen benutzt und verbreitet werden kann.  Insbesondere
+m@"ussen Derivate von Enigma unter sehr @"ahnlichen Lizenzbedingungen
+wie Enigma selbst verf@"ugbar gemacht werden.
+
+Die beiden vorstehenden Abs@"atze sind kein Ersatz f@"ur die eigentliche
+Lizenz, lediglich eine Umschreibung ihrer Grundintention.  F@"ur Details
+konsultieren Sie bitte den originalen Lizenztext oder fragen Sie auf der
+Enigma-Mailingliste.
+
+@node Das Spiel, Einige Spielobjekte, Einleitung, Top
+@chapter Das Spiel
+
+@menu
+* Ganz zu Anfang::             Durch die Men@"us navigieren und starten
+* Spielregeln::                Wie man Enigma spielt
+* Steuerung::                  Tastatur und Mauskommandos
+@end menu
+
+
+@node Ganz zu Anfang, Spielregeln, Das Spiel, Das Spiel
+@section Ganz zu Anfang
+
+Enigma pr@"asentiert sich nach dem Starten mit einem kleinen
+Hauptmen@"u, von dem aus Sie ein neues Spiel starten, einige
+Einstellungen @"andern oder das Spiel wieder verlassen k@"onnen, sobald
+Sie genug haben.  Die folgenden Abschnitte werden Ihnen einen kurzen
+@"Uberblick @"uber das Level-Men@"u und das Options-Men@"u geben,
+in der Hoffnung, dass sich der Rest von selbst erschlie@ss{}t. Zu den
+meisten Men@"us kann man mit @key{F1} eine Hilfe aufrufen. Die Begriffe
+``Level'' und ``Landschaft'' werden synonym verwendet.
+
+@menu
+* Das Level-Menue::              W@"ahle die n@"achste Landschaft
+* Das Levelpaket-Menue::         Bestimme ein Levelpaket
+* Einstellungen::                Passe Enigma an
+* Der Level-Inspektor::          Detailierte Informationen @"uber eine Landschaft
+@end menu
+
+
+@node Das Level-Menue, Das Levelpaket-Menue, Ganz zu Anfang, Ganz zu Anfang
+@subsection Das Level-Men@"u
+
+Wenn Sie im Hauptmen@"u den Eintrag ``Spiel starten'' anw@"ahlen,
+landen Sie im Level-Men@"u, das ungef@"ahr folgenderma@ss{}en
+aussieht:
+
+@image{images/levelmenu,,7cm}
+
+Der Bildschirm ist in drei Bereiche unterteilt: der obere Bereich
+enth@"alt Informationen @"uber den gerade angew@"ahlten Level und
+das aktuelle Levelpaket, der mittlere Bereich enth@"alt eine
+@"Ubersicht @"uber alle verf@"ugbaren Landschaften, und am unteren
+Bildschirmrand befindet sich eine Leiste mit Aktionskn@"opfen.
+
+Durch die Landschafts-@"Ubersicht k@"onnen Sie mithilfe der kleinen
+Pfeil-Kn@"opfe am rechten Rand oder mit den Pfeiltasten auf der Tastatur
+navigieren.  Um ein neues Spiel zu starten, klicken Sie einfach auf das
+gew@"unschte Vorschaubildchen oder Sie dr@"ucken die Eingabetaste, um
+die momentan ausgew@"ahlte Landschaft zu starten.
+
+Enigma verf@"ugt @"uber zwei Schwierigkeitsgrade: ``einfach'' und
+``normal''. Um zwischen diesen umzuschalten, dr@"ucken Sie den mittleren
+Knopf in der untersten Zeile: Schalten Sie die Silbermedaille mit der
+Feder ein, wenn Sie einfachere Landschaften bevorzugen, oder die
+Goldmedaille f@"ur den normalen, schwierigeren Modus.
+
+Nicht alle Landschaften besitzen eine vereinfachte Version;
+diejenigen, die eine besitzen, sind durch eine Feder gekennzeichnet
+(sofern Sie sie noch nicht gel@"ost haben) oder mit einem Silbermedaille
+in der oberen linken Ecke des Vorschaubilds.
+
+Sie k@"onnen zur n@"achsten Landschaft springen, indem Sie entweder
+@key{F5} bet@"atigen oder auf den @key{>>|}-Knopf in der untersten Zeile
+klicken. Die Bedeutung von ``n@"achste Landschaft'' h@"angt dabei davon
+ab, welchen Modus Sie im auf dem Knopf ganz links-unten eingestellt
+haben.
+
+@itemize @bullet
+@item 
+Eine stehende schwarze Kugel steht f@"ur ``definitiv n@"achste''. Sie
+werden damit zur n@"achsten Landschaft im Paket kommen, unabh@"angig
+davon, ob Sie diese Landschaft schonmal gel@"ost haben oder nicht.
+
+@item
+Das Medaillenpaar bezeichnet die ``n@"achste ungel@"oste Landschaft''. Der
+@key{>>|}-Knopf f@"uhrt sie dabei zur n@"achsten Landschaft, die im
+gew@"ahlten Schwierigkeitsgrad noch ungel@"ost ist.
+
+@item
+Die beschleunigende Kugel steht f@"ur den Par-Modus. Par (``professional
+average rating'') bezeichnet ein gutes Ergebnis, das von guten
+Spielern erreicht werden sollte. Landschaften, in denen Sie ebenso
+schnell wie Par oder schneller waren, werden mit einer ebensolchen
+beschleunigenden Kugel gekennzeichnet. Im Par-Modus springt der
+@key{>>|}-Knopf zur n@"achten Landschaft, f@"ur die Sie Par noch nicht
+erreicht haben.
+
+@item
+Schlie@ss{}lich steht der Globus f@"ur die Weltrekordjagd. Wenn Ihr Ergebnis
+das weltbeste bekannte Ergebnis ist, so werden Sie durch einen Globus
+@"uber dem Vorschaubild der Landschaft geehrt. In diesem Modus wird eine
+Landschaft wieder und wieder gespielt, bis Sie den Weltrekord erreicht
+haben. 
+
+@c Of course, a world record is a rare event. But you may
+@c use this mode just for training purposes and to lower your score a little bit.
+@end itemize
+
+Eine Landschaft ist m@"oglicherweise au@ss{}erdem mit einem kleinen
+roten Dreieck mit Ausrufezeichen markiert: das Symbol signalisiert, dass
+die Landschaft aktualisiert wurde, seit Sie sie zuletzt gel@"ost
+haben. Sie sehen dies wahrscheinlich nur nach einem Update von Enigma.
+
+Im Level-Men@"u k@"onnen folgende Tastaturk@"urzel verwendet werden:
+
+@table @kbd
+@item @key{ESC}
+R@"uckkehr zum Hauptmen@"u
+
+@item @key{F1}
+Hilfe
+
+@item @key{F5}
+Zur n@"achsten Landschaft, entspricht dem @key{>>|}-Knopf
+
+@item Pfeiltasten
+Auswahl einer Landschaft
+
+@item @key{Eingabe}
+Ausgew@"ahlte Landschaft spielen
+
+@item @key{Leertaste}
+N@"achstes Landschaftspaket
+
+@item @key{Backspace}
+Voriges Landschaftspaket
+
+@end table
+
+@node Das Levelpaket-Menue, Einstellungen, Das Level-Menue, Ganz zu Anfang
+@subsection Das Levelpaket-Men@"u
+
+Enigma enth@"alt bereits viele Landschaften. Sehr, sehr viele, um genau
+zu sein. Um etwas Ordnung hineinzubringen, wurden die Landschaften in
+``Levelpaketen'' zusammengefasst. Und da mit jeder neuen Version von
+Enigma neue Landschaften hinzukamen, mussten wir inzwischen sogar die
+Levelpakete selber zu ``Gruppen'' zusammenfassen. Aber keine Sorge, es
+ist alles viel einfacher als es jetzt vielleicht klingt.
+
+Um ein Levelpaket auszuw@"ahlen, wechseln Sie ins ``Levelpaket''-Men@"u,
+in das Sie vom Hauptmen@"u oder vom Level-Men@"u aus kommen k@"onnen. 
+
+In der linken Spalte sind die Gruppen aufgef@"uhrt, rechts die
+Levelpakete in der ausgew@"ahlten Gruppe. Die offiziellen,
+voreingestellten Gruppen von Enigma sind die folgenden:
+
+@itemize @bullet
+@item @b{Enigma} - Landschaften speziell f@"ur Enigma 
+@item @b{D@'ej@`a-vu} - Landschaften, die Sie vielleicht schonmal
+gesehen haben
+@item @b{Sokoban}
+@item @b{Facets} - Spezielle Sortierungen und Blickweisen auf die
+Landschaften aus den vorigen Gruppen
+@item @b{User} - Eigene Landschaften und Levelpakete, darunter die
+``History'', die die Landschaften enth@"alt, die zuletzt von Ihnen
+gespielt wurden, ``Search Result'' (Suchergebnisse) und ``Auto'', ein
+automatisch erstelltes Levelpaket f@"ur einzelne selbsterzeugte Landschaften.
+@item @b{Development} - Vorlagen und unvollendete Landschaften vom
+Enigma Team
+@item @b{All Packs} - Alle Pakete zusammen.
+@end itemize
+
+Mit einem Linksklick k@"onnen Sie eine Gruppe und dann ein Levelpaket
+ausw@"ahlen. 
+
+F@"ur eine weitere Beschreibung der Levelpakete lesen Sie bitte
+@ref{User-Levelpakete}.
+
+@node Einstellungen, Der Level-Inspektor, Das Levelpaket-Menue, Ganz zu Anfang
+@subsection Einstellungen
+
+Das Optionsmen@"u erm@"oglichst es Ihnen, Enigma an Ihre Vorlieben anzupassen.
+
+@c TODO: mit @"ubersetzung im Spiel abgleichen
+@table @strong
+@item Sprache (Language)
+W@"ahlen Sie hier die Sprache, in der die Nachrichten in den Men@"us
+und (falls verf@"ugbar) in den Leveln dargestellt werden.
+
+@item Vollbild
+Schaltet zwischen Vollbild- und Fensterdarstellung um.  Sie k@"onnen dazu
+auch das Tastenk@"urzel @kbd{Alt-@key{Eingabe}} verwenden, auch dann, wenn
+Sie sich nicht im Optionsmen@"u befinden.  @emph{Hinweis:} Auf einigen
+System wird diese Einstellung erst dann @"ubernommen, wenn Sie ins
+Hauptmen@"u zur@"uckkehren.
+
+@item Grafikmodus
+Benutzen Sie diesen Knopf um die Bildschirmaufl@"osung zu w@"ahlen, die
+Enigma f@"ur die Darstellung verwendet.  Diese Einstellung wird erst
+@"ubernommen wenn Sie ins Hauptmen@"u zur@"uckkehren.
+
+@item Gamma-Korrektur
+Regeln Sie hier falls n@"otig die Helligkeit der Bildschirmdarstellung.
+
+@item Maustempo
+Stellen Sie hier ein, wie schnell Ihre Kugel beschleunigen soll wenn Sie
+die Maus bewegen.  W@"ahrend des Spiels k@"onnen Sie dazu die linke/rechte
+Pfeiltaste verwenden.
+
+@item Effekt-Lautst@"arke
+Regeln Sie hier die Lautst@"arke von Klangeffekten im Spiel.
+
+@item Sound Schema
+(F@"ur Oxyd-Kenner.) Mit diesem Knopf k@"onnen Sie das Klangschema
+wechseln, das Enigma w@"ahrend des Spiels verwendet.  Nach Installation
+der Oxyd-Daten k@"onnen Sie hier die originalen Soundeffekte einschalten.
+
+@item Musik-Lautst@"arke
+Regeln Sie hier die Lautst@"arke der Hintergrundmusik im Men@"u.
+
+@c @item Music in game
+@c Enigma can play music files during the game.  Turn this feature on or off.
+
+@item Stereo
+Erlaubt das Umschalten zwischen Links-Rechts-Stereo, Rechts-Links-Stereo
+und Mono-Klang.
+
+@item Update Bewertungen
+Auf der Einstellung @samp{Auto} wird Enigma von Zeit zu Zeit
+versuchen, aktuelle Bewertungen herunterzuladen. Dies betrifft
+@"offentliche Bewertungen, Weltrekorde, PAR-Zeiten etc.
+@xref{Ergebnisse hochladen}.
+
+@item Spielername
+Geben Sie hier den Namen oder Alias ein, der zusammen mit Ihren
+Ergebnissen angezeigt werden soll, wenn Sie enigma.score
+hochladen. @xref{Ergebnisse hochladen}.
+
+@item Userpfad
+Das Verzeichnis, in dem Enigma die Nutzerdaten speichert. Details
+stehen im Referenzhandbuch.
+
+@item Userbilderpfad
+Das Verzeichnis, in dem Enigma Nutzerbilder speichert. Details stehen
+im Referenzhandbuch.
+
+@end table
+
+@node Der Level-Inspektor, , Einstellungen, Ganz zu Anfang
+@subsection Der Level-Inspektor
+
+Um genauere Details @"uber eine Landschaft zu erfahren, k@"onnen Sie mit
+einem Rechtsklick oder Kontroll-Klick auf das Vorschaubild einer
+Landschaft den Level-Inspektor aufrufen.
+
+Hier k@"onnen Sie Ihre Ergebnisse mit dem Weltrekord f@"ur diese
+Landschaft, mit dem Par und den Ergebnissen des Levelautors selber
+vergleichen. Es wird sogar eine Statistik dazu angezeigt, wieviele
+andere  Spielere diese Landschaft bereits gel@"ost haben.
+
+Neben weiteren Informationen, die im Referenz-Handbuch beschrieben
+werden, k@"onnen Sie auch eine kurze Anmerkung zur Landschaft
+hinterlassen und sie bewerten.
+
+Beachten Sie bitte, dass das Textfeld f@"ur die Anmerkung m@"oglicherweise
+nur ASCII-Zeichen erlaubt, abh@"angig vom System, auf dem Enigma
+l@"auft. Vermeiden Sie also notfalls Umlaute, Akzente und Sonderzeichen.
+
+Die Bewertung ganz links-unten ist Ihr pers@"onlicher Eindruck von der
+Landschaft, den Sie durch einen Linksklick einstellen k@"onnen. @samp{-}
+steht dabei f@"ur keine Meinung, 0 f@"ur sehr schlecht, 5 ist Durchschnitt
+und 10 steht f@"ur die beste unter den guten Landschaften. Ihre
+Bewertung k@"onnen Sie uns zusammen mit Ihren Ergebnissen zuschicken
+(@pxref{Ergebnisse hochladen}).
+
+Schlie@ss{}lich k@"onnen Sie den Level-Inspektor auch dazu verwenden, die
+Bildschirmphotos zu betrachten, die Sie w@"ahrend des Spielens dieser
+Landschaft aufgenommen haben (@pxref{Steuerung}).
+
+
+@node Spielregeln, Steuerung, Ganz zu Anfang, Das Spiel
+@section Spielregeln
+
+@menu
+* Gewoehnliche Landschaften::
+* Zwei-Spieler Landschaften::
+* Meditations-Landschaften::
+@end menu
+
+Um Verwirrungen vorzubeugen: Die Begriffe ``Level'' und ``Landschaft''
+werden synonym verwendet.
+
+@node Gewoehnliche Landschaften, Zwei-Spieler Landschaften, Spielregeln, Spielregeln
+@subsection Gew@"ohnliche Landschaften
+
+Die grundlegende Idee hinter Enigma ist recht einfach: In den meisten
+Landschaften steuern Sie eine kleine schwarze Kugel, und Ihr Ziel ist
+es, identische Paare sogenannter @emph{Oxyd-Steine} zu finden und zu
+@"offnen.  Geschlossene Oxyd-Steine sehen folgenderma@ss{}en aus (es gibt
+insgesamt vier @"au@ss{}erlich verschiedene Varianten, die sich aber alle
+gleich verhalten):
+
+@image{images/st-oxyds,,0.7cm}
+
+Ber@"uhren Sie einen Oxyd-Stein mit Ihrer Kugel, dann @"offnet er sich
+und zeigt ein blinkendes farbiges Symbol.  Je zwei Oxyd-Steine in jeder
+Landschaft tragen dasselbe Symbol.  Diese Paare gilt es zu finden und
+direkt hintereinander zu ber@"uhren, damit sie permantent ge@"offnet
+bleiben---stimmen die Symbole nicht @"uberein, schlie@ss{}t sich der
+erste Oxyd-Stein wieder.  Eine Landschaft gilt als gel@"ost, sobald Sie
+alle Paare von Oxyd-Steinen gefunden und ge@"offnet haben.  In der
+folgenden Abbildung sehen Sie ein Paar von gr@"unen Oxyd-Steinen, das
+bereits ge@"offnet wurde.  Das Fragezeichen im blauen Oxyd-Stein
+signalisiert, dass das zweite blaue Symbol noch irgendwo versteckt ist.
+
+@image{images/intro-oxyd,,3cm}
+
+@emph{@"Ubrigens: falls Sie es noch nicht getan haben, ist jetzt ein
+guter Zeitpunkt, Enigma einmal zu starten und die ersten paar
+Landschaften auszuprobieren!}
+
+Sie k@"onnen auf dem Boden liegende Objekte aufsammeln, indem Sie
+einfach dar@"uber rollen.  Das Inventar am unteren Rand des Bildschirms
+zeigt alle Gegenst@"ande an, die sich gerade in Ihrem Besitz befinden.
+Zu Beginn des Spiels sind Sie lediglich mit zwei Ersatzkugeln
+ausger@"ustet.  Die folgende Abbildung zeigt ein Inventar, das bereits
+eine Schaufel, ein St@"uck Papier, zwei Stangen Dynamit, Ihre
+Ersatzleben und einen Regenschirm enth@"alt:
+
+@image{images/intro-inventory,,1cm}
+
+Das Objekt, das sich ganz links im Inventar befindet, kann durch
+Dr@"ucken der linken Maustaste benutzt werden: damit legen Sie es
+entweder auf dem Boden ab oder Sie aktivieren das Objekt.  Dynamit
+beginnt beispielsweise zu brennen, wenn Sie es ablegen, und Sprungfedern
+bewirken, dass Ihre Kugel in die Luft h@"upft.  Mit der rechten
+Maustaste oder dem Mausrad k@"onnen Sie die Eintr@"age im Inventar
+umordnen.
+
+M@"ochten Sie einmal (aus welchem Grund auch immer) keine Objekte
+einsammeln, halten Sie einfach eine der Maustasten gedr@"uckt, w@"ahrend
+Sie die Kugel bewegen.  In einigen Situationen werden Sie das vielleicht
+hilfreich finden.
+
+Viele Steine lassen sich verschieben, wenn man sie nur kr@"aftig genug
+anschubst.  Einer der n@"utzlichsten beweglichen Steine ist der
+Holzstein, der etwa dazu verwendet werden kann, Br@"ucken @"uber Wasser
+und Abgr@"unde zu errichten.  Das folgende Bild zeigt, wie man eine
+Br@"ucke baut, indem man Holzsteine ins Wasser hineinschiebt:
+
+@image{images/intro-plank,,4cm}
+
+H@"aufig interagieren Spielobjekte auf @"uberraschende Weise:
+Gegenst@"ande, die auf dem Boden liegen k@"onnen beispielsweise mit
+Laserstrahlen oder beweglichen Steinen transformiert werden.  Und viele
+Steine verhalten sich bei Ber@"uhrung anders als normal wenn Sie bestimmte
+Gegenst@"ande im ersten Eintrag Ihres Inventars haben (der Zauberstab
+ist der ber@"uhmteste Vertreter dieser Gattung).
+
+Eine letzte Bemerkung: F@"uhlen Sie sich nicht gleich entmutigt durch
+die scheinbare Komplexit@"at des Spiels---die genaue Verhaltensweise der
+meisten Objekte wird im Laufe der Zeit klar werden.  Einige der
+merkw@"urdigeren Objekte werden au@ss{}erdem in @ref{Einige Spielobjekte}
+n@"aher vorgestellt..
+
+@node Zwei-Spieler Landschaften, Meditations-Landschaften, Gewoehnliche Landschaften, Spielregeln
+@subsection Zwei-Spieler Landschaften
+
+Zun@"achst eine schlechte Nachricht: Bislang unterst@"utzt Enigma noch keine
+Spiele @"uber lokale Netzwerke oder das Internet.  In dieser Hinsicht sind also
+Zwei-Spieler Landschaften in Wirklichkeit Ein-Spieler Landschaften, in
+denen Sie zwischen zwei Kugeln hin- und herschalten k@"onnen: die schwarze
+Kugel kennen Sie bereits, und eine zus@"atzliche wei@ss{}e Kugel.
+
+@image{images/intro-twoplayer,,7cm}
+
+Zwei-Spieler Landschaften k@"onnen Sie an dem kleinen Yin-Yang Symbol in
+Ihrem Inventar erkennen.  Wenn Sie dieses Objekt aktivieren, k@"onnen Sie
+die Mauskontrolle auf die wei@ss{}e bzw. wieder zur@"uck auf die schwarze
+Kugel legen.
+
+@node Meditations-Landschaften,  , Zwei-Spieler Landschaften, Spielregeln
+@subsection Meditations-Landschaften
+
+Die sogenannten Meditationslandschaften unterscheiden sich im
+Spielprinzip deutlich von gew@"ohnlichen Landschaften: hier besteht Ihre
+Aufgabe nicht darin, passende Paare von Oxyd-Steinen zu finden, sondern
+darin, eine Anzahl kleiner wei@ss{}er Kugeln in Vertiefungen im Boden zu
+bef@"ordern.  Die Landschaft gilt als gel@"ost, sobald alle Kugeln in je
+einer Mulde liegen und sich nicht mehr bewegen.
+
+@image{images/intro-meditation,,3cm}
+
+Aber seien Sie vorsichtig: Alle Kugeln bewegen sich gleichzeitig und
+eine ruckartige Mausbewegung kann einige der Kugeln wieder aus Ihren
+Vertiefungen herausschubsen.  Meditationslandschaften erfordern
+gew@"ohnlich ein sehr ruhiges H@"andchen und eine ordentliche Portion
+Geduld (sie hei@ss{} nicht umsonst Meditationslandschaften!).
+
+@node Steuerung,  , Spielregeln, Das Spiel
+@section Steuerung
+
+Folgende Tabelle gibt einen @"Uberblick @"uber die Tastenbelegung im
+Spiel.  Sie m@"ussen sich diese Liste nicht einpr@"agen---sie kann
+w@"ahrend des Spiels jederzeit mit der @key{F1}-Taste abgerufen werden.
+
+@table @kbd
+@item Linke Maustaste
+Benutze den ersten Gegenstand im Inventar
+
+@item Rechte Maustaste / Mausrad
+Sortiere die Gegenst@"ande im Inventar um
+
+@item @key{ESC}
+Zeige das Spielmen@"u
+
+@item @key{F1}
+Zeige den Hilfebildschirm
+
+@item @key{F3}
+Zerst@"ore die momentane Kugel
+
+@item @key{Umschalt}+@key{F3}
+Starte die Landschaft von Neuem
+
+@item @key{F4}
+Gehe zur n@"achsten Landschaft
+
+@item @key{F5}
+Gehe zur n@"achsten ungel@"osten Landschaft
+
+@item @key{F10}
+Erzeuge ein Bildschirmfoto
+
+@item @key{Pfeil links}
+Verringere Mausgeschwindigkeit
+
+@item @key{Pfeil rechts}
+Erh@"ohe Mausgeschwindigkeit
+
+@item @key{Alt}-@key{RET}
+Zwischen Vollbild- und Fensterdarstellung umschalten (funktioniert nicht
+auf allen Systemen, notfalls kann das Einstellungsmen@"u verwendet
+werden)
+
+@item @key{Alt}-@key{X}
+Kehre zur@"uck zum Landschaftsmen@"u
+@end table
+
+@node Einige Spielobjekte, Fortgeschrittene Themen, Das Spiel, Top
+@chapter Einige Spielobjekte
+
+Es gibt Dutzende verschiedener Spielobjekte, die Sie in Enigmas
+Landschaften kennenlernen werden. Hier wollen wir nur eine kleine
+Auswahl davon beschreiben, auf die Sie vielleicht h@"aufiger treffen
+werden. Wenn das Spielprinzip von Enigma f@"ur Sie neu ist, wollen Sie
+vielleicht zuerst mit den Tutoriallandschaften beginnen? Starten Sie
+daf@"ur einfach Enigma, w@"ahlen Sie ``Levelpaket'' dann den Knopf
+``Enigma'' ganz links-oben, dann ``Tutorial'' auf der rechten
+Seite. Beginnen Sie mit der ersten Level ``Oxyd Stones 1''. Das
+Tutorial zeigt Ihnen die wichtigsten Spielobjekte und -ideen, und
+zum @"Uben einige der einfacheren Landschaften aus Enigmas Levelpaketen.
+
+@menu
+* Gegenstaende::                 
+* Steine::                      
+@end menu
+
+@node Gegenstaende, Steine, Einige Spielobjekte, Einige Spielobjekte
+@section Gegenst@"ande
+
+@menu
+* Sprengstoffe::
+* Regenschirme::
+* Faehnchen::
+@end menu
+
+@node Sprengstoffe, Regenschirme, Gegenstaende, Gegenstaende
+@subsection Sprengstoffe
+
+@image{images/it-explosives,,0.7cm}
+
+In Enigma werden Sie im Laufe der Zeit @"uber drei verschiedene Arten
+von Sprengstoff stolpern.  Am harmlosesten ist die Dynamitstange, mit
+der Sie zwar nur geringen direkten Schaden anrichten k@"onnen, die sich
+aber hervorragend als Z@"under f@"ur naheliegenede Bomben eignen.
+
+Schwarze Bomben haben gen@"ugend Sprengladung, um tiefe L@"ocher in die
+meisten Bodentypen zu rei@ss{}en und etwaige anliegende Gegenst@"ande zu
+zerst@"oren.  F@"ur die meisten Zerst@"orungsarbeiten sind sie daher das
+Mittel der Wahl.  Wei@ss{}e Bomben haben die kombinierte Sprengladung
+von f@"unf schwarzen Bomben---bringen Sie ihre Kugel auf sichere Distanz
+wenn Sie eine von ihnen brennen sehen!
+
+@node Regenschirme, Faehnchen, Sprengstoffe, Gegenstaende
+@subsection Regenschirme
+
+@image{images/it-umbrella,,0.7cm}
+
+Benutzen Sie Schirme, um ihre Kugel f@"ur kurze Zeit (10 Sekunden um
+genau zu sein) unverwundbar zu machen.  Solange wie ein Schirm aktiv
+ist, wird ein wei@ss{}er blinkender Ring um Ihre Kugel herum angezeigt.
+Sobald der Halo anf@"angt zu flackern ist Eile angesagt: Ihnen bleiben
+dann nur noch 3 Sekunden, um Ihre Kugel in sicheres Terrain zu
+man@"ovrieren.
+
+@node Faehnchen,  , Regenschirme, Gegenstaende
+@subsection F@"ahnchen
+
+@image{images/it-flags,,0.7cm}
+
+Fahnen sind insbesondere auf langen und gef@"ahrlichen Reisen hilfreiche
+Begleiter.  Wenn Ihre Kugel unterwegs zu Bruch geht, k@"onnen Sie die
+Landschaft dort fortsetzen, wo Sie zuletzt ein F@"ahnchen abgelegt
+haben, und m@"ussen nicht noch einmal ganz am Anfang starten.  Es
+existieren zwei verschiedene Fahnen: eine schwarze und eine wei@ss{}e,
+die jeweils die Startposition der schwarzen oder wei@ss{}en Kugel
+festlegen.
+
+@node Steine,  , Gegenstaende, Einige Spielobjekte
+@section Steine  
+
+@menu
+* Toedliche Steine::             
+* Wechselsteine::               
+* Spiegel::                     
+* Einbahn-Steine::                
+* Shogunsteine::                
+* Bolder-Steine::          
+* Puzzle-Steine::               
+* Poststeine::                  
+@end menu
+
+@node Toedliche Steine, Wechselsteine, Steine, Steine
+@subsection T@"odliche Steine
+
+@image{images/st-lethal,,0.7cm}
+
+Um zwei Steinarten sollten Sie auf jeden Fall einen m@"oglichst gro@ss{}en
+Bogen schlagen, zumindest solange Sie keinen Schirm haben, um Ihre
+kostbare Kugel zu sch@"utzen.
+
+Der @emph{Totenkopfstein} ist genauso ungesund wie er aussieht; schon
+die erste Ber@"uhrung ist t@"odlich.  Im Ernst, wir haben Sie gewarnt.
+Vom Totenkopfstein gibt es auch noch eine besonders hinterh@"altige
+unsichtbare Variante, also stecken Sie auf jeden Fall Ihre Zauberbrille
+ein.
+
+Der @emph{schwarze Ritter} bewacht oftmals wichtige Durchg@"ange, und
+gew@"ohnlich hat er kein gesteigertes Interesse, sie passieren zu
+lassen.  Bringen Sie ein gutes Argument mit, mit dem sie ihn
+``@"uberzeugen'' k@"onnen.
+
+@node Wechselsteine, Spiegel, Toedliche Steine, Steine
+@subsection Wechselsteine
+
+@image{images/st-swap,,0.7cm}
+
+Wechselsteine bewegen sich nicht einfach auf das n@"achstgelegene Feld
+wenn sie geschoben werden.  Stattdessen tauschen sie ihren Platz mit
+demjenigen Stein, in den sie hineingeschoben werden.  Auf ein leeres
+Feld kann so ein Stein gar nicht geschoben werden---die einzige
+M@"oglichkeit, ihn von A nach B zu bef@"ordern ist also, ihn wiederholt
+mit ``normalen'' Steinchen zu vertauschen.
+
+@c @node Lasers, Mirrors, Swap Stones, Stones
+@c @subsection Lasers
+
+@c Both interesting and da
+
+@node Spiegel, Einbahn-Steine, Wechselsteine, Steine
+@subsection Spiegel
+
+@image{images/st-mirrors,,0.7cm}
+
+Laserstrahlen k@"onnen mithilfe der verschiedenen Spiegel umgelenkt oder
+aufgespalten werden.  Es gibt in Enigma zwei grunds@"atzliche Typen von
+Spiegeln: planare Spiegel und dreieckige Spiegel.  Ein planarer Spiegel
+verh@"ahlt sich so, wie man es erwartet: Ein auftreffender Laserstrahl
+wird reflektiert wenn er senkrecht zum Spiegel steht und er wird nach
+links oder recht abgelenkt wenn er den Spiegel in einem Winkel von 45
+Grad trifft.
+
+Dreieckige Spiegel sind etwas kniffliger: Seine drei Seitenfl@"achen
+verhalten sich wie gew@"ohnliche Spiegel, indem sie einen eintreffenden
+Lichstrahl entweder zur@"uckwerfen oder umlenken.  F@"allt ein Strahl
+allerdings auf die Spitze des Dreiecks, teilt er sich in @emph{zwei}
+Strahlen auf, die den Spiegel in entgegengesetzter Richtung verlassen.
+
+Beide Spiegeltypen gibt es au@ss{}erdem in halbtransparenter und
+verschiebbarer Variante.  Halbtransparente Spiegel lenken einen
+einkommenden Strahl zur H@"alfte um, lassen die andere H@"alfte
+allerdings unver@"andert passieren.  Verschiebbare Spiegel sind auf
+einem hellgrauen Stein befestigt, unbewegliche auf einem dunkelgrauen
+Stein.
+
+Die Ausrichtung eines Spiegels kann ge@"andert werden, indem man ihn
+leicht mit einer Kugel ber@"uhrt.  Aber passen Sie auf bei Spiegeln, die
+bereits im Strahlengang eines Lasers stehen: eine unbedachte @"Anderung
+kann Sie schnell das Leben einer Kugel kosten!
+
+@node Einbahn-Steine, Shogunsteine, Spiegel, Steine
+@subsection Einbahn-Steine
+
+@image{images/st-oneway,,0.7cm}
+
+Man kann diese Steine nur in einer Richtung passieren. Ganze
+Labyrinthe k@"onnen aus ihnen gebaut werden, aber meistens zwingen sie
+Sie einfach nur dazu, einen Teil der Landschaft zu beenden, bevor Sie
+zum n@"achsten Teil @"ubergehen.
+
+Sie haben Probleme mit Einbahn-Steinen, die Ihnen den Weg blockieren?
+Vielleicht kann Ihnen ein magischer Gegenstand helfen @enddots{}
+
+@node Shogunsteine, Bolder-Steine, Einbahn-Steine, Steine
+@subsection Shogunsteine
+
+@image{images/st-shogun,,0.7cm}
+
+In einigen Landschaften werden Ihnen blinkende blaue Punkte auf dem
+Boden begegnen.  Diese k@"onnen mit der richtigen Kombination von
+@emph{Shogunsteinen} aktiviert werden, wobei sie dann @"ublicherweise
+etwas Sinnvolles tun und z.B. eine T@"ur @"offnen oder einen Laser
+ein- oder ausschalten.
+
+Ein kleiner blinkender Punkt wird aktiviert, indem man einen Shogunstein
+mit einem kleinen Loch auf den Punkt schiebt.  Um die gr@"o@ss{}eren
+Punkte zu aktivieren ben@"otigen Sie mehrere Shogunsteine, die Sie
+passend stapeln m@"ussen.  Um etwa einen mittelgr@"o@ss{}en Punkt zu
+aktivieren m@"ussen Sie erst einen Shogunstein mit mittelgro@ss{}em Loch
+auf den Punkt schieben und dann noch einen Shogunstein mit kleinem Loch
+in den gr@"o@ss{}eren hineinschieben.  Bei gro@ss{}en blinkenden Punkten
+verh@"ahlt es sich entsprechend.
+
+@node Bolder-Steine, Puzzle-Steine, Shogunsteine, Steine
+@subsection Bolder-Steine
+
+@image{images/st-bolder,,0.7cm}
+
+Bolder-Steine bewegen sich in die Richtung, die durch den Pfeil auf
+ihnen angezeigt wird; solange, bis sie auf einen anderen Stein
+sto@ss{}en. Vielleicht blockieren die Bolder-Steine Ihren Weg, und Sie
+m@"ussen sie auf die eine oder andere Weise loswerden. Aber stellen Sie
+Ihre Kugel niemals, niemals direkt vor einen Bolder-Stein, wenn er auf
+sie zukommt, weil er Ihre Kugel zerschlagen wird, wenn er sie
+@"uberrollt!
+
+Allerdings k@"onnen Sie sich die Bolder-Steine auch zu Nutze machen,
+denn sie sind in der Lage, Oxydsteine zu @"offnen, wenn sie in sie
+hineinlaufen. Und mit verschiedenen Hilfsmitteln k@"onnen Sie die
+Bolder-Steine auch gezielt umlenken @enddots{}
+
+@node Puzzle-Steine, Poststeine, Bolder-Steine, Steine
+@subsection Puzzle-Steine
+
+Puzzlesteine verdanken ihren Namen der Tatsache, dass einzelne Steine
+dieser Gattung zusammengesteckt werden k@"onnen wie die Teile eines
+Puzzles.  Puzzlesteine haben an einigen oder allen ihrer vier Seiten
+Anschl@"usse mit denen sie an benachbarte Puzzlesteine andocken
+k@"onnen.  Sobald Puzzlesteine auf diese Weise zusammengef@"ugt sind,
+bewegen sie sich zusammen als ein gro@ss{}er Puzzlestein.  Diese
+gro@ss{}en Bl@"ocke k@"onnen Sie z.B. verwenden, um sichere Wege @"uber
+Abgr@"unde oder Wasser zu konstruieren.
+
+Puzzlesteine @"andern ihr Verhalten wenn man sie mit einem Zauberstab
+ber@"uhrt.  Ist der ber@"uhrte Puzzlestein vollst@"andig verbunden, besitzt er
+also keine offenen Anschl@"usse mehr, beginnt er augenblicklich zu
+explodieren, Stein f@"ur Stein.  Existieren noch offene Anschl@"usse,
+verschiebt die Ber@"uhrung mit dem Zauberstab alle Steine innerhalb einer
+Zeile oder Spalte des Puzzlesteins um eine Stelle.  Am besten, Sie
+probieren das einfach mal aus.
+
+Berichten zufolge existiert noch eine seltene Abart des gew@"ohnlichen
+Puzzlesteins.  Man findet ihre Vertreter haupts@"achlich in den
+Landschaften von Oxyd 1 an, und man erkennt sie daran, dass sie
+orangefarbene und nicht blaue Verbindungsrohre besitzen.  Diese
+Puzzlesteine lassen sich nicht verschieben und man muss keinen
+Zauberstab benutzen, um Zeilen und Spalten umzuordnen oder die Steine
+zum explodieren zu bringen.
+
+@node Poststeine,  , Puzzle-Steine, Steine
+@subsection Poststeine
+
+@image{images/st-mail,,0.7cm}
+
+Poststeine dienen dazu, Gegenst@"ande aus Ihrem Inventar an einen
+anderen Ort in der Landschaft zu transportieren.  Wenn Sie einen
+Poststein ber@"uhren, wird der erste Gegenstand aus Ihrem Inventar
+entfernt und an das Ende des Rohrsystems transportiert, das an den
+Poststein angeschlossen ist.  In den meisten F@"allen m@"ussen Sie
+dieses Rohrsystem erst einmal selbst zusammenbauen, etwa indem Sie die
+einzelnen St@"ucke des Rohres nacheinander ``verschicken''.
+
+Vorsicht: Poststeine funktionieren nicht mehr, sobald bereits ein
+Gegenstand am Ende des Rohres liegt.  Wenn man nicht aufpasst, kann es
+leicht passieren, dass man irrt@"umlich ein falsches Objekt verschickt,
+das danach den Postweg versperrt!
+
+@c @node Turnstiles, Bolder Stones, Puzzle Stones, Stones
+@c @subsection Turnstiles
+
+
+
+@c @node Bolder Stones, Elastics and Scissors, Turnstiles, Stones
+@c @subsection Bolder Stones
+
+
+@c @node Elastics and Scissors,  , Bolder Stones, Stones
+@c @subsection Elastics and Scissors
+
+@node Fortgeschrittene Themen, Tipps und Tricks, Einige Spielobjekte, Top
+@chapter Fortgeschrittene Themen
+
+@menu
+* User-Levelpakete::            History, Search Results and Auto
+* Backups::                     What to backup for security
+* Ergebnisse hochladen::        Let the world know your success
+* Enigma updaten::              Keeping scores and levels on an update
+@end menu
+
+@node User-Levelpakete, Backups, Fortgeschrittene Themen, Fortgeschrittene Themen
+@section User-Levelpakete
+
+@ref{Das Levelpaket-Menue} erlaubt einige weitere M@"oglichkeiten. Die
+@samp{User}-Gruppe enth@"alt drei anfangs leere Levelpakete:
+@samp{Auto Folder}, @samp{History} und @samp{Search Result}.
+
+Durch einen Klick auf den @samp{Suchen}-Knopf im Levelpaket-Men@"u
+k@"onnen Sie unter allen Landschaften nach Stichw@"ortern suchen. Bewegen
+Sie einfach die Maus auf das erscheinende Textfeld und geben Sie das
+Stichwort ein, es kann sich auf den Autor, Titel und auch den
+Dateinamen beziehen. Gro@ss{}- und Kleinschreibung wird dabei nicht
+beachtet. Wenn Sie beispielsweise nach ``jump'' suchen, werden Ihnen
+daraufhin im Levelpaket @samp{Search Results} alle Landschaften mit
+diesem Stichwort angezeigt, beispielsweise ``Jump!'', ``No Jumping
+Necessary'' und ``Jump Pads''. 
+
+Das Levelpaket @samp{History} enth@"alt Querverweise auf die von Ihnen
+zuletzt gespielten Landschaft. Es kann von Vorteil sein, wenn Sie nach
+einer Landschaft suchen, zu der Ihnen aber kein Suchwort einf@"allt.
+
+@samp{Auto Folder} ist ein Levelpaket, dem Sie sehr einfach neue
+Landschaften hinzuf@"ugen k@"onnen, beispielsweise Landschaften, die Sie
+aus dem Internet heruntergeladen oder selber erstellt haben. Kopieren
+Sie daf@"ur die Leveldatei in das Unterverzeichnis @samp{levels/auto} im
+@samp{Userpfad}-Verzeichnis, wie es unter @ref{Einstellungen}
+angezeigt wird. Dieses Verzeichnis wird bei jedem Neustart von
+Enigma durchsucht und die Landschaften dem Levelpaket @samp{Auto
+Folder} hinzugef@"ugt.
+
+Enigma bietet noch eine Reihe weiterer n@"utzlicher Features, die @"uber
+den Rahmen dieses Handbuchs hinausgehen. Sie k@"onnen aber alle Details
+hierzu im Referenz-Handbuch nachlesen.
+
+@node Backups, Ergebnisse hochladen, User-Levelpakete, Fortgeschrittene Themen
+@section Backups
+
+Wenn Sie bef@"urchten, Ihre Spielergebnisse durch einen
+Festplatten-Fehler zu verlieren, oder einfach nur auf einen anderen
+Rechner @"ubertragen m@"ochten, sollten Sie wissen, wie man ein Backup von
+Enigma macht: Im @ref{Einstellungen}-Men@"u finden Sie unter dem Eintrag
+@samp{Userpfad} das aktuelle Verzeichnis, in dem auch Ihre
+Spielergebnisse abgespeichert werden. Sie k@"onnen das gesamte
+Verzeichnis sichern, oder nur die f@"ur die Ergebnisse wichtigen Dateien
+@samp{enigma.score} und @samp{state.xml}.
+
+@node Ergebnisse hochladen, Enigma updaten, Backups, Fortgeschrittene Themen
+@section Ergebnisse hochladen
+
+Um Ihre Spielergebnisse registrieren zu lassen, schicken Sie uns bitte
+die Datei @samp{enigma.score} aus dem
+@samp{Userpfad}-Verzeichnis. Details finden Sie auf unserer
+Projekthomepage.
+
+Um automatisch die aktuellste Weltrekordliste herunterzuladen,
+aktivieren Sie einfach die Option @samp{Update Bewertungen} im
+@ref{Einstellungen}-Men@"u.
+
+@node Enigma updaten, , Ergebnisse hochladen, Fortgeschrittene Themen
+@section Enigma updaten
+
+Sofern Sie Ihre alte Enigma-Version nicht pers@"onlich angepasst haben,
+deinstallieren Sie die alte Version einfach und installieren danach
+die neue. Ihre Ergebnisse werden dabei automatisch @"ubernommen. 
+
+Falls Sie dagegen selber Landschaften den Installationsverzeichnissen
+von Enigma hinzugef@"ugt hatten, sollten Sie sie vor der Deinstallation
+sichern. Danach k@"onnen Sie sicher die alte Version deinstallieren und
+die neue installieren.
+
+@c TODO: too technical (HOMEless, environment variable)@item
+@c TODO: split in two sentences
+Die alte Ergebnisse werden beim ersten Start von Enigma automatisch
+@"ubernommen (@samp{~/.enigmarc2} auf Systemen mit
+@samp{HOME}-Umgebungsvariable bzw. @samp{.../Application
+Data/enigmarc.lua2} auf einigen Windows-Systemen). Sie k@"onnen die
+alten Dateien folglich nach dem ersten erfolgreichen Starten von
+Enigma 1.00 l@"oschen. 
+
+Falls Sie Landschaften aus Ihrer alten Version nach Enigma 1.00
+@"ubernehmen m@"ochten, konsultieren Sie bitte das Referenz-Handbuch, da
+sich das Levelformat ver@"andert hat.
+
+@node Tipps und Tricks, Autoren und Danksagungen, Fortgeschrittene Themen, Top
+@chapter Tipps und Tricks
+
+Dieses Kapitel enth@"alt Tipps f@"ur einige der etwas schwierigeren
+Landschaften in Enigma.  Lesen Sie diese Hinweise bitte nur dann, wenn
+Sie wirklich verzweifelt sind und nicht mehr weiter wissen.  Einige
+Landschaften sind absichtlich schwer und selbst Enigma-Veteranen
+ben@"otigen Stunden um sie zu knacken.  Einige Landschaften lassen sich
+im einfachen Spielmodus (@pxref{Das Level-Menue}) leichter l@"osen.
+
+@menu
+* Tutorial::                    Komplettl@"osung f@"ur `Advanced Tutorial'
+* Tipps::                       Hinweise f@"ur einige Landschaften
+@end menu
+
+@node Tutorial, Tipps, Tipps und Tricks, Tipps und Tricks
+@section Tutorial
+
+Die Landschaften aus dem "Tutorial"-Levelpaket sind normalerweise einfach.
+Eine Ausnahme bildet die letzte Landschaft, welche deutlich schwerer
+ist @enddots{}  Dieser Teil des Handbuchs wurde von Jacob Scott
+beigetragen.
+
+Diese Schritt-f@"ur-Schritt Anleitung ist f@"ur die Landschaft ``Advanced Tutorial''
+im ``Tutorial'' Levelpack.
+W@"ahrend Sie spielen, sollten Sie alle Dokumente eines Raumes so fr@"uh wie m@"oglich
+lesen.
+
+Das Ziel in dieser Landschaft ist es, wie in den meisten Landschaften in Enigma, die
+``Oxydsteine'' zu finden und mit der schwarzen Kugel zu @"offnen. Wenn Sie einen
+Oxydstein ber@"uhren, @"offnet er sich und zeigt eine Farbe. Wenn Sie nacheinander
+zwei Oxydsteine mit der gleichen Farbe @"offnen, bleiben sie beide offen.
+Sobald Sie alle Oxydsteine einer Landschaft in dieser Art ge@"offnet haben,
+haben Sie die Landschaft geschafft.
+
+Diese Landschaft hat etwa zwanzig R@"aume, unterteilt in drei Gebiete. Im ersten
+Gebiet werden Sie den grundlegenden Steinen und Bodentypen der Enigmalandschaften
+begegnen und einige einfache R@"atsel l@"osen. Das zweite Gebiet ist etwas
+anspruchsvoller und Sie werden eine n@"utzliche Technik kennen lernen,
+um bewegliche Feinde zu kontrollieren. Das dritte und letzte Gebiet l@"asst Sie mit
+komplizierteren Interaktionen zwischen den Spielobjekten
+experimentieren. In dieser speziellen Landschaft sind alle Oxydsteine
+in einem einzigen Raum am Ende des dritten Gebiets untergebracht.
+
+@subsection Gebiet 1
+
+Sie starten in einem Raum, der von unbeweglichen Wandsteinen umgeben ist. Eine
+kleine L@"ucke rechts, etwas Wasser unten links und eine geschlossene T@"ur oben
+rechts sind die einzigen Ausnahmen.
+
+Raum 1: Gehen Sie durch die L@"ucke in der rechten Wand.
+
+Raum 2: Meiden Sie einfach die Steine mit den Totenk@"opfen.
+
+Raum 3: Schieben Sie vier Holzkisten, eine nach der anderen, in einer Reihe ins
+Wasser, um eine Br@"ucke zu bauen. Schieben Sie jetzt die grauen Bl@"ocke ins Wasser.
+Nun schaffen Sie die braunen Bl@"ocke aus dem Weg (etwa nach links) und bauen mit
+zwei Holzkisten eine Br@"ucke nach rechts.
+
+Raum 4: Gehen Sie nahe an den Kreisel heran. Wenn er beginnt, Sie zu jagen,
+locken Sie ihn nach links, um die Steine in der Mitte herum. Sobald der Kreisel
+weit genug vom Durchgang in den n@"achsten Raum entfernt ist, rennen Sie hindurch.
+
+Raum 5: Die einzige Gefahr sind die Totenk@"opfe am unteren Ende des Raumes. Der
+erste Boden besteht aus Metall---dieser Boden ist @"ahnlich dem ``Laubboden'',
+auf dem Sie bisher gegangen sind. Der n@"achste Boden ist ``Rot''---es ist nicht
+ganz einfach um darauf zu bremsen oder zu beschleunigen. Der dritte Boden
+besteht aus Eis---Sie haben darauf sehr wenig Reibung. Der letzte Boden ist
+Weltall---hier gibt es keine Reibung; Sie k@"onnen darauf weder ihre
+Geschwindigkeit noch ihre Laufrichtung @"andern.
+
+Raum 6: @"Uberqueren Sie einfach die schr@"agen Abh@"ange. Dann gehen Sie nach links
+heraus @"uber den so genannten ``Invers''-Boden---wenn Sie auf diesem
+Boden sind und die Maus (oder ein @"ahnliches Ger@"at) in eine
+Richtung bewegen, wird die Kugel sich in die entgegengesetzte Richtung
+bewegen. (Wenn Sie hiermit Probleme haben, versuchen Sie Ihre Maus um
+180 Grad zu drehen).
+
+Raum 7: Versuchen Sie ein Extraleben zu bekommen, indem Sie den Klotz auf den
+unteren Schalter bewegen. Schieben Sie ihn zuerst ein Feld nach oben, dann sechs
+Felder nach links, f@"unf nach unten und zwei nach rechts. Schlussendlich noch ein
+Feld nach oben und eines nach links. Holen Sie dann das Extraleben und schieben
+Sie den Block auf den anderen Schalter um die T@"ur in den n@"achsten Raum zu @"offnen. 
+
+Raum 8: Nehmen Sie das Dynamit (dazu m@"ussen Sie auf das Eis gehen) und legen Sie
+es vor die gelblichen Bl@"ocke um sie zu sprengen und so einen Durchgang zu
+erhalten. Der Spaten hat hier keinen Zweck, aber Sie sollten seine
+Funktionsweise trotzdem kennen.
+
+Raum 9: Sto@ss{}en Sie den untersten verschiebbaren Block nach links. Nun
+versperren die Bolder, die nach rechts dr@"angen, Ihren Weg. Sto@ss{}en Sie den
+beweglichen Klotz ganz rechts (nach links oder nach rechts) um die Bolder
+vorbeigehen zu lassen. Nehmen Sie den Zauberstab (ber@"uhren Sie nicht
+unvorsichtigerweise einen Bolder, wenn der Stab an vorderster Stelle in Ihrem
+Inventar ist) und schieben Sie den beweglichen Block oben ins Wasser. Nun gehen
+Sie wieder nach rechts und nehmen den Zauberstab an die erste Stelle Ihren
+Inventars und ber@"uhren die ersten drei Bolder der langen Reihe (Passen Sei auf,
+um nicht von Boldern @"uberrannt zu werden). Schieben Sie den beweglichen Block
+ganz links nach links und gehen Sie in den n@"achsten Raum.
+
+Raum 10: Bet@"atigen Sie den Schalter. Nun schieben Sie die braunen Kl@"otze nach
+oben (je ein Feld). Schieben Sie die mittlere (von unten nach oben) Holzkiste
+nach links, und diejenige rechts dar@"uber ins Wasser. Schieben Sie die restlichen
+Holzkisten in der gleichen Reihe ins Wasser (Aufpassen, nicht ertrinken!). Nun
+schlagen Sie das Fenster (die blaue Linie) mit gro@ss{}er Geschwindigkeit ein.
+Nehmen Sie das Extraleben und gehen Sie @"uber die Br@"ucke nach oben in den ersten
+Raum und dann durch die offene T@"ur nach oben.
+
+@subsection Gebiet 2
+
+Im zweiten Gebiet werden Sie einen Rotor antreffen. Das ist ein
+beweglicher Feind Ihrer schwarzen Kugel. Verschiedene Rotoren k@"onnen
+sich unterschiedlich verhalten, aber sie sind nie sehr
+intelligent. Die L@"osung, um an ihnen vorbei zu kommen ist, sie so
+auszutricksen, dass sie das tun, was Sie wollen; dabei m@"ussen Sie
+versuchen, sich m@"oglichst aus der Gefahr heraus zu halten. 
+
+Schauen Sie sich hier etwas um, aber fassen sie den beweglichen Block noch nicht
+an. Sie m@"ussen durch diese drei geschlossenen T@"uren da oben gehen.
+
+Erste T@"ur: Schieben Sie die wei@ss{}e Kugel nach links aus der Sackgasse heraus
+(aber gehen Sie dabei noch nicht durch den Einbahnblock). Das wird vielleicht
+einige Versuche brauchen. Nehmen Sie den L@"offel auf und sto@ss{}en Sie die wei@ss{}e
+Kugel durch den wei@ss{}en Einbahnblock, aber fest genug, dass sie nicht darunter
+stecken bleibt. Nun gehen Sie durch den schwarzen Einbahnblock und schieben die
+wei@ss{}e Kugel den Weg entlang. Sto@ss{}en Sie die wei@ss{}e Kugel durch den n@"achsten
+Einbahnblock, auch hier m@"oglichst fest. Sobald die wei@ss{}e Kugel hindurch ist und
+den Abhang hinunter rollt, benutzen Sie den L@"offel; Sie beginnen am Anfang der
+Landschaft neu und sind nicht l@"anger gefangen. Gehen Sie nun wieder in den oberen
+Raum---die erste T@"ur ist jetzt offen.
+
+Zweite T@"ur: Schieben sie den beweglichen Block im Raum ganz rechts nach rechts
+und rennen Sie schnell weg. Ein Dokument mit n@"utzlichen Informationen liegt nun
+in der T@"ur zwischen Gebiet 1 und 2. Locken Sie den Rotor (indem Sie ihn dazu
+bringen Sie zu jagen, so wie Sie es mit dem Kreisel getan haben) @"uber die Mauer
+rechts der T@"ure, die die beiden Gebiete verbindet. Rennen Sie durch die T@"ur
+und @"uber die Br@"ucke in den Raum unter Ihnen. Bet@"atigen Sie den
+Schalter, um die T@"ur zu schlie@ss{}en und gehen Sie dann in den Raum, in
+dem Sie urspr@"unglich starteten. Sie werden den Rotor nicht l@"anger
+sehen---er kann nicht in den Raum kommen, in dem Sie gerade jetzt
+sind---aber wenn Sie genau hinschauen, werden Sie sehen, wo er etwa
+ist. Das Ziel ist es hier, ohne sich selbst in Gefahr zu begeben, den
+Rotor auf einen Schalter zu bringen, so, dass er eine T@"ure f@"ur Sie
+@"offnet. Bringen Sie ihn dazu, Ihnen von oben rechts nach oben links zu folgen.
+Er sollte von einigen Abh@"angen nach links geschoben werden. Bringen Sie ihn
+links nach unten, bis er nicht mehr weiter kann und Sie den Ton eines Schalter
+h@"oren. bet@"atigen Sie den Schalter unten an der Br@"ucken und gehen Sie zur@"uck in
+das Gebiet zwei. Die zweite T@"ure ist nun offen.
+
+Dritte T@"ur: Schieben Sie den beweglichen Block, unter dem der Rotor sich
+versteckt hatte auf den Schalter in der N@"ahe. Gehen Sie nach links---die dritte
+T@"ur ist jetzt auch offen. Gehen Sie durch diese drei T@"uren.
+
+@subsection Gebiet 3
+
+In Gebiet drei m@"ussen Sie die Interaktion zwischen verschiedenen Objekten von
+Enigma n@"aher untersuchen. Hier werden sie Laser, Spiegel und M@"unzen finden. Sie
+werden ein einfaches Laser-Spiegel Problem l@"osen m@"ussen, um den Laser auf einen
+bestimmten Stein zu lenken, welcher eine Br@"ucke in den n@"achsten Raum schlie@ss{}en
+wird. Um durch die n@"achsten R@"aume zu kommen, m@"ussen Sie einige neue Gegenst@"ande
+erschaffen, indem sie den Laser auf gewisse, bereits vorhandene, Dinge lenken.
+
+Im ersten Teil von Gebiet drei sind drei Spiegel, ein Laser und ein Schalter
+vorhanden.
+
+Raum 1: Sie m@"ussen den Laser auf den schwarzen Stein umlenken. Sto@ss{}en Sie den
+Spiegel links unten ein Feld nach unten (er sollte nun genau 30 Felder direkt
+links vom Laser stehen) und richten Sie ihn so aus, dass er wie ein ``\''
+aussieht; dies machen Sie, indem Sie ihn vorsichtig ber@"uhren. Schieben Sie den
+Spiegel links oben acht Felder nach links und ein Feld nach unten (er sollte
+jetzt genau vier Felder @"uber dem anderen Spiegel stehen) und richten Sie ihn so
+aus, dass er wie ein ``/'' aussieht. Schieben Sie den Spiegel rechts oben zwei
+Felder nach oben und drei nach rechts (er sollte nun 28 Felder rechts vom
+letzten Spiegel und ein Feld unter dem schwarzen Stein stehen). Richten Sie ihn
+so aus: ``/''. Schalten Sie nun den Laser an, indem Sie den Schalter bet@"atigen;
+meiden Sie den Strahl! Gehen Sie nun @"uber die Br@"ucke nach rechts.
+
+Raum 2: Nehmen Sie einige M@"unzen mit und gehen Sie zur@"uck in den vorigen Raum.
+Bestrahlen Sie eine der M@"unzen mit dem Laser, indem Sie ihn an- und abschalten.
+Nehmen Sie das umgewandelte Objekt (einen Regenschirm), und wiederholen Sie den
+Prozess mindestens ein weiteres Mal. Legen Sie nun eine M@"unze neben einen
+Spiegel und schieben Sie ihn dar@"uber. Bestrahlen Sie auch diese M@"unze mit einem
+Wert von 5, um einen Hammer zu erzeugen. Bestrahlen Sie den Hammer
+(indem Sie den Laser nochmals aus- und einschalten), um ein Schwert zu erzeugen.
+Falls Sie mehr Extraleben wollen, schieben Sie einen Spiegel zwei Mal @"uber eine
+M@"unze und bestrahlen Sie diese M@"unze mit einem Wert von 10 (dem maximal
+m@"oglichen) mit dem Laser. Um in den Raum mit den Rittern zur@"uck zu kommen,
+richten Sie die Spiegel wieder wie vorhin aus, entfernen Sie alle Objekte, die
+den Strahl blockieren k@"onnten und schalten Sie den Laser ein. Benutzen Sie nun
+die rechte Maustaste oder die ``Tab''-Taste um das Schwert an die erste Stelle
+(ganz nach links) in Ihrem Inventar zu bekommen. K@"ampfen Sie mit den Rittern
+(schlagen Sie sie jeweils 4 Mal), um einen Durchgang zu bekommen.
+
+Raum 3: Benutzen Sie einen Regenschirm, um @"uber den Abgrund nach
+unten zu fliegen und dann in den Raum rechts hinein zu gehen. Wenn der
+Ring um Ihre Kugel zu blinken beginnt, ist die Wirkung bald vorbei,
+benutzen Sie rechtzeitig einen weiteren Regenschirm.
+
+Raum 4: @"Offnen Sie einfach alle Oxydsteine in der richtigen Reihenfolge, so dass
+jeweils gleichfarbige ge@"offnet bleiben. Vermeiden Sie es, die Furzsteine zu
+ber@"uhren. Sie haben die Landschaft nun geschafft!
+
+@node Tipps,  , Tutorial, Tipps und Tricks
+@section Tipps
+
+@table @strong
+
+@item I/6: Welcome to the Machine
+Die Nachricht in der oberen rechten Ecke enth@"alt eine wichtige Nachricht.
+
+@item I/8: Easy?
+Schieben Sie den ersten Shogunstein in die linke obere Ecke und den
+zweiten in das Feld @emph{@"uber} dem am weitesten rechts gelegenen Punkt.
+
+@item I/31: Where Am I?
+Nutzen Sie die Holzsteine, falls Sie den @"Uberblick verlieren. 
+
+@item I/32: The Grim Reaper
+Haben Sie schonmal daran gedacht, Ihre Maus umzudrehen???
+
+@item I/43: Sokoban Revival
+Erinnern Sie sich? Die erste Lagerhalle im originalen Sokoban sah
+genauso aus @dots{} So schwierig kann es also nicht sein!
+
+@item I/65: Lasers 101
+Schieben Sie zwei der Spiegel an den oberen und einen an den unteren
+Rand. Wenn Sie die Spiegel geeignet verschieben und sorgf@"altig zielen,
+k@"onnen Sie alle Oxyd-Steine mit dem Laser erreichen.
+
+@item I/72: Way to Go
+Einer der blauen Punkte verh@"alt sich anders als die anderen. Nutzen
+Sie das aus!
+
+@item I/80: Meditation
+Richten Sie die Kugeln horizontal aus.
+
+@item II/15: Knock Knock!
+Klopfen Sie an den W@"anden.
+
+@item II/27: Twelve doors
+Sie haben alle T@"uren ge@"offnet und kommen immer noch nicht durch? Sie
+scheinen etwas @"ubersehen zu haben!
+
+@item II/40: Space Meditation
+Kennen Sie das Dreik@"orperproblem?
+
+@item II/44: Pharaos' Tombs
+Lernen Sie aus ``Easy Shifting @enddots{}''.
+
+@item II/56: Easy Shifting @enddots{}
+Lernen Sie aus ``Running Rings''.
+
+@item II/57: Floppy Swapping
+Erstens, suchen Sie zun@"achst die Diskette und den Zauberstab, Sie
+werden sie ben@"otigen. Zweitens, tragen Sie diese zwei Objekte immer
+bei sich. Drittens, einige Steine sehen identisch aus, sind es aber
+nicht.
+
+@item II/59: The Disappearing Block
+Blockieren Sie den Laser.
+
+@item II/65: Laser Magic
+Es ist an der Zeit, einige Grundlagen @"uber Objekt-Transformationen zu
+lernen. Experimentieren Sie!
+
+@item II/69: Question of Speed
+Gibt es einen langSAMEN L@"osungsweg???
+
+@item II/77: Push Your Way
+Suchen Sie zun@"achst den Zauberstab!
+
+@item II/97: Tool Time
+Halten Sie gef@"ahrliche Werkzeuge vor Kindern versteckt.
+
+@item II/99: Domain of Mysteries
+Seien Sie vorsichtig in der Leiter.
+
+@item II/100: Patterns
+Gibt es hier ein Echo?
+
+@item III/14: Use the PIN
+@enddots{} oder greifen Sie zur Enzyklop@"adie Ihrer Wahl, falls Sie die Nummer
+vergessen haben.
+
+@item III/16: Control Panel
+Die Nachricht im linken Raum erkl@"art, wie Sie die Steine auf der
+ersten Schalterreihe platzieren m@"ussen. Danach folgen Sie einfach den
+im linken Raum angegebenen Farbcodes.
+
+@item III/22: Portable Laser
+Beachten Sie das Gitter!
+
+@item III/27: Tricks and Traps
+Sie kommen nicht aus dem ersten Raum? Richten Sie Ihre Aufmerksamkeit
+zun@"achst auf den kleinen blinkenden Punkt. Sie finden den letzten
+Oxyd-Stein nicht? Aktivieren Sie drei gro@ss{}e blinkende Punkte im ersten
+Bild und den kleinen im dritten.
+
+@item III/28: Wells
+Haben Sie Angst vor dem Tod?
+
+@item III/29: Push? Pull!
+Einmal nach oben wechseln -- einmal nach unten wechseln - Puzzle
+rechts daneben -- dann weiter machen!
+
+@item III/40: Snow White
+Drei kleine Eskimos -- wandern auf dem Schneefeld -- suchten ihre drei
+Iglos -- auf die der wei@ss{}e Schnee f@"allt.
+
+@item III/43: The Ditch
+Man kann dieses Level nicht ohne gebrochenes Ego l@"osen.
+
+@item III/49: What's the Problem?
+Falsche F@"ahrten @"uberall @dots{} es ist eine Meditationslandschaft.
+
+@item III/95: Jump and Run
+Da liegt eine Feder unter einem Spiegel.
+
+@item IV/6: TNT Shortage?
+Mit einem Hammer geht's leichter!
+
+@item IV/17: Flood Gates
+Das vorsichtige @"Uberfluten von Gebieten kann hilfreich sein. Legen Sie
+auf jeden Fall den unteren Schalter im ersten Raum um. Die vielen
+Schalter unten links wirken alle gleich.
+
+@item IV/25: Light Switches
+Blockieren Sie die Laser, wenn Sie nicht schnell genug sind. 
+
+@item IV/27: Robbery
+Dringen Sie durch br@"uchige Bodenplatten in die Bank ein. 
+
+@item IV/34: Running Rings
+Lernen Sie aus ``Pharao's Tomb''.
+
+@item IV/39: How Many Spirals?
+Manche Menschen springen aus dem Fenster, wenn's brennt -- machen Sie
+es umgekehrt.
+
+@item IV/47: Just Moving Blocks?
+Zuviele Holzkisten? Wie k@"onnten Sie eine entfernen?
+
+@item IV/48: Artillery
+Die Kanonenkugel @"offnet auch Oxydsteine.
+
+@item IV/54: Fire Safety
+Der Bodenschalter nervt? Zerst@"oren Sie ihn!
+
+@item IV/64: The Flagstone Reaper
+Er verarbeitet.
+
+@item IV/65: Little Bit of Everything
+Finden Sie einen Weg, eine Kugel zu zerschmettern.
+
+@item V/15: Solvable?
+Erinnert Sie WNSE an irgend etwas?
+
+@item V/16: Draggers
+Zugegeben, diese Landschaft ist b@"osartig. Ein Steinsamen ist in der
+N@"ahe der Startposition versteckt.
+
+@item V/24: Space Pirates
+Diese Landschaft ist knifflig. Z@"unden Sie eine Bombe in der N@"ahe der
+Holzsteine.
+
+@item V/32: Walk the Plank
+Nicht Pirat genug, diese Landschaft zu meistern? Es gibt einen
+anderen, einfacheren Weg.
+
+@item V/34: Island of Safety
+Untersuchen Sie zuerst Einhunderte.
+
+@item V/45: Psycho Pushing
+Schalten und rennen.
+
+@item V/58: Now What?
+Wenn Sie das Kreuz sehen, was sollte wohl als n@"achstes im Feld zu
+sehen sein?
+
+@item V/78: Don't Be Greedy
+In diesem Handbuch gibt es einen besseren Hinweis.
+
+@item V/89: Ice-Bomb
+Unter dem Oxyd-Stein liegt ein besserer Hinweis versteckt.
+
+@item V/91: Firefox
+Boden brennt schneller.
+
+@item VI/8: Orbitting
+Lassen Sie nichts die W@"ande ber@"uhren.
+
+@item VI/23: Prepare Your Defense
+Der Laser kann nicht nur Gegenst@"ande @"andern.
+
+@item esprit 43
+Opfern Sie dem Vulkan.
+
+@item esprit 52
+Spielen Sie es zeitig.
+
+@item esprit 100
+Bomben Sie in der Ecke.
+
+@item Oxyd Magnum 99 (level 22): Letter Bomb
+Zerst@"oren Sie die Bombensteine.
+
+@item PerOxyd 49 (level 22): Hidden Treasure
+Stellen Sie sicher, dass Sie immer Zugang zu dem Raum mit dem
+Bodenschalter haben. Suchen Sie dann nach dem zweiten Bildschirm mit
+dem ``versteckten Schatz''.
+
+@end table
+
+@node Autoren und Danksagungen,  , Tipps und Tricks, Top
+@chapter Autoren und Danksagungen
+
+@menu
+* Hauptentwickler::             
+* Spezieller Dank::              
+* Danksagungen::                
+* Verwendete Software::           
+@end menu
+
+
+@node Hauptentwickler, Spezieller Dank, Autoren und Danksagungen, Autoren und Danksagungen
+@section Hauptentwickler
+
+@table @strong
+@item Raoul Bourquin
+Landschaftsverwaltung und -design, Homepage, zahlreiche unsch@"atzbare Erweiterungen
+
+@item Siegfried Fennig
+Landschaftsdesign, Grafik
+
+@item Martin Hawlisch
+Landschaftsdesign, Grafik, Programmierung
+
+@item Daniel Heck
+Hauptentwickler, Grafik, Dokumentation
+
+@item Ronald Lamprecht
+XML, Gui, Portierung, Kernel-Programmierung, Dokumentation, Homepage, Auswertung
+
+@item Andreas Lochmann
+Programmierung, Landschaftsverwaltung und -design, Dokumentation, Homepage
+
+@item Petr Machata
+Landschaftsdesign, Programmierung
+
+@item Nat Pryce
+Landschaftsdesign
+
+@item Jacob Scott
+Landschaftsdesign
+
+@item Sven Siggelkow
+Landschaftsdesign und besondere Oxyd-Expertise
+
+@item Ralf Westram
+Programmierung, Landschaftsdesign
+@end table
+
+
+@node Spezieller Dank, Danksagungen, Hauptentwickler, Autoren und Danksagungen
+@section Spezieller Dank
+
+@table @strong
+@item Johannes Fortmann
+Mac OS X Portierung, Programmierunterst@"utzung, Grafik
+
+@item illmind
+Forum mag-heut.net Administration, Landschaftsdesign
+
+@c waiting for licence to add the sounds
+@c @item ``Cellar of Rats''
+@c Sound effects
+
+@item Jennifer Robertson
+Grafik der zweiten Generation
+
+@item Jeremy Sawicki
+Entschl@"usselung des Oxyd-Dateiformats, Oxydlib
+
+@item Meinolf Schneider
+Urspr@"ungliche Spielidee--@emph{Vielen Dank}!
+
+@item Erich Schubert
+Debian/Ubuntu-Pakete, Landschaftsdesign
+
+@item Lukas Sch@"uller
+Landschaftsdesign
+
+@item Andrew ``Necros'' Sega
+Men@"u-Musik (@emph{Pentagonal Dreams})
+
+@item David W. Skinner
+Viele Sokoban-Landschaften von
+@uref{http://users.bentonrea.com/~sasquatch/sokoban}
+
+@item Clifford J. Tasner
+Musik der zweiten Generation, Englisch Korrektur lesen
+@end table
+
+@node Danksagungen, Verwendete Software, Spezieller Dank, Autoren und Danksagungen
+@section Danksagungen
+
+F@"ur verschiedene kleinere Beitr@"age danken wir:
+
+@itemize @bullet
+@item Roberto Bardin (Landschaftsdesign)
+@item Alain Busser (Landschaftsdesign, franz@"osische @"Ubersetzung und Handbuch)
+@item Guy Busser (Landschaftsdesign)
+@item Richi B@"utzer (Landschaftsdesign)
+@item capkoh (Landschaftsdesign)
+@item Christoph & Anita (Landschaftsdesign)
+@item Serge Dremuk (Russische @"Ubersetzung)
+@item Joseph Dunne (Landschaftsdesign)
+@item Xerxes M. Dynatos (Landschaftsdesign)
+@item Edward (Landschaftsdesign)
+@item Stephanie Fabian (Wertvolle Fehlerberichte)
+@item Roberto Garc@'ia (Spanische @"Ubersetzung)
+@item Andy Geldmacher (Landschaftsdesign)
+@item Edwin Groothuis (FreeBSD Portierung)
+@item Immanuel Herrmann (Landschaftsdesign)
+@item M@'at@'e Lehel Juh@'asz (Ungarische @"Ubersetzung)
+@item Samuele Kaplun (Italienische @"Ubersetzung)
+@item Jens-Christian Korth (Landschaftsdesign)
+@item Manuel K@"onig (Landschaftsdesign, Fehlerberichte)
+@item Johannes Laire (Landschaftsdesign)
+@item Joona Laire (Landschaftsdesign)
+@item Markus Laire (Landschaftsdesign)
+@item Dominik Lehmann (Landschaftsdesign)
+@item Edward Leuf (Feedback, Fehlerberichte)
+@item Ingo van Lil (Feedback, Fehlerberichte)
+@item Frank van der Loo (Niederl@"andische @"Ubersetzung)
+@item Sidney Markowitz (Mac OS X Portierung)
+@item Barry & Lori Mead (Landschaftsdesign)
+@item Linda Mihalic (Englisch Korrektur lesen)
+@item moonpearl (Landschaftsdesign)
+@item Krishnamurti Lelis Lima Vieira Nunes (Portugiesische @"Ubersetzung)
+@item Daniel Nylander (Schwedische @"Ubersetzung)
+@item Andreas Persenius (Landschaftsdesign)
+@item Peter Santo (Landschaftsdesign)
+@item Tobias Schmidbauer (Windows Installer und Icon)
+@item Achim Settelmeier (RPM specfile)
+@item Jon Sneyers (Landschaftsdesign)
+@item Spaceman (Landschaftsdesign)
+@item Ulf Stegemann (Landschaftsdesign)
+@item J@"urgen Sticht (Landschaftsdesign)
+@item Mikke Surakka (Finnische @"Ubersetzung)
+@item Andrzej Szombierski (Landschaftsdesign)
+@item Tacvek (Lua 5.1 Upgrade)
+@item Michael Terry (.desktop file)
+@item Ray Wick (Landschaftsdesign)
+@item Joe Wreschnig (Manual page f@"ur Unix)
+@item Yuriy Zhyromskiy (Russisches Manual)
+@end itemize
+
+@node Verwendete Software,  , Danksagungen, Autoren und Danksagungen
+@section Verwendete Software
+
+@table @strong
+
+@item SDL 
+@uref{http://www.libsdl.org/}
+
+@item SDL_image
+@uref{http://www.libsdl.org/SDL_image}
+
+@item SDL_mixer
+@uref{http://www.libsdl.org/SDL_mixer}
+
+@item Lua
+@uref{http://www.lua.org}
+
+@item Oxydlib
+@uref{http://www.sawicki.us/oxyd}
+
+@item toLua++
+@uref{http://www.codenix.com/~tolua}
+
+@item zipios
+@uref{http://zipios.sourceforge.net}
+
+@item Xerces C++
+@uref{http://xml.apache.org/xerces-c}
+
+@end table
+
+@bye

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Puzzle Demo" el:subtitle="Demolevel for libpuzzle" el:id="puzzle_demo"/>
+      <el:version el:score="2" el:release="2" el:revision="3" el:status="stable"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006, 2007 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+       <el:dependency el:path="lib/libpuzzle" el:id="lib/libpuzzle" el:release="2" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelw = 39
+levelh = 37
+
+create_world(levelw, levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c=="#" then
+            set_stone("st-glass",i-1,line)
+            set_floor("fl-black",i-1,line)
+        elseif c==" " then
+            set_floor("fl-black",i-1,line)
+        end
+    end    
+end
+
+renderLine(00 , "#######################################")
+renderLine(01 , "#                  #                  #")
+renderLine(02 , "#                  #                  #")
+renderLine(03 , "#                  #                  #")
+renderLine(04 , "#                                     #")
+renderLine(05 , "#                                     #")
+renderLine(06 , "#                                     #")
+renderLine(07 , "#                                     #")
+renderLine(08 , "#                                     #")
+renderLine(09 , "#                  #                  #")
+renderLine(10 , "#                  #                  #")
+renderLine(11 , "#                  #                  #")
+renderLine(12 , "######        ###########        ######")
+renderLine(13 , "#                  #                  #")
+renderLine(14 , "#                  #                  #")
+renderLine(15 , "#                  #                  #")
+renderLine(16 , "#                                     #")
+renderLine(17 , "#                                     #")
+renderLine(18 , "#                                     #")
+renderLine(19 , "#                                     #")
+renderLine(20 , "#                                     #")
+renderLine(21 , "#                  #                  #")
+renderLine(22 , "#                  #                  #")
+renderLine(23 , "#                  #                  #")
+renderLine(24 , "######        ###########        ######")
+renderLine(25 , "#                  #                  #")
+renderLine(26 , "#                  #                  #")
+renderLine(27 , "#                  #                  #")
+renderLine(28 , "#                                     #")
+renderLine(29 , "#                                     #")
+renderLine(30 , "#                                     #")
+renderLine(31 , "#                                     #")
+renderLine(32 , "#                                     #")
+renderLine(33 , "#                  #                  #")
+renderLine(34 , "#                  #                  #")
+renderLine(35 , "#                  #                  #")
+renderLine(36 , "#######################################")
+
+oxyd_shuffle()
+
+-- Special
+set_item("it-document", 3, 8, {text="Welcome to the demonstration of libpuzzle version 2"})
+set_item("it-document", 3, 9, {text="Please also look at the source code of the lib and of this level."})
+set_actor("ac-blackball", 2.5,7.5, {player=0}) 
+set_item("it-magicwand", 2, 7) 
+
+set_item("it-document", 11, 7, {text="Room 1: Some general things you can do with libpuzzle"})
+set_item("it-document", 8, 18, {text="The red puzzles, generated with permutations, are ALL solvable."})
+set_item("it-document", 11, 18, {text="The blue ones, generated with random, aren't!"})
+set_item("it-document", 2, 22, {text="This figure is solvable with max. 3 hits!"})
+set_item("it-document", 17, 14, {text="This figure is solvable with max. 4 hits!"})
+set_item("it-document", 28, 8, {text="Room 2: Every figure in here, the +/T/L, all are solvable because they are generated  from the solved puzzle with permutations."})
+set_item("it-document", 23, 16, {text="Room 4: Some things, you can do with pseude pieces: open puzzle clusters ..."})
+set_item("it-document", 8, 30, {text="Room 5: Some things, you can do with Bigbricks ..."})
+set_item("it-document", 26, 27, {text="Room 6: Some things, you can do with Bigbluesandstones ..."})
+
+
+-- First room:
+-- Shows some general figures with puzzlestones
+
+  --ring1
+  puzzle({"###",
+          "# #",
+          "###"},{2,2},"redpuzzle","none")
+
+  puzzle({"### ",
+          "#  #",
+          "# ##",
+          "### "},{10,6},"redpuzzle","none")
+
+  puzzle({"#  ",
+          "## ",
+          " ##"},{10,2},"redpuzzle","random")
+
+  puzzle({"###",
+          " # ",
+          "###"},{14,2},"bluepuzzle","permutation")
+
+  puzzle({"  #  ",
+          " ### ",
+          "## ##"},{14,9},"bluepuzzle","none")
+
+  puzzle({"  # ",
+          " ## ",
+          " #  ",
+          " #*#",
+          "   #",
+          "####"},{5,4},"bluepuzzle","none")
+
+-- Second room:
+-- Every puzzle here is solvable, generated with permutations
+
+  puzzle({" # ","###"," # "},{21,1},"redpuzzle","permutation")
+  puzzle({" # ","###"," # "},{25,1},"redpuzzle","permutation")
+  puzzle({" # ","###"," # "},{30,1},"redpuzzle","permutation")
+  puzzle({" # ","###"," # "},{34,1},"redpuzzle","permutation")
+
+  puzzle({"###"," # "," # "},{21,5},"redpuzzle","permutation")
+  puzzle({"###"," # "," # "},{25,5},"redpuzzle","permutation")
+  puzzle({"###"," # "," # "},{30,5},"redpuzzle","permutation")
+  puzzle({"###"," # "," # "},{34,5},"redpuzzle","permutation")
+
+  puzzle({"#  ","#  ","###"},{21,9},"redpuzzle","permutation")
+  puzzle({"#  ","#  ","###"},{25,9},"redpuzzle","permutation")
+  puzzle({"#  ","#  ","###"},{30,9},"redpuzzle","permutation")
+  puzzle({"#  ","#  ","###"},{34,9},"redpuzzle","permutation")
+
+-- Third room:
+-- Shows the difference between random and permutation shuffle.
+-- And with specify the num_shuffles parameter
+
+  puzzle({"#","#","#"},{11,20},"bluepuzzle","random")
+  puzzle({"#","#","#","#"},{13,19},"bluepuzzle","random")
+  puzzle({"#","#","#","#","#"},{15,18},"bluepuzzle","random")
+  puzzle({"#","#","#","#","#","#"},{17,17},"bluepuzzle","random")
+
+  puzzle({"#","#","#"},{8,14},"redpuzzle","permutation")
+  puzzle({"#","#","#","#"},{6,14},"redpuzzle","permutation")
+  puzzle({"#","#","#","#","#"},{4,14},"redpuzzle","permutation")
+  puzzle({"#","#","#","#","#","#"},{2,14},"redpuzzle","permutation")
+
+  puzzle({"## ##",
+          " ### ",
+          "## ##"},{11,14},"redpuzzle","permutation",4)
+
+  puzzle({"## ##",
+          " ### ",
+          "## ##"},{4,20},"bluepuzzle","permutation",3)
+
+-- Fourth room:
+-- Shows the wonderfull possibilities of pseudo_pieces.
+
+  puzzle({" + + ",
+          "+###+",
+          " # # ",
+          "+###+",
+          " + + "},{21,14},"bluepuzzle","none")
+
+  puzzle({"##+#","#  #","#+##"},{26,20},"bluepuzzle","none")
+
+  puzzle({"#*#","#+#","#*#"},{27,14},"redpuzzle","none")
+
+  puzzle({"##*#",
+          "+  *",
+          " + #",
+          "####",
+          " #  ",
+          " # +",
+          "+###"},{32,15},"bluepuzzle","none")
+
+  puzzle({"# #",
+          " # ",
+          "# #"},{22,20},"bluepuzzle","permutation")
+
+-- 5. room:
+-- Things, you can do with bigbricks.
+
+  puzzle({"###","# #","  #","###"},{3,26},"bigbrick","none")
+
+  puzzle({"### #",
+          "#   #",
+          "#*###"},{3,32},"bigbrick","none")
+
+  puzzle({"###","# #"},{9,33},"bigbrick","random")
+
+  puzzle({"#    ",
+          "##   ",
+          " ##  ",
+          "  ## ",
+          "   ##"},{9,27},"bigbrick","none")
+
+  puzzle({" # # ",
+          "#####",
+          " # # "},{12,26},"bigbrick","none")
+
+  puzzle({"###",
+          "###",
+          "###"},{15,32},"bigbrick","none")
+
+-- 6. room:
+-- Things, you can do with bigbluesandstones.
+
+  puzzle({" ##",
+          "# #",
+          "###"},{21,26},"bigbluesand","none")
+
+  puzzle({"  ####",
+          "  #  #",
+          "#### #",
+          "# ####",
+          "#  #  ",
+          "####  "},{20,30},"bigbluesand","none")
+
+  puzzle({"## ### ##",
+          " ### ### "},{28,26},"bigbluesand","none")
+
+  puzzle({"## ##",
+          " ### ",
+          "## ##"},{29,30},"bigbluesand","none")
+
+  puzzle({"  ##+",
+          " *#  ",
+          "##   ",
+          "#    ",
+          "+    "},{34,32},"bigbluesand","none")
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

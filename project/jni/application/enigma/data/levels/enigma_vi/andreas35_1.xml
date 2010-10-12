@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Checkmate II" el:subtitle="" el:id="andreas35"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Andreas Lochmann" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Andreas Lochmann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="true"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="01:06"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+CreateWorld(levelw, levelh)
+
+fill_floor("fl-abyss")
+draw_checkerboard_floor("fl-white", "fl-black", 0, 1, levelw, levelh - 1)
+draw_border("st-rock3", 0, 1, levelw, levelh - 1)
+
+set_actor("ac-blackball", 4, 7, {player=0})
+set_actor("ac-whiteball", levelw - 4, 7, {player=1})
+set_item("it-yinyang", 6, 11)
+set_item("it-yinyang", levelw - 7, 11)
+set_item("it-yinyang", 6, 2)
+set_item("it-yinyang", levelw - 7, 2)
+
+oxyd(0, 6)
+oxyd(levelw-1, 6)
+oxyd(0, 7)
+oxyd(levelw-1, 7)
+oxyd_shuffle()
+set_stone("st-black4", 1, 6)
+set_stone("st-white4", levelw - 2, 6)
+set_stone("st-white4", 1, 7)
+set_stone("st-black4", levelw - 2, 7)
+
+for x = 6, levelw - 7 do
+  for y = 2, levelh - 2 do
+    if enigma.GetKind(enigma.GetFloor(x,y)) == "fl-black" then
+      set_stone("st-white4", x, y)
+    else
+      set_stone("st-black4", x, y)
+    end
+  end
+end
+
+for x = 6, levelw - 7 do
+  for y = 3, levelh - 3 do
+    if enigma.GetKind(enigma.GetFloor(x,y)) == "fl-black" then
+      set_stone("st-chess_black", x, y)
+    else
+      set_stone("st-chess_white", x, y)
+    end
+  end
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

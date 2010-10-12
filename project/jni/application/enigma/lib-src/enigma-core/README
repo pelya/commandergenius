@@ -1,0 +1,47 @@
+This directory contains the reusable parts of Enigma, i.e., all the
+code that I had the time and leisure to write more or less properly.
+Some of the classes and functions are rather complete and useful but
+others are only useful for certain applications and would need further
+features or refinements to make genuinely reusable.  Anyway, if you
+find any of it useful, feel free to use it in your game or
+application.
+
+Here is a short rundown of the files and the services they provide:
+
+File            Description
+--------------------------------------------------------------------
+
+alist.hh        Associative lists                              
+
+argp.hh         Parser for command line (POSIX and GNU-style options)
+
+buffer.hh       Stream-like buffer for binary data, takes care of
+                endianness
+
+cache.hh        Simple facility for resource caching
+
+callback.hh     Generic callbacks, turned out not to be that useful
+
+dict.hh         std::map alike hash table; useful but a bit incomplete
+
+font.hh         Bitmap fonts, to be used in connection with the stuff
+                in video.hh
+
+geom.hh         Rectangles and rectangle lists and some geometric
+                operations like intersection, bounding box, etc; 
+                fairly complete
+
+math.hh         Generic vectors in 2 and 3 dimensions
+
+sdl.hh          Some utilities and bindings for SDL
+
+tools.hh        General utilities like delete_sequence() and delete_map()
+
+video.hh        Class wrappers and some higher level operations SDL's
+                video operations; useful, but incomplete and in need of
+                a better design.
+
+windows.hh      Attempt at a reusable window manager that keeps track
+                of the stacking order, dirty rectangles, etc.  Needs a
+                little more work to make it really useful.
+

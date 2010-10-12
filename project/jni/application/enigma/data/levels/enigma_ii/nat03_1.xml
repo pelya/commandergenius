@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Knock Knock!" el:subtitle="" el:id="nat3"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Nat Pryce" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2002 Nat Pryce</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+function noop()
+    -- do nothing
+end
+
+function trigger( x, y )
+    set_item( "it-trigger", x, y, {target="callback",action="idle"}  )
+end
+
+-- An island with a sandy beach
+
+create_world(20,13)
+fill_floor( "fl-water")
+fill_floor( "fl-sand", 1, 1, level_width-2, level_height-2 )
+fill_floor( "fl-leaves", 2, 2, level_width-4, level_height-4 )
+fill_floor( "fl-gray", 10,3, 7, 7 )
+
+
+-- A castle on the east side of the island
+
+function toggle_door( toggle_on )
+    if toggle_on == 1 then
+        SendMessage( "door", "close" )
+    else
+        SendMessage( "door", "open" )
+    end
+end
+
+draw_stones( "st-greenbrown", {11,3},  {1,0}, 5 )
+draw_stones( "st-greenbrown", {11,9}, {1,0}, 5 )
+set_stone( "st-greenbrown", 10, 4 )
+set_stone( "st-greenbrown", 10, 5 )
+doorv( 10, 6, {name="door"} )
+set_stone( "st-greenbrown", 10, 7 )
+set_stone( "st-greenbrown", 10, 8 )
+draw_stones( "st-greenbrown", {16,4}, {0,1}, 5 )
+y = random(5,7)
+set_item( "it-trigger", 16, y, {action="callback",target="toggle_door"} )
+set_stone( "st-greenbrown_move", 16, y )
+
+oxyd_default_flavor = "a"       -- Default flavor for oxyd stones.
+oxyd(10,3)
+oxyd(11,4)
+oxyd(16,3)
+oxyd(15,4)
+oxyd(10,9)
+oxyd(11,8)
+oxyd(16,9)
+oxyd(15,8)
+
+-- The puzzle to open the front door.
+
+trigger(4,4)
+trigger(5,5)
+trigger(7,7)
+trigger(8,8)
+trigger(8,4)
+trigger(7,5)
+trigger(5,7)
+trigger(4,8)
+
+set_stone( "st-brownie", 3, 6 )
+set_stone( "st-brownie", 6, 3 )
+set_stone( "st-brownie", 6, 9 )
+set_stone( "st-brownie", 9, 6 )
+
+set_actor("ac-blackball", 6.5, 6.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Lost In Space" el:subtitle="" el:id="martin90"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world(20, 13)
+draw_border("st-actorimpulse", 0, 0, 13, 13)
+fill_floor("fl-space")
+draw_border("st-glass3", 15,4,5,5)
+fill_floor("fl-trigger", 16,5,3,3)
+
+set_item( "it-trigger", 16, 6, {action="onoff", target="magnet3"})
+set_item( "it-trigger", 18, 6, {action="onoff", target="magnet4"})
+set_item( "it-trigger", 17, 5, {action="onoff", target="magnet1"})
+set_item( "it-trigger", 17, 7, {action="onoff", target="magnet2"})
+
+SetDefaultAttribs("it-magnet", {strength=1.0})
+set_item( "it-magnet",  6, 1, {name="magnet1"})
+set_item( "it-magnet",  6,11, {name="magnet2"})
+set_item( "it-magnet",  1, 6, {name="magnet3"})
+set_item( "it-magnet", 11, 6, {name="magnet4"})
+
+set_stone("st-death", 0, 6)
+set_stone("st-death",12, 6)
+set_stone("st-death", 6, 0)
+set_stone("st-death", 6,12)
+
+oxyd_default_flavor = "d"
+
+oxyd( 1, 1)
+oxyd( 1,11)
+oxyd(11, 1)
+oxyd(11,11)
+
+oxyd_shuffle()
+
+set_actor("ac-blackball", 17.5,6.5)
+
+set_actor("ac-whiteball", 6.5,6.5, {player=0, essential=1})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

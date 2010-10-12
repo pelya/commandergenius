@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Venice II" el:subtitle="" el:id="raoul17"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="raoul@users.berlios.de" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="1:27"/>
+    </el:info>
+    <el:luamain><![CDATA[
+
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+levelh=13
+levelw=20
+cells={}
+stones={}
+stones[" "]=cell{}
+cells[" "]=cell{}
+cells[" "]=cell{floor="fl-water"}
+cells["#"]=cell{floor="fl-concrete"}
+stones["O"]=cell{parent={{file_oxyd,"b"}}}
+stones["G"]=cell{stone="st-glass"}
+-- Random Bridge Setup:
+c=random(2)
+r=random(2)
+if c == 1 then
+ if r == 1 then
+  stones["a"]=cell{stone="st-oneway_white-n"}
+  stones["d"]=cell{stone="st-oneway_white-w"}
+  stones["f"]=cell{stone="st-oneway_black-e"}
+  stones["g"]=cell{stone="st-oneway_black-s"}
+ else
+  stones["a"]=cell{stone="st-oneway_white-s"}
+  stones["d"]=cell{stone="st-oneway_white-e"}
+  stones["f"]=cell{stone="st-oneway_black-w"}
+  stones["g"]=cell{stone="st-oneway_black-n"}
+ end
+else
+ if r == 1 then
+  stones["a"]=cell{stone="st-oneway_black-n"}
+  stones["d"]=cell{stone="st-oneway_black-w"}
+  stones["f"]=cell{stone="st-oneway_white-e"}
+  stones["g"]=cell{stone="st-oneway_white-s"}
+ else
+  stones["a"]=cell{stone="st-oneway_black-s"}
+  stones["d"]=cell{stone="st-oneway_black-e"}
+  stones["f"]=cell{stone="st-oneway_white-w"}
+  stones["g"]=cell{stone="st-oneway_white-n"}
+ end
+end
+level={"                    ",
+       "  ### ###  ### ###  ",
+       "  ################  ",
+       "  ### ###  ### ###  ",
+       "   #   #    #   #   ",
+       "  ### ###  ### ###  ",
+       "  ################  ",
+       "  ### ###  ### ###  ",
+       "   #   #    #   #   ",
+       "  ### ###  ### ###  ",
+       "  ################  ",
+       "  ### ###  ### ###  ",
+       "                    "}
+stmap={"                    ",
+       "  GOG GOG  GOG GGG  ",
+       "  O ddd ffff ddd G  ",
+       "  GgG GaG  GgG GaG  ",
+       "   g   a    g   a   ",
+       "  GgG GaG  GgG GaG  ",
+       "  O fff dddd fff O  ",
+       "  GaG GgG  GaG GgG  ",
+       "   a   g    a   g   ",
+       "  GaG GgG  GaG GgG  ",
+       "  G ddd ffff ddd O  ",
+       "  GGG GOG  GOG GOG  ",
+       "                    "}
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+set_item("it-yinyang",2,10)
+set_item("it-yinyang",17,2)
+set_item("it-ring",3,11)
+set_item("it-ring",16,1)
+set_item("it-cherry",3,10)
+set_item("it-cherry",16,2)
+set_actor("ac-whiteball",3.5,10.5,{player=1,name="wb"})
+set_actor("ac-blackball",16.5,2.5,{player=0,name="bb"})
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

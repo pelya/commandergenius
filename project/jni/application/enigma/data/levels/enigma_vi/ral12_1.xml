@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Persecution Mania" el:subtitle="A problem shared is a problem halved!" el:id="20060911ral294"/>
+      <el:version el:score="1" el:release="1" el:revision="$Revision: 58 $" el:status="released"/>
+      <el:author  el:name="Ronald Lamprecht" el:email="ral@users.berlios.de"/>
+      <el:copyright>Copyright © 2006 Ronald Lamprecht</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code></el:code>
+      </el:comments>
+      <el:score el:easy="0:31" el:difficult="0:48"/>
+    </el:info>
+    <el:luamain><![CDATA[
+
+set_oxyd = oxyd
+math_floor = floor
+
+function oxyd( x, y, tiles )
+    return set_oxyd( x, y )
+end
+
+function nothing(x, y, tiles)
+    -- create nothing
+end
+
+function floor( floor_type, attribs )
+    return function( x, y, tiles )
+        return set_floor( floor_type, x, y, attribs or {} )
+    end
+end
+
+function stone( stone_type, attribs )
+    return function( x, y, tiles )
+        return set_stone( stone_type, x, y, attribs or {} )
+    end
+end
+
+function item( item_type, attribs )
+    return function( x, y, tiles )
+        return set_item( item_type, x, y, attribs or {} )
+    end
+end
+
+function actor( actor_type, attribs )
+    return function( x, y, tiles )
+        return set_actor( actor_type, x+0.5, y+0.5, attribs or {} )
+    end
+end
+
+function inherit(tile_type)
+    return function( x, y, tiles )
+        return create_tile( tiles, x, y, tile_type )
+    end
+end
+
+function create_world_from_map( tiles, map )
+    create_world( strlen(map[1]), getn(map) )
+    
+    for y = 1,getn(map) do
+        local line = map[y]
+        for x = 1,strlen(line) do
+            local tile = strchar(strbyte(line,x))
+            create_tile( tiles, x-1, y-1, tile )
+        end
+    end
+end
+
+function create_tile( tiles, x, y, tile_type )
+    local constructors = tiles[tile_type]
+
+    if constructors then
+        for i = 1,getn(constructors) do
+            constructors[i](x,y,tiles)
+        end
+    else
+        error("invalid tile identifier " .. tile_type )
+    end
+end
+
+oxyd_default_flavor = "a"
+
+tiles = {}
+tiles[" "] = {floor("fl-water")}
+if difficult then
+    tiles["."] = {floor("fl-red")}
+else
+    tiles["."] = {floor("fl-rough-red")}
+end
+tiles["-"] = tiles["."] 
+tiles["x"] = {inherit(" "), oxyd}
+tiles["#"] = {inherit(" "), stone("st-rock1")}
+
+tiles["y"] = {inherit("."), item("it-yinyang")}
+tiles["1"] = {inherit("y"), actor("ac-blackball", {player=0})}
+tiles["2"] = {inherit("y"), actor("ac-whiteball", {player=1, controllers=2})}
+if difficult then
+    tiles["8"] = {inherit(" "), actor("ac-rotor",{force=6, range=20, attacknearest=1, prefercurrent=1})}
+else
+    tiles["8"] = {inherit(" "), actor("ac-rotor",{force=12, range=20, attacknearest=1, prefercurrent=1})}
+end
+
+create_world_from_map( tiles, {
+"####################",
+"x------..  ..------x",
+"#      .2  ..      #",
+"x------..  ..------x",
+"#      ..  ..      #",
+"# 8    ..  ..      #",
+"x------..  ..------x",
+"#      ..  ..    8 #",
+"#      ..  ..      #",
+"x------..  ..------x",
+"#      ..  .1      #",
+"x------..  ..------x",
+"####################",
+})
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Verfolgungswahn</el:translation>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Geteiltes Leid ist halbes Leid!</el:translation>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

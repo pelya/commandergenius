@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+<el:protected>
+  <el:info el:type="level">
+    <el:identity el:title="jumping ball flash" el:subtitle="" el:id="2007ill001"/>
+    <el:version el:score="1" el:release="1" el:revision="3" el:status="released"/>
+    <el:author  el:name="illmind" el:email="illmind@mag-heut.net" el:homepage="http://www.mag-heut.net"/>
+    <el:copyright>Copyright © 2007 illmind</el:copyright>
+    <el:license el:type="GPL v2.0 or above" el:open="true"/>
+    <el:compatibility el:enigma="0.92">
+    </el:compatibility>
+    <el:modes el:easy="false" el:single="true" el:network="false"/>
+    <el:score el:easy="-" el:difficult="1:34"/>
+  </el:info>
+  <el:luamain><![CDATA[
+-- level dimensions and standards
+levelw = 39
+levelh = 13
+create_world(levelw, levelh)
+oxyd_default_flavor = "d"
+draw_border("st-rock1")
+fill_floor("fl-black", 0,0, level_width,level_height)
+SetDefaultAttribs("it-wormhole", {range=0.0, strength=0.0})
+
+-- extra stones in level
+set_stones("st-rock1", {{4,1},{9,1},{14,1},{19,1},{24,1},{29,1},{34,1},{4,3},{9,3},{14,3},{19,3},{24,3},{29,3},{34,3}})
+set_stones("st-rock1", {{4,5},{9,5},{14,5},{19,5},{24,5},{29,5},{34,5},{4,7},{9,7},{14,7},{19,7},{24,7},{29,7},{34,7}})
+set_stones("st-rock1", {{4,9},{9,9},{14,9},{19,9},{24,9},{29,9},{34,9},{4,11},{9,11},{14,11},{19,11},{24,11},{29,11},{34,11}})
+set_stones("st-rock1", {{4,2},{5,2},{6,2},{7,2},{8,2},{9,2},{10,2},{11,2},{12,2},{13,2},{14,2}})
+set_stones("st-rock1", {{15,2},{16,2},{17,2},{18,2},{19,2},{20,2},{21,2},{22,2},{23,2},{24,2}})
+set_stones("st-rock1", {{25,2},{26,2},{27,2},{28,2},{29,2},{30,2},{31,2},{32,2},{33,2},{34,2},{35,2}})
+set_stones("st-rock1", {{4,6},{5,6},{6,6},{7,6},{8,6},{9,6},{10,6},{11,6},{12,6},{13,6},{14,6}})
+set_stones("st-rock1", {{15,6},{16,6},{17,6},{18,6},{19,6},{20,6},{21,6},{22,6},{23,6},{24,6}})
+set_stones("st-rock1", {{25,6},{26,6},{27,6},{28,6},{29,6},{30,6},{31,6},{32,6},{33,6},{34,6},{35,6}})
+set_stones("st-rock1", {{4,10},{5,10},{6,10},{7,10},{8,10},{9,10},{10,10},{11,10},{12,10},{13,10},{14,10}})
+set_stones("st-rock1", {{15,10},{16,10},{17,10},{18,10},{19,10},{20,10},{21,10},{22,10},{23,10},{24,10}})
+set_stones("st-rock1", {{25,10},{26,10},{27,10},{28,10},{29,10},{30,10},{31,10},{32,10},{33,10},{34,10},{35,10}})
+set_stones("st-rock1", {{4,4},{5,4},{6,4},{7,4},{8,4},{9,4},{10,4},{11,4},{12,4},{13,4},{14,4}})
+set_stones("st-rock1", {{15,4},{16,4},{17,4},{18,4},{19,4},{20,4},{21,4},{22,4},{23,4},{24,4}})
+set_stones("st-rock1", {{25,4},{26,4},{27,4},{28,4},{29,4},{30,4},{31,4},{32,4},{33,4},{34,4},{37,4}})
+set_stones("st-rock1", {{4,8},{5,8},{6,8},{7,8},{8,8},{9,8},{10,8},{11,8},{12,8},{13,8},{14,8}})
+set_stones("st-rock1", {{15,8},{16,8},{17,8},{18,8},{19,8},{20,8},{21,8},{22,8},{23,8},{24,8}})
+set_stones("st-rock1", {{25,8},{26,8},{27,8},{28,8},{29,8},{30,8},{31,8},{32,8},{33,8},{34,8},{37,8}})
+
+-- wormhole solution
+set_item("it-wormhole", 3, 11, {targetx="6.5",targety="7.5"}) -- start
+set_item("it-wormhole", 8 , 7, {targetx="11.5",targety="11.5"}) -- right
+set_item("it-wormhole", 13, 11, {targetx="16.5",targety="1.5"}) -- right
+set_item("it-wormhole", 15, 1, {targetx="21.5",targety="3.5"}) -- left
+set_item("it-wormhole", 23, 3, {targetx="26.5",targety="9.5"}) -- right
+set_item("it-wormhole", 28, 9, {targetx="31.5",targety="5.5"}) -- right
+set_item("it-wormhole", 30, 5, {targetx="6.5",targety="1.5"}) -- left
+set_item("it-wormhole", 5, 1, {targetx="11.5",targety="3.5"}) -- left
+set_item("it-wormhole", 13, 3, {targetx="16.5",targety="7.5"}) -- right
+set_item("it-wormhole", 18, 7, {targetx="21.5",targety="11.5"}) -- right
+set_item("it-wormhole", 20, 11, {targetx="26.5",targety="5.5"}) -- left
+set_item("it-wormhole", 25, 5, {targetx="31.5",targety="9.5"}) -- left
+set_item("it-wormhole", 30, 9, {targetx="35.5",targety="1.5"}) -- left
+set_item("it-wormhole", 8, 1, {targetx="6.5",targety="11.5"}) -- outbound
+set_item("it-wormhole", 5 , 7, {targetx="11.5",targety="1.5"}) -- outbound
+set_item("it-wormhole", 10, 3, {targetx="16.5",targety="9.5"}) -- outbound
+set_item("it-wormhole", 10, 11, {targetx="6.5",targety="3.5"}) -- outbound
+set_item("it-wormhole", 18, 1, {targetx="26.5",targety="7.5"}) -- outbound
+set_item("it-wormhole", 15, 7, {targetx="6.5",targety="5.5"}) -- outbound
+set_item("it-wormhole", 20, 3, {targetx="31.5",targety="3.5"}) -- outbound
+set_item("it-wormhole", 23, 11, {targetx="11.5",targety="9.5"}) -- outbound
+set_item("it-wormhole", 28, 5, {targetx="16.5",targety="3.5"}) -- outbound
+set_item("it-wormhole", 25, 9, {targetx="21.5",targety="7.5"}) -- outbound
+set_item("it-wormhole", 33, 5, {targetx="21.5",targety="1.5"}) -- outbound
+set_item("it-wormhole", 33, 9, {targetx="26.5",targety="11.5"}) -- outbound
+
+-- wormhole hazzards northwest
+set_item("it-wormhole", 1, 1, {targetx="6.5",targety="3.5"})
+set_item("it-wormhole", 5, 3, {targetx="11.5",targety="9.5"})
+set_item("it-wormhole", 13, 9, {targetx="16.5",targety="5.5"})
+set_item("it-wormhole", 18, 5, {targetx="21.5",targety="1.5"})
+set_item("it-wormhole", 23, 1, {targetx="26.5",targety="7.5"})
+set_item("it-wormhole", 25, 7, {targetx="31.5",targety="11.5"})
+set_item("it-wormhole", 30, 11, {targetx="6.5",targety="9.5"})
+set_item("it-wormhole", 8, 9, {targetx="11.5",targety="5.5"})
+set_item("it-wormhole", 10, 5, {targetx="16.5",targety="11.5"})
+set_item("it-wormhole", 15, 11, {targetx="21.5",targety="7.5"})
+set_item("it-wormhole", 20, 7, {targetx="26.5",targety="1.5"})
+set_item("it-wormhole", 28, 1, {targetx="31.5",targety="3.5"})
+set_item("it-wormhole", 33, 3, {targetx="6.5",targety="11.5"})
+
+-- wormhole hazzards northeast
+set_item("it-wormhole", 3, 1, {targetx="6.5",targety="5.5"})
+set_item("it-wormhole", 8, 5, {targetx="11.5",targety="7.5"})
+set_item("it-wormhole", 10, 7, {targetx="16.5",targety="3.5"})
+set_item("it-wormhole", 15, 3, {targetx="21.5",targety="9.5"})
+set_item("it-wormhole", 23, 9, {targetx="26.5",targety="1.5"})
+set_item("it-wormhole", 25, 1, {targetx="31.5",targety="11.5"})
+set_item("it-wormhole", 33, 11, {targetx="6.5",targety="9.5"})
+set_item("it-wormhole", 5, 9, {targetx="11.5",targety="1.5"})
+set_item("it-wormhole", 13, 1, {targetx="16.5",targety="11.5"})
+set_item("it-wormhole", 18, 11, {targetx="21.5",targety="5.5"})
+set_item("it-wormhole", 20, 5, {targetx="26.5",targety="3.5"})
+set_item("it-wormhole", 28, 3, {targetx="31.5",targety="7.5"})
+set_item("it-wormhole", 30, 7, {targetx="26.5",targety="11.5"})
+
+-- wormhole hazzards southwest
+set_item("it-wormhole", 1, 11, {targetx="6.5",targety="11.5"})
+set_item("it-wormhole", 5, 11, {targetx="11.5",targety="7.5"})
+set_item("it-wormhole", 13, 7, {targetx="16.5",targety="5.5"})
+set_item("it-wormhole", 15, 5, {targetx="21.5",targety="9.5"})
+set_item("it-wormhole", 20, 9, {targetx="26.5",targety="3.5"})
+set_item("it-wormhole", 25, 3, {targetx="31.5",targety="1.5"})
+set_item("it-wormhole", 30, 1, {targetx="6.5",targety="3.5"})
+set_item("it-wormhole", 8, 3, {targetx="11.5",targety="5.5"})
+set_item("it-wormhole", 13, 5, {targetx="16.5",targety="9.5"})
+set_item("it-wormhole", 18, 9, {targetx="21.5",targety="5.5"})
+set_item("it-wormhole", 23, 5, {targetx="26.5",targety="7.5"})
+set_item("it-wormhole", 28, 7, {targetx="31.5",targety="3.5"})
+set_item("it-wormhole", 30, 3, {targetx="26.5",targety="11.5"})
+set_item("it-wormhole", 28, 11, {targetx="26.5",targety="11.5"})
+set_item("it-wormhole", 25, 11, {targetx="26.5",targety="11.5"})
+
+-- wormhole hazzards undefined
+set_item("it-wormhole", 5, 5, {targetx="11.5",targety="9.5"})
+set_item("it-wormhole", 10, 9, {targetx="16.5",targety="3.5"})
+set_item("it-wormhole", 18, 3, {targetx="21.5",targety="7.5"})
+set_item("it-wormhole", 23, 7, {targetx="31.5",targety="7.5"})
+set_item("it-wormhole", 33, 7, {targetx="6.5",targety="11.5"})
+set_item("it-wormhole", 8, 11, {targetx="11.5",targety="1.5"})
+set_item("it-wormhole", 10, 1, {targetx="16.5",targety="9.5"})
+set_item("it-wormhole", 15, 9, {targetx="21.5",targety="1.5"})
+set_item("it-wormhole", 20, 1, {targetx="31.5",targety="1.5"})
+set_item("it-wormhole", 33, 1, {targetx="26.5",targety="11.5"})
+
+-- bomb me happy
+set_item("it-landmine", 7, 3)
+set_item("it-landmine", 7, 9)
+set_item("it-landmine", 12, 5)
+set_item("it-landmine", 12, 7)
+set_item("it-landmine", 17, 3)
+set_item("it-landmine", 17, 11)
+set_item("it-landmine", 22, 1)
+set_item("it-landmine", 22, 9)
+set_item("it-landmine", 27, 1)
+set_item("it-landmine", 27, 7)
+set_item("it-landmine", 32, 7)
+set_item("it-landmine", 32, 11)
+
+-- endsequence
+set_item("it-floppy", 37,1)
+set_item("it-sword", 36,1)
+set_stone("st-door", 37,  2, {name="ill01", type="h"})
+set_stone("st-door", 35,  4, {name="ill02", type="h"})
+set_stone("st-door", 37,  6, {name="ill03", type="h"})
+set_stone("st-door", 35,  8, {name="ill04", type="h"})
+set_stone("st-door", 37,  10, {name="ill05", type="h"})
+set_stone("st-floppy", 36, 2, {action="openclose", target="ill01"})
+set_stone("st-floppy", 36, 4, {action="openclose", target="ill02"})
+set_stone("st-floppy", 36, 6, {action="openclose", target="ill03"})
+set_stone("st-floppy", 36, 8, {action="openclose", target="ill04"})
+set_stone("st-floppy", 36, 10, {action="openclose", target="ill05"})
+set_stones("st-knight", {{35,3},{36,3},{37,3},{35,5},{36,5},{37,5}})
+set_stones("st-knight", {{35,7},{36,7},{37,7},{35,9},{36,9},{37,9}})
+set_item("it-crack3", 37, 11)
+set_item("it-crack2", 36, 11)
+
+-- documents
+document(2,3,"text1")
+document(2,2,"text2")
+document(27,11,"text3")
+
+-- oxyd stones
+oxyd(2,6)
+oxyd(35,11)
+oxyd_shuffle()
+
+-- blackball
+set_actor("ac-blackball", 2.5, 5.5, {player=0})
+    ]]></el:luamain>
+<el:i18n>
+    <el:string el:key="title">
+      <el:english el:translate="false"/>
+    </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">illmind's jumping ball flash ...</el:english>
+      </el:string>
+      <el:string el:key="text2">
+        <el:english el:translate="true">... of heaven comes the beast from the ...</el:english>
+      </el:string>
+      <el:string el:key="text3">
+        <el:english el:translate="true">... t r a p p e d ...</el:english>
+      </el:string>
+  </el:i18n>
+</el:protected>
+</el:level>

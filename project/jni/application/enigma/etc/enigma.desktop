@@ -1,0 +1,21 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+
+Name=Enigma
+Name[eo]=Enigmo
+
+Comment=Uncover pairs of stones while navigating obstacles using a marble
+Comment[eo]=Malkovru parojn de ŝtonojn dum vi navigas obstaklojn kun globeto
+
+FilePattern=enigma;
+TryExec=enigma
+Exec=enigma
+Terminal=false
+Icon=enigma
+
+StartupNotify=false
+
+Type=Application
+Categories=Application;Game;PuzzleGame;
+

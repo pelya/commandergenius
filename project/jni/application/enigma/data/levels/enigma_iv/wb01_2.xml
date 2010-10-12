@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Hurry!" el:subtitle="" el:id="wb1"/>
+      <el:version el:score="2" el:release="2" el:revision="1" el:status="released"/>
+      <el:author  el:name="Jon 'WB' Sneyers" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Jon 'WB' Sneyers</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Nov 2005: Changes in level design, due to new timing engine.
+--           Added easy mode (some seconds more time) -- Andreas
+
+cells={}
+
+cells[" "]=cell{{{randomfloor, cell{floor="fl-tigris"}, 3, cell{floor="fl-samba"}, 1, cell{floor="fl-stone"}, 20}}}
+cells["w"]=cell{stone="st-wood"}
+cells["i"]=cell{stone="st-stoneimpulse"}
+cells["X"]=cell{stone="st-stoneimpulse-hollow"}
+
+cells["="]=cell{stone="st-rock5"}
+cells["#"]=cell{stone="st-rock6"}
+cells["."]=cell{floor="fl-abyss"}
+
+cells["&"]=cell{{{oneway, EAST}}}
+cells["%"]=cell{{{oneway, WEST}}}
+
+cells["V"]=cell{parent=cells[" "], stone="st-bolder-s"}
+cells[">"]=cell{parent=cells[" "], stone="st-bolder-e"}
+cells["<"]=cell{parent=cells[" "], stone="st-bolder-w"}
+cells["^"]=cell{parent=cells[" "], stone="st-bolder-n"}
+
+cells["a"]=cell{stone={face="st-door", attr={name="doorA", type="v"}}}
+cells["A"]=cell{item= {face="it-trigger", attr={action="close", target="doorA"}}}
+cells["B"]=cell{item= {face="it-trigger", attr={action="open", target="doorA"}}}
+cells["O"]=cell{actor={face="ac-blackball", attr={player=0}}}
+cells["0"]=oxyd
+
+if difficult then
+  level = {
+     "#iii###0#0#0#0###00#",
+     "#i#ii &        a   0",
+     "#i##i B#0#0#0####00#",
+     "#iO&Xw#iiiiiiiiiiiii",
+     "#i###iii######### Vi",
+     "#iiiii####### Vi# ##",
+     "######### Vi# # # # ",
+     "##### Vi# # # #     ",
+     "# Vi# # # #         ",
+     "# # # #             ",
+     "# #                 ",
+     "#A# # # # # # # # # ",
+     "#i# ^i# ^i# ^i# ^i##",
+  }
+else
+  level = {
+     "#iii###0#0#0#0###00#",
+     "#i#ii &        a   0",
+     "#i##i B#0#0#0####00#",
+     "#iO&Xw#iiiiiiiiiiiii",
+     "#i###iii######### Vi",
+     "#iiiii### Vi# Vi# ##",
+     "##### Vi# # # # # # ",
+     "iii   #         A   ",
+     "i#                #<",
+     ">#                 i",
+     "                    ",
+     " # #i # # # # # # # ",
+     "## ^ii# ^i# ^i# ^i# ",
+  }
+end
+
+oxyd_default_flavor = "c"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

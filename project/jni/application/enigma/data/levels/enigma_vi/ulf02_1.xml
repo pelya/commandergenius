@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd"
+  xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Simple Space"
+        el:subtitle="A really annoying Level"
+        el:id="20060628ulf002"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Ulf Stegemann" el:email="ulf-enigma@zeitform.de"
+        el:homepage="http://ulf.zeitform.de"/>
+      <el:copyright>Copyright © 2006 Ulf Stegemann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92"/>
+      <el:modes el:easy="false" el:single="true" el:network="false" el:control="force"
+        el:scoreunit="duration" el:scoretarget="time"/>
+      <el:score el:easy="-" el:difficult="04:28"/>
+    </el:info>
+    <el:luamain><![CDATA[
+
+-- GENERAL --
+levelw = 20
+levelh = 13
+enigma.ConserveLevel=TRUE
+
+-- LANDSCAPE --
+create_world(levelw, levelh)
+draw_border("st-likeoxydc")
+fill_floor("fl-space",0,0, level_width,level_height)
+
+-- FLOORS --
+fill_floor("fl-white",16,2,2,2)
+fill_floor("fl-white",15,8,2,2)
+fill_floor("fl-white",11,3,2,2)
+fill_floor("fl-white",10,7,2,2)
+fill_floor("fl-white",7,2,2,2)
+fill_floor("fl-white",6,6,2,2)
+fill_floor("fl-white",2,9,2,2)
+fill_floor("fl-white",2,2,2,2)
+
+-- STONES --
+set_stone("st-likeoxydc",6,6)
+set_stone("st-likeoxydc",7,7)
+
+-- OXYDS --
+oxyd_default_flavor = "c"
+
+oxyd(16,2)
+oxyd(17,3)
+oxyd(15,8)
+oxyd(16,9)
+oxyd(12,3)
+oxyd(11,4)
+oxyd(10,7)
+oxyd(11,8)
+oxyd(8,3)
+oxyd(7,2)
+oxyd(6,7)
+oxyd(7,6)
+oxyd(2,9)
+oxyd(3,10)
+oxyd(3,3)
+oxyd(2,2)
+
+oxyd_shuffle()
+
+-- ACTOR --
+set_actor("ac-blackball",17.5,2.5)
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Ein wirklich nerviges Level</el:translation>
+      </el:string>
+     </el:i18n>
+  </el:protected>
+</el:level>
+
+

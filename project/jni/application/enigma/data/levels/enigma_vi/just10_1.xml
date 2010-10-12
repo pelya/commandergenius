@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Check the Light" el:subtitle="How to play chess with lasers" el:id="just10"/>
+      <el:version el:score="1" el:release="1" el:revision="4" el:status="released"/>
+      <el:author  el:name="JuSt" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 JuSt</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00" />
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="1:17"/>
+    </el:info>
+    <el:luamain><![CDATA[
+enigma.ConserveLevel=FALSE
+
+create_world(21, 13)
+oxyd_default_flavor="b"
+
+-- Floor Layer
+fill_floor("fl-concrete")
+draw_floor("fl-water", {1, 2}, {0, 1}, 10)
+draw_floor("fl-water", {2, 2}, {1, 0}, 5)
+draw_floor("fl-water", {5, 3}, {0, 1}, 9)
+set_floor("fl-water", 18, 5)
+draw_floor("fl-water", {2, 11}, {1, 0}, 3)
+draw_floor("fl-water", {6, 11}, {1, 0}, 12)
+set_floor("fl-wood", 7, 11)
+set_floor("fl-wood", 9, 11)
+set_floor("fl-wood", 11, 11)
+set_floor("fl-wood", 13, 11)
+
+-- Item Layer
+set_item("it-trigger", 4, 0, {action="open", target="door1", invisible=FALSE})
+set_item("it-seed", 18, 5)
+set_item("it-trigger", 3, 8, {action="close", target="door1", invisible=FALSE})
+set_item("it-trigger", 18, 11, {action="callback", target="got_you", invisible=FALSE})
+set_item("it-document", 14, 3, {text="text1"})
+
+-- Stone Layer
+oxyd(18, 0)
+oxyd(19, 1)
+oxyd(19, 2)
+oxyd(19, 3)
+draw_stones("st-stone2", {0, 0}, {0, 1}, 11)
+draw_stones("st-stone2", {1, 0}, {1, 0}, 2)
+draw_stones("st-stone2", {10, 0}, {1, 0}, 8)
+draw_stones("st-stone2", {4, 1}, {1, 0}, 2)
+draw_stones("st-stone2", {7, 1}, {1, 0}, 2)
+draw_stones("st-stone2", {10, 1}, {0, 1}, 2)
+draw_stones("st-stone2", {8, 2}, {0, 1}, 3)
+draw_stones("st-stone2", {17, 2}, {0, 1}, 3)
+draw_stones("st-stone2", {2, 3}, {0, 1}, 8)
+draw_stones("st-stone2", {4, 3}, {0, 1}, 2)
+draw_stones("st-stone2", {12, 3}, {0, 1}, 4)
+draw_stones("st-stone2", {10, 4}, {0, 1}, 4)
+draw_stones("st-stone2", {19, 4}, {0, 1}, 9)
+draw_stones("st-stone2", {4, 7}, {0, 1}, 4)
+draw_stones("st-stone2", {14, 9}, {-1, 1}, 2)
+fill_stones("st-stone2", 16, 9, 2, 2)
+draw_stones("st-stone2", {7, 10}, {1, 0}, 6)
+draw_stones("st-stone2", {0, 12}, {1, 0}, 5)
+draw_stones("st-stone2", {6, 12}, {1, 0}, 13)
+draw_stones("st-stone2", {20, 1}, {0, 1}, 12)
+set_stones("st-stone2", {{19, 0}, {2, 1}, {12, 1}, {3, 10}, {8, 7}})
+draw_stones("st-grate1", {7, 3}, {0, 1}, 5)
+set_stone("st-grate1", 7, 9)
+draw_stones("st-grate2", {18, 5}, {0, 1}, 3)
+set_stone("st-grate2", 18, 9)
+set_stone("st-grate2", 17, 8)
+set_stones("st-wood", {{5, 0}, {3, 7}, {7, 11}, {9, 11}, {11, 11}, {13, 11}})
+draw_stones("st-stoneimpulse", {6, 0}, {1, 0}, 4)
+draw_stones("st-stoneimpulse", {9, 1}, {0, 1}, 6)
+draw_stones("st-stoneimpulse", {3, 4}, {0, 1}, 3)
+set_stone("st-stoneimpulse", 4, 6)
+set_stone("st-laserswitch", 4, 5)
+set_stone("st-laser", 3, 0, {dir=SOUTH, on="1"})
+set_stone("st-laser", 1, 1, {dir=SOUTH, on="1"})
+set_stone("st-laser", 6, 1, {name="laser1", dir=SOUTH, on="1"})
+set_stone("st-laser", 7, 2, {dir=WEST, on="1"})
+set_stone("st-laser", 10, 3, {name="laser3", dir=EAST, on="1"})
+set_stone("st-laser", 8, 5, {name="laser2", dir=WEST, on="1"})
+set_stone("st-laser", 18, 10, {name="laser4", dir=NORTH, on="0"})
+set_stone("st-laser", 0, 11, {dir=EAST, on="1"})
+set_stone("st-laser", 5, 12, {dir=NORTH, on="1"})
+set_stones("st-glass", {{3, 1}, {8, 6}}, {type="0"})
+set_stone("st-lightpassenger", 1, 3)
+set_stone("st-door", 3, 3, {name="door1", type="h"})
+set_stone("st-door_a", 18, 4, {name="door3"})
+set_stone("st-door_a", 15, 9, {name="door2"})
+set_stones("st-chess_black", {{15, 5}, {13, 7}})
+set_stone("st-pmirror", 11, 6, {movable=TRUE, transparent=FALSE, orientation="3"})
+set_stone("st-switch", 14, 10, {action="callback", target="change_floors", on="1"})
+set_stones("st-stone_break", {{17, 1}, {13, 10}, {10, 6}, {9, 7}})
+set_stone("st-timer", 20, 0, {action="callback", target="check_it", interval="0.01", loop="1"})
+
+-- Actor Layer
+set_actor("ac-blackball", 11.5, 1.5, {player="0", mouseforce="1"})
+
+oxyd_shuffle()
+
+-- Functions
+function check_it()
+    local mystone = enigma.GetStone(5,5)
+    if mystone ~= nil then
+        local mystonekind = enigma.GetKind(mystone,"kind")
+        if mystonekind == "st-chess" then
+            SendMessage("laser3","off")
+            SendMessage("laser2","off")
+        end
+    end
+end
+
+function got_you()
+    SendMessage("door3","open")
+    SendMessage("laser4","on")
+    SendMessage("laser1","off")
+    SendMessage("door2","open")
+end
+
+function change_floors()
+    fill_floor("fl-wood", 5, 3, 1, 8)
+end
+  ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true"></el:english>
+        <el:translation el:lang="de">Ob Schachfiguren laserresistent sind?</el:translation>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

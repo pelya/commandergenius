@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Oxyd Labyrinth" el:subtitle="" el:id="martin87"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+fill_floor("fl-himalaya")
+
+oxyd_default_flavor = "d"
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+      local c = strsub( pattern, i, i)
+      if c =="#" then
+         set_stone("st-door_a",i-1,line,{type="v"})
+      elseif c == "O" then
+         oxyd( i-1, line)
+      elseif c == "+" then
+         set_stone("st-shogun-s",i-1,line)
+      end
+    end
+end
+
+set_stone("st-door_a", 1,10, {type="v", name="door1"})
+set_stone("st-door_a", 6, 9, {type="v", name="door2"})
+set_stone("st-door_a", 6, 5, {type="v", name="door3"})
+set_stone("st-door_a", 9,10, {type="v", name="door4"})
+set_stone("st-door_a",17, 8, {type="v", name="door5"})
+set_stone("st-door_a", 6, 2, {type="v", name="door6"})
+
+shogundot1(17,1, {target="door1", action="openclose"})
+shogundot1(16,2, {target="door2", action="openclose"})
+shogundot1(17,2, {target="door3", action="openclose"})
+shogundot1(18,2, {target="door4", action="openclose"})
+shogundot1(17,3, {target="door5", action="openclose"})
+shogundot1(18,3, {target="door6", action="openclose"})
+
+renderLine( 0, "####################")
+renderLine( 1, "#OOOOO#     #   #  #")
+renderLine( 2, "#       ## ##  +   #")
+renderLine( 3, "#OOOOO###  #  + #+ #")
+renderLine( 4, "#######   ## ##+# ##")
+renderLine( 5, "#         #   +  + #")
+renderLine( 6, "# #  ######   #    #")
+renderLine( 7, "#  ####   #######  #")
+renderLine( 8, "#  #  # #       # ##")
+renderLine( 9, "# ##    #  ######  #")
+renderLine(10, "# #  #### ##    ## #")
+renderLine(11, "#    #        #    #")
+renderLine(12, "####################")
+
+oxyd_shuffle()
+
+set_actor("ac-blackball", 17.5, 7.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

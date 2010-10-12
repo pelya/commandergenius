@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation -" el:subtitle="" el:id="edward30"/>
+      <el:version el:score="1" el:release="1" el:revision="2" el:status="released"/>
+      <el:author  el:name="Edward" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Edward</el:copyright>
+     <el:license el:type="Donated to Enigma under the projects license" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="0:43" el:difficult="0:23"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world(20,13)
+
+fill_floor("fl-abyss",0,0,20,13)
+fill_floor("fl-ice",4,3,12,7)
+
+function renderLine(line,pattern)
+    for i=1, strlen(pattern) do
+        local c=strsub(pattern,i,i)
+        if c=="#" then
+            set_stone("st-stoneimpulse",i-1,line)
+        elseif c=="*" then
+            set_stone("st-stoneimpulse-hollow",i-1,line)
+        elseif c=="0" then
+            set_actor("ac-whiteball-small",i-1+0.5,line+0.5,{player=0})
+        elseif c=="O" then
+            set_item("it-hollow",i-1,line)
+        end
+    end
+end
+
+if not difficult then
+
+renderLine(00,"                    ")
+renderLine(01,"                    ")
+renderLine(02,"                    ")
+renderLine(03,"    *##########*    ")
+renderLine(04,"    #O        O#    ")
+renderLine(05,"    #    00    #    ")
+renderLine(06,"    #          #    ")
+renderLine(07,"    #    00    #    ")
+renderLine(08,"    #O        O#    ")
+renderLine(09,"    *##########*    ")
+renderLine(10,"                    ")
+renderLine(11,"                    ")
+renderLine(12,"                    ")
+
+else
+
+renderLine(00,"                    ")
+renderLine(01,"                    ")
+renderLine(02,"                    ")
+renderLine(03,"    *##########*    ")
+renderLine(04,"    #O        O#    ")
+renderLine(05,"    #          #    ")
+renderLine(06,"    # 0 0  0 0 #    ")
+renderLine(07,"    #          #    ")
+renderLine(08,"    #O        O#    ")
+renderLine(09,"    *##########*    ")
+renderLine(10,"                    ")
+renderLine(11,"                    ")
+renderLine(12,"                    ")
+
+end
+
+set_item("it-magnet",4,3,{on=TRUE})
+set_item("it-magnet",15,3,{on=TRUE})
+set_item("it-magnet",4,9,{on=TRUE})
+set_item("it-magnet",15,9,{on=TRUE})
+
+document(9,6,"text1")
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Can you relax amid all this chaos?</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

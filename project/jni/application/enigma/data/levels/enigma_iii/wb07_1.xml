@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Easy Skyscraper" el:subtitle="" el:id="wb7"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jon 'WB' Sneyers" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Jon 'WB' Sneyers</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+
+cells[" "]=cell{floor="fl-tigris"}
+cells[";"]=cell{floor="fl-samba"}
+cells[":"]=cell{floor="fl-stone"}
+cells["w"]=cell{stone="st-wood"}
+cells["B"]=cell{stone="st-stone_break"}
+SetDefaultAttribs("st-rubberband", {strength=20})
+cells["R"]=cell{stone="st-rubberband"}
+cells["i"]=cell{stone="st-stoneimpulse"}
+
+cells["="]=cell{stone="st-rock5"}
+cells["#"]=cell{stone="st-rock6"}
+cells["."]=cell{floor="fl-abyss"}
+
+cells["h"]=cell{item="it-hammer"}
+
+cells["H"]=cell{stone="st-chameleon"}
+
+cells["%"]=cell{stone="st-scissors"}
+
+cells["V"]=cell{parent=cells[" "], stone="st-bolder-s"}
+cells[">"]=cell{parent=cells[" "], stone="st-bolder-e"}
+cells["<"]=cell{parent=cells[" "], stone="st-bolder-w"}
+cells["^"]=cell{parent=cells[" "], stone="st-bolder-n"}
+
+cells["O"]=cell{actor={face="ac-blackball", attr={player=0}}}
+cells["0"]=oxyd
+
+if difficult == false then
+    cells["D"]=cells["#"]
+else
+    cells["D"]=cell{stone="st-death"}
+end
+
+level = {      
+   "####################",
+   "#h                 #",
+   "R##R##R##R##R##R## R",
+   "R                  #",
+   "R R###R##R##R##R#R##",
+   "R R                #",
+   "R R  #0#      #0#  #",
+   "R R  DDD      DDD  #",
+   "R R         R      #",
+   "R R    R           #",
+   "R R            R   #",
+   "#                  #",
+   "###############R   #",
+   "#    R        D    #",
+   "#             D R  #",
+   "#  R ######   D    #",
+   "#    #0       D  R #",
+   "#  R #0       D    #",
+   "#    ########## R  #",
+   "#   R       R      #",
+   "#       R          #",
+   "#            R     #",
+   "#    R         R   #",
+   "#                  #",
+   "# R       R      R #",
+   "#     R            #",
+   "#             R    #",
+   "#   R              #",
+   "#          R       #",
+   "#      R           #",
+   "#             R    #",
+   "#   R              #",
+   "#         %        #",
+   "#                  #",
+   "#                  #",
+   "#  #################",
+   "#                  #",
+   "##########         #",
+   "#             ##BB##",
+   "#             DBBB##",
+   "#             DBBB##",
+   "#        ######BBB##",
+   "#        DBBBBBBBB##",
+   "#        DBBBBBBBB##",
+   "#   #######BB#######",
+   "#   DBBBBBBBBBBBBBB#",
+   "#   DBB0BB0BB0BB0BB#",
+   "# O DBBBBBBBBBBBBBB#",
+   "####################"
+}
+--  01234567890123456789
+
+oxyd_default_flavor = "c"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+oxyd_shuffle()
+enigma.AddConstantForce(0,50)
+display.SetFollowMode(display.FOLLOW_SCROLLING)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

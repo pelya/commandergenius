@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<index xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd">
+
+  <info enigma="1.00" group="Enigma" location="10100" network="false" owner="Enigma Team" release="1" revision="1" title="Tutorial"/>
+
+  <attributes/>
+
+  <levels>
+    <level _seq="1" _title="Oxyd Stones 1" _xpath="./m_tut1" author="Martin Hawlisch" ctrl="force" easy="true" id="m_tutor/m_tut1" rel="2" rev="0" score="2" target="time" unit="duration"/>
+    <level _seq="2" _title="Oxyd Stones 2" _xpath="./m_tut2" author="Martin Hawlisch" ctrl="force" easy="true" id="m_tutor/m_tut2" rel="2" rev="0" score="2" target="time" unit="duration"/>
+    <level _seq="3" _title="Oxyd Stones 3" _xpath="./m_tut3" author="Martin Hawlisch" ctrl="force" easy="true" id="m_tutor/m_tut3" rel="2" rev="0" score="2" target="time" unit="duration"/>
+    <level _seq="4" _title="Meditation 1" _xpath="./m_med1" author="Martin Hawlisch" ctrl="force" easy="true" id="m_tutor/m_med1" rel="2" rev="0" score="2" target="time" unit="duration"/>
+    <level _seq="5" _title="Movement 1" _xpath="./m_tut4" author="Martin Hawlisch" ctrl="force" easy="true" id="m_tutor/m_tut4" rel="2" rev="0" score="2" target="time" unit="duration"/>
+    <level _seq="6" _title="Movement 2" _xpath="./m_tut5" author="Martin Hawlisch" ctrl="force" easy="true" id="m_tutor/m_tut5" rel="2" rev="0" score="2" target="time" unit="duration"/>
+    <level _seq="7" _title="Movement 3" _xpath="./m_tut6" author="Martin Hawlisch" ctrl="force" easy="true" id="m_tutor/m_tut6" rel="2" rev="0" score="2" target="time" unit="duration"/>
+    <level _seq="8" _title="Meditation 2" _xpath="./m_med2" author="Martin Hawlisch" ctrl="force" easy="true" id="m_tutor/m_med2" rel="2" rev="0" score="2" target="time" unit="duration"/>
+    <level _seq="9" _title="Movement 4" _xpath="./m_tut7" author="Martin Hawlisch" ctrl="force" easy="true" id="m_tutor/m_tut7" rel="2" rev="0" score="2" target="time" unit="duration"/>
+    <level _seq="10" _title="Movement 5" _xpath="./m_tut8" author="Martin Hawlisch" ctrl="force" easy="true" id="m_tutor/m_tut8" rel="2" rev="0" score="2" target="time" unit="duration"/>
+    <level _seq="11" _title="Floors 1" _xpath="./m_tut9" author="Martin Hawlisch" ctrl="force" easy="true" id="m_tutor/m_tut9" rel="2" rev="0" score="2" target="time" unit="duration"/>
+    <level _seq="12" _title="Floors 2" _xpath="./m_tut10" author="Martin Hawlisch" ctrl="force" easy="false" id="m_tutor/m_tut10" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="13" _title="Floors 3" _xpath="./m_tut11" author="Martin Hawlisch" ctrl="force" easy="false" id="m_tutor/m_tut11" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="14" _title="Doors and Triggers" _xpath="./a_tut01" author="Andreas Lochmann" ctrl="force" easy="false" id="a_tut01" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="15" _title="Timers" _xpath="./a_tut02" author="Andreas Lochmann" ctrl="force" easy="false" id="a_tut02" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="16" _title="Welcome" _xpath="enigma_i/welcome_2" author="Daniel Heck" ctrl="force" easy="true" id="welcome" rel="2" rev="4" score="2" target="time" unit="duration"/>
+    <level _seq="17" _title="Rollercoaster" _xpath="enigma_ii/jc02_1" author="Jens-Christian Korth" ctrl="force" easy="false" id="jc02" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="18" _title="The Doors" _xpath="enigma_i/siegfried11_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level4a" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="19" _title="Sierpinski" _xpath="enigma_iv/alain10_1" author="Alain Busser" ctrl="force" easy="false" id="alain10" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="20" _title="- Meditation -" _xpath="enigma_i/alain03_1" author="Alain Busser" ctrl="force" easy="false" id="alain03" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="21" _title="(Counter)Clockwise" _xpath="enigma_i/wb13_1" author="Jon 'WB' Sneyers" ctrl="force" easy="false" id="wb13" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="22" _title="Hurry!" _xpath="enigma_i/jc01_1" author="Jens-Christian Korth" ctrl="force" easy="false" id="jc01" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="23" _title="Watery Grave" _xpath="enigma_i/martin37_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin37" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="24" _title="Blocks and Slopes" _xpath="./a_tut03" author="Andreas Lochmann" ctrl="force" easy="false" id="a_tut03" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="25" _title="Round Trip" _xpath="enigma_ii/martin35_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin35" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="26" _title="Koosnab" _xpath="enigma_ii/rb02_1" author="Roberto Bardin" ctrl="force" easy="false" id="rb02" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="27" _title="Hanging In The Balance" _xpath="enigma_i/illmind03_1" author="illmind" ctrl="force" easy="false" id="illmind03" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="28" _title="Three Plugs" _xpath="enigma_i/martin83_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin83" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="29" _title="Black Is Beautiful" _xpath="enigma_iii/martin15_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin15" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="30" _title="- Meditation -" _xpath="enigma_i/siegfried39_1" author="anonymous" ctrl="force" easy="false" id="meditation6" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="31" _title="Indoor Pool" _xpath="enigma_ii/nat01_1" author="Nat Pryce" ctrl="force" easy="false" id="nat1" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="32" _title="Balance" _xpath="enigma_i/erich01_1" author="Erich Schubert" ctrl="force" easy="false" id="balance" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="33" _title="Push Them In" _xpath="enigma_ii/nat05_1" author="Andreas Persenius, Nat Pryce" ctrl="force" easy="false" id="nat5" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="34" _title="Without Tremor" _xpath="enigma_i/richi04_1" author="Richi Bützer" ctrl="force" easy="false" id="richi04" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="35" _title="Slippery Slopes" _xpath="enigma_i/martin38_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin38" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="36" _title="Ice Skating" _xpath="enigma_i/siegfried22_1" author="Siegfried Fennig" ctrl="force" easy="false" id="level7a" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="37" _title="Sok It To 'Em" _xpath="enigma_i/nat07_1" author="Nat Pryce" ctrl="force" easy="false" id="nat7" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="38" _title="Lasers and Mirrors" _xpath="./a_tut04" author="Andreas Lochmann" ctrl="force" easy="false" id="a_tut04" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="39" _title="Light Switches" _xpath="enigma_i/martin08_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin08" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="40" _title="- Meditation -" _xpath="enigma_i/siegfried33_1" author="anonymous" ctrl="force" easy="false" id="meditation1" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="41" _title="Mirror Room" _xpath="enigma_i/luc12_1" author="Lukas Schüller" ctrl="force" easy="false" id="luc12" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="42" _title="Sokoban Revival" _xpath="enigma_i/martin04_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin04" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="43" _title="Mirror Room II" _xpath="enigma_i/luc17_1" author="Lukas Schüller" ctrl="force" easy="false" id="luc17" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="44" _title="Mission Impossible" _xpath="enigma_i/martin14_1" author="Martin Hawlisch" ctrl="force" easy="true" id="martin14" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="45" _title="Brittle Planks" _xpath="enigma_i/martin92_1" author="Martin Hawlisch" ctrl="force" easy="true" id="martin92" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="46" _title="Lasers 101" _xpath="enigma_i/daniel08_1" author="Daniel Heck" ctrl="force" easy="false" id="lasers101" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="47" _title="Laser Spiral" _xpath="enigma_ii/duffy03_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy3" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="48" _title="Brittle Floor!" _xpath="enigma_iii/martin91_1" author="Martin Hawlisch" ctrl="force" easy="true" id="martin91" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="49" _title="Inverted Laser Spiral" _xpath="enigma_ii/duffy42_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy42" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="50" _title="- Meditation -" _xpath="enigma_i/siegfried35_1" author="Siegfried Fennig" ctrl="force" easy="false" id="meditation14" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="51" _title="Laser Games" _xpath="enigma_iv/mp03_1" author="moonpearl" ctrl="force" easy="false" id="mp03" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="52" _title="Items" _xpath="./a_tut05" author="Andreas Lochmann" ctrl="force" easy="false" id="a_tut05" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="53" _title="Flying" _xpath="enigma_i/luc07_1" author="Lukas Schüller" ctrl="force" easy="false" id="luc07" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="54" _title="Annoying little balls" _xpath="enigma_i/wb09_2" author="Jon 'WB' Sneyers" ctrl="force" easy="false" id="wb9" rel="2" rev="0" score="2" target="time" unit="duration"/>
+    <level _seq="55" _title="The Grim Reaper" _xpath="enigma_i/daniel11_1" author="Daniel Heck" ctrl="force" easy="true" id="space" rel="1" rev="3" score="1" target="time" unit="duration"/>
+    <level _seq="56" _title="Automaton Magic" _xpath="enigma_ii/ant07_1" author="Petr Machata" ctrl="force" easy="false" id="ant07" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="57" _title="Back And Forth" _xpath="enigma_ii/martin26_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin26" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="58" _title="If They'd Just Hold Still" _xpath="enigma_i/duffy21_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy21" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="59" _title="Formentera!" _xpath="enigma_i/luc06_1" author="Lukas Schüller" ctrl="force" easy="false" id="luc06" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="60" _title="- Meditation -" _xpath="enigma_ii/wb10_1" author="Jon 'WB' Sneyers" ctrl="force" easy="false" id="wb10" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="61" _title="Is It Easy?" _xpath="enigma_i/martin06_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin06" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="62" _title="Beam0r" _xpath="enigma_ii/peter01_1" author="Peter Santo" ctrl="force" easy="false" id="peter_001" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="63" _title="Slalom Skiing" _xpath="enigma_ii/martin93_1" author="Martin Hawlisch" ctrl="force" easy="true" id="martin93" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="64" _title="Bye!" _xpath="./a_tut06" author="Andreas Lochmann" ctrl="force" easy="false" id="a_tut06" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="65" _title="Advanced Tutorial" _xpath="./adv_tutorial" author="Jacob Scott" ctrl="force" easy="false" id="m_tutor/adv_tutorial" rel="1" rev="0" score="1" target="time" unit="duration"/>
+  </levels>
+
+</index>

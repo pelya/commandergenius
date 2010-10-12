@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Swoop" el:subtitle="Per.Oxyd 3" el:id="martin01"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="per.oxyd">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 58
+levelh = 13
+
+create_world( levelw, levelh)
+draw_border("st-greenbrown")
+fill_floor("fl-sand", 0,0,levelw,levelh-3)
+fill_floor("fl-water", 0,levelh-3,levelw,3)
+
+function createOxyd( x, y)
+    set_stone( "st-metal", x-1, y)
+    set_stone( "st-metal", x+1, y)
+    set_stone( "st-metal", x,   y+1)
+    oxyd(x,y)
+end
+
+set_stone( "st-greenbrown", 1, 4)
+set_stone( "st-greenbrown", 2, 4)
+set_stone( "st-greenbrown", 3, 4)
+set_stone( "st-greenbrown", 3, 3)
+
+createOxyd( 3,8)
+createOxyd( 10,3)
+createOxyd( 12,8)
+createOxyd( 17,5)
+createOxyd( 24,7)
+createOxyd( 32,2)
+createOxyd( 40,8)
+createOxyd( 51,4)
+
+oxyd_shuffle()
+
+enigma.AddConstantForce(0,30)
+
+set_actor("ac-blackball", 2, 2)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

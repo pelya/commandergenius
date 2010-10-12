@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation -" el:subtitle="esprit 90" el:id="meditation8"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Siegfried Fennig" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Siegfried Fennig</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 39
+levelh = 13
+
+create_world(levelw, levelh)
+draw_border("st-wood_001")
+fill_floor("fl-floor_001")
+
+draw_stones("st-wood_001", {4,2}, {1,0},2)
+draw_stones("st-wood_001", {5,3}, {1,0},4)
+draw_stones("st-wood_001", {14,2}, {1,0},2)
+draw_stones("st-wood_001", {11,3}, {1,0},4)
+draw_stones("st-wood_001", {4,6}, {1,0},2)
+draw_stones("st-wood_001", {2,5}, {1,0},3)
+draw_stones("st-wood_001", {2,7}, {1,0},3)
+draw_stones("st-wood_001", {5,9}, {1,0},4)
+draw_stones("st-wood_001", {4,10}, {1,0},2)
+draw_stones("st-wood_001", {8,4}, {0,1},5)
+draw_stones("st-wood_001", {11,4}, {0,1},5)
+draw_stones("st-wood_001", {11,9}, {1,0},4)
+draw_stones("st-wood_001", {14,10}, {1,0},2)
+draw_stones("st-wood_001", {14,6}, {1,0},2)
+draw_stones("st-wood_001", {15,5}, {1,0},3)
+draw_stones("st-wood_001", {15,7}, {1,0},3)
+draw_stones("st-wood_001", {19,1}, {0,1},11)
+
+set_stone("st-switch", 3,2, {action="trigger", target="h1"})
+set_stone("st-switch", 3,10, {action="trigger", target="h2"})
+set_stone("st-switch", 16,10, {action="trigger", target="h3"})
+set_stone("st-switch", 16,2, {action="trigger", target="h4"})
+
+set_item( "it-hollow", 7,6, {name="h1"})
+set_item( "it-hollow", 9,6, {name="h2"})
+set_item( "it-hollow",10,6, {name="h3"})
+set_item( "it-hollow",12,6, {name="h4"})
+
+set_stone( "st-timer", 21, 1, {action="callback", target="th1"})
+
+timer = 0
+
+function th1()
+    if timer == 0 or timer == 5 then
+        SendMessage("h1", "trigger")
+        SendMessage("h2", "trigger")
+        SendMessage("h3", "trigger")
+        SendMessage("h4", "trigger")
+    end
+    timer = timer + 1
+    if timer == 20 then
+        timer = 0
+    end
+end
+
+set_actor("ac-whiteball-small",  6.5, 2.5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small",  6.5,10.5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small", 13.5, 2.5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small", 13.5,10.5, {player=0, mouseforce=1})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

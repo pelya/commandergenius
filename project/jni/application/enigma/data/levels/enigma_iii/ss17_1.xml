@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Something Went Wrong" el:subtitle="" el:id="ss17"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Sven Siggelkow" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Sven Siggelkow</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+
+cells[" "]=cell{floor="fl-black"}
+cells["#"]=cell{stone="st-brick"}
+cells["b"]=cell{stone="st-actorimpulse_invisible"}
+cells["S"]=cell{stone="st-swap"}
+cells["h"]=cell{parent=cells[" "],item="it-hollow"}
+
+level = {
+--  01234567890123456789
+   "####################",--00
+   "#                  #",--01
+   "# bbb          bbb #",--02
+   "#  hb          bh  #",--03
+   "# bbb          bbb #",--04
+   "#       SDDS       #",--05
+   "#       SDDS       #",--06
+   "#       SDDS       #",--07
+   "# bbb          bbb #",--08
+   "# bh           bhb #",--09
+   "# bbb          b b #",--10
+   "#                  #",--11
+   "####################" --12
+}
+set_default_parent(cells[" "])
+
+create_world_by_map(level,cells)
+
+set_actor("ac-whiteball-small", 8.5, 2.5, {player=0, mouseforce=-1, essential=1})
+set_actor("ac-whiteball-small",11.5, 2.5, {player=0, mouseforce= 1, essential=1})
+set_actor("ac-whiteball-small", 8.5,10.5, {player=0, mouseforce=-1, essential=1})
+set_actor("ac-whiteball-small",11.5,10.5, {player=0, mouseforce= 1, essential=1})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

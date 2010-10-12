@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Puzzle Puzzles" el:subtitle="look forward!" el:id="raoul26"/>
+      <el:version el:score="1" el:release="1" el:revision="25" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+       <el:dependency el:path="lib/libpuzzle" el:id="lib/libpuzzle" el:release="2" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:credits el:showinfo="true " el:showstart="false ">Thanks to Ronald for developing and debugging this level.</el:credits>
+      </el:comments>
+      <el:score el:easy="10:21" el:difficult="8:21"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelw = 40
+levelh = 37
+
+create_world(levelw, levelh)
+oxyd_default_flavor="d"
+
+fill_floor("fl-rough")
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+          if c=="O" then
+            oxyd(i-1,line)
+        elseif c=="#" then
+            set_stone("st-rock1",i-1,line)
+            set_floor("fl-black",i-1,line,{friction="7.0", mousefactor="2.0"})
+        elseif c=="G" then
+            set_stone("st-glass",i-1,line)
+        elseif c=="H" then
+            set_stone("st-glass",i-1,line)
+            set_floor("fl-water",i-1,line)
+        elseif c=="J" then
+            set_stone("st-glass",i-1,line)
+            set_floor("fl-gradient1",i-1,line)
+        elseif c=="D" then
+            set_stone("st-death",i-1,line)
+            set_floor("fl-black",i-1,line,{friction="7.0", mousefactor="2.0"})
+        elseif c=="S" then
+            set_stone("st-blue-sand",i-1,line)
+        elseif c=="P" then
+            set_stone("st-polarswitch",i-1,line)
+        elseif c=="L" then
+            set_stone("st-laser",i-1,line,{dir=SOUTH,on=true})
+        elseif c=="." then
+            set_stone("st-stoneimpulse-hollow",i-1,line)
+            set_floor("fl-water",i-1,line)
+        elseif c=="o" then
+            set_stone("st-stoneimpulse",i-1,line)
+            set_floor("fl-water",i-1,line)
+        elseif c=="E" then
+            set_stone("st-oneway_black-e",i-1,line)
+            set_floor("fl-thief",i-1,line,{friction="7.0", mousefactor="2.0"})
+        elseif c=="B" then
+            set_stone("st-black1",i-1,line)
+        elseif c=="X" then
+            set_stone("st-grate1",i-1,line)
+        elseif c=="x" then
+            set_stone("st-grate1",i-1,line)
+            set_floor("fl-water",i-1,line)
+        elseif c=="Y" then
+            set_stone("st-grate1",i-1,line)
+            set_floor("fl-black",i-1,line,{friction="7.0", mousefactor="2.0"})
+        elseif c=="W" then
+            set_stone("st-wood",i-1,line)
+        elseif c=="K" then
+            set_stone("st-door_b",i-1,line,{name="door1"})
+        elseif c=="k" then
+            set_stone("st-coinslot",i-1,line,{action="openclose", target="door1"})
+        elseif c=="F" then
+            set_stone("st-stone_break",i-1,line)
+            set_floor("fl-rough",i-1,line)
+        elseif c=="f" then
+            set_stone("st-stone_break",i-1,line)
+            set_floor("fl-water",i-1,line)
+
+        elseif c=="-" then
+            set_floor("fl-rough",i-1,line)
+        elseif c=="+" then
+            set_floor("fl-rough_slow",i-1,line)
+        elseif c=="~" then
+            set_floor("fl-water",i-1,line)
+        elseif c=="l" then
+            set_floor("fl-rough",i-1,line)
+            set_item("it-extralife",i-1,line)
+        elseif c=="t" then
+            set_floor("fl-thief",i-1,line,{friction="7.0", mousefactor="2.0"})
+        elseif c=="=" then
+            set_floor("fl-black",i-1,line,{friction="7.0", mousefactor="2.0"})
+
+        elseif c=="@" then
+            set_floor("fl-water",i-1,line)
+            set_item("it-booze-broken",i-1,line)
+        elseif c=="8" then
+            set_floor("fl-water",i-1,line)
+            set_item("it-booze",i-1,line)
+        elseif c=="&" then
+            set_floor("fl-rough",i-1,line)
+            set_item("it-coin2",i-1,line)
+
+        elseif c=="U" then
+            set_stone("st-glass",i-1,line)
+            set_floor("fl-rough",i-1,line)
+            set_item("it-coin2",i-1,line)
+        elseif c=="u" then
+            set_stone("st-glass_move",i-1,line)
+            set_floor("fl-rough",i-1,line)
+            set_item("it-coin2",i-1,line)
+
+        elseif c=="^" then
+            set_floor("fl-gradient2",i-1,line)
+        elseif c==">" then
+            set_floor("fl-gradient3",i-1,line)
+        elseif c=="v" then
+            set_floor("fl-gradient1",i-1,line)
+        elseif c=="<" then
+            set_floor("fl-gradient4",i-1,line)
+
+        elseif c=="!" then
+            set_floor("fl-gradient2",i-1,line)
+            set_stone("st-glass",i-1,line)
+
+        elseif c=="1" then
+            set_floor("fl-gradient6",i-1,line)
+        elseif c=="2" then
+            set_floor("fl-gradient8",i-1,line)
+        elseif c=="3" then
+            set_floor("fl-gradient7",i-1,line)
+        elseif c=="4" then
+            set_floor("fl-gradient5",i-1,line)
+
+        elseif c=="a" then
+            set_floor("fl-gradient10",i-1,line)
+        elseif c=="b" then
+            set_floor("fl-gradient9",i-1,line)
+        elseif c=="c" then
+            set_floor("fl-gradient11",i-1,line)
+        elseif c=="d" then
+            set_floor("fl-gradient12",i-1,line)
+        end
+    end
+end
+
+if not difficult then
+    renderLine(00 , "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    renderLine(01 , "~~~~~~~~~~~~~~~~~~~~GG~~~~~~GG~~~~L~~~~~")
+    renderLine(02 , "~~~~~~~~~~~~~~~~~~~~G-------lG~~M-GGM~~~")
+    renderLine(03 , "~~#####~~~~~~~~~~~~~~-SSSXSS-~~~G----~~~")
+    renderLine(04 , "~##OvO##~~~~~###^a~~~-S----S-~~~G-P-X~~~")
+    renderLine(05 , "~#O4v1O##DDD##===3a~~-S------~~~G-G-M.o.")
+    renderLine(06 , "~#>>~<<======Y====>--------S-~~~MGM-G~H.")
+    renderLine(07 , "~#O3^2O##DDD##===4b~~~S----S-~~~~~~-~~~.")
+    renderLine(08 , "~##O^O##~~~~~#HJvb~~~~S-S-SS-~~~-------.")
+    renderLine(09 , "~~#####~~~~~~~~~~~~~~~~~~----G~~-~~~~~~.")
+    renderLine(10 , "~~~~~~~~~~~~~~~~~~~~~~~~~-~~GG~~-~~~~...")
+    renderLine(11 , "~~~~~~~~~~~~~~~~~~~~~H~~~-~~~~~~-~~~H~~~")
+    renderLine(12 , "~~~~~~~~~~~~~~~~~~~~HMH~P-------l~~HMH~~")
+    renderLine(13 , "~~~~~~~~~~~~~~~~~~~~~H~~~-~~~~~~S~~~H~~~")
+    renderLine(14 , "~~G~~~~~~~~~~~H~~~~~~~~~~-~~SSSSS~~~SS~~")
+    renderLine(15 , "~U------------PH~~~~~~~~~-~~S--------S~~")
+    renderLine(16 , "~~-G~~~~~~~~~--~~~~~~~~~~-~~S-SSXSSS-S~~")
+    renderLine(17 , "~~-~~~~~~~~~~~-~~~~~~~~~S-S~S-SX---X-S~~")
+    renderLine(18 , "~~-G~~~~G~~~~~-~~~~~~H~SS-SSS-X----SSS~~")
+    renderLine(19 , "~G-------u~~~~-~~~~~HMHGG----------S~~~~")
+    renderLine(20 , "~~G~~~~G-~~~~~-~~~~~~~~l-X-GSSS---GS~~~~")
+    renderLine(21 , "~~~~~~~~-~~~~~-~~~~~~~~SS-SSS~SSS-SS~~~~")
+    renderLine(22 , "~~~~~~~~-~~~~~--~~~~~-~~~&--KSS~~-~--S~~")
+    renderLine(23 , "~~~~~~~~-~~~~HM-----------fm--------SS~~")
+    renderLine(24 , "~~~~~~~~-~~~~~H~~~~~HGH~~---k~~~~-~~H~~~")
+    renderLine(25 , "~~~~~~~~-~~~~~~~~~~~~G~~~-~~HHHHHtHHH~~~")
+    renderLine(26 , "~~~~~~~~-~~~~~~~~~~~~G~~~-~@8~~@HtH~~~~~")
+    renderLine(27 , "~~~~~~~~-G~~~~~~G~~~~G~~~-~@~~~d!^!a~~~~")
+    renderLine(28 , "~~~~~~~G---------G~~GGG---~@~~d2===3a~~~")
+    renderLine(29 , "~~~~~~~~G~~~~~~G-~~~G-G-f~@8~d2Y===Y3a~~")
+    renderLine(30 , "~~~~~~~~~~~~~~~~-~~~GGG---@+~<==ttt==>~~")
+    renderLine(31 , "~~~~~~~~~~~~~~~~-~~~~~~~~-@W-<==t=t==>~~")
+    renderLine(32 , "~~~~~~~~~~~~~~~~-~~~~~~~H-HtH<==ttt==>~~")
+    renderLine(33 , "GGGG~~~~~~~~~~~G-~~~~~~~H-EtHc1Y===Y4b~~")
+    renderLine(34 , "G41--------------G~~~~~~HHHHH~c1===4b~~~")
+    renderLine(35 , "G32G~~~~~~~~~~~~G~~~~~~~~~H~~~~cvvvb~~~~")
+    renderLine(36 , "GGGG~~~~~~~~~~~~~~~~~~~~~~H~~~~~~~~~~~~~")
+else
+    renderLine(00 , "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    renderLine(01 , "~~~~~~~~~~~~~~~~~~~~GG~~~~~~GG~~~~L~~~~~")
+    renderLine(02 , "~~~~~~~~~~~~~~~~~~~~G--------G~~M-GGM~~~")
+    renderLine(03 , "~~#####~~~~~~~~~~~~~~-SSSXSS-~~~G----~~~")
+    renderLine(04 , "~##OvO##~~~~~###^a~~~-S----S-~~~G-P-X~~~")
+    renderLine(05 , "~#O4v1O##DDD##===3a~~-S------~~~G-G-Mo..")
+    renderLine(06 , "~#>>~<<======Y====>-l------S-~~~MGM-G~H.")
+    renderLine(07 , "~#O3^2O##DDD##===4b~~~S----S-~~~~~~-~~~.")
+    renderLine(08 , "~##O^O##~~~~~#HJvb~~~~S-S-SS-~~~-------.")
+    renderLine(09 , "~~#####~~~~~~~~~~~~~~~~~~----G~~-~~~~~~.")
+    renderLine(10 , "~~~~~~~~~~~~~~~~~~~~~~~~~-~~GG~~-~~~~...")
+    renderLine(11 , "~~~~~~~~~~~~~~~~~~~~~H~~~-~~~~~~-~~~H~~~")
+    renderLine(12 , "~~~~~~~~~~~~~~~~~~~~HMH~P--------~~HMH~~")
+    renderLine(13 , "~~~~~~~~~~~~~~~~~~~~~H~~~-~~~~~~S~~~H~~~")
+    renderLine(14 , "~~G~~~~~~~~~~~H~~~~~~~~~~-~~SSSSS~~~SS~~")
+    renderLine(15 , "~U------------PH~~~~~~~~~-~~S--------S~~")
+    renderLine(16 , "~~-G~~~~~~~~~--~~~~~~~~~~-~~S-SSXSSS-S~~")
+    renderLine(17 , "~~-~~~~~~~~~~~-~~~~~~~~~S-S~S-SX---X-S~~")
+    renderLine(18 , "~~-G~~~~G~~~~~-~~~~~~H~SS-SSS-X----SSS~~")
+    renderLine(19 , "~G-------u~~~~-~~~~~HMHGG--FF------S~~~~")
+    renderLine(20 , "~~G~~~~G-~~~~~-~~~~~~~~l-X-GSSS---GS~~~~")
+    renderLine(21 , "~~~~~~~~-~~~~~-~~~~~~~~SS-SSS~SSS-SS~~~~")
+    renderLine(22 , "~~~~~~~~-~~~~~--~~~~~-~~~&--KSS~~-S~~~~~")
+    renderLine(23 , "~~~~~~~~-~~~~HM-----------~m------SS~~~~")
+    renderLine(24 , "~~~~~~~~-~~~~~H~~~~~HGH~~---kSSS---SSSSS")
+    renderLine(25 , "~~~~~~~~-~~~~~~~~~~~~G~~~~-~~@~SStSS~~~~")
+    renderLine(26 , "~~~~~~~~-~~~~~~~~~~~~G~~~~-~~@~~StS~~~~~")
+    renderLine(27 , "~~~~~~~~-G~~~~~~G~~~~G~~~~-~@~~dS^Sa~~~~")
+    renderLine(28 , "~~~~~~~G---------G~~---~~~-@@xd2===3a~~~")
+    renderLine(29 , "~~~~~~~~G~~~~~~G-~~~---~~~-@@d2=====3a~~")
+    renderLine(30 , "~~~~~~~~~~~~~~~~-~~~---~~~t@@<=======>~~")
+    renderLine(31 , "~~~~~~~~~~~~~~~~-~~~~~~~~~t@@<=======>~~")
+    renderLine(32 , "~~~~~~~~~~~~~~~~-~~~~~~~~~EBE<=======>~~")
+    renderLine(33 , "GGGG~~~~~~~~~~~G-~~~~~~~~~HHHc1=====4b~~")
+    renderLine(34 , "G41--------------G~~~~~~~~H~~~c1===4b~~~")
+    renderLine(35 , "G32G~~~~~~~~~~~~G~~~~~~~~~H~~~~cvvvb~~~~")
+    renderLine(36 , "GGGG~~~~~~~~~~~~~~~~~~~~HHH~~~~~~~~~~~~~")
+end
+
+---- FUNCTIONS ----
+function set_random_mirror(x,y,m)
+    r=random(1,4)  
+    strg={"|","/","-","\\"}
+    kind=strg[r]
+    set_stone("st-mirror-p"..kind..m,x,y)
+end
+
+function set_lock()
+    kind=random(1,2)
+
+    if kind==1 then -- upper part missing
+        set_stone("st-puzzle2-s",33,31)
+        set_stone("st-puzzle2-n",14,6)
+        set_stone("st-puzzle2-ns",14,5)
+        set_stone("st-rock1",15,6)
+        set_stone("st-rock1",15,5)
+        set_item("it-seed",14,7)
+    else -- lower part missing
+        set_stone("st-puzzle2-s",14,6)
+        set_stone("st-puzzle2-n",33,31)
+        set_stone("st-puzzle2-ns",14,7)
+        set_stone("st-glass",15,6)
+        set_stone("st-glass",15,7)
+        set_item("it-seed",14,5)
+    end
+end
+
+function set_water_1()
+    -- close way from the north
+    set_stone("st-oneway_black-n",33,27)
+    enigma.NameObject(enigma.GetStone(26,33), "a1")
+    SendMessage("a1","flip")
+
+    SendMessage("b3","close")
+    SendMessage("b4","close")
+    enigma.KillItem(33,24)
+end
+
+function set_water_2()
+    -- close way from the north
+    set_stone("st-oneway_black-n",33,27)
+    enigma.NameObject(enigma.GetStone(28,32), "a1")
+    SendMessage("a1","flip")
+
+    set_floor("fl-rough",26,30)
+    set_floor("fl-rough",26,31)
+    set_floor("fl-rough",26,32)
+
+    enigma.KillItem(33,24)
+end
+
+---- PUZZLES ----
+  -- W
+  puzzle({" ##",
+          "## ",
+          "#  "},{23,6},"bluepuzzle","none")
+  -- Z
+  puzzle({" ##",
+          " * ",
+          "## "},{32,18},"bluepuzzle","none")
+  -- shell_lower_part
+  puzzle({"## ##",
+          " ### ",
+          "  #  "},{31,31},"bluepuzzle","permutation")
+  -- shell_upper_part
+  puzzle({" # ",
+          "###"},{32,29},"bluepuzzle","permutation")
+  -- -
+  puzzle({"#*#"},{34,3},"bluepuzzle","none")
+  -- |
+  puzzle({"#",
+          "*",
+          "#"},{33,2},"bluepuzzle","none")
+  -- T
+  puzzle({"  #",
+          "#*#",
+          "  #"},{33,7},"bluepuzzle","none")
+
+---- ITEMS ----
+set_item("it-magicwand",33,28)
+set_item("it-banana",33,5)
+set_item("it-cherry",25,20)
+set_item("it-cherry",33,3)
+set_item("it-cherry",21,29)
+set_item("it-cross",14,6)
+set_item("it-seed",13,6)
+set_item("it-cross",25,21)
+set_item("it-spoon",33,34)
+
+if not difficult then
+    set_item("it-puller-n",35,8)
+    set_item("it-hammer",36,22)
+    set_item("it-booze",26,32)
+else
+    set_item("it-hammer",34, 24)
+end
+
+---- MIRRORS ----
+set_stone("st-mirror-p/",21,12)
+set_stone("st-mirror-p/",36,12)
+set_stone("st-mirror-p/",21,19)
+
+set_stone("st-mirror-p/",32,2)
+set_random_mirror(36,2,"")
+set_random_mirror(32,6,"")
+set_random_mirror(34,6,"")
+
+set_random_mirror(14,23,"")
+
+set_stone("st-mirror-p-tm",36,5)
+
+set_random_mirror(25,22,"m")
+set_random_mirror(27,23,"m")
+set_lock()
+
+---- BRIDGES ----
+
+if not difficult then
+    set_floor("fl-bridge-open",27,19,{name="b3", type="a"})
+    set_floor("fl-bridge-open",28,19,{name="b4", type="a"})
+    set_item("it-trigger",33,24,{action="callback", target="set_water_1"})
+else
+    set_item("it-trigger", 33, 24, {action="callback", target="set_water_2"})
+end
+
+------ ACTOR ----
+set_actor("ac-blackball", 2,35, {player=0})
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Swamp of Balls" el:subtitle="" el:id="luc08"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Lukas Schüller" el:email="Lucky_Luc@web.de" el:homepage=""/>
+      <el:copyright>Copyright © 2005 Lukas Schüller</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Function to open the oxyds
+grad = 1
+function comeback()
+  if(grad == 1) then
+    draw_floor("fl-wood", {18,1}, {0,2}, 6)
+    grad = 2
+  else
+    draw_floor("fl-gradient", {18,1}, {0,2}, 6, {type=3})
+    grad = 1
+  end
+end
+
+-- Environment
+CreateWorld(20, 13) 
+draw_border("st-rock1")
+fill_floor("fl-wood", 0,0, 20,13)
+fill_floor("fl-swamp", 0,0, 17,13)
+draw_stones("st-white4", {18,1}, {0,2}, 6)
+draw_stones("st-rock1", {18,2}, {0,2}, 5)
+draw_floor("fl-gradient", {18,1}, {0,2}, 6, {type=3})
+
+set_floor("fl-wood", 4,4)
+set_actor("ac-whiteball", 4.5,8.5, {player=1, mouseforce=0, essential=1})
+set_floor("fl-wood", 4,8)
+set_actor("ac-whiteball", 4.5,4.5, {player=1, mouseforce=0, essential=1})
+set_floor("fl-wood", 8,4)
+set_actor("ac-whiteball", 8.5,4.5, {player=1, mouseforce=0, essential=1})
+set_floor("fl-wood", 12,4)
+set_actor("ac-whiteball", 12.5,4.5, {player=1, mouseforce=0, essential=1})
+set_floor("fl-wood", 8,8)
+set_actor("ac-whiteball", 8.5,8.5, {player=1, mouseforce=0, essential=1})
+set_floor("fl-wood", 12,8)
+set_actor("ac-whiteball", 12.5,8.5, {player=1, mouseforce=0, essential=1})
+
+oxyd_default_flavor = "c"
+oxyd(19,1)
+oxyd(19,3)
+oxyd(19,5)
+oxyd(19,7)
+oxyd(19,11)
+oxyd(19,9)
+oxyd_shuffle()
+
+set_item("it-trigger", 17,6, {action="callback", target="comeback"})
+set_actor("ac-blackball",17.5,6.5, {player=0})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

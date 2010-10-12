@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace="http://enigma-game.org/schema/level/1" xmlns:el="http://enigma-game.org/schema/level/1" elementFormDefault="qualified" attributeFormDefault="qualified" version="0.5" xml:lang="en">
+  <xs:annotation>
+    <xs:documentation>
+      XML schema definitions for Enigma levels
+      Copyright © 2006 Ronald Lamprecht
+      GPL2
+    </xs:documentation>
+  </xs:annotation>
+  <xs:element name="level">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="protected" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              The protected section is reserved for data from the level author.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="info" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="identity" minOccurs="1" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:attribute name="title" type="xs:string" use="required"/>
+                        <xs:attribute name="subtitle" type="xs:string" use="optional"/>
+                        <xs:attribute name="id" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element> <!-- identity -->
+                    <xs:element name="version" minOccurs="1" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:attribute name="score" type="xs:positiveInteger" use="required"/>
+                        <xs:attribute name="release" type="xs:positiveInteger" use="required"/>
+                        <xs:attribute name="revision" use="required">
+                          <xs:simpleType>
+                            <xs:union memberTypes="xs:unsignedShort el:revisionType"/>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="status" type="el:statusType" use="required"/>
+                      </xs:complexType>
+                    </xs:element> <!-- version -->
+                    <xs:element name="author" minOccurs="1" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:attribute name="name" type="xs:string" default="anonymous" use="optional"/>
+                        <xs:attribute name="email" type="xs:anyURI" use="optional"/>
+                        <xs:attribute name="homepage" type="xs:anyURI" use="optional"/>
+                      </xs:complexType>
+                    </xs:element> <!-- author -->
+                    <xs:element name="copyright" minOccurs="1" maxOccurs="1" type="xs:string"/>
+                    <xs:element name="license" minOccurs="1" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute name="type" type="xs:string" use="required"/>
+                            <xs:attribute name="open" type="xs:boolean" use="required"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element> <!-- license -->
+                    <xs:element name="compatibility" minOccurs="1" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="dependency" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:attribute name="path" type="xs:string" use="required"/>
+                              <xs:attribute name="id" type="xs:string" use="required"/>
+                              <xs:attribute name="release" type="xs:unsignedShort" use="required"/>
+                              <xs:attribute name="preload" type="xs:boolean" use="required"/>
+                              <xs:attribute name="url" type="xs:anyURI" use="optional"/>
+                            </xs:complexType>
+                          </xs:element> <!-- dependency -->
+                          <xs:element name="externaldata" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:attribute name="path" type="xs:string" use="optional"/>
+                              <xs:attribute name="url" type="xs:anyURI" use="optional"/>
+                            </xs:complexType>
+                          </xs:element> <!-- externaldata -->
+                          <xs:element name="editor" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:attribute name="name" type="xs:string" use="required"/>
+                              <xs:attribute name="version" type="xs:string" use="required"/>
+                            </xs:complexType>
+                          </xs:element> <!-- editor -->
+                          <xs:element name="extensions" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:any namespace="##targetNamespace" minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element> <!-- extensions -->
+                        </xs:sequence>
+                        <xs:attribute name="enigma" type="xs:float" use="required"/>
+                        <xs:attribute name="engine" type="xs:string" use="optional" default="enigma"/>
+                      </xs:complexType>
+                    </xs:element> <!-- compatibility -->
+                    <xs:element name="modes" minOccurs="1" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:attribute name="easy" type="xs:boolean" use="required"/>
+                        <xs:attribute name="single" type="xs:boolean" use="required"/>
+                        <xs:attribute name="network" type="xs:boolean" use="required"/>
+                        <xs:attribute name="control" type="el:controlType" use="optional" default="force"/>
+                        <xs:attribute name="scoreunit" type="el:scoreunitType" use="optional" default="duration"/>
+                        <xs:attribute name="scoretarget" type="xs:string" use="optional" default="time"/>
+                      </xs:complexType>
+                    </xs:element> <!-- modes -->
+                    <xs:element name="comments" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="credits" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:token">
+                                  <xs:attribute name="showinfo" type="xs:boolean" use="optional" default="false"/>
+                                  <xs:attribute name="showstart" type="xs:boolean" use="optional" default="false"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element> <!-- credits -->
+                          <xs:element name="dedication" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:token">
+                                  <xs:attribute name="showinfo" type="xs:boolean" use="optional" default="false"/>
+                                  <xs:attribute name="showstart" type="xs:boolean" use="optional" default="false"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element> <!-- dedication -->
+                          <xs:element name="code" minOccurs="0" maxOccurs="1" type="xs:string"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element> <!-- comments -->
+                    <xs:element name="update" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:attribute name="url" type="xs:anyURI" use="required"/>
+                      </xs:complexType>
+                    </xs:element> <!-- update -->
+                    <xs:element name="upgrade" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:attribute name="url" type="xs:anyURI" use="required"/>
+                        <xs:attribute name="release" type="xs:unsignedShort" use="required"/>
+                      </xs:complexType>
+                    </xs:element> <!-- upgrade -->
+                    <xs:element name="preview" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:anyAttribute namespace="##targetNamespace" processContents="skip"/>
+                      </xs:complexType>
+                    </xs:element> <!-- preview -->
+                    <xs:element name="score" minOccurs="1" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:attribute name="easy" type="el:scoreType" use="required"/>
+                        <xs:attribute name="difficult" type="el:scoreType" use="required"/> 
+                      </xs:complexType>
+                    </xs:element> <!-- score -->
+                    
+                    <xs:any namespace="##targetNamespace" minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+
+                  </xs:sequence>
+                  <xs:attribute name="type" type="el:fileType" use="required"/>
+                  <xs:attribute name="quantity" type="xs:positiveInteger" use="optional" default="1"/>
+                </xs:complexType>
+              </xs:element> <!-- info -->
+              
+              <xs:element name="elements" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:any namespace="##targetNamespace" minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element> <!-- elements -->
+              
+              <xs:element name="luamain" minOccurs="0" maxOccurs="1" type="xs:string"/>
+              
+              <xs:any namespace="##other" minOccurs="0" maxOccurs="1" processContents="skip">
+                <xs:annotation>
+                  <xs:documentation>
+                    Any external level editor is free to include an element of its own
+                    namespace for storage of any extensions. This element is ignored by
+                    enigma. The editor is free to supply an additional schema for its 
+                    element definitions.
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:any>
+              
+              <xs:element name="i18n" minOccurs="1" maxOccurs="1" >
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="string" minOccurs="0" maxOccurs="unbounded" >
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="english" minOccurs="1" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:normalizedString">
+                                  <xs:attribute name="translate" type="xs:boolean" default="true"/>
+                                  <xs:attribute name="comment" type="xs:string" use="optional"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element> <!-- english -->
+                          <xs:element name="translation" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:normalizedString">
+                                  <xs:attribute name="lang" type="xs:language" use="required"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element> <!-- translation -->
+                        </xs:sequence>
+                        <xs:attribute name="key" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element> <!-- string -->
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element> <!-- i18n -->
+              
+              <xs:any namespace="##targetNamespace" minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+
+            </xs:sequence>
+            <xs:anyAttribute namespace="##targetNamespace" processContents="skip"/>
+          </xs:complexType>
+        </xs:element> <!-- protected -->
+        
+        <xs:element name="public" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              The pubic section for not validated additions by others. All info
+              in public is handeled with care by enigma. Translations will be
+              suggested to the official translators and only be used if confirmed
+              or missing in the translators translations.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="i18n" minOccurs="0" maxOccurs="1" >
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="string" minOccurs="0" maxOccurs="unbounded" >
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="translation" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:normalizedString">
+                                  <xs:attribute name="lang" type="xs:language" use="required"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element> <!-- translation -->
+                        </xs:sequence>
+                        <xs:attribute name="key" type="xs:ID" use="required">
+                          <xs:annotation>
+                            <xs:documentation>
+                              Usage of type xs:ID instead of xs:string is required by evaluation
+                              XSLT stylesheets. 
+                              It limits the public/i18n/strings to key-identifier usage instead
+                              of original complete english string as key usage. But this is not
+                              too bad, because it reduces errors due to changed english strings 
+                              in the protected area.
+                              The ID type guarantees us uniqueness within public/i18n and allows
+                              stylesheets and programs to use XPaths to crossover from a 
+                              protected/i18n/string to the corresponding public/i18n/string.
+                            </xs:documentation>
+                          </xs:annotation>
+                        </xs:attribute>
+                      </xs:complexType>
+                    </xs:element> <!-- string -->
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element> <!-- i18n -->
+              <xs:element name="upgrade" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:attribute name="url" type="xs:anyURI" use="required"/>
+                  <xs:attribute name="release" type="xs:unsignedShort" use="required"/>
+                </xs:complexType>
+              </xs:element> <!-- upgrade -->
+              <xs:element name="extensions" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:any namespace="##targetNamespace" minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element> <!-- extensions -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element> <!-- public -->
+      </xs:sequence>
+    </xs:complexType>
+    
+    <xs:key name="stringkey">
+      <xs:selector xpath="el:protected/el:i18n/el:string"/>
+      <xs:field xpath="@el:key"/>
+    </xs:key>
+    <xs:keyref name="translationkey" refer="el:stringkey">
+      <xs:selector xpath="el:public/el:i18n/el:string"/>
+      <xs:field xpath="@el:key"/>
+    </xs:keyref>
+  </xs:element>
+  
+  <xs:simpleType name="fileType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="level"/>
+      <xs:enumeration value="multilevel"/>
+      <xs:enumeration value="library"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="revisionType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="$Revision[:]?[ ]*[\d]*[ ]*$"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="statusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="released"/>
+      <xs:enumeration value="stable"/>
+      <xs:enumeration value="test"/>
+      <xs:enumeration value="experimental"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="controlType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="force"/>
+      <xs:enumeration value="balance"/>
+      <xs:enumeration value="key"/>
+      <xs:enumeration value="other"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="scoreunitType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="duration"/>
+      <xs:enumeration value="number"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="scoreType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="-|([ \d]?\d:[012345]\d)|(\d)+"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

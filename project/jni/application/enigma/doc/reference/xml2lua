@@ -1,0 +1,20 @@
+#!/usr/bin/env lua
+-- Simple converter for Enigma xml (utf-8) level to lua level
+-- Copyright (c) 2006 Ronald Lamprecht
+-- License: GPL2
+-- Usage: lua xml2lua.lua level.xml > level.lua
+-- Requires Lua 5.0 or above
+stdout = io.output()
+xml = true
+for line in io.lines(arg[1]) do
+    if (string.find(line,"]]>",1,true) ~= nil) then
+        xml = true
+    end
+    if xml then
+        stdout:write("--xml-- ")
+    end
+    stdout:write(line .. "\n" )
+    if (string.find(line,"<![CDATA[",1,true) ~= nil) then
+        xml = false
+    end
+end

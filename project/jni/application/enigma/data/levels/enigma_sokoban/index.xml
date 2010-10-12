@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<index xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd">
+
+  <info enigma="1.00" group="Sokoban" location="30100" network="false" owner="Enigma Team" release="1" revision="2" title="Sokoball"/>
+
+  <attributes/>
+
+  <levels>
+    <level _seq="1" _title="Welcome" _xpath="./xsok_intro" author="Ralf Westram" ctrl="force" easy="false" id="Sokoban/xsok_intro" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="2" _title="Sokoban 1" _xpath="./xsok_1" author="Thinking Rabbit" ctrl="force" easy="true" id="Sokoban/xsok_1" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="3" _title="Sokoban 2" _xpath="./xsok_2" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_2" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="4" _title="Sokoban 3" _xpath="./xsok_3" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_3" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="5" _title="Sokoban 5" _xpath="./xsok_5" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_5" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="6" _title="Sokoban 6" _xpath="./xsok_6" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_6" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="7" _title="Sokoban 7" _xpath="./xsok_7" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_7" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="8" _title="Sokoban 12" _xpath="./xsok_12" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_12" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="9" _title="Sokoban 13" _xpath="./xsok_13" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_13" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="10" _title="Sokoban 15" _xpath="./xsok_15" author="Thinking Rabbit" ctrl="force" easy="true" id="Sokoban/xsok_15" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="11" _title="Sokoban 16" _xpath="./xsok_16" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_16" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="12" _title="Sokoban 17" _xpath="./xsok_17" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_17" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="13" _title="Sokoban 18" _xpath="./xsok_18" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_18" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="14" _title="Sokoban 24" _xpath="./xsok_24" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_24" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="15" _title="Sokoban 26" _xpath="./xsok_26" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_26" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="16" _title="Sokoban 27" _xpath="./xsok_27" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_27" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="17" _title="Sokoban 28" _xpath="./xsok_28" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_28" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="18" _title="Sokoban 29" _xpath="./xsok_29" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_29" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="19" _title="Sokoban 30" _xpath="./xsok_30" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_30" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="20" _title="Sokoban 31" _xpath="./xsok_31" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_31" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="21" _title="Sokoban 32" _xpath="./xsok_32" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_32" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="22" _title="Sokoban 33" _xpath="./xsok_33" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_33" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="23" _title="Sokoban 34" _xpath="./xsok_34" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_34" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="24" _title="Sokoban 38" _xpath="./xsok_38" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_38" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="25" _title="Sokoban 42" _xpath="./xsok_42" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_42" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="26" _title="Sokoban 43" _xpath="./xsok_43" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_43" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="27" _title="Sokoban 45" _xpath="./xsok_45" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_45" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="28" _title="Sokoban 46" _xpath="./xsok_46" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_46" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="29" _title="Sokoban 47" _xpath="./xsok_47" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_47" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="30" _title="Sokoban 77" _xpath="./xsok_77" author="Thinking Rabbit" ctrl="force" easy="true" id="Sokoban/xsok_77" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="31" _title="Sokoban 78" _xpath="./xsok_78" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_78" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="32" _title="Sokoban 79" _xpath="./xsok_79" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_79" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="33" _title="Sokoban 81" _xpath="./xsok_81" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_81" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="34" _title="Sokoban 82" _xpath="./xsok_82" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_82" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="35" _title="Sokoban 83" _xpath="./xsok_83" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_83" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="36" _title="Sokoban 84" _xpath="./xsok_84" author="Thinking Rabbit" ctrl="force" easy="false" id="Sokoban/xsok_84" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="37" _title="Sokoban 86" _xpath="./xsok_86" author="Thinking Rabbit" ctrl="force" easy="true" id="Sokoban/xsok_86" rel="1" rev="1" score="1" target="time" unit="duration"/>
+  </levels>
+
+</index>

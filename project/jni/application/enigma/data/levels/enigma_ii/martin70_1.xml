@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Pools" el:subtitle="" el:id="martin70"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world( 20, 13)
+oxyd_default_flavor = "b"
+
+fill_floor( "fl-water")
+fill_floor( "fl-sand", 1,1,18,11)
+fill_floor( "fl-water", 8,5, 3,3)
+set_floor( "fl-water", 3,4)
+set_floor( "fl-water", 6,2)
+set_floor( "fl-water", 13,9)
+set_floor( "fl-water", 15,3)
+set_floor( "fl-water", 16,10)
+set_floor( "fl-water", 17,9)
+set_floor( "fl-water", 9,8)
+set_floor( "fl-water", 11,5)
+set_floor( "fl-water", 5,6)
+set_floor( "fl-water", 5,9)
+
+oxyd(1,3)
+oxyd(16,2)
+oxyd(4,10)
+oxyd(6,1)
+oxyd(17,11)
+oxyd(12,7)
+oxyd_shuffle()
+
+local ac = set_actor("ac-blackball", 3.3, 8.7)
+local st = set_stone("st-grate1", 9, 6)
+
+AddRubberBand( ac, st, 8, 1)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

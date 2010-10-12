@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Houdini" el:subtitle="Escape by Chaining Thieves" el:id="20060816ral719"/>
+      <el:version el:score="2" el:release="2" el:revision="$Revision: 58 $" el:status="released"/>
+      <el:author  el:name="Ronald Lamprecht" el:email="ral@users.berlios.de"/>
+      <el:copyright>Copyright © 2006 Ronald Lamprecht</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:credits el:showinfo="true" el:showstart="false">John, JuSt, Ale for testing and feedback</el:credits>
+        <el:code>network playable if the yinyang items are removed</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+
+set_oxyd = oxyd
+math_floor = floor
+
+function oxyd( x, y, tiles )
+    return set_oxyd( x, y )
+end
+
+function nothing(x, y, tiles)
+    -- create nothing
+end
+
+function floor( floor_type, attribs )
+    return function( x, y, tiles )
+        return set_floor( floor_type, x, y, attribs or {} )
+    end
+end
+
+function stone( stone_type, attribs )
+    return function( x, y, tiles )
+        return set_stone( stone_type, x, y, attribs or {} )
+    end
+end
+
+function item( item_type, attribs )
+    return function( x, y, tiles )
+        return set_item( item_type, x, y, attribs or {} )
+    end
+end
+
+function actor( actor_type, attribs )
+    return function( x, y, tiles )
+        return set_actor( actor_type, x+0.5, y+0.5, attribs or {} )
+    end
+end
+
+function inherit(tile_type)
+    return function( x, y, tiles )
+        return create_tile( tiles, x, y, tile_type )
+    end
+end
+
+function create_world_from_map( tiles, map )
+    create_world( strlen(map[1]), getn(map) )
+    
+    for y = 1,getn(map) do
+        local line = map[y]
+        for x = 1,strlen(line) do
+            local tile = strchar(strbyte(line,x))
+            create_tile( tiles, x-1, y-1, tile )
+        end
+    end
+end
+
+function create_tile( tiles, x, y, tile_type )
+    local constructors = tiles[tile_type]
+
+    if constructors then
+        for i = 1,getn(constructors) do
+            constructors[i](x,y,tiles)
+        end
+    else
+        error("invalid tile identifier " .. tile_type )
+    end
+end
+
+oxyd_default_flavor = "a"
+
+tiles = {}
+tiles[" "] = {floor("fl-wood")}
+tiles["-"] = {floor("fl-abyss")}
+tiles["_"] = {floor("fl-water")}
+tiles["*"] = {floor("fl-swamp")}
+tiles["SS"] = {inherit("*"), item("it-seed")}
+tiles["b"] = {inherit(" "), item("it-brake")}
+tiles["h"] = {inherit(" "), item("it-sword")}
+tiles["s"] = {inherit(" "), item("it-spring2")}
+tiles["j"] = {inherit(" "), item("it-springboard")}
+tiles["w"] = {inherit(" "), item("it-magicwand")}
+tiles["l"] = {inherit(" "), item("it-extralife")}
+tiles["z"] = {inherit(" "), stone("st-plain_cracked")}
+tiles["o"] = {inherit("z"), item("it-vortex-open",{name="vortex1"})}
+tiles["O"] = {inherit("z"), item("it-vortex-open",{name="vortex2"})}
+tiles["x"] = {inherit(" "), oxyd}
+tiles["#"] = {inherit(" "), stone("st-plain")}
+tiles["-D"] = {inherit("-"), item("it-death")}
+tiles["="] = {inherit("-D"), stone("st-plain")}
+tiles["+"] = {inherit(" "), stone("st-bluegray")}
+tiles["."] = {inherit(" "), stone("st-bluegray_hole")}
+tiles[","] = {inherit("l"), stone("st-bluegray_hole")}
+tiles["T"] = {inherit(" "), stone("st-thief")}
+tiles["t"] = {inherit("l"), stone("st-thief")}
+tiles["U"] = {inherit("T"), item("it-document",{text="Innocent"})}
+tiles["V"] = {inherit("T"), item("it-document",{text="Pirates"})}
+tiles["Y"] = {inherit("T"), item("it-document",{text="Treasure"})}
+tiles["P"] = {inherit("l"), stone("st-pull")}
+tiles["R"] = {inherit(" "), stone("st-rubberband", {name="rubber"})}
+tiles["S"] = {inherit(" "), stone("st-scissors", {action="open", target="doorA"})}
+tiles["A0"] = {inherit("*"), item("it-document",{text="Atreyu"})}
+tiles["A"] = {inherit("A0"), stone("st-door-h", {name="doorA"})}
+tiles["E"] = {inherit(" "), stone("st-swap")}
+tiles["G"] = {inherit("s"), stone("st-glass1")}
+tiles["g"] = {inherit(" "), stone("st-grate1")}
+tiles["H"] = {inherit(" "), stone("st-wood1")}
+tiles["M"] = {inherit("-D"), stone("st-mail-n")}
+tiles["m"] = {inherit("-D"), stone("st-coinslot", {action="onoff", target="laser"})}
+tiles["L"] = {inherit("-D"), stone("st-laser-s", {name="laser",on=0})}
+tiles["D0"] = {inherit(" "), item("it-document",{text="CloseDoor"})}
+tiles["D"] = {inherit("D0"), stone("st-door_b", {name="doorB"})}
+tiles["K"] = {inherit("-"), stone("st-key_a",{action="openclose", target="doorB"})}
+tiles["C"] = {inherit(" "), stone("st-door_b", {name="doorC"})}
+tiles["F"] = {inherit("-"), stone("st-key_b",{action="openclose", target="doorC"})}
+tiles["c"] = {inherit("."), item("it-coin1")}
+tiles["W"] = {inherit("w"), stone("st-chess_white")}
+tiles["B"] = {inherit("h"), stone("st-chess_black")}
+tiles["k"] = {inherit("G"), item("it-key_a")}
+tiles["f"] = {inherit("G"), item("it-key_b")}
+
+tiles["y"] = {inherit(" "), item("it-yinyang")}
+tiles["1"] = {inherit("y"), actor("ac-blackball", {player=0, name="acBlack"})}
+tiles["2"] = {inherit("y"), actor("ac-whiteball", {player=1, controllers=2})}
+
+if difficult then
+    tiles["I"] = {inherit(" "), item("it-trigger",{action="callback", target="swamp"})}
+    tiles["J"] = tiles[" "]
+    tiles["Q"] = {inherit("SS"), stone("st-thief")}
+else
+    tiles["I"] = tiles[" "]
+    tiles["J"] = tiles["j"]
+    tiles["Q"] = tiles["U"]
+end
+
+function swamp()
+     set_floor("fl-swamp", 2,8)
+end
+
+create_world_from_map( tiles, {
+"####################",
+"# x=w.t.+.U...+=##x#",
+"##_=s++.T.+.T..=  _#",
+"#g =-..V++++..T= g #",
+"# I=-c+..+Q.+.+=   #",
+"#  =J+++T,+.+Y+=   #",
+"#  =2+.U.++T+..=   #",
+"#  = T.+.T..+.Tm   #",
+"#FC=M==========L=DK#",
+"#                  #",
+"#      f   k       #",
+"#                  #",
+"###############*####",
+"#         ---##A####",
+"#         ---      #",
+"#       B ---j     #",
+"#        ####      #",
+"#  ETt   ###O  tTt #",
+"#  TRT 1G  P b TST #",
+"#  ETt   o###  tTt #",
+"#        ####      #",
+"#       W ---j     #",
+"#         ---      #",
+"#         ---#######",
+"####################",
+})
+
+AddRubberBand (enigma.GetNamedObject("acBlack"), enigma.GetNamedObject("rubber"), 5, 1, 0)
+vortex1 = enigma.GetNamedObject("vortex1")
+vortex2 = enigma.GetNamedObject("vortex2")
+v_x,v_y = enigma.GetPos(vortex2)
+enigma.SetAttrib(vortex1, "targetx", v_x)
+enigma.SetAttrib(vortex1, "targety", v_y)
+v_x,v_y = enigma.GetPos(vortex1)
+enigma.SetAttrib(vortex2, "targetx", v_x)
+enigma.SetAttrib(vortex2, "targety", v_y)
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="true" el:comment="Escape as unchaining"/>
+        <el:translation el:lang="de">Entfesselung durch Gefangennahme von Dieben</el:translation>
+      </el:string>
+      <el:string el:key="Atreyu">
+        <el:english el:translate="true" el:comment="Characters of Michael Ende's fantasy novel 'The Neverending Story'">Remember Atreyu's horse Atrax!</el:english>
+        <el:translation el:lang="de">Denke an Atrax, das Pferd von Atréju!</el:translation>
+      </el:string>
+      <el:string el:key="Innocent">
+        <el:english el:translate="true" >I am innocent! I've never stolen anything!</el:english>
+        <el:translation el:lang="de">Ich bin unschuldig! Ich habe nie etwas gestohlen!</el:translation>
+      </el:string>
+      <el:string el:key="Pirates">
+        <el:english el:translate="true" >It is said that pirates have taken the treasure.</el:english>
+        <el:translation el:lang="de">Man sagt Piraten hätten den Schatz genommen.</el:translation>
+      </el:string>
+      <el:string el:key="Treasure">
+        <el:english el:translate="true" >Pirates usually hide their treasure!</el:english>
+        <el:translation el:lang="de">Piraten verstecken ihren Schatz für gewöhnlich!</el:translation>
+      </el:string>
+      <el:string el:key="CloseDoor">
+        <el:english el:translate="true" >A closed door gives a better overview!</el:english>
+        <el:translation el:lang="de">Eine geschlossene Tür verschafft einen besseren Überblick!</el:translation>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

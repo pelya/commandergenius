@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Evil" el:subtitle="" el:id="spaceman4"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Spaceman" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Spaceman</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Levelcode cleaned by raoul 3.2006
+-- !!BBE105!! Do not delete this line
+
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+levelh=13
+levelw=20
+cells={}
+stones={}
+stones[" "]=cell{}
+cells[" "]=cell{}
+cells["!"]=cell{floor="fl-inverse"}
+cells["#"]=cell{floor="fl-normal"}
+cells["$"]=cell{floor="fl-acwhite"}
+stones["#"]=cell{stone="st-likeoxydb"}
+stones["$"]=cell{parent={{file_oxyd,"b"}}}
+stones["!"]=cell{stone="st-marble"}
+level={"!!!!!!!!!!!!!!!!!!!!",
+       "!!#!#!#!#!#!#!#!#!#!",
+       "!#!$!#!#!$!#!#!#!#!!",
+       "!!#!#!#!#!#!#!#!#!#!",
+       "!#!#!#!#!#!#!$!#!#!!",
+       "!!$!#!#!#!#!#!#!#!#!",
+       "!#!#!#!#!#!#!#!#!#!!",
+       "!!#!#!#!#!#!#!#!$!#!",
+       "!#!#!#!$!#!#!#!#!#!!",
+       "!!#!#!#!#!#!#!#!#!#!",
+       "!#!#!#!$!#!$!#!#!#!!",
+       "!!#!#!#!#!#!#!#!#!#!",
+       "!!!!!!!!!!!!!!!!!!!!"}
+ stmap={"!!!!!!!!!!!!!!!!!!!!",
+        "!                  !",
+        "!  $     #    #    !",
+        "!                  !",
+        "!       $    $  #  !",
+        "! #  $             !",
+        "!                  !",
+        "!            $  #  !",
+        "!      #  $       $!",
+        "!  $               !",
+        "!     ##   #    $  !",
+        "!            $     !",
+        "!!!!!!!!!!!!!!!!!!!!"}
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+set_actor("ac-blackball",18.5,1.5,{player=0,name="bb"})
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

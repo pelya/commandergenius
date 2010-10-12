@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Twokoban I" el:subtitle="Sokoban for two" el:id="raoul28"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:score el:easy="3:30" el:difficult="3:51"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelh = 13
+levelw = 20
+
+create_world(levelw, levelh)
+
+fill_floor("fl-abyss")
+fill_floor("fl-rock",1,1,3,11)
+fill_floor("fl-rock",5,1,10,11)
+fill_floor("fl-rock",16,1,3,11)
+
+function renderLine( line, pattern)
+	for i=1, strlen(pattern) do
+		local c = strsub( pattern, i, i)
+  		if c=="o" then
+			oxyd(i-1,line)
+        elseif c=="#" then
+            set_stone("st-marble",i-1,line)
+        elseif c=="G" then
+            set_stone("st-glass",i-1,line)
+        elseif c=="a" then
+            set_stone("st-glass",i-1,line)
+            set_floor("fl-abyss",i-1,line)
+
+        elseif c=="B" then
+            if not difficult then
+                set_stone("st-black4",i-1,line)
+            else
+                set_stone("st-black1",i-1,line)
+            end
+        elseif c=="W" then
+            if not difficult then
+                set_stone("st-white4",i-1,line)
+            else
+                set_stone("st-white1",i-1,line)
+            end
+
+        elseif c=="O" then
+            set_stone("st-yinyang2",i-1,line)
+        elseif c=="?" then
+            set_stone("st-yinyang1",i-1,line)
+
+        elseif c=="K" then
+            set_stone("st-shogun-sml",i-1,line)
+            set_floor("fl-abyss",i-1,line)
+        elseif c=="D" then
+            set_item("it-shogun-l",i-1,line)
+            --set_floor("fl-abyss",i-1,line)
+
+        elseif c=="S" then
+            set_stone("st-laser-s",i-1,line,{name="l1", on=false})
+        elseif c=="N" then
+            set_stone("st-laser-n",i-1,line,{name="l2", on=false})
+
+        elseif c=="2" then
+            set_stone("st-mirror-p/",i-1,line)
+        elseif c=="1" then
+            set_stone("st-mirror-p\\",i-1,line)
+
+        elseif c=="s" then
+            set_stone("st-bolder-s",i-1,line)
+            set_item("it-seed",i-1,line)
+        elseif c=="n" then
+            set_stone("st-bolder-n",i-1,line)
+            set_item("it-seed",i-1,line)
+		end
+	end
+end
+
+renderLine(00 , "                    ")
+renderLine(01 , " 21S aaaa#####a 2G1 ")
+renderLine(02 , " GnG #####OWO## GoG ")
+renderLine(03 , " G G #OOOB  ?O# G G ")
+renderLine(04 , " G G #B###K D?# G G ")
+renderLine(05 , " G G #?OO?W  ?# G G ")
+renderLine(06 , " G G #?W#BW#B?# G G ")
+renderLine(07 , " G G #?  B?OO?# G G ")
+renderLine(08 , " G G #?D K###W# G G ")
+renderLine(09 , " G G #O?  WOOO# G G ")
+renderLine(10 , " GoG ##OBO##### GsG ")
+renderLine(11 , " 1G2 a#####aaaa N12 ")
+renderLine(12 , "                    ")
+
+-- Special
+Signal("it(12 4)","st(16 11)")
+Signal("it(7 8)","st(3 1)")
+
+set_actor("ac-blackball", 9.5,6.5, {player=0})
+set_actor("ac-whiteball", 10.5,6.5, {player=1})
+
+set_item("it-yinyang",9,6)
+set_item("it-yinyang",10,6)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

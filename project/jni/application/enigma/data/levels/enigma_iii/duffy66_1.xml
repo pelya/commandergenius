@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Tilt Control" el:subtitle="" el:id="duffy66"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw=21
+levelh=13
+
+create_world( levelw, levelh)
+
+--for i=0,20 do
+--   for j=0,13 do
+--      set_floor("fl-gradient",i,j,{type=20})
+--   end
+--end
+
+fill_floor("fl-normal", 0,0,levelw,levelh)
+
+enigma.SlopeForce=10
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-greenbrown", i-1, line)
+        elseif c =="X" then
+            set_stone( "st-death", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "*" then
+            set_stone( "st-brownie", i-1, line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5)
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c=="=" then
+            set_floor("fl-space",i-1,line)
+        elseif c=="i" then
+            set_floor("fl-ice",i-1,line)
+        elseif c=="1" then
+            set_item("it-trigger", i-1,line, {invisible=1,action="callback", target="funcc1"})
+        elseif c=="2" then
+            set_item("it-trigger", i-1,line, {invisible=1,action="callback", target="funcc2"})
+        elseif c=="3" then
+            set_item("it-trigger", i-1,line, {invisible=1,action="callback", target="funcc3"})
+        elseif c=="4" then
+            set_item("it-trigger", i-1,line, {invisible=1,action="callback", target="funcc4"})
+        elseif c=="5" then
+            set_item("it-trigger", i-1,line, {invisible=1,action="callback", target="funcc5"})
+        elseif c=="6" then
+            set_item("it-trigger", i-1,line, {invisible=1,action="callback", target="funcc6"})
+        elseif c=="7" then
+            set_item("it-trigger", i-1,line, {invisible=1,action="callback", target="funcc7"})
+        elseif c=="8" then
+            set_item("it-trigger", i-1,line, {invisible=1,action="callback", target="funcc8"})
+        elseif c=="9" then
+            set_item("it-trigger", i-1,line, {invisible=1,action="callback", target="funcc9"})
+        elseif c=="0" then
+            set_item("it-trigger", i-1,line, {invisible=1,action="callback", target="funcc10"})
+            set_actor("ac-whiteball", i-.5,line+.5, {mouseforce=0})
+        elseif c=="a" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funccdir1"})
+        elseif c=="b" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funccdir2"})
+        elseif c=="c" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funccdir3"})
+        elseif c=="d" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funccdir4"})
+        elseif c=="e" then
+            set_item("it-trigger", i-1,line, {action="callback", target="funccdir5"})
+        elseif c == "d" then --1-d
+            set_floor("fl-gradient",  i-1,  line, {type=21})
+        elseif c == "u" then --2-u
+            set_floor("fl-gradient",  i-1,  line, {type=22})
+        elseif c == "r" then --3-r
+            set_floor("fl-gradient",  i-1,  line, {type=23})
+        elseif c == "l" then --4-l
+            set_floor("fl-gradient",  i-1,  line, {type=21})
+        elseif c=="L" then
+            set_stone("st-oneway-w", i-1,line)
+            set_floor("fl-gradient",  i-1,  line, {type=24})
+        elseif c=="y" then
+            set_item("it-trigger", i-1,line, {invisible=1,action="callback", target="funcc11"})
+            set_actor("ac-whiteball", i-.5,line+.5, {player=0,mouseforce=1})
+            set_floor("fl-gradient",  i-1,  line, {type=24})
+        end
+    end    
+end
+
+renderLine(00,"!!!!!!!!!!!!!!!!!!!!!")
+renderLine(01,"!!!!!!!!!!!!!!!!!!!!!")
+renderLine(02,"##o###o####o#X#o##!!!")
+renderLine(03,"#e  a  e##1231231#!!!")
+renderLine(04,"o       oo7897897o!!!")
+renderLine(05,"#       ##4564564###!")
+renderLine(06,"#d  z  b#X1231231Ly#!")
+renderLine(07,"#       ##7897897###!")
+renderLine(08,"o       oo4564564o!!!")
+renderLine(09,"#e  c  e##1231231#!!!")
+renderLine(10,"##o###o####o#X#o##!!!")
+renderLine(11,"!!!!!!!!!!!!!!!!!!!!!")
+renderLine(12,"!!!!!!!!!!!!!!!!!!!!!")
+
+oxyd_shuffle()
+
+prev=2
+cur=2
+direc=0
+prevdirec=0
+chosendir=0
+
+prebx=17
+preby=6
+
+bx=17
+by=6
+
+f1=0
+f2=0
+f3=0
+f4=0
+f5=0
+f6=0
+f7=0
+f8=0
+f9=0
+f10=0
+f11=0
+
+function funccdir1()
+    chosendir=1
+    set_floor("fl-gradient",  bx, by , {type=22})
+end
+
+function funccdir2()
+    chosendir=2
+    set_floor("fl-gradient",  bx, by , {type=23})
+end
+
+function funccdir3()
+    chosendir=3
+    set_floor("fl-gradient",  bx, by , {type=21})
+end
+
+function funccdir4()
+    chosendir=4
+    set_floor("fl-gradient",  bx, by , {type=24})
+end
+
+function funccdir5()
+    chosendir=5
+    set_floor("fl-normal",  bx, by)
+end
+
+function funcc1()
+    if f1==0 then
+        cur=1
+        f1=1
+        dcheck()
+    else
+        f1=0
+    end
+end
+
+function funcc2()
+   if f2==0 then
+      cur=2
+      f2=1
+      dcheck()
+   else
+      f2=0
+   end
+end
+
+function funcc3()
+   if f3==0 then
+      cur=3
+      f3=1
+      dcheck()
+   else
+      f3=0
+   end
+end
+
+function funcc4()
+   if f4==0 then
+      cur=4
+      f4=1
+      dcheck()
+   else
+      f4=0
+   end
+end
+
+function funcc5()
+   if f5==0 then
+      cur=5
+      f5=1
+      dcheck()
+   else
+      f5=0
+   end
+end
+
+function funcc6()
+   if f6==0 then
+      cur=6
+      f6=1
+      dcheck()
+   else
+      f6=0
+   end
+end
+
+function funcc7()
+   if f7==0 then
+      cur=7
+      f7=1
+      dcheck()
+   else
+      f7=0
+   end
+end
+
+function funcc8()
+   if f8==0 then
+      cur=8
+      f8=1
+      dcheck()
+   else
+      f8=0
+   end
+end
+
+function funcc9()
+   if f9==0 then
+      cur=9
+      f9=1
+      dcheck()
+   else
+      f9=0
+   end
+end
+
+f10=0
+
+function funcc10()
+if f10==0 then
+   prev=1
+--   cur=1
+   bx=14
+   by=6
+   f1=0
+   f2=0
+   f3=0
+   f4=0
+   f5=0
+   f6=0
+   f7=0
+   f8=0
+   f9=0
+else
+f10=0
+end
+end
+
+function funcc11()
+   set_floor("fl-gradient",  18,  6, {type=24})
+if f10==0 then
+   prev=2
+--   cur=2
+   bx=17
+   by=6
+   f1=0
+   f2=0
+   f3=0
+   f4=0
+   f5=0
+   f6=0
+   f7=0
+   f8=0
+   f9=0
+else
+f10=0
+end
+end
+
+function dcheck()
+
+    if cur==2 and prev==1 then
+        direc=2
+    elseif cur==3 and prev==2 then
+        direc=2
+    elseif cur==1 and prev==3 then
+        direc=2
+    elseif cur==5 and prev==4 then
+        direc=2
+    elseif cur==6 and prev==5 then
+        direc=2
+    elseif cur==4 and prev==6 then
+        direc=2
+    elseif cur==8 and prev==7 then
+        direc=2
+    elseif cur==9 and prev==8 then
+        direc=2
+    elseif cur==7 and prev==9 then
+        direc=2
+
+    elseif cur==1 and prev==2 then
+        direc=4
+    elseif cur==2 and prev==3 then
+        direc=4
+    elseif cur==3 and prev==1 then
+        direc=4
+    elseif cur==4 and prev==5 then
+        direc=4
+    elseif cur==5 and prev==6 then
+        direc=4
+    elseif cur==6 and prev==4 then
+        direc=4
+    elseif cur==7 and prev==8 then
+        direc=4
+    elseif cur==8 and prev==9 then
+        direc=4
+    elseif cur==9 and prev==7 then
+        direc=4
+
+    elseif cur==4 and prev==1 then
+        direc=1
+    elseif cur==5 and prev==2 then
+        direc=1
+    elseif cur==6 and prev==3 then
+        direc=1
+    elseif cur==7 and prev==4 then
+        direc=1
+    elseif cur==8 and prev==5 then
+        direc=1
+    elseif cur==9 and prev==6 then
+        direc=1
+    elseif cur==1 and prev==7 then
+        direc=1
+    elseif cur==2 and prev==8 then
+        direc=1
+    elseif cur==3 and prev==9 then
+        direc=1
+
+    elseif cur==1 and prev==4 then
+        direc=3
+    elseif cur==2 and prev==5 then
+        direc=3
+    elseif cur==3 and prev==6 then
+        direc=3
+    elseif cur==4 and prev==7 then
+        direc=3
+    elseif cur==5 and prev==8 then
+        direc=3
+    elseif cur==6 and prev==9 then
+        direc=3
+    elseif cur==7 and prev==1 then
+        direc=3
+    elseif cur==8 and prev==2 then
+        direc=3
+    elseif cur==9 and prev==3 then
+        direc=3
+
+        -- renderLine(03,"!#         1231231#!")
+        -- renderLine(04,"!#       ##7897897#!")
+        -- renderLine(05,"!#   z   ##4564564#!")
+        -- renderLine(06,"!#       ##1231231#!")
+        -- renderLine(07,"!#       ##7897897#!")
+        -- renderLine(08,"!#       ##4564564#!")
+        -- renderLine(09,"!#       ##1231231#!")
+
+    elseif cur==5 and prev==1 then
+        direc=5
+    elseif cur==6 and prev==2 then
+        direc=5
+    elseif cur==4 and prev==3 then
+        direc=5
+    elseif cur==2 and prev==7 then
+        direc=5
+    elseif cur==3 and prev==8 then
+        direc=5
+    elseif cur==1 and prev==9 then
+        direc=5
+    elseif cur==8 and prev==4 then
+        direc=5
+    elseif cur==9 and prev==5 then
+        direc=5
+    elseif cur==7 and prev==6 then
+        direc=5
+
+        -- renderLine(03,"!#         1231231#!")
+        -- renderLine(04,"!#       ##7897897#!")
+        -- renderLine(05,"!#   z   ##4564564#!")
+        -- renderLine(06,"!#       ##1231231#!")
+        -- renderLine(07,"!#       ##7897897#!")
+        -- renderLine(08,"!#       ##4564564#!")
+        -- renderLine(09,"!#       ##1231231#!")
+
+    elseif cur==1 and prev==6 then
+        direc=6
+    elseif cur==3 and prev==5 then
+        direc=6
+    elseif cur==2 and prev==4 then
+        direc=6
+    elseif cur==4 and prev==9 then
+        direc=6
+    elseif cur==6 and prev==8 then
+        direc=6
+    elseif cur==5 and prev==7 then
+        direc=6
+    elseif cur==7 and prev==3 then
+        direc=6
+    elseif cur==9 and prev==2 then
+        direc=6
+    elseif cur==8 and prev==1 then
+        direc=6
+
+        -- renderLine(03,"!#         1231231#!")
+        -- renderLine(04,"!#       ##7897897#!")
+        -- renderLine(05,"!#   z   ##4564564#!")
+        -- renderLine(06,"!#       ##1231231#!")
+        -- renderLine(07,"!#       ##7897897#!")
+        -- renderLine(08,"!#       ##4564564#!")
+        -- renderLine(09,"!#       ##1231231#!")
+
+    elseif cur==1 and prev==5 then
+        direc=7
+    elseif cur==2 and prev==6 then
+        direc=7
+    elseif cur==3 and prev==4 then
+        direc=7
+    elseif cur==4 and prev==8 then
+        direc=7
+    elseif cur==5 and prev==9 then
+        direc=7
+    elseif cur==6 and prev==7 then
+        direc=7
+    elseif cur==7 and prev==2 then
+        direc=7
+    elseif cur==8 and prev==3 then
+        direc=7
+    elseif cur==9 and prev==1 then
+        direc=7
+
+        -- renderLine(03,"!#         1231231#!")
+        -- renderLine(04,"!#       ##7897897#!")
+        -- renderLine(05,"!#   z   ##4564564#!")
+        -- renderLine(06,"!#       ##1231231#!")
+        -- renderLine(07,"!#       ##7897897#!")
+        -- renderLine(08,"!#       ##4564564#!")
+        -- renderLine(09,"!#       ##1231231#!")
+
+    elseif cur==4 and prev==2 then
+        direc=8
+    elseif cur==5 and prev==3 then
+        direc=8
+    elseif cur==6 and prev==1 then
+        direc=8
+    elseif cur==7 and prev==5 then
+        direc=8
+    elseif cur==8 and prev==6 then
+        direc=8
+    elseif cur==9 and prev==4 then
+        direc=8
+    elseif cur==1 and prev==8 then
+        direc=8
+    elseif cur==2 and prev==9 then
+        direc=8
+    elseif cur==3 and prev==7 then
+        direc=8
+
+    end
+
+    if direc==1 then
+        by=by-1
+    elseif direc==2 then
+        bx=bx+1
+    elseif direc==3 then
+        by=by+1
+    elseif direc==4 then
+        bx=bx-1
+    elseif direc==5 then
+        bx=bx+1
+        by=by-1
+    elseif direc==6 then
+        bx=bx+1
+        by=by+1
+    elseif direc==7 then
+        bx=bx-1
+        by=by+1
+    elseif direc==8 then
+        bx=bx-1
+        by=by-1
+    end
+
+    if chosendir==1 then
+        set_floor("fl-gradient",  bx, by , {type=22})
+    elseif chosendir==2 then
+        set_floor("fl-gradient",  bx,  by, {type=23})
+    elseif chosendir==3 then
+        set_floor("fl-gradient",  bx,  by, {type=21})
+    elseif chosendir==4 then
+        set_floor("fl-gradient",  bx,  by, {type=24})
+    elseif chosendir==5 then
+        set_floor("fl-normal",  bx,  by)
+    end
+
+    --   if direc==1 then
+    --          set_floor("fl-gradient",  bx, by , {type=2})
+    --  elseif direc==2 then
+    --        set_floor("fl-gradient",  bx,  by, {type=3})
+    --   elseif direc==3 then
+    --          set_floor("fl-gradient",  bx,  by, {type=1})
+    --   elseif direc==4 then
+    --          set_floor("fl-gradient",  bx,  by, {type=4})
+    --     end
+    --if direc>4 then
+    --   if prevdirec==1 then
+    --          set_floor("fl-gradient",  bx, by , {type=2})
+    --  elseif prevdirec==2 then
+    --        set_floor("fl-gradient",  bx,  by, {type=3})
+    --   elseif prevdirec==3 then
+    --          set_floor("fl-gradient",  bx,  by, {type=1})
+    --   elseif prevdirec==4 then
+    --          set_floor("fl-gradient",  bx,  by, {type=4})
+    --     end
+    --  end
+
+    set_floor("fl-normal",  prebx,  preby)
+
+    set_floor("fl-gradient",  17,  6, {type=24})
+
+    prebx=bx
+    preby=by
+
+    prev=cur
+
+    prevdirec=direc
+end
+
+if not difficult then
+    set_floor("fl-water", 13, 6)
+else
+
+ax=10
+ay=6
+
+set_floor("fl-water", (ax), (ay))
+
+ttt=0
+function timer_callback()
+    if ttt<9 then
+        ttt=ttt+1
+        set_floor("fl-water", (ax), (ay))
+    else
+        ttt=ttt+1
+        xdist=(((ax-bx)^2)^(1/2))
+        ydist=(((ay-by)^2)^(1/2))
+        if xdist>ydist and (ax-bx)<0 then
+            direc2=2
+        elseif xdist>ydist and (ax-bx)>0 then
+            direc2=4
+        elseif ydist>xdist and (ay-by)<0 then
+            direc2=3
+        elseif ydist>xdist and (ay-by)>0 then
+            direc2=1
+        elseif xdist==ydist then
+            direc2=random(2)
+            if (ax-bx)>0 then
+                if (ay-by)>0 then
+                    if direc2==1 then
+                        direc2=1
+                    elseif direc2==2 then
+                        direc2=4
+                    end
+                elseif (ay-by)<0 then
+                    if direc2==1 then
+                        direc2=3
+                    elseif direc2==2 then
+                        direc2=4
+                    end
+                end
+            elseif (ax-bx)<0 then
+                if (ay-by)>0 then
+                    if direc2==1 then
+                        direc2=1
+                    elseif direc2==2 then
+                        direc2=2
+                    end
+                elseif (ay-by)<0 then
+                    if direc2==1 then
+                        direc2=2
+                    elseif direc2==2 then
+                        direc2=3
+                    end
+                end
+            end           
+        end
+        if direc2==1 then
+            ay=ay-1
+        elseif direc2==2 then
+            ax=ax+1
+        elseif direc2==3 then
+            ay=ay+1
+        elseif direc2==4 then
+            ax=ax-1
+        end
+        --set_floor("fl-abyss", (ax-1), (ay-1))
+        --set_floor("fl-abyss", (ax-1), (ay))
+        --set_floor("fl-abyss", (ax-1), (ay+1))
+        --set_floor("fl-abyss", (ax), (ay-1))
+        set_floor("fl-water", (ax), (ay))
+        --set_floor("fl-abyss", (ax), (ay+1))
+        --set_floor("fl-abyss", (ax+1), (ay-1))
+        --set_floor("fl-abyss", (ax+1), (ay))
+        --set_floor("fl-abyss", (ax+1), (ay+1))
+
+        if direc2==4 then
+            --set_floor("fl-leaves", (ax+2), (ay+1))
+            set_floor("fl-normal", (ax+1), (ay))
+            --set_floor("fl-leaves", (ax+2), (ay-1))
+        end
+
+        if direc2==2 then
+            --set_floor("fl-leaves", (ax-2), (ay+1))
+            set_floor("fl-normal", (ax-1), (ay))
+            --set_floor("fl-leaves", (ax-2), (ay-1))
+        end
+
+        if direc2==1 then
+            --set_floor("fl-leaves", (ax-1), (ay+2))
+            set_floor("fl-normal", (ax), (ay+1))
+            --set_floor("fl-leaves", (ax+1), (ay+2))
+        end
+
+        if direc2==3 then
+            --set_floor("fl-leaves", (ax-1), (ay-2))
+            set_floor("fl-normal", (ax), (ay-1))
+            --set_floor("fl-leaves", (ax+1), (ay-2))
+        end
+        ttt=0
+    end
+end
+
+set_stone("st-timer", 20,0, {loop=1, action="callback", target="timer_callback", interval=0.1})
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

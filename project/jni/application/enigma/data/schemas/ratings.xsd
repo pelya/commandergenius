@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" xml:lang="en">
+  <xs:annotation>
+    <xs:documentation>
+      XML Schema definitions for Enigma public ratings "ratings.xml".
+      Copyright © 2006 Ronald Lamprecht
+      GPL2
+    </xs:documentation>
+  </xs:annotation>
+  <xs:element name="ratings">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="update" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              Information for online update of public ratings
+              date            -- version date in UTC
+              urlFull         -- url for a complete update
+              urlIncremental  -- url for an incremental update
+              delay           -- delay for next update in days
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:attribute name="date" type="xs:dateTime" use="required"/>
+            <xs:attribute name="urlFull" type="xs:anyURI" use="required"/>
+            <xs:attribute name="urlIncremental" type="xs:anyURI" use="required"/>
+            <xs:attribute name="delay" type="xs:unsignedShort" use="optional" default="1"/>
+          </xs:complexType>
+        </xs:element> <!-- update -->
+        <xs:element name="levels" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="level" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation>
+                    The attributes are cryptic acronyms for reasons of space and
+                    bandwidth: with 1000 levels we have a 200k rating file and
+                    with 50000 downloads it sums up to 10G!
+                    id     -  level id
+                    sv     -  score version
+                    int    -  rating intelligence
+                    dex    -  rating dexterity
+                    pat    -  rating patience
+                    kno    -  rating knowledge
+                    spe    -  rating speed
+                    bse    -  best score easy
+                    bseh   -  best score easy holder
+                    bsd    -  best score difficult
+                    bsdh   -  best score difficult holder
+                    pare   -  par score easy
+                    pard   -  par score difficult
+                    solvne -  number of users who solved easy
+                    solvpe -  percentage of users who solved easy * 100, 
+                    solvnd -  number of users who solved difficult
+                    solvpd -  percentage of users who solved difficult * 100
+                    avgur   -  average user rating * 10
+                  </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="id" type="xs:string" use="required"/>
+                  <xs:attribute name="sv" type="xs:unsignedShort" use="required"/>
+                  <xs:attribute name="int" type="xs:short" use="optional"/>
+                  <xs:attribute name="dex" type="xs:short" use="optional"/>
+                  <xs:attribute name="pat" type="xs:short" use="optional"/>
+                  <xs:attribute name="kno" type="xs:short" use="optional"/>
+                  <xs:attribute name="spe" type="xs:short" use="optional"/>
+                  <xs:attribute name="bse" type="scoreType" use="optional"/>
+                  <xs:attribute name="bseh" type="xs:string" use="optional"/>
+                  <xs:attribute name="bsd" type="scoreType" use="optional"/>
+                  <xs:attribute name="bsdh" type="xs:string" use="optional"/>
+                  <xs:attribute name="pare" type="scoreType" use="optional"/>
+                  <xs:attribute name="pard" type="scoreType" use="optional"/>
+                  <xs:attribute name="solvne" type="xs:unsignedInt" use="optional"/>
+                  <xs:attribute name="solvpe" type="xs:unsignedShort" use="optional"/>
+                  <xs:attribute name="solvnd" type="xs:unsignedInt" use="optional"/>
+                  <xs:attribute name="solvpd" type="xs:unsignedShort" use="optional"/>
+                  <xs:attribute name="avgur" type="xs:short" use="optional"/>
+                  <xs:anyAttribute namespace="##local" processContents="lax"/>
+                </xs:complexType>
+              </xs:element> <!-- level -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element> <!-- levels -->
+        <xs:any namespace="##any" minOccurs="0" maxOccurs="unbounded" processContents="skip">
+          <xs:annotation>
+            <xs:documentation>
+              Ignore any future incompatible extensions.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:any>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:simpleType name="scoreType">
+    <xs:restriction base="xs:short">
+      <xs:minInclusive value="-1"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

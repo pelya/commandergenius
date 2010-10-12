@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Use The PIN" el:subtitle="" el:id="martin99"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw =  10*19+1
+levelh = 13
+create_world(levelw, levelh)
+fill_floor("fl-metal")
+
+function create_room( nr, goal)
+    draw_border( "st-plain", nr*19, 0, 20, 13)
+    set_item( "it-wormhole", nr*19+18, 1+goal, {range=1, strength=10, targetx=nr*19+19+11.5, targety=6.5})
+    for i=1, 9 do
+        item = enigma.GetItem(nr*19+18,1+i)
+        if item == nil then
+            set_item( "it-wormhole", nr*19+18, 1+i, {range=1, strength=10, targetx=nr*19+1.5, targety=6.5})
+        end
+    end
+    if (not difficult) then
+        fill_floor( "fl-water", nr*19+1, 1, goal, 11)
+    else
+        fill_floor( "fl-water", nr*19+1, 1, 3, 11)
+    end
+end
+
+create_room( 0, 3)
+create_room( 1, 1)
+create_room( 2, 4)
+create_room( 3, 1)
+create_room( 4, 5)
+create_room( 5, 9)
+create_room( 6, 2)
+create_room( 7, 6)
+create_room( 8, 5)
+
+draw_border( "st-plain", 9*19, 0, 20, 13)
+oxyd( 9*19+2, 2)
+oxyd( 9*19+2, 10)
+oxyd( 9*19+17, 2)
+oxyd( 9*19+17, 10)
+
+Document( 12,9, "text1")
+Document( 13,9, "text2")
+set_actor("ac-blackball", 11.5,6.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="false">P</el:english>
+      </el:string> 
+      <el:string el:key="text2">
+        <el:english el:translate="false">I</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

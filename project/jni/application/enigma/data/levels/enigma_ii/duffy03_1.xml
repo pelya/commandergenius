@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Laser Spiral" el:subtitle="" el:id="duffy3"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+draw_border("st-greenbrown")
+fill_floor("fl-hay")
+
+oxyd(2,0)
+oxyd(3,0)
+oxyd(4,0)
+oxyd(5,0)
+oxyd(6,0)
+oxyd(7,0)
+oxyd(2,12)
+oxyd(3,12)
+oxyd(4,12)
+oxyd(5,12)
+oxyd(6,12)
+oxyd(7,12)
+oxyd(0,6)
+oxyd(0,7)
+oxyd_shuffle()
+
+mirrorp(2,11,FALSE,FALSE, 4)
+mirrorp(1,11,FALSE,FALSE, 2)
+mirrorp(1,7,TRUE,FALSE, 4)
+
+mirrorp(2,1,FALSE,FALSE, 4)
+mirrorp(3,2,FALSE,FALSE, 4)
+mirrorp(4,3,FALSE,FALSE, 4)
+mirrorp(5,4,FALSE,FALSE, 4)
+mirrorp(6,5,FALSE,FALSE, 4)
+mirrorp(7,6,FALSE,FALSE, 4)
+
+mirrorp(18,1,FALSE,FALSE, 2)
+mirrorp(17,2,FALSE,FALSE, 2)
+mirrorp(16,3,FALSE,FALSE, 2)
+mirrorp(15,4,FALSE,FALSE, 2)
+mirrorp(14,5,FALSE,FALSE, 2)
+
+mirrorp(3,11,FALSE,FALSE, 2)
+mirrorp(4,10,FALSE,FALSE, 2)
+mirrorp(5,9,FALSE,FALSE, 2)
+mirrorp(6,8,FALSE,FALSE, 2)
+mirrorp(7,7,FALSE,FALSE, 2)
+
+mirrorp(18,11,FALSE,FALSE, 4)
+mirrorp(17,10,FALSE,FALSE, 4)
+mirrorp(16,9,FALSE,FALSE, 4)
+mirrorp(15,8,FALSE,FALSE, 4)
+mirrorp(14,7,FALSE,FALSE, 4)
+
+set_attrib(laser(19,6, TRUE, WEST), "name", "laser")
+
+set_actor("ac-blackball", 1.5,6)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

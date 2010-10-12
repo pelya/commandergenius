@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="esprit 8" el:subtitle="esprit 8" el:id="ss_esp08"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Sven Siggelkow" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Sven Siggelkow</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+create_world(levelw, levelh)
+oxyd_default_flavor = "b"       -- Default flavor for oxyd stones.
+
+set_actor("ac-blackball", 10,6.5)
+
+fill_floor("fl-metal")
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+      local c = strsub( pattern, i, i)
+      if c ==   "#" then
+         set_stone("st-actorimpulse",i-1,line)
+      elseif c=="S" then
+         set_item("it-umbrella", i-1,line)
+      elseif c=="D" then
+     set_stone("st-death",i-1,line)
+      elseif c=="W" then
+         set_stone("st-rock2",i-1,line)
+      elseif c=="O" then
+     oxyd(i-1,line)
+      elseif c=="1" then
+         set_stone("st-oneway_black-w",i-1,line)
+      elseif c=="2" then
+         set_stone("st-oneway_black-e",i-1,line)
+      elseif c=="N" then
+     document(i-1,line,"text1")
+        end
+    end
+end
+--              01234567890123456789
+renderLine(00, "####################")
+renderLine(01, "#D       SS       D#")
+renderLine(02, "#                  #")
+renderLine(03, "#  OWWWOWWWWOWWWO  #")
+renderLine(04, "#  W            W  #") 
+renderLine(05, "#  W            W  #")  
+renderLine(06, "#S 1N          N2 S#")
+renderLine(07, "#  W            W  #")
+renderLine(08, "#  W            W  #") 
+renderLine(09, "#  OWWWOWWWWOWWWO  #")
+renderLine(10, "#                  #")
+renderLine(11, "#D       SS       D#")
+renderLine(12, "####################")
+--              01234567890123456789
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Umbrellas protect!</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

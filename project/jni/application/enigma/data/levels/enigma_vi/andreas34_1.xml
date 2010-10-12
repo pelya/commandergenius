@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Procrustes" el:subtitle="" el:id="andreas34"/>
+      <el:version el:score="1" el:release="1" el:revision="2" el:status="released"/>
+      <el:author  el:name="Andreas Lochmann" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Andreas Lochmann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+       <el:dependency el:path="lib/libpuzzle" el:id="lib/libpuzzle" el:release="2" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="05:45"/>
+    </el:info>
+    <el:luamain><![CDATA[
+
+-- Constructed with the help of BBE.
+
+levelh=13
+levelw=20
+
+mys="st-rock10"
+
+enigma.FlatForce=30
+enigma.SlopeForce=30
+enigma.ElectricForce=30
+
+function file_oxyd(x,y,f)
+  oxyd_default_flavor=f
+  oxyd(x,y)
+end
+
+function ac_blackball(x,y)
+  set_actor("ac-blackball",x+0.5,y+0.5)
+end
+
+function set_eternal_fire(x,y)
+  SendMessage(set_floor("fl-dunes", x, y, {eternal=TRUE, burnable=TRUE}), "setfire")
+end
+
+cells={}
+items={}
+actors={}
+stones={}
+actors[" "]=cell{}
+stones[" "]=cell{}
+cells[" "]=cell{}
+items[" "]=cell{}
+cells["!"]=cell{floor="fl-sand"}
+cells["#"]=cell{floor="fl-abyss"}
+if enigma.CreatingPreview then
+  cells["$"]=cell{floor="fl-hay", item="it-burnable_burning"}
+else
+  cells["$"]=cell{floor={"fl-dunes", {eternal=TRUE, burnable=TRUE, initfire=TRUE}}}
+end
+stones["!"]=cell{stone=mys}
+stones["-"]=cell{stone=mys}
+stones["I"]=cell{stone=mys}
+stones["("]=cell{stone=mys}
+stones[")"]=cell{stone=mys}
+stones["_"]=cell{stone=mys}
+stones["^"]=cell{stone=mys}
+stones["7"]=cell{stone=mys}
+stones["3"]=cell{stone=mys}
+stones["#"]=cell{parent={{file_oxyd,"d"}}}
+items["!"]=cell{item="it-magicwand"}
+items["E"]=cell{item="it-extinguisher"}
+actors["!"]=cell{parent={{ac_blackball}}}
+
+level={"!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!$#$#$$#!",
+       "!!!!!!!!!!!!##$####!",
+       "!!!!!!!!!!!!$###$#$!",
+       "!!!!!!!!!!!!$$$$$##!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!####$$$$$!!!!!!!!!!",
+       "!$$$#$###$!!!!!!!!!!",
+       "!######$##!!!!!!!!!!",
+       "!#$$$$#$#$!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!"}
+   acmap={"                    ",
+          " !                  ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    "}
+  itmap={"                    ",
+         " !                E ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         " E                  ",
+         "                    "}
+ stmap={"7-----------)#!#()#!",
+        "I                  #",
+        "I                  _",
+        "I                  ^",
+        "I                  #",
+        "I           7---)  _",
+        "I        7--3      I",
+        "^  (-----3         I",
+        "#                  I",
+        "_                  I",
+        "^                  I",
+        "#                  I",
+        "!#(--)#!#(---------3"}
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+draw_map(0,0,itmap,items)
+draw_map(0,0,acmap,actors)
+oxyd_shuffle()
+
+puzzle({" # #    #",
+        "## ######",
+        " ### #   ",
+        "     ####"}, {2,2}, "bluepuzzle", "permutation", 2)
+puzzle({"##     ",
+        " # ### ",
+        "#### ##",
+        "#  # # "}, {11,7}, "bluepuzzle", "permutation", 2)
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Prokrustes</el:translation>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

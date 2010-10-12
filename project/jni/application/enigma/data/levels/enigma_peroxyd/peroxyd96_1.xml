@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="No Safety Net" el:subtitle="Per.Oxyd 96" el:id="siegfried90"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Siegfried Fennig" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Siegfried Fennig</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="per.oxyd">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 39
+levelh = 37
+
+create_world(levelw, levelh)
+--enigma.ConserveLevel = FALSE
+oxyd_default_flavor = "d"
+fill_floor("fl-gray")
+fill_floor("fl-water", 8,11, 13, 7)
+fill_floor("fl-water", 1,18, 20,18)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+      local c = strsub( pattern, i, i)
+      if c == "r" then
+         set_stone("st-rock1",i-1,line)
+      elseif c == "7" then
+         set_stone("st-shogun-sml",i-1,line)
+      elseif c == "5" then
+         set_stone("st-shogun-sl",i-1,line)
+      elseif c == "4" then
+         set_stone("st-shogun-l",i-1,line)
+      elseif c == "1" then
+         set_stone("st-shogun-s",i-1,line)
+      elseif c == "S" then
+         set_stone("st-stoneimpulse",i-1,line)
+      elseif c == "e" then
+         set_floor("fl-gradient",i-1,line, {type=3})
+      elseif c == "E" then
+         set_stone("st-oneway-e",i-1,line)
+      elseif c == "W" then
+         set_stone("st-oneway-w",i-1,line)
+      elseif c =="#" then
+         fill_floor("fl-sand", i-1,line, 1,1)
+      elseif c == "s" then
+         set_stone("st-scissors",i-1,line)
+      elseif c == "w" then
+         set_stone("st-wood",i-1,line)
+      elseif c == "b" then
+         set_stone("st-rubberband",i-1,line)
+      elseif c == "o" then
+         oxyd( i-1, line)
+      elseif c == "a" then
+         set_actor("ac-blackball", i-.5,line+.5)
+        end
+    end
+end
+--                        1         2         3
+--              012345678901234567890123456789012345678
+renderLine(00, "SSSSSSSSSSSSSSSSS7777777777777777777777")
+renderLine(01, "S              oS                7    7")
+renderLine(02, "S SSSSSSSSSSSSSSSSSS 77777777777 7    7")
+renderLine(03, "S So  44444   E    S 7           7    7")
+renderLine(04, "S 5S  11111  SSSS41S 7 77777777777    7")
+renderLine(05, "S SSSSSSSSSS W  S41S 7           7    7")
+renderLine(06, "S So  S5455SSS14S  S 7777777 77777    7")
+renderLine(07, "S r      1      S SS S       7        7")
+renderLine(08, "S SSSSSSSSSSSS14S S41S 7777777        7")
+renderLine(09, "S                  1 S  7             7")
+renderLine(10, "S7SSSr r777777SSSSSSSS7 7             7")
+renderLine(11, "S    r r             e7 7             7")
+renderLine(12, "S    r r             e7 7             7")
+renderLine(13, "7    r r             e             o  7")
+renderLine(14, "7    r r             e #####          7")
+renderLine(15, "7  o r r             e #####          7")
+renderLine(16, "7    rrr             e #####          7")
+renderLine(17, "7                    e #####      w   7")
+renderLine(18, "7                    77777s7777777w7777")
+renderLine(19, "7                    7                7")
+renderLine(20, "7                    7          w     7")
+renderLine(21, "7                    e                7")
+renderLine(22, "7                    e   w            7")
+renderLine(23, "7                    e             b  7")
+renderLine(24, "7                    e                7")
+renderLine(25, "7                    e                7")
+renderLine(26, "7                    e          b     7")
+renderLine(27, "7                    e                7")
+renderLine(28, "7                    e                7")
+renderLine(29, "7                    e                7")
+renderLine(30, "7                    e      b    b    7")
+renderLine(31, "7                    e                7")
+renderLine(32, "7                    e                7")
+renderLine(33, "7                    e          o a   7")
+renderLine(34, "7                    e                7")
+renderLine(35, "7                    e                7")
+renderLine(36, "777777777777777777777777777777777777777")
+
+--              012345678901234567890123456789012345678
+--                        1         2         3
+
+oxyd_shuffle()
+
+set_item("it-spring1", 25, 22)
+set_item("it-magicwand", 32, 20)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

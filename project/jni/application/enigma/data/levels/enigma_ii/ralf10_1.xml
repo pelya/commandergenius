@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Khun Phan" el:subtitle="" el:id="ralf10"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Ralf Westram" el:email="amgine@reallysoft.de" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Ralf Westram</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ralf" el:id="lib/ralf" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[    
+--debug_mode()
+
+if enigma.CreatingPreview then
+level={
+   "                 *b*",
+   "################ *b*",
+   " ^  ^  ^  ^  ^ # *b*",
+   "<+><+=-+><+=-+># *b*",
+   " v  v  v  v  v # *b*",
+   " ^  ^  ^  ^  ^ # *b*",
+   "<+><+=-+><+=-+># *b*",
+   " v  v  v  v  v # *b*",
+   "    ^  ^  ^  ^ # *b*",
+   "   <] <+><+><+># *b*",
+   "    |a =  |  v # *b*",
+   "    =  |  =  ^ # *b*",
+   "   <+-=+><+><+># *b*",
+}
+else
+level={
+   "*************************",
+   "o bbbbbbbbbbbbbbbbbbbbbb*",
+   "* *********************b*",
+   "*                     *b*",
+   "*   ################# *b*",
+   "*   # ^  ^     ^  ^ # *b*",
+   "*   #<+=-+>   <+=-+># *b*",
+   "*   # v  v     v  v # *b*",
+   "*   # ^  ^  ^  ^  ^ # *b*",
+   "*   #<] <+><+><+><+># *b*",
+   "*   # |a =  |  v  v # *b*",
+   "*   # =  |  =  ^  ^ # *b*",
+   "*   #<+-=+><+><+><+># *b*",
+   "*   # v  v  v  v  v # *b*",
+   "*   # ^  ^     ^  ^ # *b*",
+   "*   #<+=-+>   <+=-+># *b*",
+   "*   # v  v     v  v # * o",
+   "*   ################# ***",
+   "*                       *",
+   "*                     ! t",
+   "*                       *",
+   "*************************",
+}
+end
+
+switchpad={
+   " x  x ",
+   "xx xxx",
+   " x  x ",
+   " x  x ",
+   "xxxxxx",
+   " x  x ",
+}
+
+bridges=0
+function set_bridge(x,y)
+   bridges = bridges+1
+   if enigma.CreatingPreview then
+      set_floor("fl-bridge-closed",x,y,{name="bridge"..bridges})
+   else
+      set_floor("fl-bridge",x,y,{name="bridge"..bridges})
+   end
+end
+
+switches=0
+function set_switch(x,y,toggle)
+   switches=switches+1
+   if enigma.CreatingPreview then
+      set_item("it-trigger",x,y)
+   else
+      set_item("it-trigger",x,y,{action="openclose",target="bridge"..switches})
+      if (toggle==1) then
+         SendMessage("bridge"..switches, "openclose")
+      end
+   end
+end
+
+function set_pad(pad,x,y)
+   padw,padh = get_map_size(pad)
+   for py=1,padh do
+      for px=1,padw do
+         local col = strsub(pad[py],px,px)
+         if (col == "x") then
+            set_switch(x+px,y+py,0)
+         else
+            set_switch(x+px,y+py,1)
+         end
+      end
+   end
+end
+
+docx = 0
+docy = 0
+hints = 0
+
+function hint()
+   hints = hints+1
+
+   if (hints<=2) then
+      enigma.EmitSound(enigma.GetNamedObject("soundstone"), "itemtransform")
+   end
+
+   if hints==1 then
+      document(docx, docy, "text1");
+   elseif hints==2 then
+      document(docx, docy, "text2");
+   end
+end
+
+function store_doc_pos(x,y)
+   docx,docy=x,y
+end
+
+cells={}
+
+cells[" "] = cell{floor="fl-tigris"}
+cells["#"] = cell{parent=cells[" "],stone="st-grate1"}
+cells["*"] = cell{parent=cells[" "],stone="st-rock1"}
+cells["a"] = cell{parent=cells[" "],actor={"ac-blackball", {player=0}}}
+cells["o"] = cell{oxyd}
+
+cells["i"] = cell{parent=cells[" "],stone="st-stoneimpulse"}
+cells["I"] = cell{parent=cells[" "],stone="st-stoneimpulse_movable"}
+
+cells["-"]=cell{{{puzzle, PUZ_0101}}}
+cells[">"]=cell{{{puzzle, PUZ_0001}}}
+cells["<"]=cell{{{puzzle, PUZ_0100}}}
+
+cells["|"]=cell{{{puzzle, PUZ_1010}}}
+cells["^"]=cell{{{puzzle, PUZ_0010}}}
+cells["v"]=cell{{{puzzle, PUZ_1000}}}
+
+cells["+"]=cell{{{puzzle, PUZ_1111}}}
+cells["]"]=cell{{{puzzle, PUZ_1011}}}
+cells["="]=cell{{{puzzle, PUZ_0000}}}
+cells["/"]=cell{{{puzzle, PUZ_0110}}}
+cells["`"]=cell{{{puzzle, PUZ_0011}}}
+cells["."]=cell{{{puzzle, PUZ_1100}}}
+cells[","]=cell{{{puzzle, PUZ_1001}}}
+
+cells["b"]=cell{parent={set_bridge}}
+
+cells["!"] = cell{floor="fl-sahara",parent={store_doc_pos}}
+cells["t"] = cell{parent=cells[" "],stone={face="st-timer",attr={action="callback", target="hint", interval=180, name="soundstone"}}}
+
+rs_create_world(level,cells)
+
+if enigma.CreatingPreview then
+  set_pad(switchpad,xlo+8,ylo+4)
+else
+  set_pad(switchpad,xlo+13,ylo+7)
+end
+
+display.SetFollowMode(display.FOLLOW_SMOOTH)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">One of the puzzle stones needs to be placed onto the trigger field.                       Guess which ... :)</el:english>
+      </el:string> 
+      <el:string el:key="text2">
+        <el:english el:translate="true">The level preview might help ...</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,47 @@
+Hacking
+=======
+
+If you intend to modify the source code, you may additionally need
+these programs:
+
+    * GNU Autotools (autoconf >= 2.5, automake)
+    * ImageMagick
+
+You can pass the '--enable-tools' flag to the configure script to build
+a few additional programs that may be useful if you intend to seriously
+play with Enigma's internals.
+
+
+FAQ - Notes
+
+- unreadable characters in sources --- utf8 coded sources like menu.cc, *.po 
+
+GCC incl 4.0 does not support standard C++ unicode escapes like "\u00E7" as a 
+french cedille. But GCC accepts code written coded as utf8.
+Please configure your editor to read and write utf8.
+
+- enigma.pot as a generated file in repository
+enigma.pot is made if missing and on explicit command (make dist ) but not
+on standard make due to performance issues. If not in repository enigma.pot 
+would be regenerated once after checkout with an update of all *.po. 
+Further changes would be ignored and all resulting *.po would be recommited 
+into the repository!
+
+- eliminate trailing '/' from gcc -I paths 
+
+This is for mingw gcc 3.4.2 compatibility. No problem with 3.4.1 and should be
+no more problem with 3.4.4. As soon as the current mingw release updates to a
+corrected gcc version we can skip this workaround.
+
+- lua code in repository is native but in exe distribution LF terminated
+Lua produces errors with CR+LF. By declaring lua files as native the repository
+will be free of CR+LF independent from the level authors editor. If we would not
+declare it native we would depend on the authors awareness of this problem.
+
+- the executable is large - why static link with xerces-c 3.0 for windows
+The trunk xerces 3.0 version libs are not stripped - strip enigma and it looks
+better. The Windows version currently generates no dll - you can do it by hand.
+But eitherway the static linked version will be smaller after upx than the
+shared one plus the dll. The Windows zip distribution grows from 11 MB only by
+appr. 650 KB to 11.5 MB.
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<state xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="state.xsd">
+  <properties>
+    <property key="UserName" value=""/>
+    <property key="CurrentGroup" value="Enigma"/>
+    <property key="NextLevelMode" value="0"/>
+    <property key="Difficulty" value="1"/>
+    <property key="RatingsUpdateTime" value="2006-03-31T20:20:00Z"/>
+  </properties>
+  <groups>
+    <group title="Enigma" curindex="Tutorial" curcolumn="0"/>
+    <group title="Déjà-vu" curindex="" curcolumn="0"/>
+    <group title="Sokoban" curindex="" curcolumn="0"/>
+    <group title="Facets" curindex="" curcolumn="0"/>
+    <group title="User" curindex="" curcolumn="0"/>
+    <group title="Development" curindex="" curcolumn="0"/>
+    <group title="All Packs" curindex="Tutorial" curcolumn="0"/>
+  </groups>
+  <indices>
+    <index title="Tutorial" group="" location="0" curposition="0" curfirst="0"/>
+  </indices>
+  <levels>
+  </levels>
+</state>

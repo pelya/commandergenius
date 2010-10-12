@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<index xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd">
+
+  <info enigma="1.00" group="Facets" location="15500" network="false" owner="Enigma Team" release="1" revision="7" title="Enigma 1.01 new"/>
+
+  <attributes/>
+
+  <levels>
+    <level _seq="1" _title="Walk the line" _xpath="enigma_vi/erich02_1" author="Erich Schubert" ctrl="force" easy="true" id="erich02" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="2" _title="Knights &amp; Boxes" _xpath="enigma_vi/johannes01_1" author="Johannes Laire" ctrl="force" easy="false" id="20061201johannes313" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="3" _title="Knight's Journey" _xpath="enigma_vi/johannes02_1" author="Johannes Laire" ctrl="force" easy="false" id="20061210johannes313" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="4" _title="Blitz Chess" _xpath="enigma_vi/luc32_1" author="Lukas Schüller" ctrl="force" easy="false" id="luc322006" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="5" _title="River of Challenges" _xpath="enigma_vi/luc33_1" author="Lukas Schüller" ctrl="force" easy="true" id="luc332006" rel="1" rev="3" score="1" target="time" unit="duration"/>
+    <level _seq="6" _title="Red Herrings" _xpath="enigma_vi/andy01_2" author="Andy Geldmacher" ctrl="force" easy="false" id="20070116money001" rel="3" rev="1" score="3" target="time" unit="duration"/>
+    <level _seq="7" _title="Playing with Lasers" _xpath="enigma_vi/just09_1" author="JuSt" ctrl="force" easy="false" id="just09_1" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="8" _title="Hot Hurdle Race" _xpath="enigma_vi/ulf04_1" author="Ulf Stegemann" ctrl="force" easy="true" id="20070124ulf019" rel="1" rev="93" score="1" target="time" unit="duration"/>
+    <level _seq="9" _title="Counterclockwise" _xpath="enigma_vi/ulf05_1" author="Ulf Stegemann" ctrl="force" easy="true" id="20070126ulf020" rel="1" rev="93" score="1" target="time" unit="duration"/>
+    <level _seq="10" _title="Check the Light" _xpath="enigma_vi/just10_1" author="JuSt" ctrl="force" easy="false" id="just10" rel="1" rev="4" score="1" target="time" unit="duration"/>
+    <level _seq="11" _title="Twokoban I" _xpath="enigma_vi/raoul28_1" author="Raoul Bourquin" ctrl="force" easy="true" id="raoul28" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="12" _title="The Passage" _xpath="enigma_vi/just11_1" author="JuSt" ctrl="force" easy="false" id="just11" rel="1" rev="6" score="1" target="time" unit="duration"/>
+    <level _seq="13" _title="Magic Triangle" _xpath="enigma_vi/just13_1" author="JuSt" ctrl="force" easy="false" id="just13" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="14" _title="Revolver" _xpath="enigma_vi/ral16_1" author="Ronald Lamprecht" ctrl="force" easy="true" id="20070214ral703" rel="1" rev="59" score="1" target="time" unit="duration"/>
+    <level _seq="15" _title="Devil's Bolder" _xpath="enigma_vi/just14_1" author="JuSt" ctrl="force" easy="true" id="just14" rel="1" rev="2" score="1" target="time" unit="duration"/>
+    <level _seq="16" _title="Turnstiles for Two" _xpath="enigma_vi/ral17_1" author="Ronald Lamprecht" ctrl="force" easy="true" id="20070314ral189" rel="1" rev="64" score="1" target="time" unit="duration"/>
+    <level _seq="17" _title="The wrong Place?" _xpath="enigma_vi/just17_1" author="JuSt" ctrl="force" easy="false" id="just17" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="18" _title="Your Friend, the Light" _xpath="enigma_vi/just15_1" author="JuSt" ctrl="force" easy="true" id="just15" rel="1" rev="2" score="1" target="time" unit="duration"/>
+    <level _seq="19" _title="jumping ball flash" _xpath="enigma_vi/illmind13_1" author="illmind" ctrl="force" easy="false" id="2007ill001" rel="1" rev="3" score="1" target="time" unit="duration"/>
+    <level _seq="20" _title="Cold Meditation" _xpath="enigma_vii/ral18_1" author="Ronald Lamprecht" ctrl="force" easy="true" id="20070314ral728" rel="1" rev="67" score="1" target="time" unit="duration"/>
+    <level _seq="21" _title="Same task ..." _xpath="enigma_vi/raoul29_1" author="Raoul Bourquin" ctrl="force" easy="true" id="raoul29" rel="1" rev="2" score="1" target="time" unit="duration"/>
+    <level _seq="22" _title="Industrial Puzzles" _xpath="enigma_vi/raoul30_1" author="Raoul Bourquin" ctrl="force" easy="false" id="raoul30" rel="1" rev="4" score="1" target="time" unit="duration"/>
+    <level _seq="23" _title="Odyssey" _xpath="enigma_vi/ant39_1" author="Petr Machata" ctrl="force" easy="false" id="ant39" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="24" _title="Tandem Chess" _xpath="enigma_vi/luc34_1" author="Lukas Schüller" ctrl="force" easy="false" id="luc342007" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="25" _title="Magic Trinity" _xpath="enigma_vi/duffy146_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy146" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="26" _title="Rotor Guards" _xpath="enigma_vi/duffy144_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy144" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="27" _title="Group Trip to Meditation" _xpath="enigma_vi/duffy136_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy136" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="28" _title="Oxyd Drilling" _xpath="enigma_vi/duffy140_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy140" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="29" _title="Pleasure Garden" _xpath="enigma_vi/duffy134_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy134" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="30" _title="Idempotency" _xpath="enigma_vi/duffy145_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy145" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="31" _title="Pontoon Bridges" _xpath="enigma_vi/duffy137_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy137" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="32" _title="Parish Fair" _xpath="enigma_vi/duffy143_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy143" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="33" _title="In the Middle" _xpath="enigma_vi/duffy141_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy141" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="34" _title="Construction Workers" _xpath="enigma_vi/duffy142_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy142" rel="1" rev="2" score="1" target="time" unit="duration"/>
+    <level _seq="35" _title="One-Way Woods" _xpath="enigma_vi/duffy135_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy135" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="36" _title="Comet" _xpath="enigma_vii/duffy147_1" author="Jacob Scott" ctrl="force" easy="true" id="duffy147" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="37" _title="Caribbean Waters" _xpath="enigma_vii/duffy139_1" author="Jacob Scott" ctrl="force" easy="true" id="duffy139" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="38" _title="DownDown" _xpath="enigma_vii/joona01_1" author="Joona Laire" ctrl="force" easy="true" id="20070406joona005" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="39" _title="City Life" _xpath="enigma_vi/joona03_1" author="Joona Laire" ctrl="force" easy="true" id="20061119joona503" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="40" _title="Diving" _xpath="enigma_vii/joona13_1" author="Joona Laire" ctrl="force" easy="true" id="20061203joona500" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="41" _title="Speed Meditation" _xpath="enigma_vii/duffy148_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy148" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="42" _title="Upstairs Meditation" _xpath="enigma_vii/duffy138_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy138" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="43" _title="Correspondence Chess" _xpath="enigma_vi/luc35_1" author="Lukas Schüller" ctrl="force" easy="true" id="luc352007" rel="1" rev="3" score="1" target="time" unit="duration"/>
+    <level _seq="44" _title="Exclusive Pole Positions" _xpath="enigma_vii/duffy149_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy149" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="45" _title="Mirror Sharing" _xpath="enigma_vii/duffy150_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy150" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="46" _title="A Cooler Spot in Hell" _xpath="enigma_vi/andreas43_2" author="Andreas Lochmann" ctrl="force" easy="false" id="andreas43" rel="2" rev="3" score="2" target="time" unit="duration"/>
+    <level _seq="47" _title="Quadropolis" _xpath="enigma_vi/cel1_1" author="Johannes Laire, Jacob Scott, Raoul Bourquin, Andreas Lochmann" ctrl="force" easy="false" id="cel2007_364" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="48" _title="Polar Bears' Paradise" _xpath="enigma_vi/ral19_1" author="Ronald Lamprecht" ctrl="force" easy="true" id="20070314ral394" rel="1" rev="68" score="1" target="time" unit="duration"/>
+    <level _seq="49" _title="Open Path" _xpath="enigma_vii/duffy152_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy152" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="50" _title="Temple of Ganesha" _xpath="enigma_vii/duffy154_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy154" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="51" _title="Temple of Gold" _xpath="enigma_vii/duffy151_1" author="Jacob Scott" ctrl="force" easy="true" id="duffy151" rel="1" rev="4" score="1" target="time" unit="duration"/>
+    <level _seq="52" _title="Advancing" _xpath="enigma_vii/joe01_1" author="Joseph Dunne" ctrl="force" easy="false" id="joe01" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="53" _title="Free Riders" _xpath="enigma_vii/duffy155_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy155" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="54" _title="Meditation in Peace" _xpath="enigma_vii/ral20_1" author="Ronald Lamprecht" ctrl="force" easy="true" id="20070502ral466" rel="1" rev="70" score="1" target="time" unit="duration"/>
+    <level _seq="55" _title="Laser Squad" _xpath="enigma_vii/duffy153_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy153" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="56" _title="Protected Exhibition" _xpath="enigma_vii/duffy156_1" author="Jacob Scott" ctrl="force" easy="true" id="duffy156" rel="1" rev="2" score="1" target="time" unit="duration"/>
+    <level _seq="57" _title="Oneway for White" _xpath="enigma_vii/duffy157_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy157" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="58" _title="Widgets in the Attic" _xpath="enigma_vii/duffy158_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy158" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="59" _title="The Wild Hunt" _xpath="enigma_vii/duffy159_1" author="Jacob Scott" ctrl="force" easy="false" id="duffy159" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="60" _title="Mountain Climbing" _xpath="enigma_vii/joe10_1" author="Joseph Dunne" ctrl="force" easy="true" id="joe10" rel="1" rev="0" score="1" target="time" unit="duration"/>
+  </levels>
+
+</index>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="All Stones" el:subtitle="Testlevel with all Stones" el:id="stones"/>
+      <el:version el:score="1" el:release="1" el:revision="2" el:status="stable"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelh = 13
+levelw = 300
+
+create_world(levelw, levelh)
+enigma.ConserveLevel = TRUE
+display.SetFollowMode(display.FOLLOW_SCROLLING)
+
+-- DESIGN --
+floor="fl-black"
+wall="st-glass"
+
+-- FLOOR --
+fill_floor(floor, 0,0,levelw,levelh)
+
+-- STONES --
+draw_border(wall)
+
+-- ITEMS --
+set_item("it-document", 10, 6, {text="text1"})
+
+-- ACTORS --
+set_actor("ac-blackball", 4.5,4.5, {player=0})
+set_actor("ac-whiteball", 6.5,4.5, {player=1})
+set_item("it-yinyang",4,4)
+set_item("it-yinyang",6,4)
+
+-- Funktionen
+-- VARS
+stonelist={"st-beads", "st-blue-sand", "st-bluegray", "st-bluegray_hole", "st-brick", "st-brownie", "st-bumps", "st-camouflage", "st-fakeoxyd", "st-glass", "st-glass1", "st-glass2", "st-glass3", "st-glass1_hole", "st-glass2_hole", "st-glass_move", "st-glass1_move", "st-glass2_move", "st-greenbrown", "st-greenbrown_hole", "st-greenbrown_move", "st-likeoxyda", "st-likeoxydb", "st-likeoxydc", "st-likeoxydd", "st-likeoxyda-open", "st-likeoxydb-open", "st-likeoxydc-open", "st-likeoxydd-open", "st-marble", "st-marble_hole", "st-marble_move", "st-metal", "st-redrock", "st-rock1", "st-rock2", "st-rock3", "st-rock4", "st-rock5", "st-rock6", "st-rock7", "st-rock8", "st-rock9", "st-rock10", "st-rock1_hole", "st-rock2_hole", "st-rock3_hole", "st-rock1_move", "st-rock3_move", "st-stone1", "st-stone2", "st-wood", "st-wood1", "st-wood2", "st-wood_001", "st-woven", "st-yellow", "st-actorimpulse", "st-actorimpulse_invisible", "st-bigbluesand-n", "st-bigbluesand-e", "st-bigbluesand-s", "st-bigbluesand-w", "st-bigbluesand-ne", "st-bigbluesand-ns", "st-bigbluesand-nw", "st-bigbluesand-es", "st-bigbluesand-ew", "st-bigbluesand-sw", "st-bigbluesand-nes", "st-bigbluesand-new", "st-bigbluesand-nsw", "st-bigbluesand-esw", "st-bigbluesand-nesw", "st-bigbrick-n", "st-bigbrick-e", "st-bigbrick-s", "st-bigbrick-w", "st-bigbrick-ne", "st-bigbrick-ns", "st-bigbrick-nw", "st-bigbrick-es", "st-bigbrick-ew", "st-bigbrick-sw", "st-bigbrick-nes", "st-bigbrick-new", "st-bigbrick-nsw", "st-bigbrick-esw", "st-bigbrick-nesw", "st-black1", "st-black2", "st-black3", "st-black4", "st-blackballs", "st-block", "st-blocker", "st-bolder-e", "st-bolder-n", "st-bolder-s", "st-bolder-w", "st-bombs", "st-brake", "st-break_acblack", "st-break_acwhite", "st-break_bolder", "st-break_gray", "st-break_invisible", "st-brick_magic", "st-bug", "st-chameleon", "st-chargeminus", "st-chargeplus", "st-chargezero", "st-chess_black", "st-chess_white", "st-coffee", "st-coinslot", "st-death", "st-death_invisible", "st-disco-dark", "st-disco-light", "st-disco-medium", "st-door-h", "st-door-v", "st-door_a", "st-door_b", "st-door_c", "st-fakeoxyda", "st-fart", "st-firebreak", "st-firebreak_move", "st-flash", "st-flhay", "st-floppy", "st-flrock", "st-fourswitch", "st-grate1", "st-grate2", "st-grate3", "st-invisible", "st-invisible_magic", "st-key", "st-knight", "st-laser-e", "st-laser-n", "st-laser-s", "st-laser-w", "st-laserbreak", "st-laserswitch", "st-lasertimeswitch", "st-lightpassenger", "st-magic", "st-mail-e", "st-mail-n", "st-mail-s", "st-mail-w", "st-mirror-3<", "st-mirror-3<m", "st-mirror-3<t", "st-mirror-3<tm", "st-mirror-3>", "st-mirror-3>m", "st-mirror-3>t", "st-mirror-3>tm", "st-mirror-3^", "st-mirror-3^m", "st-mirror-3^t", "st-mirror-3^tm", "st-mirror-3v", "st-mirror-3vm", "st-mirror-3vt", "st-mirror-3vtm", "st-mirror-p-", "st-mirror-p-m", "st-mirror-p-t", "st-mirror-p-tm", "st-mirror-p/", "st-mirror-p/m", "st-mirror-p/t", "st-mirror-p/tm", "st-mirror-p\\", "st-mirror-p\\m", "st-mirror-p\\t", "st-mirror-p\\tm", "st-mirror-p|", "st-mirror-p|m", "st-mirror-p|t", "st-mirror-p|tm", "st-oneway-n", "st-oneway-e", "st-oneway-s", "st-oneway-w", "st-oneway_black-n", "st-oneway_black-e", "st-oneway_black-s", "st-oneway_black-w", "st-oneway_white-n", "st-oneway_white-e", "st-oneway_white-s", "st-oneway_white-w", "st-oxyd", "st-plain", "st-plain_break", "st-plain_cracked", "st-plain_hole", "st-plain_move", "st-polarswitch", "st-pull", "st-puzzle-hollow", "st-puzzle-n", "st-puzzle-e", "st-puzzle-s", "st-puzzle-w", "st-puzzle-ne", "st-puzzle-ns", "st-puzzle-nw", "st-puzzle-es", "st-puzzle-ew", "st-puzzle-sw", "st-puzzle-nes", "st-puzzle-new", "st-puzzle-nsw", "st-puzzle-esw", "st-puzzle-nesw", "st-puzzle2-hollow", "st-puzzle2-n", "st-puzzle2-e", "st-puzzle2-s", "st-puzzle2-w", "st-puzzle2-ne", "st-puzzle2-ns", "st-puzzle2-nw", "st-puzzle2-es", "st-puzzle2-ew", "st-puzzle2-sw", "st-puzzle2-nes", "st-puzzle2-new", "st-puzzle2-nsw", "st-puzzle2-esw", "st-puzzle2-nesw", "st-rock3_break", "st-rock3_movebreak", "st-rotator-left", "st-rotator-right", "st-rotator_move-left", "st-rotator_move-right", "st-rubberband", "st-scissors", "st-shogun-s", "st-shogun-m", "st-shogun-l", "st-spitter", "st-stone_break", "st-stonebrush", "st-stoneimpulse", "st-stoneimpulse-hollow", "st-stoneimpulse_movable", "st-surprise", "st-swap", "st-switch", "st-switch_black", "st-switch_white", "st-thief", "st-timer", "st-timeswitch", "st-turnstile", "st-turnstile-green", "st-turnstile-e", "st-turnstile-n", "st-turnstile-s", "st-turnstile-w", "st-volcano", "st-volcano_active", "st-volcano_inactive", "st-white1", "st-white2", "st-white3", "st-white4", "st-whiteballs", "st-window", "st-wood", "st-yinyang1", "st-yinyang2", "st-yinyang3"}
+
+------
+nr=1
+for i=1,table.getn(stonelist) do
+      nr = nr+1
+      set_stone("st-switch",1+i,3, {action="callback", target="sw"..nr, name="switch"..nr})
+      func = "function sw"..nr.."() stnr="..i.."; setstone(stnr) ; end"
+      dostring(func)
+end
+
+function setstone(stnr)
+ stone=stonelist[stnr]
+ stdo=stonelist[stnr]
+ set_stone(stone,1+stnr,5)
+ set_item("it-document", 1+stnr, 1, {text=stdo})
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="false">Level with all stones of Enigma 1.01!</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

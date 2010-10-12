@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation -" el:subtitle="" el:id="meditation6"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="anonymous" el:email="" el:homepage=""/>
+      <el:copyright>Copyright ©</el:copyright>
+      <el:license el:type="Donated to Enigma under the projects license" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+draw_border("st-glass")
+
+fill_floor("fl-normal")
+
+function draw_hole( x, y)
+    hollow( x, y)
+    draw_floor("fl-gradient", {x-2,y-1}, {0,1}, 3, {type=3})
+    set_floor("fl-gradient", x-1, y, {type=3})
+    draw_floor("fl-gradient", {x+2,y-1}, {0,1}, 3, {type=4})
+    set_floor("fl-gradient", x+1, y, {type=4})
+    draw_floor("fl-gradient", {x-1,y-2}, {1,0}, 3, {type=1})
+    set_floor("fl-gradient", x, y-1, {type=1})
+    draw_floor("fl-gradient", {x-1,y+2}, {1,0}, 3, {type=2})
+    set_floor("fl-gradient", x, y+1, {type=2})
+    
+    draw_floor("fl-gradient", {x-2,y-2}, { 1, 1}, 2, {type=5})
+    draw_floor("fl-gradient", {x+2,y-2}, {-1, 1}, 2, {type=6})
+    draw_floor("fl-gradient", {x-2,y+2}, { 1,-1}, 2, {type=7})
+    draw_floor("fl-gradient", {x+2,y+2}, {-1,-1}, 2, {type=8})
+end
+
+draw_hole( 3, 3)
+draw_hole( 3, 9)
+draw_hole(16, 3)
+draw_hole(16, 9)
+
+draw_floor("fl-gradient", {6,1}, {0,1}, 11, {type=4})
+draw_floor("fl-gradient", {7,1}, {0,1}, 11, {type=4})
+draw_floor("fl-gradient", {8,1}, {0,1}, 11, {type=4})
+draw_floor("fl-gradient", {9,1}, {0,1}, 11, {type=4})
+
+draw_floor("fl-gradient", {10,1}, {0,1}, 11, {type=3})
+draw_floor("fl-gradient", {11,1}, {0,1}, 11, {type=3})
+draw_floor("fl-gradient", {12,1}, {0,1}, 11, {type=3})
+draw_floor("fl-gradient", {13,1}, {0,1}, 11, {type=3})
+
+set_actor("ac-whiteball-small", 2, 6.5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small", 3, 6.5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small", 4, 6.5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small", 5, 6.5, {player=0, mouseforce=1})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

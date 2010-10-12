@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation -" el:subtitle="" el:id="nat18"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Nat Pryce" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Nat Pryce</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world( 20, 13 )
+fill_floor( "fl-leaves" )
+draw_border( "st-glass1" )
+
+set_item( "it-hollow", 2, 2 )
+set_item( "it-hollow", 2, 4 )
+set_item( "it-hollow", 2, 6 )
+set_item( "it-hollow", 2, 8 )
+set_item( "it-hollow", 2, 10 )
+set_item( "it-hollow", 4, 2 )
+set_item( "it-hollow", 6, 2 )
+set_item( "it-hollow", 8, 2 )
+set_item( "it-hollow", 4, 10 )
+set_item( "it-hollow", 6, 10 )
+set_item( "it-hollow", 8, 10 )
+set_item( "it-hollow", 10, 2 )
+set_item( "it-hollow", 10, 4 )
+set_item( "it-hollow", 10, 6 )
+set_item( "it-hollow", 10, 8 )
+set_item( "it-hollow", 10, 10 )
+
+CENTER_X = 15
+CENTER_Y = 6.5
+RADIUS = 2
+BALL_COUNT = 16
+BAND_STRENGTH = 16
+BAND_LENGTH = 2*RADIUS*sin(360/(2*BALL_COUNT))
+
+last_ball = nil
+first_ball = nil
+for theta=0,359,360/BALL_COUNT do
+    x = CENTER_X + RADIUS*cos(theta)
+    y = CENTER_Y + RADIUS*sin(theta)
+    
+    new_ball = set_actor( "ac-whiteball-small", x, y, {player=0} )
+    if last_ball then
+        AddRubberBand( last_ball, new_ball, BAND_STRENGTH, BAND_LENGTH )
+    else
+        first_ball = new_ball
+    end
+    last_ball = new_ball
+end
+AddRubberBand( last_ball, first_ball, BAND_STRENGTH, BAND_LENGTH )
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

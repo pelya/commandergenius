@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Step gently!" el:subtitle="" el:id="malla03"/>
+      <el:version el:score="2" el:release="2" el:revision="2" el:status="released"/>
+      <el:author  el:name="Manuel König" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Manuel König</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+create_world(levelw, levelh)
+
+fill_floor("fl-abyss") 
+
+draw_border("st-metal", 0, 1,20,11)
+fill_stones("st-metal", 9, 2, 2, 9) 
+
+-- set the bridges in the left part:
+n=0
+for i=1,9 do
+    for j=1,8 do
+        set_floor("fl-bridge", j , 1+i, {name="bridge"..n})
+        set_floor("fl-metal",j+10,1+i)
+        set_item("it-trigger", j+10,1+i, {target="bridge"..n , action="openclose"})
+        n=n+1
+    end
+end
+
+-- Prepare initial Positions:
+set_floor("fl-acblack", 4, 6)
+set_floor("fl-acwhite", 14, 6)
+set_item("it-yinyang", 14, 6)
+set_item("it-yinyang", 4, 6)
+
+set_actor("ac-blackball", 4.5, 6.5, {player=0, essential=1})
+wb = set_actor("ac-whiteball", 14.5,6.5, {player=1, essential=1}) 
+swb = set_actor("ac-whiteball-small", 15.5, 6.5, {controllers=0})
+
+AddRubberBand(wb, swb, 50, 0.2)
+
+--Oxyds:
+-- UGLY: Overwriting border_stones with the oxyds!!
+
+if difficult then
+    o=4
+else
+    o=3
+end
+
+--Oxyd in the left part:
+for i=1,o do
+    repeat
+        r=random(1,2)
+        if r ==1 then -- Oxyd in the horizontal line
+            x=random(1,8)
+            y=random(0,1)*10+1
+        else -- Oxyd in the vertical line
+            x=random(0,1)*9
+            y=random(2,10)
+        end
+    until
+        enigma.GetKind(enigma.GetStone(x,y)) ~= "st-oxyd"
+    oxyd(x,y)
+end
+
+--Oxyd in the right part:
+for i=1,o do
+    repeat
+        r=random(1,2)
+        if r ==1 then -- Oxyd in the horizontal line
+            x=random(1,8)+10
+            y=random(0,1)*10+1
+        else -- Oxyd in the vertical line
+            x=random(0,1)*9+10
+            y=random(2,10)
+        end
+    until
+        enigma.GetKind(enigma.GetStone(x,y)) ~= "st-oxyd"
+    oxyd(x,y)
+end
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

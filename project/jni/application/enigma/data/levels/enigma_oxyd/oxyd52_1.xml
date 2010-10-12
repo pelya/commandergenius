@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd"
+  xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Moonwalking"
+        el:subtitle="Oxyd 52"
+        el:id="20060629ulf006"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Ulf Stegemann" el:email="ulf-enigma@zeitform.de"
+        el:homepage="http://ulf.zeitform.de"/>
+      <el:copyright>Copyright © 2006 Ulf Stegemann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd1"/>
+      <el:modes el:easy="false" el:single="true" el:network="false" el:control="force"
+        el:scoreunit="duration" el:scoretarget="time"/>
+      <el:score el:easy="-" el:difficult="00:19"/>
+    </el:info>
+    <el:luamain><![CDATA[
+
+-- GENERAL --
+levelw = 20
+levelh = 13
+enigma.ConserveLevel=TRUE
+
+-- LANDSCAPE --
+create_world(levelw, levelh)
+fill_floor("fl-abyss",0,0,level_width,level_height)
+fill_floor("fl-space",1,2,level_width-2,level_height-4)
+
+-- FLOORS --
+fill_floor("fl-gray",2,4,3,3)
+fill_floor("fl-gray",6,2,3,3)
+fill_floor("fl-gray",5,7,3,3)
+fill_floor("fl-gray",10,5,3,3)
+fill_floor("fl-gray",14,7,3,3)
+fill_floor("fl-gray",15,3,3,3)
+
+-- STONES --
+draw_stones("st-blue-sand",{0,1},{1,0},20)
+draw_stones("st-blue-sand",{0,2},{0,1},10)
+draw_stones("st-blue-sand",{19,2},{0,1},10)
+draw_stones("st-death",{1,11},{1,0},18)
+draw_stones("st-blue-sand",{2,6},{2,0},2)
+draw_stones("st-blue-sand",{5,9},{2,0},2)
+draw_stones("st-blue-sand",{6,4},{2,0},2)
+draw_stones("st-blue-sand",{10,7},{2,0},2)
+draw_stones("st-blue-sand",{14,9},{2,0},2)
+draw_stones("st-blue-sand",{15,5},{2,0},2)
+
+-- ITEMS --
+set_item("it-document",11,6,{text="text1"})
+
+-- OXYDS --
+oxyd_default_flavor = "a"
+oxyd(3,6)
+oxyd(6,9)
+oxyd(7,4)
+oxyd(11,7)
+oxyd(15,9)
+oxyd(16,5)
+oxyd_shuffle()
+
+-- FORCE --
+enigma.AddConstantForce(0,25)
+
+-- ACTOR --
+set_actor("ac-blackball",11.5,2.5)
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english>Free fall with fatal consequences!</el:english>
+        <el:translation el:lang="de">Freier Fall mit tödlichen Folgen!</el:translation>
+      </el:string>
+     </el:i18n>
+  </el:protected>
+</el:level>

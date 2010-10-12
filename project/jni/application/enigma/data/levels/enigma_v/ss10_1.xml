@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Jumpin' Jack Flash" el:subtitle="" el:id="ss10"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Sven Siggelkow" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Sven Siggelkow</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+create_world(levelw, levelh)
+
+set_actor("ac-blackball",2,3.5,{essential=1})
+set_actor("ac-whiteball-small", 17.5,6.5,{player=0,controllers=1,essential=1})
+
+fill_floor("fl-rough",0,0,levelw,levelh)
+local laser1 = laser(14,2, TRUE, EAST)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+      local c = strsub( pattern, i, i)
+      if c ==   "#" then
+         set_stone("st-greenbrown", i-1,line)
+      elseif c=="h" then
+         set_item("it-hollow", i-1,line,{essential=1})
+      elseif c=="b" then
+         if not difficult then
+      set_item("it-spade", i-1,line)
+         end
+      elseif c=="G" then
+         set_stone("st-white1", i-1,line)
+      elseif c=="s" then
+         set_stone("st-greenbrown_move", i-1,line)
+         set_item("it-springboard", i-1,line)
+      elseif c=="w" then
+         set_stone("st-3mirror", i-1,line, {movable=1})
+         set_item("it-spring2", i-1,line)
+      elseif c=="y" then
+         set_stone("st-yinyang1", i-1,line)
+      elseif c=="g" then
+         set_stone("st-greenbrown_hole", i-1,line)
+         set_item ("it-document", i-1, line, {text="text1"})
+      elseif c=="x" then
+         set_stone("st-grate3", i-1,line)
+      elseif c=="H" then
+         set_stone("st-greenbrown_hole", i-1,line)
+         set_item("it-hollow", i-1,line, {name="hollow", essential=1})
+      elseif c=="S" then
+         set_stone("st-switch", i-1,line,{action="callback", target="s1"})
+      elseif c=="a" then
+         set_floor("fl-abyss", i-1,line)
+      elseif c=="c" then
+         set_floor("fl-water", i-1,line)
+      elseif c=="l" then
+         set_floor("fl-leaves", i-1,line)
+      elseif c=="O" then
+         oxyd(i-1,line)
+      end
+    end
+end
+--               01234567890123456789
+renderLine(00 , "####################")
+renderLine(01 , "#G aaacclccaaab   h#")
+renderLine(02 , "#  aaacclccaaa xxxx#")
+renderLine(03 , "#  aaacclccaaa     #")
+renderLine(04 , "#  aaacclccaaah h  #")
+renderLine(05 , "#  aaacclccaaa     #")
+renderLine(06 , "# saaacclccaaa w   #")
+renderLine(07 , "#  aaacclccaaa     #")
+renderLine(08 , "#  aaacclccaaah h  #")
+renderLine(09 , "#  aaacclccaaa     #")
+renderLine(10 , "#  aaacclccaaa     #")
+renderLine(11 , "#g aaacclccaaa    yS")
+renderLine(12 , "####################")
+--               01234567890123456789
+
+function s1()
+ SendMessage(laser1, "onoff")
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">This is a meditation landscape: put a small marble into every hole ...</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

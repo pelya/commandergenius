@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' version="0.1" xml:lang="en">
+  <xs:annotation>
+    <xs:documentation>
+      XML schema definitions for Enigma state
+      Copyright © 2006 Ronald Lamprecht
+      GPL2
+    </xs:documentation>
+  </xs:annotation>
+  <xs:element name="state">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="properties" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              All simple key-value-properties:
+              UserName, CurrentGroup, NextLevelMode, Difficulty
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="property" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="key" type="xs:string" use="required"/>
+                  <xs:attribute name="value" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element> <!-- property -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element> <!-- properties -->
+        
+        <xs:element name="groups" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              Users levelpack group state:
+              title     - group title as displayed
+              curindex  - title of index that is currently selected in this group
+              curcolumn - display column of selected index
+              The sequence of the group elements is the display sequence in the
+              levelpack menu.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="group" minOccurs="0" maxOccurs="unbounded" >
+                <xs:complexType>
+                  <xs:attribute name="title" type="xs:string" use="required"/>
+                  <xs:attribute name="curindex" type="xs:string" use="required"/>
+                  <xs:attribute name="curcolumn" type="xs:string" use="required"/>
+                  <xs:anyAttribute namespace="##targetNamespace" processContents="skip"/>
+                </xs:complexType>
+              </xs:element> <!-- group -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element> <!-- groups -->
+
+        <xs:element name="indices" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              Users levelpack index state:
+              title       - index title as index id
+              group       - title of group to which the user assigned this levelpack
+              location    - sorting priority within a group
+              curposition - position of last selected level
+              curfirst    - position of first visible level in levelmenu
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="index" minOccurs="0" maxOccurs="unbounded" >
+                <xs:complexType>
+                  <xs:attribute name="title" type="xs:string" use="required"/>
+                  <xs:attribute name="group" type="xs:string" use="required"/>
+                  <xs:attribute name="location" type="xs:float" use="required"/>
+                  <xs:attribute name="curposition" type="xs:short" use="required"/>
+                  <xs:attribute name="curfirst" type="xs:short" use="required"/>
+                  <xs:anyAttribute namespace="##targetNamespace" processContents="skip"/>
+                </xs:complexType>
+              </xs:element> <!-- index -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element> <!-- indices -->
+        
+        <xs:element name="levels" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              Users level state:
+              id         - level id
+              annotation - users annotation to this level
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="level" minOccurs="0" maxOccurs="unbounded" >
+                <xs:complexType>
+                  <xs:attribute name="id" type="xs:string" use="required"/>
+                  <xs:attribute name="annotation" type="xs:string" use="required"/>
+                  <xs:anyAttribute namespace="##targetNamespace" processContents="skip"/>
+                </xs:complexType>
+              </xs:element> <!-- level -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element> <!-- levels -->
+        
+        <xs:any namespace="##targetNamespace" minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element> <!-- state -->
+</xs:schema>

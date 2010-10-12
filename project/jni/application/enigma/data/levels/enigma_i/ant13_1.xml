@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Impulsive" el:subtitle="" el:id="ant13"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+
+cells[" "]=cell{{{randomfloor, cell{floor="fl-tigris"}, 3, cell{floor="fl-samba"}, 1, cell{floor="fl-stone"}, 20}}}
+cells["o"]=cell{stone="st-swap"}
+cells["w"]=cell{stone="st-wood"}
+cells["i"]=cell{stone="st-stoneimpulse"}
+
+cells["a"]=cell{stone={face="st-door", attr={name="doorA", type="v"}}}
+cells["b"]=cell{stone={face="st-door", attr={name="doorB", type="v"}}}
+cells["c"]=cell{stone={face="st-door", attr={name="doorC", type="v"}}}
+cells["d"]=cell{stone={face="st-door", attr={name="doorD", type="h"}}}
+cells["A"]=cell{item= {face="it-trigger", attr={action="openclose", target="doorA"}}}
+cells["B"]=cell{item= {face="it-trigger", attr={action="openclose", target="doorB"}}}
+cells["C"]=cell{item= {face="it-trigger", attr={action="openclose", target="doorC"}}}
+cells["D"]=cell{item= {face="it-trigger", attr={action="openclose", target="doorD"}}}
+cells["O"]=cell{actor={face="ac-blackball", attr={player=0}}}
+cells["0"]=oxyd
+
+level = {
+   "iiiiiiiiiiiiiiiiiiii",
+   "iiiO               i",
+   "i    iiii iiiiiiii i",
+   "idii iiCi ii Ai    i",
+   "i ii iw iii  iiiii i",
+   "i i  iiiii  ii a   i",
+   "i i i  ii wii0 i i i",
+   "i i   ii  iiiiii i i",
+   "i ii ii  iii wii i i",
+   "i 0i iB ii iDiii iii",
+   "i ii iiii  iii0b c i",
+   "i i          iii i0i",
+   "iiiiiiiiiiiiiiiiiiii"
+}
+
+oxyd_default_flavor = "c"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

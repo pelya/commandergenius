@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Paper Chase" el:subtitle="Oxyd Extra 12" el:id="oxe12"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd.extra">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+use_cells(cells, "X",")")
+cells[" "]=cell{floor="fl-rough"}
+cells["#"]=cell{stone="st-rock5"}
+cells["D"]=cell{stone="st-death_invisible"}
+cells["F"]=fakeoxyd
+cells["x"]=cell{ cells["X"]; item="it-extralife"}
+cells["Y"]=cell{{cells["X"], cells[")"]}}
+cells["p"]=cell{item={"it-document", {text="text1"}}}
+
+level = {
+   "####################",
+   "#xFXXFXX0XXFXXFXXFX#",
+   "# D   p D  D  D p  #",
+   "#X0XXFXXFXX0xX0XXFX#",
+   "# D  D   p  p D  D #",
+   "#XFXXFxXFXXFXXFXXFx#",
+   "# D  D  DO D  D  D #",
+   "#XFxXFXXFXYFXXFXxFX#",
+   "# D  D  D  D  D  D #",
+   "#XFXX0XXFXxFXXFXX0X#",
+   "#  p D  D  D p   D #",
+   "#XFXXFXXFXXFXXFXXFX#",
+   "####################"
+}
+
+set_default_parent(cells[" "])
+oxyd_default_flavor = "b"
+create_world_by_map(level)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="false">oh ...</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Why So Slow?" el:subtitle="" el:id="jc03"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jens-Christian Korth" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © Jens-Christian Korth</el:copyright>
+      <el:license el:type="Donated to Enigma under the projects license" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+Force = 40
+ForceX = 0
+ForceY = 0
+
+function SetForce(x,y)
+   enigma.AddConstantForce(x, y)
+   ForceX = x
+   ForceY = y
+end
+
+function swT()
+   SetForce(ForceX, Force)
+end
+
+function swB()
+   SetForce(ForceX, -Force)
+end
+
+function swL()
+   SetForce(Force, ForceY)
+end
+
+function swR()
+   SetForce(-Force, ForceY)
+end
+
+create_world(20, 13) 
+oxyd_default_flavor = "d"
+draw_border("st-rock5")
+fill_floor("fl-bluegray")
+set_floor("fl-abyss",  1,  1)
+set_floor("fl-abyss", 18,  1)
+set_floor("fl-abyss",  1, 11)
+set_floor("fl-abyss", 18, 11)
+
+for i = 2, 17 do
+   set_item("it-trigger",  i,  1, {action="callback", target="swT"})
+   set_item("it-trigger",  i, 11, {action="callback", target="swB"})
+end
+
+for i = 2, 10 do
+   set_item("it-trigger",  1,  i, {action="callback", target="swL"})
+   set_item("it-trigger", 18,  i, {action="callback", target="swR"})
+end
+
+oxyd( 2, 0)
+oxyd( 7, 0)
+oxyd(12, 0)
+oxyd(17, 0)
+oxyd( 2,12)
+oxyd( 7,12)
+oxyd(12,12)
+oxyd(17,12)
+oxyd( 0, 3)
+oxyd( 0, 9)
+oxyd(19, 3)
+oxyd(19, 9)
+oxyd_shuffle() 
+
+set_actor("ac-blackball", 10,6.5)
+
+SetForce(2*Force, -2*Force)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

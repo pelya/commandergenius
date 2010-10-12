@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Chess, Bugs &amp; Rock'n'Roll" el:subtitle="" el:id="andreas31"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Andreas Lochmann" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Andreas Lochmann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="05:50"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Constructed with the help of BBE 1.05.
+
+levelh=25
+levelw=39
+enigma.FlatForce=30
+enigma.SlopeForce=40
+enigma.ElectricForce=30
+function file_oxyd(x,y,f)
+  oxyd_default_flavor=f
+  oxyd(x,y)
+end
+chess_number = 0
+function set_chess(x,y)
+  chess_number = chess_number + 1
+  set_stone("st-chess_black", x, y, {name = "chess"..tostring(chess_number)})
+end
+function set_trigger(x,y)
+  set_item("it-trigger", x, y, {action = "callback", target = "trigger_call"})
+end
+dirmessage = {}
+dirmessage[1] = "move_nne"
+dirmessage[2] = "move_nnw"
+dirmessage[3] = "move_wwn"
+dirmessage[4] = "move_wws"
+dirmessage[5] = "move_ssw"
+dirmessage[6] = "move_sse"
+dirmessage[7] = "move_ees"
+dirmessage[8] = "move_een"
+function trigger_call()
+  msg = dirmessage[random(1,8)]
+  SendMessage(enigma.GetNamedObject("chess"..tostring(random(1,chess_number))), msg)
+end
+myfloor = {}
+myfloor[1] = "fl-black"     -- "fl-lightgray"
+myfloor[2] = "fl-darkgray"  -- "fl-darkgray"
+myfloor[3] = "fl-black"     -- "fl-light"
+myfloor[4] = "fl-wood"      -- "fl-lightgray"
+myfloor[5] = "fl-black"     -- "fl-lightgray"
+myfloor[6] = "fl-black"     -- "fl-lightgray"
+function set_grad(x, y, gx, gy)
+  set_floor(myfloor[random(1,6)], x, y,
+    {force_x = gx * 30 + random(-5, 5), force_y = gy * 30 + random(-5, 5),
+    friction = 3.0, mouseforce = 1.6})
+end
+function set_blackball(x,y)
+  set_actor("ac-blackball", x + 0.5, y + 0.5, {mouseforce = 2.0, player = 0})
+end
+cells={}
+items={}
+actors={}
+stones={}
+actors[" "]=cell{}
+stones[" "]=cell{}
+cells[" "]=cell{}
+items[" "]=cell{}
+cells["!"]=cell{floor="fl-wood"}
+cells["#"]=cell{parent={{set_grad, 0.8, 0.8}}}
+cells["$"]=cell{parent={{set_grad, 0, -1}}}
+cells["%"]=cell{parent={{set_grad, 0.8, -0.8}}}
+cells["&"]=cell{parent={{set_grad, 1, 0}}}
+cells["'"]=cell{parent={{set_grad, 0, 1}}}
+cells[")"]=cell{parent={{set_grad, -1, 0}}}
+cells[","]=cell{parent={{set_grad, -0.8, 0.8}}}
+cells["-"]=cell{parent={{set_grad, -0.8, -0.8}}}
+stones["!"]=cell{stone="st-redrock"}   -- st-rock6
+stones["#"]=cell{parent={{file_oxyd,"b"}}}
+stones["C"]=cell{parent={{set_chess}}}
+stones["$"]=cell{stone="st-bug"}
+stones["T"]=cell{parent={{set_trigger}}}
+actors["!"]=cell{actor="ac-bug"}
+actors["#"]=cell{parent={{set_blackball}}}
+level={"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+       "!#####&&&&&&&&&&&&&&&&&&&&&&&&&&&,,,,,!",
+       "!#####&&&&&&&&&&&&&&&&&&&&&&&&&&&,,,,,!",
+       "!#####&&&&&&&&&&&&&&&&&&&&&&&&&&&,,,,,!",
+       "!#####&&&&&&&&&&&&&&&&&&&&&&&&&&&,,,,,!",
+       "!$$$$$''''''''''''''''''''''''''''''''!",
+       "!$$$$$''''''''''''''''''''''''''''''''!",
+       "!$$$$$''''''''''''''''''''''''''''''''!",
+       "!$$$$$''''''''''''''''''''''''''''''''!",
+       "!$$$$$)'''''''''''''''''''''''''''''''!",
+       "!%%%%%)))))))))))))))))))))))))))-----!",
+       "!%%%%%)))))))))))))))))))))))))))-----!",
+       "!!&&&&))))))))))))))))))))))))))))))))!",
+       "!#####))))))))))))))))))))))))))),,,,,!",
+       "!#####))))))))))))))))))))))))))),,,,,!",
+       "!''''')$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$!",
+       "!'''''$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$!",
+       "!'''''$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$!",
+       "!'''''$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$!",
+       "!'''''$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$!",
+       "!%%%%%&&&&&&&&&&&&&&&&&&&&&&&&&&&-----!",
+       "!%%%%%&&&&&&&&&&&&&&&&&&&&&&&&&&&-----!",
+       "!%%%%%&&&&&&&&&&&&&&&&&&&&&&&&&&&-----!",
+       "!%%%%%&&&&&&&&&&&&&&&&&&&&&&&&&&&-----!",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"}
+   acmap={"                                       ",
+          "                                       ",
+          "                         !             ",
+          "         !                             ",
+          "                                       ",
+          "                                       ",
+          "                                       ",
+          "  !                                 !  ",
+          "                                       ",
+          "                                       ",
+          "                                       ",
+          "                             !         ",
+          " #                                     ",
+          "               !                       ",
+          "                                       ",
+          "                                       ",
+          "  !!                                   ",
+          "                                       ",
+          "                                       ",
+          "                                       ",
+          "                                       ",
+          "                                       ",
+          "             !             !       !   ",
+          "                                       ",
+          "                                       "}
+  itmap={"                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       ",
+         "                                       "}
+ stmap={"!!!!#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#!!!!",
+        "!                  T                  !",
+        "!                  T                  !",
+        "!                  T                  !",
+        "#                  T                  #",
+        "!     $C$$CCC$$$$$$!$$$$$$CCC$$C$     !",
+        "!     C$$$$$$$$$C$$$$$C$$$$$$$$$C     !",
+        "!     $$C$C#CC$C#CC$CC#C$CC#C$C$$     !",
+        "!     C$$$$$$$$$C$$$$$C$$$$$$$$$C     !",
+        "!     $C$$CCC$$$$$$!$$$$$$CCC$$C$     !",
+        "!                  T                  !",
+        "!                  T                  !",
+        "!                  T                  !",
+        "!                  T                  !",
+        "!                  T                  !",
+        "!     $C$$CCC$$$$$$!$$$$$$CCC$$C$     !",
+        "!     C$$$$$$$$$C$$$$$C$$$$$$$$$C     !",
+        "!     $$C$C#CC$C#CC$CC#C$CC#C$C$$     !",
+        "!     C$$$$$$$$$C$$$$$C$$$$$$$$$C     !",
+        "!     $C$$CCC$$$$$$!$$$$$$CCC$$C$     !",
+        "#                  T                  #",
+        "!                  T                  !",
+        "!                  T                  !",
+        "!                  T                  !",
+        "!!!!#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#!!!!"}
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+draw_map(0,0,itmap,items)
+draw_map(0,0,acmap,actors)
+oxyd_shuffle()
+display.SetFollowMode(display.FOLLOW_SMOOTH)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

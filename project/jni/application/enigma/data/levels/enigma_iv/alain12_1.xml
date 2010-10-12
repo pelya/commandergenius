@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Cluenigma" el:subtitle="" el:id="alain12"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Alain Busser" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Alain Busser</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="0:53"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+oxyd_default_flavor = "a"
+fill_floor("fl-sahara", 0,0, level_width,level_height)
+draw_border("st-marble")
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="G" then
+            set_stone("st-glass", i-1, line)
+        elseif c=="a" then    --peacock 1
+               set_floor("fl-water",i-1,line)
+            set_stone("st-glass",i-1,line)
+        elseif c=="b" then    --mustard 2
+               set_floor("fl-sand",i-1,line)
+            set_stone("st-glass",i-1,line)
+        elseif c=="c" then    --plum 3
+               set_floor("fl-rough-red",i-1,line)
+            set_stone("st-glass",i-1,line)
+        elseif c=="d" then    --green 4
+               set_floor("fl-leaves",i-1,line)
+            set_stone("st-glass",i-1,line)
+        elseif c=="e" then    --white 5
+               set_floor("fl-white",i-1,line)
+            set_stone("st-glass",i-1,line)
+        elseif c=="f" then    --scarlett 6
+               set_floor("fl-red",i-1,line)
+            set_stone("st-glass",i-1,line)
+        elseif c=="A" then
+            set_stone("st-switch",i-1,line,{action="callback",target="pa"})
+        elseif c=="B" then
+            set_stone("st-switch",i-1,line,{action="callback",target="pb"})
+        elseif c=="C" then
+            set_stone("st-switch",i-1,line,{action="callback",target="pc"})
+        elseif c=="D" then
+            set_stone("st-switch",i-1,line,{action="callback",target="pd"})
+        elseif c=="E" then
+            set_stone("st-switch",i-1,line,{action="callback",target="pe"})
+        elseif c=="F" then
+            set_stone("st-switch",i-1,line,{action="callback",target="pf"})
+        elseif c=="h" then    --bomb 1
+               set_item("it-blackbomb",i-1,line)
+        elseif c=="i" then    --dagger 2
+               set_item("it-sword",i-1,line)
+        elseif c=="j" then    --poison 3
+               set_item("it-booze",i-1,line)
+        elseif c=="k" then    --wrench 4
+               set_item("it-wrench",i-1,line)
+        elseif c=="l" then    --candlestick 5
+               set_item("it-dynamite",i-1,line)
+        elseif c=="m" then    --hammer 6
+               set_item("it-hammer",i-1,line)
+        elseif c=="H" then
+            set_stone("st-switch",i-1,line,{action="callback",target="wa"})
+        elseif c=="I" then
+            set_stone("st-switch",i-1,line,{action="callback",target="wb"})
+        elseif c=="J" then
+            set_stone("st-switch",i-1,line,{action="callback",target="wc"})
+        elseif c=="K" then
+            set_stone("st-switch",i-1,line,{action="callback",target="wd"})
+        elseif c=="L" then
+            set_stone("st-switch",i-1,line,{action="callback",target="we"})
+        elseif c=="M" then
+            set_stone("st-switch",i-1,line,{action="callback",target="wf"})
+        elseif c=="P" then
+            set_stone("st-switch",i-1,line,{action="callback",target="ra"})
+        elseif c=="Q" then
+            set_stone("st-switch",i-1,line,{action="callback",target="rb"})
+        elseif c=="R" then
+            set_stone("st-switch",i-1,line,{action="callback",target="rc"})
+        elseif c=="S" then
+            set_stone("st-switch",i-1,line,{action="callback",target="rd"})
+        elseif c=="T" then
+            set_stone("st-switch",i-1,line,{action="callback",target="re"})
+        elseif c=="U" then
+            set_stone("st-switch",i-1,line,{action="callback",target="rf"})
+        elseif c=="w" then
+            set_stone("st-marble",i-1,line)
+        elseif c=="x" then
+            set_stone("st-switch",i-1,line,{action="callback",target="submit"})
+        elseif c=="X" then
+            doorh(i-1,line,{name="door1"})
+        elseif c=="y" then
+            document(i-1,line,"text1")
+        elseif c == "o" then
+            oxyd( i-1, line)
+          elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {name="ac0"})
+        end
+    end    
+end
+
+function pa()
+    murderer=1
+    redraw_person()
+end
+
+function pb()
+    murderer=2
+    redraw_person()
+end
+
+function pe()
+    murderer=5
+    redraw_person()
+end
+
+function pf()
+    murderer=6
+    redraw_person()
+end
+
+function pc()
+    murderer=3
+    redraw_person()
+end
+
+function pd()
+    murderer=4
+    redraw_person()
+end
+
+function redraw_person()
+    for i=1,6 do
+        set_stone("st-glass",1,i+4)
+    end
+    set_stone("st-white3",1,murderer+4)
+end
+
+function wa()
+    weapon=1
+    redraw_weapon()
+end
+
+function wb()
+    weapon=2
+    redraw_weapon()
+end
+
+function wc()
+    weapon=3
+    redraw_weapon()
+end
+
+function wd()
+    weapon=4
+    redraw_weapon()
+end
+
+function we()
+    weapon=5
+    redraw_weapon()
+end
+
+function wf()
+    weapon=6
+    redraw_weapon()
+end
+
+function redraw_weapon()
+    for i=1,6 do
+        set_stone("st-glass",6,i+4)
+    end
+    set_stone("st-white3",6,weapon+4)
+end
+
+function ra()
+    room=1
+    redraw_room()
+end
+
+function rb()
+    room=2
+    redraw_room()
+end
+
+function rc()
+    room=3
+    redraw_room()
+end
+
+function rd()
+    room=4
+    redraw_room()
+end
+
+function re()
+    room=5
+    redraw_room()
+end
+
+function rf()
+    room=6
+    redraw_room()
+end
+
+function redraw_room()
+    for i=1,2 do
+        for j=1,3 do
+            enigma.KillStone(13+2*i,4+2*j)
+        end
+    end
+    if room==1 then
+        set_stone("st-white3",15,6)
+    elseif room==2 then
+        set_stone("st-white3",15,8)
+    elseif room==3 then
+        set_stone("st-white3",15,10)
+    elseif room==4 then
+        set_stone("st-white3",17,6)
+    elseif room==5 then
+        set_stone("st-white3",17,8)
+    elseif room==6 then
+        set_stone("st-white3",17,10)
+    end
+end
+
+function care_person()
+    --changes by raoul to get the strings for i18n:
+    --p11="The murderer is not "
+    if murderer==1 then
+        --p12="Mrs Peacock"
+        document(11,5,"text3")
+    elseif murderer==2 then
+        --p12="Colonel Mustard"
+        document(11,5,"text4")
+    elseif murderer==3 then
+        --p12="Professor Plum"
+        document(11,5,"text5")
+    elseif murderer==4 then
+        --p12="Reverend Green"
+        document(11,5,"text6")
+    elseif murderer==5 then
+        --p12="Mrs Whiteball"
+        document(11,5,"text7")
+    elseif murderer==6 then
+        --p12="Miss Scarlett"
+        document(11,5,"text8")
+    end
+    --p1=p11..p12
+    --document(11,5,p1)
+end
+function care_weapon()
+    --changes by raoul to get the strings for i18n:
+    --w11="Sir Blackball has not been killed with "
+    if weapon==1 then
+        --w12="the bomb"
+        document(11,5,"text9")
+    elseif weapon==2 then
+        --w12="the dagger"
+        document(11,5,"text10")
+    elseif weapon==3 then
+        --w12="poison"
+        document(11,5,"text11")
+    elseif weapon==4 then
+        --w12="the wrench"
+        document(11,5,"text12")
+    elseif weapon==5 then
+        --w12="the candlestick"
+        document(11,5,"text13")
+    elseif weapon==6 then
+        --w12="the hammer"
+        document(11,5,"text14")
+    end
+    --w1=w11..w12
+    --document(11,5,w1)
+end
+
+function care_room()
+    document(11,5,"text2")
+end
+
+function submit()
+    rg=random(6)
+    if rg==1 then
+        if murderer~=true_murderer then
+            care_person()
+        elseif weapon~=true_weapon then
+            care_weapon()
+        elseif room~=true_room then
+            care_room()
+        else
+            SendMessage("door1","open")
+        end
+    elseif rg==2 then
+        if weapon~=true_weapon then
+            care_weapon()
+        elseif murderer~=true_murderer then
+            care_person()
+        elseif room~=true_room then
+            care_room()
+        else
+            SendMessage("door1","open")
+        end
+    elseif rg==3 then
+        if murderer~=true_murderer then
+            care_person()
+        elseif room~=true_room then
+            care_room()
+        elseif weapon~=true_weapon then
+            care_weapon()
+        else
+            SendMessage("door1","open")
+        end
+    elseif rg==4 then
+        if weapon~=true_weapon then
+            care_weapon()
+        elseif room~=true_room then
+            care_room()
+        elseif murderer~=true_murderer then
+            care_person()
+        else
+            SendMessage("door1","open")
+        end
+    elseif rg==5 then
+        if room~=true_room then
+            care_room()
+        elseif murderer~=true_murderer then
+            care_person()
+        elseif weapon~=true_weapon then
+            care_weapon()
+        else
+            SendMessage("door1","open")
+        end
+    elseif rg==6 then
+        if room~=true_room then
+            care_room()
+        elseif weapon~=true_weapon then
+            care_weapon()
+        elseif murderer~=true_murderer then
+            care_person()
+        else
+            SendMessage("door1","open")
+        end
+    end
+end
+
+--remark: the probability that the first random guess is the good one is 1 over 216
+
+--               01234567890123456789
+renderLine(00 , "                    ")
+renderLine(01 , " o                o ")
+renderLine(02 , " wwwwwwwwXwwwwwwwww ")
+renderLine(03 , "             PQRSTU ")
+renderLine(04 , " GGG  GGG           ")
+renderLine(05 , " GaA  GhH  y  wwwww ")  
+renderLine(06 , " GbB  GiI     w w w ")
+renderLine(07 , " GcC  GjJ  z  wwwww ")
+renderLine(08 , " GdD  GkK     w w w ")
+renderLine(09 , " GeE  GlL     wwwww ")
+renderLine(10 , " GfF  GmM     w w w ")
+renderLine(11 , " GGG  GGG  x  wwwww ")
+renderLine(12 , "                    ") 
+--               01234567890123456789
+
+true_murderer=random(6)
+true_weapon=random(6)
+true_room=random(6)
+murderer=random(6)
+weapon=random(6)
+room=random(6)
+redraw_person()
+redraw_weapon()
+redraw_room()
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true" el:comment="The persons and objects are from the Agatha-Christie-like game 'Cluedo'; their names tend to change from country to country; Mr. White has been changed to 'Whiteball' to make it more 'enigma'.">Your uncle Sir Blackball has been murdered last night in his manor, in one of his 6 rooms, by one of the weapons which are in the cellar; the suspects are the shy Mrs Peacock, the secret Colonel Mustard, the absent-minded Professor Plum, the mysterious Rev. Green, the nurse Mrs Whiteball, who discovered the corpse, and Miss Scarlett whose beauty might be fatal ... you must find who killed your uncle, where and how.</el:english>
+        <el:translation el:lang="fr">Votre oncle Sir Blackball est mort cette nuit dans l'une des six chambres de son manoir; le meurtrier s'est servi de l'une des armes qui sont dans l'armoire du vestibule; les suspects sont la timide Madame Pervenche, le secret Colonel Moutarde, le distrait Professeur Violet, l'actif Docteur Olive, la femme de chambre Madame Blancheboule, et la magnifique Mademoiselle Rose ... Vous devez trouver qui est le meutrier de votre oncle, quelle est l'arme du crime et quel est le lieu du crime.</el:translation>
+      </el:string> 
+      <el:string el:key="text2">
+        <el:english el:translate="true">This room is not the crime scene.</el:english>
+        <el:translation el:lang="fr">Cette chambre n'est pas le lieu du crime.</el:translation>
+      </el:string>
+      <el:string el:key="text3">
+        <el:english el:translate="true">The murderer is not Mrs Peacock.</el:english>
+        <el:translation el:lang="fr">Madame Pervenche n'est pas le meutrier.</el:translation>
+      </el:string>  
+      <el:string el:key="text4">
+        <el:english el:translate="true">The murderer is not Colonel Mustard.</el:english>
+         <el:translation el:lang="fr">Le Colonel Moutarde n'est pas le meutrier.</el:translation>
+     </el:string>  
+      <el:string el:key="text5">
+        <el:english el:translate="true">The murderer is not Professor Plum.</el:english>
+        <el:translation el:lang="fr">Le Professeur Violet n'est pas le meutrier.</el:translation>
+      </el:string>  
+      <el:string el:key="text6">
+        <el:english el:translate="true">The murderer is not Reverend Green.</el:english>
+        <el:translation el:lang="fr">Le docteur Olive n'est pas le meutrier.</el:translation>
+      </el:string>  
+      <el:string el:key="text7">
+        <el:english el:translate="true">The murderer is not Mrs Whiteball.</el:english>
+        <el:translation el:lang="fr">Madame Blancheboule n'est pas le meutrier.</el:translation>
+      </el:string>  
+      <el:string el:key="text8">
+        <el:english el:translate="true">The murderer is not Miss Scarlett.</el:english>
+        <el:translation el:lang="fr">Mademoiselle Rose n'est pas le meutrier.</el:translation>
+      </el:string>  
+      <el:string el:key="text9">
+        <el:english el:translate="true">Sir Blackball has not been killed with the bomb.</el:english>
+        <el:translation el:lang="fr">La bombe n'est pas l'arme du crime.</el:translation>
+      </el:string>  
+      <el:string el:key="text10">
+        <el:english el:translate="true">Sir Blackball has not been killed with the dagger.</el:english>
+        <el:translation el:lang="fr">La dague n'est pas l'arme du crime.</el:translation>
+      </el:string>  
+      <el:string el:key="text11">
+        <el:english el:translate="true">Sir Blackball has not been killed with poison.</el:english>
+        <el:translation el:lang="fr">Le poison n'est pas l'arme du crime.</el:translation>
+      </el:string>  
+      <el:string el:key="text12">
+        <el:english el:translate="true">Sir Blackball has not been killed with the wrench.</el:english>
+        <el:translation el:lang="fr">La clef anglaise n'est pas l'arme du crime.</el:translation>
+      </el:string>  
+      <el:string el:key="text13">
+        <el:english el:translate="true">Sir Blackball has not been killed with the candlestick.</el:english>
+        <el:translation el:lang="fr">Le chandelier n'est pas l'arme du crime.</el:translation>
+      </el:string>  
+      <el:string el:key="text14">
+        <el:english el:translate="true">Sir Blackball has not been killed with the hammer.</el:english>
+        <el:translation el:lang="fr">Le marteau n'est pas l'arme du crime.</el:translation>
+      </el:string>  
+    </el:i18n>
+  </el:protected>
+</el:level>

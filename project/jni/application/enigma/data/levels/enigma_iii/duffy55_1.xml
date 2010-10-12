@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Build Up Speed" el:subtitle="" el:id="duffy55"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw=100
+levelh=40
+
+create_world( levelw, levelh)
+enigma.ConserveLevel=FALSE
+
+fill_floor("fl-abyss", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-greenbrown", i-1, line)
+            set_floor("fl-metal",i-1,line)
+        elseif c =="R" then
+           set_stone( "st-rubberband", i-1, line,{strength=15})
+            set_floor("fl-hay",i-1,line)
+        elseif c =="T" then
+           set_stone( "st-rubberband", i-1, line,{strength=80})
+            set_floor("fl-metal",i-1,line)
+        elseif c =="S" then
+            set_stone( "st-scissors", i-1, line)
+            set_floor("fl-hay",i-1,line)
+        elseif c =="t" then
+            set_stone( "st-scissors", i-1, line)
+            set_floor("fl-metal",i-1,line)
+        elseif c =="r" then
+           set_stone( "st-rubberband", i-1, line,{name="r1"})
+            set_floor("fl-hay",i-1,line)
+        elseif c =="&" then
+            set_stone( "st-greenbrown", i-1, line)
+            set_floor("fl-hay",i-1,line)
+        elseif c =="%" then
+            set_stone( "st-invisible", i-1, line)
+        elseif c =="X" then
+            set_stone( "st-death", i-1, line)
+        elseif c =="Q" then
+            set_stone( "st-death", i-1, line)
+            set_floor("fl-metal",i-1,line)
+        elseif c =="q" then
+            set_stone( "st-death", i-1, line)
+            set_floor("fl-hay",i-1,line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+            set_floor("fl-metal",i-1,line)
+        elseif c == "*" then
+            set_stone( "st-brownie", i-1, line)
+            set_floor("fl-hay",i-1,line)
+                elseif c == "!" then
+            abyss(i-1,line)
+--            fill_floor("fl-water", i-1,line, 1,1)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {name="actor1"})
+            set_floor("fl-hay",i-1,line)
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+            set_floor("fl-hay",i-1,line)
+        elseif c == "G" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+            set_floor("fl-metal",i-1,line)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+            set_floor("fl-hay",i-1,line)
+        elseif c=="=" then
+            set_floor("fl-space",i-1,line)
+        elseif c=="x" then
+            set_floor("fl-hay",i-1,line)
+        elseif c=="v" then
+            set_floor("fl-metal",i-1,line)
+        elseif c == "d" then --1-d
+            set_floor("fl-gradient",  i-1,  line, {type=1})
+        elseif c == "u" then --2-u
+            set_floor("fl-gradient",  i-1,  line, {type=2})
+        elseif c == "r" then --3-r
+            set_floor("fl-gradient",  i-1,  line, {type=3})
+        elseif c == "l" then --4-l
+            set_floor("fl-gradient",  i-1,  line, {type=4})
+        elseif c == "1" then --ur
+            set_floor("fl-gradient",  i-1,  line, {type=11})
+        elseif c == "3" then --dl
+            set_floor("fl-gradient",  i-1,  line, {type=9})
+        elseif c == "7" then --dr
+            set_floor("fl-gradient",  i-1,  line, {type=12})
+        elseif c == "9" then --ul
+            set_floor("fl-gradient",  i-1,  line, {type=10})
+        elseif c=="H" then
+           set_stone("st-actorimpulse",i-1,line)
+        elseif c=="J" then
+           set_item("it-springboard",i-1,line)
+           set_floor("fl-hay",i-1,line)
+        elseif c=="m" then
+           set_item("it-magicwand",i-1,line)
+                   set_floor("fl-hay",i-1,line)
+        elseif c=="s" then
+           set_item("it-ring",i-1,line)
+                   set_floor("fl-hay",i-1,line)
+         end
+    end    
+     end
+
+-- Floor:  " "
+-- Border: "#"
+-- Oxyd:   "o"
+
+renderLine(00,"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+renderLine(01,"%                                                                                              %")
+renderLine(02,"%    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxm    %")
+renderLine(03,"%    xxxxxRxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxRxx    %")
+renderLine(04,"%    xxxxxxxxxxxxRxxxxxxxxxxxxxxxRxxxxxxxxRxxxxxxxxxxxxRxxxxxxxxxRxxxxxxxxRxxxxxxxxxxxxxxxx    %")
+renderLine(05,"%    xxxxxxxxxxxxxxxxxxxRxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxRxxxxxxxxx    %")
+renderLine(06,"%    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx    %")
+renderLine(07,"%    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxRxxxxxxxxxxxxRxxxxxxxxxxxxxxxRxxxxxxxxxxxxxxxxxxxx    %")
+renderLine(08,"%    xxxxxxRxxxxxxxxxRxxxxxxxxRxxxxxxxxxxxxxxxxxRxxxxxxxxxxxxxxRxxxxxxxxxxxxxxxxxxxxxxRxxxx    %")
+renderLine(09,"%    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxRxxxxxxxxxxxxx    %")
+renderLine(10,"%    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx    %")
+renderLine(11,"%    xxxxxxxxx                                                                    xxxxxxxxx    %")
+renderLine(12,"%    xxxxxxxxx                        ####################                        xxxxxxxxx    %")
+renderLine(13,"%    xxRxxxxxx                        #ovvvvvvvvvvvvvvvvo#                        xxxxxxRxx    %")
+renderLine(14,"%    xxxxxxxxx                        #vvvvvvvvvvvvvvvvvv#                        xxxxxxxxx    %")
+renderLine(15,"%    xxxxxxRxx                        #vvvvovvvvvvvvovvvv#                        xxxxxxxxx    %")
+renderLine(16,"%    xxxxxxxxx                        #vvvvvvvvvvvvvvvvvv#                        xxxxxxxxx    %")
+renderLine(17,"%    xxxxxxxxx                        Qvvvvvvvvoovvvvvvvv#                        xxxxxxxxx    %")
+renderLine(18,"%    SxrxzxxxJ                        vvvvvvvvvvvvvvvvvTG#                        xxxxxxxxx    %")
+renderLine(19,"%    xxxxxxxxx                        Qvvvvvvvvoovvvvvvvv#                        xxxxxxxxx    %")
+renderLine(20,"%    xxxxxxxxx                        #vvvvvvvvvvvvvvvvvv#                        xRxxxxxxx    %")
+renderLine(21,"%    xxxxRxxxx                        #vvvvovvvvvvvvovvvv#                        xxxxxxxxx    %")
+renderLine(22,"%    xxxxxxxxx                        #vvvvvvvvvvvvvvvvvv#                        xxxxxxxxx    %")
+renderLine(23,"%    xxxxxxxxx                        #ovvvvvvvvvvvvvvvvo#                        xxxxxxxRx    %")
+renderLine(24,"%    xxxxxxxxx                        ####################                        xxxxxxxxx    %")
+renderLine(25,"%    xRxxxxxxx                                                                    xxRxxxxxx    %")
+renderLine(26,"%    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx    %")
+renderLine(27,"%    xxxxxRxxxxxxxxxxxRxxxxxxxxxxRxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxRxxxxxxxxxxxxxxxxxxxxxx    %")
+renderLine(28,"%    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxRxxxxxxxxxxxxxxRxxxxxxxxxxxxxxxxxxxxxxxRxxxxxxxxx    %")
+renderLine(29,"%    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxRxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx    %")
+renderLine(30,"%    xxxxxxxRxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxRxxxxxxxxxxxxxx    %")
+renderLine(31,"%    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxRxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxRxxxx    %")
+renderLine(32,"%    xxxxxxxxxxxxxRxxxxxxxRxxxxxxxxxxxxxxRxxxxxxxxxxxxxxxxxxxxxxxxxxxRxxxxxxxxxxxxxxxxxxxxx    %")
+renderLine(33,"%    xxRxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxRxxxxxxxxxxRxxxxxxxxxxxxxxxxxxxxxxxxxxxxx    %")
+renderLine(34,"%    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxs    %")
+renderLine(35,"%                                                                                              %")
+renderLine(36,"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+
+oxyd_shuffle()
+
+actor1=enigma.GetNamedObject("actor1")
+r1=enigma.GetNamedObject("r1")
+AddRubberBand(actor1,r1,15,0)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

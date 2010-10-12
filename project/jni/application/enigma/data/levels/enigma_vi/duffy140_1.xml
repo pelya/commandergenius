@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Oxyd Drilling" el:subtitle="Useful unsuccessful drillings" el:id="duffy140"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Old filename was newleveld35</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw=21
+levelh=13
+
+create_world( levelw, levelh)
+enigma.ConserveLevel=FALSE
+
+fill_floor("fl-leaves", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-greenbrown", i-1, line)
+        elseif c =="$" then
+            set_stone( "st-greenbrown", i-1, line)
+            set_item("it-tinyhollow",i-1,line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+            set_item("it-tinyhollow",i-1,line)
+        elseif c == "&" then
+            set_floor("fl-water",i-1,line)
+            set_stone( "st-greenbrown", i-1, line)
+        elseif c == "*" then
+            set_stone( "st-brownie", i-1, line)
+        elseif c == "%" then
+            set_stone( "st-block", i-1, line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c == "~" then
+            set_floor("fl-water",i-1,line)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-1,line+.5, {player=0})
+            set_item("it-seed",i-1,line)
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c == "H" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+            set_item("it-tinyhollow",i-1,line)
+        elseif c == "G" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+            set_floor("fl-water",i-1,line)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c=="D" then
+            set_stone("st-oneway", i-1,line, {orientation=enigma.SOUTH})
+        elseif c=="L" then
+            set_stone("st-oneway", i-1,line, {orientation=enigma.WEST})
+        elseif c=="R" then
+            set_stone("st-oneway", i-1,line, {orientation=enigma.EAST})
+        elseif c=="U" then
+            set_stone("st-oneway", i-1,line, {orientation=enigma.NORTH})
+        elseif c =="E" then
+            set_stone( "st-mail-e", i-1, line)
+        elseif c =="W" then
+            set_stone( "st-mail-w", i-1, line)
+        elseif c =="h" then
+            set_item("it-pipe-h",i-1,line)
+        elseif c =="v" then
+            set_item("it-pipe-v",i-1,line)
+        elseif c =="1" then
+            set_item("it-pipe-ne",i-1,line)
+        elseif c =="3" then
+            set_item("it-pipe-wn",i-1,line)
+        elseif c =="7" then
+            set_item("it-pipe-es",i-1,line)
+        elseif c =="9" then
+            set_item("it-pipe-sw",i-1,line)
+        elseif c =="2" then
+            set_stone("st-glass",i-1,line)
+            set_item("it-pipe-ne",i-1,line)
+        elseif c =="4" then
+            set_stone("st-glass",i-1,line)
+            set_item("it-pipe-wn",i-1,line)
+        elseif c =="6" then
+            set_stone("st-glass",i-1,line)
+            set_item("it-pipe-es",i-1,line)
+        elseif c =="8" then
+            set_stone("st-glass",i-1,line)
+            set_item("it-pipe-sw",i-1,line)
+        elseif c =="i" then
+            set_stone("st-glass",i-1,line)
+            set_item("it-tinyhollow",i-1,line)
+        elseif c =="i" then
+            set_item("it-tinyhollow",i-1,line)
+            set_floor("fl-water",i-1,line)
+        elseif c =="s" then
+            set_item("it-seed",i-1,line)
+        elseif c =="A" then
+            set_stone("st-fart",i-1,line,{name="f1"})
+        elseif c =="B" then
+            set_stone("st-fart",i-1,line,{name="f2"})
+        elseif c =="C" then
+            set_stone("st-fart",i-1,line,{name="f3"})
+        elseif c =="`" then
+            set_stone("st-fart",i-1,line,{name="f4"})
+        end
+    end
+end
+
+renderLine(00,"$$$$$$$$$$$$$$$$$$$$")
+renderLine(01,"og#~~~s      s~~~#go")
+renderLine(02,"$g#~~~  7hh9  ~~~#g$")
+renderLine(03,"$g#~~~  vABv  ~~~#g$")
+renderLine(04,"og#~~~s  hh  s~~~#go")
+renderLine(05,"$g#G~~ H    H ~~G#g$")
+renderLine(06,"$gg#gg iEszWi gg#gg$")
+renderLine(07,"$g#G~~ H    H ~~G#g$")
+renderLine(08,"og#~~~s  hh  s~~~#go")
+renderLine(09,"$g#~~~  vC`v  ~~~#g$")
+renderLine(10,"$g#~~~  1hh3  ~~~#g$")
+renderLine(11,"og#~~~s      s~~~#go")
+renderLine(12,"$$$$$$$$$$$$$$$$$$$$")
+
+oxyd_shuffle()
+
+function timer_callback()
+    enigma.SendMessage(enigma.GetNamedObject("f1"),"trigger",nil)
+    enigma.SendMessage(enigma.GetNamedObject("f2"),"trigger",nil)
+    enigma.SendMessage(enigma.GetNamedObject("f3"),"trigger",nil)
+    enigma.SendMessage(enigma.GetNamedObject("f4"),"trigger",nil)
+end
+
+set_stone("st-timer", 20,0, {loop=1, action="callback", target="timer_callback", interval=5})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true"/>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Nützliche Fehlbohrungen</el:translation>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

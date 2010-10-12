@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Laser Games" el:subtitle="" el:id="mp03"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="moonpearl" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © moonpearl</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- !!BBE105!! Do not delete this line
+
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+levelh=13
+levelw=20
+enigma.FlatForce=30
+enigma.SlopeForce=30
+enigma.ElectricForce=30
+cells={}
+items={}
+actors={}
+stones={}
+actors[" "]=cell{}
+stones[" "]=cell{}
+cells[" "]=cell{}
+items[" "]=cell{}
+cells["!"]=cell{floor="fl-rough-red"}
+stones["!"]=cell{stone="st-rock4"}
+cells["#"]=cell{floor="fl-rough-blue"}
+stones["#"]=cell{stone="st-block"}
+items["!"]=cell{item="it-trigger"}
+stones["$"]=cell{stone="st-fourswitch"}
+function ac_blackball(x,y)
+n=""
+p=0
+f=0
+ if (x==4) and (y==10) then
+  n="ac4x10"
+  p=0
+  mf=1,66666666666667
+ end
+set_actor("ac-blackball",x+0.5,y+0.5,{player=p,name=n,mouseforce=mf})
+end
+actors["!"]=cell{parent={{ac_blackball}}}
+stones["%"]=cell{parent={{file_oxyd,"b"}}}
+stones["&"]=cell{stone="st-mirror-3^"}
+stones["'"]=cell{stone="st-mirror-p|"}
+stones["("]=cell{stone="st-mirror-p/"}
+stones[")"]=cell{stone="st-mirror-p-"}
+stones["*"]=cell{stone="st-mirror-p\\"}
+stones["+"]=cell{stone="st-mirror-p/t"}
+stones[","]=cell{stone="st-mirror-3v"}
+stones["-"]=cell{stone="st-mirror-p|t"}
+stones["."]=cell{stone={"st-laser-n", {on=TRUE}}}
+level={"!#!#!#!#!#!#!#!#!#!#",
+       "#!#!#!#!#!#!#!#!#!#!",
+       "!#!#!#!#!#!#!#!#!#!#",
+       "#!#!#!#!#!#!#!#!#!#!",
+       "!#!#!#!#!#!#!#!#!#!#",
+       "#!#!#!#!#!#!#!#!#!#!",
+       "!#!#!#!#!#!#!#!#!#!#",
+       "#!#!#!#!#!#!#!#!#!#!",
+       "!#!#!#!#!#!#!#!#!#!#",
+       "#!#!#!#!#!#!#!#!#!#!",
+       "!#!#!#!#!#!#!#!#!#!#",
+       "#!#!#!#!#!#!#!#!#!#!",
+       "!#!#!#!#!#!#!#!#!#!#"}
+   acmap={"                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "    !               ",
+          "                    ",
+          "                    "}
+  itmap={"                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    "}
+ stmap={"!!!!!!!!!!!%!%!%!%!!",
+        "!        !         !",
+        "!  # #   ! & , ' , %",
+        "!      # !         !",
+        "!        ! ' ) + ) %",
+        "!   $$   !         !",
+        "!   $$   ! ( ' ) * %",
+        "!   $$   !         !",
+        "!        ! - * ( - %",
+        "!        !         !",
+        "!     #  ! & * ' , %",
+        "!        !         !",
+        "!!!!!!!!!!!%!%!%!.!!"}
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+draw_map(0,0,itmap,items)
+draw_map(0,0,acmap,actors)
+set_item("it-trigger",3,4,{action="callback", target="funcc0"})
+set_item("it-trigger",4,4,{action="callback", target="funcc1"})
+set_item("it-trigger",5,4,{action="callback", target="funcc2"})
+set_item("it-trigger",6,4,{action="callback", target="funcc3"})
+set_item("it-trigger",3,5,{action="callback", target="funcc4"})
+set_item("it-trigger",6,5,{action="callback", target="funcc5"})
+set_item("it-trigger",3,6,{action="callback", target="funcc6"})
+set_item("it-trigger",6,6,{action="callback", target="funcc7"})
+set_item("it-trigger",3,7,{action="callback", target="funcc8"})
+set_item("it-trigger",6,7,{action="callback", target="funcc9"})
+set_item("it-trigger",3,8,{action="callback", target="funcc10"})
+set_item("it-trigger",4,8,{action="callback", target="funcc11"})
+set_item("it-trigger",5,8,{action="callback", target="funcc12"})
+set_item("it-trigger",6,8,{action="callback", target="funcc13"})
+SetAttrib(enigma.GetStone(11,2),"name","mirror0")
+SetAttrib(enigma.GetStone(13,2),"name","mirror1")
+SetAttrib(enigma.GetStone(15,2),"name","mirror2")
+SetAttrib(enigma.GetStone(17,2),"name","mirror3")
+SetAttrib(enigma.GetStone(11,4),"name","mirror4")
+SetAttrib(enigma.GetStone(17,4),"name","mirror5")
+SetAttrib(enigma.GetStone(11,6),"name","mirror6")
+SetAttrib(enigma.GetStone(17,6),"name","mirror7")
+SetAttrib(enigma.GetStone(11,8),"name","mirror8")
+SetAttrib(enigma.GetStone(17,8),"name","mirror9")
+SetAttrib(enigma.GetStone(11,10),"name","mirror10")
+SetAttrib(enigma.GetStone(13,10),"name","mirror11")
+SetAttrib(enigma.GetStone(15,10),"name","mirror12")
+SetAttrib(enigma.GetStone(17,10),"name","mirror13")
+SetAttrib(enigma.GetStone(17,12),"init",FALSE)
+Signal ("st(4 5)","st(13 4)")
+Signal ("st(4 5)","st(13 4)")
+Signal ("st(4 5)","st(13 4)")
+Signal ("st(4 5)","st(13 4)")
+Signal ("st(5 5)","st(15 4)")
+Signal ("st(5 5)","st(15 4)")
+Signal ("st(5 5)","st(15 4)")
+Signal ("st(5 5)","st(15 4)")
+Signal ("st(4 6)","st(13 6)")
+Signal ("st(4 6)","st(13 6)")
+Signal ("st(4 6)","st(13 6)")
+Signal ("st(4 6)","st(13 6)")
+Signal ("st(5 6)","st(15 6)")
+Signal ("st(5 6)","st(15 6)")
+Signal ("st(5 6)","st(15 6)")
+Signal ("st(5 6)","st(15 6)")
+Signal ("st(4 7)","st(13 8)")
+Signal ("st(4 7)","st(13 8)")
+Signal ("st(4 7)","st(13 8)")
+Signal ("st(4 7)","st(13 8)")
+Signal ("st(5 7)","st(15 8)")
+Signal ("st(5 7)","st(15 8)")
+Signal ("st(5 7)","st(15 8)")
+Signal ("st(5 7)","st(15 8)")
+--Signal ("it(3 4)","st(11 2)")
+--Signal ("it(4 4)","st(13 2)")
+--Signal ("it(5 4)","st(15 2)")
+--Signal ("it(6 4)","st(17 2)")
+--Signal ("it(3 5)","st(11 4)")
+--Signal ("it(6 5)","st(17 4)")
+--Signal ("it(3 6)","st(11 6)")
+--Signal ("it(6 6)","st(17 6)")
+--Signal ("it(3 7)","st(11 8)")
+--Signal ("it(6 7)","st(17 8)")
+--Signal ("it(3 8)","st(11 10)")
+--Signal ("it(4 8)","st(13 10)")
+--Signal ("it(5 8)","st(15 10)")
+--Signal ("it(6 8)","st(17 10)")
+oxyd_shuffle()
+
+-- ^ I I V
+-- I ? ? -
+-- / ? ? \
+-- I ? ? I
+-- ^ \ I V
+
+function switch()
+    mir=enigma.GetNamedObject("mirror0")
+    if sw0==1 then SendMessage(mir,"mirror-east") else SendMessage(mir,"mirror-north") end
+    mir=enigma.GetNamedObject("mirror1")
+    if sw1==1 then SendMessage(mir,"mirror-east") else SendMessage(mir,"mirror-south") end
+    mir=enigma.GetNamedObject("mirror2")
+    if sw2==1 then SendMessage(mir,"mirror-east") else SendMessage(mir,"mirror-north") end
+    mir=enigma.GetNamedObject("mirror3")
+    if sw3==1 then SendMessage(mir,"mirror-west") else SendMessage(mir,"mirror-south") end
+    mir=enigma.GetNamedObject("mirror4")
+    if sw4==1 then SendMessage(mir,"mirror-east") else SendMessage(mir,"mirror-north") end
+    mir=enigma.GetNamedObject("mirror5")
+    if sw5==1 then SendMessage(mir,"mirror-west") else SendMessage(mir,"mirror-south") end
+    mir=enigma.GetNamedObject("mirror6")
+    if sw6==1 then SendMessage(mir,"mirror-south") else SendMessage(mir,"mirror-east") end
+    mir=enigma.GetNamedObject("mirror7")
+    if sw7==1 then SendMessage(mir,"mirror-north") else SendMessage(mir,"mirror-west") end
+    mir=enigma.GetNamedObject("mirror8")
+    if sw8==1 then SendMessage(mir,"mirror-east") else SendMessage(mir,"mirror-north") end
+    mir=enigma.GetNamedObject("mirror9")
+    if sw9==1 then SendMessage(mir,"mirror-east") else SendMessage(mir,"mirror-north") end
+    mir=enigma.GetNamedObject("mirror10")
+    if sw10==1 then SendMessage(mir,"mirror-east") else SendMessage(mir,"mirror-north") end
+    mir=enigma.GetNamedObject("mirror11")
+    if sw11==1 then SendMessage(mir,"mirror-north") else SendMessage(mir,"mirror-west") end
+    mir=enigma.GetNamedObject("mirror12")
+    if sw12==1 then SendMessage(mir,"mirror-east") else SendMessage(mir,"mirror-north") end
+    mir=enigma.GetNamedObject("mirror13")
+    if sw13==1 then SendMessage(mir,"mirror-west") else SendMessage(mir,"mirror-south") end
+end
+function funcc0(ison)
+    sw0=ison
+    switch()
+end
+function funcc1(ison)
+    sw1=ison
+    switch()
+end
+function funcc2(ison)
+    sw2=ison
+    switch()
+end
+function funcc3(ison)
+    sw3=ison
+    switch()
+end
+function funcc4(ison)
+    sw4=ison
+    switch()
+end
+function funcc5(ison)
+    sw5=ison
+    switch()
+end
+function funcc6(ison)
+    sw6=ison
+    switch()
+end
+function funcc7(ison)
+    sw7=ison
+    switch()
+end
+function funcc8(ison)
+    sw8=ison
+    switch()
+end
+function funcc9(ison)
+    sw9=ison
+    switch()
+end
+function funcc10(ison)
+    sw10=ison
+    switch()
+end
+function funcc11(ison)
+    sw11=ison
+    switch()
+end
+function funcc12(ison)
+    sw12=ison
+    switch()
+end
+function funcc13(ison)
+    sw13=ison
+    switch()
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

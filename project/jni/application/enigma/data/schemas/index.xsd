@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' version="0.2" xml:lang="en">
+  <xs:annotation>
+    <xs:documentation>
+      XML schema definitions for Enigma levelpack index
+      Copyright © 2006 Ronald Lamprecht
+      GPL2
+    </xs:documentation>
+  </xs:annotation>
+  <xs:element name="index">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="info" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              Description of the index:
+              title    - identifying title of the levelpack
+              group    - default levelpack group
+              owner    - user name of levelpack creator - "system" for distributed packs
+              release  - compatibility version number of levelpack
+              revision - modification version number of levelpack
+              location - default sorting position of levelpack within a group
+              network  - true if levelpack is built for 2-player network game, false for standard single user game
+              enigma   - compatibility required Enigma release version.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:attribute name="title" type="xs:string" use="required"/>
+            <xs:attribute name="group" type="xs:string" use="required"/>
+            <xs:attribute name="owner" type="xs:string" use="required"/>
+            <xs:attribute name="release" type="xs:positiveInteger" use="required"/>
+            <xs:attribute name="revision" type="xs:positiveInteger" use="required"/>
+            <xs:attribute name="location" type="xs:float" use="required"/>
+            <xs:attribute name="network" type="xs:boolean" use="required"/>
+            <xs:attribute name="enigma" type="xs:float" use="required"/>
+          </xs:complexType>
+        </xs:element> <!-- info -->
+
+        <xs:element name="update" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              Url's needed for updates:
+              indexurl  - url to obtain updates of the index itself
+              levelurl  - url base to download new levels.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:attribute name="indexurl" type="xs:anyURI" use="required"/>
+            <xs:attribute name="levelurl" type="xs:anyURI" use="required"/>
+          </xs:complexType>
+        </xs:element> <!-- update -->
+        
+        <xs:element name="attributes" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              A dictionary for future additions. These attributes will be readable
+              by future Lua index extensions.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="property" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation>
+                    All simple key-value-properties.
+                  </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="key" type="xs:string" use="required"/>
+                  <xs:attribute name="value" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element> <!-- property -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element> <!-- attributes -->
+
+        <xs:element name="lua" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              Future Lua index extension. Per levelpack control of level menu
+              display, levelpack scoring etc..
+              Possible elements are: luamain-CDATA, i18n
+              Possible attributes are: libpath
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:any namespace="##targetNamespace" minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+            </xs:sequence>
+            <xs:anyAttribute namespace="##targetNamespace" processContents="skip"/>
+          </xs:complexType>
+        </xs:element> <!-- lua -->
+        
+        <xs:element name="levels" minOccurs="1" maxOccurs="1" >
+          <xs:annotation>
+            <xs:documentation>
+              The sequence of the level elements is the sequence of levels in the pack.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="level" minOccurs="0" maxOccurs="unbounded" >
+                <xs:annotation>
+                  <xs:documentation>
+                    The attributes either identify a level, are cached from the level
+                    metadata to avoid unnecessary level loads or describe variation from
+                    the level default. See the level description in the reference manual
+                    for more information on the single attributes:
+                    _seq    - an auto generated counter just for human readability that will never be used
+                    _title  - cached level title
+                    _xpath  - identifying relative path, url or normed oxyd identifier of the level
+                    id      - identifying level id
+                    author  - cached level author name
+                    score   - cached score version of level
+                    rel     - identifying release version of level
+                    rev     - identifying revision version of level that announces level updates
+                    easy    - cached has easy mode level flag
+                    ctrl    - variation in control of level default
+                    unit    - variation in score unit of level default
+                    target  - variation in score target of level default
+                    Attributes with leading underscore are just named this way to generate human
+                    readable indices. Future attribute additions are transparent to Enigma 1.0 -
+                    they will be ignored but are maintained on all index modifications.
+                  </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="_seq" type="xs:positiveInteger" use="optional"/>
+                  <xs:attribute name="_title" type="xs:string" use="required"/>
+                  <xs:attribute name="_xpath" type="xs:string" use="required"/>
+                  <xs:attribute name="id" type="xs:string" use="required"/>
+                  <xs:attribute name="author" type="xs:string" use="required"/>
+                  <xs:attribute name="score" type="xs:positiveInteger" use="required"/>
+                  <xs:attribute name="rel" type="xs:positiveInteger" use="required"/>
+                  <xs:attribute name="rev" type="xs:unsignedShort" use="required"/>
+                  <xs:attribute name="easy" type="xs:boolean" use="required"/>
+                  <xs:attribute name="ctrl" type="controlType" use="required"/>
+                  <xs:attribute name="unit" type="scoreunitType" use="required"/>
+                  <xs:attribute name="target" type="xs:string" use="required"/>
+                  <xs:anyAttribute namespace="##targetNamespace" processContents="skip"/>
+                </xs:complexType>
+              </xs:element> <!-- level -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element> <!-- levels -->
+        <xs:any namespace="##targetNamespace" minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element> <!-- index -->
+
+  <xs:simpleType name="controlType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="force"/>
+      <xs:enumeration value="balance"/>
+      <xs:enumeration value="key"/>
+      <xs:enumeration value="other"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="scoreunitType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="duration"/>
+      <xs:enumeration value="number"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

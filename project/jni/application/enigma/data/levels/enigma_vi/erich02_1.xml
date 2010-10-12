@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Walk the line" el:subtitle="revisited" el:id="erich02"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Erich Schubert" el:email="erich@debian.org" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Erich Schubert</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" />
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw=20
+levelh=13
+create_world(levelw, levelh)
+draw_border("st-metal")
+fill_floor("fl-normal",0,0,levelw,levelh)
+
+oxyd(17, 0)
+oxyd(17, 11)
+
+-- upper setup
+set_stone("st-laser-n", 16, 4, {on=TRUE})
+set_stone("st-metal", 15, 1)
+set_stone("st-metal", 15, 2)
+set_stone("st-metal", 15, 3)
+set_stone("st-metal", 15, 4)
+set_stone("st-mirror-p/", 16, 1)
+set_stone("st-mirror-p\\", 18, 1)
+-- lower setup
+set_stone("st-laser-s", 16, 7, {on=TRUE})
+set_stone("st-metal", 15, 7)
+set_stone("st-metal", 15, 8)
+set_stone("st-metal", 15, 9)
+set_stone("st-metal", 15, 10)
+set_stone("st-metal", 15, 11)
+set_stone("st-mirror-p/", 18, 10)
+set_stone("st-mirror-p\\", 16, 10)
+set_stone("st-metal", 16, 11)
+set_stone("st-metal", 18, 11)
+-- middle junction
+set_stone("st-mirror-3<t", 18, 5)
+set_stone("st-mirror-3<t", 18, 6)
+-- left part
+set_stone("st-wood", 2, 5)
+set_stone("st-wood", 2, 6)
+-- water hole
+if not difficult then
+  set_floor("fl-water", 6, 5)
+  set_floor("fl-water", 6, 6)
+end
+
+set_actor("ac-blackball", 3.5, 3.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="TODO" el:subtitle="wildcard level" el:id="todo"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world( levelw, levelh)
+
+draw_border("st-rock1")
+
+fill_floor("fl-abyss", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+	for i=1, strlen(pattern) do
+		local c = strsub( pattern, i, i)
+		if c =="#" then
+			set_stone( "st-rock1", i-1, line)
+		end
+	end
+end
+
+-- Floor:   " "
+-- Border:  "#"
+
+renderLine(  2, "  ###  #  ##   #")
+renderLine(  3, "   #  # # # # # #")
+renderLine(  4, "   #  # # # # # #")
+renderLine(  5, "   #  # # # # # #")
+renderLine(  6, "   #   #  ##   #")
+
+hollow( 3, 10)
+hollow( 7, 10)
+hollow(12, 10)
+hollow(16, 10)
+set_floor( "fl-space", 3, 10)
+set_floor( "fl-space", 7, 10)
+set_floor( "fl-space",12, 10)
+set_floor( "fl-space",16, 10)
+
+
+set_actor("ac-whiteball-small",  3.5,10.5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small",  7.5,10.5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small", 12.5,10.5, {player=0, mouseforce=1})
+set_actor("ac-whiteball-small", 16.5,10.5, {player=0, mouseforce=1})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Glassstones" el:subtitle="" el:id="glassstones_testlevel"/>
+      <el:version el:score="1" el:release="1" el:revision="4" el:status="stable"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.01">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelh = 13
+levelw = 20
+
+create_world(levelw, levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+          if c=="x" then
+            oxyd(i-1,line)
+        elseif c=="#" then
+            set_stone("st-glass",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+        elseif c=="a" then
+            set_stone("st-glass1",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+        elseif c=="b" then
+            set_stone("st-glass2",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+        elseif c=="c" then
+            set_stone("st-glass3",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+
+        elseif c=="M" then
+            set_stone("st-glass_move",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+        elseif c=="1" then
+            set_stone("st-glass1_move",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+        elseif c=="2" then
+            set_stone("st-glass2_move",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+
+        elseif c=="h" then
+            set_stone("st-glass1_hole",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+        elseif c=="H" then
+            set_stone("st-glass2_hole",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+
+        elseif c=="B" then
+            set_stone("st-beads",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+
+        elseif c=="w" then
+            set_stone("st-window",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+
+        elseif c=="P" then
+            set_stone("st-polarswitch",i-1,line, {on=TRUE})
+            set_floor("fl-sahara",i-1,line)
+
+        elseif c=="L" then
+            set_stone("st-laser-e",i-1,line,{on=TRUE})
+            set_floor("fl-sahara",i-1,line)
+        elseif c=="R" then
+            set_stone("st-laser-w",i-1,line,{on=TRUE})
+            set_floor("fl-sahara",i-1,line)
+
+        elseif c=="C" then
+            set_item("it-cherry",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+
+        elseif c=="U" then
+            set_item("it-umbrella",i-1,line)
+            set_floor("fl-sahara",i-1,line)
+
+        elseif c==" " then
+            set_floor("fl-sahara",i-1,line)
+        end
+    end    
+end
+
+renderLine(00 , "####################")
+renderLine(01 , "#                  #")
+renderLine(02 , "LP BBB hhh HHH wwwPR")
+renderLine(03 , "#                  #")
+renderLine(04 , "#                  #")
+renderLine(05 , "LP MMM 111 222 PPPPR")
+renderLine(06 , "#                  #")
+renderLine(07 , "#                  #")
+renderLine(08 , "LP ### aaa bbb cccPR")
+renderLine(09 , "#                  #")
+renderLine(10 , "# CCCCCCCCCCCCCCCC #")
+renderLine(11 , "# UUUUUUUUUUUUUUUU #")
+renderLine(12 , "####################")
+
+set_item("it-document", 3, 1, {text="st-beads"})
+set_item("it-document", 7, 1, {text="st-glass1_hole"})
+set_item("it-document", 11, 1, {text="st-glass2_hole"})
+set_item("it-document", 15, 1, {text="st-window"})
+
+set_item("it-document", 3, 4, {text="st-glass_move"})
+set_item("it-document", 7, 4, {text="st-glass1_move"})
+set_item("it-document", 11, 4, {text="st-glass2_move"})
+set_item("it-document", 15, 4, {text="st-polarswitch"})
+
+set_item("it-document", 3, 7, {text="st-glass"})
+set_item("it-document", 7, 7, {text="st-glass1"})
+set_item("it-document", 11, 7, {text="st-glass2"})
+set_item("it-document", 15, 7, {text="st-glass3"})
+
+-- Special
+set_actor("ac-blackball", 1.5,11.5, {player=0})                    
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

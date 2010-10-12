@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<index xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd">
+
+  <info enigma="1.00" group="Development" location="70300" network="false" owner="Enigma Team" release="1" revision="3" title="Experimental"/>
+
+  <attributes/>
+
+  <levels>
+    <level _seq="1" _title="Demo Simple" _xpath="./demo_simple" author="Ronald Lamprecht" ctrl="force" easy="false" id="20060210ral001" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="2" _title="Demo I18N" _xpath="./demo_i18n" author="Ronald Lamprecht" ctrl="force" easy="false" id="20060211ral002" rel="1" rev="2" score="1" target="time" unit="duration"/>
+    <level _seq="3" _title="Template 1" _xpath="./template1" author="AUTHOR" ctrl="force" easy="false" id="template1" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="4" _title="Template 2" _xpath="./template2" author="AUTHOR" ctrl="force" easy="false" id="template2" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="5" _title="Template 3" _xpath="./template3" author="AUTHOR" ctrl="force" easy="false" id="template3" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="6" _title="All Stones" _xpath="./stones_1" author="Raoul Bourquin" ctrl="force" easy="false" id="stones" rel="1" rev="2" score="1" target="time" unit="duration"/>
+    <level _seq="7" _title="All Floors" _xpath="./floors_1" author="Raoul Bourquin" ctrl="force" easy="false" id="floors" rel="1" rev="2" score="1" target="time" unit="duration"/>
+    <level _seq="8" _title="All Items" _xpath="./items_1" author="Raoul Bourquin" ctrl="force" easy="false" id="items" rel="1" rev="3" score="1" target="time" unit="duration"/>
+    <level _seq="9" _title="Glassstones" _xpath="./glassstones_1" author="Raoul Bourquin" ctrl="force" easy="false" id="glassstones_testlevel" rel="1" rev="4" score="1" target="time" unit="duration"/>
+    <level _seq="10" _title="Impulstest" _xpath="./testimpulses" author="Enigma Team" ctrl="force" easy="false" id="testimpulses" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="11" _title="Wolf Among Sheep" _xpath="./wolfamongsheep" author="illmind" ctrl="force" easy="false" id="wolfamongsheep" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="12" _title="Puzzle Labor" _xpath="./puzzle_testarea_1" author="Raoul Bourquin" ctrl="force" easy="false" id="puzzle_testarea" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="13" _title="Puzzle Demo" _xpath="./puzzle_demo_2" author="Raoul Bourquin" ctrl="force" easy="false" id="puzzle_demo" rel="2" rev="2" score="2" target="time" unit="duration"/>
+    <level _seq="14" _title="Flood Demo" _xpath="./flood_demo_1" author="Raoul Bourquin" ctrl="force" easy="false" id="flood_demo" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="15" _title="Impossible?" _xpath="./wb2" author="Jon 'WB' Sneyers" ctrl="force" easy="false" id="wb2_exp" rel="1" rev="0" score="1" target="time" unit="duration"/>
+  </levels>
+
+</index>

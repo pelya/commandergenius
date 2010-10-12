@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd"
+          xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="The Cube" el:id="20061120malaire901"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author el:name="Markus Laire" el:email="malaire@gmail.com"/>
+      <el:copyright>Copyright (C) 2006 Markus Laire</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+        <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:score el:easy="03:49" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+----------------------------------------
+cells={}
+cells["  "]=cell{floor="fl-abyss"}
+cells[". "]=cell{floor="fl-metal"}
+cells["* "]=cell{actor="ac-blackball", floor="fl-metal5"}
+cells["O "]=cell{oxyd}
+cells["O!"]=cell{stone="st-likeoxydd"}
+
+cells["- "]=cell{floor="fl-metal2"}
+cells["+ "]=cell{floor="fl-metal4"}
+cells["| "]=cell{floor="fl-metal5"}
+
+-- SCRAMBLE-SENSORS
+cells["1s"]=cell{floor="fl-metal3", item={"it-sensor", {action="callback", target="scramble1"}}}
+cells["2s"]=cell{floor="fl-metal3", item={"it-sensor", {action="callback", target="scramble2"}}}
+cells["3s"]=cell{floor="fl-metal3", item={"it-sensor", {action="callback", target="scramble3"}}}
+cells["4s"]=cell{floor="fl-metal3", item={"it-sensor", {action="callback", target="scramble4"}}}
+if not difficult then
+  cells["ss"]=cell{floor="fl-metal2"}
+else
+  cells["ss"]=cell{floor="fl-metal3", item={"it-sensor", {action="callback", target="scramble"}}}
+end
+
+-- CUBE-SENSORS
+cells["00"]=cell{floor="fl-space", item={"it-sensor", {action="callback", target="switch00"}}}
+cells["-0"]=cell{parent=cells["- "], item={"it-sensor", {action="callback", target="switch00"}}}
+cells["+0"]=cell{parent=cells["+ "], item={"it-sensor", {action="callback", target="switch00"}}}
+cells["|0"]=cell{parent=cells["| "], item={"it-sensor", {action="callback", target="switch00"}}}
+for n = 10,66 do
+  cells[""..n]=cell{floor="fl-space", item={"it-sensor", {action="callback", target="switch"..n}}}
+end
+
+-- BRIDGES
+for n = 0,5 do
+  cells["b"..n]=cell{floor={"fl-bridge-closed", {name="b"..n}}}
+  cells["B"..n]=cell{floor={"fl-bridge-closed", {name="B"..n}}}
+  cells["p"..n]=cell{floor={"fl-bridge-closed", {name="p"..n}}}
+end
+
+level = {
+   "*   O!O O   |00016202400|0  O O O O O O!",
+   "|   O!p0p1p2|040. . . 41|0B0B1B2B3B4B5O ",
+   "1s          |042. . . 43|0              ",
+   "2s  +0-0-0-0+044. . . 45+0-0-0-0-0-0-0-0",
+   "3s  |00010121400172125002830320034363800",
+   "4s  |046. . . 47. . . 48. . . 49. . . 50",
+   "|   |051. . . 52. . . 53. . . 54. . . 55",
+   "|   |056. . . 57. . . 58. . . 59. . . 60",
+   "|   |00011131500182226002931330035373900",
+   "+ ss+0-0-0-0+061. . . 62+0-0-0-0-0-0-0-0",
+   "|           |063. . . 64|0              ",
+   "|   O!p3p4p5|065. . . 66|0b0b1b2b3b4b5O ",
+   "|   O!O O   |00019232700|0  O O O O O O!",
+}
+
+-- ========== CALLBACK FUNCTIONS ==========
+last = 0
+
+function switch00() last = 0 end
+
+-- SCRAMBLES
+local s1 = 0
+local s2 = 0
+local s3 = 0
+local s4 = 0
+function scramble1() if (s1 == 0) then move_y(1,  1) end s1 = 1 end
+function scramble2() if (s2 == 0) then move_x(1,  1) end s2 = 1 end
+function scramble3() if (s3 == 0) then move_y(1, -1) end s3 = 1 end
+function scramble4() if (s4 == 0) then move_x(1, -1) end s4 = 1 end
+
+-- LEFT / Z
+function switch10() if (last == 11) then move_cw(2) end last = 10 end
+function switch12() if (last == 13) then move_cw(1) end last = 12 end
+function switch14() if (last == 15) then move_cw(0) end last = 14 end
+
+function switch11() if (last == 10) then move_ccw(2) end last = 11 end
+function switch13() if (last == 12) then move_ccw(1) end last = 13 end
+function switch15() if (last == 14) then move_ccw(0) end last = 15 end
+
+-- RIGHT / Z
+function switch28() if (last == 29) then move_ccw(0) end last = 28 end
+function switch30() if (last == 31) then move_ccw(1) end last = 30 end
+function switch32() if (last == 33) then move_ccw(2) end last = 32 end
+
+function switch29() if (last == 28) then move_cw(0) end last = 29 end
+function switch31() if (last == 30) then move_cw(1) end last = 31 end
+function switch33() if (last == 32) then move_cw(2) end last = 33 end
+
+-- TOP / Z
+function switch40() if (last == 41) then move_ccw(2) end last = 40 end
+function switch42() if (last == 43) then move_ccw(1) end last = 42 end
+function switch44() if (last == 45) then move_ccw(0) end last = 44 end
+
+function switch41() if (last == 40) then move_cw(2) end last = 41 end
+function switch43() if (last == 42) then move_cw(1) end last = 43 end
+function switch45() if (last == 44) then move_cw(0) end last = 45 end
+
+-- BOTTOM / Z
+function switch61() if (last == 62) then move_cw(0) end last = 61 end
+function switch63() if (last == 64) then move_cw(1) end last = 63 end
+function switch65() if (last == 66) then move_cw(2) end last = 65 end
+
+function switch62() if (last == 61) then move_ccw(0) end last = 62 end
+function switch64() if (last == 63) then move_ccw(1) end last = 64 end
+function switch66() if (last == 65) then move_ccw(2) end last = 66 end
+
+-- LEFT-CENTER-RIGHT-BACK / X
+function switch46() if (last == 47) then move_x(0, -1) end last = 46 end
+function switch51() if (last == 52) then move_x(1, -1) end last = 51 end
+function switch56() if (last == 57) then move_x(2, -1) end last = 56 end
+
+function switch47() if (last == 46) then move_x(0,  1) elseif (last == 48) then move_x(0, -1) end last = 47 end
+function switch52() if (last == 51) then move_x(1,  1) elseif (last == 53) then move_x(1, -1) end last = 52 end
+function switch57() if (last == 56) then move_x(2,  1) elseif (last == 58) then move_x(2, -1) end last = 57 end
+
+function switch48() if (last == 47) then move_x(0,  1) elseif (last == 49) then move_x(0, -1) end last = 48 end
+function switch53() if (last == 52) then move_x(1,  1) elseif (last == 54) then move_x(1, -1) end last = 53 end
+function switch58() if (last == 57) then move_x(2,  1) elseif (last == 59) then move_x(2, -1) end last = 58 end
+
+function switch49() if (last == 48) then move_x(0,  1) elseif (last == 50) then move_x(0, -1) end last = 49 end
+function switch54() if (last == 53) then move_x(1,  1) elseif (last == 55) then move_x(1, -1) end last = 54 end
+function switch59() if (last == 58) then move_x(2,  1) elseif (last == 60) then move_x(2, -1) end last = 59 end
+
+function switch50() if (last == 49) then move_x(0,  1) end last = 50 end
+function switch55() if (last == 54) then move_x(1,  1) end last = 55 end
+function switch60() if (last == 59) then move_x(2,  1) end last = 60 end
+
+-- TOP-CENTER-BOTTOM / Y
+function switch16() if (last == 17) then move_y(0,  1) end last = 16 end
+function switch20() if (last == 21) then move_y(1,  1) end last = 20 end
+function switch24() if (last == 25) then move_y(2,  1) end last = 24 end
+
+function switch17() if (last == 16) then move_y(0, -1) elseif (last == 18) then move_y(0,  1) end last = 17 end
+function switch21() if (last == 20) then move_y(1, -1) elseif (last == 22) then move_y(1,  1) end last = 21 end
+function switch25() if (last == 24) then move_y(2, -1) elseif (last == 26) then move_y(2,  1) end last = 25 end
+
+function switch18() if (last == 17) then move_y(0, -1) elseif (last == 19) then move_y(0,  1) end last = 18 end
+function switch22() if (last == 21) then move_y(1, -1) elseif (last == 23) then move_y(1,  1) end last = 22 end
+function switch26() if (last == 25) then move_y(2, -1) elseif (last == 27) then move_y(2,  1) end last = 26 end
+
+function switch19() if (last == 18) then move_y(0, -1) end last = 19 end
+function switch23() if (last == 22) then move_y(1, -1) end last = 23 end
+function switch27() if (last == 26) then move_y(2, -1) end last = 27 end
+
+-- BACK / Y
+function switch34() if (last == 35) then move_y(2, -1) end last = 34 end
+function switch36() if (last == 37) then move_y(1, -1) end last = 36 end
+function switch38() if (last == 39) then move_y(0, -1) end last = 38 end
+
+function switch35() if (last == 34) then move_y(2,  1) end last = 35 end
+function switch37() if (last == 36) then move_y(1,  1) end last = 37 end
+function switch39() if (last == 38) then move_y(0,  1) end last = 39 end
+
+-- ========== GLOBALS ==========
+
+colors = {}
+colors[0]="fl-leaves"
+colors[1]="fl-inverse"
+colors[2]="fl-swamp"
+colors[3]="fl-sand"
+colors[4]="fl-tigris"
+colors[5]="fl-rough-red"
+
+cube = {}
+
+faceinfo = {}
+faceinfo[0] = { x1 =  4, y1 = 5 }
+faceinfo[1] = { x1 =  8, y1 = 5 }
+faceinfo[2] = { x1 = 12, y1 = 5 }
+faceinfo[3] = { x1 = 16, y1 = 5 }
+faceinfo[4] = { x1 =  8, y1 = 1 }
+faceinfo[5] = { x1 =  8, y1 = 9 }
+
+-- ========== FUNCTIONS ==========
+
+-- NOTE: This formula (f * 9 + x * 3 + y) is also used in check_faces() for speed
+
+function setpos(f, x, y, v)
+  cube[f * 9 + x * 3 + y] = v
+  set_floor(colors[v], faceinfo[f].x1 + x, faceinfo[f].y1 + y)
+end
+
+function getpos(f, x, y)
+  return cube[f * 9 + x * 3 + y]
+end
+
+-- Create the initial cube
+function initial_cube()
+  for f=0,5 do
+    for x=0,2 do
+      for y=0,2 do
+        setpos(f, x, y, f)
+      end
+    end
+  end
+end
+
+--  4
+-- 0123
+--  5
+
+-- Move from center-face in Y-direction (UP if dir=1, else DOWN)
+function move_y(x, dir)
+  local f0, f1, f2, f3, a
+  if (dir == 1) then f0 = 1; f1 = 5; f2 = 3; f3 = 4;
+  else               f0 = 1; f1 = 4; f2 = 3; f3 = 5; end
+  for y = 0,2 do
+    a =              getpos(f0, x, y)
+    setpos(f0, x, y, getpos(f1, x, y))
+    setpos(f1, x, y, getpos(f2, 2 - x, 2 - y))
+    setpos(f2, 2 - x, 2 - y, getpos(f3, x, y))
+    setpos(f3, x, y, a)
+  end
+  -- Turn the faces if needed
+  if (x == 0) then
+    if (dir == 1) then turn_ccw(0) else turn_cw(0) end
+  elseif (x == 2) then
+    if (dir == 1) then turn_cw(2) else turn_ccw(2) end
+  end
+  -- Check the faces
+  check_faces()
+end
+
+-- Move from center-face in X-direction (RIGHT if dir=1, else LEFT)
+function move_x(y, dir)
+  local f0, f1, f2, f3, a
+  if (dir == 1) then f0 = 1; f1 = 0; f2 = 3; f3 = 2;
+  else               f0 = 1; f1 = 2; f2 = 3; f3 = 0; end
+  for x = 0,2 do
+    a =              getpos(f0, x, y)
+    setpos(f0, x, y, getpos(f1, x, y))
+    setpos(f1, x, y, getpos(f2, x, y))
+    setpos(f2, x, y, getpos(f3, x, y))
+    setpos(f3, x, y, a)
+  end
+  -- Turn the faces if needed
+  if (y == 0) then
+    if (dir == 1) then turn_ccw(4) else turn_cw(4) end
+  elseif (y == 2) then
+    if (dir == 1) then turn_cw(5) else turn_ccw(5) end
+  end
+  -- Check the faces
+  check_faces()
+end
+
+--  4
+-- 0123
+--  5
+
+-- Move clockwise around center-face
+function move_cw(z)
+  local a
+  for v = 0,2 do
+    a =                     getpos(0, 2 - z,     v)
+    setpos(0, 2 - z,     v, getpos(5,     v,     z))
+    setpos(5,     v,     z, getpos(2,     z, 2 - v))
+    setpos(2,     z, 2 - v, getpos(4, 2 - v, 2 - z))
+    setpos(4, 2 - v, 2 - z, a)
+  end
+  -- Turn the faces if needed
+      if (z == 0) then turn_cw(1)
+  elseif (z == 2) then turn_ccw(3) end
+  -- Check the faces
+  check_faces()
+end
+
+-- Move counter-clockwise around center-face
+function move_ccw(z)
+  local a
+  for v = 0,2 do
+    a =                     getpos(0, 2 - z,     v)
+    setpos(0, 2 - z,     v, getpos(4, 2 - v, 2 - z))
+    setpos(4, 2 - v, 2 - z, getpos(2,     z, 2 - v))
+    setpos(2,     z, 2 - v, getpos(5,     v,     z))
+    setpos(5,     v,     z, a)
+  end
+  -- Turn the faces if needed
+      if (z == 0) then turn_ccw(1)
+  elseif (z == 2) then turn_cw(3)  end
+  -- Check the faces
+  check_faces()
+end
+
+-- Turn a face clockwise (Doesn't change any other faces)
+function turn_cw(f)
+  local a
+  -- Corners
+  a =             getpos(f, 0, 0)
+  setpos(f, 0, 0, getpos(f, 0, 2))
+  setpos(f, 0, 2, getpos(f, 2, 2))
+  setpos(f, 2, 2, getpos(f, 2, 0))
+  setpos(f, 2, 0, a)
+  -- Middle-pieces
+  a =             getpos(f, 1, 0)
+  setpos(f, 1, 0, getpos(f, 0, 1))
+  setpos(f, 0, 1, getpos(f, 1, 2))
+  setpos(f, 1, 2, getpos(f, 2, 1))
+  setpos(f, 2, 1, a)
+end
+
+-- Turn a face counter-clockwise (Doesn't change any other faces)
+function turn_ccw(f)
+  local a
+  -- Corners
+  a =             getpos(f, 0, 0)
+  setpos(f, 0, 0, getpos(f, 2, 0))
+  setpos(f, 2, 0, getpos(f, 2, 2))
+  setpos(f, 2, 2, getpos(f, 0, 2))
+  setpos(f, 0, 2, a)
+  -- Middle-pieces
+  a =             getpos(f, 1, 0)
+  setpos(f, 1, 0, getpos(f, 2, 1))
+  setpos(f, 2, 1, getpos(f, 1, 2))
+  setpos(f, 1, 2, getpos(f, 0, 1))
+  setpos(f, 0, 1, a)
+end
+
+-- Check which faces have been solved and open/close the bridges accordingly
+function check_faces()
+  local f, a, index
+  for f = 0,5 do
+    a = cube[f * 9]
+    for index = f * 9, f * 9 + 8 do
+      if (cube[index] ~= a) then a = -1; break end
+    end
+    if (a == -1) then
+      send_message_named("b"..f, "open", nil)
+      send_message_named("B"..f, "open", nil)
+      send_message_named("p"..f, "open", nil)
+    else
+      send_message_named("b"..f, "close", nil)
+      send_message_named("B"..f, "close", nil)
+      send_message_named("p"..f, "close", nil)
+    end
+  end
+end
+
+-- Scramble the cube
+function scramble()
+  local s
+  for s = 1,30 do
+    local a = random(0,17)
+        if (a <  3) then move_y(a    ,  1)
+    elseif (a <  6) then move_y(a - 3, -1)
+    elseif (a <  9) then move_x(a - 6,  1)
+    elseif (a < 12) then move_x(a - 9, -1)
+    elseif (a < 15) then move_cw(a - 12)
+    else                 move_ccw(a - 15)
+    end
+  end
+end
+
+-- ========== MAIN ==========
+
+set_cell_key_width(2)
+
+oxyd_default_flavor = "d"
+set_default_parent(cells[". "])
+create_world_by_map(level)
+oxyd_shuffle()
+
+initial_cube()
+----------------------------------------
+    ]]></el:luamain>
+    <el:i18n/>
+  </el:protected>
+</el:level>

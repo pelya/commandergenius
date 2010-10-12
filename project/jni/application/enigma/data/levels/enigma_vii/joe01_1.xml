@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Advancing" el:subtitle="" el:id="joe01"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Joseph Dunne" el:email="josephdunne1993@hotmail.com" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Joseph Dunne</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+cells[" "]=cell{floor="fl-leaves"}
+cells["`"]=cell{floor="fl-sahara"}
+cells["0"]=cell{floor="fl-water"}
+cells["."]=cell{floor="fl-space"}
+cells["#"]=cell{stone="st-blue-sand"}
+cells["%"]=cell{stone="st-yellow"}
+cells["W"]=cell{stone="st-puzzle-n"}
+cells["S"]=cell{stone="st-puzzle-s"}
+cells["D"]=cell{stone="st-puzzle-e"}
+cells["A"]=cell{stone="st-puzzle-w"}
+cells["O"]=cell{stone="st-puzzle2-n"}
+cells["L"]=cell{stone="st-puzzle2-s"}
+cells["K"]=cell{stone="st-puzzle2-e"}
+cells["J"]=cell{stone="st-puzzle2-w"}
+cells["$"]=cell{stone="st-wood"}
+cells["o"]=cell{actor={"ac-whiteball-small", {player=0}}}
+cells["+"]=cell{item="it-hollow"}
+
+level = {
+"##############%#####%#############........",
+"#oS0`00`#0  ##0 0$ ##0$0$0$0     #........",
+"#`W$`00$$ $0##L0$  ##$$0%%%%DA$$ ###......",
+"#```S```#0$DA%0$ $ ##00  %000$ 0$``#......",
+"#`DAW`00# $00#O0 #### DAS000$ S````#......",
+"###```#0#$$0%DA$000## 0SW  %0KW`$`S#......",
+"# #####DAS0000 0000000 W%%0%%%`SDAW#......",
+"# 00 $0  W00%   000##  $0K0%```W0`0#......",
+"#  0%%0S %%%% ####$## $$0DA%```000`#......",
+"##0DA 0W00$````````##    0000`$00`0%%%%%%%",
+".#  $$###0$``####`$########`S0$`0$00 J J+%",
+".#0 $0#.##```#..#``##.....#`W`0$`0`%%%%%%%",
+".######..#####..#####.....###%0%####......",
+".............................%%%..........",
+}
+
+set_default_parent(cells[" "])
+create_world_by_map(level,cells)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

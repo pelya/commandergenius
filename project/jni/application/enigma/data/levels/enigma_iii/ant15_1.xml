@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Snow White -" el:subtitle="" el:id="ant15"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- update 2003-09-18 Sven Siggelkow: inserted "controllers=1" because the white marble didn't move
+
+actors = {}
+bctors = {}
+actor  = cell{{{add_multiactor, "ac-whiteball-small", actors, {player=0, mouseforce=0, essential=1}}}}
+bctor  = cell{{{add_multiactor, "ac-whiteball", bctors, {player=0, controllers=1, essential=1}}}}
+normal = cell{floor="fl-rough"}
+invert = cell{floor="fl-inverse"}
+stone  = cell{stone="st-glass"}
+tiles  = cell{{{randomfloor, {normal, invert}}}}
+mask   = cell{stone="st-chameleon"}
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+create_world(20, 13)
+fill_world_func(tiles)
+draw_border_func({normal, stone})
+draw_border_func(abyss, 1, 1, -2, -2)
+
+local x0, y0 = 4,4
+bctor(x0,y0)
+document(x0,y0,"text1")
+ngon_funcs(actor, {x0,y0}, 2.25, 3, 60)
+ngon_funcs({hollow, mask}, {15.5,7.5}, 2.5, 3, 0, floor)
+rubber_band_circle(actors, -10, 0)
+rubber_band_circle(actors, 40, 3.25)
+add_rubber_bands(actors, bctors, 10, 0)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Look ... they're over there!</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

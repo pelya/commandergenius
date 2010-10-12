@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<index xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd">
+
+  <info enigma="1.00" group="Déjà-vu" location="20400" network="false" owner="Enigma Team" release="1" revision="1" title="Oxyd Magnum"/>
+
+  <attributes/>
+
+  <levels>
+    <level _seq="1" _title="Out the Door" _xpath="./oxm02_1" author="Siegfried Fennig" ctrl="force" easy="false" id="siegfried95" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="2" _title="Cracks" _xpath="./oxm04_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin40" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="3" _title="Jam" _xpath="./oxm07_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin41" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="4" _title="Land of the Doors" _xpath="./oxm08_1" author="Martin Hawlisch" ctrl="force" easy="false" id="oxm08" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="5" _title="What's That?!" _xpath="./oxm09_1" author="Petr Machata" ctrl="force" easy="false" id="oxm009" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="6" _title="- Meditation -" _xpath="./oxm10_1" author="Petr Machata" ctrl="force" easy="false" id="oxm010" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="7" _title="Marbles &amp; Mountains" _xpath="./oxm11_1" author="Petr Machata" ctrl="force" easy="false" id="oxm011" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="8" _title="Laser Room" _xpath="./oxm12_1" author="Petr Machata" ctrl="force" easy="false" id="oxm012" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="9" _title="Oxyd Magnum 13" _xpath="./oxm13_1" author="Ulf Stegemann" ctrl="force" easy="false" id="20070105ulf018" rel="1" rev="68" score="1" target="time" unit="duration"/>
+    <level _seq="10" _title="Black or White" _xpath="./oxm14_1" author="Martin Hawlisch" ctrl="force" easy="false" id="oxm14" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="11" _title="Pull Me!" _xpath="./oxm16_1" author="Petr Machata" ctrl="force" easy="false" id="oxm016" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="12" _title="- Meditation -" _xpath="./oxm20_1" author="Petr Machata" ctrl="force" easy="false" id="oxm020" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="13" _title="Laser Room II" _xpath="./oxm21_1" author="Petr Machata" ctrl="force" easy="false" id="oxm021" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="14" _title="Black Holes" _xpath="./oxm23_1" author="Petr Machata" ctrl="force" easy="false" id="oxm023" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="15" _title="Hover Doors" _xpath="./oxm27_1" author="Siegfried Fennig" ctrl="force" easy="false" id="siegfried81" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="16" _title="Land of Impulses" _xpath="./oxm28_1" author="Siegfried Fennig" ctrl="force" easy="false" id="siegfried89" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="17" _title="Follow the Light" _xpath="./oxm33_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin49" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="18" _title="Tilt" _xpath="./oxm37_1" author="Martin Hawlisch" ctrl="force" easy="false" id="martin51" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="19" _title="Oxyd Magnum 40" _xpath="./oxm40_1" author="Raoul Bourquin" ctrl="force" easy="false" id="oxydmagnum40" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="20" _title="Light and Doors" _xpath="./oxm58_1" author="Siegfried Fennig" ctrl="force" easy="false" id="siegfried91" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="21" _title="Sensor Fields" _xpath="./oxm78_1" author="Siegfried Fennig" ctrl="force" easy="false" id="siegfried84" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="22" _title="Puller Mailing" _xpath="./oxm82_1" author="anonymous" ctrl="force" easy="false" id="magnum82" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="23" _title="Turnstiles" _xpath="./oxm84_1" author="Siegfried Fennig" ctrl="force" easy="false" id="siegfried82" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="24" _title="Hall of Mirrors" _xpath="./oxm96_1" author="Siegfried Fennig" ctrl="force" easy="false" id="siegfried96" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="25" _title="Letter Bomb" _xpath="./oxm99_1" author="Siegfried Fennig" ctrl="force" easy="false" id="siegfried97" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="26" _title="Magnum 100" _xpath="./oxm100_1" author="Sven Siggelkow" ctrl="force" easy="true" id="ss_mag100" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="27" _title="Oxyd Magnum Gold 17" _xpath="./oxmg17_1" author="Raoul Bourquin" ctrl="force" easy="false" id="oxydmagnumgold17" rel="1" rev="0" score="1" target="time" unit="duration"/>
+    <level _seq="28" _title="Oxyd Magnum Gold 18" _xpath="./oxmg18_1" author="Edward" ctrl="force" easy="false" id="oxydmagnumgold18" rel="1" rev="1" score="1" target="time" unit="duration"/>
+    <level _seq="29" _title="Oxyd Magnum Gold 19" _xpath="./oxmg19_1" author="Raoul Bourquin" ctrl="force" easy="false" id="oxydmagnumgold19" rel="1" rev="0" score="1" target="time" unit="duration"/>
+  </levels>
+
+</index>

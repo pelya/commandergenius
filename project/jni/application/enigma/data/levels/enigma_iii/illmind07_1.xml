@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="White Contrast" el:subtitle="" el:id="illmind07"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="illmind" el:email="support@mag-heut.net" el:homepage="http://www.mag-heut.net/"/>
+      <el:copyright>Copyright © illmind</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- !!BBE105!! Do not delete this line
+
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+
+levelh=13
+levelw=20
+enigma.FlatForce=30
+enigma.SlopeForce=30
+enigma.ElectricForce=30
+
+cells={}
+items={}
+stones={}
+
+stones[" "]=cell{}
+cells[" "]=cell{}
+items[" "]=cell{}
+
+cells["!"]=cell{floor="fl-acblack"}
+stones["!"]=cell{stone="st-rock6"}
+stones["#"]=cell{parent={{file_oxyd,"c"}}}
+stones["$"]=cell{stone="st-grate1"}
+stones["%"]=cell{stone="st-stone_break"}
+stones["&"]=cell{stone="st-swap"}
+stones["'"]=cell{stone="st-wood"}
+items["!"]=cell{item="it-hammer"}
+items["#"]=cell{item="it-document"}
+
+level={"!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!"}
+
+  itmap={"                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "              ! ##  ",
+         "                    ",
+         "                 !  ",
+         "                    ",
+         "                    ",
+         "                    "}
+ stmap={"!!!!!!!!!!!!!!!!!!!!",
+        "!#$!$$!$!$$$$%%%%#!!",
+        "!!!!$$!#!$$&$%%%%!#!",
+        "!$$$$$!!!$&!$%%%!#%!",
+        "!$$$$$$$$$$&$%%!%%%!",
+        "!$$$$$$$$$$$$%!%%%%!",
+        "!%%%%%!!!!!!!!%%%%%!",
+        "!%#%%!  $$$  '  '  !",
+        "!%%%!$&$$$$$$$$$!!!!",
+        "!%%!%$!&$$$&!$$$!$$!",
+        "!#!%%$&$$$$$$$$$!!!!",
+        "!!#%%$$$$$$$$$$$$$$!",
+        "!!!!!!!!!!!!!!!!!!!!"}
+
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+draw_map(0,0,itmap,items)
+
+SetAttrib(enigma.GetItem(16,7),"text","text1")
+SetAttrib(enigma.GetItem(17,7),"text","text2")
+
+set_actor("ac-whiteball",18.5,7.5,{player=0, controllers=1})
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">One  more  and  you  won't  get  this  hammer  until  you  don't  need  it  anymore!</el:english>
+      </el:string> 
+      <el:string el:key="text2">
+        <el:english el:translate="false">illmind's  white  contrast  ...</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation -" el:subtitle="" el:id="raoul24"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="raoul@users.berlios.de" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="0:27"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelh = 13
+levelw = 20
+
+wall="st-beads"
+floor="fl-mortar"
+
+create_world(levelw, levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+          if c=="x" then
+            set_floor(floor,i-1,line)
+        elseif c=="o" then
+            set_stone(wall,i-1,line)
+            set_floor(floor,i-1,line)
+        elseif c=="v" then
+            set_stone("st-oneway_white-s",i-1,line)
+            set_floor(floor,i-1,line)
+        elseif c=="^" then
+            set_stone("st-oneway_white-n",i-1,line)
+            set_floor(floor,i-1,line)
+        elseif c=="w" then
+            set_stone("st-white4",i-1,line)
+            set_floor(floor,i-1,line)
+        elseif c=="-" then
+            set_floor(floor,i-1,line)
+        elseif c==" " then
+            set_floor("fl-water",i-1,line)
+        elseif c=="0" then
+            set_floor(floor,i-1,line)
+            set_item("it-hollow",i-1,line)
+        end
+    end    
+end
+
+renderLine(00 , " ooooo       ooooo  ")
+renderLine(01 , " o---o       o---o  ")
+renderLine(02 , " o---o       o---o  ")
+renderLine(03 , " o---ooooooooo---o  ")
+renderLine(04 , " oovooo0---0ooovoo  ")
+renderLine(05 , " o-x-oo-----oo-x-o  ")
+renderLine(06 , " o---ww--0--ww---o  ")
+renderLine(07 , " o-x-oo-----oo-x-o  ")
+renderLine(08 , " oo^ooo0---0ooo^oo  ")
+renderLine(09 , " o---ooooooooo---o  ")
+renderLine(10 , " o---o       o---o  ")
+renderLine(11 , " o---o       o---o  ")
+renderLine(12 , " ooooo       ooooo  ")
+
+-- Special
+set_actor("ac-whiteball-small", 3.5,2.5, {controllers=0, name="ac1"})                    
+set_actor("ac-whiteball-small", 3.5,10.5, {controllers=0, name="ac2"})                    
+set_actor("ac-whiteball-small", 15.5,2.5, {controllers=0, name="ac3"})                    
+set_actor("ac-whiteball-small", 15.5,10.5, {controllers=0, name="ac4"})    
+set_item("it-rubberband",3,5,{target="ac1"})
+set_item("it-rubberband",3,7,{target="ac2"})
+set_item("it-rubberband",15,5,{target="ac3"})
+set_item("it-rubberband",15,7,{target="ac4"})                
+
+set_actor("ac-whiteball-small", 9.5,6.5, {controllers=1, player=0})                    
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

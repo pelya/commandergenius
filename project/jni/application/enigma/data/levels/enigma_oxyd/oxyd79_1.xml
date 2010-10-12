@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd"
+  xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Oxyd 79"
+        el:subtitle="Oxyd 79"
+        el:id="20070103ulf015"/>
+      <el:version el:score="1" el:release="1" el:revision="$Revision: 68 $" el:status="released"/>
+      <el:author  el:name="Ulf Stegemann" el:email="ulf-enigma@zeitform.de"
+        el:homepage="http://ulf.zeitform.de"/>
+      <el:copyright>Copyright © 2006 Ulf Stegemann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+        <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false" el:control="force"
+        el:scoreunit="duration" el:scoretarget="time"/>
+      <el:score el:easy="00:24" el:difficult="00:24"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- CELLS --
+cells={}
+cells["-"]=cell{floor="fl-abyss"}
+cells[" "]=cell{floor="fl-space"}
+cells["x"]=cell{floor="fl-metal"}
+cells["#"]=cell{stone="st-white1"}
+cells["e"]=cell{floor="fl-metal",item="it-extralife"}
+cells["r"]=cell{actor={"ac-rotor",{range=100,force=3}}}
+cells["O"]=cell{floor="fl-metal",actor="ac-blackball"}
+
+-- LANDSCAPE MAP --
+level = {
+   "--------------------",
+   "####################",
+   "#       xxx        #",
+   "#  xxx  xxx   xxx  #",
+   "#  xxx  xxe   xxx  #",
+   "#  xxx        xxx  #",
+   "#r                 #",
+   "# xxx   xOx        #",
+   "# xxx   xxx  xxx   #",
+   "# xxx   xxx  xxx   #",
+   "#            xxx   #",
+   "####################",
+   "--------------------"
+}
+
+-- GENERAL --
+enigma.ConserveLevel=TRUE
+oxyd_default_flavor = "a"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+oxyd(4,4)
+oxyd(3,8)
+oxyd(9,3)
+oxyd(15,4)
+oxyd(9,8)
+oxyd(14,9)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="false"/>
+      </el:string>
+     </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Wild" el:subtitle="" el:id="ant28"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+cells[" "]=cell{floor="fl-metal"}
+cells["#"]=cell{stone="st-rock1"}
+cells["S"]=cell{stone="st-rock1"}
+
+actors={}
+cells["O"]=cell{{{add_multiactor, "ac-blackball", actors, {player=0}}}}
+cells["Q"]=cell{{{add_multiactor, "ac-whiteball", actors, {player=1}}}}
+cells["0"]=oxyd
+
+cells["V"]=cell{{{gradient, 1}}}
+cells["^"]=cell{{{gradient, 2}}}
+cells[">"]=cell{{{gradient, 3}}}
+cells["<"]=cell{{{gradient, 4}}}
+cells["T"]=cell{{{gradient, 5}}}
+cells["L"]=cell{{{gradient, 7}}}
+cells["R"]=cell{{{gradient, 6}}}
+cells["/"]=cell{{{gradient, 8}}}
+
+level = {
+   "####################",
+   "#TVVVVVVVVVVVVVVVVR#",
+   "0>                <0",
+   "#>                <#",
+   "0>                <0",
+   "#>       Q        <#",
+   "0>                <0",
+   "#>        O       <#",
+   "0>                <0",
+   "#>                <#",
+   "0>                <0",
+   "#L^^^^^^^^^^^^^^^^/#",
+   "####################"
+}
+
+oxyd_default_flavor = "a"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+add_rubber_bands(actors, actors, 100, 0)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

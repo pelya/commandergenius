@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Dancing on Light Beams" el:subtitle="" el:id="andreas28"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Andreas Lochmann" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Andreas Lochmann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="01:08" el:difficult="01:19"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Created with the help of BBE 1.05
+
+Require("levels/lib/ant.lua")
+
+levelh=13
+levelw=20
+enigma.FlatForce=30
+enigma.SlopeForce=30
+enigma.ElectricForce=30
+
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+
+function ac_blackball(x,y)
+  set_actor("ac-blackball",x+0.5,y+0.5,{player=0,mouseforce=1.7})
+end
+
+function set_laser(x,y,s)
+  set_stone(s, x, y, {on = TRUE})
+end
+
+cells={}
+actors={}
+stones={}
+actors[" "]=cell{}
+stones[" "]=cell{}
+cells[" "]=cell{}
+
+cells["!"]=cell{floor="fl-stone"}
+cells["#"]=cell{floor="fl-rough-blue"}
+cells["$"]=cell{floor="fl-bumps"}
+cells["%"]=cell{floor="fl-water"}
+
+stones["!"]=cell{stone="st-rock8"}
+stones["O"]=cell{parent={{file_oxyd,"b"}}}
+stones["$"]=cell{parent={{set_itemfreeze}}}
+stones["S"]=cell{parent={{set_laser, "st-laser-s"}}}
+stones["N"]=cell{parent={{set_laser, "st-laser-n"}}}
+stones["E"]=cell{parent={{set_laser, "st-laser-e"}}}
+stones["W"]=cell{parent={{set_laser, "st-laser-w"}}}
+stones["B"]=cell{stone="st-polarswitch"}
+stones["L"]=cell{stone="st-lightpassenger"}
+stones["M"]=cell{stone="st-stoneimpulse_movable"}
+
+actors["!"]=cell{parent={{ac_blackball}}}
+
+level={"!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!"}
+   acmap={"                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "       !            ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    "}
+ stmap={"!!S!!S!!!!!!!!!!!!!!",
+        "! B  B             !",
+        "!          BW  S S !",
+        "!  S B         B B !",
+        "!  B L    EB       !",
+        "EB        B    B   !",
+        "!            B    BW",
+        "!    B  B       BBW!",
+        "!EB           B    !",
+        "!       B   B      !",
+        "!!!!!!!!N!!!N!!!!  !",
+        "!M M M M M M M M  BW",
+        "!!!!!!!!!!OOOOOO!!!!"}
+
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+draw_map(0,0,acmap,actors)
+oxyd_shuffle()
+
+function refresh_fire()
+  local x,y,c
+  for c = 1, eternal_fire_counter do
+    x = eternal_fire_x[c]
+    y = eternal_fire_y[c]
+    if enigma.GetKind(enigma.GetItem(x,y)) ~= "it-burnable_fireproof" then
+      set_item("it-burnable_burning", eternal_fire_x[c], eternal_fire_y[c])
+    else
+      if enigma.GetKind(enigma.GetFloor(x,y)) == floor_fire then
+        set_floor(mainfloor, x, y)
+      end
+      if x > 20 then 
+        set_floor(floor_up, x, y+1)
+        if y == 27 then
+          set_floor(floor_up, x, y)
+        end
+      end
+    end
+  end
+end
+
+if not difficult then
+  set_item("it-spring1", 6, 4)
+end
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,1101 @@
+2001-07-15 21:55  thomas
+
+	* Makefile.in, tests/Makefile.am, tests/Makefile.in,
+	tests/test_simplesmartptr.cpp, tests/test_zip.cpp,
+	zipios++/simplesmartptr.h:
+	
+	Changed tests/test_zip to be an autotest and commented out all the
+	debug prints. Changed tests/test_simplesmartptr to be an autotest
+	and changed SimpleSmartPointer to be more test friendly. Also
+	improved the test somewhat. Added both tests to makefile target
+	'check'.
+
+2001-07-15 21:13  thomas
+
+	* tests/: .cvsignore, all_tests.cpp:
+	
+	Forgot tests/all_tests.cpp in my previous commit. Updated
+	tests/.cvsignore to ignore files built for and by the new test.
+
+2001-07-15 21:10  thomas
+
+	* ChangeLog, NEWS, README, aclocal.m4, configure, configure.in,
+	src/fcollexceptions.cpp, tests/Makefile.am, tests/Makefile.in,
+	tests/testcase.h, tests/zipfiletest.cpp, tests/zipfiletest.h,
+	zipios++/fcollexceptions.h:
+	
+	Changed version number to 0.1.5. Added a new exception class called
+	simply Exception. Maybe it should become the base class of all the
+	other exceptions (instead of inheriting directly from
+	std::exception). Added an automatic test case, which can be run
+	with 'make check' - 'make check' of course depends on the build
+	being up to date, so for simple code/run-test iterations simply use
+	make check instead of just make.
+
+2000-12-07 19:54  thomas
+
+	* aclocal.m4, src/zipinputstream.cpp, src/zipinputstreambuf.cpp,
+	tests/Makefile.am, tests/Makefile.in,
+	tests/test_zipinputstream2.cpp, zipios++/zipinputstream.h,
+	zipios++/zipinputstreambuf.h:
+	
+	Pulled out the changes from the last commit. Adding a
+	getCurrentEntry() was the wrong solution to the problem. The right
+	solution is to model the java.util.zip.ZipInputStream, which means
+	that the first call to getNextEntry() gets you the first entry in
+	the Zip file. The right solution will be added shortly.
+
+2000-12-07 18:46  thomas
+
+	* aclocal.m4, src/zipinputstream.cpp, src/zipinputstreambuf.cpp,
+	tests/Makefile.am, tests/Makefile.in,
+	tests/test_zipinputstream2.cpp, zipios++/zipinputstream.h,
+	zipios++/zipinputstreambuf.h:
+	
+	Added a new method
+	
+	ConstEntryPointer getCurrentEntry() ;
+	
+	to ZipInputStreambuf and ZipInputStream.
+	
+	Also added a test in tests/test_zipinputstream2 that demonstrates
+	its use.
+
+2000-09-22 14:02  thomas
+
+	* zipios++/ziphead.h, zipios++/zipoutputstream.h,
+	zipios++/zipoutputstreambuf.h, src/zipoutputstream.cpp,
+	src/zipoutputstreambuf.cpp:
+	
+	ZipOutoutStreambuf and ZipOutputStream promised in their
+	documentation that they would close the attached ostream when
+	close() is invoked. That is not possible as ostreams don't have a
+	close() member function, so the ZipOutputStream and
+	ZipOutputStreambuf couldn't actually do it. To fix the situation
+	ZipOutputStreambuf no longer makes such a promise in the
+	documentation and ZipOutputStream only promises to do it, if it is
+	constructed with a filename as an argument, because then it knows
+	it is using a ofstream, which has a close() member function.
+	
+	Also fixed it so the field "total number of entries in the central
+	dir on this disk" is correctly set in the end-of-central-directory
+	structure of zip files created with ZipOutputStreambuf.
+
+2000-09-21 20:24  thomas
+
+	* src/ziphead.cpp, src/zipoutputstreambuf.cpp, zipios++/ziphead.h:
+	
+	A few zip header fields that e.g. WinZip cares about were not being
+	correctly initialized. This has been fixed and WinZip can
+	uncompress the Zip archive created by tests/test_zipoutputstream.
+
+2000-09-20 19:48  thomas
+
+	* tests/: test_zipinputstreambuf.cpp, test_zipoutputstream.cpp,
+	test_zipoutputstreambuf.cpp:
+	
+	Added ios::in | ios::binary to the ifstream constructors that
+	needed it, and wasn't already properly equipped.
+
+2000-09-20 19:46  thomas
+
+	* zipios++/zipheadio.h:
+	
+	Removed some leftover debug print-out statements.
+
+2000-08-25 21:26  thomas
+
+	* src/appendzip.cpp, src/deflateoutputstreambuf.cpp,
+	src/zipoutputstream.cpp, src/zipoutputstreambuf.cpp,
+	tests/test_zip.cpp, tests/test_zipoutputstreambuf.cpp,
+	zipios++/deflateoutputstreambuf.h, zipios++/zipoutputstreambuf.h:
+	
+	Added "ios::out | ios::binary" to all the ofstream constructor
+	invocations (all our files as binary).
+	
+	ZipOutputStream should now support the STORED "compression method",
+	but it has not been tested.
+
+2000-08-23 23:49  thomas
+
+	* src/zipinputstream.cpp, src/zipoutputstream.cpp,
+	tests/.cvsignore, tests/Makefile.am, tests/Makefile.in,
+	tests/test_zipoutputstream.cpp, zipios++/zipoutputstream.h:
+	
+	Added missing method forwarders from ZipOutputStream to
+	ZipOutputStreambuf, and added a test case
+	tests/test_zipoutputstream.cpp that is just a modification of
+	tests/test_zipoutputstreambuf.cpp to use ZipOutputStream.
+
+2000-08-23 20:47  thomas
+
+	* src/basicentry.cpp, src/deflateoutputstreambuf.cpp,
+	src/ziphead.cpp, src/zipinputstreambuf.cpp,
+	src/zipoutputstreambuf.cpp, zipios++/basicentry.h,
+	zipios++/deflateoutputstreambuf.h, zipios++/fileentry.h,
+	zipios++/ziphead.h:
+	
+	
+	The size of entries are now correctly stored in the entry headers
+	written by ZipOutputStreambuf.
+
+2000-08-23 20:23  thomas
+
+	* src/basicentry.cpp, src/deflateoutputstreambuf.cpp,
+	src/zipfile.cpp, src/ziphead.cpp, src/zipoutputstreambuf.cpp,
+	tests/.cvsignore, zipios++/Makefile.am, zipios++/Makefile.in,
+	zipios++/basicentry.h, zipios++/deflateoutputstreambuf.h,
+	zipios++/fileentry.h, zipios++/ziphead.h, zipios++/zipheadio.h,
+	zipios++/zipios_defs.h:
+	
+	ZipOutputStream now correctly computes the CRC-32 value for each
+	entry and stores it in the entry headers. unzip (from info-zip) no
+	longer complaints about 'bad CRC' for zip archives created with
+	ZipOutputStream.
+
+2000-08-22 23:58  thomas
+
+	* doxyfile, tests/test_simplesmartptr.cpp:
+	
+	Excluded a class from being processed by doxygen.
+
+2000-08-22 23:06  thomas
+
+	* aclocal.m4, src/Makefile.am, src/Makefile.in, src/appendzip.cpp,
+	src/backbuffer.h, src/deflateoutputstreambuf.cpp,
+	src/filteroutputstreambuf.cpp, src/ziphead.cpp, src/zipheadio.cpp,
+	src/zipoutputstream.cpp, src/zipoutputstreambuf.cpp,
+	tests/Makefile.am, tests/Makefile.in,
+	tests/test_zipoutputstreambuf.cpp, zipios++/Makefile.am,
+	zipios++/Makefile.in, zipios++/deflateoutputstreambuf.h,
+	zipios++/filteroutputstreambuf.h, zipios++/ziphead.h,
+	zipios++/zipheadio.h, zipios++/zipinputstream.h,
+	zipios++/zipoutputstream.h, zipios++/zipoutputstreambuf.h:
+	
+	Implemented ZipOutputStream (and ZipOutputStreambuf,
+	DeflateOutputStreambuf and FilterOutputStreambuf to do so).
+	
+	ZipOutputStream is as yet untested.
+	
+	ZipOutputStreambuf works for the simple test case
+	tests/test_zipoutputstreambuf.cpp.
+
+2000-08-20 23:13  kirkklobe
+
+	* src/: appendzip.cpp, backbuffer.h, basicentry.cpp, dircoll.cpp,
+	zipfile.cpp, zipinputstream.cpp:
+	
+	changed all ifstream(...) calls to include ios::in | ios::binary,
+	for Win32 compatibility.
+	
+	- Kirk
+
+2000-08-20 20:34  thomas
+
+	* zipios++/simplesmartptr.h:
+	
+	Added SimpleSmartPointer<>::SimpleSmartPointer &operator=( Type
+	*src ).
+	
+	MS VC++ couldn't figure out how to use the other copy-assignment
+	operators (combined with a user-defined conversion).
+
+2000-08-20 19:20  thomas
+
+	* tests/: .cvsignore, Makefile.am, Makefile.in,
+	test_simplesmartptr.cpp:
+	
+	Added test_simplesmartptr.cpp that tests SimpleSmartPointer.
+
+2000-08-11 17:07  thomas
+
+	* AUTHORS, acinclude.m4, aclocal.m4, zipios++/fcoll.h:
+	
+	Changed thomas@miba.auc.dk to thomass@deltadata.dk everywhere.
+
+2000-08-05 13:14  thomas
+
+	* Makefile.am, Makefile.in:
+	
+	Added win32/ to EXTRA_DIST so it becomes part of dist tar.gz file.
+
+2000-08-05 00:15  thomas
+
+	* src/: filepath.cpp, inflateinputstreambuf.cpp, ziphead.cpp:
+	
+	Fixes for the last few warnings experienced with VC6.
+
+2000-08-04 16:04  thomas
+
+	* src/collcoll.cpp, src/dircoll.cpp, src/fcoll.cpp,
+	src/zipfile.cpp, tests/example_zip.cpp, tests/test_appzip.cpp,
+	tests/test_collcoll.cpp, tests/test_dircoll.cpp,
+	tests/test_zip.cpp, zipios++/collcoll.h, zipios++/dircoll.h,
+	zipios++/fcoll.h, zipios++/fileentry.h:
+	
+	
+	Defined Entries typedef to replace vector< EntryPointer >. Also
+	defined a matching ConstEntries. All references to vector<
+	EntryPointer > and vector< ConstEntryPointer > has been update to
+	Entries and ConstEntries.
+
+2000-08-04 13:14  thomas
+
+	* win32/zipios.dsp:
+	
+	A shot at updating win32/zipios.dsp to reflect that
+	zipios++/fcoll_common.h is now src/zipios_common.h.
+
+2000-08-04 12:02  thomas
+
+	* AUTHORS:
+	
+	Credited Kirk in AUTHORS
+
+2000-08-04 11:29  thomas
+
+	* src/: dircoll.cpp, fcoll.cpp:
+	
+	Removed the use of the vector::vector( InputIterator first,
+	InputIterator Last ) constructor, which some versions of vector
+	don't have. This should fix a compilation problem with VC6.
+
+2000-08-04 00:06  thomas
+
+	* src/Makefile.am, src/Makefile.in, src/backbuffer.h,
+	src/basicentry.cpp, src/collcoll.cpp, src/ziphead.cpp,
+	src/zipinputstreambuf.cpp, src/zipios_common.h,
+	zipios++/Makefile.am, zipios++/Makefile.in,
+	zipios++/fcoll_common.h, zipios++/fileentry.h,
+	zipios++/zipios-config.h.in, zipios++/zipios-config.w32:
+	
+	Renamed/moved zipios++/fcoll_common.h to src/zipios_common.h.
+	Updated Makefiles and source files to reflect the change.
+	
+	Moved 'min' template from zipios++/zipios-config.w32 to
+	src/zipios_common.h (where it is now defined from scratch). Also
+	made sure that all files in which 'min' is used include
+	zipios_common.h
+
+2000-08-03 22:48  thomas
+
+	* src/directory.cpp:
+	
+	Fixed a bug that caused ./test_dircoll to dump core if closedir in
+	libc doesn't handle 0 pointers gracefully. This is the case for the
+	libc that is installed with e.g. Irix 6.5 and SunOS 5.8.
+
+2000-08-03 16:32  thomas
+
+	* AUTHORS:
+	
+	Kevin Shea is now credited in the AUTHORS file.
+
+2000-07-12 20:42  lemur
+
+	* src/appendzip.cpp, win32/Makefile.com, win32/Makefile.vc5:
+	
+	KS: something went wrong earlier, didn't get added then
+
+2000-07-12 20:38  lemur
+
+	* README, src/Makefile.vc5, src/appendzip.cpp, src/backbuffer.h,
+	src/basicentry.cpp, src/collcoll.cpp, src/dircoll.cpp,
+	src/directory.h, src/fcoll.cpp, src/filepath.cpp, src/zipfile.cpp,
+	src/ziphead.cpp, src/zipinputstreambuf.cpp, tests/Makefile.vc5,
+	tests/example_zip.cpp, tests/test_appzip.cpp, tests/test_zip.cpp,
+	tests/test_zipinputstream.cpp, tests/test_zipinputstreambuf.cpp,
+	win32/configure.bat, win32/zipios.dsp, win32/zipios.dsw,
+	zipios++/basicentry.h, zipios++/collcoll.h, zipios++/dircoll.h,
+	zipios++/fcoll.h, zipios++/fcoll_common.h, zipios++/filepath.h,
+	zipios++/meta-iostreams.h, zipios++/simplesmartptr.h,
+	zipios++/zipfile.h, zipios++/ziphead.h,
+	zipios++/zipios-config.h.in, zipios++/zipios-config.w32:
+	
+	KS: initial VC++ port
+
+2000-07-10 16:12  thomas
+
+	* doc/README:
+	
+	Added a file doc/README to explain why the doc/ directory is empty,
+	and how to get the documentation.
+
+2000-07-09 01:56  thomas
+
+	* zipios++/: fileentry.h, simplesmartptr.h:
+	
+	Added a ReferenceCount class template to simplify the process of
+	implementing classes suitable for being handled by
+	SimpleSmartPointer.
+	
+	Changed FileEntry to use it.
+
+2000-07-07 21:33  thomas
+
+	* Makefile.am, Makefile.in, aclocal.m4:
+	
+	Added a new target 'ChangeLog' to Makefile.am that updates the
+	ChangeLog from cvs using cvs2cl.pl.
+	
+	updated target webdoc to not copy the refman.ps to the html
+	directory. zipios++/fcoll.h has also been updated to not link to
+	refman.ps.
+
+2000-07-06 01:01  thomas
+
+	* aclocal.m4, src/Makefile.am, src/Makefile.in:
+	
+	Changed the libzipios_a_SOURCES in src/Makefile.am to ony include
+	the source files in src/.
+
+2000-07-06 00:25  thomas
+
+	* doxyfile:
+	
+	Fixed doxyfile to work with the new directory structure.
+
+2000-07-06 00:17  thomas
+
+	* ChangeLog, Makefile.am, Makefile.in, aclocal.m4, autogen.sh,
+	configure, configure.in, src/.cvsignore, src/Makefile.am,
+	src/Makefile.in, src/dircoll.cpp, src/zipfile.cpp,
+	tests/.cvsignore, tests/Makefile.am, tests/Makefile.in,
+	tests/test_dircoll.cpp, zipios++/.cvsignore, zipios++/Makefile.am,
+	zipios++/Makefile.in, zipios++/zipios-config.h.in:
+	
+	Added tests/Makefile.in, tests/Makefile.am and tests/.cvsignore.
+	
+	Fixed a bug in tests/test_dircoll.cpp it was set to use a directory
+	in my home directory, which is unlikely to be present on other
+	machines.
+	
+	Finished reshuffling the source code. It is now organized like
+	this:
+	
+	zipios++/   contains the public headers.  src/	      contains the
+	implementation tests/	   contains the test and example programs
+	
+	It compiles but there may be issues with stuff such as 'make dist'.
+	'make doc' doesn't work right now.
+
+2000-07-06 00:02  thomas
+
+	* src/example_zip.cpp, tests/example_zip.cpp:
+	
+	
+	Moved example_zip.cpp from src/ to tests/
+
+2000-07-05 23:35  thomas
+
+	* zipios++/: appendzip.cpp, backbuffer.h, basicentry.cpp,
+	collcoll.cpp, dircoll.cpp, directory.cpp, directory.h,
+	example_zip.cpp, fcoll.cpp, fcollexceptions.cpp, fileentry.cpp,
+	filepath.cpp, filterinputstreambuf.cpp, inflateinputstreambuf.cpp,
+	outputstringstream.h, zipfile.cpp, ziphead.cpp, zipinputstream.cpp,
+	zipinputstreambuf.cpp:
+	
+	
+	Moved all the implementation files back to the src/ directory, so
+	only the public headers reside in zipios++/
+
+2000-07-05 23:34  thomas
+
+	* src/: Makefile.am, Makefile.in, appendzip.cpp, backbuffer.h,
+	basicentry.cpp, collcoll.cpp, dircoll.cpp, directory.cpp,
+	directory.h, example_zip.cpp, fcoll.cpp, fcollexceptions.cpp,
+	fileentry.cpp, filepath.cpp, filterinputstreambuf.cpp,
+	inflateinputstreambuf.cpp, outputstringstream.h, zipfile.cpp,
+	ziphead.cpp, zipinputstream.cpp, zipinputstreambuf.cpp:
+	
+	Moved all the implementation files back to the src/ directory, so
+	only the public headers reside in zipios++/
+
+2000-07-05 22:55  thomas
+
+	* zipios++/: appendzip.cpp, backbuffer.h, basicentry.cpp,
+	basicentry.h, collcoll.cpp, dircoll.cpp, example_zip.cpp, fcoll.h,
+	fcollexceptions.cpp, fileentry.cpp, filterinputstreambuf.h,
+	inflateinputstreambuf.cpp, inflateinputstreambuf.h,
+	meta-iostreams.h, outputstringstream.h, virtualseeker.h,
+	zipfile.cpp, zipfile.h, ziphead.cpp, ziphead.h, zipinputstream.cpp,
+	zipinputstream.h, zipinputstreambuf.cpp:
+	
+	
+	Added a meta-iostreams.h header that includes all the right
+	iostream headers. Added a header outputstringstream.h which defines
+	a class OutputStringStream. OutputStringStream is typedef'ed to
+	ostringstream if sstream is present. Otherwise it is a subclass of
+	ostrstream that specializes the str() method, such that it can be
+	used as trivially as ostringstream::str().
+	
+	Updated all the relevant files to use the two added header files.
+	No more ugly #ifdef'ed #include directives in most of the files.
+	
+	Updated the introduction in \mainpage in fcoll.h
+
+2000-07-05 22:40  thomas
+
+	* tests/test.zip, tests/test_appzip.cpp, tests/test_collcoll.cpp,
+	tests/test_dircoll.cpp, tests/test_zip.cpp,
+	tests/test_zipinputstream.cpp, tests/test_zipinputstreambuf.cpp,
+	zipios++/test.zip, zipios++/test_appzip.cpp,
+	zipios++/test_collcoll.cpp, zipios++/test_dircoll.cpp,
+	zipios++/test_zip.cpp, zipios++/test_zipinputstream.cpp,
+	zipios++/test_zipinputstreambuf.cpp:
+	
+	Moved all the test programs from zipios++/ into a separate tests/
+	directory.
+
+2000-07-05 21:05  thomas
+
+	* zipios++/: filterinputstreambuf.h, inflateinputstreambuf.h,
+	zipinputstream.h, zipinputstreambuf.h:
+	
+	Declared copy-constructor and copy-assignment operator private in
+	all streambuf or istream derived classes.
+
+2000-06-30 22:47  thomas
+
+	* zipios++/virtualseeker.h:
+	
+	Added an inline doc comment to the VirtualSeeker class.
+
+2000-06-30 22:45  thomas
+
+	* doxyfile:
+	
+	Excluded zipios++/directory.{h|cpp} from being processed by
+	Doxygen.
+
+2000-06-27 19:29  thomas
+
+	* zipios++/: collcoll.h, fcoll.h, test_collcoll.cpp:
+	
+	Changed the CollectionCollection::inst() static member function to
+	return a reference rather than a pointer. Changed the typedef name
+	for CollectionCollection from CCol to CColl. Updated the \mainpage
+	doc to reflect these two changes. Changed test_collcoll.cpp to use
+	CColl::inst().
+
+2000-06-27 19:17  thomas
+
+	* zipios++/: collcoll.cpp, collcoll.h, test_collcoll.cpp:
+	
+	CollectionCollection now (resource-)manages the collections that
+	are added to it. Collections can be added by pointer, in which case
+	CollectionCollection assumes that the added collection is allocated
+	with new and assumes the responsibility of deleting it, when the
+	CollectionCollection is destroyed. Collections can also be added by
+	reference in which case CollectionCollection will clone the added
+	collection to get its own private copy.
+
+2000-06-27 19:10  thomas
+
+	* zipios++/: dircoll.cpp, dircoll.h, fcoll.h, zipfile.cpp,
+	zipfile.h:
+	
+	Added a copy-assignment operator to FileCollection.
+	
+	Added an isValid() member function and a pure virtual clone()
+	member function to FileCollection.
+	
+	Added implementations of clone() to DirectoryCollection and
+	ZipFile.
+
+2000-06-27 19:05  thomas
+
+	* zipios++/fileentry.h:
+	
+	FileEntry needed a copy-constructor and a copy-assignment operator,
+	because the reference count should not be copied. Instead the
+	copy-constructor initializes the reference count to zero, and the
+	copy-assignment operator leaves the existing value unchanged.
+
+2000-06-27 19:00  thomas
+
+	* zipios++/: ziphead.cpp, ziphead.h:
+	
+	ZipCDirEntry missed a clone() method, so it was inheriting the
+	clone() method from its immediate ancestor ZipLocalEntry. This
+	meant the ZipCDir specific part was not being cloned.
+
+2000-06-25 14:37  thomas
+
+	* NEWS:
+	
+	Put some stuff in the NEWS file.
+
+2000-06-25 00:12  thomas
+
+	* zipios++/fcoll.h:
+	
+	Added a copy constructor to FileCollection such that copies of
+	FileCollections are proper copies that do not share anything.
+
+2000-06-24 20:38  thomas
+
+	* zipios++/: filepath.cpp, filepath.h:
+	
+	Changed the FilePath constructor. It no longer has the
+	throw-exception-if-path-is-invalid feature. If necessary it is easy
+	to readd later, in which case the must_exist bool should be
+	replaced with some other input variable, where it is possible to
+	specify whether it needs to exist and what types are acceptable,
+	ie. regular file, directory etc.
+	
+	Added Doxygen comments.
+
+2000-06-24 20:06  thomas
+
+	* aclocal.m4, zipios++/Makefile.am, zipios++/Makefile.in,
+	zipios++/basicentry.cpp, zipios++/basicentry.h,
+	zipios++/dircoll.cpp, zipios++/dircoll.h, zipios++/directory.cpp,
+	zipios++/directory.h, zipios++/filepath.cpp, zipios++/filepath.h,
+	zipios++/filterinputstreambuf.h, zipios++/test_dircoll.cpp,
+	zipios++/zipios-config.h.in:
+	
+	
+	Finished the implementation of DirectoryCollection.
+
+2000-06-24 01:21  thomas
+
+	* AUTHORS:
+	
+	Added my e-mail address to the authors file next to my name. And
+	added a note about the origin of zipios++/directory.h and
+	zipios++/directory.cpp.
+
+2000-06-23 23:59  thomas
+
+	* Makefile.in, aclocal.m4, configure, configure.in,
+	zipios++/FlexLexer.h, zipios++/Makefile.am, zipios++/Makefile.in,
+	zipios++/flist.cpp, zipios++/flist.h, zipios++/flistentry.cpp,
+	zipios++/flistentry.h, zipios++/flistscanner.h,
+	zipios++/flistscanner.ll, zipios++/test_flist.cpp:
+	
+	
+	Removed FileList. This means the library no longer needs flex so we
+	don't check for it in configure anymore.
+
+2000-06-18 17:38  thomas
+
+	* README, aclocal.m4, configure, configure.in:
+	
+	Updated the version number to 0.1.4
+
+2000-06-18 17:18  thomas
+
+	* zipios++/: inflateinputstreambuf.cpp, zipinputstreambuf.cpp:
+	
+	Fixed a very bad bug, where ZipInputStreambuf::underflow() and
+	InflateInputStreambuf::underflow() would return eof prematurely.
+	
+	The problem was that if the character 255 unsigned (-1 unsigned)
+	was returned by underflow() it would be converted to the int -1,
+	which is the same as EOF. The fix is to return static_cast<
+	unsigned char >( *gptr ). This way EOF can never occur as a normal
+	data byte and this is exactly why underflow() returns an int and
+	not just a char.
+
+2000-06-18 17:06  thomas
+
+	* zipios++/: example_zip.cpp, test_appzip.cpp, test_collcoll.cpp,
+	test_dircoll.cpp, test_flist.cpp, test_zip.cpp,
+	test_zipinputstream.cpp, test_zipinputstreambuf.cpp:
+	
+	The code ufragment sed to copy data from an istream to an ostream
+	in all the test programs was verbose and wrong. I, ands been
+	replaced with ostreamm << istream.rdbuf(. everywhere.
+
+2000-06-17 13:42  thomas
+
+	* README:
+	
+	Small modification to the Installation section.
+
+2000-06-17 13:40  thomas
+
+	* README:
+	
+	The README file no contains useful information.
+
+2000-06-17 13:31  thomas
+
+	* INSTALL:
+	
+	The install file was empty.
+
+2000-06-12 12:13  thomas
+
+	* COPYING, Makefile.am, Makefile.in, aclocal.m4, configure,
+	configure.in, zipios++/appendzip.cpp, zipios++/backbuffer.h,
+	zipios++/basicentry.cpp, zipios++/basicentry.h,
+	zipios++/collcoll.cpp, zipios++/collcoll.h, zipios++/dircoll.cpp,
+	zipios++/dircoll.h, zipios++/example_zip.cpp, zipios++/fcoll.cpp,
+	zipios++/fcoll.h, zipios++/fcoll_common.h,
+	zipios++/fcollexceptions.cpp, zipios++/fcollexceptions.h,
+	zipios++/fileentry.cpp, zipios++/fileentry.h,
+	zipios++/filterinputstreambuf.cpp, zipios++/filterinputstreambuf.h,
+	zipios++/flist.cpp, zipios++/flist.h, zipios++/flistentry.cpp,
+	zipios++/flistentry.h, zipios++/flistscanner.h,
+	zipios++/flistscanner.ll, zipios++/inflateinputstreambuf.cpp,
+	zipios++/inflateinputstreambuf.h, zipios++/simplesmartptr.h,
+	zipios++/test_appzip.cpp, zipios++/test_collcoll.cpp,
+	zipios++/test_dircoll.cpp, zipios++/test_flist.cpp,
+	zipios++/test_zip.cpp, zipios++/test_zipinputstream.cpp,
+	zipios++/test_zipinputstreambuf.cpp, zipios++/virtualseeker.h,
+	zipios++/zipfile.cpp, zipios++/zipfile.h, zipios++/ziphead.cpp,
+	zipios++/ziphead.h, zipios++/zipinputstream.cpp,
+	zipios++/zipinputstream.h, zipios++/zipinputstreambuf.cpp,
+	zipios++/zipinputstreambuf.h:
+	
+	Changed the license from GPL to LGPL. Updated the version number to
+	0.1.3.
+
+2000-06-04 12:42  thomas
+
+	* ChangeLog:
+	
+	Updated Changelog
+
+2000-06-04 12:41  thomas
+
+	* aclocal.m4, configure, configure.in:
+	
+	Updated the version number to 0.1.2
+
+2000-05-29 19:35  thomas
+
+	* zipios++/: appendzip.cpp, fcoll.h, zipfile.h:
+	
+	Added documentation to the \mainpage inline doc entry in fcoll.h,
+	and added the appropriate anchors and docs in appendzip.cpp and
+	zipfile.h.
+
+2000-05-29 19:18  thomas
+
+	* zipios++/: backbuffer.h, fcoll.h, zipfile.h:
+	
+	Added inline documentation to zipfile.h
+	
+	Added @throw statements to the inline doc in backbuffer.h, fcoll.h
+	and zipfile.h.
+
+2000-05-29 16:45  thomas
+
+	* zipios++/fcoll.h:
+	
+	Updated zlib web link in doc.
+
+2000-05-29 16:28  thomas
+
+	* zipios++/fcoll.h:
+	
+	Updated documentation concerning tested platforms.
+
+2000-05-29 15:40  thomas
+
+	* zipios++/fcollexceptions.h:
+	
+	The copy constructors for all three defined exception types were
+	marked with explicit, which they really shouldn't be, and which gcc
+	2.95.2 really didn't like.
+	
+	Zipios++ has now been tested and found to work on
+	
+	Mandrake linux	 / gcc 2.95.2
+	
+	and
+	
+	RedHat 6.2 linux / egcs-2.91.66
+
+2000-05-29 15:23  thomas
+
+	* zipios++/simplesmartptr.h:
+	
+	Changed the SimpleSmartPointer class template, such that it doesn't
+	need to be an unbound friend with itself, which some compilers
+	don't support. Now it relies on that SimpleSmartPointer only has
+	one real resource, ie. the real pointer, and this resource is
+	available directly through the SimpleSmartPointer::get() method.
+
+2000-05-28 17:56  thomas
+
+	* zipios++/zipinputstreambuf.cpp:
+	
+	Replaced some cerr error print outs with exception throwing.
+
+2000-05-28 17:42  thomas
+
+	* zipios++/fcollexceptions.cpp:
+	
+	Removed commented out code.
+
+2000-05-28 17:39  thomas
+
+	* zipios++/zipfile.cpp:
+	
+	Removed cerr print outs. Instead appropriate exceptions are thrown.
+
+2000-05-25 21:25  thomas
+
+	* zipios++/ziphead.cpp:
+	
+	Removed unnecessary cerr print statements.
+
+2000-05-25 20:49  thomas
+
+	* zipios++/backbuffer.h:
+	
+	Removed unused unimplemented skeleton member function.
+
+2000-05-24 23:01  thomas
+
+	* zipios++/: backbuffer.h, fcollexceptions.cpp, fcollexceptions.h,
+	flist.cpp, test_appzip.cpp:
+	
+	Renamed fcollException to FCollException, which by accident did not
+	start with a capital letter(s).
+
+2000-05-24 22:52  thomas
+
+	* aclocal.m4, zipios++/.cvsignore, zipios++/Makefile.am,
+	zipios++/Makefile.in, zipios++/appendzip.cpp,
+	zipios++/backbuffer.h, zipios++/test_appzip.cpp,
+	zipios++/zipfile.cpp, zipios++/zipfile.h, zipios++/ziphead.h:
+	
+	Added a static method ZipFile::openEmbeddedZipFile() that opens an
+	embedded zipfile stored in the end of another file, only followed
+	by a 4 byte integer (stored in the same byte order as the 4 byte
+	unsigned integers in the zip header fields).
+	
+	Added a program appendzip that appends a zipfile to another file
+	and writes the 4 byte integer indicating the start of the zipfile
+	in the end of the file.
+	
+	Added a test_appzip test program.
+	
+	Added an if construction in BackBuffer that tests if the
+	VirtualSeeker object it has in its possession is invalid. This test
+	cannot be made by the VirtualSeeker object, as it does not have
+	access to the file it is used for, to determine if it is invalid.
+	Btw., it is invalid if start_offset is a position after end_offset
+	in the file, which happens if start_offset+end_offset >
+	true_file_length.
+
+2000-05-24 22:44  thomas
+
+	* zipios++/fcollexceptions.cpp:
+	
+	Disabled the debug prints to stderr.
+
+2000-05-23 22:34  thomas
+
+	* zipios++/virtualseeker.h:
+	
+	Added some stuff to make the MIPSpro 7.3 compiler happy in
+	-LANG:std mode.
+
+2000-05-23 22:05  thomas
+
+	* zipios++/virtualseeker.h:
+	
+	Forgot to add virtualseeker.h, which has a part in supporting 'zip
+	files' in files sorrounded by other data.
+
+2000-05-23 21:59  thomas
+
+	* aclocal.m4, zipios++/Makefile.am, zipios++/Makefile.in,
+	zipios++/backbuffer.h, zipios++/zipfile.cpp, zipios++/zipfile.h,
+	zipios++/ziphead.cpp, zipios++/ziphead.h:
+	
+	Made changes so ZipFile now works, even if the 'zip file' is stored
+	in a file with other data both ahead and after it.
+
+2000-05-21 16:55  thomas
+
+	* Makefile.am, Makefile.in, aclocal.m4, doxyfile, zipios++/fcoll.h:
+	
+	Changed the logo from a png to a jpg format image. Changed its
+	appearance too.
+
+2000-05-21 16:54  thomas
+
+	* doc/images/: zipios++.jpg, zipios++.png:
+	
+	Changed the logo.
+
+2000-05-20 20:05  thomas
+
+	* zipios++/: .cvsignore, zipios-config.h.in:
+	
+	Removed config.h added zipios++/zipios-config.h
+
+2000-05-20 20:04  thomas
+
+	* .cvsignore, aclocal.m4, config.h.in:
+	
+	Removed config.h.in added src/zipios-config.h
+
+2000-05-20 19:17  thomas
+
+	* Makefile.am, Makefile.in, aclocal.m4, configure, configure.in,
+	src/.cvsignore, src/FlexLexer.h, src/Makefile.am, src/Makefile.in,
+	src/backbuffer.h, src/basicentry.cpp, src/basicentry.h,
+	src/collcoll.cpp, src/collcoll.h, src/dircoll.cpp, src/dircoll.h,
+	src/example_zip.cpp, src/fcoll.cpp, src/fcoll.h,
+	src/fcoll_common.h, src/fcollexceptions.cpp, src/fcollexceptions.h,
+	src/fileentry.cpp, src/fileentry.h, src/filterinputstreambuf.cpp,
+	src/filterinputstreambuf.h, src/flist.cpp, src/flist.h,
+	src/flistentry.cpp, src/flistentry.h, src/flistscanner.h,
+	src/flistscanner.ll, src/inflateinputstreambuf.cpp,
+	src/inflateinputstreambuf.h, src/simplesmartptr.h, src/test.zip,
+	src/test_collcoll.cpp, src/test_dircoll.cpp, src/test_flist.cpp,
+	src/test_zip.cpp, src/test_zipinputstream.cpp,
+	src/test_zipinputstreambuf.cpp, src/zipfile.cpp, src/zipfile.h,
+	src/ziphead.cpp, src/ziphead.h, src/zipinputstream.cpp,
+	src/zipinputstream.h, src/zipinputstreambuf.cpp,
+	src/zipinputstreambuf.h, zipios++/.cvsignore, zipios++/FlexLexer.h,
+	zipios++/Makefile.am, zipios++/Makefile.in, zipios++/backbuffer.h,
+	zipios++/basicentry.cpp, zipios++/basicentry.h,
+	zipios++/collcoll.cpp, zipios++/collcoll.h, zipios++/dircoll.cpp,
+	zipios++/dircoll.h, zipios++/example_zip.cpp, zipios++/fcoll.cpp,
+	zipios++/fcoll.h, zipios++/fcoll_common.h,
+	zipios++/fcollexceptions.cpp, zipios++/fcollexceptions.h,
+	zipios++/fileentry.cpp, zipios++/fileentry.h,
+	zipios++/filterinputstreambuf.cpp, zipios++/filterinputstreambuf.h,
+	zipios++/flist.cpp, zipios++/flist.h, zipios++/flistentry.cpp,
+	zipios++/flistentry.h, zipios++/flistscanner.h,
+	zipios++/flistscanner.ll, zipios++/inflateinputstreambuf.cpp,
+	zipios++/inflateinputstreambuf.h, zipios++/simplesmartptr.h,
+	zipios++/test.zip, zipios++/test_collcoll.cpp,
+	zipios++/test_dircoll.cpp, zipios++/test_flist.cpp,
+	zipios++/test_zip.cpp, zipios++/test_zipinputstream.cpp,
+	zipios++/test_zipinputstreambuf.cpp, zipios++/zipfile.cpp,
+	zipios++/zipfile.h, zipios++/ziphead.cpp, zipios++/ziphead.h,
+	zipios++/zipinputstream.cpp, zipios++/zipinputstream.h,
+	zipios++/zipinputstreambuf.cpp, zipios++/zipinputstreambuf.h:
+	
+	Changes to allow zipios header files to be installed under
+	(/usr/)include/zipios++.
+	
+	Moved src/ to zipios++/ changed all zipios includes to include
+	zipios++/zipios-header.h. Updated Makefile.* to reflect these
+	changes, and added stuff in zipios++/Makefile.am to install the
+	header files when 'make install' is invoked.
+
+2000-05-19 14:39  thomas
+
+	* src/: zipfile.cpp, zipfile.h:
+	
+	Made ZipFile copy-constructible by removing the ifstream member
+	variable, that it had, but only ever used during initialization.
+
+2000-05-19 11:42  thomas
+
+	* aclocal.m4, src/.cvsignore, src/Makefile.am, src/Makefile.in,
+	src/test_collcoll.cpp:
+	
+	Added src/test_collcoll.cpp, a small test program to test
+	CollectionCollection. Updated src/.cvsignore and src/Makefile.am
+	appropriately.
+
+2000-05-19 11:32  thomas
+
+	* src/simplesmartptr.h:
+	
+	Fixed
+	
+	operator void*()
+	
+	that returned 'false' when 'true' and opposite.
+	
+	Made the methods that should be const const.
+
+2000-05-18 21:22  thomas
+
+	* src/: collcoll.cpp, collcoll.h:
+	
+	Implemented CollectionCollection::getInputStream()
+
+2000-05-18 16:48  thomas
+
+	* aclocal.m4, src/Makefile.am, src/Makefile.in:
+	
+	make install now installs libzipios.a in (/usr/)lib and now doesn't
+	install the test binaries.
+
+2000-05-16 19:52  thomas
+
+	* acconfig.h, aclocal.m4, config.h.in, configure, configure.in,
+	src/FlexLexer.h, src/backbuffer.h, src/basicentry.cpp,
+	src/basicentry.h, src/collcoll.cpp, src/dircoll.cpp,
+	src/example_zip.cpp, src/fcollexceptions.cpp, src/fileentry.cpp,
+	src/filterinputstreambuf.h, src/flist.cpp, src/flist.h,
+	src/flistscanner.ll, src/inflateinputstreambuf.cpp,
+	src/inflateinputstreambuf.h, src/test_dircoll.cpp,
+	src/test_flist.cpp, src/test_zip.cpp, src/test_zipinputstream.cpp,
+	src/test_zipinputstreambuf.cpp, src/zipfile.cpp, src/zipfile.h,
+	src/ziphead.cpp, src/ziphead.h, src/zipinputstream.cpp,
+	src/zipinputstream.h, src/zipinputstreambuf.cpp:
+	
+	Added a command-line switch --with-std-compliant-iostream to let
+	the user select whether the std compliant iostream library should
+	be used if it is present. The default is yes.
+
+2000-05-15 23:13  thomas
+
+	* aclocal.m4, src/Makefile.am, src/Makefile.in:
+	
+	Reverted the changes to src/Makefile.{am|in} - made in the previous
+	commit. They were not suppose to have gone into the repository.
+
+2000-05-15 23:09  thomas
+
+	* src/: Makefile.am, Makefile.in, collcoll.cpp, dircoll.cpp,
+	fileentry.h, flist.cpp, test_zip.cpp, zipfile.cpp:
+	
+	Minor Changes to make it possible to compile with the SGI MIPSpro
+	7.3 compiler. Except for dircoll.cpp, fileentry.h and test_zip.cpp
+	the only changes are that "duplicate default arguments" have been
+	removed from the .cpp files.
+
+2000-05-15 21:10  thomas
+
+	* config.h.in:
+	
+	config.h.in added.
+
+2000-05-14 21:36  thomas
+
+	* Makefile.am, Makefile.in, aclocal.m4:
+	
+	Small change to target 'webdoc' in Makefile.am, to "fix" a problem
+	with doxygen.
+
+2000-05-10 22:21  thomas
+
+	* src/dircoll.cpp:
+	
+	DirectoryCollection::getInputStream() now returns a 0 pointer
+	(wrapped in a ConstEntryPointer) if the specified entry is invalid,
+	as it should.
+	
+	Constructor fixed so the specified path doesn't have to end with a
+	/.
+
+2000-05-09 22:36  thomas
+
+	* src/: Makefile.am, Makefile.in, test_dircoll.cpp:
+	
+	Added src/test_dircoll.cpp to test DirectoryCollection. It compiles
+	and runs, but not correctly.
+
+2000-05-09 22:35  thomas
+
+	* aclocal.m4:
+	
+	Added a test_dircoll.cpp file to test DirectoryCollection. It runs,
+	but not correctly.
+
+2000-05-09 22:20  thomas
+
+	* src/: Makefile.am, Makefile.in, basicentry.cpp, basicentry.h,
+	collcoll.cpp, collcoll.h, dircoll.h, fcol.cpp, fcol.h,
+	fcol_common.h, fcolexceptions.cpp, fcolexceptions.h, fcoll.cpp,
+	fcoll.h, fcoll_common.h, fcollexceptions.cpp, fcollexceptions.h,
+	flist.cpp, flist.h, inflateinputstreambuf.cpp,
+	test_zipinputstream.cpp, zipfile.cpp, zipfile.h, ziphead.cpp,
+	zipinputstreambuf.h:
+	
+	Renamed fcol* to fcoll*.
+
+2000-05-09 22:13  thomas
+
+	* src/: backbuffer.h, basicentry.cpp, basicentry.h, collcoll.cpp,
+	collcoll.h, dircoll.cpp, dircoll.h, example_zip.cpp, fcol.cpp,
+	fcol.h, fcol_common.h, fcolexceptions.cpp, fcolexceptions.h,
+	fileentry.cpp, fileentry.h, filterinputstreambuf.cpp,
+	filterinputstreambuf.h, flist.cpp, flist.h, flistentry.cpp,
+	flistentry.h, flistscanner.h, flistscanner.ll,
+	inflateinputstreambuf.cpp, inflateinputstreambuf.h,
+	simplesmartptr.h, test_flist.cpp, test_zip.cpp,
+	test_zipinputstream.cpp, test_zipinputstreambuf.cpp, zipfile.cpp,
+	zipfile.h, ziphead.cpp, ziphead.h, zipinputstream.cpp,
+	zipinputstream.h, zipinputstreambuf.cpp, zipinputstreambuf.h:
+	
+	Changed the namespace name from fcol to zipios.
+
+2000-05-08 22:51  thomas
+
+	* Makefile.am, Makefile.in, aclocal.m4, src/fcol.h:
+	
+	ChangeLog is not on the zipios.sourceforge.net web site anymore.
+	Instead the \mainpage refers to the project page on SourceForge.
+
+2000-05-08 22:27  thomas
+
+	* Makefile.am, Makefile.in, aclocal.m4, doc/images/.cvsignore:
+	
+	Fixed it so the conversion of zipios++.png to zipios++.eps in the
+	'doc' target in the toplevel Makefile works.
+	
+	Added a doc/images/.cvsignore file containing the string
+	"zipios++.eps".
+
+2000-05-08 22:18  thomas
+
+	* doc/.cvsignore, doc/images/webgfx.gif, doc/images/zipios++.png,
+	src/test.zip:
+	
+	Imported doc/ and src/test.zip separately because the images and
+	the zip files had to be added with "cvs add -kb" to avoid line
+	ending conversion and keyword substitution.
+
+2000-05-08 22:10  thomas
+
+	* .cvsignore, AUTHORS, COPYING, ChangeLog, INSTALL, Makefile.am,
+	Makefile.in, NEWS, README, acconfig.h, acinclude.m4, aclocal.m4,
+	autogen.sh, configure, configure.in, doxyfile, install-sh, missing,
+	mkinstalldirs, src/.cvsignore, src/Makefile.am, src/backbuffer.h,
+	src/fcol.cpp, src/Makefile.in, src/fcol.h, src/fcol_common.h,
+	src/fcolexceptions.cpp, src/fcolexceptions.h, src/fileentry.cpp,
+	src/fileentry.h, src/filterinputstreambuf.h, src/flist.cpp,
+	src/flist.h, src/flistentry.cpp, src/flistentry.h,
+	src/flistscanner.h, src/flistscanner.ll,
+	src/inflateinputstreambuf.h, src/test_flist.cpp, src/test_zip.cpp,
+	src/test_zipinputstream.cpp, src/test_zipinputstreambuf.cpp,
+	src/zipfile.cpp, src/zipfile.h, src/ziphead.cpp,
+	src/zipinputstreambuf.h, src/FlexLexer.h, src/basicentry.cpp,
+	src/basicentry.h, src/collcoll.cpp, src/collcoll.h,
+	src/dircoll.cpp, src/dircoll.h, src/example_zip.cpp,
+	src/filterinputstreambuf.cpp, src/inflateinputstreambuf.cpp,
+	src/simplesmartptr.h, src/ziphead.h, src/zipinputstream.cpp,
+	src/zipinputstream.h, src/zipinputstreambuf.cpp:
+	
+	Initial revision
+
+2000-05-08 22:10  thomas
+
+	* .cvsignore, AUTHORS, COPYING, ChangeLog, INSTALL, Makefile.am,
+	Makefile.in, NEWS, README, acconfig.h, acinclude.m4, aclocal.m4,
+	autogen.sh, configure, configure.in, doxyfile, install-sh, missing,
+	mkinstalldirs, src/.cvsignore, src/Makefile.am, src/backbuffer.h,
+	src/fcol.cpp, src/Makefile.in, src/fcol.h, src/fcol_common.h,
+	src/fcolexceptions.cpp, src/fcolexceptions.h, src/fileentry.cpp,
+	src/fileentry.h, src/filterinputstreambuf.h, src/flist.cpp,
+	src/flist.h, src/flistentry.cpp, src/flistentry.h,
+	src/flistscanner.h, src/flistscanner.ll,
+	src/inflateinputstreambuf.h, src/test_flist.cpp, src/test_zip.cpp,
+	src/test_zipinputstream.cpp, src/test_zipinputstreambuf.cpp,
+	src/zipfile.cpp, src/zipfile.h, src/ziphead.cpp,
+	src/zipinputstreambuf.h, src/FlexLexer.h, src/basicentry.cpp,
+	src/basicentry.h, src/collcoll.cpp, src/collcoll.h,
+	src/dircoll.cpp, src/dircoll.h, src/example_zip.cpp,
+	src/filterinputstreambuf.cpp, src/inflateinputstreambuf.cpp,
+	src/simplesmartptr.h, src/ziphead.h, src/zipinputstream.cpp,
+	src/zipinputstream.h, src/zipinputstreambuf.cpp:
+	
+	Imported sources.
+

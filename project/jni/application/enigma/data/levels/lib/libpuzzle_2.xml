@@ -1,0 +1,801 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="library">
+      <el:identity el:title="" el:id="lib/libpuzzle"/>
+      <el:version el:score="2" el:release="2" el:revision="4" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2005, 2006, 2007 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="false" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- LIBPUZZLE, VERSION 2
+--
+-- Parameters:
+-- map: a charmap with the puzzle
+-- corner: top left corner, array {x,y}
+-- type: type of stone to use, one of these: "redpuzzle","bluepuzzle","bigbrick" or "bigbluesand"
+-- shuffle_method: shuffle method, one of these: "none","random" or "permutation"
+-- num_shuffles: Given number of shuffles to do. If not set, it will be a random number:
+--  -> in the intervall [num_pieces; num_pieces+random(1,num_pieces)] for the random shuffle method
+--  -> in the intervall [num_permutations; num_permutations + math.random(1,num_pieces)] for the permutation shuffle method
+--
+-- Globals:
+-- puzzle_map: the arraymap with the puzzle layout.
+-- part_map: map with the parts stored in it.
+-- parttable: the array with the parts.
+-- permutations: struct with all permutationdata.
+--
+-- DEFAULT VALUES:
+-- map = {"###",
+--        "# #",
+--        "###"}
+--
+-- corner = {0,0}
+-- 
+-- type = "redpuzzle"
+-- 
+-- shuffle = "none"
+--
+-- num_shuffles = nil (-> random number will be determined!)
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Wrapper to set a puzzle
+function puzzle(map, corner, type, shuffle_method, num_shuffles)
+    -- Are all parameters set?
+    -- If no, set the default for the missing ones.
+    if map == nil then
+        map = {"###","# #","###"}
+    end
+    if corner == nil then
+        corner = {0,0}
+    end
+    if type == nil then
+        type = "redpuzzle"
+    end
+    if shuffle == nil then
+        shuffle = "none"
+    end
+    -- Default (random) values for num_shuffles is set in the shuffle-functions.
+
+    -- IS THE map VALID?
+    -- Is the map bigger than 0 x 0 ?
+    local x, y = get_charmap_size(map)
+    if x < 1 or y < 1 then
+        error("puzzle(map, corner, type, shuffle_method, num_shuffles): Map "..tostring(x).." x "..tostring(y).." is too small!\n")
+    end
+    -- Is the map rectangular?
+    is_rectangular(map)
+    -- If there is no error until here, the map is ok
+    -- IS THE corner VALID?
+    if corner[1] < 0 or corner[2] < 0 then
+        error("puzzle(map, corner, type, shuffle_method, num_shuffles): Invalid value for top left map corner! "..tostring(corner[1])..";"..tostring(corner[2])..". It has to be >= (0;0).\n")
+    end
+    -- IS THE type VALID?
+    local stone_type = is_valid_type(type)
+    -- IS VALID shuffle?
+    local method = is_valid_shuffle(shuffle_method)
+    -- IS num_shuffle VALID?
+    if num_shuffles ~= nil and num_shuffles < 1 then
+        error("puzzle(map, corner, type, shuffle_method, num_shuffles): num_shuffles has illegal value "..tostring(num_shuffles).."! It has to be >= 1 or nil.\n") 
+    end
+    -- If there is no error until here, all parameters are ok
+    -- Beginn with the work.
+
+    -- DEBUG:
+    --plot_charmap(map)
+
+    -- Parse the charmap to a table:
+    parse_map(map)
+
+    -- DEBUG:
+    --plot_arraymap(puzzle_map)
+
+    -- Get the parts:
+    local num_pieces = 0
+    num_pieces = get_parts(puzzle_map)
+
+    -- DEBUG:
+    --plot_arraymap(part_map)
+
+    -- Determine the shuffle method to use.
+    if method == 1 then
+        shuffle_parts_with_noshuffle()
+    elseif method == 2 then
+        shuffle_parts_with_random(num_shuffles)
+    elseif method == 3 then
+        shuffle_parts_with_permutation(num_shuffles, num_pieces)
+    end
+
+    -- DEBUG:
+    --plot_arraymap(part_map)
+
+    plot_puzzle(corner,stone_type)
+    return 0
+end
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Helper functions --
+function get_array_size(array)
+    local its_size = table.getn(array)
+    return its_size
+end
+
+function get_charmap_size(map)
+    local y_size = table.getn(map)
+    local x_size = string.len(map[1])
+    return x_size, y_size
+end
+
+function get_arraymap_size(map)
+    local y_size = table.getn(map)
+    local x_size = table.getn(map[1])
+    return x_size, y_size
+end
+
+function is_inside_map(x,y)
+    local x_size, y_size = get_arraymap_size(puzzle_map)
+    if x < 0 or x > x_size then
+        error("is_inside_map(x,y): x is not inside of the map! "..tostring(x))
+    end
+    if y < 0 or y > y_size then
+        error("is_inside_map(x,y): y is not inside of the map! "..tostring(y))
+    end
+    return 0
+end
+
+function translate_type(type)
+    local translate_table =
+    {hollow = 1,     --"0000"
+     w =      2,     --"0001"
+     s =      3,     --"0010"
+     sw=      4,     --"0011"
+     e =      5,     --"0100"
+     ew =     6,     --"0101"
+     es =     7,     --"0110"
+     esw =    8,     --"0111"
+     n =      9,     --"1000"
+     nw =    10,     --"1001"
+     ns =    11,     --"1010"
+     nsw =   12,     --"1011"
+     ne =    13,     --"1100"
+     new =   14,     --"1101"
+     nes =   15,     --"1110"
+     nesw =  16}     --"1111"
+    return translate_table[type]
+end
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Security functions --
+function is_rectangular(map)
+    local x_size, y_size = get_charmap_size(map)
+    -- Length of the first line in the map:
+    local buffer = string.len(map[1])
+    local i
+    for i=1, y_size do
+        local temp = string.len(map[i])
+        if temp ~= buffer then
+            error("puzzle(map, corner, type, shuffle_method, num_shuffles): Map in not rectangular!\n")
+        end
+    end
+    return 0
+end
+
+function is_valid_type(type)
+    local stone
+    if type == "redpuzzle" then
+        stone = "st-puzzle2"
+    elseif type == "bluepuzzle" then
+        stone = "st-puzzle"
+    elseif type == "bigbrick" then
+        stone = "st-bigbrick"
+    elseif type == "bigbluesand" then
+        stone = "st-bigbluesand"
+    else
+        error("puzzle(map, corner, type, shuffle_method, num_shuffles): Invald type \""..tostring(type).."\"! It has to be one of these types: \"redpuzzle\",\"bluepuzzle\",\"bigbrick\" or \"bigbluesand\".")
+    end
+    return stone
+end
+
+function is_valid_shuffle(shufflemethod)
+    local method
+    if shufflemethod == "none" then
+        method = 1
+    elseif shufflemethod == "random" then
+        method = 2
+    elseif shufflemethod == "permutation" then
+        method = 3
+    else
+        error("puzzle(map, corner, type, shuffle_method, num_shuffles): Invald shuffle \""..tostring(shufflemethod).."\"! It has to be one of these methodes: \"none\",\"random\" or \"permutation\".")
+    end
+    return method
+end
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Parsing Functions --
+-- Create new, empty map for the puzzle layout:
+function new_puzzlemap(x_size, y_size)
+    -- new global:
+    puzzle_map = {}
+    local i, j = 0,0
+    for i=1, y_size do
+        -- each element of puzzlemap is an array:
+        puzzle_map[i] = {}
+        for j=1, x_size do
+            modify_puzzle_map(j,i,0)
+        end
+    end
+    return 0
+end
+
+function modify_puzzle_map(x,y,type)
+    puzzle_map[y][x] = type
+    return 0
+end
+--------------------------------------------------------------------------------
+-- functions for parsing the original map --
+function get_specific_char(map,x,y)
+    local akt_line = map[y]
+    local this_char = string.sub(akt_line,x,x)
+    return this_char
+end
+
+function parse_this_char(akt_char)
+    if akt_char == " " then
+        -- this is no piece
+        return 0
+    elseif akt_char == "#" then
+        -- this is a piece
+        return 1
+    elseif akt_char == "+" then
+        -- this is a pseudo piece
+        return 2
+    elseif akt_char == "*" then
+        -- this is the hole puzzzlepiece and the onconnected bigbrick
+        return 3
+    else
+        error("puzzle(map, corner, type, shuffle): Illegal char \""..akt_char.."\" in the map! Char must be one of these: \" \" = no piece, \"#\"= piece, \"+\"= pseudo-piece or \"*\"= hole puzzle piece.")
+    end
+end
+
+function parse_map(charmap)
+    local x_size, y_size = get_charmap_size(charmap)
+    -- Create a new puzzle_map with the right dimensions.
+    new_puzzlemap(x_size, y_size)
+
+    local i, j
+    for i=1, y_size do
+        for j=1, x_size do
+            local akt_char = get_specific_char(charmap,j,i)
+            local puzzle_type = parse_this_char(akt_char)
+            modify_puzzle_map(j,i,puzzle_type)
+        end       
+    end
+    return 0
+end
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Function for examining the puzzle --
+function is_on_border(x,y)
+    -- Test, if x and y are on the flood_map border.
+    local x_size, y_size = get_arraymap_size(puzzle_map)
+    local on_left, on_right, on_top, on_bottom = 0, 0, 0, 0
+    -- Is x on a border?
+    if x == 1 then
+        -- is on left border
+        on_left = 1
+    end
+    if x == x_size then
+        -- is on right border
+        on_right = 1
+    end
+    -- Is y on a border?
+    if y == 1 then
+        -- is on top border
+        on_top = 1
+    end
+    if y == y_size then
+        -- is on bottom border
+        on_bottom = 1
+    end
+    return on_left, on_right, on_top, on_bottom
+end
+--------------------------------------------------------------------------------
+-- New map with the kind of all parts at their location in the puzzle
+function new_partmap()
+    -- New Global:
+    part_map = {}
+
+    local x_size, y_size = get_arraymap_size(puzzle_map)
+    local i,j = 0,0
+    for i=1, y_size do
+        -- each element of partmap is an array:
+        part_map[i] = {}
+        for j=1, x_size do
+            part_map[i][j]="-"
+        end
+    end
+    return 0
+end
+
+function add_to_partmap(x,y,part)
+    part_map[y][x]=part
+    return 0
+end
+
+function get_piece_from_partmap(x,y)
+    return part_map[y][x]
+end
+
+-- Used for shuffle with permutation
+function shift_cell(cell,dir)
+-- Move the value of part_map[cell] into direction vector dir.
+    local cell_value = get_piece_from_partmap(cell[1],cell[2])
+    add_to_partmap(cell[1]+dir[1], cell[2]+dir[2], cell_value)
+    return 0
+end
+--------------------------------------------------------------------------------
+function has_piece(x,y)
+    -- There is a piece @ x,y
+    -- To be open for fututre map extension, test if there is NOT a gap or pseudopiece.
+    local temp = get_piece_from_puzzlemap(x,y)
+    if temp ~= 0 and temp ~= 2  then
+        return true
+    end
+    return false -- no piece found
+end
+
+function has_piece_or_pseudopiece(x,y)
+    -- There is a piece OR pseude piece @ x,y
+    -- The hole puzzlepiece is included as piece!
+    if puzzle_map[y][x] == 1 or puzzle_map[y][x] == 2 or puzzle_map[y][x] == 3 then
+        return true
+    end
+    return false -- no piece found
+end
+
+function has_hole_piece(x,y)
+    -- Is there the hole puzzle piece @ x,y?
+    if puzzle_map[y][x] == 3 then
+        return true
+    end
+    return false
+end
+
+function get_piece_from_puzzlemap(x,y)
+    return puzzle_map[y][x]
+end
+--------------------------------------------------------------------------------
+-- Determine the puzzles' connections from its position and neighbours in the puzzle_map
+function determine_puzzle_from_pos(x,y)
+    local north = ""
+    local east = ""
+    local south = ""
+    local west = ""
+    local part_buffer = "-"
+    local part_code = nil
+
+    local left, right, top, bottom = is_on_border(x,y)
+    -- NORTH
+    if top ~= 1 then
+        if has_piece_or_pseudopiece(x,y-1) or has_hole_piece(x,y) then north = "n" end
+    end
+    -- EAST
+    if right ~= 1 then
+        if has_piece_or_pseudopiece(x+1,y) or has_hole_piece(x,y) then east = "e" end
+    end
+    -- SOUTH
+    if bottom ~= 1 then
+        if has_piece_or_pseudopiece(x,y+1) or has_hole_piece(x,y) then south = "s" end
+    end
+    -- WEST
+    if left ~= 1 then 
+        if has_piece_or_pseudopiece(x-1,y) or has_hole_piece(x,y) then west = "w" end
+    end
+
+    -- To get a valid Stone if no neighbours were present, we define it as the
+    -- (untunneled) cross ("nesw")
+    if north == "" and east == "" and south == "" and west == "" then
+        north = "n"
+        east = "e"
+        south = "s"
+        west = "w"
+    end
+    
+    part_buffer = north..east..south..west
+    part_code = translate_type(part_buffer)
+    return part_code
+end
+
+-- Determine the puzzles' connections from its value in the puzzle_map
+function determine_puzzle_from_value(x,y)
+    local part_buffer = "-" -- the type for an inexistent puzzle
+    if get_piece_from_puzzlemap(x,y) == 3 then
+        -- hole puzzle!
+        part_buffer = "hollow"
+    -- Add other type here ...
+    end        
+    part_code = translate_type(part_buffer)
+    return part_code
+end
+--------------------------------------------------------------------------------
+-- Get the parts needed
+function get_parts(map)
+    new_partmap()
+
+    local x_size, y_size = get_arraymap_size(map)
+    local i, j = 0, 0
+    local part = ""
+    local num_pieces = 0
+    -- Examine where the piece @ x,y has to have connections
+    for i=1, y_size do
+        for j=1, x_size do
+            -- Examine the position only, if there is a part on it!
+            if has_piece(j,i) then
+                -- We have found a piece!
+                num_pieces = num_pieces+1
+                -- Which method gives us the puzzle-info?
+                if get_piece_from_puzzlemap(j,i) == 1 then
+                    -- We must examine the piece:
+                    part = determine_puzzle_from_pos(j,i)
+                else --if get_piece_from_puzzlemap(j,i) == 3 then we can predict the piece from its value in the puzzle_map
+                    part = determine_puzzle_from_value(j,i)
+                end
+            add_to_partmap(j,i,part)
+            end
+        end
+    end
+    return num_pieces
+end
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Shuffle with the noshuffle method
+function shuffle_parts_with_noshuffle()
+    -- Create the part_map with the unshuffled parts.
+    -- Do nothing. Just leave the part_map unchanged for an unshuffled puzzle.
+    return 0
+end
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Shuffle with the random method
+function new_parttable()
+    local part_array = {}
+    local x_size, y_size = get_arraymap_size(part_map)
+    local part_counter = 1
+    local part = nil
+    for i=1, y_size do
+        for j=1, x_size do
+            if has_piece(j,i) then
+                part = get_piece_from_partmap(j,i)
+                part_array[part_counter] = part
+                part_counter = part_counter+1
+            end
+        end
+    end  
+    return part_array
+end
+
+-- Write shuffled parts back to the part_map
+function write_shuffled_map(part_array)
+    local x_size, y_size = get_arraymap_size(part_map)
+    local part_counter = 1
+    local part = nil
+    for i=1, y_size do
+        for j=1, x_size do
+            if has_piece(j,i) then
+                part = part_array[part_counter]
+                add_to_partmap(j,i,part)
+                part_counter = part_counter+1
+            end
+        end
+    end  
+    return 0
+end
+
+-- Shuffle with the random method
+function swap_parts(part_array,k,l)
+    part_array[l], part_array[k] = part_array[k], part_array[l]
+    return 0
+end
+
+function shuffle_parts_with_random(num_swaps)
+    -- Create a linear table with all puzzlepieces in it:
+    local parttable = new_parttable()
+
+    -- How many swaps we will do?
+    local number_swaps = 0
+
+    local number_parts = get_array_size(parttable)
+    -- Is there a number of swaps to do given?
+    if num_swaps == nil then
+        -- If not, determine a random number:
+        number_swaps = number_parts + math.random(1,number_parts)
+    else
+        number_swaps = num_swaps
+    end
+
+    local i = 0
+    for i=1, number_swaps do
+        local r = math.random(1, number_parts)
+        local s = math.random(1, number_parts)
+        swap_parts(parttable,r,s)
+    end
+
+    write_shuffled_map(parttable)
+    return 0
+end
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Shuffle with the permutation method
+function new_permutation_table()
+    -- New Global:
+    permutations = {}
+    return 0
+end
+
+function add_permutation(start, stop)
+    local temp = {{start[1],start[2]},{stop[1],stop[2]}}
+    table.insert(permutations,temp)
+    return 0
+end
+
+function get_permutation_size(array,start)
+    local size_counter = 1
+    -- As long as there are pieces in the line to scan, go on
+    while array[start+size_counter]==1 or array[start+size_counter]==3 do
+        size_counter = size_counter+1
+    end
+    return size_counter
+end
+
+-- Scan row 
+function scan_row(row)
+    -- Create a temporary array with the row to scan.
+    local akt_row = puzzle_map[row]
+    local perm_size = 0
+    local i = 1
+    
+    while i <= table.getn(akt_row) do
+    -- We dont need to test the last element ... so i < ...
+        -- If there as a piece at position pos, examine how many pieces will follow
+        if has_piece(i,row) then     
+            perm_size = get_permutation_size(akt_row,i)
+            
+            if perm_size > 1 then
+            -- We have a real permutation (2 or more pieces in a row)
+            -- and not only one single piece.
+                add_permutation({i,row},{i+perm_size-1,row})
+                -- Go on after all the pieces found + 1 gap element.
+                -- If there would be a piece in the gap, the perm_size would be
+                -- one element bigger ...
+                -- The gap element is added below, so we can just increment i
+                -- in every loop.
+                i = i + perm_size --+1
+            end
+        end
+        i = i+1
+    end
+    return 0
+end
+
+-- Scan column
+function scan_col(col)
+    -- Create a temporary array with the column to scan.
+    local akt_col = {}
+    local k = 0
+    for k=1, table.getn(puzzle_map) do
+        akt_col[k] = puzzle_map[k][col]
+    end
+
+    local perm_size = 0
+    local i = 1
+     
+    while i <= table.getn(akt_col) do
+    -- We dont need to test the last element ... so i < ...
+        -- If there as a piece at position pos, examine how many pieces will follow
+        if has_piece(col,i) then     
+            perm_size = get_permutation_size(akt_col,i)
+            
+            if perm_size > 1 then
+            -- We have a real permutation (2 or more pieces in a row)
+            -- and not only one single piece.
+                add_permutation({col,i},{col,i+perm_size-1})
+                -- Go on after all the pieces found + 1 gap element.
+                -- If there would be a piece in the gap, the perm_size would be
+                -- one element bigger ...
+                -- The gap element is added below, so we can just increment i
+                -- in every loop.
+                i = i + perm_size --+1
+            end
+        end
+        i = i+1
+    end
+    return 0
+end
+
+function scan_puzzle_for_permutations()
+    -- Create a new table which will contain all permutations found
+    new_permutation_table()
+
+    local x_size, y_size = get_arraymap_size(puzzle_map)
+
+    local i, j = 0, 0
+    -- Scan the puzzle row for row for permutations
+    for i=1, y_size do
+        scan_row(i)
+    end
+    -- Scan the puzzle column for column for permutations
+    for j=1, x_size do
+        scan_col(j)
+    end
+    return 0
+end
+--------------------------------------------------------------------------------
+function is_horizontal(n)
+    -- Is the permutation horizontal or not?
+    -- y_start is same as y_stop?
+    if permutations[n][1][2] == permutations[n][2][2] then
+        return true
+    else
+        return false
+    end
+end
+
+function use_permutation(n)
+-- Use a specific permutation n
+    -- The data of the permutation n
+    local akt_permutation = permutations[n]
+    local akt_permutation_start = akt_permutation[1]
+    local akt_permutation_stop = akt_permutation[2]
+
+    -- Buffer for the last element
+    local last_element_buffer
+    -- Size of the used permutation
+    local permutation_size = 0
+
+    if is_horizontal(n) then
+    -- The permutation we use is a horizontal one.
+        last_element_buffer = part_map[akt_permutation_stop[2]][akt_permutation_stop[1]]
+        permutation_size = akt_permutation_stop[1]-akt_permutation_start[1]+1
+
+        local i = akt_permutation_stop[1]-1
+        while i >= akt_permutation_start[1] do
+            shift_cell({i,akt_permutation_start[2]},{1,0})
+            i = i-1
+        end
+
+        add_to_partmap(akt_permutation_start[1],akt_permutation_start[2],last_element_buffer)
+    else
+    -- The permutation we use is a vertical one.
+        last_element_buffer = part_map[akt_permutation_stop[2]][akt_permutation_stop[1]]
+        permutation_size = akt_permutation_stop[2]-akt_permutation_start[2]+1
+
+        local i = akt_permutation_stop[2]-1
+        while i >= akt_permutation_start[2] do
+            shift_cell({akt_permutation_start[1],i},{0,1})
+            i = i-1
+        end
+
+        add_to_partmap(akt_permutation_start[1],akt_permutation_start[2],last_element_buffer)
+    end
+    return 0
+end
+--------------------------------------------------------------------------------
+function shuffle_parts_with_permutation(num_permutations, pieces)
+    -- Scan the puzzle for all possible permutations.
+    scan_puzzle_for_permutations()
+
+    -- How many puzzlestones are in the current cluster?
+    local num_pieces = pieces
+
+    -- How many possible permutation we have?
+    local anz_permutations = table.getn(permutations)
+
+    if anz_permutations > 0 then
+        -- The number of permutations we will use
+        local num_permutations_to_do
+
+        if num_permutations == nil then
+        -- If there is no number of permutations to do given, determine a random one:
+            num_permutations_to_do = anz_permutations + math.random(1,num_pieces)
+        else
+            num_permutations_to_do = num_permutations
+        end
+
+        local i = 0
+        for i=1, num_permutations_to_do do
+            r = math.random(1,anz_permutations)
+            use_permutation(r)
+        end
+    end
+    return 0
+end
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Plotting Functions --
+function plot_puzzle(corner,stone_type)
+    local x_size, y_size = get_arraymap_size(puzzle_map)
+    local i = 0
+
+    for i=1, y_size do
+        for j=1, x_size do
+            if has_piece(j,i) then
+                -- Do not use this, because not all stones support this until now.
+                --local sockets = translate_type(part_map[i][j])
+                set_stone(stone_type.."-n",corner[1]+j-1,corner[2]+i-1,{connections = part_map[i][j]})
+            end
+        end
+    end
+    return 0
+end
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Debugging Functions --
+function plot_charmap(map)
+    local x_size, y_size = get_charmap_size(map)
+    local i
+    for i=1, y_size do
+        print(map[i])
+    end
+    return 0
+end
+
+function plot_arraymap(map)
+    local x_size, y_size = get_arraymap_size(map)
+    local i,j = 0,0
+    for i=1, y_size do
+        local temp = ""
+        for j=1, x_size do
+            temp = temp.."|"..tostring(map[i][j])
+        end
+        print(temp)
+    end
+    return 0
+end
+
+function print_stringarray(array)
+    local temp = ""
+    local size = get_array_size(array)
+    local i=0
+    for i=1, size do
+        temp = temp.."|"..array[i]
+    end
+    print(temp)
+    return 0
+end
+
+function print_array(array)
+    local temp = ""
+    local size = get_array_size(array)
+    local i=0
+    for i=1, size do
+        temp = temp.."|"..array[i]
+    end
+    print(temp)
+    return 0
+end
+
+function print_permutations()
+    local i = 0
+    for i=1, table.getn(permutations) do
+        local temp = ""
+        temp = "["..tostring(permutations[i][1][1])..","..tostring(permutations[i][1][2])..";"..tostring(permutations[i][2][1])..","..tostring(permutations[i][2][2]).."]"
+        print(temp)
+    end
+end
+--------------------------------------------------------------------------------
+---E--N--D------O--F------L--I--B--P--U--Z--Z--L--E-----------------------------
+--------------------------------------------------------------------------------
+    ]]></el:luamain>
+    <el:i18n>
+    </el:i18n>
+  </el:protected>
+</el:level>

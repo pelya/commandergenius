@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Send me the keys !" el:subtitle="" el:id="alain09"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Alain Busser" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Alain Busser</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="2:30"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+oxyd_default_flavor = "a"
+draw_border("st-blackballs")
+fill_floor("fl-black", 0,0, level_width,level_height)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone("st-blackballs", i-1, line)
+        elseif c=="G" then
+            set_floor("fl-space",i-1,line)
+            set_stone("st-glass",i-1,line)
+        elseif c=="s" then
+            set_floor("fl-mortar",i-1,line)
+        elseif c=="D" then
+            document(i-1,line,"text1")
+        elseif c == "o" then
+            oxyd( i-1, line)
+          elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {name="ac0"})
+            set_item("it-yinyang", i-1, line)
+        elseif c=="y" then
+            set_actor("ac-whiteball", i-.5,line+.5, {name="ac1"})
+            set_item("it-yinyang", i-1, line)
+        elseif c=="a" then
+                set_stone("st-key_a", i-1,line, {action="openclose", target="door1"})
+        elseif c=="b" then
+            set_stone("st-key_a",i-1,line,{action="openclose", target="door2"})
+        elseif c=="c" then
+            set_stone("st-key_a",i-1,line,{action="openclose", target="door3"})
+        elseif c=="d" then
+            set_stone("st-key_a",i-1,line,{action="openclose", target="door4"})
+        elseif c=="+" then
+            set_stone("st-grate1", i-1,line)
+        elseif c=="w" then
+            set_stone("st-wood", i-1,line)
+        elseif c=="f" then
+            doorh(i-1,line, {name="door1"})
+        elseif c=="g" then
+            doorh(i-1,line, {name="door2"})
+        elseif c=="h" then
+            doorh(i-1,line, {name="door3"})
+        elseif c=="i" then
+            doorh(i-1,line, {name="door4"})
+            elseif c =="U" then
+            set_item("it-key_a",i-1,line)
+            set_stone("st-wood",i-1,line)
+            elseif c =="V" then
+            set_item("it-key_a",i-1,line)
+                elseif c =="L" then
+                    set_stone("st-mail-w", i-1, line)
+                elseif c =="R" then
+                    set_stone("st-mail-e", i-1, line)
+          elseif c =="H" then
+                set_item("it-pipe-h",i-1,line)
+            elseif c =="I" then
+                set_item("it-pipe-v",i-1,line)
+            elseif c =="1" then
+                set_item("it-pipe-ne",i-1,line)
+            elseif c =="3" then
+                set_item("it-pipe-sw",i-1,line)
+        elseif c=="B" then
+            set_item("it-bag",i-1,line)
+        end
+    end    
+end
+
+--               01234567890123456789
+renderLine(00 , "                    ")
+renderLine(01 , " ssssssRGGG  HIH1H3 ")
+renderLine(02 , " ++++++  #G   HHH   ")
+renderLine(03 , " + w w+  #GG        ")
+renderLine(04 , " +w U +  #     ab   ")
+renderLine(05 , " + UVw+  GGGL  cd   ")  
+renderLine(06 , " +w U +  #          ")
+renderLine(07 , " + w w+  #sss#f#sss ")
+renderLine(08 , " +w w +  #s s#g#sys ")
+renderLine(09 , " ++++++  #sss#h#sss ")
+renderLine(10 , "    z    #####i#### ")
+renderLine(11 , "    D    #o       o ")
+renderLine(12 , "                    ") 
+--               01234567890123456789
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="fr">Envoie-moi les clefs!</el:translation>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">ALL the keys!!!</el:english>
+        <el:translation el:lang="fr">TOUTES les clefs!!!</el:translation>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

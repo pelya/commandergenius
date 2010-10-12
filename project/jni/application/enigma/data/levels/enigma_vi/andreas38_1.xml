@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Janus" el:subtitle="" el:id="andreas38"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Andreas Lochmann" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Andreas Lochmann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.0">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="true"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="02:25"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Created with the help of BBE 1.05
+
+levelh=25
+levelw=20
+enigma.FlatForce=30
+enigma.SlopeForce=30
+enigma.ElectricForce=30
+
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+function ac_whiteball(x,y)
+  set_actor("ac-whiteball", x+0.5, y+0.5, {player=1})
+  set_item("it-yinyang", x, y)
+end
+function ac_blackball(x,y)
+  set_actor("ac-blackball", x+0.5, y+0.5, {player=0})
+  set_item("it-yinyang", x, y)
+end
+
+cells={}
+items={}
+actors={}
+stones={}
+actors[" "]=cell{}
+stones[" "]=cell{}
+cells[" "]=cell{}
+items[" "]=cell{}
+cells["!"]=cell{floor="fl-black"}
+cells["#"]=cell{floor="fl-rock"}
+cells["$"]=cell{floor="fl-white"}
+stones["!"]=cell{stone="st-rock2"}
+stones["#"]=cell{stone="st-door-h"}
+stones["$"]=cell{parent={{file_oxyd,"b"}}}
+stones["%"]=cell{stone="st-wood"}
+items[" "]=cell{item={"it-trigger", {invisible=TRUE}}}
+items["!"]=cell{item={"it-trigger", {invisible=TRUE}}}
+items["t"]=cell{item={"it-trigger", {invisible=FALSE}}}
+actors["#"]=cell{parent={{ac_blackball}}}
+actors["!"]=cell{parent={{ac_whiteball}}}
+
+level={"!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!$!",
+       "!!!!!!!!!!!!!!!!!!$!",
+       "!!!!!!!!!!!!!!!!!!$!",
+       "!!!!!!!!!!!!!!!!!!$!",
+       "!!!!!!!!!!!!!!!!!!$!",
+       "!!!!!!!!!!!!!!!!!!$!",
+       "!!!!!!!!!!!!!!!!!!$!",
+       "!!!!!!!!!!!!!!!!!!$!",
+       "!!!!!!!!!!!!!!!!!!$!",
+       "!!!!!!!!!!!!!!!!!!$!",
+       "!!!!!!!!!!!!!!!!!!$!",
+       "#!################$#",
+       "$!$$$$$$$$$$$$$$$$$$",
+       "$!$$$$$$$$$$$$$$$$$$",
+       "$!$$$$$$$$$$$$$$$$$$",
+       "$!$$$$$$$$$$$$$$$$$$",
+       "$!$$$$$$$$$$$$$$$$$$",
+       "$!$$$$$$$$$$$$$$$$$$",
+       "$!$$$$$$$$$$$$$$$$$$",
+       "$!$$$$$$$$$$$$$$$$$$",
+       "$!$$$$$$$$$$$$$$$$$$",
+       "$!$$$$$$$$$$$$$$$$$$",
+       "$!$$$$$$$$$$$$$$$$$$",
+       "$$$$$$$$$$$$$$$$$$$$"}
+   acmap={"                    ",
+          "                    ",
+          "  !                 ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                    ",
+          "                 #  ",
+          "                    ",
+          "                    "}
+  itmap={"                    ",
+         "       t!           ",
+         "             !      ",
+         "     t!  t          ",
+         "         !          ",
+         "   t   t   t!       ",
+         "                    ",
+         "     t   t!  !      ",
+         "       !    !       ",
+         "       t            ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "                    ",
+         "        !           ",
+         "     !      t       ",
+         "         !          ",
+         "          t   t     ",
+         "    !        !      ",
+         "      ! t ! t   t   ",
+         "         !          ",
+         "          t   t     ",
+         "                    ",
+         "        !   t       ",
+         "                    "}
+ stmap={"!!!!!!!!!!!!!!!!!!!!",
+        "!          %     !$!",
+        "!                ! !",
+        "!                ! !",
+        "!         %      !#!",
+        "!        %   %   !#!",
+        "!     %        % !#!",
+        "!                !#!",
+        "!         %      !#!",
+        "!             %  !#!",
+        "!          %     !#!",
+        "!                !#!",
+        "!#!!!!!!!!!!!!!!!!#!",
+        "!#!                !",
+        "!#!                !",
+        "!#!                !",
+        "!#!    %    %      !",
+        "!#!   %  %         !",
+        "!#!                !",
+        "!#!    %           !",
+        "!#!       %        !",
+        "! !          %     !",
+        "! !   %            !",
+        "!$!        %       !",
+        "!!!!!!!!!!!!!!!!!!!!"}
+
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+draw_map(0,0,itmap,items)
+draw_map(0,0,acmap,actors)
+
+Signal ("it(8 14)","st(1 12)")
+Signal ("it(5 15)","st(1 13)")
+Signal ("it(9 16)","st(1 14)")
+Signal ("it(4 18)","st(1 15)")
+Signal ("it(13 18)","st(1 16)")
+Signal ("it(6 19)","st(1 17)")
+Signal ("it(10 19)","st(1 18)")
+Signal ("it(9 20)","st(1 19)")
+Signal ("it(8 23)","st(1 20)")
+Signal ("it(8 1)","st(18 4)")
+Signal ("it(13 2)","st(18 5)")
+Signal ("it(6 3)","st(18 6)")
+Signal ("it(9 4)","st(18 7)")
+Signal ("it(12 5)","st(18 8)")
+Signal ("it(13 7)","st(18 9)")
+Signal ("it(10 7)","st(18 10)")
+Signal ("it(12 8)","st(18 11)")
+Signal ("it(7 8)","st(18 12)")
+
+oxyd_shuffle()
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>
+

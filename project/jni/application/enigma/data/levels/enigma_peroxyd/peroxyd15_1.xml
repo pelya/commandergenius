@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Many Rings" el:subtitle="Per.Oxyd 15" el:id="martin09"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="per.oxyd">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world( levelw, levelh)
+
+fill_floor("fl-sand", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-metal", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "H" then
+            set_stone( "st-grate1", i-1, line)
+        end
+    end
+end
+
+-- Floor:   " "
+-- Border:  "#"
+-- Oxyd:    "o"
+
+renderLine(  0, "####################")
+renderLine(  1, "#                  #")
+renderLine(  2, "#        HHH       #")
+renderLine(  3, "#       H   H      #")
+renderLine(  4, "#      H  H  H     #")
+renderLine(  5, "#      H H H H     #")
+renderLine(  6, "#      H  H  H     #")
+renderLine(  7, "#       H   H      #")
+renderLine(  8, "#        HHH       #")
+renderLine(  9, "#                  #")
+renderLine( 10, "########## #########")
+renderLine( 11, "#o                o#")
+renderLine( 12, "####################")
+
+set_stone("st-door", 10, 10 , {name="door1", type="h"})
+set_stone( "st-shogun-sml", 9, 6)
+shogundot3( 10, 5, {target="door1", action="openclose"})
+set_stone("st-swap", 6,5)
+oxyd_shuffle()
+
+set_actor("ac-blackball", 3.5, 5.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

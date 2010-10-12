@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' version="2.0" xml:lang="en">
+  <xs:annotation>
+    <xs:documentation>
+      XML schema definitions for Enigma preferences ".enigma.xml"
+      Copyright © 2006 Ronald Lamprecht
+      GPL2
+    </xs:documentation>
+  </xs:annotation>
+  <xs:element name="preferences">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="properties" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              All simple hardware dependend key-value-properties:
+              MouseSpeed, VideoMode, MusicVolume, ...
+              Properties that describe the applications gaming state are
+              stored in state.xml
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="property" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="key" type="xs:string" use="required"/>
+                  <xs:attribute name="value" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element> <!-- property -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element> <!-- properties -->
+        
+        <xs:any namespace="##targetNamespace" minOccurs="0" maxOccurs="unbounded" processContents="skip">
+          <xs:annotation>
+            <xs:documentation>
+              Ignore any future incompatible extensions.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:any>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element> <!-- preferences -->
+</xs:schema>

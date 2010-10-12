@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Oxyd-Puzzle" el:subtitle="" el:id="raoul05"/>
+      <el:version el:score="1" el:release="1" el:revision="2" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="raoul@users.berlios.de" el:homepage=""/>
+      <el:copyright>Copyright © 2005,2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/libpuzzle" el:id="lib/libpuzzle" el:release="2" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="1:13"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelw = 20
+levelh = 13
+create_world(levelw, levelh)
+enigma.ConserveLevel = FALSE
+
+-- STONES --
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+          if c=="x" then
+                   set_floor("fl-metal",i-1,line)
+                   set_stone("st-glass1_hole",i-1,line)
+                elseif c=="#" then
+                   set_floor("fl-metal",i-1,line)
+                   set_stone("st-glass2",i-1,line)
+                elseif c==" " then
+                   set_floor("fl-metal",i-1,line)
+        end
+    end    
+end
+
+renderLine(00 , "####################")
+renderLine(01 , "#  x   xx   xx   x #")
+renderLine(02 , "#  x   xx   xx   x #")
+renderLine(03 , "#  x   xx   xx   x #")
+renderLine(04 , "#  xxxxxxxxxxxxxxx #")
+renderLine(05 , "#                  #")
+renderLine(06 , "#                  #")
+renderLine(07 , "#                  #")
+renderLine(08 , "# xxxxxxxxxxxxxxx  #")
+renderLine(09 , "# x   xx   xx   x  #")
+renderLine(10 , "# x   xx   xx   x  #")
+renderLine(11 , "# x   xx   xx   x  #")
+renderLine(12 , "####################")
+
+set_stone("st-switch_black", 5, 5, {action="callback",target="wrap1",name="sw1"})
+set_stone("st-switch_black", 4, 7, {action="callback",target="wrap4",name="sw4"})
+
+set_stone("st-switch_black", 10, 5, {action="callback",target="wrap2",name="sw2"})
+set_stone("st-switch_black", 9, 7, {action="callback",target="wrap5",name="sw5"})
+
+set_stone("st-switch_black", 15, 5, {action="callback",target="wrap3",name="sw3"})
+set_stone("st-switch_black", 14, 7, {action="callback",target="wrap6",name="sw6"})
+
+-- ACTORS --
+set_actor("ac-blackball", 2.5,6.5, {player=0})
+
+-- OXYD --
+onemal=0
+oxyd_default_flavor = "b"
+
+--RANDOM TILES FOR UPPER ROW:
+tiles={{{1,1,0},{0,1,0},{0,1,1}},{{0,1,1},{0,1,0},{1,1,0}},{{0,1,1},{1,1,0},{1,0,0}},{{1,1,0},{0,1,1},{0,0,1}},{{0,1,0},{1,1,1},{0,1,0}},{{1,1,1},{0,1,0},{0,1,0}},{{0,1,0},{0,1,0},{1,1,1}},{{1,1,1},{1,0,0},{1,0,0}},{{1,1,1},{0,0,1},{0,0,1}},{{0,1,0},{1,1,1},{1,0,0}},{{0,1,0},{1,1,1},{0,0,1}},{{1,1,0},{0,1,1},{0,1,0}},{{0,1,1},{1,1,0},{0,1,0}}}
+chosen_tiles_up = {}    
+leftcorners_up = {{4,1},{9,1},{14,1}}
+
+--chose tiles:
+ct=1
+for t=1,3 do
+    local r=random(1,13)
+    local f=tiles[r] 
+    chosen_tiles_up[ct]=f
+    ct=ct+1
+end
+
+--Draw black stones:
+for fields=1,3 do
+    for i=1,3 do
+        for j=1,3 do
+            if chosen_tiles_up[fields][i][j]==0 then
+                set_stone("st-glass2_hole",leftcorners_up[fields][1]+j-1,leftcorners_up[fields][2]+i-1)
+            end
+        end
+    end
+end
+
+--RANDOM TILES FOR LOWER ROW:
+tiles={{{1,1,0},{0,1,0},{0,1,1}},{{0,1,1},{0,1,0},{1,1,0}},{{1,0,0},{1,1,0},{0,1,1}},{{0,0,1},{0,1,1},{1,1,0}},{{0,1,0},{1,1,1},{0,1,0}},{{1,1,1},{0,1,0},{0,1,0}},{{0,1,0},{0,1,0},{1,1,1}},{{1,0,0},{1,0,0},{1,1,1}},{{0,0,1},{0,0,1},{1,1,1}},{{1,0,0},{1,1,1},{0,1,0}},{{0,0,1},{1,1,1},{0,1,0}},{{1,1,0},{0,1,1},{0,1,0}},{{0,1,1},{1,1,0},{0,1,0}}}
+chosen_tiles_lo = {}
+leftcorners_lo = {{3,9},{8,9},{13,9}}
+
+--chose tiles:
+ct=1
+for t=1,3 do
+    local r=random(1,13)
+    local f=tiles[r] 
+    chosen_tiles_lo[ct]=f
+    ct=ct+1
+end
+
+--Draw black stones:
+for fields=1,3 do
+    for i=1,3 do
+        for j=1,3 do
+            if chosen_tiles_lo[fields][i][j]==0 then
+                set_stone("st-glass2_hole",leftcorners_lo[fields][1]+j-1,leftcorners_lo[fields][2]+i-1)
+            end
+        end
+    end
+end
+
+--set the oxyds
+function set_oxyd()
+    if onemal==0 then
+        onemal=1
+        for o=0,2 do
+            oxyd(5+o*5,0)
+        end
+        for o=0,2 do
+            oxyd(4+o*5,12)
+        end
+        oxyd_shuffle()
+    end
+end
+
+--test if all puzzles set, if yes, set the oxyds
+da = {0,0,0,0,0,0}
+
+function do_test()
+    local ist=0
+    for l=1,6 do
+        ist=ist+da[l]
+    end
+    if ist==6 then
+        da={0,0,0,0,0,0}
+        set_oxyd()
+    end
+end
+
+--Wrap-Funktionen
+function generate_charmap(row,puzzle)
+    local charmap = {}
+    local i,j = 0, 0
+    for i=1,3 do
+        charmap[i] = {}
+        local buffer = ""
+        for j=1,3 do
+            if row == 1 then
+                if chosen_tiles_up[puzzle][i][j]==0 then
+                    buffer = buffer.." "
+                else
+                    buffer = buffer.."#"
+                end
+            else
+                if chosen_tiles_lo[puzzle][i][j]==0 then
+                    buffer = buffer.." "
+                else
+                    buffer = buffer.."#"
+                end
+            end
+        end
+        charmap[i] = buffer
+    end
+    return charmap
+end
+
+function wrap1()
+    local map = generate_charmap(1,1)
+    puzzle(map,leftcorners_up[1],"redpuzzle","permutation")
+    da[1]=1
+    do_test()
+end
+
+function wrap2()
+    local map = generate_charmap(1,2)
+    puzzle(map,leftcorners_up[2],"redpuzzle","permutation")
+    da[2]=1
+    do_test()
+end
+
+function wrap3()
+    local map = generate_charmap(1,3)
+    puzzle(map,leftcorners_up[3],"redpuzzle","permutation")
+    da[3]=1
+    do_test()
+end
+
+function wrap4()
+    local map = generate_charmap(2,1)
+    puzzle(map,leftcorners_lo[1],"redpuzzle","permutation")
+    da[4]=1
+    do_test()
+end
+
+function wrap5()
+    local map = generate_charmap(2,2)
+    puzzle(map,leftcorners_lo[2],"redpuzzle","permutation")
+    da[5]=1
+    do_test()
+end
+
+function wrap6()
+    local map = generate_charmap(2,3)
+    puzzle(map,leftcorners_lo[3],"redpuzzle","permutation")
+    da[6]=1
+    do_test()
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

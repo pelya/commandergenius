@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Pipe Dreams" el:subtitle="Per.Oxyd 99" el:id="level1e"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Siegfried Fennig" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Siegfried Fennig</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="per.oxyd">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+draw_border("st-metal")
+fill_floor("fl-gray")
+
+oxyd (1,1)
+oxyd (14,5)
+
+puzzle(4,8,PUZ_0001)
+puzzle(2,8,PUZ_0100)
+puzzle(3,8,PUZ_0101)
+puzzle(7,8,PUZ_0001)
+puzzle(5,8,PUZ_0100)
+puzzle(6,8,PUZ_0101)
+puzzle(5,5,PUZ_0001)
+puzzle(4,11,PUZ_0100)
+puzzle(4,5,PUZ_0101)
+
+abyss(5,11)
+
+document(12,3, "text1")
+draw_stones("st-metal", {9, 2}, {0,1},10)
+
+set_item("it-trigger", 3,11, {action="openclose", target="door"})
+set_stone("st-door", 9, 1 , {name="door", type="v"})
+
+set_stone("st-metal", 1,7)
+set_stones("st-metal", {{4,7},{5,7},{6,7},{3,10},{4,10}})
+
+set_actor("ac-blackball", 7,3)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">... did it!</el:english>
+        <el:translation el:lang="de">... geschafft!</el:translation>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

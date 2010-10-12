@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Flying" el:subtitle="" el:id="luc07"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Lukas Schüller" el:email="Lucky_Luc@web.de" el:homepage=""/>
+      <el:copyright>Copyright © 2005 Lukas Schüller</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Environment
+CreateWorld(39, 13) 
+draw_border("st-metal")
+fill_floor("fl-metal", 0,0, 20,13)
+fill_floor("fl-abyss", 20,0, 19,13)
+oxyd_default_flavor = "c"
+oxyd(1,1)
+oxyd(1,11)
+oxyd(1,6)
+oxyd(19,1)
+oxyd(19,11)
+oxyd(37,1)
+oxyd(37,11)
+oxyd(37,6)
+oxyd_shuffle()
+set_item("it-umbrella", 10,6)
+set_item("it-document", 19,6, {text="text1"})
+set_actor("ac-blackball",9.5,6.5, {player=0})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">You can fly for a short time if you use the umbrella.</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

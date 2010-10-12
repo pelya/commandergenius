@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Set Me Free" el:subtitle="" el:id="illmind06"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="illmind" el:email="support@mag-heut.net" el:homepage="http://www.mag-heut.net/"/>
+      <el:copyright>Copyright © 2005 illmind</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:credits>special thanks: CAPtainKOH</el:credits>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- level dimensions and standards
+levelw = 20
+levelh = 13
+create_world(levelw, levelh)
+oxyd_default_flavor = "d"
+draw_border("st-rock1")
+fill_floor("fl-black", 0,0, level_width,level_height)
+
+-- extra stones in level
+draw_stones("st-grate1", {4,1}, {1,0}, 12)
+draw_stones("st-grate1", {4,3}, {1,0}, 12)
+draw_stones("st-grate1", {4,9}, {1,0}, 12)
+draw_stones("st-grate1", {4,11}, {1,0}, 12)
+draw_stones("st-grate1", {1,4}, {0,1}, 5)
+draw_stones("st-grate1", {3,4}, {0,1}, 5)
+draw_stones("st-grate1", {16,4}, {0,1}, 5)
+draw_stones("st-grate1", {18,4}, {0,1}, 5)
+draw_stones("st-grate1", {4,2}, {1,0}, 4)
+draw_stones("st-grate1", {12,2}, {1,0}, 4)
+draw_stones("st-grate1", {4,10}, {1,0}, 4)
+draw_stones("st-grate1", {12,10}, {1,0}, 4)
+draw_stones("st-rock1", {6,4}, {1,0}, 8)
+draw_stones("st-rock1", {6,8}, {1,0}, 8)
+set_stones("st-grate1", {{2,1},{1,2},{2,2},{9,2},{10,2},{17,2},{18,2},{17,1},{2,6},{17,6}})
+set_stones("st-grate1", {{2,11},{1,10},{2,10},{9,10},{10,10},{17,10},{18,10},{17,11}})
+set_stones("st-grate1", {{2,4},{2,5},{2,7},{2,8},{17,4},{17,5},{17,7},{17,8}})
+set_stones("st-rock1", {{6,5},{7,5},{9,5},{10,5},{12,5},{13,5}})
+set_stones("st-rock1", {{6,7},{7,7},{9,7},{10,7},{12,7},{13,7}})
+set_stones("st-rock1", {{9,6},{10,6},{3,1},{3,2},{3,3},{2,3},{1,3},{16,1},{16,2},{16,3},{17,3},{18,3}})
+set_stones("st-rock1", {{1,9},{2,9},{3,9},{3,10},{3,11},{16,9},{16,10},{16,11},{17,9},{18,9}})
+set_stones("st-swap", {{8,2},{11,2},{4,4},{15,4},{4,8},{15,8},{8,10},{11,10}})
+
+-- reverse door functions 1
+open1=0
+function reverse1()
+if open1==1 then
+enigma.SendMessage(enigma.GetNamedObject("illdoorright01"),"open",nil)
+open1=0
+else
+enigma.SendMessage(enigma.GetNamedObject("illdoorright01"),"close",nil)
+open1=1
+end
+end
+
+-- reverse door functions 2
+open2=0
+function reverse2()
+if open2==1 then
+enigma.SendMessage(enigma.GetNamedObject("illdoorleft01"),"open",nil)
+open2=0
+else
+enigma.SendMessage(enigma.GetNamedObject("illdoorleft01"),"close",nil)
+open2=1
+end
+end
+
+-- reverse door functions 3
+open3=0
+function reverse3()
+if open3==1 then
+enigma.SendMessage(enigma.GetNamedObject("illdoorright02"),"open",nil)
+open3=0
+else
+enigma.SendMessage(enigma.GetNamedObject("illdoorright02"),"close",nil)
+open3=1
+end
+end
+
+-- reverse door functions 4
+open4=0
+function reverse4()
+if open4==1 then
+enigma.SendMessage(enigma.GetNamedObject("illdoorleft02"),"open",nil)
+open4=0
+else
+enigma.SendMessage(enigma.GetNamedObject("illdoorleft02"),"close",nil)
+open4=1
+end
+end
+
+-- trigger platforms
+set_item("it-trigger", 1, 1, {action="callback", target="reverse1"})
+set_item("it-trigger", 18, 1, {action="callback", target="reverse2"})
+set_item("it-trigger", 1, 11, {action="callback", target="reverse3"})
+set_item("it-trigger", 18, 11, {action="callback", target="reverse4"})
+
+-- trapdoors vertical
+set_stone("st-door", 6,  6, {name="illdoorleft01", type="v"})
+set_stone("st-door", 7,  6, {name="illdoorleft02", type="v"})
+set_stone("st-door", 12,  6, {name="illdoorright01", type="v"})
+set_stone("st-door", 13,  6, {name="illdoorright02", type="v"})
+
+-- items and documents
+set_item("it-document", 4,6, {text="text1"})
+
+-- multiplayer function with no yinyang
+function multiplayer_mode()
+actor={"ac-blackball", {player=0, mouseforce=1}}
+actor={"ac-whiteball", {player=1, mouseforce=1}}
+end
+
+-- oxyd stones
+oxyd(8,5)
+oxyd(8,7)
+oxyd(11,5)
+oxyd(11,7)
+oxyd_shuffle()
+
+-- blackball
+set_actor("ac-blackball", 15.5, 6.5, {player=0})
+
+-- whiteball(s)
+set_actor("ac-whiteball", 1.5, 1.5, {player=1})
+set_actor("ac-whiteball", 18.5, 1.5, {player=1})
+set_actor("ac-whiteball", 1.5, 11.5, {player=1})
+set_actor("ac-whiteball", 18.5, 11.5, {player=1})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="false">illmind's  set  me  free  ...  with  special  thanks  to  CAPtainKOH  for  help!</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Ice Breaker" el:subtitle="Oxyd Extra 14" el:id="oxe14"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd.extra">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+cells[" "]=cell{floor="fl-ice"}
+cells["#"]=cell{stone="st-rock5"}
+cells["I"]=cell{stone="st-actorimpulse"}
+cells["-"]=abyss
+cells["."]=cell{item= {"it-crack1"}}
+cells[","]=cell{item= {"it-crack2"}}
+cells[":"]=cell{item= {"it-crack3"}}
+
+level = {
+   "####################",
+   "#      I    I      #",
+   "# D .     ,      D #",
+   "#        .         #",
+   "#   II       .II . #",
+   "#        II ,,:,,  #",
+   "#I. 0I   00 ..I0. I#",
+   "#,,   .O II        #",
+   "#,:.II   .    II   #",
+   "#.:.           .   #",
+   "#.D.     .       D #",
+   "#      I    I      #",
+   "####################"
+}
+
+set_default_parent(cells[" "])
+oxyd_default_flavor = "c"
+create_world_by_map(level)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

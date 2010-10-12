@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd"
+  xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Counterclockwise"
+        el:id="20070126ulf020"/>
+      <el:version el:score="1" el:release="1" el:revision="$Revision: 93 $" el:status="released"/>
+      <el:author  el:name="Ulf Stegemann" el:email="ulf-enigma@zeitform.de"
+        el:homepage="http://ulf.zeitform.de"/>
+      <el:copyright>Copyright © 2007 Ulf Stegemann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+        <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false" el:control="force"
+        el:scoreunit="duration" el:scoretarget="time"/>
+      <el:score el:easy="00:59" el:difficult="01:08"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- DIFFICULTY --
+if difficult then
+  dstone = "st-likeoxydc"
+  dint = 0.20
+else
+  dstone = "st-bluegray"
+  dint = 0.30
+end
+
+-- CELLS --
+lasers={}
+cells={}
+cells[" "]=cell{floor="fl-rough_medium"}
+cells["#"]=cell{stone=dstone}
+cells["X"]=cell{stone="st-glass2"}
+cells["1"]=cell{{{add_multistone,"st-laser-e",lasers,{on=FALSE}}}}
+cells["2"]=cell{{{add_multistone,"st-laser-n",lasers,{on=FALSE}}}}
+cells["3"]=cell{{{add_multistone,"st-laser-w",lasers,{on=FALSE}}}}
+cells["4"]=cell{{{add_multistone,"st-laser-s",lasers,{on=FALSE}}}}
+cells["T"]=cell{item={"it-sensor",{action="callback",target="light_on"}}}
+cells["M"]=cell{item={"it-magnet",{on=TRUE,strength=100}}}
+
+-- LANDSCAPE MAP --
+level = {
+   "#######00######0####",
+   "#M      T  T      M#",
+   "# #4##0########### #",
+   "# #              3 #",
+   "# # XXXXXXXXXXXX 0 #",
+   "0 # XXXXXXXXXXXX # #",
+   "# # XXXXXXXXXXXX # 0",
+   "# 0 XXXXXXXXXXXX 0 #",
+   "# 0 XXXXXXXXXXXX 0 #",
+   "0 1              # #",
+   "# #####0########2# #", 
+   "#M                M#",
+   "#0###0###0##########"
+}
+
+-- FUNCTIONS --
+function light_on()
+  send_group_message(lasers,"on")
+end
+
+-- GENERAL --
+enigma.ConserveLevel=TRUE
+oxyd_default_flavor = "c"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+oxyd_shuffle()
+set_actor("ac-blackball",10,1.5,{player=0})
+mytop=set_actor("ac-top",9.5,11.5,{gohome=0})
+lightpass=set_stone("st-lightpassenger",9,9,{interval=dint})
+AddRubberBand(mytop,lightpass,50,0)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+     </el:i18n>
+  </el:protected>
+</el:level>

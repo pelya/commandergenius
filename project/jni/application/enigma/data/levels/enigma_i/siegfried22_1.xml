@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Ice Skating" el:subtitle="" el:id="level7a"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Siegfried Fennig" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Siegfried Fennig</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+
+fill_floor("fl-abyss")
+fill_floor("fl-ice", 1,1, 18,11)
+
+oxyd (0,0)
+oxyd (19,0)
+oxyd (0,12)
+oxyd (19,12)
+oxyd_shuffle()
+
+draw_stones("st-greenbrown_move", {3, 2}, {1,0},14)
+draw_stones("st-greenbrown_move", {3, 10}, {1,0},14)
+draw_stones("st-greenbrown_move", {2, 3}, {0,1},7)
+draw_stones("st-greenbrown_move", {17, 3}, {0,1},7)
+
+draw_stones("st-greenbrown_move", {6, 4}, {1,0},8)
+draw_stones("st-greenbrown_move", {6, 8}, {1,0},8)
+draw_stones("st-greenbrown_move", {5, 5}, {0,1},3)
+draw_stones("st-greenbrown_move", {14, 5}, {0,1},3)
+
+set_stones("st-death", {{2,2},{2,10},{17,2},{17,10}})
+set_stones("st-death", {{5,4},{5,8},{14,4},{14,8}})
+
+set_stone("st-grate1",10,6)
+
+set_actor("ac-blackball", 10.5, 6.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

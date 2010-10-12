@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Rotor Guards" el:subtitle="Hoisting guards with their own petard" el:id="duffy144"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Jacob Scott" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2007 Jacob Scott</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+rooms_wide=4
+rooms_high=1
+
+levelw=1+(19*rooms_wide)+1
+levelh=1+(12*rooms_high)
+
+create_world( levelw, levelh)
+enigma.BumperForce = 2000
+
+fill_floor("fl-normal", 0,0,levelw,levelh)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+        if c =="#" then
+            set_stone( "st-rock4", i-1, line)
+        elseif c =="b" then
+            set_stone( "st-black4", i-1, line)
+        elseif c =="H" then
+            set_stone( "st-stone_break", i-1, line)
+        elseif c =="F" then
+            set_stone( "st-actorimpulse", i-1, line)
+        elseif c =="S" then
+            set_stone( "st-swap", i-1, line)
+        elseif c =="P" then
+            set_stone( "st-pull", i-1, line)
+        elseif c == "o" then
+            oxyd( i-1, line)
+        elseif c == "*" then
+            set_stone( "st-brownie", i-1, line)
+        elseif c == "!" then
+            abyss(i-1,line)
+        elseif c == "~" then
+            set_floor("fl-water",i-1,line)
+        elseif c=="z" then
+            set_actor("ac-blackball", i-.5,line+.5, {name="z", player=0})
+        elseif c=="s" then
+            set_actor("ac-horse", i-1,line+.5, {controllers=0,player=1})
+        elseif c=="A" then
+            set_actor("ac-rotor", i-1,line+.5, {controllers=0,range=5,force=30,name="a"})
+        elseif c=="B" then
+            set_actor("ac-rotor", i-.5,line+.5, {controllers=0,range=2,force=15,name="b"})
+        elseif c=="C" then
+            set_actor("ac-rotor", i-.5,line+.5, {controllers=0,range=2,force=80,name="c"})
+            set_item("it-hammer",i-1,line)
+        elseif c=="D" then
+            set_actor("ac-rotor", i-.5,line+.5, {controllers=0,range=5.5,force=40,name="d"})
+        elseif c=="t" then
+            set_actor("ac-rotor", i-.5,line+.5, {controllers=0,range=0,force=0,name="t"})
+        elseif c == "g" then
+            draw_stones("st-grate1",{i-1,line}, {1,1}, 1)
+        elseif c=="+" then
+            set_stone( "st-wood", i-1, line)
+        elseif c=="=" then
+            set_floor("fl-space",i-1,line)
+        elseif c=="R" then
+            set_stone("st-oneway-e", i-1,line)
+        elseif c == "T" then
+            set_stone("st-timer",i-1,line,{loop=1,interval=0.1,action="callback",target="funcc1"})
+        end
+    end
+end
+
+renderLine(00,"#############################################################################T")
+renderLine(01,"#                  H       !!!!!!!!!!!!!!#               #                bo# ")
+renderLine(02,"#                  H       !!!!!!!!!!!!!!#       F   F   #                bb# ")
+renderLine(03,"#                  H       !!!!!!!!!!!!!!#     Sg        #                bo# ")
+renderLine(04,"#                  H       !!!!!!!!!!!!!!#     gg        #                bb# ")
+renderLine(05,"#                  H       ###############b### gg        #                bo# ")
+renderLine(06,"# s       C        b   z         A         R # gP  B  +  t             D  bb# ")
+renderLine(07,"#                  H       ###############b### gg        #                bo# ")
+renderLine(08,"#                  H       !!!!!!!!!!!!!!#     gg        #                bb# ")
+renderLine(09,"#                  H       !!!!!!!!!!!!!!#     Sg        #                bo# ")
+renderLine(10,"#                  H       !!!!!!!!!!!!!!#       F   F   #                bb# ")
+renderLine(11,"#                  H       !!!!!!!!!!!!!!#               #                bo# ")
+renderLine(12,"############################################################################# ")
+
+oxyd_shuffle()
+
+a=enigma.GetNamedObject("a")
+b=enigma.GetNamedObject("b")
+c=enigma.GetNamedObject("c")
+d=enigma.GetNamedObject("d")
+
+function funcc1()
+    x,y=enigma.GetPos(a)
+    if (x<29 or x>37) then
+        enigma.SetAttrib(a,"range",0)
+    else
+        enigma.SetAttrib(a,"range",5)
+    end
+    q,r=enigma.GetPos(c)
+    dc=((q-10)^2+(r-6)^2)^(1/2)
+    if (dc>1) then
+        enigma.SetAttrib(c,"range",0)
+    else
+        enigma.SetAttrib(c,"range",5)
+    end
+    t,u=enigma.GetPos(b)
+    db=((t-51)^2+(u-6)^2)^(1/2)
+    if (db>1) then
+        enigma.SetAttrib(b,"range",0)
+    else
+        enigma.SetAttrib(b,"range",5)
+    end
+    l,m=enigma.GetPos(d)
+    if (l<71 or m>9 or m<3) then
+        enigma.SetAttrib(d,"range",0)
+    else
+        enigma.SetAttrib(d,"range",5)
+    end
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Rotor Wächter</el:translation>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Wachen mit ihren eigenen Waffen schlagen</el:translation>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

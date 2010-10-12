@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Holes!" el:subtitle="" el:id="edward14"/>
+      <el:version el:score="1" el:release="1" el:revision="1" el:status="released"/>
+      <el:author  el:name="Edward" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Edward</el:copyright>
+      <el:license el:type="Donated to Enigma under the projects license" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="1:11"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world(20,13)
+
+draw_border("st-glass")
+
+function oxydline(line,p)
+    for i=1, strlen(p) do
+        local c=strsub(p,i,i)
+        if c=="#" then
+            set_floor("fl-white",i-1,line)
+        elseif c==" " then
+            set_floor("fl-black",i-1,line)
+        elseif c=="x" then
+            oxyd(i-1,line)
+        end
+    end
+end
+
+oxydline(00,"                    ")
+oxydline(01," x    x   x   x   x ")
+oxydline(02,"                    ")
+oxydline(03,"   ##  # # # # ##   ")
+oxydline(04,"  #  # # # # # # #  ")
+oxydline(05,"  #  # # # # # # #  ")
+oxydline(06,"  #  #  #   #  # #  ")
+oxydline(07,"  #  # # #  #  # #  ")
+oxydline(08,"  #  # # #  #  # #  ")
+oxydline(09,"   ##  # #  #  ##   ")
+oxydline(10,"                    ")
+oxydline(11," x    x   x   x   x ")
+oxydline(12,"                    ")
+
+--Holes with random target:
+for y=1, 11 do
+    for x=1,18 do
+        set_item("it-vortex-open",x,y,{targetx=random(1,18)+.5,targety=random(1,11)+.5})
+    end
+end
+
+--ugly: overwriting items!
+x=random(1,18)
+y=random(3,9)
+set_actor("ac-blackball",x+0.5,y+0.5,{player=0})
+set_item("it-yinyang",x,y)
+
+x=random(1,18)
+y=random(3,9)
+set_actor("ac-whiteball",x+0.5,y+0.5,{player=1})
+set_item("it-yinyang",x,y)
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

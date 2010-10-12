@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="River of Challenges" el:subtitle="At the Riverside" el:id="luc332006"/>
+      <el:version el:score="1" el:release="1" el:revision="3" el:status="released"/>
+      <el:author  el:name="Lukas Schüller" el:email="Lucky_Luc@web.de" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Lukas Schüller</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:credits el:showinfo="true" el:showstart="false">
+          Thanks to Raoul, Ronald and Andreas for testing and making small impovements
+        </el:credits>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+CreateWorld(39,37)
+oxyd_default_flavor="c"
+
+if difficult then
+  cvalue=13
+else
+  cvalue=15
+end
+
+l=1
+function toggle_laser()
+  if(l==0) then
+    l=1
+  else
+    l=0
+    SendMessage("thelaser","onoff",nil)
+  end
+end
+
+function writeFloors(line,cells)
+  for i=1, strlen(cells) do
+    local c = strsub(cells,i,i)
+    if(c==" ") then
+      set_floor("fl-leaves",i-1,line)
+    elseif(c=="-") then
+      set_floor("fl-leavesb",i-1,line)
+    elseif(c=="~") then
+      set_floor("fl-water",i-1,line)
+    elseif(c=="$") then
+      if difficult then
+        set_floor("fl-water",i-1,line)
+      else
+        set_floor("fl-leaves",i-1,line)
+      end
+    elseif(c=="x") then
+      set_floor("fl-abyss",i-1,line)
+    elseif(c==".") then
+      set_floor("fl-sand",i-1,line)
+    elseif(c=="+") then
+      set_floor("fl-wood",i-1,line)
+    elseif(c==":") then
+      set_floor("fl-dunes",i-1,line)
+    elseif(c=="#") then
+      set_floor("fl-rock",i-1,line)
+    elseif(c=="b") then
+      set_floor("fl-bridge",i-1,line,{type="x"})
+    elseif(c=="j") then
+      set_floor("fl-springboard",i-1,line)
+    end
+  end
+end
+
+writeFloors(00,"                ..~~~~~~~..            ")
+writeFloors(01,"                ...~~~~~~..          - ")
+writeFloors(02,"                 ..~~~~~~...       ~ - ")
+writeFloors(03,"                 ..~~~~~~~...      ~ - ")
+writeFloors(04,"                 ..~~~~~~~~..    ~~~ ~ ")
+writeFloors(05,"                 ..~~~~~~~~..     -~~~ ")
+writeFloors(06,"                 ..~~~~~~~~...      -- ")
+writeFloors(07,"                 ..~~~~~~~~~..         ")
+writeFloors(08,"                  .~~~~~~~~~.          ")
+writeFloors(09,"                   ~~~~~~~~~           ")
+writeFloors(10,"               ::::+++b++bb++::::::::::")
+writeFloors(11,"               :    ~~~~~~~~~          ")
+writeFloors(12,"       ############ ~~~~~~~~~          ")
+writeFloors(13," ----- ############  ~~~~~~~~~         ")
+writeFloors(14," - # - ############   ~~~~~~~~         ")
+writeFloors(15," - :   ############  :++++~~~~         ")
+writeFloors(16," - ::::############::: ~~++++++        ")
+writeFloors(17," -    :############    ~~~~~~~         ")
+writeFloors(18," - ::::############  ~~~+++++~~        ")
+writeFloors(19," - :   ############  ~+++~~~++++       ")
+writeFloors(20," - :   ##b######### ~~+~~~~~~~~        ")
+writeFloors(21," - :   ############  ~+~++++++++       ")
+writeFloors(22," - ::::~~~::    :    ~+++~~~~~~        ")
+writeFloors(23," -     ~~  ::   :    ~~~~~+++++::::::::")
+writeFloors(24," #         :::  :   ~~~~+++~+~~~  -----")
+writeFloors(25," --------- :::  :::    ~~~~~+~~~   ----")
+writeFloors(26,"#########- :::  ##:::::++++++~~~    ---")
+writeFloors(27,"#########- ::  ###     ~~~~~~~~~     --")
+writeFloors(28,"#########- :    #      ~~~~~~~~~.    --")
+writeFloors(29,"#########:::    -      ~~~~~~~~~~.   --")
+writeFloors(30,"#########- :#---         ~~~~~~~~..    ")
+writeFloors(31,"#########- : ---         ~~~~~~~~~..   ")
+writeFloors(32,"#########  : ---~         ~~~~~~~~..   ")
+writeFloors(33,"   $~  $~  :#  ~~~        ~~~~~~~~..   ")
+writeFloors(34,"   $~  $~       ~         xxx++xxx...  ")
+writeFloors(35,"   $~  $~                 ~~~~~~~~~..  ")
+writeFloors(36,"                           ~~~~~~~~..  ")
+
+function writeStones(line,cells)
+  for i=1, strlen(cells) do
+    local c = strsub(cells,i,i)
+    if(c=="#") then
+      set_stone("st-camouflage",i-1,line)
+    elseif(c=="?") then
+      set_stone("st-invisible",i-1,line)
+    elseif(c=="+") then
+      set_stone("st-rock1",i-1,line)
+    elseif(c=="*") then
+      set_stone("st-wood_001",i-1,line)
+    elseif(c==".") then
+      set_stone("st-stoneimpulse",i-1,line)
+    elseif(c=="-") then
+      set_stone("st-brownie",i-1,line)
+    elseif(c=="s") then
+      set_stone("st-swap",i-1,line)
+    elseif(c=="1") then
+      set_stone("st-puzzle-ew",i-1,line)
+    elseif(c=="2") then
+      set_stone("st-puzzle-e",i-1,line)
+    elseif(c=="3") then
+      set_stone("st-puzzle-nw",i-1,line)
+    elseif(c=="4") then
+      set_stone("st-puzzle-s",i-1,line)
+    elseif(c=="5") then
+      set_stone("st-puzzle-ns",i-1,line)
+    elseif(c=="6") then
+      set_stone("st-puzzle-w",i-1,line)
+    elseif(c=="e") then
+      set_stone("st-laser-e",i-1,line,{init="false",name="thelaser"})
+    elseif(c=="x") then
+      set_stone("st-stone_break",i-1,line)
+    elseif(c=="$") then
+      if not difficult then
+        set_stone("st-stone_break",i-1,line)
+      end
+    elseif(c=="/") then
+      set_stone("st-mirror-p\\",i-1,line)
+    elseif(c=="&") then
+      set_stone("st-bolder-e",i-1,line)
+    elseif(c=="X") then
+      set_stone("st-grate1",i-1,line)
+    elseif(c=="|") then
+      set_stone("st-door-v",i-1,line)
+    elseif(c=="v") then
+      set_stone("st-oneway_black-s",i-1,line)
+    elseif(c=="<") then
+      set_stone("st-oneway_black-w",i-1,line)
+    elseif(c==">") then
+      set_stone("st-oneway_black-e",i-1,line)
+    elseif(c=="^") then
+      set_stone("st-oneway_black-n",i-1,line)
+    elseif(c=="k") then
+      set_stone("st-knight",i-1,line)
+    elseif(c=="A") then
+      set_stone("st-floppy",i-1,line)
+    elseif(c=="B") then
+      set_stone("st-key_a",i-1,line)
+    elseif(c=="C") then
+      set_stone("st-switch",i-1,line)
+    elseif(c=="D") then
+      set_stone("st-coinslot",i-1,line)
+    elseif(c=="o") then
+      oxyd(i-1,line)
+    end
+  end
+end
+
+writeStones(00,"##################???????########..##o#")
+writeStones(01,"########     ######                 # #")
+writeStones(02,"#         ##   ####             #   # #")
+writeStones(03,"#     ##       ####             ### # #")
+writeStones(04,"# 121 #    #   #                    # #")
+writeStones(05,"#     #    #  ## #               #    #")
+writeStones(06,"o 315 ######                     ###  #")
+writeStones(07,"#     ###      # #            s    ####")
+writeStones(08,"# 141      ## ##                      #")
+writeStones(09,"#      ##  ## #### *********          #")
+writeStones(10,"#      #  ### #                       #")
+writeStones(11,"########      # ####*********#        #")
+writeStones(12,"#######+++++..+ +++#         ##########")
+writeStones(13,"#     #+o ++-+   B+#e$$$$$xxxxxxxxxxx/#")
+writeStones(14,"# #v# #+  +A      +###        #######x#")
+writeStones(15,"# # ###+  ++++    +##         #     #x#")
+writeStones(16,"# #    <              #         ### #x#")
+writeStones(17,"# #### + +        +####       ##### #x#")
+writeStones(18,"# #    + +        +##          #### #x#")
+writeStones(19,"# # ###+ ++++++   +##               #x#")
+writeStones(20,"# # ###+     C+  o+#           ######x#")
+writeStones(21,"# # ###+++++++++ ++##               #x#")
+writeStones(22,"# D         #### ####          #### #x#")
+writeStones(23,"# #####  ##  ### ####      X         &#")
+writeStones(24,"#^##########  ## ###       +v+  #######")
+writeStones(25,"#         ### ##   ####    +          o")
+writeStones(26,"+++++++++ ##  ## +         <          #")
+writeStones(27,"+ox+    + #  ##+^+### #    +          #")
+writeStones(28,"+xx+    + # #### #### #               #")
+writeStones(29,"+  k    xxx #### #### #               #")
+writeStones(30,"+xx+    + # #  | ###  ###             #")
+writeStones(31,"+ox+    + # # ##  ## 6 ##             #")
+writeStones(32,"+++++++++## ####   # 1 ###            #")
+writeStones(33,"C           >      #  2 ##********    #")
+writeStones(34,"#           ##     # 1 2 6            #")
+writeStones(35,"#           ###   ##     #*********   o")
+writeStones(36,"###########################????????####")
+
+function writeItems(line,cells)
+  for i=1, strlen(cells) do
+    local c = strsub(cells,i,i)
+    if(c=="x") then
+      set_item("it-crack3",i-1,line)
+    elseif(c=="j") then
+      set_item("it-springboard",i-1,line)
+    elseif(c=="o") then
+      set_item("it-coin1",i-1,line)
+    elseif(c=="O") then
+      set_item("it-coin4",i-1,line,{value=15.5})
+    elseif(c=="f") then
+      set_item("it-floppy",i-1,line)
+    elseif(c=="k") then
+      set_item("it-key_a",i-1,line)
+    elseif(c=="e") then
+      set_item("it-extralife",i-1,line)
+    elseif(c=="*") then
+      set_item("it-wormhole",i-1,line,{targetx="9.5",targety="25.5",range="0.5"})
+    elseif(c=="d") then
+      set_item("it-dynamite",i-1,line)
+    end
+  end
+end
+
+writeItems(00,"                                       ")
+writeItems(01,"        xx                             ")
+writeItems(02,"                                       ")
+writeItems(03,"                                       ")
+writeItems(04,"                                       ")
+writeItems(05,"                                       ")
+writeItems(06,"                                       ")
+writeItems(07,"           x                           ")
+writeItems(08,"                                       ")
+writeItems(09,"                                       ")
+writeItems(10,"                                       ")
+writeItems(11,"                                       ")
+writeItems(12,"                                       ")
+writeItems(13,"                                       ")
+writeItems(14,"     e          o                      ")
+writeItems(15,"                                       ")
+writeItems(16,"                                       ")
+writeItems(17,"                                       ")
+writeItems(18,"                                       ")
+writeItems(19,"                                       ")
+writeItems(20,"                                       ")
+writeItems(21,"                                       ")
+writeItems(22,"      j                                ")
+writeItems(23,"                                       ")
+writeItems(24,"                        e O            ")
+writeItems(25,"                                       ")
+writeItems(26,"                            f          ")
+writeItems(27,"                                       ")
+writeItems(28,"                                       ")
+writeItems(29,"      k                                ")
+writeItems(30,"             d                         ")
+writeItems(31,"             *                         ")
+writeItems(32,"                                       ")
+writeItems(33,"                                       ")
+if difficult then
+  writeItems(34,"  j  j   j                             ")
+else
+  writeItems(34,"   j j   j                             ")
+end
+writeItems(35,"                                       ")
+writeItems(36,"                                       ")
+
+set_item("it-trigger",20,16,{action="on",target="thelaser"})
+set_item("it-trigger",36,23,{action="callback",target="toggle_laser"})
+
+Signal("st(11 14)","fl(22 10)")
+Signal("st(17 13)","fl(25 10)")
+Signal("st(13 20)","fl(26 10)")
+Signal("st(0 33)","fl(9 20)")
+Signal("st(2 22)","st(15 30)")
+
+oxyd_shuffle()
+
+set_actor("ac-blackball",1.5,6.5,{player=0})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

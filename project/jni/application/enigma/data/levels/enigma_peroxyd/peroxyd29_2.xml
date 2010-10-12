@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd"
+  xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Per.Oxyd 29"
+        el:subtitle="Per.Oxyd 29"
+        el:id="20061222ulf013"/>
+      <el:version el:score="2" el:release="2" el:revision="69" el:status="released"/>
+      <el:author  el:name="Ulf Stegemann" el:email="ulf-enigma@zeitform.de"
+        el:homepage="http://ulf.zeitform.de"/>
+      <el:copyright>Copyright © 2006 Ulf Stegemann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+        <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+        <el:dependency el:path="lib/andreas_ghosts" el:id="lib/andreas_ghosts" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false" el:control="force"
+        el:scoreunit="duration" el:scoretarget="time"/>
+      <el:score el:easy="00:20" el:difficult="00:24"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- -> add ghosts !!
+
+enigma.SlopeForce = 15
+
+-- CELLS --
+cells={}
+cells[" "]=cell{parent={{ghosts_set_rail,1,"fl-white"}}}
+cells["x"]=cell{floor="fl-abyss"}
+cells["#"]=cell{stone="st-stone2"}
+if (not difficult) then -- easy
+  cells["r"]=cell{parent={{ghosts_set_ghost,"ac-top",1,
+            ghosts_direction_intelligent,{range=3,force=20,gohome=FALSE}}}}
+else
+  cells["r"]=cell{parent={{ghosts_set_ghost,"ac-top",1,
+              ghosts_direction_intelligent,{range=4,force=30,gohome=FALSE}}}}
+end
+-- LANDSCAPE MAP --
+level = {
+   "xxxxxxxxxxxxxxxxxxxx",
+   "####################",
+   "#                  #",
+   "# # 0 # ######## 0 #",
+   "# # # #    #     # #",
+   "# # # ## # 0 ### # #",
+   "#   # #  #r    # # #",
+   "# ### 0 ## ### 0 # #",
+   "# #      #   #   # #",
+   "# 0 #### ### ### # #",
+   "#        O         #",
+   "####################",
+   "xxxxxxxxxxxxxxxxxxxx"
+}
+
+-- GENERAL --
+enigma.ConserveLevel=TRUE
+oxyd_default_flavor = "a"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+oxyd_shuffle()
+
+-- ACTOR --
+if (not difficult) then -- easy
+  ghosts_set_ghost(3,6,"ac-top",1, ghosts_direction_intelligent,{range=3,force=20,gohome=FALSE})
+else
+  ghosts_set_ghost(3,6,"ac-top",1, ghosts_direction_intelligent,{range=4,force=30,gohome=FALSE})
+end
+
+ghosts_savedfloor[1] = "fl-abyss"
+ghosts_savedfloor[2] = "fl-abyss"
+
+set_stone("st-timer", 0, 0, {interval = ghosts_timerinterval, invisible = TRUE, action = "callback", target = "ghosts_timercallback"})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="false"/>
+      </el:string>
+     </el:i18n>
+  </el:protected>
+</el:level>

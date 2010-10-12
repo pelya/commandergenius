@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Per.Oxyd 88" el:subtitle="Per.Oxyd 88" el:id="peroxyd88"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="per.oxyd">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="0:25"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- GENERAL --
+levelw = 20
+levelh = 13
+
+create_world(levelw, levelh)
+
+fill_floor("fl-abyss")
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+          if c=="x" then
+                        oxyd_default_flavor = "a"
+            oxyd(i-1,line)
+                elseif c=="#" then
+                   set_stone("st-plain",i-1,line)
+                elseif c=="E" then
+                   set_stone("st-rubberband",i-1,line)
+
+                elseif c==" " then
+                   set_floor("fl-water",i-1,line)
+                elseif c=="h" then
+                   set_floor("fl-samba",i-1,line)
+
+        end
+    end    
+end
+
+renderLine(00 , "--------------------")
+renderLine(01 , "######x#######x#####")
+renderLine(02 , "#    hhh     hhh   #")
+renderLine(03 , "#   hhhh hhh hhhh  #")
+renderLine(04 , "#  hEh hEh hEh hEh #")
+renderLine(05 , "#hhhhhhhhhhhhhhhhhh#")
+renderLine(06 , "xhhh hhh hhh hhh hhx")
+renderLine(07 , "#hhhhhhhhhhhhhhhhhh#")
+renderLine(08 , "# hEh hEh hEh hEh  #")
+renderLine(09 , "#  hhhh hhh hhhh   #")
+renderLine(10 , "#   hhh     hhh    #")
+renderLine(11 , "#####x#######x######")
+renderLine(12 , "--------------------")
+
+oxyd_shuffle()
+
+-- Special
+set_item("it-document", 11, 5, {text="text1"})
+bb=set_actor("ac-blackball", 8.5,5.5, {player=0, name="bb"})  
+AddRubberBand(bb, enigma.GetStone(8,4),60)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Watch out for water holes!</el:english>
+        <el:translation el:lang="de">Beachten Sie die Wasserlöcher!</el:translation>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

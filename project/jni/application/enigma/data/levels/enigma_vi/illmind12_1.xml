@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="be quick or be dead" el:subtitle="" el:id="illmind12"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="illmind" el:email="support@mag-heut.net" el:homepage="http://www.mag-heut.net/"/>
+      <el:copyright>Copyright © 2006 illmind</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- level dimensions and standards
+levelw = 20
+levelh = 13
+create_world(levelw, levelh)
+
+oxyd_default_flavor = "d"
+draw_border("st-rock1")
+fill_floor("fl-black", 0,0, level_width,level_height)
+
+-- extra stones in level
+if not difficult then
+    set_stone( "st-timer", 0, 0, {action="callback", target="ill_timer_easy", interval=10})
+    set_stones("st-rock1", {{2,2},{4,2},{6,2},{8,2},{11,2},{13,2},{15,2},{17,2}})
+    set_stones("st-rock1", {{2,4},{4,4},{6,4},{8,4},{11,4},{13,4},{15,4},{17,4}})
+    set_stones("st-rock1", {{2,6},{4,6},{6,6},{8,6},{11,6},{13,6},{15,6},{17,6}})
+    set_stones("st-rock1", {{2,8},{4,8},{6,8},{8,8},{11,8},{13,8},{15,8},{17,8}})
+    set_stones("st-rock1", {{2,10},{4,10},{6,10},{8,10},{11,10},{13,10},{15,10},{17,10}})
+else
+    set_stone( "st-timer", 0, 0, {action="callback", target="ill_timer_difficult", interval=8})
+end
+
+-- set oxyds --
+function set_oxyd(arr)
+    for i=1,8 do
+        oxyd(arr[i][1],arr[i][2])
+        set_floor("fl-abyss",arr[i][1],arr[i][2])
+    end
+end
+
+-- restoring function --
+function restore(arr)
+    for i=1,8 do
+        set_stone("st-rock1",arr[i][1],arr[i][2])
+        set_floor("fl-black",arr[i][1],arr[i][2])
+    end
+end
+
+-- effect timer
+mytimer=-1
+
+function ill_timer_easy()
+    mytimer=mytimer+1
+    -- initiate oxyd_colors
+    -- without oxyd_current_color correction, while running there is (oxyd_current_color==7) -> TRUE,
+    -- but there are only 8 colors in enigma! So the oxyd() function failed when mytimer==2 because of colors overflow!
+    -- see oxyd() function in init.lua for more details
+    oxyd_current_color=0
+    if mytimer==0 then
+        set_oxyd({{2,2},{8,2},{11,2},{17,2},{2,10},{8,10},{11,10},{17,10}})
+    elseif mytimer==1 then
+        restore({{2,2},{8,2},{11,2},{17,2},{2,10},{8,10},{11,10},{17,10}})
+        set_oxyd({{2,4},{8,4},{2,8},{8,8},{11,4},{17,4},{11,8},{17,8}})
+    elseif mytimer==2 then
+        restore({{2,4},{8,4},{2,8},{8,8},{11,4},{17,4},{11,8},{17,8}})
+        set_oxyd({{4,4},{6,4},{4,8},{6,8},{13,4},{15,4},{13,8},{15,8}})
+    elseif mytimer==3 then
+        restore({{4,4},{6,4},{4,8},{6,8},{13,4},{15,4},{13,8},{15,8}})
+        set_oxyd({{4,2},{6,2},{4,10},{6,10},{13,2},{15,2},{13,10},{15,10}})
+    elseif mytimer==4 then
+        restore({{4,2},{6,2},{4,10},{6,10},{13,2},{15,2},{13,10},{15,10}})
+        set_oxyd({{2,6},{4,6},{6,6},{8,6},{11,6},{13,6},{15,6},{17,6}})
+    elseif mytimer==5 then
+        restore({{2,6},{4,6},{6,6},{8,6},{11,6},{13,6},{15,6},{17,6}})
+        set_oxyd({{8,2},{8,4},{8,8},{8,10},{11,2},{11,4},{11,8},{11,10}})
+    elseif mytimer==6 then
+        restore({{8,2},{8,4},{8,8},{8,10},{11,2},{11,4},{11,8},{11,10}})
+        -- loop ill_timer
+        mytimer=-1
+        ill_timer_easy()
+    end
+    -- shuffle on every call
+    oxyd_shuffle()
+end
+
+function ill_timer_difficult()
+    mytimer=mytimer+1
+    oxyd_current_color=0
+    if mytimer==0 then
+        set_oxyd({{2,2},{8,2},{11,2},{17,2},{2,10},{8,10},{11,10},{17,10}})
+    elseif mytimer==1 then
+        restore({{2,2},{8,2},{11,2},{17,2},{2,10},{8,10},{11,10},{17,10}})
+        set_oxyd({{2,4},{8,4},{2,8},{8,8},{11,4},{17,4},{11,8},{17,8}})
+    elseif mytimer==2 then
+        restore({{2,4},{8,4},{2,8},{8,8},{11,4},{17,4},{11,8},{17,8}})
+        set_oxyd({{4,4},{6,4},{4,8},{6,8},{13,4},{15,4},{13,8},{15,8}})
+    elseif mytimer==3 then
+        restore({{4,4},{6,4},{4,8},{6,8},{13,4},{15,4},{13,8},{15,8}})
+        set_oxyd({{4,2},{6,2},{4,10},{6,10},{13,2},{15,2},{13,10},{15,10}})
+    elseif mytimer==4 then
+        restore({{4,2},{6,2},{4,10},{6,10},{13,2},{15,2},{13,10},{15,10}})
+        set_oxyd({{3,3},{7,3},{12,3},{16,3},{3,9},{7,9},{12,9},{16,9}})
+    elseif mytimer==5 then
+        restore({{3,3},{7,3},{12,3},{16,3},{3,9},{7,9},{12,9},{16,9}})
+        set_oxyd({{5,3},{14,3},{2,6},{8,6},{5,9},{14,9},{11,6},{17,6}})
+    elseif mytimer==6 then
+        restore({{5,3},{14,3},{2,6},{8,6},{5,9},{14,9},{11,6},{17,6}})
+        set_oxyd({{4,6},{6,6},{3,2},{3,10},{13,6},{15,6},{16,2},{16,10}})
+    elseif mytimer==7 then
+        restore({{4,6},{6,6},{3,2},{3,10},{13,6},{15,6},{16,2},{16,10}})
+        set_oxyd({{3,5},{7,5},{3,7},{7,7},{12,5},{16,5},{12,7},{16,7}})
+    elseif mytimer==8 then
+        restore({{3,5},{7,5},{3,7},{7,7},{12,5},{16,5},{12,7},{16,7}})
+        set_oxyd({{2,3},{2,5},{2,7},{2,9},{17,3},{17,5},{17,7},{17,9}})
+    elseif mytimer==9 then
+        restore({{2,3},{2,5},{2,7},{2,9},{17,3},{17,5},{17,7},{17,9}})
+        set_oxyd({{5,2},{7,2},{5,10},{7,10},{12,2},{14,2},{12,10},{14,10}})
+    elseif mytimer==10 then
+        restore({{5,2},{7,2},{5,10},{7,10},{12,2},{14,2},{12,10},{14,10}})
+        set_oxyd({{8,3},{9,2},{10,2},{11,3},{8,9},{9,10},{10,10},{11,9}})
+    elseif mytimer==11 then
+        restore({{8,3},{9,2},{10,2},{11,3},{8,9},{9,10},{10,10},{11,9}})
+        set_oxyd({{8,5},{9,4},{10,4},{11,5},{8,7},{9,8},{10,8},{11,7}})
+    elseif mytimer==12 then
+        restore({{8,5},{9,4},{10,4},{11,5},{8,7},{9,8},{10,8},{11,7}})
+        set_oxyd({{5,5},{5,7},{9,5},{10,5},{9,7},{10,7},{14,5},{14,7}})
+        ill_timer_difficult()
+    end
+    -- shuffle on every call
+    oxyd_shuffle()
+end
+
+-- first initiate
+if not difficult then
+    ill_timer_easy()
+else
+    ill_timer_difficult()
+end
+
+-- documents
+set_item("it-document", 1,1, {text="text1"})
+
+-- blackball
+set_actor("ac-blackball", 18.5, 1.5, {player=0})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">illmind's be quick or be dead</el:english>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

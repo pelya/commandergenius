@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Puzzle Labor" el:subtitle="Testlevel to examine new puzzles" el:id="puzzle_testarea"/>
+      <el:version el:score="1" el:release="1" el:revision="2" el:status="stable"/>
+      <el:author  el:name="Raoul Bourquin" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2005, 2007 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+       <el:dependency el:path="lib/libpuzzle" el:id="lib/libpuzzle" el:release="2" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 39
+levelh = 13
+create_world(levelw, levelh)
+enigma.ConserveLevel = FALSE
+
+-- Design --
+boden="fl-sahara"
+wand="st-glass"
+boden2="fl-black"
+
+-- FLOOR --
+fill_floor(boden, 0,0,levelw,levelh)
+fill_floor(boden2,7,3,8,6)
+
+-- STONES --
+draw_border(wand)
+draw_stones(wand,{19,1},{0,1},11)
+
+-- ACTORS --
+local ac1=set_actor("ac-blackball", 1.5,1.5, {player=0, essential = 1})
+local ac2=set_actor("ac-whiteball", 21.5,2.5, {player=1, essential = 1})
+
+-- ITEMS
+set_item("it-yinyang",1,1)
+set_item("it-yinyang",21,2)
+
+set_item("it-document",2,7,{text="Increment the num_permutation, beginning with 1."})
+set_item("it-document",2,8,{text="Reset the num_permutation to nil (random default)."})
+
+set_item("it-document",17,11,{text="Clear"})
+
+set_item("it-document",21,5,{text="With the switches at the right, you can determine the layout of the desired puzzle."})
+set_item("it-document",21,6,{text="Switch up means stone, switch down means no stone at that position."})
+set_item("it-document",21,7,{text="After you set up the layout, hit the switch at the top and return to the left screen."})
+set_item("it-document",21,1,{text="Store the figure to draw it."})
+set_item("it-document",21,11,{text="Reset all switches."})
+
+set_item("it-document",1,10,{text="Which Stonetype? Possible are: \"st-puzzle\", \"st-puzzle2\", \"st-bigbrick\" or \"st-bigbluesand\"."})
+set_item("it-document",17,1,{text="Draw the puzzle unshuffled. (shuffle_method = \"none\")."})
+set_item("it-document",17,3,{text="Draw the puzzle shuffled with the \"random\" method."})
+set_item("it-document",17,5,{text="Draw the puzzle shuffled with the \"permutation\" method."})
+
+set_item("it-magicwand",2,10)
+--------------------------------------------------------------------------------
+-- SWITCHES, left room:
+-- Switches to draw the puzzle:
+set_stone("st-switch", 18, 1, {action="callback",target="draw_none",name="draw1"})
+set_stone("st-switch", 18, 3, {action="callback",target="draw_random",name="draw2"})
+set_stone("st-switch", 18, 5, {action="callback",target="draw_permutation",name="draw3"})
+
+-- Clear the canvas:
+set_stone("st-switch", 18, 11, {action="callback",target="remove_puzzle",name="clear"})
+
+set_stone("st-switch", 1, 7, {action="callback",target="increment_num_permutations",name="num"})
+set_stone("st-switch", 1, 8, {action="callback",target="reset_num_permutations",name="rnum"})
+set_stone("st-switch", 1, 11, {action="callback",target="stone_kind_switch",name="kind"})
+
+-- Right room:
+set_stone("st-switch", 20, 1, {action="callback",target="write_values",name="w_v"})
+set_stone("st-switch", 20, 11, {action="callback",target="clear_values",name="c_v"})
+
+-- Generate the switches and functions
+nr=0
+array={}
+for i=1,6 do
+    for j=1,8 do
+        nr = nr+1
+        set_stone("st-switch",21+2*j,-1+2*i, {action="callback", target="sw"..nr, name="swi"..nr})
+
+        func = "function sw"..nr.."() k="..nr.."; if array[k]==0 then array[k]=1 else array[k]=0 end end"
+        dostring(func)
+        array[nr] = 0
+   end
+end
+--------------------------------------------------------------------------------
+---------------------
+--WORLD-VALUES:
+defaultmap = {" # # ",
+              "#####",
+              " # # "}
+
+stone_kind = {"redpuzzle","bluepuzzle","bigbrick","bigbluesand"}
+kind_pointer = 1
+
+charmap = defaultmap
+
+local num_permutations = nil
+-- Functions to draw the puzzle:
+function draw_none()
+    puzzle(charmap,{7,3},stone_kind[kind_pointer],"none")
+end
+
+function draw_random()
+    puzzle(charmap,{7,3},stone_kind[kind_pointer],"random",num_permutations)
+end
+
+function draw_permutation()
+    puzzle(charmap,{7,3},stone_kind[kind_pointer],"permutation",num_permutations)
+end
+
+-- Clear:
+function remove_puzzle()
+    for i=1,8 do
+        for j=1,6 do
+            enigma.KillStone(6+i,2+j)
+        end
+    end
+end
+
+-- Chose the kind
+function stone_kind_switch()
+    kind_pointer = kind_pointer +1
+    if kind_pointer > 4 then
+        kind_pointer = 1
+    end
+    set_item("it-document",2,11,{text="Stonekind set to: "..stone_kind[kind_pointer]})
+end
+
+function increment_num_permutations()
+    if num_permutations == nil then
+        num_permutations = 1
+    else
+        num_permutations = num_permutations +1
+    end
+    set_item("it-document",2,7,{text="Num_Permutations set to: "..tostring(num_permutations)})
+end
+
+function reset_num_permutations()
+    num_permutations = nil
+    set_item("it-document",2,7,{text="Num_Permutations set to: "..tostring(num_permutations)})
+end
+--------------------------------------------------------------------------------
+-- Reset the switches
+function clear_values()
+    matrix={{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0}}
+    for o=1,48 do
+        enigma.SendMessage(enigma.GetNamedObject("swi"..o),"off",nil)
+    end
+end
+
+-- Store the switchvalues
+function write_values()
+    matrix={{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0}}
+    local x = 1
+    local y = 1
+    local h = 0
+    for h=1, 48 do
+        matrix[y][x] = array[h]
+        if x == 8 then
+            x = 0
+            y = y + 1
+        end
+        x = x+1
+    end
+    gen_charmap()
+end
+
+-- Generate the charmap
+function gen_charmap()
+    charmap = {}
+    local checker = 0
+    local i, j = 0, 0
+    for i=1, 6 do
+        charmap[i]=""
+        local buffer = ""
+        for j=1, 8 do
+            if matrix[i][j] == 1 then
+                checker = 1
+                buffer = buffer.."#"
+            elseif matrix[i][j] == 0 then
+                buffer = buffer.." "
+            end
+        end
+        charmap[i] = buffer
+    end
+    if checker == 0 then
+        -- If we leave this out, libpuzzle would raise an error!
+        charmap = defaultmap
+    end
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

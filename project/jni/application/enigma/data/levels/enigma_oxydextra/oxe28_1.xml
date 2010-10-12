@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Dance With Me" el:subtitle="Oxyd Extra 28" el:id="oxe28"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2002 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd.extra">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+--- NOTE
+--- there has to be a killer actor in this level - small marble that kills the big one,
+--- if the two touch. As soon as it's, replace ac-whiteball-small with correct model name,
+--- or supply coorect attributes.
+--
+--- ALSO NOTE
+--- in Oxyd Extra, the killer marble was a lot faster than black one. I tried to use
+--- mouseforce=2 with no effect, please repair as soon as this feature becomes
+--- implemented.
+---
+--- FINAL NOTE
+--- everything should work now :-) Daniel
+---
+--- POST SCRIPTUM
+--- yes, it does :) Thanks, Petr
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+fl0 = cell{floor="fl-gray"}
+marble = cell{actor={"ac-blackball", {player=0}}}
+killer = cell{actor={"ac-killerball", {mouseforce=2, controllers=1}}}
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+create_world(20, 13)
+oxyd_default_flavor="c"
+fill_world_func(abyss)
+fill_world_func(fl0, 7, 4, 5, 5)
+draw_func(oxyd, {{8,3},{8,-3}}, {1,0}, 3)
+draw_func(oxyd, {{6,5},{-7,5}}, {0,1}, 3)
+draw_func_corners(oxyd, 7, 4, 5, 5)
+
+marble(9, -4)
+killer(9, 4)
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

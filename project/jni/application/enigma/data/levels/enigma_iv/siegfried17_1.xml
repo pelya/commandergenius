@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Chain Reaction" el:subtitle="" el:id="level5e"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Siegfried Fennig" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Siegfried Fennig</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 58
+levelh = 13
+create_world(levelw, levelh)
+oxyd_default_flavor = "b"
+draw_border("st-greenbrown")
+oxyd( 56, 3)
+oxyd( 56,9)
+fill_floor("fl-water", 0,0, 20 ,13)
+fill_floor("fl-sand", 20,0, 38 ,13)
+fill_floor("fl-water", 19,0, 20 ,6)
+fill_floor("fl-water", 20,10, 7 ,2)
+fill_floor("fl-abyss", 39,5, 5 ,1)
+fill_floor("fl-abyss", 39,7, 3 ,1)
+fill_floor("fl-abyss", 39,8, 4 ,3)
+fill_floor("fl-abyss", 55,2, 1 ,5)
+fill_floor("fl-abyss", 55,8, 1 ,3)
+fill_floor("fl-abyss", 56,2, 1 ,1)
+fill_floor("fl-abyss", 56,10, 1 ,1)
+fill_floor("fl-abyss", 44,1, 1 ,5)
+fill_floor("fl-abyss", 50,3, 1 ,8)
+fill_floor("fl-water", 50,8, 1, 2) -- fix added by ralf (st-bolder now falls into abyss)
+fill_floor("fl-abyss", 43,10, 6 ,1)
+fill_floor("fl-abyss", 44,7, 5 ,1)
+fill_floor("fl-sand", 2,2, 19 ,1)
+fill_floor("fl-sand", 22,2, 17 ,1)
+fill_floor("fl-sand", 20,3, 1 ,2)
+fill_floor("fl-sand", 35,4, 1 ,2)
+fill_floor("fl-sand", 3,4, 17 ,1)
+fill_floor("fl-sand", 2,3, 1 ,9)
+fill_floor("fl-sand", 4,6, 16 ,1)
+fill_floor("fl-sand", 1,6, 1,1)
+fill_floor("fl-sand", 3,6, 1,2)
+draw_stones("st-grate1", {7,8}, {1,1},3)
+draw_stones("st-grate1", {11,8}, {1,1},3)
+draw_stones("st-grate1", {15,8}, {1,1},3)
+draw_stones("st-grate1", {39,10}, {1,0},10)
+draw_stones("st-grate1", {50,5}, {0,1},3)
+set_stone("st-grate1", 35, 3)
+draw_stones("st-greenbrown", {27,8}, {1,0},7)
+draw_stones("st-greenbrown_hole", {27,9}, {1,0},11)
+draw_stones("st-greenbrown_hole", {27,10}, {1,0},11)
+draw_stones("st-greenbrown", {27,11}, {1,0},7)
+draw_stones("st-greenbrown_hole", {34,8}, {1,0},4)
+draw_stones("st-greenbrown_hole", {34,11}, {1,0},4)
+draw_stones("st-greenbrown", {19,1}, {1,0},1)
+draw_stones("st-greenbrown", {19,3}, {0,1},1)
+draw_stones("st-greenbrown", {19,5}, {0,1},1)
+draw_stones("st-greenbrown", {19,7}, {0,1},5)
+draw_stones("st-greenbrown", {38,1}, {1,0},1)
+draw_stones("st-greenbrown", {38,3}, {0,1},3)
+draw_stones("st-greenbrown", {38,7}, {0,1},4)
+draw_stones("st-greenbrown", {25,7}, {1,0},12)
+set_stones("st-greenbrown", {{21,7},{23,7}})
+set_stones("st-invisible", {{20,5},{22,5},{24,5},{37,5}})
+set_stones("st-greenbrown", {{15,1},{15,3},{15,5}})
+set_stones("st-wood", {{21,6},{23,6}})
+set_stone("st-oneway-e", 15,2)
+set_stone("st-oneway-w", 15,4)
+set_stone("st-oneway-n", 37,7)
+set_stone("st-oneway-n", 35,4)
+set_stones("st-bombs", {{38,11}})
+draw_stones("st-stone_break", {2,6}, {1,0},1)
+draw_stones("st-wood", {39,6}, {1,0},1)
+set_stone("st-bolder-e", 1,6)
+set_stone("st-bolder-e", 45,2)
+set_stone("st-bolder-e", 49,10)
+set_stone("st-bolder-n", 44,6)
+set_stone("st-bolder-e", 43,7)
+set_stone("st-bolder-n", 53,8)
+set_stone("st-bolder-w", 54,3)
+set_stone("st-bolder-s", 50,2)
+set_stone("st-grate1", 46, 2)
+set_stone("st-grate1", 50, 10)
+set_stone("st-grate1", 44, 5)
+set_stone("st-grate1", 44, 7)
+set_stone("st-grate1", 53, 7)
+set_stone("st-grate1", 53, 3)
+set_stone("st-grate1", 50, 3)
+draw_stones("st-grate1", {44,2}, {0,1},3)
+draw_stones("st-grate1", {55,2}, {0,1},9)
+set_stone("st-stoneimpulse", 45,3)
+set_stone("st-stoneimpulse", 49,9)
+set_stone("st-stoneimpulse", 43,6)
+set_stone("st-stoneimpulse", 52,8)
+set_stone("st-stoneimpulse", 54,4)
+set_stone("st-stoneimpulse", 51,2)
+set_floor("fl-bridge", 39,2, {name="bridge1", type="y"})
+set_item("it-trigger", 40,6, {target="bridge1", action="openclose"})
+set_floor("fl-bridge", 42,7, {name="bridge2", type="y"})
+set_item("it-trigger", 56,1, {target="bridge2", action="openclose"})
+set_floor("fl-bridge", 55,7, {name="bridge3", type="y"})
+set_item("it-trigger", 41,6, {target="bridge6", action="openclose"})
+set_floor("fl-bridge", 42,4, {name="bridge6", type="y"})
+set_item("it-trigger", 56,11, {target="bridge3", action="openclose"})
+set_stone("st-switch", 20,1, {action="openclose", target="bridge4"})
+set_floor("fl-bridge", 35,3, {name="bridge4", type="y"})
+set_item("it-coin2", 22,2)
+set_item("it-coin2", 21,6)
+set_stone("st-coinslot", 42,1, {action="openclose", target="bridge5"})
+set_floor("fl-bridge", 42,5, {name="bridge5", type="y"})
+set_stone("st-key_b", 41,1, {action="openclose", target="bridge7"})
+set_floor("fl-bridge", 46,7, {name="bridge7", type="y"})
+set_stone("st-key_a", 1, 2, {action="openclose", target="door1"})
+doorv( 19,2, {name="door1"})
+set_item("it-key_a", 1,6)
+set_item("it-key_b", 42,6)
+hammer(2,9)
+dynamite(34,8)
+set_item("it-hollow", 2,11)
+set_actor("ac-blackball", 2.5, 11.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

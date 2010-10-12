@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd"
+          xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="City Life" el:id="20061119joona503"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author el:name="Joona Laire" el:email="joona.laire@gmail.com"/>
+      <el:copyright>Copyright © 2006 Joona Laire</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+        <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+cells[" "]=cell{floor="fl-black"}
+cells["X"]=cell{stone="st-rock6"}
+cells["Z"]=cell{stone="st-rock4"}
+cells["C"]=cell{stone="st-rock2"}
+cells["V"]=cell{stone="st-rock3"}
+cells["+"]=cell{actor="ac-blackball"}
+cells["a"]=cell{actor={"ac-killerball", {mouseforce=-2}}}
+cells["b"]=cell{actor={"ac-killerball", {mouseforce=-1}}}
+cells["c"]=cell{actor={"ac-killerball", {mouseforce=1}}}
+cells["d"]=cell{actor={"ac-killerball", {mouseforce=2}}}
+if difficult then
+    cells["e"]=cell{actor={"ac-killerball", {mouseforce=-4}}}
+    cells["f"]=cell{actor={"ac-killerball", {mouseforce=0.2}}}
+    cells["g"]=cell{actor={"ac-killerball", {mouseforce=4}}}
+    cells["h"]=cell{actor={"ac-killerball", {mouseforce=10}}}
+else
+    cells["e"]=cell{floor="fl-black"}
+    cells["f"]=cell{floor="fl-black"}
+    cells["g"]=cell{floor="fl-black"}
+    cells["h"]=cell{floor="fl-black"}
+end
+cells["0"]=cell{oxyd}
+cells["8"]=cell{stone="st-oneway-n"}
+cells["6"]=cell{stone="st-oneway-e"}
+cells["2"]=cell{stone="st-oneway-s"}
+cells["4"]=cell{stone="st-oneway-w"}
+cells["o"]=cell{stone="st-black4"}
+
+level = {
+--                     !                  !
+   "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+   "X     6      6        6  d    6       6       4      4   X",
+   "X  VoVVVV  XXXXXX  CCoCCC  VVVVVV  XXXXXX  ZZZZZZ  XXXXX X",
+   "X  V0VVVV  XXXXXX  CC0CCC  VVVVVV  XXXXXX  ZZZZZZ  XXXXX X",
+   "X88VVVVVV22XXXXXX88CCCCCC22VVVVVV88XXXXXX22ZZZZZZ88XXX0o X",
+   "X  VVVVVV  XXXXXX  CCCCCC  VVVVVV  XXXXXX  ZZZZZZ  XXXXX X",
+   "X  VVVVVV  XXXXXX  CCCCCC  VVVVVV  XXXXXX  ZZZZZZ  XXXXX X",
+   "X g   6      6   a    6      6       4  g    4       4   X",
+   "X     6      6  c     6      6       4       4   e   4   X",
+   "X  VVVVVV  XXXXXX  XXXXXX  XXXXXX  XXXXXX  CCCCCC  CCCCC X",
+   "X  VVVVVV  XXXXXX  XXXXXX  XXXXXX  XXXXXX  CCCCCC  CCCCC X",
+   "X88VVVVVV22XXXXXX88XXXXXX22XXXXXX88XXXXXX22CCCCCC88CCCCC X",
+   "X  o0VVVV  XXXXXX  XXXXXX  XX0XXX  XXXXXX fCCCCCC  CCCCC X", -- !!
+   "X  VVVVVV  XXXXXX  XXXXXX  XXoXXX  XXXXXX  CCCCCC  CCCCC X",
+   "X     6       4   c   4   +   4      4       6   a   4   X",
+   "X     6   f   4       4       4  b   4   c   6       4   X",
+   "X  CCCCCC  VVVVVV  ZZZZZZ  XXXXXX  VVVVVV  XXXXXX  CCCCC X",
+   "X  CCCCCC  VVVVVV  ZZZZZZ  XXXXXX  VVVVVV  XXXXXX  CCCCC X",
+   "X88CCCCCC22VVVVVV88ZZZZZZ22XXXXXX88VVVVVV22XXXXXX88CCCCC X",
+   "X dCCCCCC  o0VVVV  ZZZZZZ  XXXXXX  VVVVVV  XXXXXX  CCCCCdX",
+   "X  CCCCCC  VVVVVV  ZZZZZZ  XXXXXX  VVVVVV  XXXXXX  CCCCC X",
+   "X     4       6       6  b    6      6   b   6       4   X",
+   "X     4  a    6       6       6      6       6   f   4   X",
+   "X  XXXXXX  XXXXXX  CCCCCC  XoXXXX  VVVVVV  XXXXXX  XXXXX X",
+   "X  XXXXXX  XXXXXX  CCCCCC  X0XXXX  VVVVVV  XXXXXX  XXXXX X", -- !!
+   "X88XXXXXX22XXXXXX88CCCCCC22XXXXXX88VVVVVV22XXXXXX88XXXXX X",
+   "X  XXXXXX  o0XXXX  CCCCCC  XXXXXX  V0VVVV  XXXXXX  o0XXX X",
+   "X  XXXXXX  XXXXXX  CCCCCC  XXXXXX  VoVVVV  XXXXXX  XXXXX X",
+   "Xc    4       6  h    6       6      4       4     f 4   X",
+   "X     4   c   6       6   a   6   e  4       4       4   X",
+   "X  XXXXXX  ZZZZZZ  ZZZZZZ  VVVVVV  ZZZZZZ  XXXXXX  CCCCC X",
+   "X  XXXXXX  ZZZZZZ  ZZZZZZ  VVVVVV  ZZZZZZ  XXXXXX  CCCCC X",
+   "X88XXXXXX22ZZZZZZ88ZZZZZZ22VVVVVV88ZZZZZZ22XXXXXX88CCCCC X",
+   "X  XXXX0o  ZZZZZZ  ZZZZZZ  VVVVVV  ZZZZZZ  XXXXXX  C0CCC X",
+   "X  XXXXXX  ZZZZZZ  ZZZZZZ  VVVVVV  ZZZZZZa XXXXXX  CoCCC X",
+   "X     4      6        6   d  6       6       6       6   X",
+   "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+--                     !                  !
+}
+
+oxyd_default_flavor = "b"
+set_default_parent(cells[" "])
+create_world_by_map(level,cells)
+oxyd_shuffle()
+
+display.SetFollowMode(display.FOLLOW_SMOOTH)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

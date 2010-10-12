@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd"
+  xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected >
+    <el:info el:type="level">
+      <el:identity el:title="Hot Hurdle Race"
+        el:subtitle="Run for your life!"
+        el:id="20070124ulf019"/>
+      <el:version el:score="1" el:release="1" el:revision="$Revision: 93 $" el:status="released"/>
+      <el:author  el:name="Ulf Stegemann" el:email="ulf-enigma@zeitform.de"
+        el:homepage="http://ulf.zeitform.de"/>
+      <el:copyright>Copyright © 2007 Ulf Stegemann</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+        <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="true" el:single="true" el:network="false" el:control="force"
+        el:scoreunit="duration" el:scoretarget="time"/>
+      <el:score el:easy="00:12" el:difficult="00:12"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- CELLS --
+cells={}
+cells[" "]=cell{floor={"fl-bumps",{fastfire=TRUE,noash=TRUE}}}
+cells["x"]=cell{floor="fl-space"}
+cells["b"]=cell{floor="fl-black"}
+cells["w"]=cell{floor="fl-white"}
+cells["D"]=cell{floor="fl-abyss",stone="st-death"}
+cells["F"]=cell{stone="st-likeoxydb"}
+cells["N"]=cell{stone={"st-laser-n",{on=TRUE}}}
+cells["S"]=cell{stone={"st-laser-s",{on=TRUE}}}
+cells["."]=cell{item="it-spring1"}
+cells["s"]=cell{floor="fl-white",item={"it-sensor",{action="callback",target="settimer"}}}
+
+-- LANDSCAPE MAP --
+level = {
+   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "xxDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDxx",
+   "xxD        s          S        S        S        S        S        S        S        S        S        S          bw   0Dxx",
+   "xxD        s                                                                                                      wb   DDxx",
+   "xxD O.     s                                                                                                      bw   DDxx",
+   "xxD        s                                                                                                      wb   DDxx",
+   "xxD        s          N        N        N        N        N        N        N        N        N        N          bw   0Dxx",
+   "xxDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDxx",
+   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+
+-- FUNCTIONS --
+function settimer()
+  if (not difficult) then
+    myint = 0.12
+  else
+    myint = 0.07
+  end
+  set_stone("st-timer",0,0,{action="callback",target="timer_handler",interval=myint,invisible=1})
+end
+
+function timer_handler()
+  if ( mytimer <= 113 ) then
+    draw_items("it-death",{mytimer,4},{0,1},5)
+    mytimer = mytimer + 1
+  end
+end
+
+--
+-- Firy version
+-- 
+--   if ( mytimer <= 118 ) then
+--     draw_items("it-burnable_fireproof",{mytimer-5,4},{0,1},5)
+--     count=4
+--     while count<9 do
+--       enigma.KillItem(mytimer-5,count)
+--       count=count+1
+--     end
+--     if ( mytimer <= 113 ) then
+--       draw_items("it-burnable_ignited",{mytimer,4},{0,1},5)
+--     end
+--     mytimer = mytimer+1
+--   end
+-- end
+
+-- GENERAL --
+mytimer=2
+enigma.ConserveLevel=FALSE
+oxyd_default_flavor = "b"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+oxyd_shuffle()
+display.SetFollowMode(display.FOLLOW_SMOOTH)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Heißer Hürdenlauf</el:translation>
+      </el:string>
+      <el:string el:key="subtitle">
+        <el:english el:translate="true"/>
+        <el:translation el:lang="de">Lauf um Dein Leben!</el:translation>
+      </el:string>
+     </el:i18n>
+  </el:protected>
+</el:level>

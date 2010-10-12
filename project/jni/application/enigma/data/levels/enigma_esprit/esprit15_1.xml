@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="esprit 15" el:subtitle="esprit 15" el:id="martin67"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world( 39, 13)
+oxyd_default_flavor = "a"
+
+fill_floor( "fl-sahara")
+fill_floor( "fl-abyss", 7,0, 6, 13)
+
+draw_border( "st-rock10",  0, 0, 7, 13)
+draw_border( "st-rock10", 13, 0, 7, 13)
+draw_stones( "st-rock10", { 1,4}, {1,0},5)
+draw_stones( "st-rock10", { 1,8}, {1,0},5)
+draw_stones( "st-rock10", {14,4}, {1,0},5)
+draw_stones( "st-rock10", {14,8}, {1,0},5)
+draw_stones( "st-rock10", { 3,1}, {0,1},11)
+draw_stones( "st-rock10", {16,1}, {0,1},11)
+
+oxyd( 3, 2)
+oxyd( 3, 6)
+oxyd( 3,10)
+oxyd(16, 2)
+oxyd(16, 6)
+oxyd(16,10)
+
+oxyd_shuffle()
+
+SetDefaultAttribs("it-wormhole", {range=5.0, strength=5})
+
+set_item("it-wormhole", 1,  1, {targetx=4.5,targety=2.5})
+set_item("it-wormhole", 5,  1, {targetx=14.5,targety=6.5})
+set_item("it-wormhole",18,  6, {targetx=4.5,targety=5.5})
+set_item("it-wormhole",14,  6, {targetx=17.5,targety=6.5})
+set_item("it-wormhole",18, 11, {targetx=4.5,targety=10.5})
+set_item("it-wormhole", 1,  6, {targetx=2.5,targety=10.5})
+set_item("it-wormhole", 1, 11, {targetx=15.5,targety=2.5})
+set_item("it-wormhole",14,  1, {targetx=18.5,targety=11.5})
+set_item("it-wormhole", 5,  6, {targetx=2.5,targety=5.5})
+set_item("it-wormhole",14, 11, {targetx=5.5,targety=6.5})
+set_item("it-wormhole", 5, 11, {targetx=2.5,targety=2.5})
+set_item("it-wormhole",18,  5, {targetx=17.5,targety=2.5})
+set_item("it-wormhole",18,  7, {targetx=17.5,targety=10.5})
+set_item("it-wormhole", 1,  7, {targetx=17.5,targety=1.5})
+set_item("it-wormhole", 1,  5, {targetx=1.5,targety=2.5})
+set_item("it-wormhole",18,  1, {targetx=15.5,targety=7.5})
+
+set_actor("ac-blackball", 4.5, 6.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

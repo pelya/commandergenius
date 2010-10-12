@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Wells" el:subtitle="" el:id="ant19"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells = {}
+
+cells[" "] = cell{floor="fl-himalaya"}
+cells["#"] = cell{stone="st-rock4"}
+cells["S"] = cell{{{switch, "switchb", "callback"}}}
+
+cells["e"] = cell{item ="it-extralife"}
+cells["s"] = cell{item ="it-spring1"}
+cells["O"] = cell{actor={face="ac-blackball", attr={player=0}, mode=2}}
+
+doors1 = {}
+doors2 = {}
+cells["1"] = cell{{{add_multistone, "st-door_a", doors1, {type="v"}}}}
+cells["2"] = cell{{{add_multistone, "st-door_a", doors2, {type="v"}}}}
+switch1    = cell{{{send_group_message, doors1, "openclose", nil; mode=-1}}}
+switch2    = cell{{{send_group_message, doors2, "openclose", nil; mode=-1}}}
+switchb = function()  switch1() switch2() end
+
+cells["%"] = cell{{cells["#"], switch2}}
+
+level = {
+   "####.##########.####",
+   "#0 ###        ### s#",
+   "#   1          2   #",
+   "#   1          2   #",
+   "#   1          2   #",
+   "#  ###        ###  #",
+   "S  X.#    O   #.X  S",
+   "#  ###        ###  #",
+   "#   1          2   #",
+   "#   1          2   #",
+   "#   1          2   #",
+   "#e ###        ### 0#",
+   "####.##########.###%"
+}
+
+oxyd_default_flavor = "c"
+set_default_parent(cells[" "])
+create_world_by_map(level)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

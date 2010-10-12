@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Mas Microban 17" el:subtitle="" el:id="Sokoban/mmic_17"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="David W Skinner" el:email="sasquatch@bentonrea.com" el:homepage="http://users.bentonrea.com/~sasquatch/sokoban/"/>
+      <el:copyright>Copyright © David W Skinner</el:copyright>
+      <el:license el:type="see Lua code below" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ralf_sokoban" el:id="lib/ralf_sokoban" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Converted to enigma format by Ralf Westram with friendly permission from David W Skinner.</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+level={
+  "!#####",
+  "!#   #",
+  "!#o#@#",
+  "## o #",
+  "#   ##",
+  "#.*._#",
+  "#____#",
+  "######",
+}
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+play_sokoban(level,1191)
+
+document(xlo+1,ylo+6,"text1")
+
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="false">Excerpt from the 'Mas Microban' set by David W Skinner. David writes: "Like 'Microban' this set is for beginners and children. Most of the puzzles are small and illustrate a particular concept." I'm not quite sure what kind of children David has ... well nevertheless have fun with these "childish" levels.</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

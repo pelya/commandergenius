@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Odyssey" el:subtitle="The Enigma Level" el:id="ant39"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- 2003-02-10 -- keeping up to date with latest additions to ant.lua
+
+cells={}
+
+solidfloor=cell{floor={face="fl-leaves"}}
+abyssfloor=cell{floor={face="fl-abyss"}}
+wallstone=cell{stone={face="st-rock1"}}
+
+cells["#"]=cell{parent={solidfloor, wallstone}}
+cells[" "]=cell{parent={solidfloor}}
+cells["."]=cell{parent={abyssfloor}}
+cells["="]=cell{parent={solidfloor}, stone={face="st-glass"}}
+
+cells["X"]=cell{parent=cells[" "],stone={face="st-grate1"}}
+
+cells["+"]=cell{parent=cells[" "],stone={face="st-puzzle", attr={connections=PUZ_0000}}}
+cells["/"]=cell{parent=cells[" "],stone={face="st-puzzle", attr={connections=PUZ_0110}}}
+cells[")"]=cell{parent=cells[" "],stone={face="st-puzzle", attr={connections=PUZ_0001}}}
+cells["|"]=cell{parent=cells[" "],stone={face="st-puzzle", attr={connections=PUZ_1010}}}
+cells["L"]=cell{parent=cells[" "],stone={face="st-puzzle", attr={connections=PUZ_1100}}}
+
+cells["w"]=cell{parent=cells[" "],stone={face="st-wood"}}
+
+cells[">"]=cell{parent=cells[" "],stone={face="st-laser", attr={on=FALSE, dir=enigma.EAST, name="laser1"}}}
+cells["S"]=cell{parent=cells[" "],stone={face="st-switch", attr={action="onoff", target="laser1"}}}
+cells["F"]=cell{parent=cells[" "],stone={face="st-laserswitch", attr={action="openclose", target="doorF"}}}
+cells["G"]=cell{parent=cells[" "],stone={face="st-laserswitch", attr={action="openclose", target="doorG"}}}
+cells["f"]=cell{parent=cells[" "],stone={face="st-door", attr={type="h", name="doorF"}}}
+cells["g"]=cell{parent=cells[" "],stone={face="st-door", attr={type="h", name="doorG"}}}
+cells["s"]=cell{parent=cells["w"],item={face="it-seed"}}
+
+cells["M"]=cell{parent=cells[" "],stone={face="st-pmirror", attr={movable=TRUE, transparent=FALSE, orientation=NORTH}}}
+
+cells["0"]=cell{parent={cells[" "], oxyd}}
+cells["O"]=cell{parent=cells[" "],actor={face="ac-blackball", attr={player=0}, actor=1}}
+
+level = {
+   "####################",
+   "#                  #",
+   "# w w w w w  w w w #",
+   "#..................#",
+   "#..................#",
+   "#..................#",
+   "#..................#",
+   "#                  #",
+   "#     ###### ####  #",
+   "#     #G=       #  #",
+   "#     ###  +    #  #",
+   "#      O#  +    #  #",
+   "###|#####  |    ####",
+   "#X +  =    |      X#",
+   "#X M  =    |      X#",
+   "#X    =    |   /  X#",
+   ">X    =       ||  X#",
+   "#X    =       L   X#",
+   "##XXXX#====#w #===##",
+   "#X    =    w w    X#",
+   "SX w  =     w     X#",
+   "#Xw s =      ))   X#",
+   "#X s  =   M|  ww  X#",
+   "#X    =   M       X#",
+   "###g#####        ###",
+   "#       #        # #",
+   "#  w  ###        # #",
+   "# w w #F=        # #",
+   "#  w  ######f##### #",
+   "#        #         #",
+   "#........#.........#",
+   "#........#.........#",
+   "#........#.........#",
+   "#........#.........#",
+   "#        #         #",
+   "#        #         #",
+   "#0######0#0#######0#"
+}
+
+oxyd_default_flavor = "c"
+create_world_by_map(level, cells)
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

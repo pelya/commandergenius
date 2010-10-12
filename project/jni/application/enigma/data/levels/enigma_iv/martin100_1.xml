@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title=".c.R.e.A.z.Y.w.O.r.L.d." el:subtitle="" el:id="martin100"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martinn Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+world.DefineSimpleStoneMovable("fake_stone_move", "shatter", 0)
+display.DefineAlias("fake_stone_move", "st-death")
+world.DefineSimpleStone("fake_stone", "shatter", 0, 0)
+display.DefineAlias("fake_stone", "st-death")
+
+cells={}
+
+cells[" "]=cell{floor="fl-abyss_fake"}
+cells["."]=cell{floor="fl-swamp"}
+cells["#"]=cell{stone="fake_stone"}
+cells["+"]=cell{stone="fake_stone_move"}
+cells["X"]=cell{stone="my_oxyd"}
+cells["%"]=cell{stone="st-death_invisible"}
+cells["h"]=cell{parent=cells["."],item="it-hammer"}
+cells["d"]=cell{item="it-umbrella"}
+cells["x"]=cell{actor={"ac-rotor", {range=25, force=40}}}
+cells["o"]=cell{parent=cells["."],actor={"ac-blackball", {player=0, mouseforce=1}}}
+
+level = {
+   "####################",
+   "#......          # #",
+   "#..o...          # 0",
+   "#....h.          # #",
+   "##%####++++++++++++#",
+   "#d%                #",
+   "#%%                #",
+   "#                  #",
+   "#                  #",
+   "#                  #",
+   "#                  #",
+   "#                  #",
+   "#0##################"
+}
+
+
+set_default_parent(cells[" "])
+
+create_world_by_map(level,cells)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

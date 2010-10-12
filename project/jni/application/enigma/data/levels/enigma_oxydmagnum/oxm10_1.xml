@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="- Meditation -" el:subtitle="Oxyd Magnum 10" el:id="oxm010"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Petr Machata" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2002 Petr Machata</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92" el:engine="oxyd.magnum">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+normal = cell{floor="fl-brick"}
+stone  = cell{stone="st-marble"}
+marble = cell{actor={"ac-whiteball-small", {player=0, mouseforce=1}}}
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+create_world(20, 13)
+draw_border_func(abyss)
+fill_world_func(normal, 0,1,0,-2)
+draw_border_func(stone, 0,1,0,-2)
+draw_func_corners(hollow, 2,3,-4,-6)
+draw_func_corners(stone,  4,3,-8,-6)
+draw_func_corners(stone,  7,5,-14,-10)
+draw_func_corners(marble, 8,5,-16,-10)
+draw_func(stone, {{7,4},{7,-4}}, {1,0}, 6)
+draw_func(stone, {{5,5},{-5,5}}, {0,1}, 3)
+stone({{2,6},{-2,6}})
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

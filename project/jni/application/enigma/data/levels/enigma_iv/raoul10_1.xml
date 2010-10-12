@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Sleeping Serpent" el:subtitle="" el:id="raoul10"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Raoul Bourquin" el:email="raoul@users.berlios.de" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Raoul Bourquin</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="1:30"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- I love Puzzlestones :-)
+
+-- GENERAL --
+levelw = 20
+levelh = 15
+create_world(levelw, levelh)
+enigma.ConserveLevel = FALSE
+oxyd_default_flavor = "b"
+enigma.WaterSinkSpeed=5
+display.SetFollowMode(display.FOLLOW_SCROLLING)
+
+-- DESIGN --
+boden="fl-black"
+
+fill_floor(boden, 0,0, level_width,level_height)
+
+function renderLine( line, pattern)
+    for i=1, strlen(pattern) do
+        local c = strsub( pattern, i, i)
+          if c=="x" then
+            oxyd(i-1,line)
+-- Serpent
+          elseif c=="a" then
+set_stone("st-puzzle2-ns",i-1,line)
+          elseif c=="b" then
+set_stone("st-puzzle2-ew",i-1,line)
+
+      
+          elseif c=="d" then
+set_stone("st-puzzle2-sw",i-1,line)
+set_item("it-trigger",i-1,line,{action="callback", target="wasser", invisible=TRUE})
+          elseif c=="e" then
+set_stone("st-puzzle2-nw",i-1,line)
+set_item("it-trigger",i-1,line,{action="callback", target="wasser", invisible=TRUE})
+          elseif c=="f" then
+set_stone("st-puzzle2-ne",i-1,line)
+set_item("it-trigger",i-1,line,{action="callback", target="wasser", invisible=TRUE})
+          elseif c=="g" then
+set_stone("st-puzzle2-es",i-1,line)
+set_item("it-trigger",i-1,line,{action="callback", target="wasser", invisible=TRUE})
+
+          elseif c=="h" then
+set_stone("st-puzzle2-e",i-1,line)
+set_item("it-trigger",i-1,line,{action="callback", target="wasser", invisible=TRUE})
+
+-- Ring
+          elseif c=="u" then
+set_stone("st-puzzle2-ns",i-1,line)
+          elseif c=="v" then
+set_stone("st-puzzle2-ew",i-1,line)
+
+          elseif c=="p" then
+set_stone("st-puzzle2-sw",i-1,line)
+          elseif c=="q" then
+set_stone("st-puzzle2-nw",i-1,line)
+          elseif c=="r" then
+set_stone("st-puzzle2-ne",i-1,line)
+          elseif c=="s" then
+set_stone("st-puzzle2-es",i-1,line)
+
+-- Wall
+          elseif c=="6" then
+set_stone("st-puzzle-ns",i-1,line)
+          elseif c=="8" then
+set_stone("st-puzzle-ew",i-1,line)
+
+          elseif c=="1" then
+set_stone("st-puzzle-sw",i-1,line)
+          elseif c=="2" then
+set_stone("st-puzzle-nw",i-1,line)
+          elseif c=="3" then
+set_stone("st-puzzle-ne",i-1,line)
+          elseif c=="4" then
+set_stone("st-puzzle-es",i-1,line)
+
+
+        end
+    end    
+end
+
+renderLine(00 , "48888888888888888881")
+renderLine(01 , "6x                x6")
+renderLine(02 , "6  gbbbbbbbbbbbbd  6")
+renderLine(03 , "6  ax           fd 6")
+renderLine(04 , "6  fbbbbbbbbbbd  a 6")
+renderLine(05 , "6            xa  a 6")  
+renderLine(06 , "6svp hbbbbbbbbe  a 6")  
+renderLine(07 , "6u u             a 6")  
+renderLine(08 , "6rvq hbbbbbbbbd  a 6")
+renderLine(09 , "6            xa  a 6")
+renderLine(10 , "6  gbbbbbbbbbbe  a 6")
+renderLine(11 , "6  ax           ge 6")
+renderLine(12 , "6  fbbbbbbbbbbbbe  6")
+renderLine(13 , "6x                x6") 
+renderLine(14 , "38888888888888888882")
+
+oxyd_shuffle()
+
+-- Special
+set_item("it-document", 3, 7, {text="text1"})
+set_actor("ac-blackball", 2.5,7.5, {player=0})                    
+
+-- Code --
+-- Serpent-water
+don2=1;
+function wasser()
+ don2=don2+1;
+ if don2==18 then
+  fill_floor("fl-water", 0,0, level_width,level_height)
+ end
+end
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Don't wake it up!</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

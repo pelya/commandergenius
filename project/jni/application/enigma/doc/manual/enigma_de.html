@@ -1,0 +1,2018 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!--Copyright C 2003, 2004, 2005, 2006, 2007 Daniel Heck und Beitragende
+
+Das Kopieren und Verteilen dieser Datei, mit oder ohne A"nderungen, ist
+gestattet, unter der Voraussetzung, dass obiger Copyright-Vermerk und
+dieser Abschnitt erhalten bleiben.
+-->
+<!-- Created on Mai, 24 2007 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>Enigma Handbuch: Enigma</title>
+
+<meta name="description" content="Enigma Handbuch: Enigma">
+<meta name="keywords" content="Enigma Handbuch: Enigma">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="de" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Top"></a>
+<a name="SEC_Top"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="settitle">Enigma</h1>
+
+<p>Dieses Handbuch beschreibt die Installation und das Spielprinzip von
+Enigma.  Es bezieht sich auf Enigma Version 1.01.
+</p>
+<p>Copyright &copy; 2003, 2004, 2005, 2006, 2007 Daniel Heck und Beitragende
+</p>
+<p>Das Kopieren und Verteilen dieser Datei, mit oder ohne &Auml;nderungen, ist
+gestattet, unter der Voraussetzung, dass obiger Copyright-Vermerk und
+dieser Abschnitt erhalten bleiben.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC1">1. Einleitung</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  Allgemeine Informationen &uuml;ber Enigma
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC5">2. Das Spiel</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   Spielprinzipien
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC16">3. Einige Spielobjekte</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">         Beschreibung einiger Objekte im Spiel
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC30">4. Fortgeschrittene Themen</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">     Weitere Features und Verwaltung
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC35">5. Tipps und Tricks</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            Tipps f&uuml;r einige schwierige Levels
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC41">6. Autoren und Danksagungen</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">    Credits und `Thank You's
+</td></tr>
+</table>
+
+<hr size="1">
+<a name="Einleitung"></a>
+<a name="SEC1"></a>
+<h1 class="chapter"> 1. Einleitung </h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC2">1.1 &Uuml;ber Enigma</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Einige Fakten &uuml;ber Enigma
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC3">1.2 Installation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Woher und wie installiert man Enigma
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC4">1.3 Verbreiten von Enigma</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">       Geben Sie Kopien an Ihre Freunde weiter!
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Ueber-Enigma"></a>
+<a name="SEC2"></a>
+<h2 class="section"> 1.1 &Uuml;ber Enigma </h2>
+
+<p>Zu sagen, Enigma sei ein R&auml;tselspiel, ist eine
+Untertreibung. Tats&auml;chlich ist Enigma eine riesige Sammlung von
+R&auml;tseln, jede seiner 550 einzigartigen Landschaften fordert die
+Intelligenz, Geschicklichkeit und wahre Willensst&auml;rke seines Spielers
+aufs Neue. Enigma ist einfach zu erlernen, herausfordernd zu spielen
+und schwer zu schlagen. Es ist f&uuml;r fast alle Altersklassen
+geeignet. Es enth&auml;lt Hunderte von Landschaften (Leveln). Und als ob
+das noch nicht genug w&auml;re, ist es zudem vollst&auml;ndig frei. Wenn Sie
+Puzzle- und R&auml;tselspiele m&ouml;gen, und eine ruhige Hand haben, wird Sie
+Enigma wahrscheinlich f&uuml;r Stunden nicht aus seinem Bann lassen.
+</p>
+<p>Das Ziel des Spieles ist es, Paare identisch gef&auml;rbter
+<samp>`Oxydsteine'</samp> zu finden und aufzudecken. Einfaches Prinzip?
+Bestimmt. Einfach zu meistern? Sicherlich nicht! Versteckte Fallen,
+riesige Labyrinthe, Laserstrahlen und nicht zuletzt zahllose haarige
+R&auml;tsel blockieren f&uuml;r gew&ouml;hnlich den direkten Weg zu den
+Oxydsteinen. Enigmas Spielobjekte (von denen Hunderte existieren,
+so dass keine Langeweile aufkommen kann) interagieren auf viele
+unerwartete Weisen, and da viele von ihnen den Gesetzen der Physik
+gehorchen (bzw. Enigmas spezieller Version der Physik), ist es nicht
+immer einfach, sie mit der Maus zu kontrollieren <small class="enddots">....</small>
+</p>
+<p>Das urspr&uuml;ngliche Ziel des Enigma-Projektes war es, den Geist der
+Oxyd-Spiele-Serie am Leben zu erhalten, nachdem ihr Verleger 2002
+entschied, das Spielegesch&auml;ft zu verlassen. Fans dieses ber&uuml;hmten
+Spiels werden ihre D&eacute;j&agrave;-vus erleben. Aber &uuml;ber die Jahre hat
+Enigma auch die Ideen zahlloser weiterer ber&uuml;hmter Spiele in sich
+aufgenommen und ihnen seinen eigenen, ganz pers&ouml;nlichen Twist
+hinzugef&uuml;gt.
+</p>
+<p>Enigma gibt es f&uuml;r Windows, Mac OS X und die meisten Linux- und
+Unixversionen. Es wurde in viele Sprachen &uuml;bersetzt, sogar dieses
+Handbuch ist in mehreren Sprachen erh&auml;ltlich.
+</p>
+<p>Die offizielle <a href="http://www.nongnu.org/enigma">Homepage</a> von Enigma
+versucht, die wichtigsten Informationen rund um Enigma zu sammeln: Hier
+finden Sie Bildschirmfotos, die aktuellsten Versionen, Informationen
+&uuml;ber die Weiterentwicklung von Enigma und au&szlig;erdem die aktuellste
+Ausgabe dieses <a href="http://www.nongnu.org/enigma/manual">Handbuchs</a>.
+Die Entwickler von Enigma k&ouml;nnen jederzeit unter der Email-Adresse
+<a href="mailto:enigma-devel@nongnu.org">enigma-devel@nongnu.org</a> erreicht werden.
+</p>
+<p>Enigma ist freie Software, d.h. Sie sind ausdr&uuml;cklich dazu
+aufgefordert, m&ouml;glichst viele Kopien an Ihre Freunde zu verteilen
+(see section <a href="#SEC4">Verbreiten von Enigma</a>).  Enigma wird von einer kleinen Gruppe
+von Freiwilligen entwickelt, und wir alle arbeiten in unserer Freizeit.
+Wenn Ihnen das Spiel gef&auml;llt, w&uuml;rden wir uns &uuml;ber eine kleine
+Email an die oben genannte Adresse sehr freuen, sozusagen als kleine
+Anerkennung und Belohnung f&uuml;r die unz&auml;hligen Stunden, die wir in
+Enigma investiert haben.
+</p>
+
+<hr size="6">
+<a name="Installation"></a>
+<a name="SEC3"></a>
+<h2 class="section"> 1.2 Installation </h2>
+
+<p>Die aktuellste Version von Enigma findet sich stets auf der offiziellen
+<a href="http://www.nongnu.org/enigma/download.html">Download-Seite</a>. Diese
+Seite stellt Pakete f&uuml;r die folgenden Betriebssysteme bereit:
+</p>
+<dl compact="compact">
+<dt> <strong>Windows</strong></dt>
+<dd><p>Die Windows-Version von Enigma wird in Form eines einfachen
+Installationsprogrammes vertrieben, das Enigma auf Ihrem Computer
+einrichtet.  Laden Sie bitte einfach die bereitgestellte Datei auf Ihren
+Computer und f&uuml;hren Sie sie aus, um die Installation zu starten.
+</p>
+</dd>
+<dt> <strong>Unix</strong></dt>
+<dd><p>Vorgefertigte Pakete existieren f&uuml;r einige verbreitete
+Linux-Distributionen wie SUSE, Redhat und Debian.  F&uuml;r andere
+Unix-&auml;hnliche Betriebssysteme steht ist das Neukompilieren der
+Quellcodes sicher die einfachste L&ouml;sung.
+</p>
+</dd>
+<dt> <strong>Mac OS X</strong></dt>
+<dd><p>Unter OS X ist keine Installation n&ouml;tig; entpacken Sie einfach die
+bereitgestellt <tt>`.dmg'</tt> or <tt>`.tar.gz'</tt> und kopieren Sie die
+enthaltene Applikation an den von Ihnen gew&uuml;nschten Ort.
+</p></dd>
+</dl>
+
+<p>Die Download-Seite enth&auml;lt &uuml;blicherweise detailliertere und aktuellere
+Informationen (allerdings nur auf Englisch).  Falls Sie Probleme haben,
+Enigma auf Ihrem Rechner zum Laufen zu bringen, z&ouml;gern Sie bitte nicht,
+uns unter <a href="mailto:enigma-devel@nongnu.org">enigma-devel@nongnu.org</a> um Unterst&uuml;tzung zu bitten.
+</p>
+<hr size="6">
+<a name="Verbreiten-von-Enigma"></a>
+<a name="SEC4"></a>
+<h2 class="section"> 1.3 Verbreiten von Enigma </h2>
+
+<p>Enigma ist freie Software und darf gem&auml;&szlig; den Bedingungen der GNU General
+Public License (GPL) verbreitet werden.  Die englische Fassung dieser
+Lizenz ist jeder Kopie von Enigma beigelegt, die Datei hei&szlig;t
+entweder <tt>`COPYING'</tt> oder <tt>`COPYING.txt'</tt>.  F&uuml;r den Fall, dass Sie
+Enigma lediglich <em>spielen</em> wollen, m&uuml;ssen Sie die Lizenz eigentlich
+nicht studieren (Sie h&auml;tten es ja vermutlich ohnehin nicht getan).  F&uuml;r
+Sie besagt die Lizenz im Wesentlichen: Spielen Sie Enigma so viel Sie
+wollen, so lange Sie wollen und geben Sie auf jeden Fall allen Ihren
+Freunden eine Kopie!
+</p>
+<p>Falls Sie dagegen &Auml;nderungen an Enigma vornehmen oder an der weiteren
+Entwicklung teilnehmen m&ouml;chten, nehmen Sie sich bitte die Zeit, die
+Lizenz durchzulesen.  Die GPL gew&auml;hrleistet, dass Enigma auch in
+Zukunft freie Software bleiben wird und ohne zus&auml;tzliche
+Einschr&auml;nkungen benutzt und verbreitet werden kann.  Insbesondere
+m&uuml;ssen Derivate von Enigma unter sehr &auml;hnlichen Lizenzbedingungen
+wie Enigma selbst verf&uuml;gbar gemacht werden.
+</p>
+<p>Die beiden vorstehenden Abs&auml;tze sind kein Ersatz f&uuml;r die eigentliche
+Lizenz, lediglich eine Umschreibung ihrer Grundintention.  F&uuml;r Details
+konsultieren Sie bitte den originalen Lizenztext oder fragen Sie auf der
+Enigma-Mailingliste.
+</p>
+<hr size="6">
+<a name="Das-Spiel"></a>
+<a name="SEC5"></a>
+<h1 class="chapter"> 2. Das Spiel </h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC6">2.1 Ganz zu Anfang</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             Durch die Men&uuml;s navigieren und starten
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC11">2.2 Spielregeln</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Wie man Enigma spielt
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC15">2.3 Steuerung</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  Tastatur und Mauskommandos
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Ganz-zu-Anfang"></a>
+<a name="SEC6"></a>
+<h2 class="section"> 2.1 Ganz zu Anfang </h2>
+
+<p>Enigma pr&auml;sentiert sich nach dem Starten mit einem kleinen
+Hauptmen&uuml;, von dem aus Sie ein neues Spiel starten, einige
+Einstellungen &auml;ndern oder das Spiel wieder verlassen k&ouml;nnen, sobald
+Sie genug haben.  Die folgenden Abschnitte werden Ihnen einen kurzen
+&Uuml;berblick &uuml;ber das Level-Men&uuml; und das Options-Men&uuml; geben,
+in der Hoffnung, dass sich der Rest von selbst erschlie&szlig;t. Zu den
+meisten Men&uuml;s kann man mit <kbd>F1</kbd> eine Hilfe aufrufen. Die Begriffe
+&quot;Level&quot; und &quot;Landschaft&quot; werden synonym verwendet.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC7">2.1.1 Das Level-Men&uuml;</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              W&auml;hle die n&auml;chste Landschaft
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC8">2.1.2 Das Levelpaket-Men&uuml;</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">         Bestimme ein Levelpaket
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC9">2.1.3 Einstellungen</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Passe Enigma an
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC10">2.1.4 Der Level-Inspektor</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          Detailierte Informationen &uuml;ber eine Landschaft
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Das-Level_002dMenue"></a>
+<a name="SEC7"></a>
+<h3 class="subsection"> 2.1.1 Das Level-Men&uuml; </h3>
+
+<p>Wenn Sie im Hauptmen&uuml; den Eintrag &quot;Spiel starten&quot; anw&auml;hlen,
+landen Sie im Level-Men&uuml;, das ungef&auml;hr folgenderma&szlig;en
+aussieht:
+</p>
+<p><img src="./images/levelmenu.png" alt="images/levelmenu">
+</p>
+<p>Der Bildschirm ist in drei Bereiche unterteilt: der obere Bereich
+enth&auml;lt Informationen &uuml;ber den gerade angew&auml;hlten Level und
+das aktuelle Levelpaket, der mittlere Bereich enth&auml;lt eine
+&Uuml;bersicht &uuml;ber alle verf&uuml;gbaren Landschaften, und am unteren
+Bildschirmrand befindet sich eine Leiste mit Aktionskn&ouml;pfen.
+</p>
+<p>Durch die Landschafts-&Uuml;bersicht k&ouml;nnen Sie mithilfe der kleinen
+Pfeil-Kn&ouml;pfe am rechten Rand oder mit den Pfeiltasten auf der Tastatur
+navigieren.  Um ein neues Spiel zu starten, klicken Sie einfach auf das
+gew&uuml;nschte Vorschaubildchen oder Sie dr&uuml;cken die Eingabetaste, um
+die momentan ausgew&auml;hlte Landschaft zu starten.
+</p>
+<p>Enigma verf&uuml;gt &uuml;ber zwei Schwierigkeitsgrade: &quot;einfach&quot; und
+&quot;normal&quot;. Um zwischen diesen umzuschalten, dr&uuml;cken Sie den mittleren
+Knopf in der untersten Zeile: Schalten Sie die Silbermedaille mit der
+Feder ein, wenn Sie einfachere Landschaften bevorzugen, oder die
+Goldmedaille f&uuml;r den normalen, schwierigeren Modus.
+</p>
+<p>Nicht alle Landschaften besitzen eine vereinfachte Version;
+diejenigen, die eine besitzen, sind durch eine Feder gekennzeichnet
+(sofern Sie sie noch nicht gel&ouml;st haben) oder mit einem Silbermedaille
+in der oberen linken Ecke des Vorschaubilds.
+</p>
+<p>Sie k&ouml;nnen zur n&auml;chsten Landschaft springen, indem Sie entweder
+<kbd>F5</kbd> bet&auml;tigen oder auf den <kbd>&gt;&gt;|</kbd>-Knopf in der untersten Zeile
+klicken. Die Bedeutung von &quot;n&auml;chste Landschaft&quot; h&auml;ngt dabei davon
+ab, welchen Modus Sie im auf dem Knopf ganz links-unten eingestellt
+haben.
+</p>
+<ul>
+<li> 
+Eine stehende schwarze Kugel steht f&uuml;r &quot;definitiv n&auml;chste&quot;. Sie
+werden damit zur n&auml;chsten Landschaft im Paket kommen, unabh&auml;ngig
+davon, ob Sie diese Landschaft schonmal gel&ouml;st haben oder nicht.
+
+</li><li>
+Das Medaillenpaar bezeichnet die &quot;n&auml;chste ungel&ouml;ste Landschaft&quot;. Der
+<kbd>&gt;&gt;|</kbd>-Knopf f&uuml;hrt sie dabei zur n&auml;chsten Landschaft, die im
+gew&auml;hlten Schwierigkeitsgrad noch ungel&ouml;st ist.
+
+</li><li>
+Die beschleunigende Kugel steht f&uuml;r den Par-Modus. Par (&quot;professional
+average rating&quot;) bezeichnet ein gutes Ergebnis, das von guten
+Spielern erreicht werden sollte. Landschaften, in denen Sie ebenso
+schnell wie Par oder schneller waren, werden mit einer ebensolchen
+beschleunigenden Kugel gekennzeichnet. Im Par-Modus springt der
+<kbd>&gt;&gt;|</kbd>-Knopf zur n&auml;chten Landschaft, f&uuml;r die Sie Par noch nicht
+erreicht haben.
+
+</li><li>
+Schlie&szlig;lich steht der Globus f&uuml;r die Weltrekordjagd. Wenn Ihr Ergebnis
+das weltbeste bekannte Ergebnis ist, so werden Sie durch einen Globus
+&uuml;ber dem Vorschaubild der Landschaft geehrt. In diesem Modus wird eine
+Landschaft wieder und wieder gespielt, bis Sie den Weltrekord erreicht
+haben. 
+
+</li></ul>
+
+<p>Eine Landschaft ist m&ouml;glicherweise au&szlig;erdem mit einem kleinen
+roten Dreieck mit Ausrufezeichen markiert: das Symbol signalisiert, dass
+die Landschaft aktualisiert wurde, seit Sie sie zuletzt gel&ouml;st
+haben. Sie sehen dies wahrscheinlich nur nach einem Update von Enigma.
+</p>
+<p>Im Level-Men&uuml; k&ouml;nnen folgende Tastaturk&uuml;rzel verwendet werden:
+</p>
+<dl compact="compact">
+<dt> <kbd><kbd>ESC</kbd></kbd></dt>
+<dd><p>R&uuml;ckkehr zum Hauptmen&uuml;
+</p>
+</dd>
+<dt> <kbd><kbd>F1</kbd></kbd></dt>
+<dd><p>Hilfe
+</p>
+</dd>
+<dt> <kbd><kbd>F5</kbd></kbd></dt>
+<dd><p>Zur n&auml;chsten Landschaft, entspricht dem <kbd>&gt;&gt;|</kbd>-Knopf
+</p>
+</dd>
+<dt> <kbd>Pfeiltasten</kbd></dt>
+<dd><p>Auswahl einer Landschaft
+</p>
+</dd>
+<dt> <kbd><kbd>Eingabe</kbd></kbd></dt>
+<dd><p>Ausgew&auml;hlte Landschaft spielen
+</p>
+</dd>
+<dt> <kbd><kbd>Leertaste</kbd></kbd></dt>
+<dd><p>N&auml;chstes Landschaftspaket
+</p>
+</dd>
+<dt> <kbd><kbd>Backspace</kbd></kbd></dt>
+<dd><p>Voriges Landschaftspaket
+</p>
+</dd>
+</dl>
+
+<hr size="6">
+<a name="Das-Levelpaket_002dMenue"></a>
+<a name="SEC8"></a>
+<h3 class="subsection"> 2.1.2 Das Levelpaket-Men&uuml; </h3>
+
+<p>Enigma enth&auml;lt bereits viele Landschaften. Sehr, sehr viele, um genau
+zu sein. Um etwas Ordnung hineinzubringen, wurden die Landschaften in
+&quot;Levelpaketen&quot; zusammengefasst. Und da mit jeder neuen Version von
+Enigma neue Landschaften hinzukamen, mussten wir inzwischen sogar die
+Levelpakete selber zu &quot;Gruppen&quot; zusammenfassen. Aber keine Sorge, es
+ist alles viel einfacher als es jetzt vielleicht klingt.
+</p>
+<p>Um ein Levelpaket auszuw&auml;hlen, wechseln Sie ins &quot;Levelpaket&quot;-Men&uuml;,
+in das Sie vom Hauptmen&uuml; oder vom Level-Men&uuml; aus kommen k&ouml;nnen. 
+</p>
+<p>In der linken Spalte sind die Gruppen aufgef&uuml;hrt, rechts die
+Levelpakete in der ausgew&auml;hlten Gruppe. Die offiziellen,
+voreingestellten Gruppen von Enigma sind die folgenden:
+</p>
+<ul>
+<li> <b>Enigma</b> - Landschaften speziell f&uuml;r Enigma 
+</li><li> <b>D&eacute;j&agrave;-vu</b> - Landschaften, die Sie vielleicht schonmal
+gesehen haben
+</li><li> <b>Sokoban</b>
+</li><li> <b>Facets</b> - Spezielle Sortierungen und Blickweisen auf die
+Landschaften aus den vorigen Gruppen
+</li><li> <b>User</b> - Eigene Landschaften und Levelpakete, darunter die
+&quot;History&quot;, die die Landschaften enth&auml;lt, die zuletzt von Ihnen
+gespielt wurden, &quot;Search Result&quot; (Suchergebnisse) und &quot;Auto&quot;, ein
+automatisch erstelltes Levelpaket f&uuml;r einzelne selbsterzeugte Landschaften.
+</li><li> <b>Development</b> - Vorlagen und unvollendete Landschaften vom
+Enigma Team
+</li><li> <b>All Packs</b> - Alle Pakete zusammen.
+</li></ul>
+
+<p>Mit einem Linksklick k&ouml;nnen Sie eine Gruppe und dann ein Levelpaket
+ausw&auml;hlen. 
+</p>
+<p>F&uuml;r eine weitere Beschreibung der Levelpakete lesen Sie bitte
+<a href="#SEC31">User-Levelpakete</a>.
+</p>
+<hr size="6">
+<a name="Einstellungen"></a>
+<a name="SEC9"></a>
+<h3 class="subsection"> 2.1.3 Einstellungen </h3>
+
+<p>Das Optionsmen&uuml; erm&ouml;glichst es Ihnen, Enigma an Ihre Vorlieben anzupassen.
+</p>
+<dl compact="compact">
+<dt> <strong>Sprache (Language)</strong></dt>
+<dd><p>W&auml;hlen Sie hier die Sprache, in der die Nachrichten in den Men&uuml;s
+und (falls verf&uuml;gbar) in den Leveln dargestellt werden.
+</p>
+</dd>
+<dt> <strong>Vollbild</strong></dt>
+<dd><p>Schaltet zwischen Vollbild- und Fensterdarstellung um.  Sie k&ouml;nnen dazu
+auch das Tastenk&uuml;rzel <kbd>Alt-<kbd>Eingabe</kbd></kbd> verwenden, auch dann, wenn
+Sie sich nicht im Optionsmen&uuml; befinden.  <em>Hinweis:</em> Auf einigen
+System wird diese Einstellung erst dann &uuml;bernommen, wenn Sie ins
+Hauptmen&uuml; zur&uuml;ckkehren.
+</p>
+</dd>
+<dt> <strong>Grafikmodus</strong></dt>
+<dd><p>Benutzen Sie diesen Knopf um die Bildschirmaufl&ouml;sung zu w&auml;hlen, die
+Enigma f&uuml;r die Darstellung verwendet.  Diese Einstellung wird erst
+&uuml;bernommen wenn Sie ins Hauptmen&uuml; zur&uuml;ckkehren.
+</p>
+</dd>
+<dt> <strong>Gamma-Korrektur</strong></dt>
+<dd><p>Regeln Sie hier falls n&ouml;tig die Helligkeit der Bildschirmdarstellung.
+</p>
+</dd>
+<dt> <strong>Maustempo</strong></dt>
+<dd><p>Stellen Sie hier ein, wie schnell Ihre Kugel beschleunigen soll wenn Sie
+die Maus bewegen.  W&auml;hrend des Spiels k&ouml;nnen Sie dazu die linke/rechte
+Pfeiltaste verwenden.
+</p>
+</dd>
+<dt> <strong>Effekt-Lautst&auml;rke</strong></dt>
+<dd><p>Regeln Sie hier die Lautst&auml;rke von Klangeffekten im Spiel.
+</p>
+</dd>
+<dt> <strong>Sound Schema</strong></dt>
+<dd><p>(F&uuml;r Oxyd-Kenner.) Mit diesem Knopf k&ouml;nnen Sie das Klangschema
+wechseln, das Enigma w&auml;hrend des Spiels verwendet.  Nach Installation
+der Oxyd-Daten k&ouml;nnen Sie hier die originalen Soundeffekte einschalten.
+</p>
+</dd>
+<dt> <strong>Musik-Lautst&auml;rke</strong></dt>
+<dd><p>Regeln Sie hier die Lautst&auml;rke der Hintergrundmusik im Men&uuml;.
+</p>
+
+</dd>
+<dt> <strong>Stereo</strong></dt>
+<dd><p>Erlaubt das Umschalten zwischen Links-Rechts-Stereo, Rechts-Links-Stereo
+und Mono-Klang.
+</p>
+</dd>
+<dt> <strong>Update Bewertungen</strong></dt>
+<dd><p>Auf der Einstellung <samp>`Auto'</samp> wird Enigma von Zeit zu Zeit
+versuchen, aktuelle Bewertungen herunterzuladen. Dies betrifft
+&ouml;ffentliche Bewertungen, Weltrekorde, PAR-Zeiten etc.
+See section <a href="#SEC33">Ergebnisse hochladen</a>.
+</p>
+</dd>
+<dt> <strong>Spielername</strong></dt>
+<dd><p>Geben Sie hier den Namen oder Alias ein, der zusammen mit Ihren
+Ergebnissen angezeigt werden soll, wenn Sie enigma.score
+hochladen. See section <a href="#SEC33">Ergebnisse hochladen</a>.
+</p>
+</dd>
+<dt> <strong>Userpfad</strong></dt>
+<dd><p>Das Verzeichnis, in dem Enigma die Nutzerdaten speichert. Details
+stehen im Referenzhandbuch.
+</p>
+</dd>
+<dt> <strong>Userbilderpfad</strong></dt>
+<dd><p>Das Verzeichnis, in dem Enigma Nutzerbilder speichert. Details stehen
+im Referenzhandbuch.
+</p>
+</dd>
+</dl>
+
+<hr size="6">
+<a name="Der-Level_002dInspektor"></a>
+<a name="SEC10"></a>
+<h3 class="subsection"> 2.1.4 Der Level-Inspektor </h3>
+
+<p>Um genauere Details &uuml;ber eine Landschaft zu erfahren, k&ouml;nnen Sie mit
+einem Rechtsklick oder Kontroll-Klick auf das Vorschaubild einer
+Landschaft den Level-Inspektor aufrufen.
+</p>
+<p>Hier k&ouml;nnen Sie Ihre Ergebnisse mit dem Weltrekord f&uuml;r diese
+Landschaft, mit dem Par und den Ergebnissen des Levelautors selber
+vergleichen. Es wird sogar eine Statistik dazu angezeigt, wieviele
+andere  Spielere diese Landschaft bereits gel&ouml;st haben.
+</p>
+<p>Neben weiteren Informationen, die im Referenz-Handbuch beschrieben
+werden, k&ouml;nnen Sie auch eine kurze Anmerkung zur Landschaft
+hinterlassen und sie bewerten.
+</p>
+<p>Beachten Sie bitte, dass das Textfeld f&uuml;r die Anmerkung m&ouml;glicherweise
+nur ASCII-Zeichen erlaubt, abh&auml;ngig vom System, auf dem Enigma
+l&auml;uft. Vermeiden Sie also notfalls Umlaute, Akzente und Sonderzeichen.
+</p>
+<p>Die Bewertung ganz links-unten ist Ihr pers&ouml;nlicher Eindruck von der
+Landschaft, den Sie durch einen Linksklick einstellen k&ouml;nnen. <samp>`-'</samp>
+steht dabei f&uuml;r keine Meinung, 0 f&uuml;r sehr schlecht, 5 ist Durchschnitt
+und 10 steht f&uuml;r die beste unter den guten Landschaften. Ihre
+Bewertung k&ouml;nnen Sie uns zusammen mit Ihren Ergebnissen zuschicken
+(see section <a href="#SEC33">Ergebnisse hochladen</a>).
+</p>
+<p>Schlie&szlig;lich k&ouml;nnen Sie den Level-Inspektor auch dazu verwenden, die
+Bildschirmphotos zu betrachten, die Sie w&auml;hrend des Spielens dieser
+Landschaft aufgenommen haben (see section <a href="#SEC15">Steuerung</a>).
+</p>
+
+<hr size="6">
+<a name="Spielregeln"></a>
+<a name="SEC11"></a>
+<h2 class="section"> 2.2 Spielregeln </h2>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC12">2.2.1 Gew&ouml;hnliche Landschaften</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC13">2.2.2 Zwei-Spieler Landschaften</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC14">2.2.3 Meditations-Landschaften</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+<p>Um Verwirrungen vorzubeugen: Die Begriffe &quot;Level&quot; und &quot;Landschaft&quot;
+werden synonym verwendet.
+</p>
+<hr size="6">
+<a name="Gewoehnliche-Landschaften"></a>
+<a name="SEC12"></a>
+<h3 class="subsection"> 2.2.1 Gew&ouml;hnliche Landschaften </h3>
+
+<p>Die grundlegende Idee hinter Enigma ist recht einfach: In den meisten
+Landschaften steuern Sie eine kleine schwarze Kugel, und Ihr Ziel ist
+es, identische Paare sogenannter <em>Oxyd-Steine</em> zu finden und zu
+&ouml;ffnen.  Geschlossene Oxyd-Steine sehen folgenderma&szlig;en aus (es gibt
+insgesamt vier &auml;u&szlig;erlich verschiedene Varianten, die sich aber alle
+gleich verhalten):
+</p>
+<p><img src="./images/st-oxyds.png" alt="images/st-oxyds">
+</p>
+<p>Ber&uuml;hren Sie einen Oxyd-Stein mit Ihrer Kugel, dann &ouml;ffnet er sich
+und zeigt ein blinkendes farbiges Symbol.  Je zwei Oxyd-Steine in jeder
+Landschaft tragen dasselbe Symbol.  Diese Paare gilt es zu finden und
+direkt hintereinander zu ber&uuml;hren, damit sie permantent ge&ouml;ffnet
+bleiben--stimmen die Symbole nicht &uuml;berein, schlie&szlig;t sich der
+erste Oxyd-Stein wieder.  Eine Landschaft gilt als gel&ouml;st, sobald Sie
+alle Paare von Oxyd-Steinen gefunden und ge&ouml;ffnet haben.  In der
+folgenden Abbildung sehen Sie ein Paar von gr&uuml;nen Oxyd-Steinen, das
+bereits ge&ouml;ffnet wurde.  Das Fragezeichen im blauen Oxyd-Stein
+signalisiert, dass das zweite blaue Symbol noch irgendwo versteckt ist.
+</p>
+<p><img src="./images/intro-oxyd.png" alt="images/intro-oxyd">
+</p>
+<p><em>&Uuml;brigens: falls Sie es noch nicht getan haben, ist jetzt ein
+guter Zeitpunkt, Enigma einmal zu starten und die ersten paar
+Landschaften auszuprobieren!</em>
+</p>
+<p>Sie k&ouml;nnen auf dem Boden liegende Objekte aufsammeln, indem Sie
+einfach dar&uuml;ber rollen.  Das Inventar am unteren Rand des Bildschirms
+zeigt alle Gegenst&auml;nde an, die sich gerade in Ihrem Besitz befinden.
+Zu Beginn des Spiels sind Sie lediglich mit zwei Ersatzkugeln
+ausger&uuml;stet.  Die folgende Abbildung zeigt ein Inventar, das bereits
+eine Schaufel, ein St&uuml;ck Papier, zwei Stangen Dynamit, Ihre
+Ersatzleben und einen Regenschirm enth&auml;lt:
+</p>
+<p><img src="./images/intro-inventory.png" alt="images/intro-inventory">
+</p>
+<p>Das Objekt, das sich ganz links im Inventar befindet, kann durch
+Dr&uuml;cken der linken Maustaste benutzt werden: damit legen Sie es
+entweder auf dem Boden ab oder Sie aktivieren das Objekt.  Dynamit
+beginnt beispielsweise zu brennen, wenn Sie es ablegen, und Sprungfedern
+bewirken, dass Ihre Kugel in die Luft h&uuml;pft.  Mit der rechten
+Maustaste oder dem Mausrad k&ouml;nnen Sie die Eintr&auml;ge im Inventar
+umordnen.
+</p>
+<p>M&ouml;chten Sie einmal (aus welchem Grund auch immer) keine Objekte
+einsammeln, halten Sie einfach eine der Maustasten gedr&uuml;ckt, w&auml;hrend
+Sie die Kugel bewegen.  In einigen Situationen werden Sie das vielleicht
+hilfreich finden.
+</p>
+<p>Viele Steine lassen sich verschieben, wenn man sie nur kr&auml;ftig genug
+anschubst.  Einer der n&uuml;tzlichsten beweglichen Steine ist der
+Holzstein, der etwa dazu verwendet werden kann, Br&uuml;cken &uuml;ber Wasser
+und Abgr&uuml;nde zu errichten.  Das folgende Bild zeigt, wie man eine
+Br&uuml;cke baut, indem man Holzsteine ins Wasser hineinschiebt:
+</p>
+<p><img src="./images/intro-plank.png" alt="images/intro-plank">
+</p>
+<p>H&auml;ufig interagieren Spielobjekte auf &uuml;berraschende Weise:
+Gegenst&auml;nde, die auf dem Boden liegen k&ouml;nnen beispielsweise mit
+Laserstrahlen oder beweglichen Steinen transformiert werden.  Und viele
+Steine verhalten sich bei Ber&uuml;hrung anders als normal wenn Sie bestimmte
+Gegenst&auml;nde im ersten Eintrag Ihres Inventars haben (der Zauberstab
+ist der ber&uuml;hmteste Vertreter dieser Gattung).
+</p>
+<p>Eine letzte Bemerkung: F&uuml;hlen Sie sich nicht gleich entmutigt durch
+die scheinbare Komplexit&auml;t des Spiels--die genaue Verhaltensweise der
+meisten Objekte wird im Laufe der Zeit klar werden.  Einige der
+merkw&uuml;rdigeren Objekte werden au&szlig;erdem in <a href="#SEC16">Einige Spielobjekte</a>
+n&auml;her vorgestellt..
+</p>
+<hr size="6">
+<a name="Zwei_002dSpieler-Landschaften"></a>
+<a name="SEC13"></a>
+<h3 class="subsection"> 2.2.2 Zwei-Spieler Landschaften </h3>
+
+<p>Zun&auml;chst eine schlechte Nachricht: Bislang unterst&uuml;tzt Enigma noch keine
+Spiele &uuml;ber lokale Netzwerke oder das Internet.  In dieser Hinsicht sind also
+Zwei-Spieler Landschaften in Wirklichkeit Ein-Spieler Landschaften, in
+denen Sie zwischen zwei Kugeln hin- und herschalten k&ouml;nnen: die schwarze
+Kugel kennen Sie bereits, und eine zus&auml;tzliche wei&szlig;e Kugel.
+</p>
+<p><img src="./images/intro-twoplayer.png" alt="images/intro-twoplayer">
+</p>
+<p>Zwei-Spieler Landschaften k&ouml;nnen Sie an dem kleinen Yin-Yang Symbol in
+Ihrem Inventar erkennen.  Wenn Sie dieses Objekt aktivieren, k&ouml;nnen Sie
+die Mauskontrolle auf die wei&szlig;e bzw. wieder zur&uuml;ck auf die schwarze
+Kugel legen.
+</p>
+<hr size="6">
+<a name="Meditations_002dLandschaften"></a>
+<a name="SEC14"></a>
+<h3 class="subsection"> 2.2.3 Meditations-Landschaften </h3>
+
+<p>Die sogenannten Meditationslandschaften unterscheiden sich im
+Spielprinzip deutlich von gew&ouml;hnlichen Landschaften: hier besteht Ihre
+Aufgabe nicht darin, passende Paare von Oxyd-Steinen zu finden, sondern
+darin, eine Anzahl kleiner wei&szlig;er Kugeln in Vertiefungen im Boden zu
+bef&ouml;rdern.  Die Landschaft gilt als gel&ouml;st, sobald alle Kugeln in je
+einer Mulde liegen und sich nicht mehr bewegen.
+</p>
+<p><img src="./images/intro-meditation.png" alt="images/intro-meditation">
+</p>
+<p>Aber seien Sie vorsichtig: Alle Kugeln bewegen sich gleichzeitig und
+eine ruckartige Mausbewegung kann einige der Kugeln wieder aus Ihren
+Vertiefungen herausschubsen.  Meditationslandschaften erfordern
+gew&ouml;hnlich ein sehr ruhiges H&auml;ndchen und eine ordentliche Portion
+Geduld (sie hei&szlig; nicht umsonst Meditationslandschaften!).
+</p>
+<hr size="6">
+<a name="Steuerung"></a>
+<a name="SEC15"></a>
+<h2 class="section"> 2.3 Steuerung </h2>
+
+<p>Folgende Tabelle gibt einen &Uuml;berblick &uuml;ber die Tastenbelegung im
+Spiel.  Sie m&uuml;ssen sich diese Liste nicht einpr&auml;gen--sie kann
+w&auml;hrend des Spiels jederzeit mit der <kbd>F1</kbd>-Taste abgerufen werden.
+</p>
+<dl compact="compact">
+<dt> <kbd>Linke Maustaste</kbd></dt>
+<dd><p>Benutze den ersten Gegenstand im Inventar
+</p>
+</dd>
+<dt> <kbd>Rechte Maustaste / Mausrad</kbd></dt>
+<dd><p>Sortiere die Gegenst&auml;nde im Inventar um
+</p>
+</dd>
+<dt> <kbd><kbd>ESC</kbd></kbd></dt>
+<dd><p>Zeige das Spielmen&uuml;
+</p>
+</dd>
+<dt> <kbd><kbd>F1</kbd></kbd></dt>
+<dd><p>Zeige den Hilfebildschirm
+</p>
+</dd>
+<dt> <kbd><kbd>F3</kbd></kbd></dt>
+<dd><p>Zerst&ouml;re die momentane Kugel
+</p>
+</dd>
+<dt> <kbd><kbd>Umschalt</kbd>+<kbd>F3</kbd></kbd></dt>
+<dd><p>Starte die Landschaft von Neuem
+</p>
+</dd>
+<dt> <kbd><kbd>F4</kbd></kbd></dt>
+<dd><p>Gehe zur n&auml;chsten Landschaft
+</p>
+</dd>
+<dt> <kbd><kbd>F5</kbd></kbd></dt>
+<dd><p>Gehe zur n&auml;chsten ungel&ouml;sten Landschaft
+</p>
+</dd>
+<dt> <kbd><kbd>F10</kbd></kbd></dt>
+<dd><p>Erzeuge ein Bildschirmfoto
+</p>
+</dd>
+<dt> <kbd><kbd>Pfeil links</kbd></kbd></dt>
+<dd><p>Verringere Mausgeschwindigkeit
+</p>
+</dd>
+<dt> <kbd><kbd>Pfeil rechts</kbd></kbd></dt>
+<dd><p>Erh&ouml;he Mausgeschwindigkeit
+</p>
+</dd>
+<dt> <kbd><kbd>Alt</kbd>-<kbd>RET</kbd></kbd></dt>
+<dd><p>Zwischen Vollbild- und Fensterdarstellung umschalten (funktioniert nicht
+auf allen Systemen, notfalls kann das Einstellungsmen&uuml; verwendet
+werden)
+</p>
+</dd>
+<dt> <kbd><kbd>Alt</kbd>-<kbd>X</kbd></kbd></dt>
+<dd><p>Kehre zur&uuml;ck zum Landschaftsmen&uuml;
+</p></dd>
+</dl>
+
+<hr size="6">
+<a name="Einige-Spielobjekte"></a>
+<a name="SEC16"></a>
+<h1 class="chapter"> 3. Einige Spielobjekte </h1>
+
+<p>Es gibt Dutzende verschiedener Spielobjekte, die Sie in Enigmas
+Landschaften kennenlernen werden. Hier wollen wir nur eine kleine
+Auswahl davon beschreiben, auf die Sie vielleicht h&auml;ufiger treffen
+werden. Wenn das Spielprinzip von Enigma f&uuml;r Sie neu ist, wollen Sie
+vielleicht zuerst mit den Tutoriallandschaften beginnen? Starten Sie
+daf&uuml;r einfach Enigma, w&auml;hlen Sie &quot;Levelpaket&quot; dann den Knopf
+&quot;Enigma&quot; ganz links-oben, dann &quot;Tutorial&quot; auf der rechten
+Seite. Beginnen Sie mit der ersten Level &quot;Oxyd Stones 1&quot;. Das
+Tutorial zeigt Ihnen die wichtigsten Spielobjekte und -ideen, und
+zum &Uuml;ben einige der einfacheren Landschaften aus Enigmas Levelpaketen.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC17">3.1 Gegenst&auml;nde</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC21">3.2 Steine</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="Gegenstaende"></a>
+<a name="SEC17"></a>
+<h2 class="section"> 3.1 Gegenst&auml;nde </h2>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC18">3.1.1 Sprengstoffe</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC19">3.1.2 Regenschirme</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC20">3.1.3 F&auml;hnchen</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="Sprengstoffe"></a>
+<a name="SEC18"></a>
+<h3 class="subsection"> 3.1.1 Sprengstoffe </h3>
+
+<p><img src="./images/it-explosives.png" alt="images/it-explosives">
+</p>
+<p>In Enigma werden Sie im Laufe der Zeit &uuml;ber drei verschiedene Arten
+von Sprengstoff stolpern.  Am harmlosesten ist die Dynamitstange, mit
+der Sie zwar nur geringen direkten Schaden anrichten k&ouml;nnen, die sich
+aber hervorragend als Z&uuml;nder f&uuml;r naheliegenede Bomben eignen.
+</p>
+<p>Schwarze Bomben haben gen&uuml;gend Sprengladung, um tiefe L&ouml;cher in die
+meisten Bodentypen zu rei&szlig;en und etwaige anliegende Gegenst&auml;nde zu
+zerst&ouml;ren.  F&uuml;r die meisten Zerst&ouml;rungsarbeiten sind sie daher das
+Mittel der Wahl.  Wei&szlig;e Bomben haben die kombinierte Sprengladung
+von f&uuml;nf schwarzen Bomben--bringen Sie ihre Kugel auf sichere Distanz
+wenn Sie eine von ihnen brennen sehen!
+</p>
+<hr size="6">
+<a name="Regenschirme"></a>
+<a name="SEC19"></a>
+<h3 class="subsection"> 3.1.2 Regenschirme </h3>
+
+<p><img src="./images/it-umbrella.png" alt="images/it-umbrella">
+</p>
+<p>Benutzen Sie Schirme, um ihre Kugel f&uuml;r kurze Zeit (10 Sekunden um
+genau zu sein) unverwundbar zu machen.  Solange wie ein Schirm aktiv
+ist, wird ein wei&szlig;er blinkender Ring um Ihre Kugel herum angezeigt.
+Sobald der Halo anf&auml;ngt zu flackern ist Eile angesagt: Ihnen bleiben
+dann nur noch 3 Sekunden, um Ihre Kugel in sicheres Terrain zu
+man&ouml;vrieren.
+</p>
+<hr size="6">
+<a name="Faehnchen"></a>
+<a name="SEC20"></a>
+<h3 class="subsection"> 3.1.3 F&auml;hnchen </h3>
+
+<p><img src="./images/it-flags.png" alt="images/it-flags">
+</p>
+<p>Fahnen sind insbesondere auf langen und gef&auml;hrlichen Reisen hilfreiche
+Begleiter.  Wenn Ihre Kugel unterwegs zu Bruch geht, k&ouml;nnen Sie die
+Landschaft dort fortsetzen, wo Sie zuletzt ein F&auml;hnchen abgelegt
+haben, und m&uuml;ssen nicht noch einmal ganz am Anfang starten.  Es
+existieren zwei verschiedene Fahnen: eine schwarze und eine wei&szlig;e,
+die jeweils die Startposition der schwarzen oder wei&szlig;en Kugel
+festlegen.
+</p>
+<hr size="6">
+<a name="Steine"></a>
+<a name="SEC21"></a>
+<h2 class="section"> 3.2 Steine </h2>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC22">3.2.1 T&ouml;dliche Steine</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC23">3.2.2 Wechselsteine</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">               
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC24">3.2.3 Spiegel</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC25">3.2.4 Einbahn-Steine</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC26">3.2.5 Shogunsteine</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC27">3.2.6 Bolder-Steine</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC28">3.2.7 Puzzle-Steine</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">               
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC29">3.2.8 Poststeine</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="Toedliche-Steine"></a>
+<a name="SEC22"></a>
+<h3 class="subsection"> 3.2.1 T&ouml;dliche Steine </h3>
+
+<p><img src="./images/st-lethal.png" alt="images/st-lethal">
+</p>
+<p>Um zwei Steinarten sollten Sie auf jeden Fall einen m&ouml;glichst gro&szlig;en
+Bogen schlagen, zumindest solange Sie keinen Schirm haben, um Ihre
+kostbare Kugel zu sch&uuml;tzen.
+</p>
+<p>Der <em>Totenkopfstein</em> ist genauso ungesund wie er aussieht; schon
+die erste Ber&uuml;hrung ist t&ouml;dlich.  Im Ernst, wir haben Sie gewarnt.
+Vom Totenkopfstein gibt es auch noch eine besonders hinterh&auml;ltige
+unsichtbare Variante, also stecken Sie auf jeden Fall Ihre Zauberbrille
+ein.
+</p>
+<p>Der <em>schwarze Ritter</em> bewacht oftmals wichtige Durchg&auml;nge, und
+gew&ouml;hnlich hat er kein gesteigertes Interesse, sie passieren zu
+lassen.  Bringen Sie ein gutes Argument mit, mit dem sie ihn
+&quot;&uuml;berzeugen&quot; k&ouml;nnen.
+</p>
+<hr size="6">
+<a name="Wechselsteine"></a>
+<a name="SEC23"></a>
+<h3 class="subsection"> 3.2.2 Wechselsteine </h3>
+
+<p><img src="./images/st-swap.png" alt="images/st-swap">
+</p>
+<p>Wechselsteine bewegen sich nicht einfach auf das n&auml;chstgelegene Feld
+wenn sie geschoben werden.  Stattdessen tauschen sie ihren Platz mit
+demjenigen Stein, in den sie hineingeschoben werden.  Auf ein leeres
+Feld kann so ein Stein gar nicht geschoben werden--die einzige
+M&ouml;glichkeit, ihn von A nach B zu bef&ouml;rdern ist also, ihn wiederholt
+mit &quot;normalen&quot; Steinchen zu vertauschen.
+</p>
+
+
+<hr size="6">
+<a name="Spiegel"></a>
+<a name="SEC24"></a>
+<h3 class="subsection"> 3.2.3 Spiegel </h3>
+
+<p><img src="./images/st-mirrors.png" alt="images/st-mirrors">
+</p>
+<p>Laserstrahlen k&ouml;nnen mithilfe der verschiedenen Spiegel umgelenkt oder
+aufgespalten werden.  Es gibt in Enigma zwei grunds&auml;tzliche Typen von
+Spiegeln: planare Spiegel und dreieckige Spiegel.  Ein planarer Spiegel
+verh&auml;hlt sich so, wie man es erwartet: Ein auftreffender Laserstrahl
+wird reflektiert wenn er senkrecht zum Spiegel steht und er wird nach
+links oder recht abgelenkt wenn er den Spiegel in einem Winkel von 45
+Grad trifft.
+</p>
+<p>Dreieckige Spiegel sind etwas kniffliger: Seine drei Seitenfl&auml;chen
+verhalten sich wie gew&ouml;hnliche Spiegel, indem sie einen eintreffenden
+Lichstrahl entweder zur&uuml;ckwerfen oder umlenken.  F&auml;llt ein Strahl
+allerdings auf die Spitze des Dreiecks, teilt er sich in <em>zwei</em>
+Strahlen auf, die den Spiegel in entgegengesetzter Richtung verlassen.
+</p>
+<p>Beide Spiegeltypen gibt es au&szlig;erdem in halbtransparenter und
+verschiebbarer Variante.  Halbtransparente Spiegel lenken einen
+einkommenden Strahl zur H&auml;lfte um, lassen die andere H&auml;lfte
+allerdings unver&auml;ndert passieren.  Verschiebbare Spiegel sind auf
+einem hellgrauen Stein befestigt, unbewegliche auf einem dunkelgrauen
+Stein.
+</p>
+<p>Die Ausrichtung eines Spiegels kann ge&auml;ndert werden, indem man ihn
+leicht mit einer Kugel ber&uuml;hrt.  Aber passen Sie auf bei Spiegeln, die
+bereits im Strahlengang eines Lasers stehen: eine unbedachte &Auml;nderung
+kann Sie schnell das Leben einer Kugel kosten!
+</p>
+<hr size="6">
+<a name="Einbahn_002dSteine"></a>
+<a name="SEC25"></a>
+<h3 class="subsection"> 3.2.4 Einbahn-Steine </h3>
+
+<p><img src="./images/st-oneway.png" alt="images/st-oneway">
+</p>
+<p>Man kann diese Steine nur in einer Richtung passieren. Ganze
+Labyrinthe k&ouml;nnen aus ihnen gebaut werden, aber meistens zwingen sie
+Sie einfach nur dazu, einen Teil der Landschaft zu beenden, bevor Sie
+zum n&auml;chsten Teil &uuml;bergehen.
+</p>
+<p>Sie haben Probleme mit Einbahn-Steinen, die Ihnen den Weg blockieren?
+Vielleicht kann Ihnen ein magischer Gegenstand helfen <small class="enddots">....</small>
+</p>
+<hr size="6">
+<a name="Shogunsteine"></a>
+<a name="SEC26"></a>
+<h3 class="subsection"> 3.2.5 Shogunsteine </h3>
+
+<p><img src="./images/st-shogun.png" alt="images/st-shogun">
+</p>
+<p>In einigen Landschaften werden Ihnen blinkende blaue Punkte auf dem
+Boden begegnen.  Diese k&ouml;nnen mit der richtigen Kombination von
+<em>Shogunsteinen</em> aktiviert werden, wobei sie dann &uuml;blicherweise
+etwas Sinnvolles tun und z.B. eine T&uuml;r &ouml;ffnen oder einen Laser
+ein- oder ausschalten.
+</p>
+<p>Ein kleiner blinkender Punkt wird aktiviert, indem man einen Shogunstein
+mit einem kleinen Loch auf den Punkt schiebt.  Um die gr&ouml;&szlig;eren
+Punkte zu aktivieren ben&ouml;tigen Sie mehrere Shogunsteine, die Sie
+passend stapeln m&uuml;ssen.  Um etwa einen mittelgr&ouml;&szlig;en Punkt zu
+aktivieren m&uuml;ssen Sie erst einen Shogunstein mit mittelgro&szlig;em Loch
+auf den Punkt schieben und dann noch einen Shogunstein mit kleinem Loch
+in den gr&ouml;&szlig;eren hineinschieben.  Bei gro&szlig;en blinkenden Punkten
+verh&auml;hlt es sich entsprechend.
+</p>
+<hr size="6">
+<a name="Bolder_002dSteine"></a>
+<a name="SEC27"></a>
+<h3 class="subsection"> 3.2.6 Bolder-Steine </h3>
+
+<p><img src="./images/st-bolder.png" alt="images/st-bolder">
+</p>
+<p>Bolder-Steine bewegen sich in die Richtung, die durch den Pfeil auf
+ihnen angezeigt wird; solange, bis sie auf einen anderen Stein
+sto&szlig;en. Vielleicht blockieren die Bolder-Steine Ihren Weg, und Sie
+m&uuml;ssen sie auf die eine oder andere Weise loswerden. Aber stellen Sie
+Ihre Kugel niemals, niemals direkt vor einen Bolder-Stein, wenn er auf
+sie zukommt, weil er Ihre Kugel zerschlagen wird, wenn er sie
+&uuml;berrollt!
+</p>
+<p>Allerdings k&ouml;nnen Sie sich die Bolder-Steine auch zu Nutze machen,
+denn sie sind in der Lage, Oxydsteine zu &ouml;ffnen, wenn sie in sie
+hineinlaufen. Und mit verschiedenen Hilfsmitteln k&ouml;nnen Sie die
+Bolder-Steine auch gezielt umlenken <small class="enddots">....</small>
+</p>
+<hr size="6">
+<a name="Puzzle_002dSteine"></a>
+<a name="SEC28"></a>
+<h3 class="subsection"> 3.2.7 Puzzle-Steine </h3>
+
+<p>Puzzlesteine verdanken ihren Namen der Tatsache, dass einzelne Steine
+dieser Gattung zusammengesteckt werden k&ouml;nnen wie die Teile eines
+Puzzles.  Puzzlesteine haben an einigen oder allen ihrer vier Seiten
+Anschl&uuml;sse mit denen sie an benachbarte Puzzlesteine andocken
+k&ouml;nnen.  Sobald Puzzlesteine auf diese Weise zusammengef&uuml;gt sind,
+bewegen sie sich zusammen als ein gro&szlig;er Puzzlestein.  Diese
+gro&szlig;en Bl&ouml;cke k&ouml;nnen Sie z.B. verwenden, um sichere Wege &uuml;ber
+Abgr&uuml;nde oder Wasser zu konstruieren.
+</p>
+<p>Puzzlesteine &auml;ndern ihr Verhalten wenn man sie mit einem Zauberstab
+ber&uuml;hrt.  Ist der ber&uuml;hrte Puzzlestein vollst&auml;ndig verbunden, besitzt er
+also keine offenen Anschl&uuml;sse mehr, beginnt er augenblicklich zu
+explodieren, Stein f&uuml;r Stein.  Existieren noch offene Anschl&uuml;sse,
+verschiebt die Ber&uuml;hrung mit dem Zauberstab alle Steine innerhalb einer
+Zeile oder Spalte des Puzzlesteins um eine Stelle.  Am besten, Sie
+probieren das einfach mal aus.
+</p>
+<p>Berichten zufolge existiert noch eine seltene Abart des gew&ouml;hnlichen
+Puzzlesteins.  Man findet ihre Vertreter haupts&auml;chlich in den
+Landschaften von Oxyd 1 an, und man erkennt sie daran, dass sie
+orangefarbene und nicht blaue Verbindungsrohre besitzen.  Diese
+Puzzlesteine lassen sich nicht verschieben und man muss keinen
+Zauberstab benutzen, um Zeilen und Spalten umzuordnen oder die Steine
+zum explodieren zu bringen.
+</p>
+<hr size="6">
+<a name="Poststeine"></a>
+<a name="SEC29"></a>
+<h3 class="subsection"> 3.2.8 Poststeine </h3>
+
+<p><img src="./images/st-mail.png" alt="images/st-mail">
+</p>
+<p>Poststeine dienen dazu, Gegenst&auml;nde aus Ihrem Inventar an einen
+anderen Ort in der Landschaft zu transportieren.  Wenn Sie einen
+Poststein ber&uuml;hren, wird der erste Gegenstand aus Ihrem Inventar
+entfernt und an das Ende des Rohrsystems transportiert, das an den
+Poststein angeschlossen ist.  In den meisten F&auml;llen m&uuml;ssen Sie
+dieses Rohrsystem erst einmal selbst zusammenbauen, etwa indem Sie die
+einzelnen St&uuml;cke des Rohres nacheinander &quot;verschicken&quot;.
+</p>
+<p>Vorsicht: Poststeine funktionieren nicht mehr, sobald bereits ein
+Gegenstand am Ende des Rohres liegt.  Wenn man nicht aufpasst, kann es
+leicht passieren, dass man irrt&uuml;mlich ein falsches Objekt verschickt,
+das danach den Postweg versperrt!
+</p>
+
+
+
+
+
+
+<hr size="6">
+<a name="Fortgeschrittene-Themen"></a>
+<a name="SEC30"></a>
+<h1 class="chapter"> 4. Fortgeschrittene Themen </h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC31">4.1 User-Levelpakete</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            History, Search Results and Auto
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC32">4.2 Backups</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     What to backup for security
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC33">4.3 Ergebnisse hochladen</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">        Let the world know your success
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC34">4.4 Enigma updaten</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              Keeping scores and levels on an update
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="User_002dLevelpakete"></a>
+<a name="SEC31"></a>
+<h2 class="section"> 4.1 User-Levelpakete </h2>
+
+<p><a href="#SEC8">Das Levelpaket-Men&uuml;</a> erlaubt einige weitere M&ouml;glichkeiten. Die
+<samp>`User'</samp>-Gruppe enth&auml;lt drei anfangs leere Levelpakete:
+<samp>`Auto Folder'</samp>, <samp>`History'</samp> und <samp>`Search Result'</samp>.
+</p>
+<p>Durch einen Klick auf den <samp>`Suchen'</samp>-Knopf im Levelpaket-Men&uuml;
+k&ouml;nnen Sie unter allen Landschaften nach Stichw&ouml;rtern suchen. Bewegen
+Sie einfach die Maus auf das erscheinende Textfeld und geben Sie das
+Stichwort ein, es kann sich auf den Autor, Titel und auch den
+Dateinamen beziehen. Gro&szlig;- und Kleinschreibung wird dabei nicht
+beachtet. Wenn Sie beispielsweise nach &quot;jump&quot; suchen, werden Ihnen
+daraufhin im Levelpaket <samp>`Search Results'</samp> alle Landschaften mit
+diesem Stichwort angezeigt, beispielsweise &quot;Jump!&quot;, &quot;No Jumping
+Necessary&quot; und &quot;Jump Pads&quot;. 
+</p>
+<p>Das Levelpaket <samp>`History'</samp> enth&auml;lt Querverweise auf die von Ihnen
+zuletzt gespielten Landschaft. Es kann von Vorteil sein, wenn Sie nach
+einer Landschaft suchen, zu der Ihnen aber kein Suchwort einf&auml;llt.
+</p>
+<p><samp>`Auto Folder'</samp> ist ein Levelpaket, dem Sie sehr einfach neue
+Landschaften hinzuf&uuml;gen k&ouml;nnen, beispielsweise Landschaften, die Sie
+aus dem Internet heruntergeladen oder selber erstellt haben. Kopieren
+Sie daf&uuml;r die Leveldatei in das Unterverzeichnis <samp>`levels/auto'</samp> im
+<samp>`Userpfad'</samp>-Verzeichnis, wie es unter <a href="#SEC9">Einstellungen</a>
+angezeigt wird. Dieses Verzeichnis wird bei jedem Neustart von
+Enigma durchsucht und die Landschaften dem Levelpaket <samp>`Auto
+Folder'</samp> hinzugef&uuml;gt.
+</p>
+<p>Enigma bietet noch eine Reihe weiterer n&uuml;tzlicher Features, die &uuml;ber
+den Rahmen dieses Handbuchs hinausgehen. Sie k&ouml;nnen aber alle Details
+hierzu im Referenz-Handbuch nachlesen.
+</p>
+<hr size="6">
+<a name="Backups"></a>
+<a name="SEC32"></a>
+<h2 class="section"> 4.2 Backups </h2>
+
+<p>Wenn Sie bef&uuml;rchten, Ihre Spielergebnisse durch einen
+Festplatten-Fehler zu verlieren, oder einfach nur auf einen anderen
+Rechner &uuml;bertragen m&ouml;chten, sollten Sie wissen, wie man ein Backup von
+Enigma macht: Im <a href="#SEC9">Einstellungen</a>-Men&uuml; finden Sie unter dem Eintrag
+<samp>`Userpfad'</samp> das aktuelle Verzeichnis, in dem auch Ihre
+Spielergebnisse abgespeichert werden. Sie k&ouml;nnen das gesamte
+Verzeichnis sichern, oder nur die f&uuml;r die Ergebnisse wichtigen Dateien
+<samp>`enigma.score'</samp> und <samp>`state.xml'</samp>.
+</p>
+<hr size="6">
+<a name="Ergebnisse-hochladen"></a>
+<a name="SEC33"></a>
+<h2 class="section"> 4.3 Ergebnisse hochladen </h2>
+
+<p>Um Ihre Spielergebnisse registrieren zu lassen, schicken Sie uns bitte
+die Datei <samp>`enigma.score'</samp> aus dem
+<samp>`Userpfad'</samp>-Verzeichnis. Details finden Sie auf unserer
+Projekthomepage.
+</p>
+<p>Um automatisch die aktuellste Weltrekordliste herunterzuladen,
+aktivieren Sie einfach die Option <samp>`Update Bewertungen'</samp> im
+<a href="#SEC9">Einstellungen</a>-Men&uuml;.
+</p>
+<hr size="6">
+<a name="Enigma-updaten"></a>
+<a name="SEC34"></a>
+<h2 class="section"> 4.4 Enigma updaten </h2>
+
+<p>Sofern Sie Ihre alte Enigma-Version nicht pers&ouml;nlich angepasst haben,
+deinstallieren Sie die alte Version einfach und installieren danach
+die neue. Ihre Ergebnisse werden dabei automatisch &uuml;bernommen. 
+</p>
+<p>Falls Sie dagegen selber Landschaften den Installationsverzeichnissen
+von Enigma hinzugef&uuml;gt hatten, sollten Sie sie vor der Deinstallation
+sichern. Danach k&ouml;nnen Sie sicher die alte Version deinstallieren und
+die neue installieren.
+</p>
+<p>Die alte Ergebnisse werden beim ersten Start von Enigma automatisch
+&uuml;bernommen (<samp>`~/.enigmarc2'</samp> auf Systemen mit
+<samp>`HOME'</samp>-Umgebungsvariable bzw. <samp>`.../Application
+Data/enigmarc.lua2'</samp> auf einigen Windows-Systemen). Sie k&ouml;nnen die
+alten Dateien folglich nach dem ersten erfolgreichen Starten von
+Enigma 1.00 l&ouml;schen. 
+</p>
+<p>Falls Sie Landschaften aus Ihrer alten Version nach Enigma 1.00
+&uuml;bernehmen m&ouml;chten, konsultieren Sie bitte das Referenz-Handbuch, da
+sich das Levelformat ver&auml;ndert hat.
+</p>
+<hr size="6">
+<a name="Tipps-und-Tricks"></a>
+<a name="SEC35"></a>
+<h1 class="chapter"> 5. Tipps und Tricks </h1>
+
+<p>Dieses Kapitel enth&auml;lt Tipps f&uuml;r einige der etwas schwierigeren
+Landschaften in Enigma.  Lesen Sie diese Hinweise bitte nur dann, wenn
+Sie wirklich verzweifelt sind und nicht mehr weiter wissen.  Einige
+Landschaften sind absichtlich schwer und selbst Enigma-Veteranen
+ben&ouml;tigen Stunden um sie zu knacken.  Einige Landschaften lassen sich
+im einfachen Spielmodus (see section <a href="#SEC7">Das Level-Men&uuml;</a>) leichter l&ouml;sen.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC36">5.1 Tutorial</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    Komplettl&ouml;sung f&uuml;r `Advanced Tutorial'
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC40">5.2 Tipps</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       Hinweise f&uuml;r einige Landschaften
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="Tutorial"></a>
+<a name="SEC36"></a>
+<h2 class="section"> 5.1 Tutorial </h2>
+
+<p>Die Landschaften aus dem &quot;Tutorial&quot;-Levelpaket sind normalerweise einfach.
+Eine Ausnahme bildet die letzte Landschaft, welche deutlich schwerer
+ist <small class="enddots">....</small>  Dieser Teil des Handbuchs wurde von Jacob Scott
+beigetragen.
+</p>
+<p>Diese Schritt-f&uuml;r-Schritt Anleitung ist f&uuml;r die Landschaft &quot;Advanced Tutorial&quot;
+im &quot;Tutorial&quot; Levelpack.
+W&auml;hrend Sie spielen, sollten Sie alle Dokumente eines Raumes so fr&uuml;h wie m&ouml;glich
+lesen.
+</p>
+<p>Das Ziel in dieser Landschaft ist es, wie in den meisten Landschaften in Enigma, die
+&quot;Oxydsteine&quot; zu finden und mit der schwarzen Kugel zu &ouml;ffnen. Wenn Sie einen
+Oxydstein ber&uuml;hren, &ouml;ffnet er sich und zeigt eine Farbe. Wenn Sie nacheinander
+zwei Oxydsteine mit der gleichen Farbe &ouml;ffnen, bleiben sie beide offen.
+Sobald Sie alle Oxydsteine einer Landschaft in dieser Art ge&ouml;ffnet haben,
+haben Sie die Landschaft geschafft.
+</p>
+<p>Diese Landschaft hat etwa zwanzig R&auml;ume, unterteilt in drei Gebiete. Im ersten
+Gebiet werden Sie den grundlegenden Steinen und Bodentypen der Enigmalandschaften
+begegnen und einige einfache R&auml;tsel l&ouml;sen. Das zweite Gebiet ist etwas
+anspruchsvoller und Sie werden eine n&uuml;tzliche Technik kennen lernen,
+um bewegliche Feinde zu kontrollieren. Das dritte und letzte Gebiet l&auml;sst Sie mit
+komplizierteren Interaktionen zwischen den Spielobjekten
+experimentieren. In dieser speziellen Landschaft sind alle Oxydsteine
+in einem einzigen Raum am Ende des dritten Gebiets untergebracht.
+</p>
+<hr size="6">
+<a name="SEC37"></a>
+<h3 class="subsection"> 5.1.1 Gebiet 1 </h3>
+
+<p>Sie starten in einem Raum, der von unbeweglichen Wandsteinen umgeben ist. Eine
+kleine L&uuml;cke rechts, etwas Wasser unten links und eine geschlossene T&uuml;r oben
+rechts sind die einzigen Ausnahmen.
+</p>
+<p>Raum 1: Gehen Sie durch die L&uuml;cke in der rechten Wand.
+</p>
+<p>Raum 2: Meiden Sie einfach die Steine mit den Totenk&ouml;pfen.
+</p>
+<p>Raum 3: Schieben Sie vier Holzkisten, eine nach der anderen, in einer Reihe ins
+Wasser, um eine Br&uuml;cke zu bauen. Schieben Sie jetzt die grauen Bl&ouml;cke ins Wasser.
+Nun schaffen Sie die braunen Bl&ouml;cke aus dem Weg (etwa nach links) und bauen mit
+zwei Holzkisten eine Br&uuml;cke nach rechts.
+</p>
+<p>Raum 4: Gehen Sie nahe an den Kreisel heran. Wenn er beginnt, Sie zu jagen,
+locken Sie ihn nach links, um die Steine in der Mitte herum. Sobald der Kreisel
+weit genug vom Durchgang in den n&auml;chsten Raum entfernt ist, rennen Sie hindurch.
+</p>
+<p>Raum 5: Die einzige Gefahr sind die Totenk&ouml;pfe am unteren Ende des Raumes. Der
+erste Boden besteht aus Metall--dieser Boden ist &auml;hnlich dem &quot;Laubboden&quot;,
+auf dem Sie bisher gegangen sind. Der n&auml;chste Boden ist &quot;Rot&quot;--es ist nicht
+ganz einfach um darauf zu bremsen oder zu beschleunigen. Der dritte Boden
+besteht aus Eis--Sie haben darauf sehr wenig Reibung. Der letzte Boden ist
+Weltall--hier gibt es keine Reibung; Sie k&ouml;nnen darauf weder ihre
+Geschwindigkeit noch ihre Laufrichtung &auml;ndern.
+</p>
+<p>Raum 6: &Uuml;berqueren Sie einfach die schr&auml;gen Abh&auml;nge. Dann gehen Sie nach links
+heraus &uuml;ber den so genannten &quot;Invers&quot;-Boden--wenn Sie auf diesem
+Boden sind und die Maus (oder ein &auml;hnliches Ger&auml;t) in eine
+Richtung bewegen, wird die Kugel sich in die entgegengesetzte Richtung
+bewegen. (Wenn Sie hiermit Probleme haben, versuchen Sie Ihre Maus um
+180 Grad zu drehen).
+</p>
+<p>Raum 7: Versuchen Sie ein Extraleben zu bekommen, indem Sie den Klotz auf den
+unteren Schalter bewegen. Schieben Sie ihn zuerst ein Feld nach oben, dann sechs
+Felder nach links, f&uuml;nf nach unten und zwei nach rechts. Schlussendlich noch ein
+Feld nach oben und eines nach links. Holen Sie dann das Extraleben und schieben
+Sie den Block auf den anderen Schalter um die T&uuml;r in den n&auml;chsten Raum zu &ouml;ffnen. 
+</p>
+<p>Raum 8: Nehmen Sie das Dynamit (dazu m&uuml;ssen Sie auf das Eis gehen) und legen Sie
+es vor die gelblichen Bl&ouml;cke um sie zu sprengen und so einen Durchgang zu
+erhalten. Der Spaten hat hier keinen Zweck, aber Sie sollten seine
+Funktionsweise trotzdem kennen.
+</p>
+<p>Raum 9: Sto&szlig;en Sie den untersten verschiebbaren Block nach links. Nun
+versperren die Bolder, die nach rechts dr&auml;ngen, Ihren Weg. Sto&szlig;en Sie den
+beweglichen Klotz ganz rechts (nach links oder nach rechts) um die Bolder
+vorbeigehen zu lassen. Nehmen Sie den Zauberstab (ber&uuml;hren Sie nicht
+unvorsichtigerweise einen Bolder, wenn der Stab an vorderster Stelle in Ihrem
+Inventar ist) und schieben Sie den beweglichen Block oben ins Wasser. Nun gehen
+Sie wieder nach rechts und nehmen den Zauberstab an die erste Stelle Ihren
+Inventars und ber&uuml;hren die ersten drei Bolder der langen Reihe (Passen Sei auf,
+um nicht von Boldern &uuml;berrannt zu werden). Schieben Sie den beweglichen Block
+ganz links nach links und gehen Sie in den n&auml;chsten Raum.
+</p>
+<p>Raum 10: Bet&auml;tigen Sie den Schalter. Nun schieben Sie die braunen Kl&ouml;tze nach
+oben (je ein Feld). Schieben Sie die mittlere (von unten nach oben) Holzkiste
+nach links, und diejenige rechts dar&uuml;ber ins Wasser. Schieben Sie die restlichen
+Holzkisten in der gleichen Reihe ins Wasser (Aufpassen, nicht ertrinken!). Nun
+schlagen Sie das Fenster (die blaue Linie) mit gro&szlig;er Geschwindigkeit ein.
+Nehmen Sie das Extraleben und gehen Sie &uuml;ber die Br&uuml;cke nach oben in den ersten
+Raum und dann durch die offene T&uuml;r nach oben.
+</p>
+<hr size="6">
+<a name="SEC38"></a>
+<h3 class="subsection"> 5.1.2 Gebiet 2 </h3>
+
+<p>Im zweiten Gebiet werden Sie einen Rotor antreffen. Das ist ein
+beweglicher Feind Ihrer schwarzen Kugel. Verschiedene Rotoren k&ouml;nnen
+sich unterschiedlich verhalten, aber sie sind nie sehr
+intelligent. Die L&ouml;sung, um an ihnen vorbei zu kommen ist, sie so
+auszutricksen, dass sie das tun, was Sie wollen; dabei m&uuml;ssen Sie
+versuchen, sich m&ouml;glichst aus der Gefahr heraus zu halten. 
+</p>
+<p>Schauen Sie sich hier etwas um, aber fassen sie den beweglichen Block noch nicht
+an. Sie m&uuml;ssen durch diese drei geschlossenen T&uuml;ren da oben gehen.
+</p>
+<p>Erste T&uuml;r: Schieben Sie die wei&szlig;e Kugel nach links aus der Sackgasse heraus
+(aber gehen Sie dabei noch nicht durch den Einbahnblock). Das wird vielleicht
+einige Versuche brauchen. Nehmen Sie den L&ouml;ffel auf und sto&szlig;en Sie die wei&szlig;e
+Kugel durch den wei&szlig;en Einbahnblock, aber fest genug, dass sie nicht darunter
+stecken bleibt. Nun gehen Sie durch den schwarzen Einbahnblock und schieben die
+wei&szlig;e Kugel den Weg entlang. Sto&szlig;en Sie die wei&szlig;e Kugel durch den n&auml;chsten
+Einbahnblock, auch hier m&ouml;glichst fest. Sobald die wei&szlig;e Kugel hindurch ist und
+den Abhang hinunter rollt, benutzen Sie den L&ouml;ffel; Sie beginnen am Anfang der
+Landschaft neu und sind nicht l&auml;nger gefangen. Gehen Sie nun wieder in den oberen
+Raum--die erste T&uuml;r ist jetzt offen.
+</p>
+<p>Zweite T&uuml;r: Schieben sie den beweglichen Block im Raum ganz rechts nach rechts
+und rennen Sie schnell weg. Ein Dokument mit n&uuml;tzlichen Informationen liegt nun
+in der T&uuml;r zwischen Gebiet 1 und 2. Locken Sie den Rotor (indem Sie ihn dazu
+bringen Sie zu jagen, so wie Sie es mit dem Kreisel getan haben) &uuml;ber die Mauer
+rechts der T&uuml;re, die die beiden Gebiete verbindet. Rennen Sie durch die T&uuml;r
+und &uuml;ber die Br&uuml;cke in den Raum unter Ihnen. Bet&auml;tigen Sie den
+Schalter, um die T&uuml;r zu schlie&szlig;en und gehen Sie dann in den Raum, in
+dem Sie urspr&uuml;nglich starteten. Sie werden den Rotor nicht l&auml;nger
+sehen--er kann nicht in den Raum kommen, in dem Sie gerade jetzt
+sind--aber wenn Sie genau hinschauen, werden Sie sehen, wo er etwa
+ist. Das Ziel ist es hier, ohne sich selbst in Gefahr zu begeben, den
+Rotor auf einen Schalter zu bringen, so, dass er eine T&uuml;re f&uuml;r Sie
+&ouml;ffnet. Bringen Sie ihn dazu, Ihnen von oben rechts nach oben links zu folgen.
+Er sollte von einigen Abh&auml;ngen nach links geschoben werden. Bringen Sie ihn
+links nach unten, bis er nicht mehr weiter kann und Sie den Ton eines Schalter
+h&ouml;ren. bet&auml;tigen Sie den Schalter unten an der Br&uuml;cken und gehen Sie zur&uuml;ck in
+das Gebiet zwei. Die zweite T&uuml;re ist nun offen.
+</p>
+<p>Dritte T&uuml;r: Schieben Sie den beweglichen Block, unter dem der Rotor sich
+versteckt hatte auf den Schalter in der N&auml;he. Gehen Sie nach links--die dritte
+T&uuml;r ist jetzt auch offen. Gehen Sie durch diese drei T&uuml;ren.
+</p>
+<hr size="6">
+<a name="SEC39"></a>
+<h3 class="subsection"> 5.1.3 Gebiet 3 </h3>
+
+<p>In Gebiet drei m&uuml;ssen Sie die Interaktion zwischen verschiedenen Objekten von
+Enigma n&auml;her untersuchen. Hier werden sie Laser, Spiegel und M&uuml;nzen finden. Sie
+werden ein einfaches Laser-Spiegel Problem l&ouml;sen m&uuml;ssen, um den Laser auf einen
+bestimmten Stein zu lenken, welcher eine Br&uuml;cke in den n&auml;chsten Raum schlie&szlig;en
+wird. Um durch die n&auml;chsten R&auml;ume zu kommen, m&uuml;ssen Sie einige neue Gegenst&auml;nde
+erschaffen, indem sie den Laser auf gewisse, bereits vorhandene, Dinge lenken.
+</p>
+<p>Im ersten Teil von Gebiet drei sind drei Spiegel, ein Laser und ein Schalter
+vorhanden.
+</p>
+<p>Raum 1: Sie m&uuml;ssen den Laser auf den schwarzen Stein umlenken. Sto&szlig;en Sie den
+Spiegel links unten ein Feld nach unten (er sollte nun genau 30 Felder direkt
+links vom Laser stehen) und richten Sie ihn so aus, dass er wie ein &quot;\&quot;
+aussieht; dies machen Sie, indem Sie ihn vorsichtig ber&uuml;hren. Schieben Sie den
+Spiegel links oben acht Felder nach links und ein Feld nach unten (er sollte
+jetzt genau vier Felder &uuml;ber dem anderen Spiegel stehen) und richten Sie ihn so
+aus, dass er wie ein &quot;/&quot; aussieht. Schieben Sie den Spiegel rechts oben zwei
+Felder nach oben und drei nach rechts (er sollte nun 28 Felder rechts vom
+letzten Spiegel und ein Feld unter dem schwarzen Stein stehen). Richten Sie ihn
+so aus: &quot;/&quot;. Schalten Sie nun den Laser an, indem Sie den Schalter bet&auml;tigen;
+meiden Sie den Strahl! Gehen Sie nun &uuml;ber die Br&uuml;cke nach rechts.
+</p>
+<p>Raum 2: Nehmen Sie einige M&uuml;nzen mit und gehen Sie zur&uuml;ck in den vorigen Raum.
+Bestrahlen Sie eine der M&uuml;nzen mit dem Laser, indem Sie ihn an- und abschalten.
+Nehmen Sie das umgewandelte Objekt (einen Regenschirm), und wiederholen Sie den
+Prozess mindestens ein weiteres Mal. Legen Sie nun eine M&uuml;nze neben einen
+Spiegel und schieben Sie ihn dar&uuml;ber. Bestrahlen Sie auch diese M&uuml;nze mit einem
+Wert von 5, um einen Hammer zu erzeugen. Bestrahlen Sie den Hammer
+(indem Sie den Laser nochmals aus- und einschalten), um ein Schwert zu erzeugen.
+Falls Sie mehr Extraleben wollen, schieben Sie einen Spiegel zwei Mal &uuml;ber eine
+M&uuml;nze und bestrahlen Sie diese M&uuml;nze mit einem Wert von 10 (dem maximal
+m&ouml;glichen) mit dem Laser. Um in den Raum mit den Rittern zur&uuml;ck zu kommen,
+richten Sie die Spiegel wieder wie vorhin aus, entfernen Sie alle Objekte, die
+den Strahl blockieren k&ouml;nnten und schalten Sie den Laser ein. Benutzen Sie nun
+die rechte Maustaste oder die &quot;Tab&quot;-Taste um das Schwert an die erste Stelle
+(ganz nach links) in Ihrem Inventar zu bekommen. K&auml;mpfen Sie mit den Rittern
+(schlagen Sie sie jeweils 4 Mal), um einen Durchgang zu bekommen.
+</p>
+<p>Raum 3: Benutzen Sie einen Regenschirm, um &uuml;ber den Abgrund nach
+unten zu fliegen und dann in den Raum rechts hinein zu gehen. Wenn der
+Ring um Ihre Kugel zu blinken beginnt, ist die Wirkung bald vorbei,
+benutzen Sie rechtzeitig einen weiteren Regenschirm.
+</p>
+<p>Raum 4: &Ouml;ffnen Sie einfach alle Oxydsteine in der richtigen Reihenfolge, so dass
+jeweils gleichfarbige ge&ouml;ffnet bleiben. Vermeiden Sie es, die Furzsteine zu
+ber&uuml;hren. Sie haben die Landschaft nun geschafft!
+</p>
+<hr size="6">
+<a name="Tipps"></a>
+<a name="SEC40"></a>
+<h2 class="section"> 5.2 Tipps </h2>
+
+<dl compact="compact">
+<dt> <strong>I/6: Welcome to the Machine</strong></dt>
+<dd><p>Die Nachricht in der oberen rechten Ecke enth&auml;lt eine wichtige Nachricht.
+</p>
+</dd>
+<dt> <strong>I/8: Easy?</strong></dt>
+<dd><p>Schieben Sie den ersten Shogunstein in die linke obere Ecke und den
+zweiten in das Feld <em>&uuml;ber</em> dem am weitesten rechts gelegenen Punkt.
+</p>
+</dd>
+<dt> <strong>I/31: Where Am I?</strong></dt>
+<dd><p>Nutzen Sie die Holzsteine, falls Sie den &Uuml;berblick verlieren. 
+</p>
+</dd>
+<dt> <strong>I/32: The Grim Reaper</strong></dt>
+<dd><p>Haben Sie schonmal daran gedacht, Ihre Maus umzudrehen???
+</p>
+</dd>
+<dt> <strong>I/43: Sokoban Revival</strong></dt>
+<dd><p>Erinnern Sie sich? Die erste Lagerhalle im originalen Sokoban sah
+genauso aus &hellip; So schwierig kann es also nicht sein!
+</p>
+</dd>
+<dt> <strong>I/65: Lasers 101</strong></dt>
+<dd><p>Schieben Sie zwei der Spiegel an den oberen und einen an den unteren
+Rand. Wenn Sie die Spiegel geeignet verschieben und sorgf&auml;ltig zielen,
+k&ouml;nnen Sie alle Oxyd-Steine mit dem Laser erreichen.
+</p>
+</dd>
+<dt> <strong>I/72: Way to Go</strong></dt>
+<dd><p>Einer der blauen Punkte verh&auml;lt sich anders als die anderen. Nutzen
+Sie das aus!
+</p>
+</dd>
+<dt> <strong>I/80: Meditation</strong></dt>
+<dd><p>Richten Sie die Kugeln horizontal aus.
+</p>
+</dd>
+<dt> <strong>II/15: Knock Knock!</strong></dt>
+<dd><p>Klopfen Sie an den W&auml;nden.
+</p>
+</dd>
+<dt> <strong>II/27: Twelve doors</strong></dt>
+<dd><p>Sie haben alle T&uuml;ren ge&ouml;ffnet und kommen immer noch nicht durch? Sie
+scheinen etwas &uuml;bersehen zu haben!
+</p>
+</dd>
+<dt> <strong>II/40: Space Meditation</strong></dt>
+<dd><p>Kennen Sie das Dreik&ouml;rperproblem?
+</p>
+</dd>
+<dt> <strong>II/44: Pharaos' Tombs</strong></dt>
+<dd><p>Lernen Sie aus &quot;Easy Shifting <small class="enddots">....</small>&quot;.
+</p>
+</dd>
+<dt> <strong>II/56: Easy Shifting <small class="enddots">....</small></strong></dt>
+<dd><p>Lernen Sie aus &quot;Running Rings&quot;.
+</p>
+</dd>
+<dt> <strong>II/57: Floppy Swapping</strong></dt>
+<dd><p>Erstens, suchen Sie zun&auml;chst die Diskette und den Zauberstab, Sie
+werden sie ben&ouml;tigen. Zweitens, tragen Sie diese zwei Objekte immer
+bei sich. Drittens, einige Steine sehen identisch aus, sind es aber
+nicht.
+</p>
+</dd>
+<dt> <strong>II/59: The Disappearing Block</strong></dt>
+<dd><p>Blockieren Sie den Laser.
+</p>
+</dd>
+<dt> <strong>II/65: Laser Magic</strong></dt>
+<dd><p>Es ist an der Zeit, einige Grundlagen &uuml;ber Objekt-Transformationen zu
+lernen. Experimentieren Sie!
+</p>
+</dd>
+<dt> <strong>II/69: Question of Speed</strong></dt>
+<dd><p>Gibt es einen langSAMEN L&ouml;sungsweg???
+</p>
+</dd>
+<dt> <strong>II/77: Push Your Way</strong></dt>
+<dd><p>Suchen Sie zun&auml;chst den Zauberstab!
+</p>
+</dd>
+<dt> <strong>II/97: Tool Time</strong></dt>
+<dd><p>Halten Sie gef&auml;hrliche Werkzeuge vor Kindern versteckt.
+</p>
+</dd>
+<dt> <strong>II/99: Domain of Mysteries</strong></dt>
+<dd><p>Seien Sie vorsichtig in der Leiter.
+</p>
+</dd>
+<dt> <strong>II/100: Patterns</strong></dt>
+<dd><p>Gibt es hier ein Echo?
+</p>
+</dd>
+<dt> <strong>III/14: Use the PIN</strong></dt>
+<dd><p><small class="enddots">....</small> oder greifen Sie zur Enzyklop&auml;die Ihrer Wahl, falls Sie die Nummer
+vergessen haben.
+</p>
+</dd>
+<dt> <strong>III/16: Control Panel</strong></dt>
+<dd><p>Die Nachricht im linken Raum erkl&auml;rt, wie Sie die Steine auf der
+ersten Schalterreihe platzieren m&uuml;ssen. Danach folgen Sie einfach den
+im linken Raum angegebenen Farbcodes.
+</p>
+</dd>
+<dt> <strong>III/22: Portable Laser</strong></dt>
+<dd><p>Beachten Sie das Gitter!
+</p>
+</dd>
+<dt> <strong>III/27: Tricks and Traps</strong></dt>
+<dd><p>Sie kommen nicht aus dem ersten Raum? Richten Sie Ihre Aufmerksamkeit
+zun&auml;chst auf den kleinen blinkenden Punkt. Sie finden den letzten
+Oxyd-Stein nicht? Aktivieren Sie drei gro&szlig;e blinkende Punkte im ersten
+Bild und den kleinen im dritten.
+</p>
+</dd>
+<dt> <strong>III/28: Wells</strong></dt>
+<dd><p>Haben Sie Angst vor dem Tod?
+</p>
+</dd>
+<dt> <strong>III/29: Push? Pull!</strong></dt>
+<dd><p>Einmal nach oben wechseln - einmal nach unten wechseln - Puzzle
+rechts daneben - dann weiter machen!
+</p>
+</dd>
+<dt> <strong>III/40: Snow White</strong></dt>
+<dd><p>Drei kleine Eskimos - wandern auf dem Schneefeld - suchten ihre drei
+Iglos - auf die der wei&szlig;e Schnee f&auml;llt.
+</p>
+</dd>
+<dt> <strong>III/43: The Ditch</strong></dt>
+<dd><p>Man kann dieses Level nicht ohne gebrochenes Ego l&ouml;sen.
+</p>
+</dd>
+<dt> <strong>III/49: What's the Problem?</strong></dt>
+<dd><p>Falsche F&auml;hrten &uuml;berall &hellip; es ist eine Meditationslandschaft.
+</p>
+</dd>
+<dt> <strong>III/95: Jump and Run</strong></dt>
+<dd><p>Da liegt eine Feder unter einem Spiegel.
+</p>
+</dd>
+<dt> <strong>IV/6: TNT Shortage?</strong></dt>
+<dd><p>Mit einem Hammer geht's leichter!
+</p>
+</dd>
+<dt> <strong>IV/17: Flood Gates</strong></dt>
+<dd><p>Das vorsichtige &Uuml;berfluten von Gebieten kann hilfreich sein. Legen Sie
+auf jeden Fall den unteren Schalter im ersten Raum um. Die vielen
+Schalter unten links wirken alle gleich.
+</p>
+</dd>
+<dt> <strong>IV/25: Light Switches</strong></dt>
+<dd><p>Blockieren Sie die Laser, wenn Sie nicht schnell genug sind. 
+</p>
+</dd>
+<dt> <strong>IV/27: Robbery</strong></dt>
+<dd><p>Dringen Sie durch br&uuml;chige Bodenplatten in die Bank ein. 
+</p>
+</dd>
+<dt> <strong>IV/34: Running Rings</strong></dt>
+<dd><p>Lernen Sie aus &quot;Pharao's Tomb&quot;.
+</p>
+</dd>
+<dt> <strong>IV/39: How Many Spirals?</strong></dt>
+<dd><p>Manche Menschen springen aus dem Fenster, wenn's brennt - machen Sie
+es umgekehrt.
+</p>
+</dd>
+<dt> <strong>IV/47: Just Moving Blocks?</strong></dt>
+<dd><p>Zuviele Holzkisten? Wie k&ouml;nnten Sie eine entfernen?
+</p>
+</dd>
+<dt> <strong>IV/48: Artillery</strong></dt>
+<dd><p>Die Kanonenkugel &ouml;ffnet auch Oxydsteine.
+</p>
+</dd>
+<dt> <strong>IV/54: Fire Safety</strong></dt>
+<dd><p>Der Bodenschalter nervt? Zerst&ouml;ren Sie ihn!
+</p>
+</dd>
+<dt> <strong>IV/64: The Flagstone Reaper</strong></dt>
+<dd><p>Er verarbeitet.
+</p>
+</dd>
+<dt> <strong>IV/65: Little Bit of Everything</strong></dt>
+<dd><p>Finden Sie einen Weg, eine Kugel zu zerschmettern.
+</p>
+</dd>
+<dt> <strong>V/15: Solvable?</strong></dt>
+<dd><p>Erinnert Sie WNSE an irgend etwas?
+</p>
+</dd>
+<dt> <strong>V/16: Draggers</strong></dt>
+<dd><p>Zugegeben, diese Landschaft ist b&ouml;sartig. Ein Steinsamen ist in der
+N&auml;he der Startposition versteckt.
+</p>
+</dd>
+<dt> <strong>V/24: Space Pirates</strong></dt>
+<dd><p>Diese Landschaft ist knifflig. Z&uuml;nden Sie eine Bombe in der N&auml;he der
+Holzsteine.
+</p>
+</dd>
+<dt> <strong>V/32: Walk the Plank</strong></dt>
+<dd><p>Nicht Pirat genug, diese Landschaft zu meistern? Es gibt einen
+anderen, einfacheren Weg.
+</p>
+</dd>
+<dt> <strong>V/34: Island of Safety</strong></dt>
+<dd><p>Untersuchen Sie zuerst Einhunderte.
+</p>
+</dd>
+<dt> <strong>V/45: Psycho Pushing</strong></dt>
+<dd><p>Schalten und rennen.
+</p>
+</dd>
+<dt> <strong>V/58: Now What?</strong></dt>
+<dd><p>Wenn Sie das Kreuz sehen, was sollte wohl als n&auml;chstes im Feld zu
+sehen sein?
+</p>
+</dd>
+<dt> <strong>V/78: Don't Be Greedy</strong></dt>
+<dd><p>In diesem Handbuch gibt es einen besseren Hinweis.
+</p>
+</dd>
+<dt> <strong>V/89: Ice-Bomb</strong></dt>
+<dd><p>Unter dem Oxyd-Stein liegt ein besserer Hinweis versteckt.
+</p>
+</dd>
+<dt> <strong>V/91: Firefox</strong></dt>
+<dd><p>Boden brennt schneller.
+</p>
+</dd>
+<dt> <strong>VI/8: Orbitting</strong></dt>
+<dd><p>Lassen Sie nichts die W&auml;nde ber&uuml;hren.
+</p>
+</dd>
+<dt> <strong>VI/23: Prepare Your Defense</strong></dt>
+<dd><p>Der Laser kann nicht nur Gegenst&auml;nde &auml;ndern.
+</p>
+</dd>
+<dt> <strong>esprit 43</strong></dt>
+<dd><p>Opfern Sie dem Vulkan.
+</p>
+</dd>
+<dt> <strong>esprit 52</strong></dt>
+<dd><p>Spielen Sie es zeitig.
+</p>
+</dd>
+<dt> <strong>esprit 100</strong></dt>
+<dd><p>Bomben Sie in der Ecke.
+</p>
+</dd>
+<dt> <strong>Oxyd Magnum 99 (level 22): Letter Bomb</strong></dt>
+<dd><p>Zerst&ouml;ren Sie die Bombensteine.
+</p>
+</dd>
+<dt> <strong>PerOxyd 49 (level 22): Hidden Treasure</strong></dt>
+<dd><p>Stellen Sie sicher, dass Sie immer Zugang zu dem Raum mit dem
+Bodenschalter haben. Suchen Sie dann nach dem zweiten Bildschirm mit
+dem &quot;versteckten Schatz&quot;.
+</p>
+</dd>
+</dl>
+
+<hr size="6">
+<a name="Autoren-und-Danksagungen"></a>
+<a name="SEC41"></a>
+<h1 class="chapter"> 6. Autoren und Danksagungen </h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC42">6.1 Hauptentwickler</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC43">6.2 Spezieller Dank</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC44">6.3 Danksagungen</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC45">6.4 Verwendete Software</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">           
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Hauptentwickler"></a>
+<a name="SEC42"></a>
+<h2 class="section"> 6.1 Hauptentwickler </h2>
+
+<dl compact="compact">
+<dt> <strong>Raoul Bourquin</strong></dt>
+<dd><p>Landschaftsverwaltung und -design, Homepage, zahlreiche unsch&auml;tzbare Erweiterungen
+</p>
+</dd>
+<dt> <strong>Siegfried Fennig</strong></dt>
+<dd><p>Landschaftsdesign, Grafik
+</p>
+</dd>
+<dt> <strong>Martin Hawlisch</strong></dt>
+<dd><p>Landschaftsdesign, Grafik, Programmierung
+</p>
+</dd>
+<dt> <strong>Daniel Heck</strong></dt>
+<dd><p>Hauptentwickler, Grafik, Dokumentation
+</p>
+</dd>
+<dt> <strong>Ronald Lamprecht</strong></dt>
+<dd><p>XML, Gui, Portierung, Kernel-Programmierung, Dokumentation, Homepage, Auswertung
+</p>
+</dd>
+<dt> <strong>Andreas Lochmann</strong></dt>
+<dd><p>Programmierung, Landschaftsverwaltung und -design, Dokumentation, Homepage
+</p>
+</dd>
+<dt> <strong>Petr Machata</strong></dt>
+<dd><p>Landschaftsdesign, Programmierung
+</p>
+</dd>
+<dt> <strong>Nat Pryce</strong></dt>
+<dd><p>Landschaftsdesign
+</p>
+</dd>
+<dt> <strong>Jacob Scott</strong></dt>
+<dd><p>Landschaftsdesign
+</p>
+</dd>
+<dt> <strong>Sven Siggelkow</strong></dt>
+<dd><p>Landschaftsdesign und besondere Oxyd-Expertise
+</p>
+</dd>
+<dt> <strong>Ralf Westram</strong></dt>
+<dd><p>Programmierung, Landschaftsdesign
+</p></dd>
+</dl>
+
+
+<hr size="6">
+<a name="Spezieller-Dank"></a>
+<a name="SEC43"></a>
+<h2 class="section"> 6.2 Spezieller Dank </h2>
+
+<dl compact="compact">
+<dt> <strong>Johannes Fortmann</strong></dt>
+<dd><p>Mac OS X Portierung, Programmierunterst&uuml;tzung, Grafik
+</p>
+</dd>
+<dt> <strong>illmind</strong></dt>
+<dd><p>Forum mag-heut.net Administration, Landschaftsdesign
+</p>
+
+</dd>
+<dt> <strong>Jennifer Robertson</strong></dt>
+<dd><p>Grafik der zweiten Generation
+</p>
+</dd>
+<dt> <strong>Jeremy Sawicki</strong></dt>
+<dd><p>Entschl&uuml;sselung des Oxyd-Dateiformats, Oxydlib
+</p>
+</dd>
+<dt> <strong>Meinolf Schneider</strong></dt>
+<dd><p>Urspr&uuml;ngliche Spielidee-<em>Vielen Dank</em>!
+</p>
+</dd>
+<dt> <strong>Erich Schubert</strong></dt>
+<dd><p>Debian/Ubuntu-Pakete, Landschaftsdesign
+</p>
+</dd>
+<dt> <strong>Lukas Sch&uuml;ller</strong></dt>
+<dd><p>Landschaftsdesign
+</p>
+</dd>
+<dt> <strong>Andrew &quot;Necros&quot; Sega</strong></dt>
+<dd><p>Men&uuml;-Musik (<em>Pentagonal Dreams</em>)
+</p>
+</dd>
+<dt> <strong>David W. Skinner</strong></dt>
+<dd><p>Viele Sokoban-Landschaften von
+<a href="http://users.bentonrea.com/~sasquatch/sokoban">http://users.bentonrea.com/~sasquatch/sokoban</a>
+</p>
+</dd>
+<dt> <strong>Clifford J. Tasner</strong></dt>
+<dd><p>Musik der zweiten Generation, Englisch Korrektur lesen
+</p></dd>
+</dl>
+
+<hr size="6">
+<a name="Danksagungen"></a>
+<a name="SEC44"></a>
+<h2 class="section"> 6.3 Danksagungen </h2>
+
+<p>F&uuml;r verschiedene kleinere Beitr&auml;ge danken wir:
+</p>
+<ul>
+<li> Roberto Bardin (Landschaftsdesign)
+</li><li> Alain Busser (Landschaftsdesign, franz&ouml;sische &Uuml;bersetzung und Handbuch)
+</li><li> Guy Busser (Landschaftsdesign)
+</li><li> Richi B&uuml;tzer (Landschaftsdesign)
+</li><li> capkoh (Landschaftsdesign)
+</li><li> Christoph &amp; Anita (Landschaftsdesign)
+</li><li> Serge Dremuk (Russische &Uuml;bersetzung)
+</li><li> Joseph Dunne (Landschaftsdesign)
+</li><li> Xerxes M. Dynatos (Landschaftsdesign)
+</li><li> Edward (Landschaftsdesign)
+</li><li> Stephanie Fabian (Wertvolle Fehlerberichte)
+</li><li> Roberto Garc&iacute;a (Spanische &Uuml;bersetzung)
+</li><li> Andy Geldmacher (Landschaftsdesign)
+</li><li> Edwin Groothuis (FreeBSD Portierung)
+</li><li> Immanuel Herrmann (Landschaftsdesign)
+</li><li> M&aacute;t&eacute; Lehel Juh&aacute;sz (Ungarische &Uuml;bersetzung)
+</li><li> Samuele Kaplun (Italienische &Uuml;bersetzung)
+</li><li> Jens-Christian Korth (Landschaftsdesign)
+</li><li> Manuel K&ouml;nig (Landschaftsdesign, Fehlerberichte)
+</li><li> Johannes Laire (Landschaftsdesign)
+</li><li> Joona Laire (Landschaftsdesign)
+</li><li> Markus Laire (Landschaftsdesign)
+</li><li> Dominik Lehmann (Landschaftsdesign)
+</li><li> Edward Leuf (Feedback, Fehlerberichte)
+</li><li> Ingo van Lil (Feedback, Fehlerberichte)
+</li><li> Frank van der Loo (Niederl&auml;ndische &Uuml;bersetzung)
+</li><li> Sidney Markowitz (Mac OS X Portierung)
+</li><li> Barry &amp; Lori Mead (Landschaftsdesign)
+</li><li> Linda Mihalic (Englisch Korrektur lesen)
+</li><li> moonpearl (Landschaftsdesign)
+</li><li> Krishnamurti Lelis Lima Vieira Nunes (Portugiesische &Uuml;bersetzung)
+</li><li> Daniel Nylander (Schwedische &Uuml;bersetzung)
+</li><li> Andreas Persenius (Landschaftsdesign)
+</li><li> Peter Santo (Landschaftsdesign)
+</li><li> Tobias Schmidbauer (Windows Installer und Icon)
+</li><li> Achim Settelmeier (RPM specfile)
+</li><li> Jon Sneyers (Landschaftsdesign)
+</li><li> Spaceman (Landschaftsdesign)
+</li><li> Ulf Stegemann (Landschaftsdesign)
+</li><li> J&uuml;rgen Sticht (Landschaftsdesign)
+</li><li> Mikke Surakka (Finnische &Uuml;bersetzung)
+</li><li> Andrzej Szombierski (Landschaftsdesign)
+</li><li> Tacvek (Lua 5.1 Upgrade)
+</li><li> Michael Terry (.desktop file)
+</li><li> Ray Wick (Landschaftsdesign)
+</li><li> Joe Wreschnig (Manual page f&uuml;r Unix)
+</li><li> Yuriy Zhyromskiy (Russisches Manual)
+</li></ul>
+
+<hr size="6">
+<a name="Verwendete-Software"></a>
+<a name="SEC45"></a>
+<h2 class="section"> 6.4 Verwendete Software </h2>
+
+<dl compact="compact">
+<dt> <strong>SDL</strong> </dt>
+<dd><p><a href="http://www.libsdl.org/">http://www.libsdl.org/</a>
+</p>
+</dd>
+<dt> <strong>SDL_image</strong></dt>
+<dd><p><a href="http://www.libsdl.org/SDL_image">http://www.libsdl.org/SDL_image</a>
+</p>
+</dd>
+<dt> <strong>SDL_mixer</strong></dt>
+<dd><p><a href="http://www.libsdl.org/SDL_mixer">http://www.libsdl.org/SDL_mixer</a>
+</p>
+</dd>
+<dt> <strong>Lua</strong></dt>
+<dd><p><a href="http://www.lua.org">http://www.lua.org</a>
+</p>
+</dd>
+<dt> <strong>Oxydlib</strong></dt>
+<dd><p><a href="http://www.sawicki.us/oxyd">http://www.sawicki.us/oxyd</a>
+</p>
+</dd>
+<dt> <strong>toLua++</strong></dt>
+<dd><p><a href="http://www.codenix.com/~tolua">http://www.codenix.com/~tolua</a>
+</p>
+</dd>
+<dt> <strong>zipios</strong></dt>
+<dd><p><a href="http://zipios.sourceforge.net">http://zipios.sourceforge.net</a>
+</p>
+</dd>
+<dt> <strong>Xerces C++</strong></dt>
+<dd><p><a href="http://xml.apache.org/xerces-c">http://xml.apache.org/xerces-c</a>
+</p>
+</dd>
+</dl>
+
+<hr size="6">
+<a name="SEC_Contents"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1>Inhaltsverzeichniss</h1>
+<div class="contents">
+
+<ul class="toc">
+  <li><a name="TOC1" href="#SEC1">1. Einleitung</a>
+  <ul class="toc">
+    <li><a name="TOC2" href="#SEC2">1.1 &Uuml;ber Enigma</a></li>
+    <li><a name="TOC3" href="#SEC3">1.2 Installation</a></li>
+    <li><a name="TOC4" href="#SEC4">1.3 Verbreiten von Enigma</a></li>
+  </ul></li>
+  <li><a name="TOC5" href="#SEC5">2. Das Spiel</a>
+  <ul class="toc">
+    <li><a name="TOC6" href="#SEC6">2.1 Ganz zu Anfang</a>
+    <ul class="toc">
+      <li><a name="TOC7" href="#SEC7">2.1.1 Das Level-Men&uuml;</a></li>
+      <li><a name="TOC8" href="#SEC8">2.1.2 Das Levelpaket-Men&uuml;</a></li>
+      <li><a name="TOC9" href="#SEC9">2.1.3 Einstellungen</a></li>
+      <li><a name="TOC10" href="#SEC10">2.1.4 Der Level-Inspektor</a></li>
+    </ul></li>
+    <li><a name="TOC11" href="#SEC11">2.2 Spielregeln</a>
+    <ul class="toc">
+      <li><a name="TOC12" href="#SEC12">2.2.1 Gew&ouml;hnliche Landschaften</a></li>
+      <li><a name="TOC13" href="#SEC13">2.2.2 Zwei-Spieler Landschaften</a></li>
+      <li><a name="TOC14" href="#SEC14">2.2.3 Meditations-Landschaften</a></li>
+    </ul></li>
+    <li><a name="TOC15" href="#SEC15">2.3 Steuerung</a></li>
+  </ul></li>
+  <li><a name="TOC16" href="#SEC16">3. Einige Spielobjekte</a>
+  <ul class="toc">
+    <li><a name="TOC17" href="#SEC17">3.1 Gegenst&auml;nde</a>
+    <ul class="toc">
+      <li><a name="TOC18" href="#SEC18">3.1.1 Sprengstoffe</a></li>
+      <li><a name="TOC19" href="#SEC19">3.1.2 Regenschirme</a></li>
+      <li><a name="TOC20" href="#SEC20">3.1.3 F&auml;hnchen</a></li>
+    </ul></li>
+    <li><a name="TOC21" href="#SEC21">3.2 Steine</a>
+    <ul class="toc">
+      <li><a name="TOC22" href="#SEC22">3.2.1 T&ouml;dliche Steine</a></li>
+      <li><a name="TOC23" href="#SEC23">3.2.2 Wechselsteine</a></li>
+      <li><a name="TOC24" href="#SEC24">3.2.3 Spiegel</a></li>
+      <li><a name="TOC25" href="#SEC25">3.2.4 Einbahn-Steine</a></li>
+      <li><a name="TOC26" href="#SEC26">3.2.5 Shogunsteine</a></li>
+      <li><a name="TOC27" href="#SEC27">3.2.6 Bolder-Steine</a></li>
+      <li><a name="TOC28" href="#SEC28">3.2.7 Puzzle-Steine</a></li>
+      <li><a name="TOC29" href="#SEC29">3.2.8 Poststeine</a></li>
+    </ul>
+</li>
+  </ul></li>
+  <li><a name="TOC30" href="#SEC30">4. Fortgeschrittene Themen</a>
+  <ul class="toc">
+    <li><a name="TOC31" href="#SEC31">4.1 User-Levelpakete</a></li>
+    <li><a name="TOC32" href="#SEC32">4.2 Backups</a></li>
+    <li><a name="TOC33" href="#SEC33">4.3 Ergebnisse hochladen</a></li>
+    <li><a name="TOC34" href="#SEC34">4.4 Enigma updaten</a></li>
+  </ul></li>
+  <li><a name="TOC35" href="#SEC35">5. Tipps und Tricks</a>
+  <ul class="toc">
+    <li><a name="TOC36" href="#SEC36">5.1 Tutorial</a>
+    <ul class="toc">
+      <li><a name="TOC37" href="#SEC37">5.1.1 Gebiet 1</a></li>
+      <li><a name="TOC38" href="#SEC38">5.1.2 Gebiet 2</a></li>
+      <li><a name="TOC39" href="#SEC39">5.1.3 Gebiet 3</a></li>
+    </ul></li>
+    <li><a name="TOC40" href="#SEC40">5.2 Tipps</a></li>
+  </ul></li>
+  <li><a name="TOC41" href="#SEC41">6. Autoren und Danksagungen</a>
+  <ul class="toc">
+    <li><a name="TOC42" href="#SEC42">6.1 Hauptentwickler</a></li>
+    <li><a name="TOC43" href="#SEC43">6.2 Spezieller Dank</a></li>
+    <li><a name="TOC44" href="#SEC44">6.3 Danksagungen</a></li>
+    <li><a name="TOC45" href="#SEC45">6.4 Verwendete Software</a></li>
+  </ul>
+</li>
+</ul>
+</div>
+<hr size="1">
+<a name="SEC_About"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1>&Uuml;ber dieses Dokument</h1>
+<p>
+  This document was generated by <em>Ronald Lamprecht</em> on <em>Mai, 24 2007</em> using <a href="http://texi2html.cvshome.org/"><em>texi2html 1.76</em></a>.
+</p>
+<p>
+  The buttons in the navigation panels have the following meaning:
+</p>
+<table border="1">
+  <tr>
+    <th> Button </th>
+    <th> Name </th>
+    <th> Go to </th>
+    <th> From 1.2.3 go to</th>
+  </tr>
+  <tr>
+    <td align="center"> [ &lt; ] </td>
+    <td align="center">Back</td>
+    <td>previous section in reading order</td>
+    <td>1.2.2</td>
+  </tr>
+  <tr>
+    <td align="center"> [ &gt; ] </td>
+    <td align="center">Forward</td>
+    <td>next section in reading order</td>
+    <td>1.2.4</td>
+  </tr>
+  <tr>
+    <td align="center"> [ &lt;&lt; ] </td>
+    <td align="center">FastBack</td>
+    <td>beginning of this chapter or previous chapter</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td align="center"> [ Up ] </td>
+    <td align="center">Up</td>
+    <td>up section</td>
+    <td>1.2</td>
+  </tr>
+  <tr>
+    <td align="center"> [ &gt;&gt; ] </td>
+    <td align="center">FastForward</td>
+    <td>next chapter</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td align="center"> [Top] </td>
+    <td align="center">Top</td>
+    <td>cover (top) of document</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td align="center"> [Contents] </td>
+    <td align="center">Contents</td>
+    <td>table of contents</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td align="center"> [Index] </td>
+    <td align="center">Index</td>
+    <td>index</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td align="center"> [ ? ] </td>
+    <td align="center">About</td>
+    <td>about (help)</td>
+    <td> &nbsp; </td>
+  </tr>
+</table>
+
+<p>
+  where the <strong> Example </strong> assumes that the current position is at <strong> Subsubsection One-Two-Three </strong> of a document of the following structure:
+</p>
+
+<ul>
+  <li> 1. Section One
+    <ul>
+      <li>1.1 Subsection One-One
+        <ul>
+          <li>...</li>
+        </ul>
+      </li>
+      <li>1.2 Subsection One-Two
+        <ul>
+          <li>1.2.1 Subsubsection One-Two-One</li>
+          <li>1.2.2 Subsubsection One-Two-Two</li>
+          <li>1.2.3 Subsubsection One-Two-Three &nbsp; &nbsp;
+            <strong>&lt;== Current Position </strong></li>
+          <li>1.2.4 Subsubsection One-Two-Four</li>
+        </ul>
+      </li>
+      <li>1.3 Subsection One-Three
+        <ul>
+          <li>...</li>
+        </ul>
+      </li>
+      <li>1.4 Subsection One-Four</li>
+    </ul>
+  </li>
+</ul>
+
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated by <em>Ronald Lamprecht</em> on <em>Mai, 24 2007</em> using <a href="http://texi2html.cvshome.org/"><em>texi2html 1.76</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

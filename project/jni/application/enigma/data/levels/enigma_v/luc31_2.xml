@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="The Chamber" el:subtitle="" el:id="luc31"/>
+      <el:version el:score="2" el:release="2" el:revision="1" el:status="released"/>
+      <el:author  el:name="Lukas Schüller" el:email="Lucky_Luc@web.de" el:homepage=""/>
+      <el:copyright>Copyright © 2006 Lukas Schüller</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+-- Created with BlackBallEd
+enigma.ConserveLevel = FALSE
+
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+
+levelh=13
+levelw=20
+
+enigma.FlatForce=30
+enigma.SlopeForce=30
+enigma.ElectricForce=30
+
+cells={}
+items={}
+stones={}
+
+stones[" "]=cell{}
+cells[" "]=cell{}
+items[" "]=cell{}
+
+cells["!"]=cell{floor="fl-stwood"}
+stones["!"]=cell{stone="st-blue-sand"}
+stones["#"]=cell{parent={{file_oxyd,"c"}}}
+stones["$"]=cell{stone="st-door-v"}
+items["!"]=cell{item="it-trigger"}
+stones["%"]=cell{stone="st-wood"}
+stones["&"]=cell{stone="st-door-h"}
+
+level={"!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!",
+       "!!!!!!!!!!!!!!!!!!!!"}
+itmap={"                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "       ! !          ",
+       "        ! !         ",
+       "       ! !          ",
+       "        ! !         ",
+       "                    ",
+       "                    ",
+       "                    ",
+       "                    "}
+stmap={"!!!!!!!!!!!!!!!!!!!!",
+       "#                  #",
+       "!    !!!!!!!!!!!   !",
+       "!    $ $ $ $ $ !   !",
+       "!    !!!!!!!!!&!   !",
+       "!    !  % %  ! !   !",
+       "!    ! % %   ! !   !",
+       "!    !  % %  !&!   !",
+       "!    ! % %   $ !   !",
+       "!    !!!!!!!!!!!   !",
+       "!                  !",
+       "#                  #",
+       "!!!!!!!!!!!!!!!!!!!!"}
+
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+draw_map(0,0,itmap,items)
+
+SetAttrib(enigma.GetItem(7,5),"invisible",FALSE)
+SetAttrib(enigma.GetItem(7,7),"invisible",FALSE)
+SetAttrib(enigma.GetItem(8,6),"invisible",FALSE)
+SetAttrib(enigma.GetItem(8,8),"invisible",FALSE)
+SetAttrib(enigma.GetItem(9,5),"invisible",FALSE)
+SetAttrib(enigma.GetItem(9,7),"invisible",FALSE)
+SetAttrib(enigma.GetItem(10,6),"invisible",FALSE)
+SetAttrib(enigma.GetItem(10,8),"invisible",FALSE)
+
+Signal ("it(7 5)","st(13 8)")
+Signal ("it(9 5)","st(14 7)")
+Signal ("it(8 6)","st(14 4)")
+Signal ("it(10 6)","st(13 3)")
+Signal ("it(7 7)","st(11 3)")
+Signal ("it(9 7)","st(9 3)")
+Signal ("it(8 8)","st(7 3)")
+Signal ("it(10 8)","st(5 3)")
+
+oxyd_shuffle()
+set_actor("ac-blackball",6.5,5.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

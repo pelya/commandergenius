@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Template 3" el:subtitle="" el:id="template3"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="stable"/>
+      <el:author  el:name="AUTHOR" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © YEAR AUTHOR</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="1.00">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+function file_oxyd(x,y,f)
+    oxyd_default_flavor=f
+    oxyd(x,y)
+end
+
+-- ANT --
+cells={}
+stones={}
+
+stones[" "]=cell{}
+cells[" "]=cell{}
+
+cells["-"]=cell{floor="fl-sahara"}
+
+stones["#"]=cell{stone="st-glass"}
+stones["x"]=cell{parent={{file_oxyd,"b"}}}
+
+level={"--------------------",
+       "--------------------",
+       "--------------------",
+       "--------------------",
+       "--------------------",
+       "--------------------",
+       "--------------------",
+       "--------------------",
+       "--------------------",
+       "--------------------",
+       "--------------------",
+       "--------------------",
+       "--------------------"}
+
+stmap={"####################",
+       "#x                x#",
+       "#                  #",
+       "#                  #",
+       "#                  #",
+       "#                  #",
+       "#                  #",
+       "#                  #",
+       "#                  #",
+       "#                  #",
+       "#                  #",
+       "#x                x#",
+       "####################"}
+
+create_world_by_map(level)
+draw_map(0,0,stmap,stones)
+
+set_actor("ac-blackball",10.5,1.5,{player=0,name="blackball"})
+set_item("it-document",12,1,{text="text1"})
+
+oxyd_shuffle()
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="false">Template for a level coded with the ant library.</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

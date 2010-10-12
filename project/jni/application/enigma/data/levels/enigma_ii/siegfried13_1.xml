@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Pharaoh's Tomb" el:subtitle="" el:id="level4d"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Siegfried Fennig" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Siegfried Fennig</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+levelw = 20
+levelh = 13
+
+create_world( levelw, levelh)
+
+fill_floor("fl-swamp", 0,0,levelw,levelh)
+fill_floor("fl-wood", 1, 1, levelw-2, levelh-2)
+draw_border( "st-invisible")
+
+set_item("it-document", 10, 6, {text="text1"})
+document(14,5, "text2")
+
+draw_stones("st-greenbrown_hole", {1,1},{1,0},18)
+draw_stones("st-greenbrown_hole", {1,11},{1,0},18)
+draw_stones("st-greenbrown_hole", {1,3},{1,0},2)
+draw_stones("st-greenbrown_hole", {1,4},{0,1},7)
+draw_stones("st-greenbrown_hole", {18,2},{0,1},9)
+draw_stones("st-greenbrown", {1,2},{1,0},17)
+draw_stones("st-greenbrown", {2,10},{1,0},16)
+draw_stones("st-greenbrown", {2,4},{0,1},6)
+draw_stones("st-greenbrown", {17,3},{0,1},1)
+draw_stones("st-greenbrown", {17,5},{0,1},5)
+draw_stones("st-greenbrown", {4,3},{1,1},4)
+draw_stones("st-greenbrown", {3,6},{1,1},3)
+draw_stones("st-greenbrown", {3,8},{1,1},2)
+draw_stones("st-greenbrown_move", {3,4},{1,1},3)
+draw_stones("st-greenbrown_move", {14,4},{1,1},3)
+draw_stones("st-greenbrown_move", {14,6},{1,1},3)
+draw_stones("st-greenbrown_move", {12,6},{1,1},3)
+set_stones("st-greenbrown_hole", {{17,4}})
+set_stones("st-greenbrown_move", {{16,4}})
+set_stones("st-greenbrown", {{15,3},{17,3},{15,9},{6,7},{13,5}})
+
+oxyd( 6, 6)
+oxyd( 13, 6)
+
+set_actor("ac-blackball", 10, 6.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+      <el:string el:key="text1">
+        <el:english el:translate="true">Some stones are movable.</el:english>
+      </el:string> 
+      <el:string el:key="text2">
+        <el:english el:translate="true">You lost!</el:english>
+      </el:string> 
+    </el:i18n>
+  </el:protected>
+</el:level>

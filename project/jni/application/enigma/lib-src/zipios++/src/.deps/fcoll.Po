@@ -1,0 +1,408 @@
+fcoll.o: fcoll.cpp ../zipios++/zipios-config.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/algorithm \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_algobase.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/c++config.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/os_defines.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/cpu_defines.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/cstddef \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/include/stddef.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/functexcept.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/exception_defines.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/cpp_type_traits.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ext/type_traits.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ext/numeric_traits.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_pair.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/move.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/concept_check.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_iterator_base_types.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_iterator_base_funcs.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_iterator.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/debug/debug.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_algo.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/cstdlib \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/stdlib.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/cdefs.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/cdefs_elf.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/string.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/malloc.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/alloca.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/strings.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/types.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/stdint.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/_types.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/machine/_types.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/linux/posix_types.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/linux/stddef.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/linux/compiler.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/asm/posix_types.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/asm/types.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/linux/types.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/machine/kernel.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/sysmacros.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/memory.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/algorithmfwd.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/initializer_list \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_heap.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_tempbuf.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_construct.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/new \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/exception \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_uninitialized.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/string \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stringfwd.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/char_traits.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/postypes.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/cwchar \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/wchar.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/stdio.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/include/stdarg.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/time.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/time.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/linux/time.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/asm/siginfo.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/asm-generic/siginfo.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/allocator.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/c++allocator.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ext/new_allocator.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/localefwd.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/c++locale.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/clocale \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/locale.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/iosfwd \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/cctype \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/ctype.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/ostream_insert.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/cxxabi-forced.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_function.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/backward/binders.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/basic_string.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ext/atomicity.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/gthr.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/gthr-default.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/pthread.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/signal.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/limits.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/limits.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/linux/limits.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/machine/internal_types.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/machine/limits.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/asm/signal.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/asm-generic/signal.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sched.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/unistd.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/select.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/sysconf.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/linux/capability.h \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/pathconf.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/atomic_word.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/basic_string.tcc \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/vector \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_vector.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_bvector.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/vector.tcc \
+ ../zipios++/fcoll.h ../zipios++/fcollexceptions.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/stdexcept \
+ ../zipios++/fileentry.h ../zipios++/meta-iostreams.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/iostream \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ostream \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ios \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/ios_base.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/locale_classes.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/locale_classes.tcc \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/streambuf \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/streambuf.tcc \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/basic_ios.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/locale_facets.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/cwctype \
+ /Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/wctype.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/ctype_base.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/streambuf_iterator.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/ctype_inline.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/locale_facets.tcc \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/basic_ios.tcc \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/ostream.tcc \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/istream \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/istream.tcc \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/fstream \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/codecvt.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/cstdio \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/basic_file.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/c++io.h \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/fstream.tcc \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/sstream \
+ /Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/sstream.tcc \
+ ../zipios++/simplesmartptr.h ../zipios++/zipios_defs.h
+
+../zipios++/zipios-config.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/algorithm:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_algobase.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/c++config.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/os_defines.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/cpu_defines.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/cstddef:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/include/stddef.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/functexcept.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/exception_defines.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/cpp_type_traits.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ext/type_traits.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ext/numeric_traits.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_pair.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/move.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/concept_check.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_iterator_base_types.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_iterator_base_funcs.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_iterator.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/debug/debug.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_algo.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/cstdlib:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/stdlib.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/cdefs.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/cdefs_elf.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/string.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/malloc.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/alloca.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/strings.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/types.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/stdint.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/_types.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/machine/_types.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/linux/posix_types.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/linux/stddef.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/linux/compiler.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/asm/posix_types.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/asm/types.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/linux/types.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/machine/kernel.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/sysmacros.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/memory.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/algorithmfwd.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/initializer_list:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_heap.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_tempbuf.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_construct.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/new:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/exception:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_uninitialized.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/string:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stringfwd.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/char_traits.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/postypes.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/cwchar:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/wchar.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/stdio.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/include/stdarg.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/time.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/time.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/linux/time.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/asm/siginfo.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/asm-generic/siginfo.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/allocator.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/c++allocator.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ext/new_allocator.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/localefwd.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/c++locale.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/clocale:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/locale.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/iosfwd:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/cctype:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/ctype.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/ostream_insert.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/cxxabi-forced.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_function.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/backward/binders.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/basic_string.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ext/atomicity.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/gthr.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/gthr-default.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/pthread.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/signal.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/limits.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/limits.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/linux/limits.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/machine/internal_types.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/machine/limits.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/asm/signal.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/asm-generic/signal.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sched.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/unistd.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/select.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/sys/sysconf.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/linux/capability.h:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/pathconf.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/atomic_word.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/basic_string.tcc:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/vector:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_vector.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/stl_bvector.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/vector.tcc:
+
+../zipios++/fcoll.h:
+
+../zipios++/fcollexceptions.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/stdexcept:
+
+../zipios++/fileentry.h:
+
+../zipios++/meta-iostreams.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/iostream:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ostream:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/ios:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/ios_base.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/locale_classes.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/locale_classes.tcc:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/streambuf:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/streambuf.tcc:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/basic_ios.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/locale_facets.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/cwctype:
+
+/Users/michi/android/ndk-crystax/build/platforms/android-8/arch-arm/usr/include/wctype.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/ctype_base.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/streambuf_iterator.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/ctype_inline.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/locale_facets.tcc:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/basic_ios.tcc:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/ostream.tcc:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/istream:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/istream.tcc:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/fstream:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/codecvt.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/cstdio:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/basic_file.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/arm-eabi/thumb/bits/c++io.h:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/fstream.tcc:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/sstream:
+
+/Users/michi/android/ndk-crystax/build/prebuilt/darwin-x86/arm-eabi-4.4.0/bin/../lib/gcc/arm-eabi/4.4.0/../../../../arm-eabi/include/c++/4.4.0/bits/sstream.tcc:
+
+../zipios++/simplesmartptr.h:
+
+../zipios++/zipios_defs.h:

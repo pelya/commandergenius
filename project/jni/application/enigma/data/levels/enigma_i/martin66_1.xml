@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="A Narrow Path" el:subtitle="" el:id="martin66"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Martin Hawlisch" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 2003 Martin Hawlisch</el:copyright>
+      <el:license el:type="GPL version 2" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+create_world( 39, 13)
+oxyd_default_flavor = "c"
+
+fill_floor( "fl-abyss")
+
+fill_floor( "fl-samba", 3, 3, 16, 1)
+fill_floor( "fl-samba", 18, 4, 1, 8)
+fill_floor( "fl-samba", 13, 11, 5, 1)
+fill_floor( "fl-samba", 13, 6, 1, 5)
+fill_floor( "fl-samba", 6, 6, 7, 1)
+fill_floor( "fl-samba", 6, 7, 1, 4)
+fill_floor( "fl-samba", 1, 11, 10, 1)
+fill_floor( "fl-samba", 1, 1, 1, 10)
+fill_floor( "fl-samba", 2, 1, 8, 1)
+set_floor( "fl-samba", 4, 2)
+
+draw_items( "it-tinyhill", {5,3}, {2,0}, 7)
+draw_items( "it-hollow", {1, 1}, {0,1}, 10)
+draw_items( "it-hollow", {18, 3}, {0,1},9)
+draw_items( "it-tinyhollow", {4, 1}, {0,1},3)
+set_item( "it-hill", 7, 1)
+set_item( "it-hill", 6, 7)
+set_item( "it-tinyhollow", 5, 11)
+set_item( "it-hollow", 13, 6)
+
+oxyd(10, 1)
+oxyd( 3, 4)
+oxyd(11,11)
+oxyd(10, 5)
+oxyd(17, 4)
+oxyd(17, 8)
+
+oxyd_shuffle()
+
+set_actor("ac-blackball", 6.5, 3.5)
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

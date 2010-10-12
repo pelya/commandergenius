@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<el:level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://enigma-game.org/schema/level/1 level.xsd" xmlns:el="http://enigma-game.org/schema/level/1">
+  <el:protected>
+    <el:info el:type="level">
+      <el:identity el:title="Electric Funeral" el:subtitle="" el:id="ss15"/>
+      <el:version el:score="1" el:release="1" el:revision="0" el:status="released"/>
+      <el:author  el:name="Sven Siggelkow" el:email="" el:homepage=""/>
+      <el:copyright>Copyright © 203 Sven Siggelkow</el:copyright>
+      <el:license el:type="GPL v2.0 or above" el:open="true"/>
+      <el:compatibility el:enigma="0.92">
+       <el:dependency el:path="lib/ant" el:id="lib/ant" el:release="1" el:preload="true"/>
+      </el:compatibility>
+      <el:modes el:easy="false" el:single="true" el:network="false"/>
+      <el:comments>
+        <el:code>Lua 5.1 and XML converted by Leveladministrators</el:code>
+      </el:comments>
+      <el:score el:easy="-" el:difficult="-"/>
+    </el:info>
+    <el:luamain><![CDATA[
+cells={}
+
+cells[" "]=cell{floor="fl-leaves"}
+cells["b"]=cell{floor="fl-gravel"}
+cells["#"]=cell{stone="st-rock1"}
+cells["h"]=cell{parent=cells["b"],item="it-hollow"}
+cells["+"]=cell{stone="st-chargeplus"}
+cells["-"]=cell{stone="st-chargeminus"}
+cells["0"]=cell{stone="st-chargezero"}
+
+level = {
+   "#########-########0#",     
+   "#                  #",     
+   "#                  #",     
+   "#                  #",     
+   "#      bhhhb       #",     
+   "#      hbbbh       #",     
+   "+      hb+bh       +",     
+   "#      hbbbh       #",     
+   "#      bhhhb       #",     
+   "#                  #",     
+   "#                  #",     
+   "#                  #",     
+   "#0#######-##########"      
+}   
+set_default_parent(cells[" "])
+    
+create_world_by_map(level,cells)
+
+local ac1=set_actor("ac-whiteball-small", 6,1.5, {player=0})
+local ac2=set_actor("ac-whiteball-small", 8,9, {player=0})                                          
+local ac3=set_actor("ac-whiteball-small", 5,3, {player=0})                                          
+local ac4=set_actor("ac-whiteball-small", 8,8, {player=0})                                          
+local ac5=set_actor("ac-whiteball-small", 10,5, {player=0})
+local ac6=set_actor("ac-whiteball-small", 8,6, {player=0})
+local ac7=set_actor("ac-whiteball-small", 9,7, {player=0})
+local ac8=set_actor("ac-whiteball-small", 8,4, {player=0})
+local ac9=set_actor("ac-whiteball-small", 8,2, {player=0})
+local ac10=set_actor("ac-whiteball-small", 9,5, {player=0})
+local ac11=set_actor("ac-whiteball-small", 9,4, {player=0})
+local ac12=set_actor("ac-whiteball-small", 9,3, {player=0})
+
+                                          
+AddRubberBand(ac1, ac2, 6, 1)
+AddRubberBand(ac2, ac3, 6, 1)
+AddRubberBand(ac3, ac4, 6, 1)    
+AddRubberBand(ac4, ac5, 6, 1)    
+AddRubberBand(ac5, ac6, 6, 1)
+AddRubberBand(ac6, ac7, 6, 1)
+AddRubberBand(ac7, ac8, 6, 1)    
+AddRubberBand(ac8, ac9, 6, 1) 
+AddRubberBand(ac9, ac10, 6, 1)
+AddRubberBand(ac10, ac11, 6, 1)
+AddRubberBand(ac11, ac12, 6, 1)    
+AddRubberBand(ac12, ac1, 6, 1) 
+    ]]></el:luamain>
+    <el:i18n>
+      <el:string el:key="title">
+        <el:english el:translate="false"/>
+      </el:string>
+    </el:i18n>
+  </el:protected>
+</el:level>

@@ -1,0 +1,379 @@
+Changes in Version 1.01
+=======================
+
+User-Visible changes
+--------------------
+
+    - 60++ new level
+    - added easy mode to some existing levels
+    - fixes of all levels with known shortcuts
+    - Finnish translation
+    - French and Russian 1.0 manuals
+    - support of updatable cross internet level packs
+    - return to last played level via F6
+    - sound damping for noisy levels
+    - level developer inspector with developer attributes
+    - mouse wheel enabled for many buttons like user ratings, volume,...
+    - logo cleaned
+    - moved backup of score and state to backup subdirectory
+    - level menu string display optimization of level title, wr-holders,...
+    - visualize inherited user rating in level inspector
+    - vista compatible marble icon
+    - windows installer reengineering to modern NSI
+
+Internal changes
+----------------
+
+    - fix of various engine bugs that did not yet show up with bundled levels
+    - fixed properties of various glass stones
+    - sound handling reengineering
+    - support of user sound sets
+    - autorecovery from state / score mismatches
+    - re-Id of Windows users
+
+Changes in Version 1.00
+=======================
+
+User-Visible changes
+--------------------
+
+    - 200++ new levels, fixes to all broken levels
+    - new levelpack sorting
+    - grouping of levelpacks
+    - level inspector for viewing ratings and statistic information about levels
+    - screenshot viewer
+    - personal annotations and rating of levels
+    - score registration and download of world records and statistic information
+    - PAR and handicap as messures for a player
+    - drop & play of new levels and new levelpacks
+    - history and search of levels
+    - composer for own levelpacks and levelpack groups
+    - instant language change
+    - Translations of level titles and documents
+    - Swedish, Russian, Hungarian, Portuguese translation
+    - German and French manuals
+    - 100++ pages Reference manual
+
+Internal changes
+----------------
+
+    - XMLification of all data files
+    - reengineering of level and levelpack
+    - catch many errors intenally, display messages, continue or clean shutdown
+    - portability issues - Unix, Windows, MacOS as unified platform
+    - switch from Lua 4.* to Lua 5.1.1, from tolua to tolua++
+    - switch return value of messages from void/nil to Value
+    - added sender object as second argument to callback function
+    - common floor attributes (gradient, mouseforce, friction)
+    - border stones are swappable
+    - improved fire system: eternal, secure fire, heat transformation, ...
+    - new stones: st-chess, st-lightpassenger, st-polarswitch, st-redrock,
+        st-firebreak[_move], st-bigbluesand-<nesw>, st-camouflage
+    - new floors: fl-thief, fl-nomouse, fl-woven_orange
+    - new items: it-rubberband, it-booze-broken, it-death, it-drop
+    - removed: fl-ice_001
+    - it-pencil -> it-cross, it-crack
+    - it-brush -> it-cross, it-squashed
+    - st-scissor actions
+    - bigbricks unswappable and unpullable
+    - st-flash/actorimpulse*/spitter : distorted forces
+    - small whiteballs can jump
+    - new libraries: andreas_itemfreeze, andreas_ghosts, libpuzzle, libterrain
+    - icons polish
+    - sound additions, volume reduction on stone hit
+    
+    for details on the subjects read the reference manual, for a complete list 
+    of changes see svn commit messages at berlios.de:
+    http://svn.berlios.de/wsvn/enigma-game/tags/1.00/?op=log&rev=0&sc=0&isdir=1)
+
+Changes in Version 0.92
+=======================
+
+Internal changes
+----------------
+
+    - fl-ice_001 is back, but by all means, use fl-ice if you can
+
+User-Visible changes
+--------------------
+
+    - Ice is working again
+    - Cannonballs are working again
+    - Spanish translation (thanks to Samuel Elías Martínez �?lvarez)
+    - New application icon on Windows (thanks to Tobias Schmidbauer)
+
+
+Changes in Version 0.91
+=======================
+
+Internal changes
+----------------
+
+    - removed fl-ice_001 
+    - new game variable enigma.IceFriction
+
+
+Changes in Version 0.90
+=======================
+
+User-Visible Changes
+--------------------
+
+    * Support for internationalized text
+    * Support for 800x600 and 1024x768 video modes
+    * Many new levels
+    * Tutorial levels for new players
+    * Much improved support for loading Oxyd levels
+    * New game mode: Time hunt
+    * Can reorder inventory with TAB key
+    * Support for gamma correction on some systems
+    * New command line options: --dumpinfo, --lang, --data
+    * Removed --8bpp command line option
+    * Removed support for 8bit graphics
+
+
+Internal changes
+----------------
+
+* New item types
+
+    - it-bag
+    - it-banana
+    - it-blackbomb-burning
+    - it-booze
+    - it-changefloor
+    - it-drop (not 100% finished)
+    - it-easykeepstone
+    - it-easykillstone
+    - it-magnet-off
+    - it-magnet-on
+    - it-squashed
+    - it-surprise
+
+* Other item changes
+
+    - Renamed it-soother to it-ring
+
+* New stone types
+
+    - st-spitter
+    - st-flash
+    - st-surprise
+    - st-coffee
+    - st-blackballs
+    - st-whiteballs
+    - st-bug
+    - st-breaking
+    - st-fakeoxyda
+    - st-plain_cracked
+    - st-plain_hole
+    - st-plain_breaking
+    - st-plain_break
+    - st-plain_falling
+    - st-plain_move
+    - st-laserbreak
+    - st-break_gray
+    - st-yinyang3
+
+* New floor types
+
+    fl-ice (fl-ice_001 still available)
+
+* Other changes
+
+    - Two new scrolling modes: FOLLOW_SCREENSCROLLING (yes, ugly name,
+      sorry) and FOLLOW_SMOOTH.
+
+    - Elastic bands also have a minimum length, see daniel6.lua.
+
+    - An XML-based level format.  Please refer to the reference manual
+      for details.
+
+
+Changes in Version 0.81
+=======================
+
+User-Visible Changes
+--------------------
+
+    * Fixed bug which caused all levels to be restarted when the
+      marble died.
+
+Internal Changes
+----------------
+
+* Changed a few object names
+
+	it-seed_vulcano -> it-seed_volcano
+	st-vulcano -> st-volcano
+	st-vulcano-growing -> st-volcano-growing
+
+
+
+Changes in Version 0.80
+=======================
+
+User-Visible Changes
+--------------------
+
+  * Time game
+  * Easy / difficult game mode
+  * Sokoban mode
+  * Game manual
+  * More than 300 new levels (now more than 550 in total)
+  * (partially working) Oxyd level importer
+  * Better soft scrolling
+  * Countless new game elements: turnstiles, volcanos, warp tunnels,
+    land-mines, jump pads, rotors, ...
+  * Reduced memory footprint
+
+
+Internal Changes
+----------------
+
+* New Lua Variables
+
+	enigma.AllowTogglePlayer = TRUE | FALSE
+	enigma.ShowMoves = TRUE | FALSE
+	enigma.Brittleness = 0 .. 1
+	enigma.SlopeForce
+	enigma.SlopeForce2
+	enigma.FrictionFactor
+	enigma.ElectricForce
+	enigma.BumperForce
+
+
+* New Actor Types
+
+	ac-bug
+	ac-killerball
+	ac-rotator
+	ac-top
+
+
+* New Stone Types
+
+	st-actorimpulse_invisible
+	st-beads
+	st-block
+	st-blocker
+	st-blue-sand
+	st-bolder-[nesw]
+	st-brake
+	st-break_bolder
+	st-break_invisible
+	st-chargeminus
+	st-chargeplus
+	st-chargezero
+	st-death_invisible
+	st-disco-dark
+	st-disco-light
+	st-disco-medium
+	st-door-h
+	st-door-h-open
+	st-door-v
+	st-door-v-open
+	st-easymode
+	st-fourswitch
+	st-glass_hole
+	st-glass_move
+	st-knight
+	st-laserswitch
+	st-likeoxyd[abcd]
+	st-mail
+	st-oneway-[nesw]
+	st-oneway_black-[nesw]
+	st-oneway_white-[nesw]
+	st-plain
+	st-pull
+	st-puzzle-[nesw]
+	st-puzzle-{ne, ns, nw, es, ew, sw}
+	st-puzzle-{nes, new, nsw, esw, nesw}
+	st-puzzle2-[nesw]
+	st-puzzle2-{ne, ns, nw, es, ew, sw}
+	st-puzzle2-{nes, new, nsw, esw, nesw}
+	st-rock3_movebreak
+	st-rotator-left
+	st-rotator-right
+	st-rotator_move-left
+	st-rotator_move-right
+	st-shogun-{s, m, l, sm, sl, ml, sml}
+	st-stoneimpulse_movable
+	st-switch_black
+	st-switch_white
+	st-timeswitch
+	st-turnstile
+	st-turnstile-[nesw]
+	st-turnstile-green
+	st-volcano
+	st-volcano_active
+	st-volcano_inactive
+	st-window
+	st-wood1
+	st-wood2
+	st-yellow
+
+* New Item Types
+
+	it-abyss
+	it-blocker
+	it-brake
+	it-burnable
+	it-burnable-ash
+	it-burnable-fireproof
+	it-burnable-ignited
+	it-cherry
+	it-coffee
+	it-easymode
+	it-extinguisher
+	it-extinguisher-empty
+	it-extinguisher-full
+	it-flagblack
+	it-flagwhite
+	it-glasses
+	it-glasses-broken
+	it-hstrip
+	it-inversesensor
+	it-landmine
+	it-odometer
+	it-pin
+	it-puller-[nesw]
+	it-seed
+	it-seed_nowood
+	it-seed_volcano
+	it-seed_wood
+	it-sensor
+	it-soother
+	it-springboard
+	it-vortex-closed
+	it-vortex-open
+	it-vstrip
+	it-weight
+	it-whitebomb
+	it-wrench
+
+* New Floor Types
+
+	fl-abyss_fake
+	fl-acwhite
+	fl-acblack
+	fl-black
+	fl-bumps
+	fl-concrete
+	fl-gravel
+	fl-light
+	fl-mortar
+	fl-red
+	fl-rock
+	fl-rough-blue
+	fl-rough-red
+	fl-rough_medium
+	fl-rough_slow
+	fl-springboard
+	fl-stwood
+	fl-stwood1
+	fl-stwood1
+	fl-stwood2
+	fl-stwood2
+	fl-white
+
