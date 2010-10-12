@@ -1,0 +1,4 @@
+Minor iconv implementation
+
+Handles ASCII, ISO-8859-1 and UTF-8 (2 byte lenght chars)
+
