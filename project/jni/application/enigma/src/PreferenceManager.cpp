@@ -16,10 +16,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  */
-#ifdef ANDROID
-#include <android/log.h>
-#endif
-
 #include "PreferenceManager.hh"
 #include "main.hh"
 #include "DOMErrorReporter.hh"
@@ -61,10 +57,8 @@ namespace enigma {
     }
     
     PreferenceManager::PreferenceManager() {
-	__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "prefman init 1");
         std::string prefTemplatePath;
         bool haveXMLProperties = (ecl::FileExists(app.prefPath)) ? true : false;
-                __android_log_print(ANDROID_LOG_INFO, "ENIGMA", "prefman init 2");
 
         if (!app.systemFS->findFile( std::string("schemas/") + PREFFILENAME , prefTemplatePath)) {
             cerr << "Preferences: no template found\n";
@@ -72,13 +66,11 @@ namespace enigma {
         }
 
         try {
-        __android_log_print(ANDROID_LOG_INFO, "ENIGMA", "prefman init 3");
 
             app.domParserErrorHandler->resetErrors();
             app.domParserErrorHandler->reportToErr();
             app.domParserSchemaResolver->resetResolver();
             app.domParserSchemaResolver->addSchemaId("preferences.xsd","preferences.xsd");
-        __android_log_print(ANDROID_LOG_INFO, "ENIGMA", "prefman init 4");
 
             if (haveXMLProperties) {
                 // update existing XML prefs from possibly newer template:
@@ -109,35 +101,17 @@ namespace enigma {
                 }
                 prefTemplate->release();
             } else {
-        __android_log_print(ANDROID_LOG_INFO, "ENIGMA", "prefman init 6");
 
                 // update from LUA options to XML preferences:
                 // use the template, copy LUA option values and save it later as prefs
                 doc = app.domParser->parseURI(prefTemplatePath.c_str());
-        __android_log_print(ANDROID_LOG_INFO, "ENIGMA", prefTemplatePath.c_str());
-
-char nr[10];
-sprintf(nr,"el %d", doc->getElementsByTagName(
-                        Utf8ToXML("*").x_str())->getLength());
-
-__android_log_print(ANDROID_LOG_INFO, "ENIGMA", nr);
-
                 propertiesElem = reinterpret_cast<DOMElement *>(doc->getElementsByTagName(
                         Utf8ToXML("properties").x_str())->item(0));
-        __android_log_print(ANDROID_LOG_INFO, "ENIGMA", "prefman init 75");
-if(!propertiesElem)
-        __android_log_print(ANDROID_LOG_INFO, "ENIGMA", "prefman NULL");
-
-
-
                 DOMNodeList * propList = propertiesElem->getElementsByTagName(Utf8ToXML("property").x_str());
-        __android_log_print(ANDROID_LOG_INFO, "ENIGMA", "prefman init 8");
                 for (int i = 0, l = propList-> getLength(); i < l; i++) {
-        __android_log_print(ANDROID_LOG_INFO, "ENIGMA", "prefman init 9");
                     DOMElement * property  = reinterpret_cast<DOMElement *>(propList->item(i));
                     const XMLCh * key = property->getAttribute(Utf8ToXML("key").x_str());
                     std::string optionValue;
-        __android_log_print(ANDROID_LOG_INFO, "ENIGMA", "prefman init 10");
                     if (options::HasOption(XMLtoLocal(key).c_str(), optionValue)) {
                         Log << "Preferences: copy LUA option \"" << XMLtoLocal(key) << "\"\n";
                         property->setAttribute(Utf8ToXML("value").x_str(), 
