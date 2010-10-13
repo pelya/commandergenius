@@ -78,17 +78,17 @@ namespace enigma {
 
             doc = app.domParser->parseURI(statePath.c_str());
             if (doc != NULL && !app.domParserErrorHandler->getSawErrors()) {
-                propertiesElem = dynamic_cast<DOMElement *>(doc->getElementsByTagName(
+                propertiesElem = reinterpret_cast<DOMElement *>(doc->getElementsByTagName(
                         Utf8ToXML("properties").x_str())->item(0));
-                groupsElem = dynamic_cast<DOMElement *>(doc->getElementsByTagName(
+                groupsElem = reinterpret_cast<DOMElement *>(doc->getElementsByTagName(
                         Utf8ToXML("groups").x_str())->item(0));
                 groupList = groupsElem->getElementsByTagName(
                         Utf8ToXML("group").x_str());
-                indicesElem = dynamic_cast<DOMElement *>(doc->getElementsByTagName(
+                indicesElem = reinterpret_cast<DOMElement *>(doc->getElementsByTagName(
                         Utf8ToXML("indices").x_str())->item(0));
                 indexList = indicesElem->getElementsByTagName(
                         Utf8ToXML("index").x_str());
-                levelsElem = dynamic_cast<DOMElement *>(doc->getElementsByTagName(
+                levelsElem = reinterpret_cast<DOMElement *>(doc->getElementsByTagName(
                         Utf8ToXML("levels").x_str())->item(0));
             }
             if(app.domParserErrorHandler->getSawErrors()) {
@@ -192,14 +192,14 @@ namespace enigma {
 
     void StateManager::getGroupNames(std::vector<std::string> *names) {
         for (int i = 0, l = groupList-> getLength(); i < l; i++) {
-            DOMElement * group = dynamic_cast<DOMElement *>(groupList->item(i));
+            DOMElement * group = reinterpret_cast<DOMElement *>(groupList->item(i));
             names->push_back(XMLtoUtf8(group->getAttribute(Utf8ToXML("title").x_str())).c_str());
         }
     }
     
     std::string StateManager::getGroupSelectedIndex(std::string groupName) {
         for (int i = 0, l = groupList-> getLength(); i < l; i++) {
-            DOMElement * group = dynamic_cast<DOMElement *>(groupList->item(i));
+            DOMElement * group = reinterpret_cast<DOMElement *>(groupList->item(i));
             if (groupName == XMLtoUtf8(group->getAttribute(Utf8ToXML("title").x_str())).c_str())
                 return XMLtoUtf8(group->getAttribute(Utf8ToXML("curindex").x_str())).c_str();
         }
@@ -208,7 +208,7 @@ namespace enigma {
     
     std::string StateManager::getGroupSelectedColumn(std::string groupName) {
         for (int i = 0, l = groupList-> getLength(); i < l; i++) {
-            DOMElement * group = dynamic_cast<DOMElement *>(groupList->item(i));
+            DOMElement * group = reinterpret_cast<DOMElement *>(groupList->item(i));
             if (groupName == XMLtoUtf8(group->getAttribute(Utf8ToXML("title").x_str())).c_str())
                 return XMLtoUtf8(group->getAttribute(Utf8ToXML("curcolumn").x_str())).c_str();
         }
@@ -217,7 +217,7 @@ namespace enigma {
 
     void StateManager::setGroupSelectedIndex(std::string groupName, std::string indexName) {
         for (int i = 0, l = groupList-> getLength(); i < l; i++) {
-            DOMElement * group = dynamic_cast<DOMElement *>(groupList->item(i));
+            DOMElement * group = reinterpret_cast<DOMElement *>(groupList->item(i));
             if (groupName == XMLtoUtf8(group->getAttribute(Utf8ToXML("title").x_str())).c_str()) {
                 group->setAttribute(Utf8ToXML("curindex").x_str(), Utf8ToXML(indexName).x_str());
                 return;
@@ -227,7 +227,7 @@ namespace enigma {
     
     void StateManager::setGroupSelectedColumn(std::string groupName, std::string column) {
         for (int i = 0, l = groupList-> getLength(); i < l; i++) {
-            DOMElement * group = dynamic_cast<DOMElement *>(groupList->item(i));
+            DOMElement * group = reinterpret_cast<DOMElement *>(groupList->item(i));
             if (groupName == XMLtoUtf8(group->getAttribute(Utf8ToXML("title").x_str())).c_str()) {
                 group->setAttribute(Utf8ToXML("curcolumn").x_str(), Utf8ToXML(column).x_str());
                 return;
@@ -238,7 +238,7 @@ namespace enigma {
     void StateManager::addGroup(std::string groupName, std::string indexName, int column) {
         // check if group exists - update attributes only
         for (int i = 0, l = groupList->getLength(); i < l; i++) {
-            DOMElement * group = dynamic_cast<DOMElement *>(groupList->item(i));
+            DOMElement * group = reinterpret_cast<DOMElement *>(groupList->item(i));
             if (groupName == XMLtoUtf8(group->getAttribute(Utf8ToXML("title").x_str())).c_str()) {
                 group->setAttribute(Utf8ToXML("curcolumn").x_str(), 
                         Utf8ToXML(ecl::strf("%d",column)).x_str());
@@ -264,14 +264,14 @@ namespace enigma {
         if (pos < 0 || pos >= groupList->getLength())
             groupsElem->appendChild(group);
         else  {
-            DOMElement * nextGroup = dynamic_cast<DOMElement *>(groupList->item(pos));
+            DOMElement * nextGroup = reinterpret_cast<DOMElement *>(groupList->item(pos));
             groupsElem->insertBefore(group, nextGroup);
         }
     }
     
     void StateManager::deleteGroup(std::string groupName) {
         for (int i = 0, l = groupList->getLength(); i < l; i++) {
-            DOMElement * group = dynamic_cast<DOMElement *>(groupList->item(i));
+            DOMElement * group = reinterpret_cast<DOMElement *>(groupList->item(i));
             if (groupName == XMLtoUtf8(group->getAttribute(Utf8ToXML("title").x_str())).c_str()) {
                 groupsElem->removeChild(group);
                 return;
@@ -282,7 +282,7 @@ namespace enigma {
     void StateManager::renameGroup(std::string oldName, std::string newName) {
         // rename group element
         for (int i = 0, l = groupList->getLength(); i < l; i++) {
-            DOMElement * group = dynamic_cast<DOMElement *>(groupList->item(i));
+            DOMElement * group = reinterpret_cast<DOMElement *>(groupList->item(i));
             if (oldName == XMLtoUtf8(group->getAttribute(Utf8ToXML("title").x_str())).c_str()) {
                 group->setAttribute(Utf8ToXML("title").x_str(), Utf8ToXML(newName).x_str());
                 break;
@@ -295,7 +295,7 @@ namespace enigma {
             double &location, int &curpos, int &curfirst) {
         // check if index exists - get user attributes
         for (int i = 0, l = indexList-> getLength(); i < l; i++) {
-            DOMElement * index = dynamic_cast<DOMElement *>(indexList->item(i));
+            DOMElement * index = reinterpret_cast<DOMElement *>(indexList->item(i));
             if (indexName == XMLtoUtf8(index->getAttribute(Utf8ToXML("title").x_str())).c_str()) {
                 groupName = XMLtoUtf8(index->getAttribute(Utf8ToXML("group").x_str())).c_str();
                 XMLDouble * result = new XMLDouble(index->getAttribute(Utf8ToXML("location").x_str()));
@@ -319,7 +319,7 @@ namespace enigma {
     void StateManager::setIndexName(std::string oldName, std::string newName) {
         // search index and set attribute
         for (int i = 0, l = indexList-> getLength(); i < l; i++) {
-            DOMElement * index = dynamic_cast<DOMElement *>(indexList->item(i));
+            DOMElement * index = reinterpret_cast<DOMElement *>(indexList->item(i));
             if (oldName == XMLtoUtf8(index->getAttribute(Utf8ToXML("title").x_str())).c_str()) {
                 index->setAttribute(Utf8ToXML("title").x_str(), Utf8ToXML(newName).x_str());
                 return;
@@ -330,7 +330,7 @@ namespace enigma {
     void StateManager::setIndexLocation(std::string indexName, double location) {
         // search index and set attribute
         for (int i = 0, l = indexList-> getLength(); i < l; i++) {
-            DOMElement * index = dynamic_cast<DOMElement *>(indexList->item(i));
+            DOMElement * index = reinterpret_cast<DOMElement *>(indexList->item(i));
             if (indexName == XMLtoUtf8(index->getAttribute(Utf8ToXML("title").x_str())).c_str()) {
                 index->setAttribute(Utf8ToXML("location").x_str(), Utf8ToXML(ecl::strf("%.15g",location)).x_str());
                 return;
@@ -341,7 +341,7 @@ namespace enigma {
     void StateManager::setIndexCurpos(std::string indexName, int curpos) {
         // search index and set attribute
         for (int i = 0, l = indexList-> getLength(); i < l; i++) {
-            DOMElement * index = dynamic_cast<DOMElement *>(indexList->item(i));
+            DOMElement * index = reinterpret_cast<DOMElement *>(indexList->item(i));
             if (indexName == XMLtoUtf8(index->getAttribute(Utf8ToXML("title").x_str())).c_str()) {
                 index->setAttribute(Utf8ToXML("curposition").x_str(), Utf8ToXML(ecl::strf("%d",curpos)).x_str());
                 return;
@@ -352,7 +352,7 @@ namespace enigma {
     void StateManager::setIndexCurfirst(std::string indexName, int curfirst) {
         // search index and set attribute
         for (int i = 0, l = indexList-> getLength(); i < l; i++) {
-            DOMElement * index = dynamic_cast<DOMElement *>(indexList->item(i));
+            DOMElement * index = reinterpret_cast<DOMElement *>(indexList->item(i));
             if (indexName == XMLtoUtf8(index->getAttribute(Utf8ToXML("title").x_str())).c_str()) {
                 index->setAttribute(Utf8ToXML("curfirst").x_str(), Utf8ToXML(ecl::strf("%d",curfirst)).x_str());
                 return;
@@ -363,7 +363,7 @@ namespace enigma {
     void StateManager::setIndexGroup(std::string indexName, std::string groupName) {
         // search index and set attribute
         for (int i = 0, l = indexList-> getLength(); i < l; i++) {
-            DOMElement * index = dynamic_cast<DOMElement *>(indexList->item(i));
+            DOMElement * index = reinterpret_cast<DOMElement *>(indexList->item(i));
             if (indexName == XMLtoUtf8(index->getAttribute(Utf8ToXML("title").x_str())).c_str()) {
                 index->setAttribute(Utf8ToXML("group").x_str(), Utf8ToXML(groupName).x_str());
                 return;
@@ -396,7 +396,7 @@ namespace enigma {
         DOMElement * level;
         DOMNodeList * levelList = levelsElem->getElementsByTagName(Utf8ToXML("level").x_str());
         for (int i = 0, l = levelList-> getLength(); i < l && !levelFound; i++) {
-            level  = dynamic_cast<DOMElement *>(levelList->item(i));
+            level  = reinterpret_cast<DOMElement *>(levelList->item(i));
             if (XMLString::equals(xmlId, 
                     level->getAttribute(Utf8ToXML("id").x_str()))) {
                 levelFound = true;

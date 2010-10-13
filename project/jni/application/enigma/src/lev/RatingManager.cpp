@@ -134,7 +134,7 @@ namespace enigma { namespace lev {
             DOMDocument *doc = app.domParser->parseURI(path.c_str());
             if (doc != NULL && !app.domParserErrorHandler->getSawErrors()) {
                 DOMElement *updateElem = 
-                        dynamic_cast<DOMElement *>(doc->getElementsByTagName(
+                        reinterpret_cast<DOMElement *>(doc->getElementsByTagName(
                         Utf8ToXML("update").x_str())->item(0));
                 std::time_t newVersion = timeValue(updateElem->getAttribute(Utf8ToXML("date").x_str()));
                 bool isUpdate = (std::difftime(newVersion, ratingVersion) > 0) ? true : false;
@@ -148,7 +148,7 @@ namespace enigma { namespace lev {
                 DOMNodeList *levelList = doc->getElementsByTagName( 
                             Utf8ToXML("level").x_str());
                 for (int i = 0, l = levelList-> getLength();  i < l; i++) {
-                    DOMElement *levelElem = dynamic_cast<DOMElement *>(levelList->item(i));
+                    DOMElement *levelElem = reinterpret_cast<DOMElement *>(levelList->item(i));
                     const XMLCh * attr = levelElem->getAttribute(Utf8ToXML("id").x_str());
                     std::string id = XMLtoUtf8(attr).c_str();
                     attr = levelElem->getAttribute(Utf8ToXML("sv").x_str());
@@ -335,13 +335,13 @@ namespace enigma { namespace lev {
             app.domParserSchemaResolver->addSchemaId("ratings.xsd","ratings.xsd");
             saveDoc = app.domParser->parseURI(ratTemplatePath.c_str());
             if (saveDoc != NULL && !app.domParserErrorHandler->getSawErrors()) {
-                DOMElement * updateElem = dynamic_cast<DOMElement *>(saveDoc->getElementsByTagName(
+                DOMElement * updateElem = reinterpret_cast<DOMElement *>(saveDoc->getElementsByTagName(
                         Utf8ToXML("update").x_str())->item(0));
                 updateElem->setAttribute(Utf8ToXML("date").x_str(), Utf8ToXML(ratingVersionString.c_str()).x_str());
                 updateElem->setAttribute(Utf8ToXML("urlFull").x_str(), Utf8ToXML(urlFullUpdate.c_str()).x_str());
                 updateElem->setAttribute(Utf8ToXML("urlIncremental").x_str(), Utf8ToXML(urlIncrementalUpdate.c_str()).x_str());
                 updateElem->setAttribute(Utf8ToXML("delay").x_str(), Utf8ToXML(ecl::strf("%d",updateMinDelay).c_str()).x_str());
-                levelsElem = dynamic_cast<DOMElement *>(saveDoc->getElementsByTagName(
+                levelsElem = reinterpret_cast<DOMElement *>(saveDoc->getElementsByTagName(
                         Utf8ToXML("levels").x_str())->item(0));
                 std::for_each(cache.begin(), cache.end(), saveLevelRating);
                 std::string writePath = app.userPath + "/" + RATINGSFILENAME;

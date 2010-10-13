@@ -182,9 +182,9 @@ namespace enigma { namespace lev {
                 
             }
             if (doc != NULL && !app.domParserErrorHandler->getSawErrors()) {
-                propertiesElem = dynamic_cast<DOMElement *>(doc->getElementsByTagName(
+                propertiesElem = reinterpret_cast<DOMElement *>(doc->getElementsByTagName(
                         Utf8ToXML("properties").x_str())->item(0));
-                levelsElem = dynamic_cast<DOMElement *>(doc->getElementsByTagName(
+                levelsElem = reinterpret_cast<DOMElement *>(doc->getElementsByTagName(
                         Utf8ToXML("levels").x_str())->item(0));
                 levelList = levelsElem->getElementsByTagName(Utf8ToXML("level").x_str());
                 
@@ -192,13 +192,13 @@ namespace enigma { namespace lev {
                 if (hasValidStateUserId && userId == stateUserId) {
                     hasValidUserId = true;
                     for (int i = 0, l = levelList->getLength(); i < l; i++) {
-                        DOMElement * levelElem  = dynamic_cast<DOMElement *>(levelList->item(i));
+                        DOMElement * levelElem  = reinterpret_cast<DOMElement *>(levelList->item(i));
                         std::string levelId = XMLtoUtf8(levelElem->getAttribute(Utf8ToXML("id").x_str())).c_str();
                         std::string scoreVersion = XMLtoUtf8(levelElem->getAttribute(Utf8ToXML("version").x_str())).c_str();
                         DOMNamedNodeMap * attrXMap = levelElem->getAttributes();
                         std::map<std::string, std::string> attrMap;
                         for (int j = 0, k = attrXMap->getLength();  j < k; j++) {
-                            DOMAttr * levelAttr = dynamic_cast<DOMAttr *>(attrXMap->item(j));
+                            DOMAttr * levelAttr = reinterpret_cast<DOMAttr *>(attrXMap->item(j));
                             std::string attrName = XMLtoUtf8(levelAttr->getName()).c_str();
                             if (attrName != "sec" && levelAttr->getSpecified())
                                 attrMap[attrName] = XMLtoUtf8(levelAttr->getValue()).c_str();
@@ -383,11 +383,11 @@ namespace enigma { namespace lev {
         }
         
         for (int i = 0, l = levelList->getLength(); i < l; i++) {
-            DOMElement * levelElem  = dynamic_cast<DOMElement *>(levelList->item(i));
+            DOMElement * levelElem  = reinterpret_cast<DOMElement *>(levelList->item(i));
             DOMNamedNodeMap * attrXMap = levelElem->getAttributes();
             std::map<std::string, std::string> attrMap;
             for (int j = 0, k = attrXMap->getLength();  j < k; j++) {
-                DOMAttr * levelAttr = dynamic_cast<DOMAttr *>(attrXMap->item(j));
+                DOMAttr * levelAttr = reinterpret_cast<DOMAttr *>(attrXMap->item(j));
                 std::string attrName = XMLtoUtf8(levelAttr->getName()).c_str();
                 if (attrName != "sec" && levelAttr->getSpecified())
                     attrMap[attrName] = XMLtoUtf8(levelAttr->getValue()).c_str();
@@ -1007,7 +1007,7 @@ namespace enigma { namespace lev {
     std::string ScoreManager::upgradeSum() {
         std::string scores;
         for (int i = 0, l = levelList->getLength(); i < l; i++) {
-            DOMElement * level  = dynamic_cast<DOMElement *>(levelList->item(i));
+            DOMElement * level  = reinterpret_cast<DOMElement *>(levelList->item(i));
             const XMLCh *attr = level->getAttribute(Utf8ToXML("diff1").x_str());
             int score = (XMLString::stringLen(attr) > 0) ? XMLString::parseInt(attr) : -1;
             if (score >= 0)

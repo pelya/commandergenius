@@ -65,6 +65,10 @@
 #include "NSSystemDirectories.h"
 #endif
 
+#ifdef ANDROID
+#include <android/log.h>
+#endif
+
 using namespace std;
 using namespace ecl;
 using namespace enigma;
@@ -230,12 +234,15 @@ Application::Application() : wizard_mode (false), nograb (false), language (""),
 
 void Application::init(int argc, char **argv) 
 {
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "init start");
+
     progCallPath = argv[0];
     copy(argv+1, argv+argc, back_inserter(args));
     
     // parse commandline arguments -- needs args
     AP ap;
     ap.parse();
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "cmdline start");
 
     // ----- Evaluate command line arguments.
     // start with simple actions that do not need further initialization
@@ -245,6 +252,7 @@ void Application::init(int argc, char **argv)
         exit(0);
     }
     
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "preview start");
     //
     if (ap.makepreview) {
         ap.force_window = true;
@@ -253,53 +261,68 @@ void Application::init(int argc, char **argv)
         isMakePreviews = true;
     }
 
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "log start");
     // initialize logfile -- needs ap
-    if (ap.do_log) 
+// DEBUG    if (ap.do_log) 
         enigma::Log.rdbuf(cout.rdbuf());
-    else
-        enigma::Log.rdbuf(::nullbuffer);
+//    else
+//        enigma::Log.rdbuf(::nullbuffer);
 
     // initialize assertion stop flag
     if (ap.do_assert)
         enigma::noAssert = false;
 
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "path start");
     // initialize system datapaths -- needs ap, log
     systemCmdDataPath = ap.datapath;
     initSysDatapaths(ap.preffilename);
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "xerces start");
 
     // initialize XML -- needs log, datapaths
     initXerces();
     
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "lua start");
+
     // initialize LUA - Run initialization scripts
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "initlua start");
     lua_State *L = lua::GlobalState();
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "startuplua start");
     lua::CheckedDoFile(L, app.systemFS, "startup.lua");
 
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "preflua start");
     // initialize preferences -- needs LUA, XML
     if (!options::Load()) {
         fprintf(stderr, _("Error in configuration file.\n"));
       	fprintf(stderr, lua::LastError (lua::GlobalState()).c_str());
     }     
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "pref start");
     prefs = PreferenceManager::instance();
     
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "preffs start");
     if (ap.force_window) {
         options::SetOption("FullScreen", false);
     }
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "prefpreview start");
     if (isMakePreviews) {
         options::SetOption("VideoMode", 0);
     }
 
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "user start");
     // initialize user data paths -- needs preferences, system datapaths
     initUserDatapaths();
-    
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "i18n");
+
     // set message language
     init_i18n();
     
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "world init");
     // ----- Initialize object repositories
     world::Init();
     if (ap.dumpinfo) {
         world::DumpObjectInfo();
         exit(0);
     }
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "sdl start");
 
     // ----- Initialize SDL library
 #ifdef WIN32
@@ -483,7 +506,8 @@ void Application::initSysDatapaths(const std::string &prefFilename)
     if (!systemCmdDataPath.empty())
          systemFS->prepend_dir(systemCmdDataPath);
     Log << "systemFS = \"" << systemFS->getDataPath() << "\"\n"; 
-    
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", systemFS->getDataPath().c_str());
+
     // l10nPath
     l10nPath = LOCALEDIR;    // defined in src/Makefile.am
 #ifdef __MINGW32__
@@ -611,7 +635,9 @@ void Application::initXerces() {
 
 void Application::initUserDatapaths() {
     // userPath
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "query");
     userPath = prefs->getString("UserPath");
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "query done");
     if (userPath.empty()) {
 #ifdef MACOSX
         if (prefs->getInt("_MacUpdate1.00") != 1)
@@ -627,10 +653,13 @@ void Application::initUserDatapaths() {
         userPath = userStdPath;
 #endif
     } else {
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "XML CONVERT");
+
         userPath = XMLtoLocal(Utf8ToXML(userPath.c_str()).x_str()).c_str();
     }
     Log << "userPath = \"" << userPath << "\"\n"; 
-    
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", userPath.c_str());
+
     // userImagePath
     userImagePath = prefs->getString("UserImagePath");
     if (userImagePath.empty()) {
@@ -657,12 +686,16 @@ void Application::initUserDatapaths() {
         resourceFS->prepend_dir(std::string(path)+"/Application Support/Enigma");
     }
 #endif
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "pathgen");
+
     if (!systemCmdDataPath.empty())
 	resourceFS->prepend_dir(systemCmdDataPath);    
     resourceFS->prepend_dir(userPath);
     if (userImagePath != userPath)
         resourceFS->prepend_dir(userImagePath);
     Log << "resourceFS = \"" << resourceFS->getDataPath() << "\"\n"; 
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", resourceFS->getDataPath().c_str());
+__android_log_print(ANDROID_LOG_INFO, "ENIGMA", "pathgen");
 
     // create levels/auto, levels/cross, levels/legacy_dat on userPath
     if (!ecl::FolderExists(userPath + "/levels/auto"))

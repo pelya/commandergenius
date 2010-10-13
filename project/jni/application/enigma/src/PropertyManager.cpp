@@ -174,7 +174,7 @@ namespace enigma {
 
         DOMNodeList * propList = propertiesElem->getElementsByTagName(Utf8ToXML("property").x_str());
         for (int i = 0, l = propList-> getLength(); i < l && !propFound; i++) {
-            property  = dynamic_cast<DOMElement *>(propList->item(i));
+            property  = reinterpret_cast<DOMElement *>(propList->item(i));
             if (XMLString::equals(key, 
                     property->getAttribute(Utf8ToXML("key").x_str()))) {
                 propFound = true;

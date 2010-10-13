@@ -2,7 +2,7 @@
 /* src/config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* android paths */
-#define SYSTEM_DATA_DIR "."
+#define SYSTEM_DATA_DIR "./data"
 #define LOCALEDIR "."
 
 

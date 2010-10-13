@@ -23,6 +23,7 @@
 #include <xercesc/util/XMLString.hpp>
 #include <xercesc/util/TransService.hpp>
 
+
 XERCES_CPP_NAMESPACE_USE
 
 namespace enigma

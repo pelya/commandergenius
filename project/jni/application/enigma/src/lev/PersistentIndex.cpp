@@ -305,11 +305,11 @@ namespace enigma { namespace lev {
                 }
 
                 if (doc != NULL && !app.domParserErrorHandler->getSawErrors()) {
-                    infoElem = dynamic_cast<DOMElement *>(doc->getElementsByTagName(
+                    infoElem = reinterpret_cast<DOMElement *>(doc->getElementsByTagName(
                             Utf8ToXML("info").x_str())->item(0));
-                    updateElem = dynamic_cast<DOMElement *>(doc->getElementsByTagName(
+                    updateElem = reinterpret_cast<DOMElement *>(doc->getElementsByTagName(
                             Utf8ToXML("update").x_str())->item(0));
-                    levelsElem = dynamic_cast<DOMElement *>(doc->getElementsByTagName(
+                    levelsElem = reinterpret_cast<DOMElement *>(doc->getElementsByTagName(
                             Utf8ToXML("levels").x_str())->item(0));
                 }
 
@@ -396,7 +396,7 @@ namespace enigma { namespace lev {
             knownAttributes.insert("unit");
             knownAttributes.insert("target");
             for (int i = 0, l = levelList->getLength();  i < l; i++) {
-                DOMElement *levelElem = dynamic_cast<DOMElement *>(levelList->item(i));
+                DOMElement *levelElem = reinterpret_cast<DOMElement *>(levelList->item(i));
                 std::string path = XMLtoUtf8(levelElem->getAttribute( 
                         Utf8ToXML("_xpath").x_str())).c_str();
                 std::string id = XMLtoUtf8(levelElem->getAttribute( 
@@ -436,7 +436,7 @@ namespace enigma { namespace lev {
                         Utf8ToXML("target").x_str())).c_str();
                 DOMNamedNodeMap * attrMap = levelElem->getAttributes();
                 for (int j = 0, k = attrMap->getLength();  j < k; j++) {
-                    DOMAttr * levelAttr = dynamic_cast<DOMAttr *>(attrMap->item(j));
+                    DOMAttr * levelAttr = reinterpret_cast<DOMAttr *>(attrMap->item(j));
                     std::string attrName = XMLtoUtf8(levelAttr->getName()).c_str();
                     if (knownAttributes.find(attrName) == knownAttributes.end()) {
                         Log << "PersistentIndex Load unknown Attribut: " << attrName << "\n";
@@ -660,9 +660,9 @@ namespace enigma { namespace lev {
                     app.domParserSchemaResolver->addSchemaId("index.xsd","index.xsd");
                     doc = app.domParser->parseURI(indexTemplatePath.c_str());
                     if (doc != NULL && !app.domParserErrorHandler->getSawErrors()) {
-                        infoElem = dynamic_cast<DOMElement *>(doc->getElementsByTagName(
+                        infoElem = reinterpret_cast<DOMElement *>(doc->getElementsByTagName(
                                 Utf8ToXML("info").x_str())->item(0));
-                        levelsElem = dynamic_cast<DOMElement *>(doc->getElementsByTagName(
+                        levelsElem = reinterpret_cast<DOMElement *>(doc->getElementsByTagName(
                                 Utf8ToXML("levels").x_str())->item(0));
                     }
                     if(app.domParserErrorHandler->getSawErrors()) {
@@ -777,7 +777,7 @@ namespace enigma { namespace lev {
         DOMNodeList *levList = levelsElem->getElementsByTagName(
                 Utf8ToXML("level").x_str());
         for (int i = 0, l = levList-> getLength();  i < l; i++) {
-            DOMElement *levElem = dynamic_cast<DOMElement *>(levList->item(i));
+            DOMElement *levElem = reinterpret_cast<DOMElement *>(levList->item(i));
             levElem->setAttribute( Utf8ToXML("_seq").x_str(),
                     Utf8ToXML(ecl::strf("%d",i+1)).x_str());           
         }

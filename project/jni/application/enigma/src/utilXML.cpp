@@ -42,11 +42,11 @@ namespace enigma
         for (child = elem->getFirstChild(); child != NULL; child = next) {
             next = child->getNextSibling();
             if (child->getNodeType() == DOMNode::TEXT_NODE) {
-                if (dynamic_cast<DOMText *>(child)->isIgnorableWhitespace()) {
+                if (reinterpret_cast<DOMText *>(child)->isIgnorableWhitespace()) {
                     elem->removeChild(child);
                 }
             } else if (child->getNodeType() == DOMNode::ELEMENT_NODE) {
-                DOMElement * childElem = dynamic_cast<DOMElement *>(child);
+                DOMElement * childElem = reinterpret_cast<DOMElement *>(child);
                 if (childElem != NULL)
                     stripIgnorableWhitespace(childElem);
             }

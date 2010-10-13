@@ -564,7 +564,7 @@ namespace enigma { namespace lev {
 #endif
                 }
                 if (doc != NULL && !app.domParserErrorHandler->getSawErrors()) {
-                    infoElem = dynamic_cast<DOMElement *>(doc->getElementsByTagNameNS(
+                    infoElem = reinterpret_cast<DOMElement *>(doc->getElementsByTagNameNS(
                             levelNS, Utf8ToXML("info").x_str())->item(0));
                     stringList = doc->getElementsByTagNameNS(levelNS, 
                             Utf8ToXML("string").x_str());
@@ -631,7 +631,7 @@ namespace enigma { namespace lev {
             DOMNodeList *depList = infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("dependency").x_str());
             for (int i = 0, l = depList->getLength();  i < l; i++) {
-                DOMElement *depElem = dynamic_cast<DOMElement *>(depList->item(i));
+                DOMElement *depElem = reinterpret_cast<DOMElement *>(depList->item(i));
                 std::string depPath;
                 std::string depId;
                 int         depRelease;
@@ -763,7 +763,7 @@ namespace enigma { namespace lev {
         lua_State *L = lua::LevelState();
         DOMNodeList * luamainList = doc->getElementsByTagNameNS(levelNS, Utf8ToXML("luamain").x_str());
         if (luamainList->getLength() == 1) {
-            DOMElement *luamain  = dynamic_cast<DOMElement *>(luamainList->item(0));
+            DOMElement *luamain  = reinterpret_cast<DOMElement *>(luamainList->item(0));
             // add debugging info to lua code
             std::string luaCode = "--@" + absLevelPath + "\n" + 
                         XMLtoUtf8(luamain->getTextContent()).c_str();
@@ -793,7 +793,7 @@ namespace enigma { namespace lev {
         if (key == "title" || key == "subtitle") {
             // get the english originals from the identity attributes
             DOMElement *identityElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("identity").x_str())->item(0));
             english = XMLtoUtf8(identityElem->getAttributeNS(levelNS, 
                     Utf8ToXML(&key).x_str())).c_str();
@@ -805,7 +805,7 @@ namespace enigma { namespace lev {
         bool keyFound = false;
         bool protectedString = true;
         for (int i = 0, l = stringList-> getLength();  i < l && !translFound; i++) {
-            DOMElement *stringElem = dynamic_cast<DOMElement *>(stringList->item(i));
+            DOMElement *stringElem = reinterpret_cast<DOMElement *>(stringList->item(i));
             if (key == XMLtoUtf8(stringElem->getAttributeNS(levelNS, 
                     Utf8ToXML("key").x_str())).c_str()) {
                 keyFound = true;
@@ -814,7 +814,7 @@ namespace enigma { namespace lev {
                 if (protectedString) {
                     // resolve english text from string->english subelement
                     DOMElement *englishElem = 
-                         dynamic_cast<DOMElement *>(stringElem->getElementsByTagNameNS(
+                         reinterpret_cast<DOMElement *>(stringElem->getElementsByTagNameNS(
                          levelNS, Utf8ToXML("english").x_str())->item(0));
                     std::string tmp = XMLtoUtf8(englishElem->getTextContent()).c_str();
                     if (!tmp.empty()) {
@@ -832,7 +832,7 @@ namespace enigma { namespace lev {
                     DOMNodeList *translList = stringElem->getElementsByTagNameNS(
                             levelNS, Utf8ToXML("translation").x_str());
                     for (int i = 0, l = translList-> getLength();  i < l && !translFound; i++) {
-                        DOMElement *translElem = dynamic_cast<DOMElement *>(translList->item(i));
+                        DOMElement *translElem = reinterpret_cast<DOMElement *>(translList->item(i));
                         if (lang == XMLtoUtf8(translElem->getAttributeNS(levelNS, 
                                 Utf8ToXML("lang").x_str())).c_str()) {
                             translation = XMLtoUtf8(translElem->getTextContent()).c_str();
@@ -873,7 +873,7 @@ namespace enigma { namespace lev {
     bool Proxy::updateId() {
         if (doc != NULL) {
             DOMElement *identityElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("identity").x_str())->item(0));
             std::string docId = XMLtoUtf8(identityElem->getAttributeNS(levelNS, 
                     Utf8ToXML("id").x_str())).c_str();
@@ -894,7 +894,7 @@ namespace enigma { namespace lev {
     int Proxy::getScoreVersion() {
         if (doc != NULL) {
             DOMElement *versionElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("version").x_str())->item(0));
             scoreVersion = XMLString::parseInt(versionElem->getAttributeNS(levelNS, 
                     Utf8ToXML("score").x_str()));
@@ -905,7 +905,7 @@ namespace enigma { namespace lev {
     bool Proxy::updateReleaseVersion() {
         if (doc != NULL) {
             DOMElement *versionElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("version").x_str())->item(0));
             int docRelease = XMLString::parseInt(versionElem->getAttributeNS(levelNS, 
                     Utf8ToXML("release").x_str()));
@@ -927,7 +927,7 @@ namespace enigma { namespace lev {
     int Proxy::getRevisionNumber() {
         if (doc != NULL) {
             DOMElement *versionElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("version").x_str())->item(0));
             const XMLCh * revision = versionElem->getAttributeNS(levelNS, 
                     Utf8ToXML("revision").x_str());
@@ -959,7 +959,7 @@ namespace enigma { namespace lev {
     levelStatusType Proxy::getLevelStatus() {
         if (doc != NULL) {
             DOMElement *versionElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("version").x_str())->item(0));
             std::string status = XMLtoUtf8(versionElem->getAttributeNS(levelNS, 
                     Utf8ToXML("status").x_str())).c_str();
@@ -978,7 +978,7 @@ namespace enigma { namespace lev {
     std::string Proxy::getAuthor() {
         if (doc != NULL) {
             DOMElement *authorElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("author").x_str())->item(0));
             author = XMLtoUtf8(authorElem->getAttributeNS(levelNS, 
                     Utf8ToXML("name").x_str())).c_str();
@@ -989,7 +989,7 @@ namespace enigma { namespace lev {
     std::string Proxy::getTitle() {
         if (doc != NULL) {
             DOMElement *identityElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("identity").x_str())->item(0));
             title = XMLtoUtf8(identityElem->getAttributeNS(levelNS, 
                     Utf8ToXML("title").x_str())).c_str();
@@ -1000,7 +1000,7 @@ namespace enigma { namespace lev {
     bool Proxy::hasEasymode() {
         if (doc != NULL) {
             DOMElement *modesElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("modes").x_str())->item(0));
             hasEasymodeFlag = boolValue(modesElem->getAttributeNS(levelNS, 
                         Utf8ToXML("easy").x_str()));
@@ -1012,7 +1012,7 @@ namespace enigma { namespace lev {
         std::string contact;
         if (doc != NULL) {
             DOMElement *authorElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("author").x_str())->item(0));
             contact = XMLtoUtf8(authorElem->getAttributeNS(levelNS, 
                     Utf8ToXML("email").x_str())).c_str();
@@ -1024,7 +1024,7 @@ namespace enigma { namespace lev {
         std::string homepage;
         if (doc != NULL) {
             DOMElement *authorElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("author").x_str())->item(0));
             homepage = XMLtoUtf8(authorElem->getAttributeNS(levelNS, 
                     Utf8ToXML("homepage").x_str())).c_str();
@@ -1036,7 +1036,7 @@ namespace enigma { namespace lev {
         double value = 0.92;
         if (doc != NULL) {
             DOMElement *compatibilityElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("compatibility").x_str())->item(0));
             XMLDouble * result = new XMLDouble(compatibilityElem->getAttributeNS(levelNS, 
                     Utf8ToXML("enigma").x_str()));
@@ -1049,7 +1049,7 @@ namespace enigma { namespace lev {
     GameType Proxy::getEngineCompatibility() {
         if (doc != NULL) {
             DOMElement *authorElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("compatibility").x_str())->item(0));
             engineCompatibility = GetGameType(XMLtoUtf8(authorElem->getAttributeNS(levelNS, 
                     Utf8ToXML("engine").x_str())).c_str());
@@ -1062,7 +1062,7 @@ namespace enigma { namespace lev {
         controlType control = force;
         if (doc != NULL) {
             DOMElement *authorElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("modes").x_str())->item(0));
             std::string controlString = XMLtoUtf8(authorElem->getAttributeNS(levelNS, 
                     Utf8ToXML("control").x_str())).c_str();
@@ -1079,7 +1079,7 @@ namespace enigma { namespace lev {
     scoreUnitType Proxy::getScoreUnit() {
         if (doc != NULL) {
             DOMElement *modesElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("modes").x_str())->item(0));
             std::string txt = XMLtoUtf8(modesElem->getAttributeNS(levelNS, 
                         Utf8ToXML("scoreunit").x_str())).c_str();
@@ -1096,7 +1096,7 @@ namespace enigma { namespace lev {
         std::string title = "time";
         if (doc != NULL) {
             DOMElement *modesElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("modes").x_str())->item(0));
             title = XMLtoUtf8(modesElem->getAttributeNS(levelNS, 
                         Utf8ToXML("scoretarget").x_str())).c_str();
@@ -1109,7 +1109,7 @@ namespace enigma { namespace lev {
         std::string attribute = infoUsage ? "showinfo" : "showstart";
         if (doc != NULL) {
             DOMElement *creditsElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("credits").x_str())->item(0));
             if (creditsElem != NULL)  // element is optional
                 if (boolValue(creditsElem->getAttributeNS(levelNS, 
@@ -1124,7 +1124,7 @@ namespace enigma { namespace lev {
         std::string attribute = infoUsage ? "showinfo" : "showstart";
         if (doc != NULL) {
             DOMElement *dedicationElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("dedication").x_str())->item(0));
             if (dedicationElem != NULL)  // element is optional
                 if (boolValue(dedicationElem->getAttributeNS(levelNS, 
@@ -1137,7 +1137,7 @@ namespace enigma { namespace lev {
         int score = -1;
         if (doc != NULL) {
             DOMElement *versionElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("score").x_str())->item(0));
             score = scoreText2Int(XMLtoUtf8(versionElem->getAttributeNS(levelNS, 
                     Utf8ToXML("easy").x_str())).c_str());
@@ -1149,7 +1149,7 @@ namespace enigma { namespace lev {
         int score = -1;
         if (doc != NULL) {
             DOMElement *versionElem = 
-                    dynamic_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
+                    reinterpret_cast<DOMElement *>(infoElem->getElementsByTagNameNS(
                     levelNS, Utf8ToXML("score").x_str())->item(0));
             score = scoreText2Int(XMLtoUtf8(versionElem->getAttributeNS(levelNS, 
                     Utf8ToXML("difficult").x_str())).c_str());
