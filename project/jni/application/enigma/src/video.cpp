@@ -335,6 +335,7 @@ namespace
             VM_640x480, 
             false,              // 640x512 is deprecated!
         },
+#ifndef ANDROID
         { 
             VM_800x600, 800, 600, 40, "800x600", 
             "models-40.lua", "gfx40/",
@@ -361,6 +362,7 @@ namespace
             Rect (260, 655, 710, 40), // text area
             VM_640x480, true,
         },
+#endif
     };
 
     VideoModes current_video_mode = VM_None;

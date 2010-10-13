@@ -11,7 +11,7 @@
     <property key="SoundVolume" value="1.0"/>
     <property key="MusicVolume" value="1.0"/>
     <property key="StereoSeparation" value="10.0"/>
-    <property key="MenuMusicFile" value="sound/menu.s3m"/>
+    <property key="MenuMusicFile" value="sound/menu.ogg"/>
     <property key="LevelMusicFile" value="sound/Emilie.xm"/>
     <property key="Language" value=""/>
     <property key="RatingsAutoUpdate" value="0"/>

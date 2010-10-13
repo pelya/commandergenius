@@ -81,7 +81,7 @@ namespace {
 #endif
         if (node->getNodeType () == DOMNode::ELEMENT_NODE &&
                  std::string(XMLtoUtf8(node->getNodeName()).c_str()) == "level") {
-            const DOMElement *e = dynamic_cast<const DOMElement *>(node);
+            const DOMElement *e = reinterpret_cast<const DOMElement *>(node);
             std::string id = XMLtoUtf8(e->getAttribute(Utf8ToXML("id").x_str())).c_str();
             if (id.find("Import ") == 0) {
                 // reject scores for levels imported from dat files
