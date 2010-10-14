@@ -216,6 +216,8 @@ void MouseCursor::set_image (ecl::Surface *s, int hx, int hy) {
 }
 
 void MouseCursor::draw () {
+// we do not need a mouse cursor on a touchscreen device
+#ifndef ANDROID
     if (visible > 0) {
         grab_bg();
 
@@ -225,6 +227,7 @@ void MouseCursor::draw () {
 
         changedp = false;
     }
+#endif
 }
 
 void MouseCursor::redraw () {

@@ -9,7 +9,7 @@ ifneq ($(APPLICATION_SUBDIRS_BUILD),)
 APP_SUBDIRS := $(APPLICATION_SUBDIRS_BUILD)
 endif
 
-LOCAL_CFLAGS :=
+LOCAL_CFLAGS := -DHAS_SOCKLEN_T
 
 ifeq ($(CRYSTAX_TOOLCHAIN),)
 # Paths should be on newline so launchConfigure.sh will work properly

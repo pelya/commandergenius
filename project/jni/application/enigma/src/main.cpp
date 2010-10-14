@@ -308,6 +308,9 @@ void Application::init(int argc, char **argv)
 //    SDL_putenv("SDL_VIDEODRIVER=directx");  //needed for SDL 1.2.12 that favors GDI which crashes on SetGamma
 #endif
     int sdl_flags = SDL_INIT_VIDEO;
+#ifdef ANDROID
+    sdl_flags |= SDL_INIT_JOYSTICK;
+#endif
     if (enigma::WizardMode)
         sdl_flags |= SDL_INIT_NOPARACHUTE;
     if (SDL_Init(sdl_flags) < 0) {

@@ -1,6 +1,6 @@
 
 # The namespace in Java file, with dots replaced with underscores
-SDL_JAVA_PACKAGE_PATH := com_teeworlds
+SDL_JAVA_PACKAGE_PATH := org_enigmagame_enigma
 
 # Path to shared libraries - Android 1.6 cannot load them properly, thus we have to specify absolute path here
 # SDL_SHARED_LIBRARIES_PATH := /data/data/de.schwardtnet.alienblaster/lib
@@ -10,7 +10,7 @@ SDL_JAVA_PACKAGE_PATH := com_teeworlds
 # Typically /sdcard/alienblaster 
 # Or /data/data/de.schwardtnet.alienblaster/files if you're planning to unpack data in application private folder
 # Your application will just set current directory there
-SDL_CURDIR_PATH := com.teeworlds
+SDL_CURDIR_PATH := org.enigmagame.enigma
 
 # Android Dev Phone G1 has trackball instead of cursor keys, and 
 # sends trackball movement events as rapid KeyDown/KeyUp events,
@@ -21,19 +21,19 @@ SDL_TRACKBALL_KEYUP_DELAY := 1
 
 # If the application designed for higher screen resolution enable this to get the screen
 # resized in HW-accelerated way, however it eats a tiny bit of CPU
-SDL_VIDEO_RENDER_RESIZE := 0
+SDL_VIDEO_RENDER_RESIZE := 1
 
-COMPILED_LIBRARIES := sdl_image xml2
+COMPILED_LIBRARIES := sdl_mixer sdl_image sdl_ttf intl xerces
 
-APPLICATION_ADDITIONAL_CFLAGS := -O2
+APPLICATION_ADDITIONAL_CFLAGS := -finline-functions -O2
 
-APPLICATION_ADDITIONAL_LDFLAGS := -Lbin/ndk/local/armeabi -lfreetype
+APPLICATION_ADDITIONAL_LDFLAGS := -lpng
 
 APPLICATION_SUBDIRS_BUILD := 
 
 APPLICATION_CUSTOM_BUILD_SCRIPT := 
 
-SDL_ADDITIONAL_CFLAGS := -DSDL_ANDROID_KEYCODE_MOUSE=UNKNOWN -DSDL_ANDROID_KEYCODE_0=SPACE -DSDL_ANDROID_KEYCODE_1=RETURN -DSDL_ANDROID_KEYCODE_2=LEFT -DSDL_ANDROID_KEYCODE_3=RIGHT -DSDL_ANDROID_KEYCODE_4=LSHIFT -DSDL_ANDROID_KEYCODE_5=ESCAPE -DSDL_ANDROID_KEYCODE_6=RSHIFT -DSDL_ANDROID_KEYCODE_7=LSHIFT
+SDL_ADDITIONAL_CFLAGS := -DSDL_ANDROID_KEYCODE_MOUSE=UNKNOWN -DSDL_ANDROID_KEYCODE_0=RETURN -DSDL_ANDROID_KEYCODE_1=LCTRL -DSDL_ANDROID_KEYCODE_2=PAGEUP -DSDL_ANDROID_KEYCODE_3=PAGEDOWN -DSDL_ANDROID_KEYCODE_4=LCTRL
 
 # If SDL_Mixer should link to libMAD
 SDL_MIXER_USE_LIBMAD :=

@@ -51,6 +51,10 @@ using namespace enigma::client;
 using namespace ecl;
 using namespace std;
 
+#ifdef ANDROID
+#include <SDL.h>
+#endif
+
 #include "client_internal.hh"
 
 /* -------------------- Auxiliary functions -------------------- */
@@ -197,12 +201,14 @@ void Client::handle_events()
             on_keydown(e);
             break;
         case SDL_MOUSEMOTION:
+#ifndef ANDROID
             if (abs(e.motion.xrel) > 300 || abs(e.motion.yrel) > 300) {
                 fprintf(stderr, "mouse event with %i, %i\n", e.motion.xrel, e.motion.yrel);
             }
             else
                 server::Msg_MouseForce (options::GetDouble("MouseSpeed") *
                                         V2 (e.motion.xrel, e.motion.yrel));
+#endif
             break;
         case SDL_MOUSEBUTTONDOWN:
         case SDL_MOUSEBUTTONUP:
@@ -422,7 +428,10 @@ void Client::on_keydown(SDL_Event &e)
         case SDLK_ESCAPE: show_menu(); break;
         case SDLK_LEFT:   set_mousespeed(options::GetMouseSpeed() - 1); break;
         case SDLK_RIGHT:  set_mousespeed(options::GetMouseSpeed() + 1); break;
-        case SDLK_TAB:    rotate_inventory(+1); break;
+        #ifdef ANDROID
+	case SDLK_LCTRL:
+	#endif
+	case SDLK_TAB:    rotate_inventory(+1); break;
         case SDLK_F1:     show_help(); break;
         case SDLK_F2:
             // display hint
@@ -609,12 +618,27 @@ std::string Client::init_hunted_time()
 void Client::tick (double dtime) 
 {
     const double timestep = 0.01; // 10ms
+    #ifdef ANDROID
+    Sint16 joy_x, joy_y;
+    SDL_Joystick *joy;
+    #endif
 
     switch (m_state) {
     case cls_idle:
         break;
 
     case cls_preparing_game: {
+        #ifdef ANDROID
+        // calibrate the orientation sensor, using the current position as zero
+        // TODO: average the values over some period of time?
+        joy = SDL_JoystickOpen(0);
+        SDL_JoystickUpdate();
+        if(joy != NULL) {
+            m_joy_x0 = SDL_JoystickGetAxis(joy,0);
+            m_joy_y0 = SDL_JoystickGetAxis(joy,1);
+        }
+        #endif
+
         video::TransitionEffect *fx = m_effect.get();
         if (fx && !fx->finished()) {
             fx->tick (dtime);
@@ -632,7 +656,21 @@ void Client::tick (double dtime)
     }
 
     case cls_game:
-        if (app.state->getInt("NextLevelMode") == lev::NEXT_LEVEL_NOT_BEST) {
+        #ifdef ANDROID
+        // joystick/accelerometer control
+        joy = SDL_JoystickOpen(0);
+        SDL_JoystickUpdate();
+        if(joy != NULL) {
+            joy_x = SDL_JoystickGetAxis(joy,0) - m_joy_x0;
+            joy_y = SDL_JoystickGetAxis(joy,1) - m_joy_y0;
+            server::Msg_MouseForce(options::GetDouble("MouseSpeed") * -dtime/3000.0 *
+                 V2 (joy_x*sqrt(abs(joy_x)), joy_y*sqrt(abs(joy_y))));   // use joy**1.5 to allow more flexible (non-linear) control 
+            Msg_ShowText(strf(_("joy x: %d     joy y: %d"), joy_x,joy_y), false, 0.1);
+        } else {
+            Msg_ShowText(_("joystick is NULL!"), false, 0.1);
+        }
+        #endif
+	if (app.state->getInt("NextLevelMode") == lev::NEXT_LEVEL_NOT_BEST) {
             int old_second = round_nearest<int> (m_total_game_time);
             int second     = round_nearest<int> (m_total_game_time + dtime);
 
