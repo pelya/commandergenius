@@ -94,8 +94,17 @@ JAVA_EXPORT_NAME(DemoRenderer_nativeResize) ( JNIEnv*  env, jobject  thiz, jint 
 {
 	if( SDL_ANDROID_sWindowWidth == 0 )
 	{
+		#if SDL_VIDEO_RENDER_RESIZE_KEEP_ASPECT
+		SDL_ANDROID_sWindowWidth  = (SDL_ANDROID_sFakeWindowWidth*h)/SDL_ANDROID_sFakeWindowHeight;
+		SDL_ANDROID_sWindowHeight = h;
+		if(SDL_ANDROID_sWindowWidth > w) {
+			SDL_ANDROID_sWindowWidth  = w;
+			SDL_ANDROID_sWindowHeight = (SDL_ANDROID_sFakeWindowHeight*w)/SDL_ANDROID_sFakeWindowWidth;
+ 		}
+		#else
 		SDL_ANDROID_sWindowWidth = w;
 		SDL_ANDROID_sWindowHeight = h;
+		#endif
 		__android_log_print(ANDROID_LOG_INFO, "libSDL", "Physical screen resolution is %dx%d", w, h);
 	}
 }

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CHANGE_APP_SETTINGS_VERSION=10
+CHANGE_APP_SETTINGS_VERSION=11
 AUTO=
 
 if [ "X$1" = "X-a" ]; then
@@ -73,6 +73,13 @@ read var
 if [ -n "$var" ] ; then
 	SdlVideoResize="$var"
 fi
+
+echo -n "\nApplication resizing should preserve the aspect ratio, creating black bars  (y) or (n) ($SdlVideoResizeKeepAspect): "
+read var
+if [ -n "$var" ] ; then
+        SdlVideoResizeKeepAspect="$var"
+fi
+
 
 echo -n "\nEnable OpenGL depth buffer (needed only for 3-d applications, small speed decrease) (y) or (n) ($NeedDepthBuffer): "
 read var
@@ -221,6 +228,7 @@ echo AppFullName=$AppFullName >> AndroidAppSettings.cfg
 echo ScreenOrientation=$ScreenOrientation >> AndroidAppSettings.cfg
 echo AppDataDownloadUrl=\"$AppDataDownloadUrl\" >> AndroidAppSettings.cfg
 echo SdlVideoResize=$SdlVideoResize >> AndroidAppSettings.cfg
+echo SdlVideoResizeKeepAspect=$SdlVideoResizeKeepAspect >> AndroidAppSettings.cfg
 echo NeedDepthBuffer=$NeedDepthBuffer >> AndroidAppSettings.cfg
 echo AppUsesMouse=$AppUsesMouse >> AndroidAppSettings.cfg
 echo AppNeedsArrowKeys=$AppNeedsArrowKeys >> AndroidAppSettings.cfg
@@ -257,6 +265,12 @@ if [ "$SdlVideoResize" = "y" ] ; then
 else
 	SdlVideoResize=0
 fi
+if [ "$SdlVideoResizeKeepAspect" = "y" ] ; then
+        SdlVideoResizeKeepAspect=1
+else
+        SdlVideoResizeKeepAspect=0
+fi
+
 if [ "$NeedDepthBuffer" = "y" ] ; then
 	NeedDepthBuffer=true
 else
@@ -362,6 +376,7 @@ cat project/jni/Android.mk | \
 	sed "s/SDL_JAVA_PACKAGE_PATH := .*/SDL_JAVA_PACKAGE_PATH := $AppFullNameUnderscored/" | \
 	sed "s^SDL_CURDIR_PATH := .*^SDL_CURDIR_PATH := $DataPath^" | \
 	sed "s^SDL_VIDEO_RENDER_RESIZE := .*^SDL_VIDEO_RENDER_RESIZE := $SdlVideoResize^" | \
+        sed "s^SDL_VIDEO_RENDER_RESIZE_KEEP_ASPECT := .*^SDL_VIDEO_RENDER_RESIZE_KEEP_ASPECT := $SdlVideoResizeKeepAspect^" | \
 	sed "s^COMPILED_LIBRARIES := .*^COMPILED_LIBRARIES := $CompiledLibraries^" | \
 	sed "s^APPLICATION_ADDITIONAL_CFLAGS :=.*^APPLICATION_ADDITIONAL_CFLAGS := $AppCflags^" | \
 	sed "s^APPLICATION_ADDITIONAL_LDFLAGS :=.*^APPLICATION_ADDITIONAL_LDFLAGS := $AppLdflags^" | \

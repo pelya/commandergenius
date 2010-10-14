@@ -22,6 +22,9 @@ SDL_TRACKBALL_KEYUP_DELAY := 1
 # If the application designed for higher screen resolution enable this to get the screen
 # resized in HW-accelerated way, however it eats a tiny bit of CPU
 SDL_VIDEO_RENDER_RESIZE := 1
+# Preserve aspect ratio when doing this
+SDL_VIDEO_RENDER_RESIZE_KEEP_ASPECT := 1
+
 
 COMPILED_LIBRARIES := sdl_mixer sdl_image sdl_ttf intl xerces
 

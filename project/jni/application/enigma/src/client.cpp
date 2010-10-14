@@ -665,9 +665,6 @@ void Client::tick (double dtime)
             joy_y = SDL_JoystickGetAxis(joy,1) - m_joy_y0;
             server::Msg_MouseForce(options::GetDouble("MouseSpeed") * -dtime/3000.0 *
                  V2 (joy_x*sqrt(abs(joy_x)), joy_y*sqrt(abs(joy_y))));   // use joy**1.5 to allow more flexible (non-linear) control 
-            Msg_ShowText(strf(_("joy x: %d     joy y: %d"), joy_x,joy_y), false, 0.1);
-        } else {
-            Msg_ShowText(_("joystick is NULL!"), false, 0.1);
         }
         #endif
 	if (app.state->getInt("NextLevelMode") == lev::NEXT_LEVEL_NOT_BEST) {
