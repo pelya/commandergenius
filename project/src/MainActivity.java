@@ -21,6 +21,11 @@ public class MainActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				   WindowManager.LayoutParams.FLAG_FULLSCREEN); 
+		if(Globals.InhibitSuspend)
+			getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
+					WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+
 
 		_tv = new TextView(this);
 		_tv.setText("Initializing");

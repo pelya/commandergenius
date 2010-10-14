@@ -119,6 +119,13 @@ if [ -n "$var" ] ; then
 	NonBlockingSwapBuffers="$var"
 fi
 
+echo -n "\nPrevent device from going to suspend mode while application is running (y/n) ($InhibitSuspend): "
+read var
+if [ -n "$var" ] ; then
+        InhibitSuspend="$var"
+fi
+
+
 echo -n "\nRedefine common keys to SDL keysyms: TOUCHSCREEN SEARCH/CALL/DPAD_CENTER VOLUMEUP VOLUMEDOWN MENU BACK CAMERA ENTER DEL"
 echo -n "\nMENU and BACK hardware keys and TOUCHSCREEN virtual 'key' are available on all devices, other keys may be absent"
 echo -n "\nThe same key values are used if touchscreen keyboard is enabled, except for MENU and BACK\n($RedefinedKeys)\n: "
@@ -226,6 +233,7 @@ echo LibSdlVersion=$LibSdlVersion >> AndroidAppSettings.cfg
 echo AppName=\"$AppName\" >> AndroidAppSettings.cfg
 echo AppFullName=$AppFullName >> AndroidAppSettings.cfg
 echo ScreenOrientation=$ScreenOrientation >> AndroidAppSettings.cfg
+echo InhibitSuspend=$InhibitSuspend >> AndroidAppSettings.cfg
 echo AppDataDownloadUrl=\"$AppDataDownloadUrl\" >> AndroidAppSettings.cfg
 echo SdlVideoResize=$SdlVideoResize >> AndroidAppSettings.cfg
 echo SdlVideoResizeKeepAspect=$SdlVideoResizeKeepAspect >> AndroidAppSettings.cfg
@@ -270,6 +278,13 @@ if [ "$SdlVideoResizeKeepAspect" = "y" ] ; then
 else
         SdlVideoResizeKeepAspect=0
 fi
+
+if [ "$InhibitSuspend" = "y" ] ; then
+        InhibitSuspend=true
+else
+        InhibitSuspend=false
+fi
+
 
 if [ "$NeedDepthBuffer" = "y" ] ; then
 	NeedDepthBuffer=true
@@ -359,6 +374,7 @@ cat project/src/Globals.java | \
 	sed "s@public static String DataDownloadUrl = .*@public static String DataDownloadUrl = \"$AppDataDownloadUrl1\";@" | \
 	sed "s/public static boolean NeedDepthBuffer = .*;/public static boolean NeedDepthBuffer = $NeedDepthBuffer;/" | \
 	sed "s/public static boolean HorizontalOrientation = .*;/public static boolean HorizontalOrientation = $HorizontalOrientation;/" | \
+        sed "s/public static boolean InhibitSuspend = .*;/public static boolean InhibitSuspend = $InhibitSuspend;/" | \
 	sed "s/public static boolean AppUsesMouse = .*;/public static boolean AppUsesMouse = $AppUsesMouse;/" | \
 	sed "s/public static boolean AppNeedsArrowKeys = .*;/public static boolean AppNeedsArrowKeys = $AppNeedsArrowKeys;/" | \
 	sed "s/public static boolean AppUsesJoystick = .*;/public static boolean AppUsesJoystick = $AppUsesJoystick;/" | \

@@ -15,6 +15,9 @@ class Globals {
 
 	// Set this value to true if you're planning to render 3D using OpenGL - it eats some GFX resources, so disabled for 2D
 	public static boolean HorizontalOrientation = true;
+
+	// prevent device from going to suspend mode
+	public static boolean InhibitSuspend = true;
 	
 	// Readme text to be shown on download page
 	public static String ReadmeText = "^You can press \"Home\" now - the data will be downloaded in background^Have fun playing enigma!^".replace("^","\n");
