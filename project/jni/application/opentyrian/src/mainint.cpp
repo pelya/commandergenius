@@ -2851,6 +2851,14 @@ void JE_pauseGame( void )
 {
 	JE_boolean done = false;
 	JE_word mouseX, mouseY;
+#ifdef ANDROID
+	bool saved_music_disabled = music_disabled, saved_samples_disabled = samples_disabled;
+
+	music_disabled = samples_disabled = true;
+	SDL_ANDROID_PauseAudioPlayback();
+#else
+	set_volume(tyrMusicVolume / 2, fxVolume);
+#endif
 
 	//tempScreenSeg = VGAScreenSeg; // sega000
 	if (!superPause)
@@ -2860,8 +2868,6 @@ void JE_pauseGame( void )
 		VGAScreen = VGAScreenSeg;
 		JE_showVGA();
 	}
-
-	set_volume(tyrMusicVolume / 2, fxVolume);
 
 	if (isNetworkGame)
 	{
@@ -2931,7 +2937,13 @@ void JE_pauseGame( void )
 		}
 	}
 
+#ifdef ANDROID
+	music_disabled = saved_music_disabled;
+	samples_disabled = saved_samples_disabled;
+	SDL_ANDROID_ResumeAudioPlayback();
+#else
 	set_volume(tyrMusicVolume, fxVolume);
+#endif
 
 	//skipStarShowVGA = true;
 }
