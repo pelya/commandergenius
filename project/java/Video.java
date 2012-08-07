@@ -524,6 +524,21 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer
 		return 1;
 	}
 
+	public void togglePlainAndroidSoftKeyboardInput() // Called from native code
+	{
+		class Callback implements Runnable
+		{
+			public MainActivity parent;
+			public void run()
+			{
+				parent.togglePlainAndroidSoftKeyboardInput();
+			}
+		}
+		Callback cb = new Callback();
+		cb.parent = context;
+		context.runOnUiThread(cb);
+	}
+
 	public void showScreenKeyboard(final String oldText, int sendBackspace) // Called from native code
 	{
 		class Callback implements Runnable

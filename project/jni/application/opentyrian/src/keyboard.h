@@ -50,6 +50,16 @@ void set_mouse_position( int x, int y );
 
 void service_SDL_events( JE_boolean clear_new );
 
+extern JE_boolean handle_pause_key;
+
+static inline
+void service_SDL_events_ignore_pause( JE_boolean clear_new )
+{
+	handle_pause_key = false;
+	service_SDL_events( clear_new );
+	handle_pause_key = true;
+}
+
 void sleep_game( void );
 
 void JE_clearKeyboard( void );

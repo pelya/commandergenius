@@ -31,7 +31,9 @@
 
 void JE_textMenuWait( JE_word *waitTime, JE_boolean doGamma )
 {
+#ifdef MENU_SELECT_BY_MOUSE_MOVE
 	set_mouse_position(160, 100);
+#endif
 	
 	do
 	{
@@ -58,6 +60,11 @@ void JE_textMenuWait( JE_word *waitTime, JE_boolean doGamma )
 		
 		if (has_mouse && input_grabbed)
 		{
+#ifdef MENU_SELECT_BY_MOUSE_MOVE
+			/* Whacky hack which changes menu selecton based on
+			 * relative mouse movement does not work with touch
+			 * when a touch tiggers a mousedown which gets mapped
+			 * to SDLK_RETURN above */
 			if (abs(mouse_y - 100) > 10)
 			{
 				inputDetected = true;
@@ -80,6 +87,7 @@ void JE_textMenuWait( JE_word *waitTime, JE_boolean doGamma )
 				}
 				newkey = true;
 			}
+#endif
 		}
 		
 		NETWORK_KEEP_ALIVE();

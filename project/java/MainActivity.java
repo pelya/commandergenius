@@ -285,6 +285,17 @@ public class MainActivity extends Activity {
 		}
 		_isPaused = false;
 	}
+
+	@Override
+	public void onWindowFocusChanged (boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		if (hasFocus == false) {
+			synchronized(textInput) {
+				// Send 'SDLK_PAUSE' (to enter pause mode) to native code:
+				DemoRenderer.nativeTextInput( 19, 19 );
+			}
+		}
+	}
 	
 	public boolean isPaused()
 	{
@@ -305,6 +316,12 @@ public class MainActivity extends Activity {
 			mGLView.exitApp();
 		super.onDestroy();
 		System.exit(0);
+	}
+
+	public void togglePlainAndroidSoftKeyboardInput()
+	{
+		InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 	}
 
 	public void showScreenKeyboard(final String oldText, boolean sendBackspace)

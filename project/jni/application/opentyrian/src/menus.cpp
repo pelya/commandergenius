@@ -31,12 +31,33 @@
 
 char episode_name[6][31], difficulty_name[7][21], gameplay_name[5][26];
 
+bool
+select_menuitem_by_touch(JE_byte menu_top, JE_byte menu_spacing, JE_shortint menu_item_count, JE_shortint *current_item)
+{
+	if (!mousedown)
+		return false;
+
+	char new_item = (mouse_y - menu_top) / menu_spacing;
+
+	if (mouse_y >= menu_top && mouse_y < menu_top + (menu_item_count+1) * menu_spacing)
+	{
+		if (new_item == *current_item)
+			return false;
+
+		JE_playSampleNum(S_CURSOR);
+
+		*current_item = new_item;
+	}
+	return true;
+}
+
 bool select_gameplay( void )
 {
 	JE_loadPic(VGAScreen, 2, false);
 	JE_dString(VGAScreen, JE_fontCenter(gameplay_name[0], FONT_SHAPES), 20, gameplay_name[0], FONT_SHAPES);
 
-	int gameplay = 1,
+	const JE_byte menu_top = 30, menu_spacing = 24;
+	JE_shortint gameplay = 1,
 	    gameplay_max = 4;
 
 	bool fade_in = true;
@@ -44,7 +65,7 @@ bool select_gameplay( void )
 	{
 		for (int i = 1; i <= gameplay_max; i++)
 		{
-			JE_outTextAdjust(VGAScreen, JE_fontCenter(gameplay_name[i], SMALL_FONT_SHAPES), i * 24 + 30, gameplay_name[i], 15, - 4 + (i == gameplay ? 2 : 0) - (i == 4 ? 4 : 0), SMALL_FONT_SHAPES, true);
+			JE_outTextAdjust(VGAScreen, JE_fontCenter(gameplay_name[i], SMALL_FONT_SHAPES), i * menu_spacing + menu_top, gameplay_name[i], 15, - 4 + (i == gameplay ? 2 : 0) - (i == 4 ? 4 : 0), SMALL_FONT_SHAPES, true);
 		}
 		JE_showVGA();
 
@@ -56,6 +77,9 @@ bool select_gameplay( void )
 
 		JE_word temp = 0;
 		JE_textMenuWait(&temp, false);
+
+		if (select_menuitem_by_touch(menu_top, menu_spacing, gameplay_max, &gameplay))
+			continue;
 
 		if (newkey)
 		{
@@ -115,7 +139,8 @@ bool select_episode( void )
 	JE_loadPic(VGAScreen, 2, false);
 	JE_dString(VGAScreen, JE_fontCenter(episode_name[0], FONT_SHAPES), 20, episode_name[0], FONT_SHAPES);
 
-	int episode = 1,
+	const JE_byte menu_top = 20, menu_spacing = 30;
+	JE_shortint episode = 1,
 	    episode_max = EPISODE_MAX - 1;
 
 	bool fade_in = true;
@@ -123,7 +148,7 @@ bool select_episode( void )
 	{
 		for (int i = 1; i <= episode_max; i++)
 		{
-			JE_outTextAdjust(VGAScreen, 20, i * 30 + 20, episode_name[i], 15, -4 + (i == episode ? 2 : 0) - (!episodeAvail[i - 1] ? 4 : 0), SMALL_FONT_SHAPES, true);
+			JE_outTextAdjust(VGAScreen, 20, i * menu_spacing + menu_top, episode_name[i], 15, -4 + (i == episode ? 2 : 0) - (!episodeAvail[i - 1] ? 4 : 0), SMALL_FONT_SHAPES, true);
 		}
 		JE_showVGA();
 
@@ -135,6 +160,9 @@ bool select_episode( void )
 
 		JE_word temp = 0;
 		JE_textMenuWait(&temp, false);
+
+		if (select_menuitem_by_touch(menu_top, menu_spacing, episode_max, &episode))
+			continue;
 
 		if (newkey)
 		{
@@ -192,15 +220,16 @@ bool select_difficulty( void )
 	JE_loadPic(VGAScreen, 2, false);
 	JE_dString(VGAScreen, JE_fontCenter(difficulty_name[0], FONT_SHAPES), 20, difficulty_name[0], FONT_SHAPES);
 
+	const JE_byte menu_top = 30, menu_spacing = 24;
 	difficultyLevel = 2;
-	int difficulty_max = 3;
+	JE_shortint difficulty_max = 3;
 
 	bool fade_in = true;
 	for (; ; )
 	{
 		for (int i = 1; i <= difficulty_max; i++)
 		{
-			JE_outTextAdjust(VGAScreen, JE_fontCenter(difficulty_name[i], SMALL_FONT_SHAPES), i * 24 + 30, difficulty_name[i], 15, -4 + (i == difficultyLevel ? 2 : 0), SMALL_FONT_SHAPES, true);
+			JE_outTextAdjust(VGAScreen, JE_fontCenter(difficulty_name[i], SMALL_FONT_SHAPES), i * menu_spacing + menu_top, difficulty_name[i], 15, -4 + (i == difficultyLevel ? 2 : 0), SMALL_FONT_SHAPES, true);
 		}
 		JE_showVGA();
 
@@ -212,6 +241,9 @@ bool select_difficulty( void )
 
 		JE_word temp = 0;
 		JE_textMenuWait(&temp, false);
+
+		if (select_menuitem_by_touch(menu_top, menu_spacing, difficulty_max, &difficultyLevel))
+			continue;
 
 		if (SDL_GetModState() & KMOD_SHIFT)
 		{

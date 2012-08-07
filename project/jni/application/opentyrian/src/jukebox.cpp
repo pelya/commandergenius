@@ -101,8 +101,13 @@ void jukebox( void )
 			
 			const int x = VGAScreen->w / 2;
 			
+#ifdef ANDROID
+			draw_font_hv(VGAScreen, x, 170, "Press the Back button to quit the jukebox.",           small_font, centered, 1, 0);
+			draw_font_hv(VGAScreen, x, 180, "Touch to change the song being played.", small_font, centered, 1, 0);
+#else
 			draw_font_hv(VGAScreen, x, 170, "Press ESC to quit the jukebox.",           small_font, centered, 1, 0);
 			draw_font_hv(VGAScreen, x, 180, "Arrow keys change the song being played.", small_font, centered, 1, 0);
+#endif
 			draw_font_hv(VGAScreen, x, 190, buffer,                                     small_font, centered, 1, 4);
 		}
 
@@ -113,10 +118,22 @@ void jukebox( void )
 
 		wait_delay();
 
+#ifdef ANDROID
+		if (mousedown)
+		{
+			wait_noinput(true, true, true);
+			newkey = true;
+			if (mouse_x < 160)
+				lastkey_sym = SDLK_LEFT;
+			else
+				lastkey_sym = SDLK_RIGHT;
+		}
+#else
 		// quit on mouse click
 		Uint16 x, y;
 		if (JE_mousePosition(&x, &y) > 0)
 			trigger_quit = true;
+#endif
 
 		if (newkey)
 		{

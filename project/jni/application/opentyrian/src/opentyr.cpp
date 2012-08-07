@@ -28,6 +28,7 @@
 #include "jukebox.h"
 #include "keyboard.h"
 #include "loudness.h"
+#include "menus.h"
 #include "mainint.h"
 #include "mtrand.h"
 #include "musmast.h"
@@ -61,7 +62,9 @@ const char *opentyrian_str = "OpenTyrian",
 const char *opentyrian_menu_items[] =
 {
 	"About OpenTyrian",
+#ifndef ANDROID
 	"Toggle Fullscreen",
+#endif
 	"Scaler: None",
 	"Jukebox",
 #ifdef ANDROID
@@ -69,6 +72,15 @@ const char *opentyrian_menu_items[] =
 #endif
 	"Return to Main Menu"
 };
+
+#ifndef ANDROID
+const int menu_item_scaler   = 2;
+const int menu_item_jukebox  = 3;
+#else
+const int menu_item_scaler   = 1;
+const int menu_item_jukebox  = 2;
+const int menu_item_destruct = 3;
+#endif
 
 /* zero-terminated strncpy */
 char *strnztcpy( char *to, const char *from, size_t count )
@@ -79,7 +91,8 @@ char *strnztcpy( char *to, const char *from, size_t count )
 
 void opentyrian_menu( void )
 {
-	int sel = 0;
+	const JE_byte menu_top = 36, menu_spacing = 20;
+	JE_shortint sel = 0;
 	const int maxSel = COUNTOF(opentyrian_menu_items) - 1;
 	bool quit = false, fade_in = true;
 	
@@ -105,13 +118,16 @@ void opentyrian_menu( void )
 			const char *text = opentyrian_menu_items[i];
 			char buffer[100];
 
-			if (i == 2) /* Scaler */
+			if (i == menu_item_scaler) /* Scaler */
 			{
 				snprintf(buffer, sizeof(buffer), "Scaler: %s", scalers[temp_scaler].name);
 				text = buffer;
 			}
 
-			draw_font_hv_shadow(VGAScreen, VGAScreen->w / 2, (i != maxSel) ? i * 16 + 32 : 118, text, normal_font, centered, 15, (i != sel) ? -4 : -2, false, 2);
+			// Destruct is not adapted for touch input, so we show it only if keyboard is used:
+			if (i == menu_item_destruct && (mousedown || lastkey_sym == SDLK_ESCAPE))
+				continue;
+			draw_font_hv_shadow(VGAScreen, VGAScreen->w / 2, (i != maxSel) ? i * menu_spacing + menu_top : 118, text, normal_font, centered, 15, (i != sel) ? -4 : -2, false, 2);
 		}
 
 		JE_showVGA();
@@ -125,6 +141,9 @@ void opentyrian_menu( void )
 
 		tempW = 0;
 		JE_textMenuWait(&tempW, false);
+
+		if (select_menuitem_by_touch(menu_top, menu_spacing, maxSel, &sel))
+			continue;
 
 		if (newkey)
 		{
@@ -149,7 +168,7 @@ void opentyrian_menu( void )
 					JE_playSampleNum(S_CURSOR);
 					break;
 				case SDLK_LEFT:
-					if (sel == 2)
+					if (sel == menu_item_scaler)
 					{
 						do
 						{
@@ -162,7 +181,10 @@ void opentyrian_menu( void )
 					}
 					break;
 				case SDLK_RIGHT:
-					if (sel == 2)
+#ifdef ANDROID
+				case SDLK_RETURN:
+#endif
+					if (sel == menu_item_scaler)
 					{
 						do
 						{
@@ -173,8 +195,10 @@ void opentyrian_menu( void )
 						while (!can_init_scaler(temp_scaler, fullscreen_enabled));
 						JE_playSampleNum(S_CURSOR);
 					}
+#ifndef ANDROID
 					break;
 				case SDLK_RETURN:
+#endif
 				case SDLK_SPACE:
 					switch (sel)
 					{
@@ -187,6 +211,7 @@ void opentyrian_menu( void )
 							JE_showVGA();
 							fade_in = true;
 							break;
+#ifndef ANDROID
 						case 1: /* Fullscreen */
 							JE_playSampleNum(S_SELECT);
 
@@ -198,7 +223,8 @@ void opentyrian_menu( void )
 							}
 							set_palette(colors, 0, 255); // for switching between 8 bpp scalers
 							break;
-						case 2: /* Scaler */
+#endif
+						case menu_item_scaler: /* Scaler */
 							JE_playSampleNum(S_SELECT);
 
 							if (scaler != temp_scaler)
@@ -212,7 +238,7 @@ void opentyrian_menu( void )
 								set_palette(colors, 0, 255); // for switching between 8 bpp scalers
 							}
 							break;
-						case 3: /* Jukebox */
+						case menu_item_jukebox: /* Jukebox */
 							JE_playSampleNum(S_SELECT);
 
 							fade_black(10);
@@ -223,7 +249,7 @@ void opentyrian_menu( void )
 							fade_in = true;
 							break;
 #ifdef ANDROID
-						case 4: /* Destruct */
+						case menu_item_destruct: /* Destruct */
 							JE_playSampleNum(S_SELECT);
 							loadDestruct = true;
 							fade_black(10);

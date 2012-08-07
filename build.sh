@@ -1,4 +1,10 @@
 #!/bin/sh
+set -eu
+
+if [ $# -gt 0 -a $1 = "-r" ]; then
+	shift
+	run_apk=true
+fi
 
 # Set here your own NDK path if needed
 # export PATH=$PATH:~/src/endless_space/android-ndk-r7
@@ -39,7 +45,15 @@ cd project && env PATH=$NDKBUILDPATH nice -n19 ndk-build V=1 -j$NCPU && \
    || true ; } && \
  ant debug && \
  [ -n "`adb devices | tail -n +2`" ] && \
- test -z "$1" && cd bin && \
+if [ $# -eq 0 ]; then # It seems peyla wanted build.sh to not install if an arg is given..
+ cd bin
  { adb install -r MainActivity-debug.apk | grep 'Failure' && \
  adb uninstall `grep AppFullName ../../AndroidAppSettings.cfg | sed 's/.*=//'` && adb install -r MainActivity-debug.apk ; true ; } && \
- true # adb shell am start -n `grep AppFullName ../../AndroidAppSettings.cfg | sed 's/.*=//'`/.MainActivity
+ if [ "$run_apk" = true ]; then
+   ActivityName="`grep AppFullName ../../AndroidAppSettings.cfg | sed 's/.*=//'`/.MainActivity"
+   RUN_APK="adb shell am start -n $ActivityName"
+   echo "Running $ActivityName on the USB-connected device:"
+   echo "$RUN_APK"
+   eval $RUN_APK
+ fi
+fi

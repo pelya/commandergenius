@@ -48,6 +48,8 @@
 #include "vga256d.h"
 #include "video.h"
 
+#include "SDL_screenkeyboard.h"
+
 #include <assert.h>
 #include <ctype.h>
 
@@ -1167,21 +1169,20 @@ void JE_doInGameSetup( void )
 
 JE_boolean JE_inGameSetup( void )
 {
+	const JE_byte menu_top = 20, menu_spacing = 20;
+	const JE_shortint menu_items = 6;
+	JE_shortint sel = 1;
 	SDL_Surface *temp_surface = VGAScreen;
 	VGAScreen = VGAScreenSeg; /* side-effect of game_screen */
 
 	JE_boolean returnvalue = false;
 
 	const JE_byte help[6] /* [1..6] */ = {15, 15, 28, 29, 26, 27};
-	JE_byte  sel;
-	JE_boolean quit;
+	JE_boolean quit = false;
 
 	bool first = true;
 
 	//tempScreenSeg = VGAScreenSeg; /* <MXD> ? should work as VGAScreen */
-
-	quit = false;
-	sel = 1;
 
 	JE_barShade(VGAScreen, 3, 13, 217, 137); /*Main Box*/
 	JE_barShade(VGAScreen, 5, 15, 215, 135);
@@ -1194,9 +1195,9 @@ JE_boolean JE_inGameSetup( void )
 	{
 		memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen->pitch * VGAScreen->h);
 
-		for (x = 0; x < 6; x++)
+		for (x = 0; x < menu_items; x++)
 		{
-			JE_outTextAdjust(VGAScreen, 10, (x + 1) * 20, inGameText[x], 15, ((sel == x+1) << 1) - 4, SMALL_FONT_SHAPES, true);
+			JE_outTextAdjust(VGAScreen, 10, menu_top + x*menu_spacing, inGameText[x], 15, ((sel == x+1) << 1) - 4, SMALL_FONT_SHAPES, true);
 		}
 
 		JE_outTextAdjust(VGAScreen, 120, 3 * 20, detailLevel[processorType-1], 15, ((sel == 3) << 1) - 4, SMALL_FONT_SHAPES, true);
@@ -1204,10 +1205,13 @@ JE_boolean JE_inGameSetup( void )
 
 		JE_outTextAdjust(VGAScreen, 10, 147, mainMenuHelp[help[sel-1]-1], 14, 6, TINY_FONT, true);
 
-		JE_barDrawShadow(VGAScreen, 120, 20, 1, 16, tyrMusicVolume / 12, 3, 13);
-		JE_barDrawShadow(VGAScreen, 120, 40, 1, 16, fxVolume / 12, 3, 13);
+		JE_barDrawShadow(VGAScreen, 120, 20, 1, music_disabled ? 12 : 16, tyrMusicVolume / 12, 3, 13);
+		JE_barDrawShadow(VGAScreen, 120, 40, 1, samples_disabled ? 12 : 16, fxVolume / 12, 3, 13);
 
 		JE_showVGA();
+
+		if (mousedown && sel >= 3 && sel <= 4)
+			wait_noinput(true, true, true);
 
 		if (first)
 		{
@@ -1217,6 +1221,22 @@ JE_boolean JE_inGameSetup( void )
 
 		tempW = 0;
 		JE_textMenuWait(&tempW, true);
+
+		sel--;
+		if (select_menuitem_by_touch(menu_top, menu_spacing, menu_items, &sel))
+		{
+			sel++;
+			continue;
+		}
+		sel++;
+
+		if (mousedown && sel < 5)
+		{
+			if (lastmouse_x > 160)
+				lastkey_sym = SDLK_RIGHT;
+			else
+				lastkey_sym = SDLK_LEFT;
+		}
 
 		if (inputDetected)
 		{
@@ -2383,7 +2403,9 @@ void JE_operation( JE_byte slot )
 		wait_noinput(false, true, false);
 
 		JE_barShade(VGAScreen, 65, 55, 255, 155);
-
+#ifdef ANDROID
+		SDL_ANDROID_CallJavaTogglePlainAndroidSoftKeyboardInput();
+#endif
 		bool quit = false;
 		while (!quit)
 		{
@@ -2495,6 +2517,9 @@ void JE_operation( JE_byte slot )
 					case SDLK_RETURN:
 					case SDLK_SPACE:
 						quit = true;
+#ifdef ANDROID
+						SDL_ANDROID_CallJavaTogglePlainAndroidSoftKeyboardInput();
+#endif
 						JE_saveGame(slot, stemp);
 						JE_playSampleNum(S_SELECT);
 						break;
@@ -2503,8 +2528,9 @@ void JE_operation( JE_byte slot )
 			}
 		}
 	}
-
+#ifndef ANDROID // This hangs on input stuff with touch-emulated mouse:
 	wait_noinput(false, true, false);
+#endif
 }
 
 void JE_inGameDisplays( void )
@@ -2761,7 +2787,7 @@ void JE_mainKeyboardInput( void )
 	}
 
 	/* pause game */
-	pause_pressed = pause_pressed || keysactive[SDLK_p];
+	pause_pressed = pause_pressed || keysactive[SDLK_p] || keysactive[SDLK_PAUSE];
 
 	/* in-game setup */
 	ingamemenu_pressed = ingamemenu_pressed || keysactive[SDLK_ESCAPE];
@@ -2851,6 +2877,14 @@ void JE_pauseGame( void )
 {
 	JE_boolean done = false;
 	JE_word mouseX, mouseY;
+#ifdef ANDROID
+	bool saved_music_disabled = music_disabled, saved_samples_disabled = samples_disabled;
+
+	music_disabled = samples_disabled = true;
+	SDL_ANDROID_PauseAudioPlayback();
+#else
+	set_volume(tyrMusicVolume / 2, fxVolume);
+#endif
 
 	//tempScreenSeg = VGAScreenSeg; // sega000
 	if (!superPause)
@@ -2860,8 +2894,6 @@ void JE_pauseGame( void )
 		VGAScreen = VGAScreenSeg;
 		JE_showVGA();
 	}
-
-	set_volume(tyrMusicVolume / 2, fxVolume);
 
 	if (isNetworkGame)
 	{
@@ -2893,6 +2925,7 @@ void JE_pauseGame( void )
 
 		push_joysticks_as_keyboard();
 		service_SDL_events(true);
+		JE_showVGA();
 
 		if ((newkey && lastkey_sym != SDLK_LCTRL && lastkey_sym != SDLK_RCTRL && lastkey_sym != SDLK_LALT && lastkey_sym != SDLK_RALT)
 		    || JE_mousePosition(&mouseX, &mouseY) > 0)
@@ -2916,6 +2949,8 @@ void JE_pauseGame( void )
 				done = true;
 			}
 		}
+		else
+			SDL_Delay(300);
 
 		wait_delay();
 	} while (!done);
@@ -2931,7 +2966,13 @@ void JE_pauseGame( void )
 		}
 	}
 
+#ifdef ANDROID
+	music_disabled = saved_music_disabled;
+	samples_disabled = saved_samples_disabled;
+	SDL_ANDROID_ResumeAudioPlayback();
+#else
 	set_volume(tyrMusicVolume, fxVolume);
+#endif
 
 	//skipStarShowVGA = true;
 }
@@ -3150,10 +3191,10 @@ redo:
 					}
 				}
 
-				service_SDL_events(false);
+				service_SDL_events_ignore_pause(false);
 
-				/* mouse input */
-				/*
+				/* mouse input algorithm which is not suitable for touch-emulated mouse */
+#ifndef ANDROID
 				if ((inputDevice == 0 || inputDevice == 2) && has_mouse)
 				{
 					button[0] |= mouse_pressed[0];
@@ -3172,9 +3213,7 @@ redo:
 						set_mouse_position(159, 100);
 					}
 				}
-				*/
-
-
+#endif
 				/* keyboard input */
 				if ((inputDevice == 0 || inputDevice == 1 || inputDevice == 2) && !play_demo)
 				{

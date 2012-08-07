@@ -16,6 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+#include "config.h"
 #include "joystick.h"
 #include "keyboard.h"
 #include "network.h"
@@ -128,6 +129,10 @@ void set_mouse_position( int x, int y )
 	}
 }
 
+JE_boolean handle_pause_key = true;
+
+void JE_pauseGame( void );
+
 void service_SDL_events( JE_boolean clear_new )
 {
 	SDL_Event ev;
@@ -144,6 +149,14 @@ void service_SDL_events( JE_boolean clear_new )
 				mouse_y = ev.motion.y * vga_height / scalers[scaler].height;
 				break;
 			case SDL_KEYDOWN:
+				if (handle_pause_key && ev.key.keysym.sym == SDLK_PAUSE)
+				{
+					JE_boolean superPause_save = superPause;
+					superPause = true;
+					JE_pauseGame();
+					superPause = superPause_save;
+					break;
+				}
 				if (ev.key.keysym.mod & KMOD_CTRL)
 				{
 					/* <ctrl><bksp> emergency kill */

@@ -105,6 +105,9 @@ extern DECLSPEC int SDLCALL SDL_ANDROID_GetScreenKeyboardTextInput(char * textBu
 /* Whether user redefined on-screen keyboard layout via SDL menu, app should not enforce it's own layout in that case */
 extern DECLSPEC int SDLCALL SDL_ANDROID_GetScreenKeyboardRedefinedByUser();
 
+/* Show only the bare Android on-screen keyboard without any text input field */
+extern DECLSPEC void SDLCALL SDL_ANDROID_CallJavaTogglePlainAndroidSoftKeyboardInput();
+
 #ifdef __cplusplus
 }
 #endif

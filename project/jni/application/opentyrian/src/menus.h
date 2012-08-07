@@ -26,6 +26,7 @@ extern char episode_name[6][31], difficulty_name[7][21], gameplay_name[5][26];
 bool select_gameplay( void );
 bool select_episode( void );
 bool select_difficulty( void );
+bool select_menuitem_by_touch(JE_byte menu_top, JE_byte menu_spacing, JE_shortint menu_item_count, JE_shortint *current_item);
 
 #endif /* MENUS_H */
 

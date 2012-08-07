@@ -2377,7 +2377,7 @@ draw_player_shot_loop_end:
 	}
 	else // input handling for pausing, menu, cheats
 	{
-		service_SDL_events(false);
+		service_SDL_events_ignore_pause(false);
 
 		if (newkey)
 		{
@@ -3352,13 +3352,18 @@ new_game:
 bool JE_titleScreen( JE_boolean animate )
 {
 	bool quit = false;
-
-	const int menunum = 7;
+#ifdef ANDROID
+	const JE_shortint menunum = 5; // Quit not possible, Android manages life cycle!
+	const JE_byte menu_top = 96, menu_spacing = 16;
+#else
+	const JE_shortint menunum = 6;
+	const JE_byte menu_top = 96, menu_spacing = 14;
+#endif
 
 	unsigned int arcade_code_i[SA_ENGAGE] = { 0 };
 
 	JE_word waitForDemo;
-	JE_byte menu = 0;
+	JE_shortint menu = 0;
 	JE_boolean redraw = true,
 	           fadeIn = false;
 
@@ -3505,9 +3510,9 @@ bool JE_titleScreen( JE_boolean animate )
 					strcpy(menuText[4], opentyrian_str);  // OpenTyrian override
 
 					/* Draw Menu Text on Screen */
-					for (int i = 0; i < menunum; ++i)
+					for (int i = 0; i <= menunum; ++i)
 					{
-						int x = VGAScreen->w / 2, y = 104 + i * 13;
+						int x = VGAScreen->w / 2, y = menu_top + i * menu_spacing;
 
 						draw_font_hv(VGAScreen, x - 1, y - 1, menuText[i], normal_font, centered, 15, -10);
 						draw_font_hv(VGAScreen, x + 1, y + 1, menuText[i], normal_font, centered, 15, -10);
@@ -3527,7 +3532,7 @@ bool JE_titleScreen( JE_boolean animate )
 			memcpy(VGAScreen->pixels, VGAScreen2->pixels, VGAScreen->pitch * VGAScreen->h);
 
 			// highlight selected menu item
-			draw_font_hv(VGAScreen, VGAScreen->w / 2, 104 + menu * 13, menuText[menu], normal_font, centered, 15, -1);
+			draw_font_hv(VGAScreen, VGAScreen->w / 2, menu_top + menu * menu_spacing, menuText[menu], normal_font, centered, 15, -1);
 
 			JE_showVGA();
 
@@ -3543,6 +3548,8 @@ bool JE_titleScreen( JE_boolean animate )
 			if (waitForDemo == 1)
 				play_demo = true;
 
+			if (select_menuitem_by_touch(menu_top, menu_spacing, menunum, &menu))
+				continue;
 			if (newkey)
 			{
 				switch (lastkey_sym)
