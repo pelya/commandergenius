@@ -30,7 +30,7 @@ How to compile demo application
 Launch commands
 	rm project/jni/application/src
 	ln -s ballfield project/jni/application/src
-	./ChangeAppSettings.sh -a
+	./changeAppSettings.sh -a
 	android update project -p project -t android-15
 Then edit file build.sh if needed to add NDK dir to your PATH, then launch it.
 It will compile a bunch of libs under project/libs/armeabi,
@@ -59,6 +59,10 @@ to compile it remove project/jni/application/src symlink and make new one pointi
 Note that GL ES is NOT pure OpenGL - there are no glBegin() and glEnd() call and other widely used functions,
 and generally it will take a lot of effort to port OpenGL application to GL ES.
 
+How to compile a specific SDL based application
+===============================================
+. build/envsetup.sh
+build
 
 How to compile your own application
 ===================================
@@ -235,7 +239,7 @@ and that may be not desired for older phones with very little storage.
 The script app2sd.sh will re-package your .apk file in such a way that
 the shared libraries will not be extracted by Android OS but by application itself,
 and it will remove them from internal storage right after starting up,
-so you still need that space free, but only temporarily. 
+so you still need that space free, but only temporarily.
 However your application will start up slower.
 
 SDL supports AdMob advertisements, you need to set your publisher ID inside AndroidAppSettings.cfg,
@@ -261,7 +265,7 @@ Android application sleep/resume support
 Application may be put to background at any time, for example if user gets phone call onto the device.
 The application will lose OpenGL context then, and has to re-create it when put to foreground.
 
-The SDL provides function 
+The SDL provides function
 SDL_ANDROID_SetApplicationPutToBackgroundCallback( callback_t appPutToBackground, callback_t appRestored );
 where callback_t is function pointer of type "void (*) void".
 The default callbacks will call another Android-specific functions:
@@ -276,14 +280,14 @@ If you're using pure SDL 1.2 API (with or without HW acceleration) you don't nee
 the SDL itself will re-create GL textures and fill them with pixel data from existing SDL HW surfaces,
 so you may leave the callbacks to defaults.
 
-If you're using SDL 1.3 API and using SDL_Texture, then the textures pixeldata is lost - you will need 
+If you're using SDL 1.3 API and using SDL_Texture, then the textures pixeldata is lost - you will need
 to call SDL_UpdateTexture() to refill texture pixeldata from appRestored() callback for all your textures.
 If you're using compatibility API with SDL_Surfaces you don't have to worry about that.
 
 If you're using SDL with OpenGL with either SDL 1.2 or SDL 1.3, the situation is even more grim -
 not only all your GL textures are lost, but all GL matrices, blend modes, etc. has to be re-created.
 
-OS may decide there's too little free RAM left on device, and kill background applications 
+OS may decide there's too little free RAM left on device, and kill background applications
 without notice, so it vill be good to create temporary savegame etc. from appPutToBackground() callback.
 
 Also it's a good practice to pause any application audio, especially if the user gets phone call,
@@ -390,7 +394,7 @@ If the error string is like this:
 
 I/dalvikvm(18105): Unable to dlopen(/data/data/net.olofson.kobodl/lib/libapplication.so): Cannot load library: link_image[1995]: failed to link libapplication.so
 
-that means your application contains undefined symbols, absent in the system libraries, 
+that means your application contains undefined symbols, absent in the system libraries,
 you may check for all missing symbols by running script checkMissing.sh .
 That typically happens because of linking to the dynamic libstdc++ which is not included into the .apk file -
 specify "-lgnustl_static" in the linker flags to fix that.
