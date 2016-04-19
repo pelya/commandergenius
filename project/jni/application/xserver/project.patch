@@ -1,6 +1,6 @@
 --- a/project/AndroidManifest.xml	2015-01-01 23:59:34.805231773 +0200
 +++ a/project/AndroidManifest.xml	2015-01-01 23:59:45.189378809 +0200
-@@ -43,6 +43,17 @@
+@@ -43,6 +43,19 @@
  				 android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
  				 android:enabled="true"
  		/>
@@ -10,7 +10,9 @@
 +				  android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
 +				  android:windowSoftInputMode="stateUnspecified">
 +			<intent-filter>
-+				<action android:name="android.intent.action.RUN" /> <action android:name="android.intent.action.MAIN" />
++				<action android:name="android.intent.action.RUN" />
++                               <action android:name="android.intent.action.MAIN" />
++                               <action android:name="android.intent.action.VIEW" />
 +				<category android:name="android.intent.category.DEFAULT"/>
 +				<data android:scheme="x11" />
 +			</intent-filter>
