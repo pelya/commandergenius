@@ -183,14 +183,14 @@ static int ANDROIDAUD_OpenAudio (_THIS, SDL_AudioSpec *spec)
 
 	this->hidden = NULL;
 
-	if( ! (audioFormat->format == AUDIO_S8 || audioFormat->format == AUDIO_S16) )
+	if( ! (audioFormat->format == AUDIO_U8 || audioFormat->format == AUDIO_S16) )
 	{
 		__android_log_print(ANDROID_LOG_ERROR, "libSDL", "Application requested unsupported audio format - only S8 and S16 are supported");
 		return (-1); // TODO: enable format conversion? Don't know how to do that in SDL
 	}
 
 	bytesPerSample = (audioFormat->format & 0xFF) / 8;
-	audioFormat->format = ( bytesPerSample == 2 ) ? AUDIO_S16 : AUDIO_S8;
+	audioFormat->format = ( bytesPerSample == 2 ) ? AUDIO_S16 : AUDIO_U8;
 
 	__android_log_print(ANDROID_LOG_INFO, "libSDL", "ANDROIDAUD_OpenAudio(): app requested audio bytespersample %d freq %d channels %d samples %d", bytesPerSample, audioFormat->freq, (int)audioFormat->channels, (int)audioFormat->samples);
 
@@ -455,7 +455,7 @@ extern DECLSPEC int SDLCALL SDL_ANDROID_OpenAudioRecording(SDL_AudioSpec *spec)
 
 	recording = *spec;
 
-	if( ! (recording.format == AUDIO_S8 || recording.format == AUDIO_S16) )
+	if( ! (recording.format == AUDIO_U8 || recording.format == AUDIO_S16) )
 	{
 		__android_log_print(ANDROID_LOG_ERROR, "libSDL", "SDL_ANDROID_OpenAudioRecording(): Application requested unsupported audio format - only S8 and S16 are supported");
 		return 0;
