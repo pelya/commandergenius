@@ -185,7 +185,7 @@ static int ANDROIDAUD_OpenAudio (_THIS, SDL_AudioSpec *spec)
 
 	if( ! (audioFormat->format == AUDIO_U8 || audioFormat->format == AUDIO_S16) )
 	{
-		__android_log_print(ANDROID_LOG_ERROR, "libSDL", "Application requested unsupported audio format - only S8 and S16 are supported");
+		__android_log_print(ANDROID_LOG_ERROR, "libSDL", "Application requested unsupported audio format - only U8 and S16 are supported");
 		return (-1); // TODO: enable format conversion? Don't know how to do that in SDL
 	}
 
@@ -212,7 +212,7 @@ static int ANDROIDAUD_OpenAudio (_THIS, SDL_AudioSpec *spec)
 		return (-1);
 	}
 
-	__android_log_print(ANDROID_LOG_INFO, "libSDL", "ANDROIDAUD_OpenAudio(): Requesting audio: freq %d channels %d format %s bufsize %d", audioFormat->freq, audioFormat->channels, bytesPerSample == 2 ? "S16" : "S8", audioFormat->size);
+	__android_log_print(ANDROID_LOG_INFO, "libSDL", "ANDROIDAUD_OpenAudio(): Requesting audio: freq %d channels %d format %s bufsize %d", audioFormat->freq, audioFormat->channels, bytesPerSample == 2 ? "S16" : "U8", audioFormat->size);
 	// The returned audioBufferSize may be huge, up to 100 Kb for 44100 because user may have selected large audio buffer to get rid of choppy sound
 	audioBufferSize = (*jniEnv)->CallIntMethod( jniEnv, JavaAudioThread, JavaInitAudio, 
 					(jint)audioFormat->freq, (jint)audioFormat->channels, 
@@ -457,7 +457,7 @@ extern DECLSPEC int SDLCALL SDL_ANDROID_OpenAudioRecording(SDL_AudioSpec *spec)
 
 	if( ! (recording.format == AUDIO_U8 || recording.format == AUDIO_S16) )
 	{
-		__android_log_print(ANDROID_LOG_ERROR, "libSDL", "SDL_ANDROID_OpenAudioRecording(): Application requested unsupported audio format - only S8 and S16 are supported");
+		__android_log_print(ANDROID_LOG_ERROR, "libSDL", "SDL_ANDROID_OpenAudioRecording(): Application requested unsupported audio format - only U8 and S16 are supported");
 		return 0;
 	}
 
