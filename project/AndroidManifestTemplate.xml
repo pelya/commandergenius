@@ -10,7 +10,6 @@
 				 android:allowBackup="true"
 				 android:banner="@drawable/banner"
 				 android:isGame="true"
-				 android:extractNativeLibs="true"
 				 android:supportsRtl="true"
 				 android:theme="@style/AppTheme"
 				 android:requestLegacyExternalStorage="true"

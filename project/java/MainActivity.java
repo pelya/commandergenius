@@ -306,7 +306,7 @@ public class MainActivity extends Activity
 		// Request SD card permission right during start, because game devs don't care about runtime permissions and stuff
 		try
 		{
-			if( android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M )
+			if( Globals.AccessSdCard && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M )
 			{
 				PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_PERMISSIONS | PackageManager.GET_META_DATA);
 				Log.v("SDL", "SD card permission 1: " + getPackageName() + " perms " + info.requestedPermissions + " name " + info.packageName + " ver " + info.versionName);

@@ -732,6 +732,12 @@ else
 	ResetSdlConfigForThisVersion=false
 fi
 
+if [ "$AccessSdCard" = "y" ]; then
+	AccessSdCard=true
+else
+	AccessSdCard=false
+fi
+
 KEY2=0
 for KEY in $RedefinedKeys; do
 	RedefinedKeycodes="$RedefinedKeycodes -DSDL_ANDROID_KEYCODE_$KEY2=$KEY"
@@ -932,7 +938,7 @@ case "$MinimumScreenSize" in
 		;;
 esac
 
-if [ "$AccessSdCard" = "y" ]; then
+if [ "$AccessSdCard" = "true" ]; then
 	$SEDI "/==NOT_EXTERNAL_STORAGE==/ d" project/AndroidManifest.xml
 	$SEDI "/==READ_OBB==/ d" project/AndroidManifest.xml
 else
@@ -1066,8 +1072,10 @@ $SEDI "s%public static String AdmobPublisherId = .*%public static String AdmobPu
 $SEDI "s/public static String AdmobTestDeviceId = .*/public static String AdmobTestDeviceId = \"$AdmobTestDeviceId\";/" project/src/Globals.java
 $SEDI "s/public static String AdmobBannerSize = .*/public static String AdmobBannerSize = \"$AdmobBannerSize\";/" project/src/Globals.java
 $SEDI "s%public static String GooglePlayGameServicesId = .*%public static String GooglePlayGameServicesId = \"$GooglePlayGameServicesId\";%" project/src/Globals.java
+$SEDI "s/public static boolean AccessSdCard.*/public static boolean AccessSdCard = $AccessSdCard;/" project/src/Globals.java
 $SEDI "s/public static String AppLibraries.*/public static String AppLibraries[] = { $LibrariesToLoad };/" project/src/Globals.java
 $SEDI "s/public static String AppMainLibraries.*/public static String AppMainLibraries[] = { $MainLibrariesToLoad };/" project/src/Globals.java
+
 
 if $UsingSdl2; then
 	# Delete options that reference classes from SDL 1.2
@@ -1086,7 +1094,7 @@ cat project/jni/SettingsTemplate.mk | \
 	sed "s^COMPILED_LIBRARIES := .*^COMPILED_LIBRARIES := $CompiledLibraries^" | \
 	sed "s^APPLICATION_ADDITIONAL_CFLAGS :=.*^APPLICATION_ADDITIONAL_CFLAGS := $AppCflags^" | \
 	sed "s^APPLICATION_ADDITIONAL_CPPFLAGS :=.*^APPLICATION_ADDITIONAL_CPPFLAGS := $AppCppflags^" | \
-	sed "s^APPLICATION_ADDITIONAL_LDFLAGS :=.*^APPLICATION_ADDITIONAL_LDFLAGS := $AppLdflags^" | \
+	sed "s^APPLICATION_ADDITIONAL_LDFLAGS :=.*^APPLICATION_ADDITIONAL_LDFLAGS := -lc++_shared $AppLdflags^" | \
 	sed "s^APPLICATION_GLES_LIBRARY :=.*^APPLICATION_GLES_LIBRARY := $GLESLib^" | \
 	sed "s^APPLICATION_OVERLAPS_SYSTEM_HEADERS :=.*^APPLICATION_OVERLAPS_SYSTEM_HEADERS := $AppOverlapsSystemHeaders^" | \
 	sed "s^USE_GL4ES :=.*^USE_GL4ES := $UseGl4es^" | \
