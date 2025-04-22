@@ -120,7 +120,7 @@ jobs:
           ANDROID_UPLOAD_KEYSTORE_ALIAS: "${{secrets.ANDROID_UPLOAD_KEYSTORE_ALIAS}}"
 
       # Github actions is dumb and won't let you download single files from artifacts, so break up the artifacts instead
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: ${{env.APP_NAME}}
           path: upload
