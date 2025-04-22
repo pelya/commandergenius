@@ -775,7 +775,7 @@ for KEY in $RedefinedKeysFourthGamepad; do
 done
 
 if [ "$APP_PLATFORM" = "" ]; then
-	APP_PLATFORM=android-19
+	APP_PLATFORM=android-21
 fi
 
 if [ "$MultiABI" = "y" ] ; then
@@ -952,7 +952,7 @@ fi
 if [ -z "$AppOpenFileExtension" ]; then
 	$SEDI "/==OPENFILE==/ d" project/AndroidManifest.xml
 else
-	EXTS="`for EXT in $AppOpenFileExtension; do echo -n '\\\\1'$EXT'\\\\2' ; done`"
+	EXTS="`for EXT in $AppOpenFileExtension; do echo -n '\\1'$EXT'\\2' ; done`"
 	$SEDI "s/\(.*\)==OPENFILE-EXT==\(.*\)/$EXTS/g" project/AndroidManifest.xml
 fi
 

@@ -4,13 +4,13 @@ plugins {
 
 android {
     namespace 'net.olofson.ballfield'
-    compileSdk 33
-    ndkVersion "25.2.9519653"
+    compileSdk 36
+    ndkVersion "29.0.13113456"
 
     defaultConfig {
         applicationId "net.olofson.ballfield"
-        minSdk 19
-        targetSdk 33
+        minSdk 21
+        targetSdk 36
     }
 
     buildTypes {
