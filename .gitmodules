@@ -94,16 +94,16 @@
 [submodule "project/jni/sdl2"]
 	path = project/jni/sdl2
 	url = https://github.com/libsdl-org/SDL.git
-	branch = main
+	branch = SDL2
 [submodule "project/jni/sdl2_image"]
 	path = project/jni/sdl2_image
 	url = https://github.com/libsdl-org/SDL_image
-	branch = main
+	branch = SDL2
 [submodule "project/jni/sdl2_ttf"]
 	path = project/jni/sdl2_ttf
 	url = https://github.com/libsdl-org/SDL_ttf.git
-	branch = main
+	branch = SDL2
 [submodule "project/jni/sdl2_mixer"]
 	path = project/jni/sdl2_mixer
 	url = https://github.com/libsdl-org/SDL_mixer.git
-	branch = master
+	branch = SDL2

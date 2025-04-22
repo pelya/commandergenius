@@ -132,8 +132,17 @@ public class DummyService extends Service
 			.setTicker(getString(getApplicationInfo().labelRes))
 			.setOngoing(true)
 			.build();
-		PendingIntent killIntent = PendingIntent.getService(this, 5, new Intent(Intent.ACTION_DELETE, null, this, DummyService.class), PendingIntent.FLAG_CANCEL_CURRENT);
-		PendingIntent showIntent = PendingIntent.getActivity(this, 0, new Intent("", null, this, MainActivity.class), PendingIntent.FLAG_CANCEL_CURRENT);
+		int killIntentFlags = 0, showIntentFlags = 0, FLAG_MUTABLE = 0x02000000;
+		if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ) {
+			killIntentFlags = FLAG_MUTABLE | PendingIntent.FLAG_CANCEL_CURRENT;
+			showIntentFlags = FLAG_MUTABLE | PendingIntent.FLAG_CANCEL_CURRENT;
+		}
+		else {
+			killIntentFlags = PendingIntent.FLAG_CANCEL_CURRENT;
+			showIntentFlags = PendingIntent.FLAG_CANCEL_CURRENT;
+		}
+		PendingIntent killIntent = PendingIntent.getService(this, 5, new Intent(Intent.ACTION_DELETE, null, this, DummyService.class), killIntentFlags);
+		PendingIntent showIntent = PendingIntent.getActivity(this, 0, new Intent("", null, this, MainActivity.class), showIntentFlags);
 		ntf.deleteIntent = killIntent;
 		RemoteViews view = new RemoteViews(getPackageName(), R.layout.notification);
 		view.setCharSequence(R.id.notificationText, "setText", getString(R.string.notification_app_is_running, getString(getApplicationInfo().labelRes)));

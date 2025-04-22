@@ -1,1 +1,1 @@
-../../../sdl2_mixer/external/libogg-1.3.2/include/ogg/ogg.h
+../../../sdl2_mixer/external/ogg/include/ogg/ogg.h

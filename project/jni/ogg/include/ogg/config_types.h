@@ -1,1 +1,1 @@
-../../../sdl2_mixer/external/libogg-1.3.2/android/ogg/config_types.h
+../../../sdl2_mixer/external/ogg/android/ogg/config_types.h

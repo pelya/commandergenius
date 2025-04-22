@@ -103,6 +103,8 @@ import android.content.pm.PermissionInfo;
 import java.util.Arrays;
 import java.util.zip.ZipFile;
 import java.util.ArrayList;
+import android.os.Environment;
+import android.net.Uri;
 
 
 public class MainActivity extends Activity
@@ -310,11 +312,26 @@ public class MainActivity extends Activity
 				Log.v("SDL", "SD card permission 1: " + getPackageName() + " perms " + info.requestedPermissions + " name " + info.packageName + " ver " + info.versionName);
 				if( info.requestedPermissions != null && Arrays.asList(info.requestedPermissions).contains(Manifest.permission.WRITE_EXTERNAL_STORAGE) )
 				{
-					Log.v("SDL", "SD card permission 4: REQUEST");
+					Log.v("SDL", "SD card permission 4 (WRITE): REQUEST");
 					int permissionCheck = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
 					if (permissionCheck != PackageManager.PERMISSION_GRANTED && !writeExternalStoragePermissionDialogAnswered)
 					{
 						requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+					}
+				}
+				// For Android 11+
+				if( android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S && !Environment.isExternalStorageManager() )
+				{
+					Log.v("SDL", "SD card permission 4 (MANAGE): REQUEST");
+					try {
+						Intent permissionRequestIntent = new Intent(
+							android.provider.Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
+							Uri.parse("package:" + getApplicationContext().getPackageName())
+						);
+						startActivity(permissionRequestIntent);
+					} catch (Exception ex) {
+						Intent permissionRequestIntent = new Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+						startActivity(permissionRequestIntent);
 					}
 				}
 			}

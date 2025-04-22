@@ -10,6 +10,9 @@ SUPPORT_MID_TIMIDITY := 0
 SUPPORT_JPG := true
 SUPPORT_PNG := true
 
+# Enable ogg module inside sdl2_mixer (common dependency for both v1.2 and v2 mixers)
+SUPPORT_OGG := true
+
 NDK_VERSION := $(strip $(patsubst android-ndk-%,%,$(filter android-ndk-%, $(subst /, ,$(dir $(TARGET_CC))))))
 #$(info NDK version $(NDK_VERSION)) # This warning puzzles ndk-gdb
 ifneq ($(filter r1 r2 r3 r4 r5 r6 r7 r8,$(NDK_VERSION)),)
