@@ -26,7 +26,7 @@ fi
 ARCH=armeabi-v7a
 GCCPREFIX=armv7a-linux-androideabi
 BINUTILSPREFIX=arm-linux-androideabi
-APILEVEL=19
+APILEVEL=21
 
 
 CFLAGS="

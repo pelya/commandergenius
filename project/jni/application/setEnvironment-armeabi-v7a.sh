@@ -25,7 +25,7 @@ fi
 ARCH=armeabi-v7a
 GCCPREFIX=armv7a-linux-androideabi
 BINUTILSPREFIX=arm-linux-androideabi
-APILEVEL=19
+APILEVEL=21
 
 APP_MODULES=`grep 'APP_MODULES [:][=]' $LOCAL_PATH/../Settings.mk | sed 's@.*[=]\(.*\)@\1@' | sed 's@\b\(application\|sdl_main\|sdl_native_helpers\|c++_shared\)\b@@g'`
 

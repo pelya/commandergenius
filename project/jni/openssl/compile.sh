@@ -48,7 +48,7 @@ build() {
 		export ANDROID_NDK_HOME=`dirname $CC`/..
 		export CC=clang
 		export AR=ar
-		./Configure shared zlib --prefix=`pwd`/dist --openssldir=. $CONFIGURE_ARCH -fPIC' \
+		./Configure shared no-zlib --prefix=`pwd`/dist --openssldir=. $CONFIGURE_ARCH -fPIC' \
 		|| exit 1
 
 	sed -i.old 's/^CNF_CPPFLAGS=.*/CNF_CPPFLAGS=/' Makefile
