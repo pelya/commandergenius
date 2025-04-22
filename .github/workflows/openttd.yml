@@ -70,7 +70,7 @@ jobs:
         run: echo "ICU_REV=`git -C project/jni/iconv/src rev-parse HEAD`::`echo ${ARCH_LIST} | sed 's/ /:/g'`" >> $GITHUB_ENV
 
       - name: Copy ICU libraries from cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         id: cache-icu
         with:
           # The same SDL revision will produce the same libraries
