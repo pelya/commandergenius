@@ -5,7 +5,9 @@ LOCAL_PATH=`cd $LOCAL_PATH && pwd`
 
 VER=build
 
+[ -z "$BUILD_NUM_CPUS" ] && $BUILD_NUM_CPUS=8
 export CMAKE_BUILD_PARALLEL_LEVEL=$BUILD_NUM_CPUS
+export APILEVEL=24
 
 [ -d openttd-$VER-$1 ] || mkdir -p openttd-$VER-$1/bin/baseset
 
@@ -47,7 +49,7 @@ export ARCH=$1
 				;;
 			png)
 				# Hack for PNG_PNG_INCLUDE_DIR
-				echo "set(${TARGET}_${TARGET}_INCLUDE_DIR $LOCAL_PATH/../../$LIB/include)" >> $CMAKE_SDL
+				echo "set(${TARGET}_${TARGET}_INCLUDE_DIRS $LOCAL_PATH/../../$LIB/include $LOCAL_PATH/../../$LIB/include/android)" >> $CMAKE_SDL
 				;;
 			freetype)
 				# Hack for FREETYPE_INCLUDE_DIRS
@@ -55,6 +57,13 @@ export ARCH=$1
 				;;
 			fontconfig)
 				TARGET=Fontconfig
+				;;
+			harfbuzz)
+				TARGET=Harfbuzz
+				;;
+			curl)
+				# Different .so file name to avoid linking to system libexpat.so
+				LIB_FILE=curl-sdl
 				;;
 			icui18n|iculx|icuuc|icudata|icule|icuio)
 				TARGET="ICU_`echo $LIB | sed 's/icu//'`"

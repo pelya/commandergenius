@@ -2,7 +2,7 @@
 
 set -e
 
-VER=13.4-0
+VER=14.1-0
 ARCH=$1
 ANDROID_DATA_FULLPATH=$(realpath ./AndroidData/)
 
@@ -34,6 +34,10 @@ ANDROID_DATA_FULLPATH=$(realpath ./AndroidData/)
 [ -e ${ANDROID_DATA_FULLPATH}/icudt62l.zip.xz ] && [ -n "$NO_REBUILD_DATA" ] || {
 	pushd ../../icuuc
 	rm -f ${ANDROID_DATA_FULLPATH}/icudt62l.zip.xz ${ANDROID_DATA_FULLPATH}/icudt62l.zip
+	if ! [  -e ./share/icu/62.1/icudt62l.dat ]; then
+		echo "Missing icudt62l.data; Try force recompiling prebuilt targets";
+		exit 1
+	fi
 	zip -0 ${ANDROID_DATA_FULLPATH}/icudt62l.zip share/icu/62.1/icudt62l.dat && xz -8 ${ANDROID_DATA_FULLPATH}/icudt62l.zip
 	popd
 }
