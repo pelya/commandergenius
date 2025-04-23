@@ -4,7 +4,10 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := sdl_savepng
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH) $(LOCAL_PATH)/../png/include $(LOCAL_PATH)/../sdl-1.2/include $(LOCAL_PATH)/include
+LOCAL_C_INCLUDES := $(LOCAL_PATH) $(LOCAL_PATH)/../png/include \
+    $(LOCAL_PATH) $(LOCAL_PATH)/../png/include/android \
+    $(LOCAL_PATH)/../sdl-1.2/include \
+    $(LOCAL_PATH)/include
 
 LOCAL_CPP_EXTENSION := .cpp
 
