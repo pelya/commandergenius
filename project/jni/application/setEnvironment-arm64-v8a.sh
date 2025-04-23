@@ -24,7 +24,7 @@ else
 fi
 ARCH=arm64-v8a
 GCCPREFIX=aarch64-linux-android
-APILEVEL=21
+[ -z "$APILEVEL" ] && APILEVEL=21
 
 APP_MODULES=`grep 'APP_MODULES [:][=]' $LOCAL_PATH/../Settings.mk | sed 's@.*[=]\(.*\)@\1@' | sed 's@\b\(application\|sdl_main\|sdl_native_helpers\|c++_shared\)\b@@g'`
 
