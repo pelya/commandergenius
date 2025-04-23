@@ -191,7 +191,7 @@ DeleteFilesOnUpgrade="$DeleteFilesOnUpgrade"
 
 # Here you may type readme text, which will be shown during startup. Format is:
 # Text in English, use \\\\\\\\n to separate lines (that's four backslashes)^de:Text in Deutsch^ru:Text in Russian^button:Button that will open some URL:http://url-to-open/
-ReadmeText='$ReadmeText' | sed 's/\\\\n/\\\\\\\\n/g'
+ReadmeText='$ReadmeText'
 
 # libSDL version to use (1.2/2)
 LibSdlVersion=$LibSdlVersion
@@ -799,6 +799,9 @@ include project/jni/SettingsTemplate.mk
 all:
 	@echo $(APP_AVAILABLE_STATIC_LIBS)
 .PHONY: all' | make -s -f -`"
+
+CompiledLibraries="`echo $CompiledLibraries | sed 's/\bc[+][+]_shared\b//g'`"
+
 for lib in $CompiledLibraries; do
 	process=true
 	for lib1 in $StaticLibraries; do
@@ -1212,15 +1215,17 @@ fi
 echo Compiling prebuilt libraries
 
 if echo "$CompiledLibraries" | grep -E 'crypto|ssl' > /dev/null; then
+	echo "Compiling prebuilt openssl"
 	make -C project/jni -f Makefile.prebuilt openssl ARCH_LIST="$MultiABI"
 fi
 
 if echo "$CompiledLibraries" | grep -E 'iconv|charset|icu' > /dev/null; then
-	echo "#=Compiling prebuilt icu"
+	echo "Compiling prebuilt icu and iconv"
 	make -C project/jni -f Makefile.prebuilt icu ARCH_LIST="$MultiABI"
 fi
 
 if echo "$CompiledLibraries" | grep 'boost_' > /dev/null; then
+	echo "Compiling prebuilt boost"
 	make -C project/jni -f Makefile.prebuilt boost ARCH_LIST="$MultiABI"
 fi
 
