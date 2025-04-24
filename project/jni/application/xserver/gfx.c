@@ -857,7 +857,7 @@ void XSDL_generateBackground(const char * port, int showHelp, int resolutionW, i
 	struct ifconf ifc;
 	struct ifreq ifr[20];
 	SDL_Surface * surf;
-	int y = resolutionH * 1 / 6;
+	int y = resolutionH * 30 / VID_Y;
 	char msg[128];
 	char clipboard[8192] = "";
 
@@ -875,6 +875,9 @@ void XSDL_generateBackground(const char * port, int showHelp, int resolutionW, i
 
 	surf = SDL_CreateRGBSurface(SDL_SWSURFACE, resolutionW, resolutionH, 24, 0x0000ff, 0x00ff00, 0xff0000, 0);
 	SDL_FillRect(surf, NULL, 0x7f0000);
+
+	renderStringScaled("To show keyboard, tap Back < or swipe from the screen edge", 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+	y += resolutionH * 30 / VID_Y;
 
 	renderStringScaled("Launch these commands on your Linux PC:", 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
 	y += resolutionH * 30 / VID_Y;
