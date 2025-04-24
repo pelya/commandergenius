@@ -16,7 +16,7 @@
 #     misrepresented as being the original software.
 #  3. This notice may not be removed or altered from any source distribution.
 
-name: openttd
+name: xserver
 on:
   push:
     branches:
@@ -28,7 +28,7 @@ on:
 jobs:
   build:
     env:
-      APP_NAME: openttd
+      APP_NAME: xserver
       # It takes one hour per one architecture to build Boost and ICU libraries, and Github limits CI script duration to 6 hours
       ARCH_LIST: armeabi-v7a arm64-v8a x86 x86_64
       ANDROID_BUILD_TOOLS: 35.0.0
@@ -48,12 +48,21 @@ jobs:
           fetch-depth: 1
           submodules: false
 
+      - name: Install X.org system packages
+        run: >
+          sudo dpkg --add-architecture i386 ;
+          sudo apt-get update ;
+          sudo apt-get install bison make zip git locales pkg-config
+          curl autoconf automake autopoint libtool libtool-bin help2man texinfo intltool
+          xfonts-utils xutils-dev libfontenc-dev libxkbfile-dev libxmuu-dev
+          libjpeg-dev libpng-dev libpixman-1-dev libssl-dev libpciaccess-dev
+          python3-xcbgen
+
       - name: Check out submodules
         # There are many more submodules in this repo, we don't need them all
         run: >
           git submodule update --init --recursive --depth=1
           project/jni/application/${APP_NAME}
-          project/jni/iconv/src
           project/jni/sdl2 project/jni/sdl2_image
           project/jni/sdl2_mixer project/jni/sdl2_ttf
 
@@ -65,28 +74,7 @@ jobs:
         run: |
           sed -i "s/MultiABI=.*/MultiABI='${ARCH_LIST}'/g" project/jni/application/src/AndroidAppSettings.cfg
 
-      - name: Get ICU revision
-        id: icu-rev
-        run: echo "ICU_REV=`git -C project/jni/iconv/src rev-parse HEAD`::`echo ${ARCH_LIST} | sed 's/ /:/g'`" >> $GITHUB_ENV
-
-      - name: Copy ICU libraries from cache
-        uses: actions/cache@v4
-        id: cache-icu
-        with:
-          # The same SDL revision will produce the same libraries
-          key: ${{env.ICU_REV}}
-          path: |
-            project/jni/iconv/include
-            project/jni/iconv/lib
-            project/jni/icuuc/include
-            project/jni/icuuc/lib
-            project/jni/icuuc/share/icu
-
-      - name: Touch cached ICU timestamps
-        if: steps.cache-icu.outputs.cache-hit == 'true'
-        run: touch project/jni/iconv/lib/*/* project/jni/icuuc/lib/*/* project/jni/icuuc/share/icu/*/* || true
-
-      - name: Patch Java files and build Boost, ICU, and OpenSSL
+      - name: Patch Java files and build OpenSSL
         run: |
           export PATH=$ANDROID_NDK_LATEST_HOME:$PATH
           ./changeAppSettings.sh
@@ -149,7 +137,7 @@ jobs:
         continue-on-error: true
         with:
           serviceAccountJsonPlainText: ${{secrets.SERVICE_ACCOUNT_JSON}}
-          packageName: org.openttd.sdl
+          packageName: x.org.server
           releaseFiles: upload/*.aab
           track: beta
           #track: production

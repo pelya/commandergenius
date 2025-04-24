@@ -52,7 +52,6 @@ jobs:
         # There are many more submodules in this repo, we don't need them all
         run: >
           git submodule update --init --recursive --depth=1
-          project/jni/boost/src project/jni/iconv/src
           project/jni/sdl2 project/jni/sdl2_image
           project/jni/sdl2_mixer project/jni/sdl2_ttf
 
