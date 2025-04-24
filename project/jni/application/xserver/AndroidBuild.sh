@@ -36,7 +36,7 @@ cd android
 } || exit 1
 cd $1
 
-# Megahack: set /proc/self/cwd as the X.org data dir, and chdir() to the correct directory when runngin X.org
+# Megahack: set /proc/self/cwd as the X.org data dir, and chdir() to the correct directory when running X.org
 env TARGET_DIR=/proc/self/cwd \
 ./build.sh || exit 1
 
@@ -68,7 +68,7 @@ xkb/.libs/libxkbstubs.a \
 composite/.libs/libcomposite.a \
 os/.libs/libos.a \
 -L$CURDIR/../../../libs/'"$1"' \
--lpixman-1 -lXfont2 -lXau -lxshmfence -lXdmcp -lfontenc -lfreetype -lsdl_savepng -lpng \
+-lpixman-1 -lXfont2 -lXau -lxshmfence -lXdmcp -lfontenc -lfreetype -lharfbuzz -lsdl_savepng -lpng \
 -llog -lGLESv1_CM -landroid-shmem -lz -lm -ldl' \
 || exit 1
 
