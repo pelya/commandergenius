@@ -89,7 +89,7 @@ int main( int argc, char* argv[] )
 		}
 		else if( strcmp(argv[1], "-screenbuttons") == 0 )
 		{
-			screenButtons = 1;
+			screenButtons = 0;
 		}
 		else if( strcmp(argv[1], "-warndiskspacemb") == 0 && argc > 2 )
 		{
