@@ -548,11 +548,9 @@ static void ProcessMouseUp( int x, int y )
 		abs(mouseInitialY - y) < SDL_ANDROID_sFakeWindowHeight / 16 &&
 		SDL_GetTicks() - mouseInitialTime < 700 )
 	{
-		if( forceScreenUpdateMouseClick )
-			SDL_ANDROID_MainThreadPushMouseMotion( mouseInitialX, mouseInitialY );
 		SDL_ANDROID_MainThreadPushMouseButton( SDL_PRESSED, SDL_BUTTON_LEFT );
-		if( forceScreenUpdateMouseClick && mouseInitialX > 0 )
-			SDL_ANDROID_MainThreadPushMouseMotion( mouseInitialX - 1, mouseInitialY );
+		if( forceScreenUpdateMouseClick && x > 0 )
+			SDL_ANDROID_MainThreadPushMouseMotion( x - 1, y );
 		mouseInitialX = -1;
 		mouseInitialY = -1;
 		deferredMouseTap = 2;
