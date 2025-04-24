@@ -56,7 +56,7 @@ jobs:
           curl autoconf automake autopoint libtool libtool-bin help2man texinfo intltool
           xfonts-utils xutils-dev libfontenc-dev libxkbfile-dev libxmuu-dev
           libjpeg-dev libpng-dev libpixman-1-dev libssl-dev libpciaccess-dev
-          python3-xcbgen
+          python3-xcbgen libfreetype-dev
 
       - name: Check out submodules
         # There are many more submodules in this repo, we don't need them all
