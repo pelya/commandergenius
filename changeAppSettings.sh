@@ -20,7 +20,7 @@ if [ "X$1" = "X-u" ]; then
 	shift
 fi
 if [ "X$1" = "X-h" ]; then
-	echo "Usage: $0 [-a] [-v] [-u]"
+	echo "Usage: $0 [-a] [-v] [-u] [app-name]"
 	echo "       -a: auto-update project files without asking questions, it's the default action"
 	echo "       -v: ask for new version number on terminal"
 	echo "       -u: update AndroidAppSettings.cfg, this may add new config options to it"
