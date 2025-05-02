@@ -62,10 +62,10 @@
 		<service android:name=".DummyService"
 				 android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
 				 android:enabled="true"
-				 android:foregroundServiceType="specialUse"
+				 android:foregroundServiceType="specialUse">
 			<property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
 					  android:value="Keep the app running in background"/>
-		/>
+		</service>
 	</application>
 
 	<!-- ==INTERNET== --> <uses-permission android:name="android.permission.INTERNET" />
@@ -79,6 +79,7 @@
 	<!-- ==RECORD_AUDIO== --> <uses-permission android:name="android.permission.RECORD_AUDIO" />
 	<!-- ==ADMOB== --> <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<!-- ==FOREGROUND_SERVICE== --> <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+	<!-- ==FOREGROUND_SERVICE== --> <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
 	<!-- <uses-permission android:name="android.permission.VIBRATE"></uses-permission> --> <!-- Vibrator not supported yet by SDL -->
 
