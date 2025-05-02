@@ -105,6 +105,7 @@ import java.util.zip.ZipFile;
 import java.util.ArrayList;
 import android.os.Environment;
 import android.net.Uri;
+import androidx.core.view.WindowCompat;
 
 
 public class MainActivity extends Activity
@@ -1590,7 +1591,12 @@ class DimSystemStatusBar
 		{
 			// Immersive mode, I already hear curses when system bar reappears mid-game from the slightest swipe at the bottom of the screen
 			//Log.i("SDL", "libSDL: Enabling fullscreen, Android SDK " + android.os.Build.VERSION.SDK_INT + " VERSION_CODES.P " + android.os.Build.VERSION_CODES.P);
-			if( android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P )
+			if( android.os.Build.VERSION.SDK_INT >= 35 )
+			{
+				if (!Globals.DrawInDisplayCutout)
+					WindowCompat.setDecorFitsSystemWindows(window, true);
+			}
+			else if( android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P )
 			{
 				//Log.i("SDL", "libSDL: Setting display cutout mode to SHORT_EDGES");
 				if (Globals.DrawInDisplayCutout)
