@@ -62,6 +62,9 @@
 		<service android:name=".DummyService"
 				 android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
 				 android:enabled="true"
+				 android:foregroundServiceType="specialUse"
+			<property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+					  android:value="Keep the app running in background"/>
 		/>
 	</application>
 
