@@ -89,14 +89,16 @@ import android.graphics.Rect;
 import android.view.InputDevice;
 import android.inputmethodservice.KeyboardView;
 import android.inputmethodservice.Keyboard;
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.widget.RemoteViews;
 import android.os.Build;
 import android.app.NotificationChannel;
+import androidx.core.app.NotificationCompat;
 
 public class DummyService extends Service
 {
+	static String CHANNEL_ID = "app_running_ntf";
+
 	public DummyService()
 	{
 		super();
@@ -112,26 +114,16 @@ public class DummyService extends Service
 			System.exit(0);
 		}
 		Log.v("SDL", "Starting dummy service - displaying notification");
-		Notification.Builder builder;
+
 		if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O )
 		{
-			String channelId = "app_running_ntf";
-			NotificationChannel channel = new NotificationChannel(channelId,
+			NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
 										getString(R.string.notification_app_is_running, getString(getApplicationInfo().labelRes)),
 										NotificationManager.IMPORTANCE_LOW);
 			NotificationManager mgr = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 			mgr.createNotificationChannel(channel);
-			builder = new Notification.Builder(this, channelId);
 		}
-		else
-		{
-			builder = new Notification.Builder(this);
-		}
-		Notification ntf = builder
-			.setSmallIcon(R.drawable.icon)
-			.setTicker(getString(getApplicationInfo().labelRes))
-			.setOngoing(true)
-			.build();
+
 		int killIntentFlags = 0, showIntentFlags = 0, FLAG_MUTABLE = 0x02000000;
 		if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ) {
 			killIntentFlags = FLAG_MUTABLE | PendingIntent.FLAG_CANCEL_CURRENT;
@@ -143,14 +135,20 @@ public class DummyService extends Service
 		}
 		PendingIntent killIntent = PendingIntent.getService(this, 5, new Intent(Intent.ACTION_DELETE, null, this, DummyService.class), killIntentFlags);
 		PendingIntent showIntent = PendingIntent.getActivity(this, 0, new Intent("", null, this, MainActivity.class), showIntentFlags);
+
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+			.setSmallIcon(R.drawable.icon)
+			.setTicker(getString(getApplicationInfo().labelRes))
+			.setContentText(getString(R.string.notification_app_is_running, getString(getApplicationInfo().labelRes)))
+			.setContentIntent(showIntent)
+			.addAction(R.drawable.close, getString(R.string.notification_stop), killIntent)
+			.setOngoing(true)
+			.setAutoCancel(false)
+			.setPriority(NotificationCompat.PRIORITY_MIN);
+
+		Notification ntf = builder.build();
 		ntf.deleteIntent = killIntent;
-		RemoteViews view = new RemoteViews(getPackageName(), R.layout.notification);
-		view.setCharSequence(R.id.notificationText, "setText", getString(R.string.notification_app_is_running, getString(getApplicationInfo().labelRes)));
-		view.setOnClickPendingIntent(R.id.notificationText, showIntent);
-		view.setOnClickPendingIntent(R.id.notificationIcon, showIntent);
-		view.setOnClickPendingIntent(R.id.notificationView, showIntent);
-		view.setOnClickPendingIntent(R.id.notificationStop, killIntent);
-		ntf.contentView = view;
+
 		startForeground(1, ntf);
 		return Service.START_NOT_STICKY;
 	}

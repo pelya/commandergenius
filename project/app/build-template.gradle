@@ -35,7 +35,19 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation "androidx.constraintlayout:constraintlayout:2.2.1"
+    implementation "androidx.core:core-ktx:1.16.0"
     implementation 'com.google.android.gms:play-services-games:23.1.0' // ==GOOGLEPLAYGAMESERVICES==
+    //implementation "androidx.compose.material:material:1.8.0" // Importing a library for a single icon is overkill
+    // specify Kotlin version explicitly, because these libraries import two different versions
+    constraints {
+        //
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
 }
