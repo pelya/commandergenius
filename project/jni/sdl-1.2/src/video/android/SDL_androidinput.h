@@ -13,7 +13,7 @@ freely, subject to the following restrictions:
 1. The origin of this software must not be misrepresented; you must not
    claim that you wrote the original software. If you use this software
    in a product, an acknowledgment in the product documentation would be
-   appreciated but is not required. 
+   appreciated but is not required.
 2. Altered source versions must be plainly marked as such, and must not be
    misrepresented as being the original software.
 3. This notice may not be removed or altered from any source distribution.
@@ -303,6 +303,12 @@ extern int SDL_ANDROID_isTouchscreenKeyboardUsed;
 #ifndef SDL_ANDROID_GAMEPAD_0_KEYCODE_23
 #define SDL_ANDROID_GAMEPAD_0_KEYCODE_23 UNKNOWN
 #endif
+#ifndef SDL_ANDROID_GAMEPAD_0_KEYCODE_24
+#define SDL_ANDROID_GAMEPAD_0_KEYCODE_24 UNKNOWN
+#endif
+#ifndef SDL_ANDROID_GAMEPAD_0_KEYCODE_25
+#define SDL_ANDROID_GAMEPAD_0_KEYCODE_25 UNKNOWN
+#endif
 
 #ifndef SDL_ANDROID_GAMEPAD_1_KEYCODE_0
 #define SDL_ANDROID_GAMEPAD_1_KEYCODE_0 SDL_ANDROID_GAMEPAD_0_KEYCODE_0
@@ -375,6 +381,12 @@ extern int SDL_ANDROID_isTouchscreenKeyboardUsed;
 #endif
 #ifndef SDL_ANDROID_GAMEPAD_1_KEYCODE_23
 #define SDL_ANDROID_GAMEPAD_1_KEYCODE_23 SDL_ANDROID_GAMEPAD_0_KEYCODE_23
+#endif
+#ifndef SDL_ANDROID_GAMEPAD_1_KEYCODE_24
+#define SDL_ANDROID_GAMEPAD_1_KEYCODE_24 SDL_ANDROID_GAMEPAD_0_KEYCODE_24
+#endif
+#ifndef SDL_ANDROID_GAMEPAD_1_KEYCODE_25
+#define SDL_ANDROID_GAMEPAD_1_KEYCODE_25 SDL_ANDROID_GAMEPAD_0_KEYCODE_25
 #endif
 
 #ifndef SDL_ANDROID_GAMEPAD_2_KEYCODE_0
@@ -449,6 +461,12 @@ extern int SDL_ANDROID_isTouchscreenKeyboardUsed;
 #ifndef SDL_ANDROID_GAMEPAD_2_KEYCODE_23
 #define SDL_ANDROID_GAMEPAD_2_KEYCODE_23 SDL_ANDROID_GAMEPAD_0_KEYCODE_23
 #endif
+#ifndef SDL_ANDROID_GAMEPAD_2_KEYCODE_24
+#define SDL_ANDROID_GAMEPAD_2_KEYCODE_24 SDL_ANDROID_GAMEPAD_0_KEYCODE_24
+#endif
+#ifndef SDL_ANDROID_GAMEPAD_2_KEYCODE_25
+#define SDL_ANDROID_GAMEPAD_2_KEYCODE_25 SDL_ANDROID_GAMEPAD_0_KEYCODE_25
+#endif
 
 #ifndef SDL_ANDROID_GAMEPAD_3_KEYCODE_0
 #define SDL_ANDROID_GAMEPAD_3_KEYCODE_0 SDL_ANDROID_GAMEPAD_0_KEYCODE_0
@@ -522,12 +540,17 @@ extern int SDL_ANDROID_isTouchscreenKeyboardUsed;
 #ifndef SDL_ANDROID_GAMEPAD_3_KEYCODE_23
 #define SDL_ANDROID_GAMEPAD_3_KEYCODE_23 SDL_ANDROID_GAMEPAD_0_KEYCODE_23
 #endif
-
+#ifndef SDL_ANDROID_GAMEPAD_3_KEYCODE_24
+#define SDL_ANDROID_GAMEPAD_3_KEYCODE_24 SDL_ANDROID_GAMEPAD_0_KEYCODE_24
+#endif
+#ifndef SDL_ANDROID_GAMEPAD_3_KEYCODE_25
+#define SDL_ANDROID_GAMEPAD_3_KEYCODE_25 SDL_ANDROID_GAMEPAD_0_KEYCODE_25
+#endif
 
 // Queue events to main thread
 extern void SDL_ANDROID_MainThreadPushMouseMotion(int x, int y);
 extern void SDL_ANDROID_MainThreadPushMouseButton(int pressed, int button);
-extern void SDL_ANDROID_MainThreadPushKeyboardKey(int pressed, SDL_scancode key, int unicode);
+extern void SDL_ANDROID_MainThreadPushKeyboardKey(int pressed, SDL_scancode key, int unicode, int deviceId);
 extern void SDL_ANDROID_MainThreadPushMultitouchButton(int id, int pressed, int x, int y, int force); // SDL 1.3 only
 extern void SDL_ANDROID_MainThreadPushMultitouchMotion(int id, int x, int y, int force); // SDL 1.3 only
 extern void SDL_ANDROID_MainThreadPushJoystickAxis(int joy, int axis, int value);

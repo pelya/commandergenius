@@ -318,7 +318,7 @@ int SDL_KeyboardInit(void)
 	keynames[SDLK_RMETA] = "right meta";
 	keynames[SDLK_LMETA] = "left meta";
 	keynames[SDLK_LSUPER] = "left super";	/* "Windows" keys */
-	keynames[SDLK_RSUPER] = "right super";	
+	keynames[SDLK_RSUPER] = "right super";
 	keynames[SDLK_MODE] = "alt gr";
 	keynames[SDLK_COMPOSE] = "compose";
 
@@ -396,7 +396,7 @@ char *SDL_GetKeyName(SDLKey key)
 }
 
 /* These are global for SDL_eventloop.c */
-int SDL_PrivateKeyboard(Uint8 state, SDL_keysym *keysym)
+int SDL_PrivateKeyboardWithDeviceId(Uint8 state, SDL_keysym *keysym, int deviceId)
 {
 	SDL_Event event;
 	int posted, repeatable;
@@ -405,7 +405,7 @@ int SDL_PrivateKeyboard(Uint8 state, SDL_keysym *keysym)
 	SDL_memset(&event, 0, sizeof(event));
 
 #if 0
-printf("The '%s' key has been %s\n", SDL_GetKeyName(keysym->sym), 
+printf("The '%s' key has been %s\n", SDL_GetKeyName(keysym->sym),
 				state == SDL_PRESSED ? "pressed" : "released");
 #endif
 	/* Set up the keysym */
@@ -551,6 +551,7 @@ printf("Keyboard event didn't change state - dropped!\n");
 	if ( SDL_ProcessEvents[event.type] == SDL_ENABLE ) {
 		event.key.state = state;
 		event.key.keysym = *keysym;
+        event.key.which = deviceId;
 		/*
 		 * jk 991215 - Added
 		 */
@@ -565,6 +566,12 @@ printf("Keyboard event didn't change state - dropped!\n");
 		}
 	}
 	return(posted);
+}
+
+/* These are global for SDL_eventloop.c */
+int SDL_PrivateKeyboard(Uint8 state, SDL_keysym *keysym)
+{
+    return SDL_PrivateKeyboardWithDeviceId(state, keysym, 0);
 }
 
 /*

@@ -13,7 +13,7 @@ freely, subject to the following restrictions:
 1. The origin of this software must not be misrepresented; you must not
    claim that you wrote the original software. If you use this software
    in a product, an acknowledgment in the product documentation would be
-   appreciated but is not required. 
+   appreciated but is not required.
 2. Altered source versions must be plainly marked as such, and must not be
    misrepresented as being the original software.
 3. This notice may not be removed or altered from any source distribution.
@@ -502,7 +502,7 @@ unsigned SDL_ANDROID_processTouchscreenKeyboard(int x, int y, int action, int po
 	int joyAmount = SDL_ANDROID_joysticksAmount;
 	if( joyAmount == 0 && (arrows[0].w > 0 || floatingScreenJoystick) )
 		joyAmount = 1;
-	
+
 	if( !touchscreenKeyboardShown )
 	{
 		for( i = 0; i < MAX_BUTTONS; i++ )
@@ -514,7 +514,7 @@ unsigned SDL_ANDROID_processTouchscreenKeyboard(int x, int y, int action, int po
 				pointerInButtonRect[i] = -1;
 				if( buttonKeysyms[i] != SDLK_UNKNOWN )
 				{
-					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, buttonKeysyms[i], 0 );
+					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, buttonKeysyms[i], 0, 0 );
 				}
 			}
 		}
@@ -531,17 +531,17 @@ unsigned SDL_ANDROID_processTouchscreenKeyboard(int x, int y, int action, int po
 				}
 				else
 				{
-					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(UP), 0 );
-					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(DOWN), 0 );
-					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(LEFT), 0 );
-					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(RIGHT), 0 );
+					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(UP), 0, 0 );
+					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(DOWN), 0, 0 );
+					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(LEFT), 0, 0 );
+					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(RIGHT), 0, 0 );
 					oldArrows = 0;
 				}
 			}
 		}
 		return 0;
 	}
-	
+
 	if( action == MOUSE_DOWN )
 	{
 		//__android_log_print(ANDROID_LOG_INFO, "libSDL", "touch %03dx%03d ptr %d action %d", x, y, pointerId, action);
@@ -564,9 +564,9 @@ unsigned SDL_ANDROID_processTouchscreenKeyboard(int x, int y, int action, int po
 					else if( buttonKeysyms[i] != SDLK_UNKNOWN )
 					{
 						if( buttonsStayPressedAfterTouch[i] )
-							SDL_ANDROID_MainThreadPushKeyboardKey( SDL_GetKeyboardState(NULL)[buttonKeysyms[i]] == 0 ? SDL_PRESSED : SDL_RELEASED, buttonKeysyms[i], 0 );
+							SDL_ANDROID_MainThreadPushKeyboardKey( SDL_GetKeyboardState(NULL)[buttonKeysyms[i]] == 0 ? SDL_PRESSED : SDL_RELEASED, buttonKeysyms[i], 0, 0 );
 						else
-							SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, buttonKeysyms[i], 0 );
+							SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, buttonKeysyms[i], 0, 0 );
 					}
 					if( preventButtonOverlap )
 					{
@@ -600,13 +600,13 @@ unsigned SDL_ANDROID_processTouchscreenKeyboard(int x, int y, int action, int po
 					{
 						i = ArrowKeysPressed(x, y);
 						if( i & ARROW_UP )
-							SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, SDL_KEY(UP), 0 );
+							SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, SDL_KEY(UP), 0, 0 );
 						if( i & ARROW_DOWN )
-							SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, SDL_KEY(DOWN), 0 );
+							SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, SDL_KEY(DOWN), 0, 0 );
 						if( i & ARROW_LEFT )
-							SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, SDL_KEY(LEFT), 0 );
+							SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, SDL_KEY(LEFT), 0, 0 );
 						if( i & ARROW_RIGHT )
-							SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, SDL_KEY(RIGHT), 0 );
+							SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, SDL_KEY(RIGHT), 0, 0 );
 						oldArrows = i;
 					}
 				}
@@ -654,10 +654,10 @@ unsigned SDL_ANDROID_processTouchscreenKeyboard(int x, int y, int action, int po
 				}
 				else
 				{
-					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(UP), 0 );
-					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(DOWN), 0 );
-					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(LEFT), 0 );
-					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(RIGHT), 0 );
+					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(UP), 0, 0 );
+					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(DOWN), 0, 0 );
+					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(LEFT), 0, 0 );
+					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(RIGHT), 0, 0 );
 					oldArrows = 0;
 				}
 				if( floatingScreenJoystick && j == 0 )
@@ -673,7 +673,7 @@ unsigned SDL_ANDROID_processTouchscreenKeyboard(int x, int y, int action, int po
 				processed |= 1<<i;
 				pointerInButtonRect[i] = -1;
 				if( i != BUTTON_TEXT_INPUT && !buttonsStayPressedAfterTouch[i] && buttonKeysyms[i] != SDLK_UNKNOWN )
-					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, buttonKeysyms[i], 0 );
+					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, buttonKeysyms[i], 0, 0 );
 			}
 		}
 	}
@@ -697,7 +697,7 @@ unsigned SDL_ANDROID_processTouchscreenKeyboard(int x, int y, int action, int po
 		{
 			processed |= SDL_ANDROID_processTouchscreenKeyboard(x, y, MOUSE_DOWN, pointerId);
 		}
-		
+
 		// Process cases when pointer leaves button area
 		// TODO: huge code size, split it or somehow make it more readable
 		for( j = 0; j < joyAmount; j++ )
@@ -727,10 +727,10 @@ unsigned SDL_ANDROID_processTouchscreenKeyboard(int x, int y, int action, int po
 					}
 					else
 					{
-						SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(UP), 0 );
-						SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(DOWN), 0 );
-						SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(LEFT), 0 );
-						SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(RIGHT), 0 );
+						SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(UP), 0, 0 );
+						SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(DOWN), 0, 0 );
+						SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(LEFT), 0, 0 );
+						SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(RIGHT), 0, 0 );
 						oldArrows = 0;
 					}
 				}
@@ -753,21 +753,21 @@ unsigned SDL_ANDROID_processTouchscreenKeyboard(int x, int y, int action, int po
 						if( i != oldArrows )
 						{
 							if( oldArrows & ARROW_UP && ! (i & ARROW_UP) )
-								SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(UP), 0 );
+								SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(UP), 0, 0 );
 							if( oldArrows & ARROW_DOWN && ! (i & ARROW_DOWN) )
-								SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(DOWN), 0 );
+								SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(DOWN), 0, 0 );
 							if( oldArrows & ARROW_LEFT && ! (i & ARROW_LEFT) )
-								SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(LEFT), 0 );
+								SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(LEFT), 0, 0 );
 							if( oldArrows & ARROW_RIGHT && ! (i & ARROW_RIGHT) )
-								SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(RIGHT), 0 );
+								SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(RIGHT), 0, 0 );
 							if( i & ARROW_UP )
-								SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, SDL_KEY(UP), 0 );
+								SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, SDL_KEY(UP), 0, 0 );
 							if( i & ARROW_DOWN )
-								SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, SDL_KEY(DOWN), 0 );
+								SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, SDL_KEY(DOWN), 0, 0 );
 							if( i & ARROW_LEFT )
-								SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, SDL_KEY(LEFT), 0 );
+								SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, SDL_KEY(LEFT), 0, 0 );
 							if( i & ARROW_RIGHT )
-								SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, SDL_KEY(RIGHT), 0 );
+								SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, SDL_KEY(RIGHT), 0, 0 );
 						}
 						oldArrows = i;
 					}
@@ -785,7 +785,7 @@ unsigned SDL_ANDROID_processTouchscreenKeyboard(int x, int y, int action, int po
 				{
 					pointerInButtonRect[i] = -1;
 					if( i != BUTTON_TEXT_INPUT && buttonKeysyms[i] != SDLK_UNKNOWN )
-						SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, buttonKeysyms[i], 0 );
+						SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, buttonKeysyms[i], 0, 0 );
 				}
 			}
 		}
@@ -813,7 +813,7 @@ void shrinkButtonRect(SDL_Rect s, SDL_Rect * d)
 	d->y = s.y + s.h / 2 - d->h / 2;
 }
 
-JNIEXPORT void JNICALL 
+JNIEXPORT void JNICALL
 JAVA_EXPORT_NAME(Settings_nativeSetupScreenKeyboard) ( JNIEnv* env, jobject thiz,
 		jint size, jint drawsize, jint theme, jint _transparency, jint _floatingScreenJoystick, jint buttonAmount )
 {
@@ -986,7 +986,7 @@ static int setupScreenKeyboardButtonTexture( GLTexture_t * data, Uint8 * charBuf
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture_w, texture_h, 0, GL_RGBA,
 					bpp == 4 ? GL_UNSIGNED_BYTE : (format ? GL_UNSIGNED_SHORT_4_4_4_4 : GL_UNSIGNED_SHORT_5_5_5_1), NULL);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	
+
 	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, w, h, GL_RGBA,
 						bpp == 4 ? GL_UNSIGNED_BYTE : (format ? GL_UNSIGNED_SHORT_4_4_4_4 : GL_UNSIGNED_SHORT_5_5_5_1),
 						charBuf + 3*sizeof(int) );
@@ -1097,7 +1097,7 @@ static int setupScreenKeyboardButtonDualShock( int buttonID, Uint8 * charBuf )
 
 	for( i = 1; i <=4; i++ )
 		arrowImages[i] = arrowImages[0];
-	
+
 	for( i = 2; i < MAX_BUTTONS; i++ )
 		buttonImages[i * 2 + 1] = buttonImages[i * 2];
 
@@ -1138,7 +1138,7 @@ static int setupScreenKeyboardButton( int buttonID, Uint8 * charBuf, int count )
 }
 
 
-JNIEXPORT void JNICALL 
+JNIEXPORT void JNICALL
 JAVA_EXPORT_NAME(Settings_nativeSetupScreenKeyboardButtons) ( JNIEnv*  env, jobject thiz, jbyteArray charBufJava )
 {
 	jboolean isCopy = JNI_TRUE;
@@ -1147,10 +1147,10 @@ JAVA_EXPORT_NAME(Settings_nativeSetupScreenKeyboardButtons) ( JNIEnv*  env, jobj
 	int but, pos, count;
 	memcpy(&count, charBuf, sizeof(int));
 	count = ntohl(count);
-	
+
 	for( but = 0, pos = sizeof(int); pos < len; but ++ )
 		pos += setupScreenKeyboardButton( but, charBuf + pos, count );
-	
+
 	(*env)->ReleaseByteArrayElements(env, charBufJava, (jbyte *)charBuf, 0);
 }
 
@@ -1214,7 +1214,7 @@ int SDL_ANDROID_SetScreenKeyboardButtonPos(int buttonId, SDL_Rect * pos)
 {
 	if( buttonId < 0 || buttonId >= SDL_ANDROID_SCREENKEYBOARD_BUTTON_NUM || ! pos )
 		return 0;
-	
+
 	if( buttonId >= SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD && buttonId <= SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD3 )
 	{
 		int i = buttonId - SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD;
@@ -1251,7 +1251,7 @@ int SDL_ANDROID_GetScreenKeyboardButtonPos(int buttonId, SDL_Rect * pos)
 {
 	if( buttonId < 0 || buttonId >= SDL_ANDROID_SCREENKEYBOARD_BUTTON_NUM || ! pos )
 		return 0;
-	
+
 	if( buttonId >= SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD && buttonId <= SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD3 )
 	{
 		*pos = arrows[buttonId - SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD];

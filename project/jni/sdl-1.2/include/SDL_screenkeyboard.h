@@ -190,13 +190,13 @@ enum
    Analog thumb joysticks will send keycodes instead of joystick events
    only if SDL_JoystickOpen() was NOT called for joystick IDs from 2 to 5. */
 extern DECLSPEC void SDLCALL SDL_ANDROID_SetIndividualGamepadKeymap(int GamepadId,
-	int A, int B, int X, int Y, int L1, int R1, int L2, int R2, int LThumb, int RThumb,
+	int A, int B, int X, int Y, int C, int Z, int L1, int R1, int L2, int R2, int LThumb, int RThumb,
 	int Start, int Select, int Up, int Down, int Left, int Right,
 	int LThumbUp, int LThumbDown, int LThumbLeft, int LThumbRight,
 	int RThumbUp, int RThumbDown, int RThumbLeft, int RThumbRight);
 
 /* Deprecated API, will change keymap for all gamepads */
-extern DECLSPEC void SDLCALL SDL_ANDROID_SetGamepadKeymap(int A, int B, int X, int Y, int L1, int R1, int L2, int R2, int LThumb, int RThumb);
+extern DECLSPEC void SDLCALL SDL_ANDROID_SetGamepadKeymap(int A, int B, int X, int Y, int C, int Z, int L1, int R1, int L2, int R2, int LThumb, int RThumb);
 
 /* Set SDL keycode for hardware Android key. Android keycodes are defined here:
 http://developer.android.com/reference/android/view/KeyEvent.html#KEYCODE_0
