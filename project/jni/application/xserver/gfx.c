@@ -15,6 +15,7 @@
 #include <SDL/SDL_ttf.h>
 #include <SDL/SDL_screenkeyboard.h>
 #include <SDL/SDL_android.h>
+#include <savepng.h>
 #include <android/log.h>
 
 #include "gfx.h"
@@ -83,9 +84,13 @@ static int unpackFiles(const char *archive, const char *script, const char *dele
 	if( strlen(deleteOldDataMarkerFile) > 0 && stat( fname2, &st ) == 0 )
 	{
 		__android_log_print(ANDROID_LOG_INFO, "XSDL", "Upgrade detected, showing warning dialog");
+		//upgradeWarning = UPGRADE_WARNING_PROCEED;
+		upgradeWarning = UPGRADE_WARNING_CANCEL;
+		/*
 		upgradeWarning = UPGRADE_WARNING_ASK;
 		while( upgradeWarning == UPGRADE_WARNING_ASK )
 			SDL_Delay(200);
+		*/
 		if( upgradeWarning == UPGRADE_WARNING_CANCEL )
 			return 1;
 		__android_log_print(ANDROID_LOG_INFO, "XSDL", "Deleting old installation...");
@@ -113,7 +118,7 @@ static int unpackFiles(const char *archive, const char *script, const char *dele
 			if( (uint64_t)freeSpace.f_bsize * (uint64_t)freeSpace.f_bavail < (uint64_t)freeSpaceRequiredMb * 1024 * 1024 )
 			{
 				sprintf(unpackLog[0], "Error: not enough free space on internal storage");
-				sprintf(unpackLog[1], "Available %llu Mb, required %d Mb", (uint64_t)freeSpace.f_bsize * freeSpace.f_bavail / 1024 / 1024, freeSpaceRequiredMb);
+				sprintf(unpackLog[1], "Available %llu Mb, required %d Mb", (long long)freeSpace.f_bsize * freeSpace.f_bavail / 1024 / 1024, freeSpaceRequiredMb);
 				sprintf(unpackLog[2], "Uninstall large apps to free more space on internal storage");
 				sleep(1);
 				continue;
@@ -192,32 +197,9 @@ static int unpackFiles(const char *archive, const char *script, const char *dele
 	strcat( fname, script );
 	if( stat( fname, &st ) != 0 )
 	{
-		strcpy( fname2, getenv("UNSECURE_STORAGE_DIR") );
-		strcat( fname2, "/" );
-		strcat( fname2, script );
-		if( stat( fname2, &st ) != 0 )
-		{
-			__android_log_print(ANDROID_LOG_INFO, "XSDL", "Cannot find postinstall script");
-			return 1;
-		}
-		else
-		{
-			strcpy( fname2, "cat " );
-			strcat( fname2, getenv("UNSECURE_STORAGE_DIR") );
-			strcat( fname2, "/" );
-			strcat( fname2, script );
-			strcat( fname2, " > " );
-			strcat( fname2, fname );
-			__android_log_print(ANDROID_LOG_INFO, "XSDL", "Copying postinstall script from SD card: %s", fname2);
-			system( fname2 );
-		}
+		__android_log_print(ANDROID_LOG_INFO, "XSDL", "Cannot find postinstall script");
+		return 1;
 	}
-
-	__android_log_print(ANDROID_LOG_INFO, "XSDL", "Setting executable permissions on postinstall script");
-
-	strcpy( fname2, "chmod 755 " );
-	strcat( fname2, fname );
-	system( fname2 );
 
 	__android_log_print(ANDROID_LOG_INFO, "XSDL", "Running postinstall scipt: %s", script);
 
@@ -233,7 +215,7 @@ static int unpackFiles(const char *archive, const char *script, const char *dele
 			break;
 		if( strchr(buf, '\n') != NULL )
 			strchr(buf, '\n')[0] = 0;
-		__android_log_print(ANDROID_LOG_INFO, "XSDL", "> %s", buf);
+		__android_log_print(ANDROID_LOG_VERBOSE, "XSDL", "> %s", buf);
 		strncpy(unpackLog[3], unpackLog[2], sizeof(unpackLog[0]) - 4);
 		strncpy(unpackLog[2], unpackLog[1], sizeof(unpackLog[0]) - 4);
 		strncpy(unpackLog[1], unpackLog[0], sizeof(unpackLog[0]) - 4);
@@ -250,7 +232,7 @@ static void * unpackFilesThread(void * unused)
 {
 	const char *unpack[][4] =
 	{
-		{ "data.tar.gz", "postinstall.sh", "usr/lib/xorg/protocol.txt", "img img-* postinstall.sh update*.sh" },
+		{ "data.tar.gz", "usr/bin/postinstall.sh", "usr/lib/xorg/protocol.txt", "img img-* postinstall.sh update*.sh" },
 		{ "xfonts.tar.gz", "", "", "" },
 		{ "update1.tar.gz", "update1.sh", "", "" },
 		{ "update2.tar.gz", "update2.sh", "", "" },
@@ -279,8 +261,58 @@ static void * unpackFilesThread(void * unused)
 	return (void *)1;
 }
 
+static void symlinkUsrBin(void)
+{
+	char libname[PATH_MAX];
+	char targetname[PATH_MAX];
+	char libpath[PATH_MAX];
+	char targetpath[PATH_MAX];
+	char mappingpath[PATH_MAX];
+	FILE *mapping;
+
+	sprintf( mappingpath, "%s/bin-map-%s.txt", getenv("DATADIR"), XSDL_ARCH );
+	__android_log_print(ANDROID_LOG_INFO, "XSDL", "Opening %s", mappingpath);
+	mapping = fopen(mappingpath, "rb");
+	if (!mapping)
+	{
+		__android_log_print(ANDROID_LOG_INFO, "XSDL", "Opening %s failed", mappingpath);
+		return;
+	}
+
+	sprintf( targetpath, "%s/usr", getenv("APPDIR") );
+	mkdir(targetpath, 0700);
+
+	sprintf( targetpath, "%s/usr/bin", getenv("APPDIR") );
+	mkdir(targetpath, 0700);
+
+	while (fgets(libname, sizeof(libname), mapping) &&
+			fgets(targetname, sizeof(targetname), mapping))
+	{
+		if (strchr(libname, '\n'))
+			strchr(libname, '\n')[0] = 0;
+		if (strchr(targetname, '\n'))
+			strchr(targetname, '\n')[0] = 0;
+		sprintf( libpath, "%s/%s", getenv("LIBDIR"), libname );
+		sprintf( targetpath, "%s/usr/bin/%s", getenv("APPDIR"), targetname );
+		__android_log_print(ANDROID_LOG_INFO, "XSDL", "ln -s %s %s", libpath, targetpath);
+		remove(targetpath);
+		symlink(libpath, targetpath);
+	}
+	fclose(mapping);
+
+	sprintf(targetpath, "%s/busybox", getenv("APPDIR"));
+	remove(targetpath);
+	symlink("usr/bin/busybox", targetpath);
+	__android_log_print(ANDROID_LOG_INFO, "XSDL", "ln -s usr/bin/busybox %s", targetpath);
+
+	// Reinstalling the app with the same version number will change LIBDIR, so update symlinks on each start
+	//remove(mappingpath);
+}
+
 void XSDL_unpackFiles(int _freeSpaceRequiredMb)
 {
+	symlinkUsrBin();
+
 	pthread_t thread_id;
 	void * status;
 	memset(unpackLog, 0, sizeof(unpackLog));
@@ -335,7 +367,7 @@ void XSDL_unpackFiles(int _freeSpaceRequiredMb)
 		renderString(unpackLog[3], VID_X/2, VID_Y*5/8);
 		progress++;
 		renderString(progressWheel[progress % PROGRESS_WHEEL_NUM], VID_X/2, VID_Y*6/8);
-		renderString("You may put this app to background while it's unpacking", VID_X/2, VID_Y*7/8);
+		renderString("Unpacking data ...", VID_X/2, VID_Y*7/8);
 		SDL_Flip(SDL_GetVideoSurface());
 		int x = 0, y = 0;
 		while( upgradeWarning == UPGRADE_WARNING_ASK )
@@ -394,12 +426,13 @@ void XSDL_unpackFiles(int _freeSpaceRequiredMb)
 	SDL_JoystickClose(j0);
 }
 
-void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, int * displayH, int * builtinKeyboard, int * ctrlAltShiftKeys)
+void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, int * displayH, int * builtinKeyboard, int * ctrlAltShiftKeys, char * portStr, int * pulseAudio)
 {
 	int x = 0, y = 0, i, ii;
 	SDL_Event event;
 	int res = -1, dpi = -1;
 	int customX = 1000, customY = 1000;
+	int port = atoi(portStr + 1);
 	enum { MODE_CUSTOM = 11 };
 	char native[32] = "0x0", native56[32], native46[32], native36[32], native26[32];
 	char custom[32] = "1000x1000";
@@ -460,10 +493,15 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 	cfgfile = fopen(cfgpath, "r");
 	if( cfgfile )
 	{
-		fscanf(cfgfile, "%d %d %d %d %d %d", &savedRes, &savedDpi, &customX, &customY, builtinKeyboard, ctrlAltShiftKeys);
+		fscanf(cfgfile, "%d %d %d %d %d %d %d %d", &savedRes, &savedDpi, &customX, &customY, builtinKeyboard, ctrlAltShiftKeys, &port, pulseAudio);
 		fclose(cfgfile);
+		if (strcmp(portStr, ":0") != 0)
+		{
+			port = atoi(portStr + 1);
+		}
 	}
 	sprintf(custom, "%dx%d", customX, customY);
+	sprintf(portStr, ":%d", port);
 
 	int counter = 3000, config = 0;
 	Uint32 curtime = SDL_GetTicks();
@@ -497,10 +535,16 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 		y += 30;
 		sprintf(buf, "Keyboard: %s", *builtinKeyboard == 0 ? "System" : *builtinKeyboard == 1 ? "Builtin QWERTY" : "System + Builtin");
 		renderString(buf, vertical ? VID_Y / 2 : VID_X/2, y);
+		y += 30;
+		sprintf(buf, "Display number: %d", port);
+		renderString(buf, vertical ? VID_Y / 2 : VID_X/2, y);
+		y += 30;
+		sprintf(buf, "Ctrl/Alt/Shift overlay: %s", *ctrlAltShiftKeys == 0 ? "No" : *ctrlAltShiftKeys == 1 ? "Yes, left side" : "Yes, right side");
+		renderString(buf, vertical ? VID_Y / 2 : VID_X/2, y);
 		y += 40;
 		sprintf(buf, "Starting in %d seconds", counter / 1000 + 1);
 		renderString(buf, vertical ? VID_Y / 2 : VID_X/2, y);
-		SDL_Delay(100);
+		SDL_Delay(50);
 		SDL_Flip(SDL_GetVideoSurface());
 		counter -= SDL_GetTicks() - curtime;
 		curtime = SDL_GetTicks();
@@ -513,7 +557,10 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 	}
 
 	SDL_Joystick * j0 = SDL_JoystickOpen(0);
+	int mouse = 0;
 
+	x = 0;
+	y = 0;
 	while ( res < 0 )
 	{
 		while (SDL_PollEvent(&event))
@@ -526,7 +573,6 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 				break;
 				case SDL_MOUSEBUTTONUP:
 				{
-					//SDL_GetMouseState(&x, &y);
 					if( vertical )
 					{
 						int z = x;
@@ -539,7 +585,19 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 					__android_log_print(ANDROID_LOG_INFO, "XSDL", "Screen coords %d %d res %d\n", x, y, res);
 				}
 				break;
+				case SDL_MOUSEMOTION:
+					if (mouse > 2)
+					{
+						x = event.motion.x;
+						y = event.motion.y;
+					}
+					else
+					{
+						mouse++;
+					}
+				break;
 				case SDL_JOYBALLMOTION:
+					mouse = 0;
 					x = event.jball.xrel;
 					y = event.jball.yrel;
 				break;
@@ -561,9 +619,9 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 			if( i == 2 && ii == 3 && !vertical )
 				renderString("custom", VID_X/8 + (ii*VID_X/4), VID_Y/6 - VID_Y/12 + (i*VID_Y/3));
 		}
-		//SDL_GetMouseState(&x, &y);
-		//renderString("X", x, y);
-		SDL_Delay(100);
+
+		renderString("∆", x, y);
+		SDL_Delay(50);
 		SDL_Flip(SDL_GetVideoSurface());
 		if (res == MODE_CUSTOM)
 		{
@@ -609,7 +667,7 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 					renderString("Enter height:", VID_X/8, VID_Y/6);
 				renderString("Press Enter when done", VID_X*3/4, VID_Y/6);
 				renderString(custom, VID_X/8 + VID_X/4, VID_Y/6);
-				SDL_Delay(100);
+				SDL_Delay(50);
 				SDL_Flip(SDL_GetVideoSurface());
 			}
 			__android_log_print(ANDROID_LOG_INFO, "XSDL", "Selected custom display resolution: %s = %d %d", custom, customX, customY);
@@ -622,6 +680,9 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 		*resolutionW = customX;
 		*resolutionH = customY;
 	}
+
+	x = 0;
+	y = 0;
 	while ( dpi < 0 )
 	{
 		while (SDL_PollEvent(&event))
@@ -634,7 +695,6 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 				break;
 				case SDL_MOUSEBUTTONUP:
 				{
-					//SDL_GetMouseState(&x, &y);
 					if( vertical )
 					{
 						int z = x;
@@ -644,10 +704,22 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 					i = (y / (VID_Y/4));
 					ii = (x / (VID_X/4));
 					dpi = i * 4 + ii;
-					__android_log_print(ANDROID_LOG_INFO, "XSDL", "Screen coords %d %d dpi %d\n", x, y, res);
+					__android_log_print(ANDROID_LOG_INFO, "XSDL", "Screen coords %d %d dpi %d\n", x, y, dpi);
 				}
 				break;
+				case SDL_MOUSEMOTION:
+					if (mouse > 2)
+					{
+						x = event.motion.x;
+						y = event.motion.y;
+					}
+					else
+					{
+						mouse++;
+					}
+				break;
 				case SDL_JOYBALLMOTION:
+					mouse = 0;
 					x = event.jball.xrel;
 					y = event.jball.yrel;
 				break;
@@ -664,14 +736,16 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 			else
 				renderStringScaled(fontsStr[i*4+ii], scale, VID_X/8 + (ii*VID_X/4), VID_Y/8 + (i*VID_Y/4), 255, 255, 255, SDL_GetVideoSurface());
 		}
-		//SDL_GetMouseState(&x, &y);
-		//renderString("X", x, y);
-		SDL_Delay(100);
+
+		renderString("∆", x, y);
+		SDL_Delay(50);
 		SDL_Flip(SDL_GetVideoSurface());
 	}
 	*displayW = *displayW / fontsVal[dpi];
 	*displayH = *displayH / fontsVal[dpi];
 
+	x = 0;
+	y = 0;
 	okay = !config;
 	while ( !okay )
 	{
@@ -685,23 +759,55 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 				break;
 				case SDL_MOUSEBUTTONUP:
 				{
-					//SDL_GetMouseState(&x, &y);
 					if( vertical )
 					{
 						int z = x;
 						x = y;
 						y = z;
 					}
-					if( y > 0 && y < VID_Y * 2 / 6 )
+					if( y > 0 && y < VID_Y * 1.5f / 6 )
+					{
 						*builtinKeyboard = (*builtinKeyboard + 1) % 3;
-					if( y > VID_Y * 2 / 6 &&  y < VID_Y * 4 / 6 )
-						*ctrlAltShiftKeys = !*ctrlAltShiftKeys;
-					if( y > VID_Y * 4 / 6 &&  y < VID_Y * 6 / 6 )
+					}
+					if( y > VID_Y * 1.5f / 6 &&  y < VID_Y * 2.5f / 6 )
+					{
+						*ctrlAltShiftKeys = *ctrlAltShiftKeys + 1;
+						if (*ctrlAltShiftKeys > 2)
+						{
+							*ctrlAltShiftKeys = 0;
+						}
+					}
+					if( y > VID_Y * 2.5f / 6 &&  y < VID_Y * 3.5f / 6 )
+					{
+						port ++;
+						port %= 4;
+					}
+					if( y > VID_Y * 3.5f / 6 &&  y < VID_Y * 4.5f / 6 )
+					{
+						*pulseAudio = !(*pulseAudio);
+					}
+					if( y > VID_Y * 4.5 / 6 &&  y < VID_Y * 6 / 6 )
+					{
 						okay = 1;
-					__android_log_print(ANDROID_LOG_INFO, "XSDL", "Screen coords %d %d dpi %d\n", x, y, res);
+					}
+					__android_log_print(ANDROID_LOG_INFO, "XSDL", "Screen coords %d %d\n", x, y);
+					x = 0;
+					y = 0;
 				}
 				break;
+				case SDL_MOUSEMOTION:
+					if (mouse > 2)
+					{
+						x = event.motion.x;
+						y = event.motion.y;
+					}
+					else
+					{
+						mouse++;
+					}
+				break;
 				case SDL_JOYBALLMOTION:
+					mouse = 0;
 					x = event.jball.xrel;
 					y = event.jball.yrel;
 				break;
@@ -714,13 +820,20 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 		sprintf(buf, "Keyboard: %s", *builtinKeyboard == 0 ? "System" : *builtinKeyboard == 1 ? "Builtin QWERTY" : "System + Builtin");
 		renderString(buf, VID_X/2, VID_Y * 1 / 6);
 
-		sprintf(buf, "Separate Ctrl/Alt/Shift keys: %s", *ctrlAltShiftKeys == 0 ? "No" : "Yes");
+		sprintf(buf, "Ctrl/Alt/Shift overlay: %s", *ctrlAltShiftKeys == 0 ? "No" : *ctrlAltShiftKeys == 1 ? "Yes, left side" : "Yes, right side");
+		renderString(buf, VID_X/2, VID_Y * 2 / 6);
+
+		sprintf(buf, "Display number: %d", port);
 		renderString(buf, VID_X/2, VID_Y * 3 / 6);
+
+		sprintf(buf, "PulseAudio: %s", *pulseAudio ? "Yes" : "No");
+		renderString(buf, VID_X/2, VID_Y * 4 / 6);
 
 		sprintf(buf, "Okay");
 		renderString(buf, VID_X/2, VID_Y * 5 / 6);
 
-		SDL_Delay(100);
+		renderString("∆", x, y);
+		SDL_Delay(50);
 		SDL_Flip(SDL_GetVideoSurface());
 	}
 
@@ -731,10 +844,11 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 		cfgfile = fopen(cfgpath, "w");
 		if( cfgfile )
 		{
-			fprintf(cfgfile, "%d %d %d %d %d %d\n", res, dpi, customX, customY, *builtinKeyboard, *ctrlAltShiftKeys);
+			fprintf(cfgfile, "%d %d %d %d %d %d %d %d\n", res, dpi, customX, customY, *builtinKeyboard, *ctrlAltShiftKeys, port, *pulseAudio);
 			fclose(cfgfile);
 		}
 	}
+	sprintf(portStr, ":%d", port);
 }
 
 void XSDL_generateBackground(const char * port, int showHelp, int resolutionW, int resolutionH)
@@ -743,8 +857,9 @@ void XSDL_generateBackground(const char * port, int showHelp, int resolutionW, i
 	struct ifconf ifc;
 	struct ifreq ifr[20];
 	SDL_Surface * surf;
-	int y = resolutionH * 1 / 6;
+	int y = resolutionH * 30 / VID_Y;
 	char msg[128];
+	char clipboard[8192] = "";
 
 	if (resolutionH > resolutionW)
 		resolutionH = resolutionW;
@@ -753,13 +868,16 @@ void XSDL_generateBackground(const char * port, int showHelp, int resolutionW, i
 	{
 		surf = SDL_CreateRGBSurface(SDL_SWSURFACE, 16, 16, 24, 0x0000ff, 0x00ff00, 0xff0000, 0);
 		SDL_FillRect(surf, NULL, 0x00002f);
-		SDL_SaveBMP(surf, "background.bmp");
+		SDL_SavePNG(surf, "background.png");
 		SDL_FreeSurface(surf);
 		return;
 	}
 
 	surf = SDL_CreateRGBSurface(SDL_SWSURFACE, resolutionW, resolutionH, 24, 0x0000ff, 0x00ff00, 0xff0000, 0);
-	SDL_FillRect(surf, NULL, 0x00002f);
+	SDL_FillRect(surf, NULL, 0x7f0000);
+
+	renderStringScaled("To show keyboard, tap Back < or swipe from the screen edge", 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+	y += resolutionH * 30 / VID_Y;
 
 	renderStringScaled("Launch these commands on your Linux PC:", 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
 	y += resolutionH * 30 / VID_Y;
@@ -792,18 +910,23 @@ void XSDL_generateBackground(const char * port, int showHelp, int resolutionW, i
 					continue;
 				sprintf (msg, "export DISPLAY=%s%s", saddr, port);
 				renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+				strcat(clipboard, msg); strcat(clipboard, "\n");
 				y += resolutionH * 15 / VID_Y;
-				sprintf (msg, "export PULSE_SERVER=tcp:%s:4712", saddr);
+				sprintf (msg, "export PULSE_SERVER=tcp:%s:4713", saddr);
 				renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+				strcat(clipboard, msg); strcat(clipboard, "\n");
 				y += resolutionH * 15 / VID_Y;
-				sprintf (msg, "metacity & gimp");
+				sprintf (msg, "xfwm4 & firefox");
 				renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+				strcat(clipboard, msg); strcat(clipboard, "\n");
 				y += resolutionH * 20 / VID_Y;
 			}
 		}
 
 		close(sd);
 	}
+
+	SDL_SetClipboardText(clipboard);
 
 	y += resolutionH * 10 / VID_Y;
 	sprintf (msg, "To tunnel X over SSH, forward port %d", atoi(port+1) + 6000);
@@ -816,19 +939,18 @@ void XSDL_generateBackground(const char * port, int showHelp, int resolutionW, i
 	sprintf (msg, "If you run Linux in chroot on this device, run:");
 	renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
 	y += resolutionH * 15 / VID_Y;
-	sprintf (msg, "export DISPLAY=:0 PULSE_SERVER=tcp:127.0.0.1:4712");
+	sprintf (msg, "export DISPLAY=:0 PULSE_SERVER=tcp:127.0.0.1:4713");
 	renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
 
-	SDL_SaveBMP(surf, "background.bmp");
+	SDL_SavePNG(surf, "background.png");
 	SDL_FreeSurface(surf);
 }
 
 void XSDL_showServerLaunchErrorMessage()
 {
 	showErrorMessage(	"Error: X server failed to launch.\n\n"
-						"This may happen because of SELinux,\n"
-						"or because installation was corrupted.\n"
-						"Either way, this app will not work, which is sad.");
+						"Try to use different display number,\n"
+						"reboot your device, or reinstall the app.");
 }
 
 void showErrorMessage(const char *msg)
@@ -915,11 +1037,14 @@ void renderString(const char *c, int x, int y)
 
 void renderStringScaled(const char *c, int size, int x, int y, int r, int g, int b, SDL_Surface * surf)
 {
+	char fontpath[PATH_MAX];
 	if (!c || !c[0])
 		return;
 	SDL_Color fColor = {r, g, b};
 	SDL_Rect fontRect = {0, 0, 0, 0};
-	TTF_Font* font = TTF_OpenFont("DroidSansMono.ttf", size);
+	strcpy( fontpath, getenv("UNSECURE_STORAGE_DIR") );
+	strcat( fontpath, "/DroidSansMono.ttf" );
+	TTF_Font* font = TTF_OpenFont(fontpath, size);
 	SDL_Surface* fontSurface = TTF_RenderUTF8_Solid(font, c, fColor);
 	TTF_CloseFont(font);
 	fontRect.w = fontSurface->w;

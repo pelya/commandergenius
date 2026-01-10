@@ -1,0 +1,11 @@
+NOTE: This is a fork of https://github.com/pelya/openttd-android since development there is on hold currently.
+
+OpenTTD is an open source reimplementation of the Microprose game Transport Tycoon Deluxe (TTD). As president of a start-up transportation company in (typically) 1950, you have a choice of building rail, road, air and maritime transportation routes to build up your transportation empire. Outsmart your competition by beating them to attractive passenger and commodities routes to become the game's highest-ranking transport company by the year 2050.
+
+OpenTTD is based on Chris Sawyer's Transport Tycoon Deluxe and introduces a whole set of new features, including multiplayer support, better stations and vehicles, larger maps and a host of other options. 
+
+Posting a full list of features would be futile as it would mean updating this page almost daily, and even then some things might be forgotten. Play with the game to experience all the features yourself, or take a look at the <a href="https://wiki.openttd.org/en/Manual/">Manual</a> for a more thorough listing and explanation of the features and possibilities available.
+
+Tips:
+* Scroll the map with two fingers, when you are building roads or stations.
+* Close dialogs by dragging them to the screen edge.

@@ -118,10 +118,10 @@ static int touchPointers[MAX_MULTITOUCH_POINTERS] = {0};
 static int firstMousePointerId = -1, secondMousePointerId = -1;
 enum { MAX_MULTITOUCH_GESTURES = 4 };
 static int multitouchGestureKeycode[MAX_MULTITOUCH_GESTURES] = {
-SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREENKB_KEYCODE_6)),
-SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREENKB_KEYCODE_7)),
-SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREENKB_KEYCODE_8)),
-SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREENKB_KEYCODE_9))
+SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREEN_GESTURE_KEYCODE_0)),
+SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREEN_GESTURE_KEYCODE_1)),
+SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREEN_GESTURE_KEYCODE_2)),
+SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREEN_GESTURE_KEYCODE_3))
 };
 static int multitouchGestureSensitivity = 0;
 static int multitouchGestureDist = -1;
@@ -132,8 +132,8 @@ static int multitouchGestureMiddleX = -1;
 static int multitouchGestureMiddleY = -1;
 static int multitouchGestureHappened = 0;
 enum { MULTITOUCH_MOUSE_WHEEL_DIST = 20 };
-int SDL_ANDROID_TouchscreenCalibrationWidth = 480;
-int SDL_ANDROID_TouchscreenCalibrationHeight = 320;
+int SDL_ANDROID_TouchscreenCalibrationWidth = 0;
+int SDL_ANDROID_TouchscreenCalibrationHeight = 0;
 int SDL_ANDROID_TouchscreenCalibrationX = 0;
 int SDL_ANDROID_TouchscreenCalibrationY = 0;
 static int leftClickTimeout = 0;
@@ -166,7 +166,7 @@ static int moveMouseWithGyroscope = 0;
 static float moveMouseWithGyroscopeSpeed = 5.0f;
 static int moveMouseWithGyroscopeX = 0;
 static int moveMouseWithGyroscopeY = 0;
-static int forceScreenUpdateMouseClick = 1;
+static int forceScreenUpdateMouseClick = 0;
 
 static pthread_t mouseClickTimeoutThreadId = 0;
 static sem_t mouseClickTimeoutSemaphore;
@@ -309,14 +309,19 @@ static void AdjustTouchScreenCalibration( jint *xx, jint *yy )
 {
 	int x = *xx, y = *yy;
 
-	x -= SDL_ANDROID_TouchscreenCalibrationX;
-	y -= SDL_ANDROID_TouchscreenCalibrationY;
+	if( SDL_ANDROID_TouchscreenCalibrationWidth > 0 )
+	{
+		x -= SDL_ANDROID_TouchscreenCalibrationX;
+		y -= SDL_ANDROID_TouchscreenCalibrationY;
+		x = x * SDL_ANDROID_sRealWindowWidth / SDL_ANDROID_TouchscreenCalibrationWidth;
+		y = y * SDL_ANDROID_sRealWindowHeight / SDL_ANDROID_TouchscreenCalibrationHeight;
+	}
+
 #if SDL_VIDEO_RENDER_RESIZE
 	// Translate mouse coordinates
-
 	x -= (SDL_ANDROID_sRealWindowWidth - SDL_ANDROID_sWindowWidth) / 2;
-	x = x * SDL_ANDROID_sFakeWindowWidth / SDL_ANDROID_TouchscreenCalibrationWidth;
-	y = y * SDL_ANDROID_sFakeWindowHeight / SDL_ANDROID_TouchscreenCalibrationHeight;
+	x = x * SDL_ANDROID_sFakeWindowWidth / SDL_ANDROID_sWindowWidth;
+	y = y * SDL_ANDROID_sFakeWindowHeight / SDL_ANDROID_sWindowHeight;
 	if( x < 0 )
 		x = 0;
 	if( x > SDL_ANDROID_sFakeWindowWidth )
@@ -325,10 +330,6 @@ static void AdjustTouchScreenCalibration( jint *xx, jint *yy )
 		y = 0;
 	if( y > SDL_ANDROID_sFakeWindowHeight )
 		y = SDL_ANDROID_sFakeWindowHeight;
-	
-#else
-	x = x * SDL_ANDROID_sRealWindowWidth / SDL_ANDROID_TouchscreenCalibrationWidth;
-	y = y * SDL_ANDROID_sRealWindowHeight / SDL_ANDROID_TouchscreenCalibrationHeight;
 #endif
 
 	*xx = x;
@@ -463,6 +464,12 @@ static void SendMultitouchEvents( int x, int y, int action, int pointerId, int f
 		SDL_ANDROID_MainThreadPushJoystickBall(JOY_TOUCHSCREEN, pointerId, x, y);
 		if( action == MOUSE_UP )
 			SDL_ANDROID_MainThreadPushJoystickButton(JOY_TOUCHSCREEN, pointerId, SDL_RELEASED);
+		if( !SDL_ANDROID_isMouseUsed && pointerId == 0 )
+		{
+			// Set mouse coordinates to track the first touch pointer, they are used elsewhere but not updated when mouse events are disabled
+			SDL_ANDROID_currentMouseX = x;
+			SDL_ANDROID_currentMouseY = y;
+		}
 	}
 
 	if( !isMultitouchUsed && !SDL_ANDROID_isMouseUsed && !SDL_ANDROID_isTouchscreenKeyboardUsed )
@@ -478,7 +485,7 @@ static void ProcessMouseRelativeMovement( jint *xx, jint *yy, int action )
 {
 	int x = *xx, y = *yy;
 
-	if( !relativeMovement )
+	if( !relativeMovement || hardwareMouseDetected )
 		return;
 
 	if( action == MOUSE_DOWN )
@@ -541,10 +548,9 @@ static void ProcessMouseUp( int x, int y )
 		abs(mouseInitialY - y) < SDL_ANDROID_sFakeWindowHeight / 16 &&
 		SDL_GetTicks() - mouseInitialTime < 700 )
 	{
-		SDL_ANDROID_MainThreadPushMouseMotion( mouseInitialX, mouseInitialY );
 		SDL_ANDROID_MainThreadPushMouseButton( SDL_PRESSED, SDL_BUTTON_LEFT );
-		if( forceScreenUpdateMouseClick && mouseInitialX > 0 )
-			SDL_ANDROID_MainThreadPushMouseMotion( mouseInitialX - 1, mouseInitialY );
+		if( forceScreenUpdateMouseClick && x > 0 )
+			SDL_ANDROID_MainThreadPushMouseMotion( x - 1, y );
 		mouseInitialX = -1;
 		mouseInitialY = -1;
 		deferredMouseTap = 2;
@@ -862,9 +868,9 @@ JAVA_EXPORT_NAME(DemoGLSurfaceView_nativeMotionEvent) ( JNIEnv*  env, jobject  t
 
 	if( ProcessTouchscreenKeyboard( x, y, action, pointerId ) )
 		return;
-	
+
 	AssignNewTouchPointers( action, pointerId );
-	
+
 	AdjustTouchScreenCalibration( &x, &y );
 
 	ProcessMultitouchGesture( x, y, action, pointerId );
@@ -966,6 +972,10 @@ static void ProcessMoveMouseWithGyroscope(float gx, float gy, float gz)
 void SDL_ANDROID_WarpMouse(int x, int y)
 {
 	//__android_log_print(ANDROID_LOG_INFO, "libSDL", "SDL_ANDROID_WarpMouse(): %dx%d rel %dx%d old %dx%d", x, y, relativeMovementX, relativeMovementY, SDL_ANDROID_currentMouseX, SDL_ANDROID_currentMouseY);
+	if( hardwareMouseDetected )
+	{
+		SDL_ANDROID_SetCapturedMousePosition(x, y);
+	}
 	relativeMovementX -= SDL_ANDROID_currentMouseX-x;
 	relativeMovementY -= SDL_ANDROID_currentMouseY-y;
 	SDL_ANDROID_MainThreadPushMouseMotion(x, y);
@@ -997,7 +1007,7 @@ JAVA_EXPORT_NAME(DemoGLSurfaceView_nativeKey) ( JNIEnv*  env, jobject thiz, jint
 	}
 
 	keycode = TranslateKeyGamepad(key, gamepadId);
-	//__android_log_print(ANDROID_LOG_INFO, "libSDL","nativeKey %d action %d translated %d unicode %d", key, action, keycode, unicode);
+	//__android_log_print(ANDROID_LOG_INFO, "libSDL","nativeKey %d action %d translated %d unicode %d unshifted %d", key, action, keycode, unicode, unshifted);
 
 	if( (int)keycode == SDLK_NO_REMAP || (keycode == SDLK_UNKNOWN && unicode == 0) )
 		return 0;

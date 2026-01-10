@@ -1,14 +1,18 @@
---- a/project/AndroidManifest.xml	2015-01-01 23:59:34.805231773 +0200
-+++ a/project/AndroidManifest.xml	2015-01-01 23:59:45.189378809 +0200
-@@ -43,6 +43,19 @@
- 				 android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
+--- a/project/AndroidManifest.xml	2025-05-02 10:27:57.225677144 +0300
++++ b/project/AndroidManifest.xml	2025-05-02 10:28:19.613269757 +0300
+@@ -47,8 +47,22 @@
  				 android:enabled="true"
- 		/>
+ 				 android:foregroundServiceType="specialUse"
+ 			<property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+-					  android:value="Keep the app running in background"/>
++					  android:value="Keep the X server running in background. Stopping it will terminate all X11 applications that are connected to this server."/>
+ 		</service>
 +		<activity android:name=".RunFromOtherApp"
 +				  android:label="@string/app_name"
 +				  android:launchMode="standard"
 +				  android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
-+				  android:windowSoftInputMode="stateUnspecified">
++				  android:windowSoftInputMode="stateUnspecified"
++				  android:exported="true">
 +			<intent-filter>
 +				<action android:name="android.intent.action.RUN" />
 +				<action android:name="android.intent.action.MAIN" />
@@ -19,4 +23,4 @@
 +		</activity>
  	</application>
  
- 	<uses-sdk android:minSdkVersion="9" android:targetSdkVersion="23"/>
+ 	<!-- ==INTERNET== --> <uses-permission android:name="android.permission.INTERNET" />

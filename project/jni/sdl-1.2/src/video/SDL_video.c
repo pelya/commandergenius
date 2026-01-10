@@ -1437,7 +1437,7 @@ void *SDL_GL_GetProcAddress(const char* proc)
 
 	func = NULL;
 	if ( video->GL_GetProcAddress ) {
-#ifdef ANDROID
+#ifdef __ANDROID__
 		if ( 1 ) {
 #else
 		if ( video->gl_config.driver_loaded ) {

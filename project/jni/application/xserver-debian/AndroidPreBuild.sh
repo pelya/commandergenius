@@ -1,1 +1,1 @@
-../xserver-gimp/AndroidPreBuild.sh
+../xserver/AndroidPreBuild.sh

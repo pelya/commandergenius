@@ -48,7 +48,7 @@ If you compile this code with SDL 1.3 or newer, or use in some other way, the li
 #include "../events/SDL_sysevents.h"
 #include "../events/SDL_events_c.h"
 #endif
-#ifdef ANDROID
+#ifdef __ANDROID__
 #include <android/log.h>
 #endif
 

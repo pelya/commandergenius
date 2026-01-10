@@ -34,7 +34,7 @@
         <Key android:codes="30" android:keyLabel="b" />
         <Key android:codes="42" android:keyLabel="n" />
         <Key android:codes="41" android:keyLabel="m" />
-        <Key android:keyWidth="20.000004%p" android:codes="67" android:keyEdgeFlags="right" android:keyLabel="≪ ×" />
+        <Key android:keyWidth="20.000004%p" android:codes="67" android:keyEdgeFlags="right" android:keyLabel="⬅" />
     </Row>
     <Row android:rowEdgeFlags="bottom">
         <Key android:codes="-6" android:keyEdgeFlags="left" android:keyLabel="123…" />

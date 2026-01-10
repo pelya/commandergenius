@@ -324,6 +324,7 @@ class SettingsMenuMisc extends SettingsMenu
 				p.getResources().getString(R.string.mouse_keepaspectratio),
 				p.getResources().getString(R.string.video_smooth),
 				p.getResources().getString(R.string.video_immersive),
+				p.getResources().getString(R.string.video_draw_cutout),
 				p.getResources().getString(R.string.video_orientation_autodetect),
 				p.getResources().getString(R.string.video_orientation_vertical),
 				p.getResources().getString(R.string.video_bpp_24),
@@ -333,6 +334,7 @@ class SettingsMenuMisc extends SettingsMenu
 				Globals.KeepAspectRatio,
 				Globals.VideoLinearFilter,
 				Globals.ImmersiveMode,
+				Globals.DrawInDisplayCutout,
 				Globals.AutoDetectOrientation,
 				!Globals.HorizontalOrientation,
 				Globals.VideoDepthBpp == 24,
@@ -345,6 +347,7 @@ class SettingsMenuMisc extends SettingsMenu
 					p.getResources().getString(R.string.mouse_keepaspectratio),
 					p.getResources().getString(R.string.video_smooth),
 					p.getResources().getString(R.string.video_immersive),
+					p.getResources().getString(R.string.video_draw_cutout),
 					p.getResources().getString(R.string.video_orientation_autodetect),
 					p.getResources().getString(R.string.video_orientation_vertical),
 					p.getResources().getString(R.string.video_bpp_24),
@@ -355,6 +358,7 @@ class SettingsMenuMisc extends SettingsMenu
 					Globals.KeepAspectRatio,
 					Globals.VideoLinearFilter,
 					Globals.ImmersiveMode,
+					Globals.DrawInDisplayCutout,
 					Globals.AutoDetectOrientation,
 					!Globals.HorizontalOrientation,
 					Globals.VideoDepthBpp == 24,
@@ -365,7 +369,7 @@ class SettingsMenuMisc extends SettingsMenu
 				defaults = defaults2;
 			}
 
-			if(Globals.Using_SDL_1_3)
+			if(Globals.UsingSDL2)
 			{
 				CharSequence[] items2 = {
 					p.getResources().getString(R.string.mouse_keepaspectratio),
@@ -390,14 +394,16 @@ class SettingsMenuMisc extends SettingsMenu
 					if( item == 2 )
 						Globals.ImmersiveMode = isChecked;
 					if( item == 3 )
-						Globals.AutoDetectOrientation = isChecked;
+						Globals.DrawInDisplayCutout = isChecked;
 					if( item == 4 )
-						Globals.HorizontalOrientation = !isChecked;
+						Globals.AutoDetectOrientation = isChecked;
 					if( item == 5 )
-						Globals.VideoDepthBpp = (isChecked ? 24 : 16);
+						Globals.HorizontalOrientation = !isChecked;
 					if( item == 6 )
-						Globals.TvBorders = isChecked;
+						Globals.VideoDepthBpp = (isChecked ? 24 : 16);
 					if( item == 7 )
+						Globals.TvBorders = isChecked;
+					if( item == 8 )
 						Globals.MultiThreadedVideo = isChecked;
 				}
 			});
@@ -542,6 +548,42 @@ class SettingsMenuMisc extends SettingsMenu
 		}
 	}
 
+	public static class StorageAccessConfig extends Menu
+	{
+		public static int REQUEST_STORAGE_ID = 42;
+
+		public static void onActivityResult(final MainActivity p, final int requestCode, final int resultCode, final Intent resultData)
+		{
+			if (requestCode == REQUEST_STORAGE_ID)
+			{
+				if (resultCode == Activity.RESULT_OK)
+				{
+					Uri treeUri = resultData.getData();
+					p.getContentResolver().takePersistableUriPermission(treeUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+					Log.i("SDL", "Storage write permission granted to path " + treeUri.toString());
+				}
+				else
+				{
+					Log.i("SDL", "Storage write permission rejected");
+				}
+			}
+		}
+
+		String title(final MainActivity p)
+		{
+			return p.getResources().getString(R.string.storage_access);
+		}
+		void run (final MainActivity p)
+		{
+			if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP)
+			{
+				p.startActivityForResult(new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE), REQUEST_STORAGE_ID);
+			}
+
+			goBack(p);
+		}
+	}
+
 	static class CommandlineConfig extends Menu
 	{
 		String title(final MainActivity p)
@@ -557,12 +599,10 @@ class SettingsMenuMisc extends SettingsMenu
 			edit.setFocusableInTouchMode(true);
 			edit.setFocusable(true);
 			if (Globals.CommandLine.length() == 0)
-				Globals.CommandLine = "SDL_app";
-			if (Globals.CommandLine.indexOf(" ") == -1)
-				Globals.CommandLine += " ";
-			edit.setText(Globals.CommandLine.substring(Globals.CommandLine.indexOf(" ")).replace(" ", "\n").replace("	", " "));
+				Globals.CommandLine = "App";
+			edit.setText(Globals.CommandLine.replace(" ", "\n").replace("	", " "));
 			edit.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-			edit.setMinLines(2);
+			edit.setMinLines(1);
 			//edit.setMaxLines(100);
 			builder.setView(edit);
 
@@ -570,17 +610,22 @@ class SettingsMenuMisc extends SettingsMenu
 			{
 				public void onClick(DialogInterface dialog, int item) 
 				{
-					Globals.CommandLine = "SDL_app";
+					Globals.CommandLine = "";
 					String args[] = edit.getText().toString().split("\n");
-					boolean firstArg = true;
-					for( String arg: args )
+					if( args.length == 1 )
 					{
-						Globals.CommandLine += " ";
-						if( firstArg )
-							Globals.CommandLine += arg;
-						else
+						Globals.CommandLine = args[0];
+					}
+					else
+					{
+						boolean firstArg = true;
+						for( String arg: args )
+						{
+							if( !firstArg )
+								Globals.CommandLine += " ";
 							Globals.CommandLine += arg.replace(" ", "	");
-						firstArg = false;
+							firstArg = false;
+						}
 					}
 					dialog.dismiss();
 					goBack(p);

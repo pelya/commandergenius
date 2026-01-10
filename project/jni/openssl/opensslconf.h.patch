@@ -1,0 +1,36 @@
+diff -u -r include-old/crypto/bn_conf.h include/crypto/bn_conf.h
+--- a/include/crypto/bn_conf.h	2025-04-22 17:58:33.706074060 +0300
++++ b/include/crypto/bn_conf.h	2025-04-22 18:03:53.976651334 +0300
+@@ -21,8 +21,11 @@
+ /* Should we define BN_DIV2W here? */
+ 
+ /* Only one for the following should be defined */
+-#undef SIXTY_FOUR_BIT_LONG
+-#undef SIXTY_FOUR_BIT
++#ifdef __LP64__
++#define SIXTY_FOUR_BIT_LONG
++#define SIXTY_FOUR_BIT
++#else
+ #define THIRTY_TWO_BIT
++#endif
+ 
+ #endif
+diff -u -r include-old/openssl/opensslconf.h include/openssl/opensslconf.h
+--- a/include/openssl/opensslconf.h	2025-04-22 17:58:33.706074060 +0300
++++ b/include/openssl/opensslconf.h	2025-04-22 18:03:00.125562283 +0300
+@@ -188,9 +188,12 @@
+ #if !defined(OPENSSL_SYS_UEFI)
+ # define BN_LLONG
+ /* Only one for the following should be defined */
+-# undef SIXTY_FOUR_BIT_LONG
+-# undef SIXTY_FOUR_BIT
+-# define THIRTY_TWO_BIT
++#ifdef __LP64__
++#define SIXTY_FOUR_BIT_LONG
++#define SIXTY_FOUR_BIT
++#else
++#define THIRTY_TWO_BIT
++#endif
+ #endif
+ 
+ #define RC4_INT unsigned char

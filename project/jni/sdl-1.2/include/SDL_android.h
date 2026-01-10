@@ -26,9 +26,16 @@
 #include "SDL_video.h"
 #include "SDL_screenkeyboard.h"
 #include "SDL_audio.h"
-#include <jni.h>
 
 #include "begin_code.h"
+
+#if defined(__cplusplus)
+struct JavaVM;
+#else
+struct JNIInvokeInterface;
+typedef const struct JNIInvokeInterface* JavaVM;
+#endif
+
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
 extern "C" {
@@ -148,7 +155,7 @@ extern DECLSPEC void SDLCALL SDL_ANDROID_SetMouseEmulationMode(
 	int forceHardwareMouse, int showScreenUnderFinger,
 	int fingerHover, int fingerHoverJitterFilter, int generateSubframeTouchEvents
 );
-	
+
 extern DECLSPEC int SDLCALL SDL_ANDROID_GetMouseEmulationMode();
 
 /* Control the System mouse pointer visibility */

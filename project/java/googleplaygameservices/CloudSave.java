@@ -41,6 +41,7 @@ public class CloudSave implements GameHelper.GameHelperListener {
 
 	// The game helper object. This class is mainly a wrapper around this object.
 	protected GameHelper mHelper;
+	public int REQUEST_CLOUD_SAVE_ID = 38;
 
 	MainActivity parent;
 
@@ -72,6 +73,8 @@ public class CloudSave implements GameHelper.GameHelperListener {
 	boolean createNewSave = false;
 	public void onActivityResult(int request, int response, Intent intent)
 	{
+		if (request != REQUEST_CLOUD_SAVE_ID)
+			return;
 		Log.d("SDL", "CloudSave: onActivityResult() response " + response + " intent " + (intent != null));
 		try
 		{
@@ -119,7 +122,7 @@ public class CloudSave implements GameHelper.GameHelperListener {
 				{
 					public void run()
 					{
-						parent.startActivityForResult(snapshotIntent, 0);
+						parent.startActivityForResult(snapshotIntent, REQUEST_CLOUD_SAVE_ID);
 					}
 				});
 				semaphore.acquireUninterruptibly();
@@ -192,7 +195,7 @@ public class CloudSave implements GameHelper.GameHelperListener {
 				{
 					public void run()
 					{
-						parent.startActivityForResult(snapshotIntent, 0);
+						parent.startActivityForResult(snapshotIntent, REQUEST_CLOUD_SAVE_ID);
 					}
 				});
 				semaphore.acquireUninterruptibly();
@@ -359,10 +362,6 @@ public class CloudSave implements GameHelper.GameHelperListener {
 
 	public void enableDebugLog(boolean enabled) {
 		mHelper.enableDebugLog(enabled);
-	}
-
-	public String getInvitationId() {
-		return mHelper.getInvitationId();
 	}
 
 	public void reconnectClient() {

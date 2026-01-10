@@ -1,1 +1,0 @@
-../../xserver-debian/AndroidData/postinstall.sh

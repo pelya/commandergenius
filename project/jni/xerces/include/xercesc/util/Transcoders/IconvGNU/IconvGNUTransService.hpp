@@ -25,7 +25,7 @@
 #include <xercesc/util/TransService.hpp>
 #include <xercesc/util/Mutexes.hpp>
 
-#include <iconv/iconv.h>
+#include <xercesc/iconv/iconv.h>
 
 XERCES_CPP_NAMESPACE_BEGIN
 

@@ -1,1 +1,0 @@
-setEnvironment.sh

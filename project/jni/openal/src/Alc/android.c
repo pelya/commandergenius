@@ -30,9 +30,11 @@
 
 typedef void ( * SDL_ANDROID_ApplicationPutToBackgroundCallback_t ) (void);
 
+#ifdef AL_SDL_ONPAUSE_CALLBACK
 extern int SDL_ANDROID_SetOpenALPutToBackgroundCallback(
 		SDL_ANDROID_ApplicationPutToBackgroundCallback_t PutToBackground,
 		SDL_ANDROID_ApplicationPutToBackgroundCallback_t Restored );
+#endif
 
 static int doPause=0;
 int resumeHandled;
@@ -154,7 +156,9 @@ static ALCboolean android_open_playback(ALCdevice *device, const ALCchar *device
     int channels;
     int bytes;
 
+#ifdef AL_SDL_ONPAUSE_CALLBACK
     SDL_ANDROID_SetOpenALPutToBackgroundCallback(al_android_pause_playback, al_android_resume_playback);
+#endif
     if (!cAudioTrack)
     {
         /* Cache AudioTrack class and it's method id's

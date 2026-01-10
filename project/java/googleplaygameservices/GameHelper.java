@@ -37,12 +37,6 @@ import com.google.android.gms.drive.Drive;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.Games.GamesOptions;
 import com.google.android.gms.games.GamesActivityResultCodes;
-import com.google.android.gms.games.multiplayer.Invitation;
-import com.google.android.gms.games.multiplayer.Multiplayer;
-import com.google.android.gms.games.multiplayer.turnbased.TurnBasedMatch;
-import com.google.android.gms.games.request.GameRequest;
-//import com.google.android.gms.plus.Plus;
-//import com.google.android.gms.plus.Plus.PlusOptions;
 
 public class GameHelper implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
@@ -121,11 +115,9 @@ public class GameHelper implements GoogleApiClient.ConnectionCallbacks,
     // Client request flags
     public final static int CLIENT_NONE = 0x00;
     public final static int CLIENT_GAMES = 0x01;
-    //public final static int CLIENT_PLUS = 0x02;
     public final static int CLIENT_APPSTATE = 0x04;
     public final static int CLIENT_SNAPSHOT = 0x05;
-    public final static int CLIENT_ALL = CLIENT_GAMES //| CLIENT_PLUS
-            | CLIENT_APPSTATE | CLIENT_SNAPSHOT;
+    public final static int CLIENT_ALL = CLIENT_GAMES | CLIENT_APPSTATE | CLIENT_SNAPSHOT;
 
     // What clients were requested? (bit flags)
     int mRequestedClients = CLIENT_NONE;
@@ -156,24 +148,6 @@ public class GameHelper implements GoogleApiClient.ConnectionCallbacks,
     boolean mDebugLog = false;
 
     Handler mHandler;
-
-    /*
-     * If we got an invitation when we connected to the games client, it's here.
-     * Otherwise, it's null.
-     */
-    Invitation mInvitation;
-
-    /*
-     * If we got turn-based match when we connected to the games client, it's
-     * here. Otherwise, it's null.
-     */
-    TurnBasedMatch mTurnBasedMatch;
-
-    /*
-     * If we have incoming requests when we connected to the games client, they
-     * are here. Otherwise, it's null.
-     */
-    ArrayList<GameRequest> mRequests;
 
     // Listener
     GameHelperListener mListener = null;
@@ -290,7 +264,6 @@ public class GameHelper implements GoogleApiClient.ConnectionCallbacks,
 
         if (0 != (mRequestedClients & CLIENT_SNAPSHOT)) {
           builder.addScope(Drive.SCOPE_APPFOLDER);
-          builder.addApi(Drive.API);
         }
 
         mGoogleApiClientBuilder = builder;
@@ -412,101 +385,6 @@ public class GameHelper implements GoogleApiClient.ConnectionCallbacks,
 
         // let go of the Activity reference
         mActivity = null;
-    }
-
-    /**
-     * Returns the invitation ID received through an invitation notification.
-     * This should be called from your GameHelperListener's
-     *
-     * @link{GameHelperListener#onSignInSucceeded method, to check if there's an
-     *                                            invitation available. In that
-     *                                            case, accept the invitation.
-     * @return The id of the invitation, or null if none was received.
-     */
-    public String getInvitationId() {
-        if (!mGoogleApiClient.isConnected()) {
-            Log.w(TAG,
-                    "Warning: getInvitationId() should only be called when signed in, "
-                            + "that is, after getting onSignInSuceeded()");
-        }
-        return mInvitation == null ? null : mInvitation.getInvitationId();
-    }
-
-    /**
-     * Returns the invitation received through an invitation notification. This
-     * should be called from your GameHelperListener's
-     *
-     * @link{GameHelperListener#onSignInSucceeded method, to check if there's an
-     *                                            invitation available. In that
-     *                                            case, accept the invitation.
-     * @return The invitation, or null if none was received.
-     */
-    public Invitation getInvitation() {
-        if (!mGoogleApiClient.isConnected()) {
-            Log.w(TAG,
-                    "Warning: getInvitation() should only be called when signed in, "
-                            + "that is, after getting onSignInSuceeded()");
-        }
-        return mInvitation;
-    }
-
-    public boolean hasInvitation() {
-        return mInvitation != null;
-    }
-
-    public boolean hasTurnBasedMatch() {
-        return mTurnBasedMatch != null;
-    }
-
-    public boolean hasRequests() {
-        return mRequests != null;
-    }
-
-    public void clearInvitation() {
-        mInvitation = null;
-    }
-
-    public void clearTurnBasedMatch() {
-        mTurnBasedMatch = null;
-    }
-
-    public void clearRequests() {
-        mRequests = null;
-    }
-
-    /**
-     * Returns the tbmp match received through an invitation notification. This
-     * should be called from your GameHelperListener's
-     *
-     * @link{GameHelperListener#onSignInSucceeded method, to check if there's a
-     *                                            match available.
-     * @return The match, or null if none was received.
-     */
-    public TurnBasedMatch getTurnBasedMatch() {
-        if (!mGoogleApiClient.isConnected()) {
-            Log.w(TAG,
-                    "Warning: getTurnBasedMatch() should only be called when signed in, "
-                            + "that is, after getting onSignInSuceeded()");
-        }
-        return mTurnBasedMatch;
-    }
-
-    /**
-     * Returns the requests received through the onConnected bundle. This should
-     * be called from your GameHelperListener's
-     *
-     * @link{GameHelperListener#onSignInSucceeded method, to check if there are
-     *                                            incoming requests that must be
-     *                                            handled.
-     * @return The requests, or null if none were received.
-     */
-    public ArrayList<GameRequest> getRequests() {
-        if (!mGoogleApiClient.isConnected()) {
-            Log.w(TAG, "Warning: getRequests() should only be called "
-                    + "when signed in, "
-                    + "that is, after getting onSignInSuceeded()");
-        }
-        return mRequests;
     }
 
     /** Enables debug logging */
@@ -686,8 +564,6 @@ public class GameHelper implements GoogleApiClient.ConnectionCallbacks,
         }
         debugLog("Starting connection.");
         mConnecting = true;
-        mInvitation = null;
-        mTurnBasedMatch = null;
         mGoogleApiClient.connect();
     }
 
@@ -712,27 +588,6 @@ public class GameHelper implements GoogleApiClient.ConnectionCallbacks,
 
         if (connectionHint != null) {
             debugLog("onConnected: connection hint provided. Checking for invite.");
-            Invitation inv = connectionHint
-                    .getParcelable(Multiplayer.EXTRA_INVITATION);
-            if (inv != null && inv.getInvitationId() != null) {
-                // retrieve and cache the invitation ID
-                debugLog("onConnected: connection hint has a room invite!");
-                mInvitation = inv;
-                debugLog("Invitation ID: " + mInvitation.getInvitationId());
-            }
-
-            // Do we have any requests pending?
-            mRequests = Games.Requests
-                    .getGameRequestsFromBundle(connectionHint);
-            if (!mRequests.isEmpty()) {
-                // We have requests in onConnected's connectionHint.
-                debugLog("onConnected: connection hint has " + mRequests.size()
-                        + " request(s)");
-            }
-
-            debugLog("onConnected: connection hint provided. Checking for TBMP game.");
-            mTurnBasedMatch = connectionHint
-                    .getParcelable(Multiplayer.EXTRA_TURN_BASED_MATCH);
         }
 
         // we're good to go

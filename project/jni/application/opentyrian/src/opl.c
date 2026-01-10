@@ -30,6 +30,30 @@
 #include <string.h> // memset()
 #include "opl.h"
 
+// per-chip variables
+Bitu chip_num;
+op_type op[MAXOPERATORS];
+
+Bits int_samplerate;
+
+Bit8u status;
+Bit32u opl_index;
+#if defined(OPLTYPE_IS_OPL3)
+Bit8u adlibreg[512];	// adlib register set (including second set)
+Bit8u wave_sel[44];		// waveform selection
+#else
+Bit8u adlibreg[256];	// adlib register set
+Bit8u wave_sel[22];		// waveform selection
+#endif
+
+
+// vibrato/tremolo increment/counter
+Bit32u vibtab_pos;
+Bit32u vibtab_add;
+Bit32u tremtab_pos;
+Bit32u tremtab_add;
+
+
 static Bit32u generator_add;	// should be a chip parameter
 
 static fltype recipsamp;	// inverse of sampling rate

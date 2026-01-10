@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	  package="com.package.name"
+	  xmlns:tools="http://schemas.android.com/tools"
 	  android:versionCode="100"
 	  android:versionName="1.0.0"
 	  android:installLocation="auto"
@@ -10,13 +10,18 @@
 				 android:allowBackup="true"
 				 android:banner="@drawable/banner"
 				 android:isGame="true"
+				 android:supportsRtl="true"
+				 android:theme="@style/AppTheme"
+				 android:requestLegacyExternalStorage="true"
 	>
-		<activity android:name=".MainActivity"
+		<activity android:name="MainActivity"
 				  android:label="@string/app_name"
 				  android:alwaysRetainTaskState="true"
 				  android:launchMode="singleTask"
 				  android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
 				  android:windowSoftInputMode="stateUnspecified"
+				  android:theme="@style/AppTheme"
+				  android:exported="true"
 		>
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -40,31 +45,41 @@
 			<!-- ==OPENFILE== --> </intent-filter>
 		</activity>
 		<!-- ==ADMOB== --> <activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"/>
-		<!-- ==ADMOB== --> <meta-data android:name="com.google.android.gms.version" android:value="4323000" /> <!-- Change this value to the actual Google Play SDK version -->
+		<!-- ==ADMOB== --> <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 		<!-- ==GOOGLEPLAYGAMESERVICES== --> <meta-data android:name="com.google.android.gms.games.APP_ID" android:value="@string/google_play_game_services_app_id" />
 		<!-- ==GOOGLEPLAYGAMESERVICES== --> <meta-data android:name="com.google.android.gms.appstate.APP_ID" android:value="@string/google_play_game_services_app_id" />
 		<!-- ==GOOGLEPLAYGAMESERVICES== --> <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
 		<meta-data android:name="com.sec.android.support.multiwindow" android:value="true" /> <!-- Samsung's multiwindow -->
-		<activity android:name=".RestartMainActivity"
+		<activity android:name="RestartMainActivity"
 				  android:label="@string/app_name"
 				  android:alwaysRetainTaskState="true"
 				  android:launchMode="singleTask"
 				  android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
 				  android:windowSoftInputMode="stateUnspecified"
 				  android:process=":RestartMainActivity"
+				  android:exported="true"
 		/>
 		<service android:name=".DummyService"
 				 android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
 				 android:enabled="true"
-		/>
+				 android:foregroundServiceType="specialUse">
+			<property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+					  android:value="Keep the app running in background"/>
+		</service>
 	</application>
 
 	<!-- ==INTERNET== --> <uses-permission android:name="android.permission.INTERNET" />
-	<!-- ==EXTERNAL_STORAGE== --> <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<!-- ==EXTERNAL_STORAGE== --> <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29" tools:ignore="ScopedStorage" />
+	<!-- ==EXTERNAL_STORAGE== --> <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 	<!-- ==EXTERNAL_STORAGE== --> <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-	<!-- ==NOT_EXTERNAL_STORAGE== --> <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" /> <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="18" /> <!-- App has write access to it's own dir on SD card without this permission on Android 4.4 and above -->
+	<!-- ==NOT_EXTERNAL_STORAGE== --> <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
+	<!-- ==NOT_EXTERNAL_STORAGE== --> <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="18" /> <!-- App has write access to it's own dir on SD card without this permission on Android 4.4 and above -->
+	<!-- ==READ_OBB== --> <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
+	<!-- ==READ_OBB== --> <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- OBB file requires explicit permission before Marshmallow -->
 	<!-- ==RECORD_AUDIO== --> <uses-permission android:name="android.permission.RECORD_AUDIO" />
 	<!-- ==ADMOB== --> <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<!-- ==FOREGROUND_SERVICE== --> <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+	<!-- ==FOREGROUND_SERVICE== --> <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
 	<!-- <uses-permission android:name="android.permission.VIBRATE"></uses-permission> --> <!-- Vibrator not supported yet by SDL -->
 
@@ -73,10 +88,17 @@
 	<uses-feature android:name="android.software.leanback" android:required="false" /> <!-- Android TV requires this -->
 	<uses-feature android:name="android.hardware.microphone" android:required="false" /> <!-- Android TV requires this -->
 	<uses-feature android:name="android.hardware.gamepad" android:required="false"/> <!-- Android TV requires this -->
+	<uses-feature android:name="android.hardware.telephony" android:required="false"/> <!-- Android TV requires this -->
+	<uses-feature android:name="android.hardware.camera" android:required="false"/> <!-- Android TV requires this -->
+	<uses-feature android:name="android.hardware.nfc" android:required="false"/> <!-- Android TV requires this -->
+	<uses-feature android:name="android.hardware.location.gps" android:required="false"/> <!-- Android TV requires this -->
+	<uses-feature android:name="android.hardware.sensor" android:required="false"/> <!-- Android TV requires this -->
 	<!-- ==SCREEN-SIZE-SMALL== --> <supports-screens android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" android:xlargeScreens="true" />
 	<!-- ==SCREEN-SIZE-NORMAL== --> <supports-screens android:smallScreens="false" android:normalScreens="true" android:largeScreens="true" android:xlargeScreens="true" />
 	<!-- ==SCREEN-SIZE-LARGE== --> <supports-screens android:smallScreens="false" android:normalScreens="false" android:largeScreens="true" android:xlargeScreens="true" />
 	<!-- ==GLES2== --> <uses-feature android:glEsVersion="0x00020000" required="true"/>
 	<!-- ==GLES3== --> <uses-feature android:glEsVersion="0x00030000" required="true"/>
+
+	<uses-sdk android:minSdkVersion="21"/>
 
 </manifest>

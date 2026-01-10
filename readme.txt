@@ -1,22 +1,20 @@
-This is SDL 1.2 and 1.3 ported to Google Android (also bunch of other libs included).
-Sources or patches of the individual games are in the directory project/jni/application.
+About
+=====
 
-The libsdl.org now has an official SDL 1.3/2.0 Android port, which is more recent and
-better suited for creating new applications from scratch, this port is focused mainly
-on SDL 1.2 and compiling existing applications, it's up to you to decide which port is better.
-Also this port is developed very slowly, although the same is true for an official port.
+This is SDL 1.2 ported to Google Android (also bunch of other libs included).
+Sources or patches of the individual games are in the directory project/jni/application.
+It can also build an official SDL2 Android port, with a few features on top.
 
 
 Installation
 ============
 
 Install latest Android SDK and NDK from http://developer.android.com/index.html
-Add both to your PATH env variable 0 you should be able to run commands 'ndk-build' and 'android'.
-You will need to install Gradle also.
+Add NDK to your PATH env variable - you should be able to run commands 'ndk-build'.
 it is recommended to install OpenJDK and its development files.
 On RPM based distros they are usually called java-x.x.x-openjdk and java-x.x.x-openjdk-devel.
 On Debian or Ubuntu you install them like this: sudo apt-get install openjdk-8-jdk ant
-The application will run on Android 2.3 and above, but will use features from Android 6.0 if available.
+The application will run on Android 4.1 and above, but will use features from Android 9 if available.
 The most supported environment for this port is Linux, MacOs should be okay too.
 If you're developing under Windows, you will need to install some Linux environment,
 such as Bash shell on Windows 10, or Portable Ubuntu, then install Linux toolchain on it.
@@ -30,19 +28,24 @@ How to compile demo application
 
 Launch commands
 
+	git submodule update --init --recursive
+	./build.sh ballfield
+
+Or in separate steps
+
 	rm project/jni/application/src
 	ln -s ballfield project/jni/application/src
-	./changeAppSettings.sh -a
-	
+	./changeAppSettings.sh
+	./build.sh
+
 Then edit file build.sh if needed to add NDK dir to your PATH, then launch it.
-It will compile a bunch of libs under project/libs/armeabi,
+It will compile a bunch of libs under project/libs/,
 create Android package file project/bin/MainActivity-debug.apk,
 and install it to your device or emulator, if you specify option -i or -r to build.sh.
 Then you can test it by launching Ballfield icon from Android applications menu.
 
 There are other applications inside project/jni/application directory,
 some of them are referenced using Git submodule mechanism, you may download them using command
-git submodule update --init --recursive
 Some of them may be outdated and won't compile, some contain only patch file and no sources,
 so you should check out Git logs before compiling a particular app, and checkout whole repo at that date:
 gitk project/jni/application/<directory>
@@ -61,31 +64,93 @@ Note that GL ES is NOT pure OpenGL - there are no glBegin() and glEnd() call and
 and generally it will take a lot of effort to port OpenGL application to GL ES.
 
 
-Licensing issues when using gradle 
+SDL2
+====
+
+To use SDL2, specify LibSdlVersion=2 inside AndroidAppSettings.cfg.
+
+SDL2 currently supports only these options from AndroidAppSettings.cfg:
+
+	AppName
+	AppFullName
+	AppVersionCode
+	AppVersionName
+	AppDataDownloadUrl
+	ResetSdlConfigForThisVersion
+	DeleteFilesOnUpgrade
+	MultiABI
+	CompiledLibraries
+	CustomBuildScript
+	AppCflags
+	AppCppflags
+	AppLdflags
+	AppOverlapsSystemHeaders
+	AppSubdirsBuild
+	AppBuildExclude
+	AppCmdline
+
+SDL2 does not support overlay screen buttons, you will need to draw and handle touch controls inside your own code.
+
+Note that the library names for SDL2 are uppercase: SDL2 SDL2_image SDL2_mixer SDL2_ttf,
+whereass for SDL 1.2 library names are lowercase: sdl-1.2 sdl_image sdl_mixer sdl_ttf.
+
+Other libraries like Boost and OpenSSL are fully supported when SDL2 is used.
+
+SDL2 will not show download/unzip progess to the user, you can use https:// links inside AppDataDownloadUrl,
+but it will appear that the app is frozen on first start.
+
+By default, SDL2 does not lock screen orientation and cha switch between portrait and landscape,
+to lock screen orientation, call this code before calling SDL_CreateWindow():
+
+	SDL_SetHint(SDL_HINT_ORIENTATIONS, "LandscapeRight LandscapeLeft");
+
+SDL2 will generate additional mouse events for touchscreen and touch events for mouse, to disable this you need to call:
+
+	SDL_SetHint(SDL_HINT_TOUCH_MOUSE_EVENTS, "0");
+	SDL_SetHint(SDL_HINT_MOUSE_TOUCH_EVENTS, "0");
+
+SDL2 will not terminate the app process and will not unload shared libraries when your main() / SDL_main() function returns,
+when the app is launched again your main() will be called twice without clearing global and static variables.
+To prevent this, call exit() or _exit() instead of returning from main().
+
+SDL2 by default does not allow internet access in the AndroidManifest.xml, to fix this copy the patch file
+to your app directory and run changeAppSettings.sh:
+
+	cp project/jni/application/supertux/project.diff cp project/jni/application/src/project.diff
+
+SDL2 does not support notch or display cutout.
+SDL_GetDisplayBounds() / SDL_GetDisplayUsableBounds() / SDL_GetDisplayMode() / SDL_GetCurrentDisplayMode()
+will report the screen size including the cutout, however it's not possible to draw inside the cutout area,
+so you should use the size returned by SDL_GetWindowSize() and by SDL_WINDOWEVENT_RESIZED event,
+and you should use fullscreen window mode.
+
+SDL2 does not support Back button. You will need to draw back or pause button inside your app code.
+
+
+Licensing issues when using gradle
 ==================================
 
-cd into android-sdk-linux/tools/bin
+cd into android-sdk-linux/tools/bin and
 
-
-and
-
-./sdkmanager --licenses
+	./sdkmanager --licenses
 
 if that does not work you need to update
 
-./sdkmanager --update
+	./sdkmanager --update
 
-Accept the license with 'y'. It might download additional stuff, yet not sure, why...
+Accept the license with 'y'. It might download additional stuff, yet not sure, why.
 
-Retry with 
+Retry with
 
-./sdkmanager --licenses
+	./sdkmanager --licenses
 
+If the system tells you that the licenses were accepted, but the build system tells otherwise, it might be looking at the wrong path.
+Symlinking the licenses directory might solve your problem:
 
-How to compile a specific SDL based application
-===============================================
-. build/envsetup.sh
-build
+	ln -s $ANDROID_HOME/licenses project
+
+If every other method fails. launch Android Studio, import 'project' directory, and try to build it once.
+
 
 How to compile your own application
 ===================================
@@ -126,6 +191,8 @@ Also you have to create an icon image file at project/jni/application/src/icon.p
 project/jni/application/src/AndroidData/logo.png to be used as a splash screen image.
 Then you may launch build.sh.
 
+To compile C++ code, add "c++_shared" to CompiledLibraries inside AndroidAppSettings.cfg.
+
 C++ RTTI and exceptions give very slight memory overhead, if you need them -
 add "-frtti -fexceptions" to the AppCflags inside AndroidAppSettings.cfg
 If you use autoconf/automake/configure scripts with setEnvironment.sh, you may write
@@ -134,10 +201,27 @@ env CXXFLAGS='-frtti -fexceptions' ../setEnvironment.sh ./configure
 Application data may be bundled with app itself, or downloaded from the internet on the first run -
 if you want to put app data inside .apk file - create a .zip archive and put it into the directory
 project/jni/application/src/AndroidData (create it if it doesn't exist), then run ChangeAppSettings.sh
-and specify the file name there. If the data files are more than 10 Mb it's a good idea to put them
-on public HTTP server - you may specify URL in ChangeAppSettings.sh, also you may specify several files.
+and specify the file name there. If the data files are more than 150 Mb then it's a good idea to put them
+on public HTTP server - you may specify URL in AppDataDownloadUrl in AndroidAppSettings.cfg, also you may specify several files.
 If you'll release new version of data files you should change download URL or data file name and update your app as well -
 the app will re-download the data if URL does not match the saved URL from previous download.
+
+AppDataDownloadUrl can have several URLs in the form "Description|URL|MirrorURL^Description2|URL2|MirrorURL2^..."
+If you'll start Description with '!' symbol it will be enabled by default, '!!' will also hide the entry from the menu, so it cannot be disabled.
+If the URL in in the form ':dir/file.dat:http://URL/' it will be downloaded as binary BLOB to the application dir and not unzipped.
+If the URL does not contain 'http://' or 'https://', it is treated as file from 'project/jni/application/src/AndroidData' dir -
+these files are put inside .apk package by the build system.
+
+Android app bundles do not support .obb files, they use asset packs instead.
+This app project includes one pre-configured install-time asset pack.
+To put your data into asset pack, copy it to the directory AndroidData/assetpack
+and run changeAppSettings.sh. The asset pack zip archive path will be returned by
+getenv("ANDROID_ASSET_PACK_PATH"), this call will return NULL if the asset pack is not installed.
+You can put "assetpack" keyword to AppDataDownloadUrl, the code will check
+if the asset pack is installed and will not download the data from other URLs.
+You can extract files from the asset pack the same way you extract files from the app assets.
+
+AppDataDownloadUrl="!!Game data|assetpack|https://yourserver.xyz/gamedata.zip"
 
 All devices have different screen resolutions, you may toggle automatic screen resizing
 in ChangeAppSettings.sh and draw to virtual 640x480 screen - it will be HW accelerated
@@ -299,14 +383,18 @@ There is helper script project/jni/application/setEnvironment.sh which will set 
 for configure script and makefile, see AndroidBuild.sh in project/jni/application/scummvm dir for reference.
 
 
-How to compile your own application using GCC 4.7 or newer
+Signing your application
 ==========================================================
 
-By default, your application will be build with GCC 4.6. To use a newer version of GCC, e.g. GCC 4.8, set-up
-your project like described but execute following commands before running any of the commandergenius scripts
-to configure or build your project:
-export GCCVER=4.8
-export NDK_TOOLCHAIN_VERSION=${GCCVER}
+You can use scripts sign.sh and signBundle.sh to sign your app.
+Set environment variables ANDROID_KEYSTORE_FILE and ANDROID_KEYSTORE_ALIAS
+to your app signing certificate path and certificate alias,
+and if you don't want the script asking you for a password, set variable
+ANDROID_KEYSTORE_PASS_FILE to a file containing your certificate password.
+
+If you are using app bundles, set envirnment variables
+ANDROID_UPLOAD_KEYSTORE_FILE, ANDROID_UPLOAD_KEYSTORE_ALIAS, and ANDROID_UPLOAD_KEYSTORE_PASS_FILE
+to your app bundle signing certificate in a similar way.
 
 
 Android application sleep/resume support
@@ -353,7 +441,7 @@ SDL_ANDROID_SetApplicationPutToBackgroundCallback( callback_t appPutToBackground
 where callback_t is function pointer of type "void (*) void".
 The default callbacks will call another Android-specific functions:
 SDL_ANDROID_PauseAudioPlayback() and SDL_ANDROID_ResumeAudioPlayback()
-which will pause and resume audio from HW layer, so appplication does not need to destroy and re-init audio,
+which will pause and resume audio from HW layer, so application does not need to destroy and re-init audio,
 and in general you don't need to redefine those functions, unless you want to play audio in background.
 The callbacks will be called from inside SDL_Flip().
 

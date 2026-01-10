@@ -11,7 +11,7 @@ void SDL_android_init_keymap(SDLKey *SDL_android_keymap)
   int i;
   SDLKey * keymap = SDL_android_keymap;
 
-  for (i=0; i<SDL_arraysize(SDL_android_keymap); ++i)
+  for (i = 0; i < KEYCODE_LAST + 1; i++)
     SDL_android_keymap[i] = SDL_KEY(UNKNOWN);
 
   keymap[KEYCODE_UNKNOWN] = SDL_KEY(UNKNOWN);

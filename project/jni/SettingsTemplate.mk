@@ -1,18 +1,24 @@
 
+SDL_VERSION := 1.2
+
 # To filter out static libs from all libs in makefile
-APP_AVAILABLE_STATIC_LIBS := jpeg png freetype fontconfig xerces ogg vorbis flac \
-	boost_atomic boost_chrono boost_container boost_context boost_coroutine boost_date_time boost_exception boost_filesystem \
-	boost_graph boost_iostreams boost_log boost_log_setup boost_prg_exec_monitor boost_program_options boost_random \
-	boost_regex boost_serialization boost_signals boost_stacktrace_basic boost_stacktrace_noop \
+APP_AVAILABLE_STATIC_LIBS := jpeg png webp freetype fontconfig xerces ogg vorbis tremor flac \
+	boost_atomic boost_chrono boost_container boost_context boost_contract boost_coroutine boost_date_time boost_exception boost_filesystem \
+	boost_graph boost_iostreams boost_json boost_locale boost_log boost_log_setup boost_math_c99 boost_math_c99f boost_math_c99l boost_math_tr1 \
+	boost_math_tr1f boost_math_tr1l boost_nowide boost_prg_exec_monitor boost_program_options boost_random boost_regex boost_serialization \
 	boost_system boost_test_exec_monitor boost_thread boost_timer boost_type_erasure boost_unit_test_framework boost_wave boost_wserialization \
 	glu icudata icutest icui18n icuio icule iculx icutu icuuc icu-le-hb harfbuzz sdl_savepng android_support \
-	gl4es nanogl gd
+	gl4es nanogl gd guichan glm
 
 # Available libraries: mad (GPL-ed!) sdl_mixer sdl_image sdl_ttf sdl_net sdl_blitpool sdl_gfx sdl_sound intl xml2 lua jpeg png ogg flac tremor vorbis freetype xerces curl theora fluidsynth lzma lzo2 mikmod openal timidity zzip bzip2 yaml-cpp python boost_date_time boost_filesystem boost_iostreams boost_program_options boost_regex boost_signals boost_system boost_thread glu avcodec avdevice avfilter avformat avresample avutil swscale swresample bzip2 
-APP_MODULES := application sdl-1.2 sdl_main sdl_native_helpers jpeg png ogg flac vorbis freetype tremor ogg
+APP_MODULES := application sdl-1.2 sdl_native_helpers jpeg png ogg flac vorbis freetype tremor ogg
+
+ifeq ($(CUSTOM_BUILD_SCRIPT_FIRST_PASS),)
+APP_MODULES += application $(if $(filter 1.2, $(SDL_VERSION)), sdl_main)
+endif
 
 ifeq ($(APP_ABI),)
-APP_ABI := armeabi
+APP_ABI := arm64-v8a armeabi-v7a x86 x86_64
 endif
 
 # The namespace in Java file, with dots replaced with underscores
@@ -58,13 +64,6 @@ USE_GL4ES :=
 
 SDL_ADDITIONAL_CFLAGS := -DSDL_ANDROID_KEYCODE_MOUSE=UNKNOWN -DSDL_ANDROID_KEYCODE_0=LCTRL -DSDL_ANDROID_KEYCODE_1=LALT -DSDL_ANDROID_KEYCODE_2=SPACE -DSDL_ANDROID_KEYCODE_3=RETURN -DSDL_ANDROID_KEYCODE_4=RETURN
 
-SDL_VERSION := 1.2
-
-# Link-time optimization enabled for optimization junkies. -O999 etc
-#APP_CFLAGS := -flto
-#APP_CXXFLAGS := -flto
-#APP_LDFLAGS := -flto
-# Latest GCC got better LTO support
 NDK_TOOLCHAIN_VERSION := clang
 
-APP_PLATFORM := android-18
+APP_PLATFORM := android-16

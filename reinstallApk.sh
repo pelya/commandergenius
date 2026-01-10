@@ -1,7 +1,7 @@
 #!/bin/sh
 
 APK="$1"
-[ -z "$APK" ] && APK=project/app/build/outputs/apk/app-release.apk
+[ -z "$APK" ] && APK=project/app/build/outputs/apk/release/app-release.apk
 
 LOG=/tmp/reinstall-apk-$$.log
 

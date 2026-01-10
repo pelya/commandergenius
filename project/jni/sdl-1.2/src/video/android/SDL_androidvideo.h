@@ -81,6 +81,7 @@ extern void SDL_ANDROID_initFakeStdout();
 extern SDL_VideoDevice *ANDROID_CreateDevice_1_3(int devindex);
 extern void SDL_ANDROID_ProcessDeferredEvents();
 extern void SDL_ANDROID_WarpMouse(int x, int y);
+extern void SDL_ANDROID_SetCapturedMousePosition(int x, int y);
 extern void SDL_ANDROID_DrawMouseCursor(int x, int y, int size, float alpha);
 extern void SDL_ANDROID_DrawMouseCursorIfNeeded();
 extern void SDL_ANDROID_CallJavaTogglePlainAndroidSoftKeyboardInput();

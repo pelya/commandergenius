@@ -46,7 +46,7 @@ If you compile this code with SDL 1.3 or newer, or use in some other way, the li
 #if SDL_VERSION_ATLEAST(1,3,0)
 #include "SDL_yuv_sw_c.h"
 #endif
-#ifdef ANDROID
+#ifdef __ANDROID__
 #include <android/log.h>
 #else
 #define __android_log_print(...)
@@ -316,7 +316,7 @@ GLES_CreateRenderer(SDL_Window * window, Uint32 flags)
     data->GL_OES_draw_texture_supported = SDL_FALSE;
     data->useDrawTexture = SDL_FALSE;
 #else
-#ifdef ANDROID
+#ifdef __ANDROID__
     data->GL_OES_draw_texture_supported = SDL_TRUE;
     data->useDrawTexture = SDL_TRUE;
 #else

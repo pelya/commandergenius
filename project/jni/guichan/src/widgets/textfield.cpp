@@ -154,7 +154,7 @@ namespace gcn
     void TextField::mousePressed(MouseEvent& mouseEvent)
     {
 #ifdef ANDROID
-        if (showAndroidKeyboard)
+        if (showAndroidKeyboard && !SDL_IsScreenKeyboardShown(NULL))
             SDL_ANDROID_ToggleScreenKeyboardTextInput(getText().c_str());
 #endif
         if (mouseEvent.getButton() == MouseEvent::LEFT)

@@ -248,6 +248,7 @@ class SettingsMenu
 				new SettingsMenuKeyboard.ScreenGesturesConfig(),
 				new SettingsMenuMisc.VideoSettingsConfig(),
 				new SettingsMenuMisc.CommandlineConfig(),
+				new SettingsMenuMisc.StorageAccessConfig(),
 				new SettingsMenuMisc.ResetToDefaultsConfig(),
 				new OkButton(),
 			};

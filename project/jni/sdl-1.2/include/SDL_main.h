@@ -32,7 +32,7 @@
 #if defined(__WIN32__) || \
     (defined(__MWERKS__) && !defined(__BEOS__)) || \
     defined(__MACOS__) || defined(__MACOSX__) || \
-    defined(__SYMBIAN32__) || defined(QWS) || defined(ANDROID)
+    defined(__SYMBIAN32__) || defined(QWS) || defined(__ANDROID__)
 
 #ifdef __cplusplus
 #define C_LINKAGE	"C"

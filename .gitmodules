@@ -3,28 +3,28 @@
 	url = https://github.com/usineur/android-newraw.git
 [submodule "project/jni/boost/src"]
 	path = project/jni/boost/src
-	url = https://github.com/pelya/Boost-for-Android.git
-	branch = master2
+	url = https://github.com/moritz-wundke/Boost-for-Android.git
+	branch = master
 	update = merge
 [submodule "project/jni/application/commandergenius/commandergenius"]
 	path = project/jni/application/commandergenius/commandergenius
 	url = https://github.com/gerstrong/Commander-Genius.git
+	update = merge
 [submodule "project/jni/application/openarena/engine"]
 	path = project/jni/application/openarena/engine
 	url = https://github.com/pelya/openarena-engine.git
+	update = merge
 [submodule "project/jni/application/openarena/vm"]
 	path = project/jni/application/openarena/vm
 	url = https://github.com/pelya/openarena-vm
+	update = merge
 [submodule "project/jni/application/teeworlds/src"]
 	path = project/jni/application/teeworlds/src
 	url = https://github.com/pelya/teeworlds.git
-[submodule "project/jni/application/c-dogs/src"]
-	path = project/jni/application/c-dogs/src
-	url = https://github.com/cxong/cdogs-sdl.git
 [submodule "project/jni/application/xserver/xserver"]
 	path = project/jni/application/xserver/xserver
 	url = https://github.com/pelya/xserver.git
-	branch = xsdl2
+	branch = xsdl-1.20
 	update = merge
 [submodule "android-shmem"]
 	path = project/jni/shmem
@@ -39,12 +39,13 @@
 [submodule "project/jni/iconv/src"]
 	path = project/jni/iconv/src
 	url = https://github.com/pelya/libiconv-libicu-android.git
-[submodule "project/jni/icuuc/src"]
-	path = project/jni/icuuc/src
-	url = https://github.com/pelya/libiconv-libicu-android.git
+	branch = master
+	update = merge
 [submodule "project/jni/application/openttd/src"]
 	path = project/jni/application/openttd/src
 	url = https://github.com/pelya/openttd-android.git
+	branch = 13
+	update = merge
 [submodule "project/jni/application/uae4all2"]
 	path = project/jni/application/uae4all2
 	url = https://github.com/lubomyr/uae4all2.git
@@ -60,6 +61,7 @@
 [submodule "project/jni/application/xserver/pulseaudio"]
 	path = project/jni/application/xserver/pulseaudio
 	url = https://github.com/pelya/pulseaudio-android.git
+	branch = master
 [submodule "project/jni/application/supertux/supertux"]
 	path = project/jni/application/supertux/supertux
 	url = https://github.com/pelya/supertux.git
@@ -74,11 +76,34 @@
 [submodule "project/jni/application/openttd-jgrpp/src"]
 	path = project/jni/application/openttd-jgrpp/src
 	url = https://github.com/pelya/OpenTTD-JGR-patchpack.git
-	branch = jgrpp
+	branch = android-desktop
+	update = merge
 [submodule "project/jni/application/liero/src"]
 	path = project/jni/application/liero/src
 	url = https://github.com/pelya/liero-android.git
+	update = merge
 [submodule "project/jni/application/openlierox/src"]
 	path = project/jni/application/openlierox/src
 	url = https://github.com/albertz/openlierox.git
 	branch = half-assed-android-port
+	update = merge
+[submodule "project/jni/application/xserver-debian/debian-image"]
+	path = project/jni/application/xserver-debian/debian-image
+	url = https://github.com/pelya/debian-noroot
+	branch = master
+[submodule "project/jni/sdl2"]
+	path = project/jni/sdl2
+	url = https://github.com/libsdl-org/SDL.git
+	branch = SDL2
+[submodule "project/jni/sdl2_image"]
+	path = project/jni/sdl2_image
+	url = https://github.com/libsdl-org/SDL_image
+	branch = SDL2
+[submodule "project/jni/sdl2_ttf"]
+	path = project/jni/sdl2_ttf
+	url = https://github.com/libsdl-org/SDL_ttf.git
+	branch = SDL2
+[submodule "project/jni/sdl2_mixer"]
+	path = project/jni/sdl2_mixer
+	url = https://github.com/libsdl-org/SDL_mixer.git
+	branch = SDL2

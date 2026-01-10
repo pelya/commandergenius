@@ -38,7 +38,7 @@
 		<Key android:codes="30" android:keyLabel="b" android:isRepeatable="true"/>
 		<Key android:codes="42" android:keyLabel="n" android:isRepeatable="true"/>
 		<Key android:codes="41" android:keyLabel="m" android:isRepeatable="true"/>
-		<Key android:codes="67" android:keyLabel="≪ ×" android:keyWidth="20%p" android:keyEdgeFlags="right" android:isRepeatable="true"/>
+		<Key android:codes="67" android:keyLabel="⬅" android:keyWidth="20%p" android:keyEdgeFlags="right" android:isRepeatable="true"/>
 	</Row>
 	<Row android:rowEdgeFlags="bottom">
 		<Key android:codes="-6" android:keyLabel="123…" android:keyEdgeFlags="left"/>

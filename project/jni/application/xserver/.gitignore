@@ -1,3 +1,7 @@
 *.o
-AndroidData/binaries-*
 tmp-*
+/AndroidData/binaries-*
+/AndroidData/bin-map.zip
+/AndroidData/lib
+/AndroidData/xfonts.tgz
+

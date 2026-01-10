@@ -16,6 +16,7 @@
 <string name="storage_phone">Внутрішнє зберігання - %d Мб</string>
 <string name="storage_sd">SD карта - %d Мб</string>
 <string name="storage_question">Куди зберігати дані програми</string>
+<string name="storage_access">Дозвіл на запис на SD карту</string>
 <string name="optional_downloads">Додаткові завантаження</string>
 <string name="ok">ОК</string>
 <string name="controls_arrows">Стрілки / джойстік / Dpad</string>

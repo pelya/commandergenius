@@ -42,8 +42,6 @@ class GameHelperUtils {
                 return "RESULT_CANCELED";
             case GamesActivityResultCodes.RESULT_APP_MISCONFIGURED:
                 return "RESULT_APP_MISCONFIGURED";
-            case GamesActivityResultCodes.RESULT_LEFT_ROOM:
-                return "RESULT_LEFT_ROOM";
             case GamesActivityResultCodes.RESULT_LICENSE_FAILED:
                 return "RESULT_LICENSE_FAILED";
             case GamesActivityResultCodes.RESULT_RECONNECT_REQUIRED:

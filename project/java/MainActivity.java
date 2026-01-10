@@ -13,7 +13,7 @@ freely, subject to the following restrictions:
 1. The origin of this software must not be misrepresented; you must not
    claim that you wrote the original software. If you use this software
    in a product, an acknowledgment in the product documentation would be
-   appreciated but is not required. 
+   appreciated but is not required.
 2. Altered source versions must be plainly marked as such, and must not be
    misrepresented as being the original software.
 3. This notice may not be removed or altered from any source distribution.
@@ -40,9 +40,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Guideline;
+import androidx.constraintlayout.widget.ConstraintSet;
 import android.graphics.drawable.Drawable;
 import android.graphics.Color;
 import android.content.res.Configuration;
+import android.content.pm.ApplicationInfo;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -97,6 +101,11 @@ import android.app.UiModeManager;
 import android.Manifest;
 import android.content.pm.PermissionInfo;
 import java.util.Arrays;
+import java.util.zip.ZipFile;
+import java.util.ArrayList;
+import android.os.Environment;
+import android.net.Uri;
+import androidx.core.view.WindowCompat;
 
 
 public class MainActivity extends Activity
@@ -115,12 +124,19 @@ public class MainActivity extends Activity
 			getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
 					WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+		// We need to load Globals.DrawInDisplayCutout option to correctly set fullscreen mode, it can only be done from onCreate()
+		Settings.LoadConfig(this);
+		DimSystemStatusBar.dim(null, getWindow());
+
 		Log.i("SDL", "libSDL: Creating startup screen");
-		_layout = new LinearLayout(this);
-		_layout.setOrientation(LinearLayout.VERTICAL);
-		_layout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+		Display display = getWindowManager().getDefaultDisplay();
+		int height = display.getHeight();
+		_layout = new ConstraintLayout(this);
+		_layout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
 		_layout2 = new LinearLayout(this);
-		_layout2.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		_layout2.setId(View.generateViewId());
+		_layout2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0));
 		loadingDialog = new ProgressDialog(this);
 		loadingDialog.setMessage(getString(R.string.accessing_network));
 
@@ -130,7 +146,7 @@ public class MainActivity extends Activity
 		{
 			_btn = new Button(this);
 			_btn.setEnabled(false);
-			_btn.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+			_btn.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
 			_btn.setText(getResources().getString(R.string.device_change_cfg));
 			class onClickListener implements View.OnClickListener
 			{
@@ -150,7 +166,6 @@ public class MainActivity extends Activity
 			_layout2.addView(_btn);
 		}
 
-		_layout.addView(_layout2);
 
 		ImageView img = new ImageView(this);
 
@@ -163,9 +178,23 @@ public class MainActivity extends Activity
 		{
 			img.setImageResource(R.drawable.publisherlogo);
 		}
-		img.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+		img.setId(View.generateViewId());
+		img.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0));
+
 		_layout.addView(img);
-		
+		_layout.addView(_layout2);
+
+		ConstraintSet set = new ConstraintSet();
+		set.clone(_layout);
+
+		int[] chainIds = { img.getId(), _layout2.getId() }; // the ids you set on your views above
+		float[] weights = { 8, 2 };
+		set.createVerticalChain(ConstraintSet.PARENT_ID, ConstraintSet.TOP,
+															ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM,
+															chainIds, weights, ConstraintSet.CHAIN_SPREAD);
+
+		set.applyTo(_layout);
+
 		_videoLayout = new FrameLayout(this);
 		_videoLayout.addView(_layout);
 
@@ -175,11 +204,37 @@ public class MainActivity extends Activity
 			_videoLayout.addView(_ad.getView());
 			_ad.getView().setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM | Gravity.RIGHT));
 		}
-		
+
 		setContentView(_videoLayout);
 		_videoLayout.setFocusable(true);
 		_videoLayout.setFocusableInTouchMode(true);
 		_videoLayout.requestFocus();
+		DimSystemStatusBar.dim(_videoLayout, getWindow());
+
+		//Log.i("SDL", "Checking for asset pack");
+		try
+		{
+			if( android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP )
+			{
+				ApplicationInfo info = this.getPackageManager().getApplicationInfo(this.getPackageName(), 0);
+				if( info.splitSourceDirs != null )
+				{
+					for( String apk: info.splitSourceDirs )
+					{
+						Log.i("SDL", "Package apk: " + apk);
+						if( apk.endsWith("assetpack.apk") )
+						{
+							this.assetPackPath = apk;
+							Log.i("SDL", "Found asset pack: " + this.assetPackPath);
+						}
+					}
+				}
+			}
+		}
+		catch( Exception eee )
+		{
+			Log.i("SDL", "Asset pack exception: " + eee);
+		}
 
 		class Callback implements Runnable
 		{
@@ -203,8 +258,9 @@ public class MainActivity extends Activity
 						public MainActivity Parent;
 						public void run()
 						{
-							Settings.Load(Parent);
+							Settings.ProcessConfig(Parent);
 							setScreenOrientation();
+							DimSystemStatusBar.dim(_videoLayout, getWindow());
 							loaded.release();
 							loadedLibraries.release();
 							if( _btn != null )
@@ -251,24 +307,39 @@ public class MainActivity extends Activity
 		// Request SD card permission right during start, because game devs don't care about runtime permissions and stuff
 		try
 		{
-			if( android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M )
+			if( Globals.AccessSdCard && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M )
 			{
 				PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_PERMISSIONS | PackageManager.GET_META_DATA);
 				Log.v("SDL", "SD card permission 1: " + getPackageName() + " perms " + info.requestedPermissions + " name " + info.packageName + " ver " + info.versionName);
 				if( info.requestedPermissions != null && Arrays.asList(info.requestedPermissions).contains(Manifest.permission.WRITE_EXTERNAL_STORAGE) )
 				{
-					Log.v("SDL", "SD card permission 4: REQUEST");
+					Log.v("SDL", "SD card permission 4 (WRITE): REQUEST");
 					int permissionCheck = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
 					if (permissionCheck != PackageManager.PERMISSION_GRANTED && !writeExternalStoragePermissionDialogAnswered)
 					{
 						requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
 					}
 				}
+				// For Android 11+
+				if( android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S && !Environment.isExternalStorageManager() )
+				{
+					Log.v("SDL", "SD card permission 4 (MANAGE): REQUEST");
+					try {
+						Intent permissionRequestIntent = new Intent(
+							android.provider.Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
+							Uri.parse("package:" + getApplicationContext().getPackageName())
+						);
+						startActivity(permissionRequestIntent);
+					} catch (Exception ex) {
+						Intent permissionRequestIntent = new Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+						startActivity(permissionRequestIntent);
+					}
+				}
 			}
 		}
 		catch(Exception e) {}
 	}
-	
+
 	public void setUpStatusLabel()
 	{
 		MainActivity Parent = this; // Too lazy to rename
@@ -312,11 +383,11 @@ public class MainActivity extends Activity
 		this.runOnUiThread(cb);
 	}
 
-	public void initSDL()
+	public void downloadFinishedInitSDL()
 	{
 		setScreenOrientation();
 		updateScreenOrientation();
-		DimSystemStatusBar.get().dim(_videoLayout);
+		DimSystemStatusBar.dim(_videoLayout, getWindow());
 		(new Thread(new Runnable()
 		{
 			public void run()
@@ -335,7 +406,7 @@ public class MainActivity extends Activity
 						Log.i("SDL", "libSDL: Application paused, cancelling SDL initialization until it will be brought to foreground");
 						return;
 					}
-					DimSystemStatusBar.get().dim(_videoLayout);
+					DimSystemStatusBar.dim(_videoLayout, getWindow());
 				}
 				runOnUiThread(new Runnable()
 				{
@@ -349,7 +420,7 @@ public class MainActivity extends Activity
 						if( android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT && Globals.ImmersiveMode &&
 							(_videoLayout.getHeight() != dm.widthPixels || _videoLayout.getWidth() != dm.heightPixels) )
 						{
-							DimSystemStatusBar.get().dim(_videoLayout);
+							DimSystemStatusBar.dim(_videoLayout, getWindow());
 							try {
 								Thread.sleep(300);
 							} catch( Exception e ) {}
@@ -366,9 +437,9 @@ public class MainActivity extends Activity
 		if(sdlInited)
 			return;
 		Log.i("SDL", "libSDL: Initializing video and SDL application");
-		
+
 		sdlInited = true;
-		DimSystemStatusBar.get().dim(_videoLayout);
+		DimSystemStatusBar.dim(_videoLayout, getWindow());
 		_videoLayout.removeView(_layout);
 		if( _ad.getView() != null )
 			_videoLayout.removeView(_ad.getView());
@@ -451,21 +522,20 @@ public class MainActivity extends Activity
 		{
 			_videoLayout.addView(mGLView, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
 		}
-		mGLView.setFocusableInTouchMode(true);
-		mGLView.setFocusable(true);
-		mGLView.requestFocus();
-		if (Globals.HideSystemMousePointer && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N)
+		mGLView.captureMouse(true);
+		if( Globals.HideSystemMousePointer && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N )
 		{
 			mGLView.setPointerIcon(android.view.PointerIcon.getSystemIcon(this, android.view.PointerIcon.TYPE_NULL));
 		}
+
 
 		if( _ad.getView() != null )
 		{
 			_videoLayout.addView(_ad.getView());
 			_ad.getView().setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.TOP | Gravity.RIGHT));
 		}
-		DimSystemStatusBar.get().dim(_videoLayout);
-		//DimSystemStatusBar.get().dim(mGLView);
+		DimSystemStatusBar.dim(_videoLayout, getWindow());
+		//DimSystemStatusBar.dim(mGLView, getWindow());
 
 		Rect r = new Rect();
 		_videoLayout.getWindowVisibleDisplayFrame(r);
@@ -475,15 +545,40 @@ public class MainActivity extends Activity
 			public void onGlobalLayout()
 			{
 				final Rect r = new Rect();
-				_videoLayout.getWindowVisibleDisplayFrame(r);
+				//_videoLayout.getWindowVisibleDisplayFrame(r);
+				final int xy[] = new int[] { 0, 0 };
+				_videoLayout.getLocationInWindow(xy);
+				r.left = xy[0];
+				r.top = xy[1];
+				r.right = r.left + _videoLayout.getWidth();
+				r.bottom = r.top + _videoLayout.getHeight();
+				//boolean cutoutLeft = false, cutoutTop = false;
+				if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P && Globals.ImmersiveMode)
+				{
+					if (getWindow().getDecorView() != null && getWindow().getDecorView().getRootWindowInsets() != null &&
+						getWindow().getDecorView().getRootWindowInsets().getDisplayCutout() != null)
+					{
+						android.view.DisplayCutout cutout = getWindow().getDecorView().getRootWindowInsets().getDisplayCutout();
+						Log.v("SDL", "Detected display cutout");
+						// TODO: do something with it
+						//if (cutout.getBoundingRectLeft().width() > 0)
+						//	cutoutLeft = true;
+						//if (cutout.getBoundingRectTop().height() > 0)
+						//	cutoutTop = true;
+					}
+				}
 				final int heightDiff = _videoLayout.getRootView().getHeight() - _videoLayout.getHeight(); // Take system bar into consideration
 				final int widthDiff = _videoLayout.getRootView().getWidth() - _videoLayout.getWidth(); // Nexus 5 has system bar at the right side
-				Log.v("SDL", "Main window visible region changed: " + r.left + ":" + r.top + ":" + r.width() + ":" + r.height() );
+				Log.v("SDL", "Main window visible region changed: " + r.left + ":" + r.top + ":" + r.width() + ":" + r.height() + " -> " +
+						(r.left + widthDiff) + ":" + (r.top + heightDiff) + ":" + r.width() + ":" + r.height());
+				Log.v("SDL", "videoLayout: " + _videoLayout.getLeft() + ":" + _videoLayout.getTop() + ":" + _videoLayout.getWidth() + ":" + _videoLayout.getHeight() +
+						" videoLayout.getRootView() " + _videoLayout.getRootView().getLeft() + ":" + _videoLayout.getRootView().getTop() + ":" +
+						_videoLayout.getRootView().getWidth() + ":" + _videoLayout.getRootView().getHeight());
 				_videoLayout.postDelayed( new Runnable()
 				{
 					public void run()
 					{
-						DimSystemStatusBar.get().dim(_videoLayout);
+						DimSystemStatusBar.dim(_videoLayout, getWindow());
 						mGLView.nativeScreenVisibleRect(r.left + widthDiff, r.top + heightDiff, r.width(), r.height());
 					}
 				}, 300 );
@@ -491,7 +586,7 @@ public class MainActivity extends Activity
 				{
 					public void run()
 					{
-						DimSystemStatusBar.get().dim(_videoLayout);
+						DimSystemStatusBar.dim(_videoLayout, getWindow());
 						mGLView.nativeScreenVisibleRect(r.left + widthDiff, r.top + heightDiff, r.width(), r.height());
 					}
 				}, 600 );
@@ -521,8 +616,8 @@ public class MainActivity extends Activity
 		super.onResume();
 		if( mGLView != null )
 		{
-			DimSystemStatusBar.get().dim(_videoLayout);
-			//DimSystemStatusBar.get().dim(mGLView);
+			DimSystemStatusBar.dim(_videoLayout, getWindow());
+			//DimSystemStatusBar.dim(mGLView, getWindow());
 			mGLView.onResume();
 		}
 		else
@@ -533,7 +628,7 @@ public class MainActivity extends Activity
 				downloader.setStatusField(_tv);
 				if( downloader.DownloadComplete )
 				{
-					initSDL();
+					downloadFinishedInitSDL();
 				}
 			}
 		}
@@ -551,11 +646,15 @@ public class MainActivity extends Activity
 		super.onWindowFocusChanged(hasFocus);
 		Log.i("SDL", "libSDL: onWindowFocusChanged: " + hasFocus + " - sending onPause/onResume");
 		if (hasFocus == false)
+		{
 			onPause();
+		}
 		else
+		{
 			onResume();
+		}
 	}
-	
+
 	public boolean isPaused()
 	{
 		return _isPaused;
@@ -596,6 +695,7 @@ public class MainActivity extends Activity
 	public void onActivityResult(int request, int response, Intent data) {
 		super.onActivityResult(request, response, data);
 		cloudSave.onActivityResult(request, response, data);
+		SettingsMenuMisc.StorageAccessConfig.onActivityResult(this, request, response, data);
 	}
 
 	private int TextInputKeyboardList[][] =
@@ -615,6 +715,7 @@ public class MainActivity extends Activity
 			{
 				public void run()
 				{
+					mGLView.captureMouse(false);
 					if (keyboard == 0)
 					{
 						_inputManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
@@ -689,9 +790,9 @@ public class MainActivity extends Activity
 								if (key > 100000)
 								{
 									key -= 100000;
-									MainActivity.this.onKeyDown(KeyEvent.KEYCODE_SHIFT_LEFT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_SHIFT_LEFT));
+									mGLView.onKeyDown(KeyEvent.KEYCODE_SHIFT_LEFT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_SHIFT_LEFT));
 								}
-								MainActivity.this.onKeyDown(key, new KeyEvent(KeyEvent.ACTION_DOWN, key));
+								mGLView.onKeyDown(key, new KeyEvent(KeyEvent.ACTION_DOWN, key));
 							}
 							public void onRelease(int key)
 							{
@@ -705,9 +806,9 @@ public class MainActivity extends Activity
 								{
 									builtinKeyboard.shift = ! builtinKeyboard.shift;
 									if (builtinKeyboard.shift && !builtinKeyboard.alt)
-										MainActivity.this.onKeyDown(KeyEvent.KEYCODE_SHIFT_LEFT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_SHIFT_LEFT));
+										mGLView.onKeyDown(KeyEvent.KEYCODE_SHIFT_LEFT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_SHIFT_LEFT));
 									else
-										MainActivity.this.onKeyUp(KeyEvent.KEYCODE_SHIFT_LEFT, new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_SHIFT_LEFT));
+										mGLView.onKeyUp(KeyEvent.KEYCODE_SHIFT_LEFT, new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_SHIFT_LEFT));
 									builtinKeyboard.ChangeKeyboard();
 									return;
 								}
@@ -715,7 +816,7 @@ public class MainActivity extends Activity
 								{
 									builtinKeyboard.alt = ! builtinKeyboard.alt;
 									if (builtinKeyboard.alt)
-										MainActivity.this.onKeyUp(KeyEvent.KEYCODE_SHIFT_LEFT, new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_SHIFT_LEFT));
+										mGLView.onKeyUp(KeyEvent.KEYCODE_SHIFT_LEFT, new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_SHIFT_LEFT));
 									else
 										builtinKeyboard.shift = false;
 									builtinKeyboard.ChangeKeyboard();
@@ -730,12 +831,12 @@ public class MainActivity extends Activity
 										if (k.on)
 										{
 											builtinKeyboard.stickyKeys.add(key);
-											MainActivity.this.onKeyDown(key, new KeyEvent(KeyEvent.ACTION_DOWN, key));
+											mGLView.onKeyDown(key, new KeyEvent(KeyEvent.ACTION_DOWN, key));
 										}
 										else
 										{
 											builtinKeyboard.stickyKeys.remove(key);
-											MainActivity.this.onKeyUp(key, new KeyEvent(KeyEvent.ACTION_UP, key));
+											mGLView.onKeyUp(key, new KeyEvent(KeyEvent.ACTION_UP, key));
 										}
 										return;
 									}
@@ -748,11 +849,11 @@ public class MainActivity extends Activity
 									shifted = true;
 								}
 
-								MainActivity.this.onKeyUp(key, new KeyEvent(KeyEvent.ACTION_UP, key));
+								mGLView.onKeyUp(key, new KeyEvent(KeyEvent.ACTION_UP, key));
 
 								if (shifted)
 								{
-									MainActivity.this.onKeyUp(KeyEvent.KEYCODE_SHIFT_LEFT, new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_SHIFT_LEFT));
+									mGLView.onKeyUp(KeyEvent.KEYCODE_SHIFT_LEFT, new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_SHIFT_LEFT));
 									builtinKeyboard.stickyKeys.remove(KeyEvent.KEYCODE_SHIFT_LEFT);
 									for (Keyboard.Key k: builtinKeyboard.getKeyboard().getKeys())
 									{
@@ -774,6 +875,7 @@ public class MainActivity extends Activity
 						_screenKeyboard = builtinKeyboard;
 						FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM);
 						_videoLayout.addView(_screenKeyboard, layout);
+						_videoLayout.bringChildToFront(_screenKeyboard);
 					}
 				}
 			});
@@ -792,8 +894,9 @@ public class MainActivity extends Activity
 					}
 					getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 					_inputManager.hideSoftInputFromWindow(mGLView.getWindowToken(), 0);
-					DimSystemStatusBar.get().dim(_videoLayout);
-					//DimSystemStatusBar.get().dim(mGLView);
+					DimSystemStatusBar.dim(_videoLayout, getWindow());
+					//DimSystemStatusBar.dim(mGLView, getWindow());
+					mGLView.captureMouse(true);
 				}
 			});
 		}
@@ -805,6 +908,7 @@ public class MainActivity extends Activity
 		if(Globals.CompatibilityHacksTextInputEmulatesHwKeyboard)
 		{
 			showScreenKeyboardWithoutTextInputField(Globals.TextInputKeyboard);
+			mGLView.captureMouse(false);
 			return;
 		}
 		if(_screenKeyboard != null)
@@ -870,12 +974,15 @@ public class MainActivity extends Activity
 		screenKeyboard.setTextColor(this.getResources().getColor(android.R.color.background_light));
 		if( isRunningOnOUYA() && Globals.TvBorders )
 			screenKeyboard.setPadding(100, 100, 100, 100); // Bad bad HDMI TVs all have cropped borders
+		else
+			screenKeyboard.setPadding(20, 20, 20, 20); // Account for rounded screen corners
 		_screenKeyboard = screenKeyboard;
 		_videoLayout.addView(_screenKeyboard);
 		//_screenKeyboard.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.NONE, false));
 		screenKeyboard.setInputType(InputType.TYPE_CLASS_TEXT);
 		screenKeyboard.setFocusableInTouchMode(true);
 		screenKeyboard.setFocusable(true);
+		mGLView.captureMouse(false);
 		//_inputManager.showSoftInput(screenKeyboard, InputMethodManager.SHOW_IMPLICIT);
 		//getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 		// Hack to try to force on-screen keyboard
@@ -904,7 +1011,10 @@ public class MainActivity extends Activity
 	public void hideScreenKeyboard()
 	{
 		if( keyboardWithoutTextInputShown )
+		{
 			showScreenKeyboardWithoutTextInputField(Globals.TextInputKeyboard);
+			mGLView.captureMouse(true);
+		}
 
 		if(_screenKeyboard == null || ! (_screenKeyboard instanceof EditText))
 			return;
@@ -921,16 +1031,14 @@ public class MainActivity extends Activity
 		_inputManager.hideSoftInputFromWindow(_screenKeyboard.getWindowToken(), 0);
 		_videoLayout.removeView(_screenKeyboard);
 		_screenKeyboard = null;
-		mGLView.setFocusableInTouchMode(true);
-		mGLView.setFocusable(true);
-		mGLView.requestFocus();
-		DimSystemStatusBar.get().dim(_videoLayout);
+		mGLView.captureMouse(true);
+		DimSystemStatusBar.dim(_videoLayout, getWindow());
 
 		_videoLayout.postDelayed( new Runnable()
 		{
 			public void run()
 			{
-				DimSystemStatusBar.get().dim(_videoLayout);
+				DimSystemStatusBar.dim(_videoLayout, getWindow());
 			}
 		}, 500 );
 	};
@@ -939,7 +1047,7 @@ public class MainActivity extends Activity
 	{
 		return _screenKeyboard != null;
 	};
-	
+
 	public void setScreenKeyboardHintMessage(String s)
 	{
 		_screenKeyboardHintMessage = s;
@@ -963,7 +1071,7 @@ public class MainActivity extends Activity
 
 	public void setAdvertisementPosition(int x, int y)
 	{
-		
+
 		if( _ad.getView() != null )
 		{
 			final FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -1045,79 +1153,6 @@ public class MainActivity extends Activity
 		}
 	}
 
-	/*
-	@Override
-	public boolean onKeyDown(int keyCode, final KeyEvent event)
-	{
-		if( keyCode == KeyEvent.KEYCODE_BACK )
-		{
-			if( (event.getSource() & InputDevice.SOURCE_MOUSE) == InputDevice.SOURCE_MOUSE )
-			{
-				// Stupid Samsung and stupid Acer remaps right mouse button to BACK key
-				DemoGLSurfaceView.nativeMouseButtonsPressed(2, 1);
-				return true;
-			}
-			else if( keyboardWithoutTextInputShown )
-			{
-				return true;
-			}
-		}
-		if( _screenKeyboard != null && _screenKeyboard.onKeyDown(keyCode, event) )
-			return true;
-
-		if( mGLView != null )
-		{
-			if( mGLView.nativeKey( keyCode, 1, event.getUnicodeChar() ) == 0 )
-				return super.onKeyDown(keyCode, event);
-		}
-		else
-		if( keyListener != null )
-		{
-			keyListener.onKeyEvent(keyCode);
-		}
-		else
-		if( _btn != null )
-			return _btn.onKeyDown(keyCode, event);
-		return true;
-	}
-	
-	@Override
-	public boolean onKeyUp(int keyCode, final KeyEvent event)
-	{
-		if( keyCode == KeyEvent.KEYCODE_BACK )
-		{
-			if( (event.getSource() & InputDevice.SOURCE_MOUSE) == InputDevice.SOURCE_MOUSE )
-			{
-				// Stupid Samsung and stupid Acer remaps right mouse button to BACK key
-				DemoGLSurfaceView.nativeMouseButtonsPressed(2, 0);
-				return true;
-			}
-			else if( keyboardWithoutTextInputShown )
-			{
-				showScreenKeyboardWithoutTextInputField(0); // Hide keyboard
-				return true;
-			}
-		}
-		if( _screenKeyboard != null && _screenKeyboard.onKeyUp(keyCode, event) )
-			return true;
-
-		if( mGLView != null )
-		{
-			if( mGLView.nativeKey( keyCode, 0, event.getUnicodeChar() ) == 0 )
-				return super.onKeyUp(keyCode, event);
-			if( keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_MENU )
-			{
-				DimSystemStatusBar.get().dim(_videoLayout);
-				//DimSystemStatusBar.get().dim(mGLView);
-			}
-		}
-		else
-		if( _btn != null )
-			return _btn.onKeyUp(keyCode, event);
-		return true;
-	}
-	*/
-	
 	//private Configuration oldConfig = null;
 	@Override
 	public void onConfigurationChanged(Configuration newConfig)
@@ -1161,7 +1196,7 @@ public class MainActivity extends Activity
 		super.onNewIntent(i);
 		setIntent(i);
 	}
-	
+
 	public void LoadLibraries()
 	{
 		try
@@ -1182,6 +1217,15 @@ public class MainActivity extends Activity
 			Log.i("SDL", "libSDL: Cannot load GLESv3 or GLESv2 lib");
 		}
 
+		String [] SupportedAbis = { android.os.Build.CPU_ABI };
+		if (android.os.Build.CPU_ABI2 != null && !android.os.Build.CPU_ABI2.equals(""))
+		{
+			SupportedAbis = new String [] { android.os.Build.CPU_ABI, android.os.Build.CPU_ABI2 };
+		}
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP)
+		{
+			SupportedAbis = android.os.Build.SUPPORTED_ABIS;
+		}
 		// Load all libraries
 		try
 		{
@@ -1192,166 +1236,99 @@ public class MainActivity extends Activity
 				{
 					String libname = System.mapLibraryName(l);
 					File libpath = new File(getFilesDir().getAbsolutePath() + "/../lib/" + libname);
-					Log.i("SDL", "libSDL: loading lib " + libpath.getAbsolutePath());
+					//Log.i("SDL", "libSDL: loading lib " + libpath.getAbsolutePath());
 					System.load(libpath.getPath());
+					Log.i("SDL", "libSDL: loaded lib " + libpath.getAbsolutePath());
 				}
 				catch( UnsatisfiedLinkError e )
 				{
-					Log.i("SDL", "libSDL: error loading lib " + l + ": " + e.toString());
+					//Log.i("SDL", "libSDL: error loading lib " + l + ": " + e.toString());
 					try
 					{
 						String libname = System.mapLibraryName(l);
 						File libpath = new File(getFilesDir().getAbsolutePath() + "/" + libname);
-						Log.i("SDL", "libSDL: loading lib " + libpath.getAbsolutePath());
+						//Log.i("SDL", "libSDL: loading lib " + libpath.getAbsolutePath());
 						System.load(libpath.getPath());
+						Log.i("SDL", "libSDL: loaded lib " + libpath.getAbsolutePath());
 					}
 					catch( UnsatisfiedLinkError ee )
 					{
-						Log.i("SDL", "libSDL: error loading lib " + l + ": " + ee.toString());
+						//Log.i("SDL", "libSDL: error loading lib " + l + ": " + ee.toString());
 						System.loadLibrary(l);
+						Log.i("SDL", "libSDL: loaded lib " + l + " from System.loadLibrary(l)");
 					}
 				}
 			}
 		}
 		catch ( UnsatisfiedLinkError e )
 		{
-			try {
-				Log.i("SDL", "libSDL: Extracting APP2SD-ed libs");
-				
-				InputStream in = null;
-				try
-				{
-					for( int i = 0; ; i++ )
-					{
-						InputStream in2 = getAssets().open("bindata" + String.valueOf(i));
-						if( in == null )
-							in = in2;
-						else
-							in = new SequenceInputStream( in, in2 );
-					}
-				}
-				catch( IOException ee ) { }
-
-				if( in == null )
-					throw new RuntimeException("libSDL: Extracting APP2SD-ed libs failed, the .apk file packaged incorrectly");
-
-				ZipInputStream zip = new ZipInputStream(in);
-
-				File libDir = getFilesDir();
-				try {
-					libDir.mkdirs();
-				} catch( SecurityException ee ) { };
-				
-				byte[] buf = new byte[16384];
-				while(true)
-				{
-					ZipEntry entry = null;
-					entry = zip.getNextEntry();
-					/*
-					if( entry != null )
-						Log.i("SDL", "Extracting lib " + entry.getName());
-					*/
-					if( entry == null )
-					{
-						Log.i("SDL", "Extracting libs finished");
-						break;
-					}
-					if( entry.isDirectory() )
-					{
-						File outDir = new File( libDir.getAbsolutePath() + "/" + entry.getName() );
-						if( !(outDir.exists() && outDir.isDirectory()) )
-							outDir.mkdirs();
-						continue;
-					}
-
-					OutputStream out = null;
-					String path = libDir.getAbsolutePath() + "/" + entry.getName();
-					try {
-						File outDir = new File( path.substring(0, path.lastIndexOf("/") ));
-						if( !(outDir.exists() && outDir.isDirectory()) )
-							outDir.mkdirs();
-					} catch( SecurityException eeeee ) { };
-
-					Log.i("SDL", "Saving to file '" + path + "'");
-
-					out = new FileOutputStream( path );
-					int len = zip.read(buf);
-					while (len >= 0)
-					{
-						if(len > 0)
-							out.write(buf, 0, len);
-						len = zip.read(buf);
-					}
-
-					out.flush();
-					out.close();
-				}
-
-				for(String l_unmapped : Globals.AppLibraries)
-				{
-					String l = GetMappedLibraryName(l_unmapped);
-					String libname = System.mapLibraryName(l);
-					File libpath = new File(libDir, libname);
-					Log.i("SDL", "libSDL: loading lib " + libpath.getPath());
-					System.load(libpath.getPath());
-					libpath.delete();
-				}
-			}
-			catch ( Exception ee )
-			{
-				Log.i("SDL", "libSDL: Error: " + ee.toString());
-			}
+			Log.i("SDL", "libSDL: Error: " + e.toString());
 		}
 
-		String [] binaryZipNames = { "binaries-" + android.os.Build.CPU_ABI + ".zip", "binaries-" + android.os.Build.CPU_ABI2 + ".zip", "binaries.zip" };
-		if ( android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN )
-			binaryZipNames = new String[] { "binaries-" + android.os.Build.CPU_ABI + "-pie.zip", "binaries-" + android.os.Build.CPU_ABI2 + "-pie.zip", "binaries-" + android.os.Build.CPU_ABI + ".zip", "binaries-" + android.os.Build.CPU_ABI2 + ".zip", "binaries.zip" };
-		for(String binaryZip: binaryZipNames)
+		ZipFile myApk = null;
+		try
+		{
+			myApk = new ZipFile(getPackageResourcePath());
+		}
+		catch( IOException eeeeeeeee ) {}
+
+		ArrayList<String> a = new ArrayList<String>();
+		for( String arch: SupportedAbis )
+		{
+			a.add("binaries-" + arch + ".zip");
+		}
+		a.add("binaries.zip");
+		String [] binaryZipNames = a.toArray(new String[0]);
+
+		for( String binaryZip: binaryZipNames )
 		{
 			try {
-				Log.i("SDL", "libSDL: Trying to extract binaries from assets " + binaryZip);
-				
 				InputStream in = null;
 				try
 				{
-					for( int i = 0; ; i++ )
-					{
-						InputStream in2 = getAssets().open(binaryZip + String.format("%02d", i));
-						if( in == null )
-							in = in2;
-						else
-							in = new SequenceInputStream( in, in2 );
-					}
+					//Log.i("SDL", "libSDL: Trying to extract binaries from assets/" + binaryZip);
+					if( in == null )
+						in = getAssets().open(binaryZip);
+					Log.i("SDL", "libSDL: Found binaries at assets/" + binaryZip);
 				}
-				catch( IOException ee )
+				catch( Exception eee ) {}
+
+				if( binaryZip.equals("binaries.zip") )
 				{
-					try
+					for( String arch: SupportedAbis )
 					{
-						if( in == null )
-							in = getAssets().open(binaryZip);
+						try
+						{
+							if( in == null && myApk != null )
+							{
+								//Log.i("SDL", "libSDL: Trying to extract binaries from lib/" + arch + "/" + binaryZip);
+								in = myApk.getInputStream(myApk.getEntry("lib/" + arch + "/" + binaryZip));
+								Log.i("SDL", "libSDL: Found binaries at lib/" + arch + "/" + binaryZip);
+							}
+						}
+						catch( Exception eeee ) {}
 					}
-					catch( IOException eee ) {}
 				}
 
 				if( in == null )
-					throw new RuntimeException("libSDL: Extracting binaries failed, the .apk file packaged incorrectly");
+					throw new RuntimeException("libSDL: Extracting binaries failed");
 
 				ZipInputStream zip = new ZipInputStream(in);
 
 				File libDir = getFilesDir();
-				try {
+				try
+				{
 					libDir.mkdirs();
-				} catch( SecurityException ee ) { };
-				
+				}
+				catch( SecurityException ee ) { };
+
 				byte[] buf = new byte[16384];
 				while(true)
 				{
 					ZipEntry entry = null;
 					entry = zip.getNextEntry();
-					/*
-					if( entry != null )
-						Log.i("SDL", "Extracting lib " + entry.getName());
-					*/
+					//if( entry != null )
+					//	Log.i("SDL", "Extracting binary " + entry.getName());
 					if( entry == null )
 					{
 						Log.i("SDL", "Extracting binaries finished");
@@ -1360,6 +1337,11 @@ public class MainActivity extends Activity
 					if( entry.isDirectory() )
 					{
 						File outDir = new File( libDir.getAbsolutePath() + "/" + entry.getName() );
+						if( !outDir.getCanonicalPath().startsWith(libDir.getAbsolutePath() + "/") )
+						{
+							Log.i("SDL", "Security exception: " + outDir.getCanonicalPath());
+							return;
+						}
 						if( !(outDir.exists() && outDir.isDirectory()) )
 							outDir.mkdirs();
 						continue;
@@ -1367,13 +1349,21 @@ public class MainActivity extends Activity
 
 					OutputStream out = null;
 					String path = libDir.getAbsolutePath() + "/" + entry.getName();
-					try {
+					try
+					{
 						File outDir = new File( path.substring(0, path.lastIndexOf("/") ));
+						if( !outDir.getCanonicalPath().startsWith(libDir.getAbsolutePath() + "/") )
+						{
+							Log.i("SDL", "Security exception: " + outDir.getCanonicalPath());
+							return;
+						}
 						if( !(outDir.exists() && outDir.isDirectory()) )
 							outDir.mkdirs();
-					} catch( SecurityException eeeeeee ) { };
+					}
+					catch( SecurityException eeeeeee ) { };
 
-					try {
+					try
+					{
 						CheckedInputStream check = new CheckedInputStream( new FileInputStream(path), new CRC32() );
 						while( check.read(buf, 0, buf.length) > 0 ) {};
 						check.close();
@@ -1388,6 +1378,11 @@ public class MainActivity extends Activity
 					} catch( Exception eeeeee ) { }
 
 					Log.i("SDL", "Saving to file '" + path + "'");
+					if( !(new File(path).getCanonicalPath().startsWith(libDir.getAbsolutePath() + "/")) )
+					{
+						Log.i("SDL", "Security exception: " + path);
+						return;
+					}
 
 					out = new FileOutputStream( path );
 					int len = zip.read(buf);
@@ -1411,6 +1406,12 @@ public class MainActivity extends Activity
 				//Log.i("SDL", "libSDL: Error: " + eee.toString());
 			}
 		}
+		try
+		{
+			if (myApk != null)
+				myApk.close();
+		}
+		catch( IOException eeeeeeeeee ) {}
 	};
 
 	public static String GetMappedLibraryName(final String s)
@@ -1428,27 +1429,31 @@ public class MainActivity extends Activity
 		Settings.nativeChdir(Globals.DataDir);
 		for(String l: Globals.AppMainLibraries)
 		{
+			Log.i("SDL", "libSDL: loading library " + l);
 			try
 			{
 				String libname = System.mapLibraryName(l);
 				File libpath = new File(context.getFilesDir().getAbsolutePath() + "/../lib/" + libname);
-				Log.i("SDL", "libSDL: loading lib " + libpath.getAbsolutePath());
+				//Log.i("SDL", "libSDL: loading lib " + libpath.getAbsolutePath());
 				System.load(libpath.getPath());
+				Log.i("SDL", "libSDL: loaded library " + libpath.getPath());
 			}
 			catch( UnsatisfiedLinkError e )
 			{
-				Log.i("SDL", "libSDL: error loading lib " + l + ": " + e.toString());
+				//Log.i("SDL", "libSDL: error loading lib " + l + ": " + e.toString());
 				try
 				{
 					String libname = System.mapLibraryName(l);
 					File libpath = new File(context.getFilesDir().getAbsolutePath() + "/" + libname);
-					Log.i("SDL", "libSDL: loading lib " + libpath.getAbsolutePath());
+					//Log.i("SDL", "libSDL: loading lib " + libpath.getAbsolutePath());
 					System.load(libpath.getPath());
+					Log.i("SDL", "libSDL: loaded library " + libpath.getPath());
 				}
 				catch( UnsatisfiedLinkError ee )
 				{
-					Log.i("SDL", "libSDL: error loading lib " + l + ": " + ee.toString());
+					//Log.i("SDL", "libSDL: error loading lib " + l + ": " + ee.toString());
 					System.loadLibrary(l);
+					Log.i("SDL", "libSDL: loaded library " + l);
 				}
 			}
 		}
@@ -1524,6 +1529,11 @@ public class MainActivity extends Activity
 		{
 			Log.i("SDL", "libSDL: Record audio permission: " + (grantResults[0] == PackageManager.PERMISSION_GRANTED ? "GRANTED" : "DENIED"));
 		}
+		if (Manifest.permission.READ_EXTERNAL_STORAGE.equals(permissions[0]))
+		{
+			Log.i("SDL", "libSDL: Read external storage permission: " + (grantResults[0] == PackageManager.PERMISSION_GRANTED ? "GRANTED" : "DENIED"));
+			readExternalStoragePermissionDialogAnswered = true;
+		}
 		if (Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0]))
 		{
 			Log.i("SDL", "libSDL: Write external storage permission: " + (grantResults[0] == PackageManager.PERMISSION_GRANTED ? "GRANTED" : "DENIED"));
@@ -1531,12 +1541,13 @@ public class MainActivity extends Activity
 		}
 	}
 
-    public void setSystemMousePointerVisible(int visible) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N)
+	public void setSystemMousePointerVisible(int visible)
+	{
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N)
 		{
 			mGLView.setPointerIcon(android.view.PointerIcon.getSystemIcon(this, (visible == 0) ? android.view.PointerIcon.TYPE_NULL : android.view.PointerIcon.TYPE_DEFAULT));
 		}
-    }
+	}
 
 	public FrameLayout getVideoLayout() { return _videoLayout; }
 
@@ -1546,14 +1557,14 @@ public class MainActivity extends Activity
 
 	private TextView _tv = null;
 	private Button _btn = null;
-	private LinearLayout _layout = null;
+	private ConstraintLayout _layout = null;
 	private LinearLayout _layout2 = null;
 	private Advertisement _ad = null;
 	public CloudSave cloudSave = null;
 	public ProgressDialog loadingDialog = null;
 
 	FrameLayout _videoLayout = null;
-	private View _screenKeyboard = null;
+	public View _screenKeyboard = null;
 	private String _screenKeyboardHintMessage = null;
 	static boolean keyboardWithoutTextInputShown = false;
 	private boolean sdlInited = false;
@@ -1564,44 +1575,51 @@ public class MainActivity extends Activity
 
 	public LinkedList<Integer> textInput = new LinkedList<Integer> ();
 	public static MainActivity instance = null;
+	public boolean readExternalStoragePermissionDialogAnswered = false;
 	public boolean writeExternalStoragePermissionDialogAnswered = false;
+
+	public String ObbMountPath = null;
+	public String assetPackPath = null; // Not saved to the config file
 }
 
 // *** HONEYCOMB / ICS FIX FOR FULLSCREEN MODE, by lmak ***
-abstract class DimSystemStatusBar
+class DimSystemStatusBar
 {
-	public static DimSystemStatusBar get()
+	public static void dim(final View view, final Window window)
 	{
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB)
-			return DimSystemStatusBarHoneycomb.Holder.sInstance;
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT && Globals.ImmersiveMode)
+		{
+			// Immersive mode, I already hear curses when system bar reappears mid-game from the slightest swipe at the bottom of the screen
+			//Log.i("SDL", "libSDL: Enabling fullscreen, Android SDK " + android.os.Build.VERSION.SDK_INT + " VERSION_CODES.P " + android.os.Build.VERSION_CODES.P);
+			if( android.os.Build.VERSION.SDK_INT >= 35 )
+			{
+				if (!Globals.DrawInDisplayCutout)
+					WindowCompat.setDecorFitsSystemWindows(window, true);
+			}
+			else if( android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P )
+			{
+				//Log.i("SDL", "libSDL: Setting display cutout mode to SHORT_EDGES");
+				if (Globals.DrawInDisplayCutout)
+					window.getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+				else
+					window.getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER;
+			}
+			if (view != null)
+			{
+				view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+											| View.SYSTEM_UI_FLAG_FULLSCREEN
+											| View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+											| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+											| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+											| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+			}
+		}
 		else
-			return DimSystemStatusBarDummy.Holder.sInstance;
-	}
-	public abstract void dim(final View view);
-
-	private static class DimSystemStatusBarHoneycomb extends DimSystemStatusBar
-	{
-		private static class Holder
 		{
-			private static final DimSystemStatusBarHoneycomb sInstance = new DimSystemStatusBarHoneycomb();
-		}
-		public void dim(final View view)
-		{
-			if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT && Globals.ImmersiveMode)
-				// Immersive mode, I already hear curses when system bar reappears mid-game from the slightest swipe at the bottom of the screen
-				view.setSystemUiVisibility(android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | android.view.View.SYSTEM_UI_FLAG_FULLSCREEN);
-			else
+			if (view != null)
+			{
 				view.setSystemUiVisibility(android.view.View.SYSTEM_UI_FLAG_LOW_PROFILE);
-	   }
-	}
-	private static class DimSystemStatusBarDummy extends DimSystemStatusBar
-	{
-		private static class Holder
-		{
-			private static final DimSystemStatusBarDummy sInstance = new DimSystemStatusBarDummy();
-		}
-		public void dim(final View view)
-		{
+			}
 		}
 	}
 }

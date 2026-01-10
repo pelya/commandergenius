@@ -7,7 +7,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 2009 - 2015, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 2009 - 2017, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -49,9 +49,9 @@ typedef enum {
   IMAP_LAST          /* never used */
 } imapstate;
 
-/* This IMAP struct is used in the SessionHandle. All IMAP data that is
+/* This IMAP struct is used in the Curl_easy. All IMAP data that is
    connection-oriented must be in imap_conn to properly deal with the fact that
-   perhaps the SessionHandle is changed between the times the connection is
+   perhaps the Curl_easy is changed between the times the connection is
    used. */
 struct IMAP {
   curl_pp_transfer transfer;
@@ -71,6 +71,7 @@ struct imap_conn {
   struct pingpong pp;
   imapstate state;            /* Always use imap.c:state() to change state! */
   bool ssldone;               /* Is connect() over SSL done? */
+  bool preauth;               /* Is this connection PREAUTH? */
   struct SASL sasl;           /* SASL-related parameters */
   unsigned int preftype;      /* Preferred authentication type */
   int cmdid;                  /* Last used command ID */

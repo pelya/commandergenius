@@ -131,7 +131,7 @@ int ANDROID_ToggleFullScreen(_THIS, int fullscreen)
 	return 1;
 }
 
-enum { SDL_NUMMODES = 63 };
+enum { SDL_NUMMODES = 73 };
 static SDL_Rect *SDL_modelist[SDL_NUMMODES+1];
 
 //#define SDL_modelist		(this->hidden->SDL_modelist)
@@ -291,73 +291,91 @@ int ANDROID_VideoInit(_THIS, SDL_PixelFormat *vformat)
 		SDL_modelist[i] = SDL_malloc(sizeof(SDL_Rect));
 		SDL_modelist[i]->x = SDL_modelist[i]->y = 0;
 	}
+	i = 0;
 	/* Modes sorted largest to smallest */
-	SDL_modelist[0]->w = SDL_ANDROID_sWindowWidth; SDL_modelist[0]->h = SDL_ANDROID_sWindowHeight;
-	SDL_modelist[1]->w = SDL_ANDROID_sWindowWidth * 5 / 6; SDL_modelist[1]->h = SDL_ANDROID_sWindowHeight * 5 / 6;
-	SDL_modelist[2]->w = SDL_ANDROID_sWindowWidth * 4 / 6; SDL_modelist[2]->h = SDL_ANDROID_sWindowHeight * 4 / 6;
-	SDL_modelist[3]->w = SDL_ANDROID_sWindowWidth * 3 / 6; SDL_modelist[3]->h = SDL_ANDROID_sWindowHeight * 3 / 6;
-	SDL_modelist[4]->w = SDL_ANDROID_sWindowWidth * 2 / 6; SDL_modelist[4]->h = SDL_ANDROID_sWindowHeight * 2 / 6;
-	SDL_modelist[5]->w = 800; SDL_modelist[5]->h = 600; // Widely used on PC
-	SDL_modelist[6]->w = 640; SDL_modelist[6]->h = 480; // Widely used on PC
-	SDL_modelist[7]->w = 640; SDL_modelist[7]->h = 400; // Widely used on PC
-	SDL_modelist[8]->w = 320; SDL_modelist[8]->h = 240; // For older games
-	SDL_modelist[9]->w = 320; SDL_modelist[9]->h = 200; // For even older games
-	SDL_modelist[10]->w = 480; SDL_modelist[10]->h = 320; // Virtual wide-screen mode
-	SDL_modelist[11]->w = 800; SDL_modelist[11]->h = 480; // Virtual wide-screen mode
-	SDL_modelist[12]->w = 640; SDL_modelist[12]->h = 350; // For PrefClub app
-	SDL_modelist[13]->w = 320; SDL_modelist[13]->h = 256; // For UAE4ALL2
-	SDL_modelist[14]->w = 640; SDL_modelist[14]->h = 200; // For UAE4ALL2
-	SDL_modelist[15]->w = 640; SDL_modelist[15]->h = 240; // For UAE4ALL2
-	SDL_modelist[16]->w = 640; SDL_modelist[16]->h = 256; // For UAE4ALL2
-	SDL_modelist[17]->w = 320; SDL_modelist[17]->h = 262; // For UAE4ALL2
-	SDL_modelist[18]->w = 640; SDL_modelist[18]->h = 262; // For UAE4ALL2
-	SDL_modelist[19]->w = 320; SDL_modelist[19]->h = 270; // For UAE4ALL2
-	SDL_modelist[20]->w = 640; SDL_modelist[20]->h = 270; // For UAE4ALL2
-	SDL_modelist[21]->w = 320; SDL_modelist[21]->h = 216; // For UAE4ALL2
-	SDL_modelist[22]->w = 640; SDL_modelist[22]->h = 216; // For UAE4ALL2
-	SDL_modelist[23]->w = 384; SDL_modelist[23]->h = 272; // For VICE
-	SDL_modelist[24]->w = 854; SDL_modelist[24]->h = 480; // Virtual wide-screen mode
-	SDL_modelist[25]->w = 1280; SDL_modelist[25]->h = 720; // Virtual wide-screen mode
-	SDL_modelist[26]->w = 1920; SDL_modelist[26]->h = 1080; // Virtual wide-screen mode
-	SDL_modelist[27]->w = 1024; SDL_modelist[27]->h = 768; // Widely used on PC
-	SDL_modelist[28]->w = 640; SDL_modelist[28]->h = 512; // For P-UAE
-	SDL_modelist[29]->w = 640; SDL_modelist[29]->h = 524; // For P-UAE
-	SDL_modelist[30]->w = 640; SDL_modelist[30]->h = 540; // For P-UAE
-	SDL_modelist[31]->w = 352; SDL_modelist[31]->h = 200; // For UAE4ALL2
-	SDL_modelist[32]->w = 352; SDL_modelist[32]->h = 216; // For UAE4ALL2
-	SDL_modelist[33]->w = 352; SDL_modelist[33]->h = 240; // For UAE4ALL2
-	SDL_modelist[34]->w = 352; SDL_modelist[34]->h = 256; // For UAE4ALL2
-	SDL_modelist[35]->w = 352; SDL_modelist[35]->h = 262; // For UAE4ALL2
-	SDL_modelist[36]->w = 352; SDL_modelist[36]->h = 270; // For UAE4ALL2
-	SDL_modelist[37]->w = 384; SDL_modelist[37]->h = 200; // For UAE4ALL2
-	SDL_modelist[38]->w = 384; SDL_modelist[38]->h = 216; // For UAE4ALL2
-	SDL_modelist[39]->w = 384; SDL_modelist[39]->h = 240; // For UAE4ALL2
-	SDL_modelist[40]->w = 384; SDL_modelist[40]->h = 256; // For UAE4ALL2
-	SDL_modelist[41]->w = 384; SDL_modelist[41]->h = 262; // For UAE4ALL2
-	SDL_modelist[42]->w = 384; SDL_modelist[42]->h = 270; // For UAE4ALL2
-	SDL_modelist[43]->w = 704; SDL_modelist[43]->h = 200; // For UAE4ALL2
-	SDL_modelist[44]->w = 704; SDL_modelist[44]->h = 216; // For UAE4ALL2
-	SDL_modelist[45]->w = 704; SDL_modelist[45]->h = 240; // For UAE4ALL2
-	SDL_modelist[46]->w = 704; SDL_modelist[46]->h = 256; // For UAE4ALL2
-	SDL_modelist[47]->w = 704; SDL_modelist[47]->h = 262; // For UAE4ALL2
-	SDL_modelist[48]->w = 704; SDL_modelist[48]->h = 270; // For UAE4ALL2
-	SDL_modelist[49]->w = 768; SDL_modelist[49]->h = 200; // For UAE4ALL2
-	SDL_modelist[50]->w = 768; SDL_modelist[50]->h = 216; // For UAE4ALL2
-	SDL_modelist[51]->w = 768; SDL_modelist[51]->h = 240; // For UAE4ALL2
-	SDL_modelist[52]->w = 768; SDL_modelist[52]->h = 256; // For UAE4ALL2
-	SDL_modelist[53]->w = 768; SDL_modelist[53]->h = 262; // For UAE4ALL2
-	SDL_modelist[54]->w = 768; SDL_modelist[54]->h = 270; // For UAE4ALL2
-	SDL_modelist[55]->w = 1280; SDL_modelist[55]->h = 960; // For UQM-HD
-	SDL_modelist[56]->w = 960; SDL_modelist[56]->h = 600; // For ScummVM 3x-mode
-	SDL_modelist[57]->w = 960; SDL_modelist[57]->h = 540; // Virtual wide-screen mode
-	SDL_modelist[58]->w = 720; SDL_modelist[58]->h = 400; // Virtual wide-screen mode
-	SDL_modelist[59]->w = 480; SDL_modelist[59]->h = 272; // PSP
-	SDL_modelist[60]->w = 996; SDL_modelist[60]->h = 560; // For OpenTTD
-	SDL_modelist[61]->w = 1280; SDL_modelist[61]->h = 800; // for Basilisk2
-	SDL_modelist[62]->w = 1366; SDL_modelist[62]->h = 768; // for Basilisk2
-	SDL_modelist[63] = NULL;
+	SDL_modelist[i]->w = SDL_ANDROID_sWindowWidth; SDL_modelist[i]->h = SDL_ANDROID_sWindowHeight;
+	// These modes come first, because they preserve aspect ratio and keep pixels square
+	i++; SDL_modelist[i]->w = SDL_ANDROID_sWindowWidth * 8 / 9; SDL_modelist[i]->h = SDL_ANDROID_sWindowHeight * 8 / 9; // 8 / 9 : 1920x1080 -> 1706x960
+	i++; SDL_modelist[i]->w = SDL_ANDROID_sWindowWidth * 7 / 8; SDL_modelist[i]->h = SDL_ANDROID_sWindowHeight * 7 / 8; // 7 / 8 : 1920x1080 -> 1680x945
+	i++; SDL_modelist[i]->w = SDL_ANDROID_sWindowWidth * 5 / 6; SDL_modelist[i]->h = SDL_ANDROID_sWindowHeight * 5 / 6; // 5 / 6 : 1920x1080 -> 1600x900
+	i++; SDL_modelist[i]->w = SDL_ANDROID_sWindowWidth * 7 / 9; SDL_modelist[i]->h = SDL_ANDROID_sWindowHeight * 7 / 9; // 7 / 9 : 1920x1080 -> 1493x840
+	i++; SDL_modelist[i]->w = SDL_ANDROID_sWindowWidth * 6 / 8; SDL_modelist[i]->h = SDL_ANDROID_sWindowHeight * 6 / 8; // 6 / 8 : 1920x1080 -> 1440x810
+	i++; SDL_modelist[i]->w = SDL_ANDROID_sWindowWidth * 4 / 6; SDL_modelist[i]->h = SDL_ANDROID_sWindowHeight * 4 / 6; // 4 / 6 : 1920x1080 -> 1280x720
+	i++; SDL_modelist[i]->w = SDL_ANDROID_sWindowWidth * 5 / 8; SDL_modelist[i]->h = SDL_ANDROID_sWindowHeight * 5 / 8; // 5 / 8 : 1920x1080 -> 1200x675
+	i++; SDL_modelist[i]->w = SDL_ANDROID_sWindowWidth * 5 / 9; SDL_modelist[i]->h = SDL_ANDROID_sWindowHeight * 5 / 9; // 5 / 9 : 1920x1080 -> 1066x600
+	i++; SDL_modelist[i]->w = SDL_ANDROID_sWindowWidth * 3 / 6; SDL_modelist[i]->h = SDL_ANDROID_sWindowHeight * 3 / 6; // 3 / 6 : 1920x1080 -> 960x540
+	i++; SDL_modelist[i]->w = SDL_ANDROID_sWindowWidth * 4 / 9; SDL_modelist[i]->h = SDL_ANDROID_sWindowHeight * 4 / 9; // 4 / 9 : 1920x1080 -> 853x480
+	i++; SDL_modelist[i]->w = SDL_ANDROID_sWindowWidth * 3 / 8; SDL_modelist[i]->h = SDL_ANDROID_sWindowHeight * 3 / 8; // 3 / 8 : 1920x1080 -> 720x405
+	i++; SDL_modelist[i]->w = SDL_ANDROID_sWindowWidth * 2 / 6; SDL_modelist[i]->h = SDL_ANDROID_sWindowHeight * 2 / 6; // 2 / 6 : 1920x1080 -> 640x360
+	i++; SDL_modelist[i]->w = SDL_ANDROID_sWindowWidth * 2 / 8; SDL_modelist[i]->h = SDL_ANDROID_sWindowHeight * 2 / 8; // 2 / 8 : 1920x1080 -> 480x270
+	i++; SDL_modelist[i]->w = SDL_ANDROID_sWindowWidth * 2 / 9; SDL_modelist[i]->h = SDL_ANDROID_sWindowHeight * 2 / 9; // 2 / 9 : 1920x1080 -> 426x240
+	// Other modes for compatibility with various emulators
+	i++; SDL_modelist[i]->w = 800;  SDL_modelist[i]->h = 600; // Widely used on PC
+	i++; SDL_modelist[i]->w = 640;  SDL_modelist[i]->h = 480; // Widely used on PC
+	i++; SDL_modelist[i]->w = 640;  SDL_modelist[i]->h = 400; // Widely used on PC
+	i++; SDL_modelist[i]->w = 320;  SDL_modelist[i]->h = 240; // For older games
+	i++; SDL_modelist[i]->w = 320;  SDL_modelist[i]->h = 200; // For even older games
+	i++; SDL_modelist[i]->w = 480;  SDL_modelist[i]->h = 320; // Virtual wide-screen mode
+	i++; SDL_modelist[i]->w = 800;  SDL_modelist[i]->h = 480; // Virtual wide-screen mode
+	i++; SDL_modelist[i]->w = 640;  SDL_modelist[i]->h = 350; // For PrefClub app
+	i++; SDL_modelist[i]->w = 320;  SDL_modelist[i]->h = 256; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 640;  SDL_modelist[i]->h = 200; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 640;  SDL_modelist[i]->h = 240; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 640;  SDL_modelist[i]->h = 256; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 320;  SDL_modelist[i]->h = 262; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 640;  SDL_modelist[i]->h = 262; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 320;  SDL_modelist[i]->h = 270; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 640;  SDL_modelist[i]->h = 270; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 320;  SDL_modelist[i]->h = 216; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 640;  SDL_modelist[i]->h = 216; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 384;  SDL_modelist[i]->h = 272; // For VICE
+	i++; SDL_modelist[i]->w = 854;  SDL_modelist[i]->h = 480; // Virtual wide-screen mode
+	i++; SDL_modelist[i]->w = 1280; SDL_modelist[i]->h = 720; // Virtual wide-screen mode
+	i++; SDL_modelist[i]->w = 1920; SDL_modelist[i]->h = 1080; // Virtual wide-screen mode
+	i++; SDL_modelist[i]->w = 1024; SDL_modelist[i]->h = 768; // Widely used on PC
+	i++; SDL_modelist[i]->w = 640;  SDL_modelist[i]->h = 512; // For P-UAE
+	i++; SDL_modelist[i]->w = 640;  SDL_modelist[i]->h = 524; // For P-UAE
+	i++; SDL_modelist[i]->w = 640;  SDL_modelist[i]->h = 540; // For P-UAE
+	i++; SDL_modelist[i]->w = 352;  SDL_modelist[i]->h = 200; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 352;  SDL_modelist[i]->h = 216; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 352;  SDL_modelist[i]->h = 240; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 352;  SDL_modelist[i]->h = 256; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 352;  SDL_modelist[i]->h = 262; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 352;  SDL_modelist[i]->h = 270; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 384;  SDL_modelist[i]->h = 200; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 384;  SDL_modelist[i]->h = 216; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 384;  SDL_modelist[i]->h = 240; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 384;  SDL_modelist[i]->h = 256; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 384;  SDL_modelist[i]->h = 262; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 384;  SDL_modelist[i]->h = 270; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 704;  SDL_modelist[i]->h = 200; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 704;  SDL_modelist[i]->h = 216; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 704;  SDL_modelist[i]->h = 240; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 704;  SDL_modelist[i]->h = 256; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 704;  SDL_modelist[i]->h = 262; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 704;  SDL_modelist[i]->h = 270; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 768;  SDL_modelist[i]->h = 200; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 768;  SDL_modelist[i]->h = 216; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 768;  SDL_modelist[i]->h = 240; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 768;  SDL_modelist[i]->h = 256; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 768;  SDL_modelist[i]->h = 262; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 768;  SDL_modelist[i]->h = 270; // For UAE4ALL2
+	i++; SDL_modelist[i]->w = 1280; SDL_modelist[i]->h = 960; // For UQM-HD
+	i++; SDL_modelist[i]->w = 960;  SDL_modelist[i]->h = 600; // For ScummVM 3x-mode
+	i++; SDL_modelist[i]->w = 960;  SDL_modelist[i]->h = 540; // Virtual wide-screen mode
+	i++; SDL_modelist[i]->w = 720;  SDL_modelist[i]->h = 400; // Virtual wide-screen mode
+	i++; SDL_modelist[i]->w = 480;  SDL_modelist[i]->h = 272; // PSP
+	i++; SDL_modelist[i]->w = 996;  SDL_modelist[i]->h = 560; // For OpenTTD
+	i++; SDL_modelist[i]->w = 1280; SDL_modelist[i]->h = 800; // for Basilisk2
+	i++; SDL_modelist[i]->w = 1366; SDL_modelist[i]->h = 768; // for Basilisk2
+	i++; SDL_modelist[i] = NULL;
 	// If you going to add another video mode, increase SDL_NUMMODES constant
-	
+	if(i != SDL_NUMMODES)
+	{
+		__android_log_print(ANDROID_LOG_ERROR, "libSDL", "Please increase SDL_NUMMODES = %d at %s to match the number of actual video modes = %d", SDL_NUMMODES, __FILE__, i);
+		abort();
+	}
+
 	SDL_VideoInit_1_3(NULL, 0);
 	
 	/* We're done! */
@@ -429,7 +447,6 @@ SDL_Surface *ANDROID_SetVideoMode(_THIS, SDL_Surface *current,
 				// and expects those 256 pixels to stretch 2x height like on a TV interlaced display.
 				SDL_ANDROID_sWindowWidth = SDL_ANDROID_sWindowHeight * 4 / 3;
 
-			SDL_ANDROID_TouchscreenCalibrationWidth = SDL_ANDROID_sWindowWidth;
 			SDL_ANDROID_ForceClearScreenRectAmount = 2;
 		}
 

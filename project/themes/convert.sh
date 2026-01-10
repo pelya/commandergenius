@@ -363,10 +363,10 @@ rgui \
 rgui \
 mouse_pointer \
 \
-dpad_UpLeft \
-dpad_UpRight \
-dpad_DownLeft \
-dpad_DownRight \
+dpad_upleft \
+dpad_upright \
+dpad_downleft \
+dpad_downright \
 \
 ; do
 	if [ \! -e ../res/raw/$F.png.raw ]; then
@@ -469,10 +469,10 @@ rgui \
 rgui \
 mouse_pointer \
 \
-dpad_UpLeft \
-dpad_UpRight \
-dpad_DownLeft \
-dpad_DownRight \
+dpad_upleft \
+dpad_upright \
+dpad_downleft \
+dpad_downright \
 \
 ; do
 	if [ \! -e ../res/raw/$F.png.raw ]; then

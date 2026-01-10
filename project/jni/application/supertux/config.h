@@ -31,4 +31,15 @@
 
 #define HAVE_LIBCURL
 
+#define BUILD_DATA_DIR "data"
+
+#define BUILD_CONFIG_DATA_DIR "data"
+
+/* #undef ENABLE_DISCORD */
+
+/* #undef UBUNTU_TOUCH */
+#define ENABLE_TOUCHSCREEN_SUPPORT
+
+/* #undef REMOVE_QUIT_BUTTON */
+
 #endif /*CONFIG_H*/

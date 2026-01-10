@@ -7,28 +7,38 @@ TODO, which will get actually done
 
 - TeeWorlds: tap-and-swipe controls.
 
-- OpenArena: add dynamic camera button to joystick, add option for joystick tap action.
-
-- OpenArena: tap to aim for aiming modes with shoot button.
-
-- OpenArena: Option for the second tap to stop shooting in tap to shoot mode, 
-
-- USB Keyboard: options for camera feed size and for redefining remote menu hotkey.
-
-- UQM HD: add fonts from http://mosc-portal.bursa.ru/showthread.php?t=206 and switch back to joystick controls, set 4:3 aspect ratio as default.
-
 - SDL: CompatibilityHacksForceScreenUpdate=y does not redraw screen after putting to background and restoring.
-
-- SDL: request SD card permission on Android 6.
 
 - SDL: add option for non-fullscreen non-immersive mode.
 
-- SDL: new commandline arguments editor adds extra blank parameter at the beginning.
+- SDL: SdlVideoResizeKeepAspect=y mouse location shifted near right border.
 
-- SDL: support for mounting OBB files as directories: https://developer.android.com/google/play/expansion-files.html
+- SDL: Text input window still blocks touches sometimes after text input is finished.
 
-- Debian: proot crashes on Shield TV arm64 box.
+- SDL: Right mouse button sometimes gets stuck in tap or hold mode, faster scrollwheel while not moving mouse cursor.
 
-- Debian: add harldink simulation to proot, for Android 6.
+- SDL: SD card permission dialog does nothing on Android 10.
 
-- Debian: add OpenSL ES output plugin to PulseAudio.
+- SDL2: Back button does not work.
+
+- XSDL: use pixel size instead of video mode size, Android multiwindow support.
+
+- XSDL: proper window resizing, with xrandr resizing XSDL screen buffer.
+
+- XSDL: do not use xsel to enter Unicode characters, modify clipboard directly.
+
+- XSDL: Copy contents of XSDL clipboard to Android clipboard when the app loses focus.
+
+- XSDL: Update video when window not focused, this will allow for output in splitscreen mode.
+
+- XSDL: Option to disable PulseAudio.
+
+- Debian: force Chromium version to the last working one, from Jan 2020.
+
+- OpenLieroX: limited lives are shown incorrectly in score table when spectating.
+
+- OpenLieroX: download speed test at humus.kvalitne.cz is not working, replace it with some default value.
+
+- OpenLieroX: always dig while tapping Jump button, not just when in air.
+
+- SuperTux: Level editor is unusable.

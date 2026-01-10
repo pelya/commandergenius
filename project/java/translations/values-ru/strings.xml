@@ -16,6 +16,7 @@
 <string name="storage_phone">Внутреннее хранение - %d Мб</string>
 <string name="storage_sd">SD карта - %d Мб</string>
 <string name="storage_question">Куда сохранять данные приложения</string>
+<string name="storage_access">Разрешение на запись на SD карту</string>
 <string name="optional_downloads">Дополнительные загрузки</string>
 <string name="ok">Продолжить</string>
 <string name="controls_arrows">Стрелки / джойстик / Dpad</string>

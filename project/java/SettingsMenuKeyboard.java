@@ -57,6 +57,7 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Button;
 import android.view.View;
+import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.text.Editable;
 import android.text.SpannedString;
@@ -385,26 +386,22 @@ class SettingsMenuKeyboard extends SettingsMenu
 				p.getResources().getString(R.string.remap_screenkb_button) + " 4",
 				p.getResources().getString(R.string.remap_screenkb_button) + " 5",
 				p.getResources().getString(R.string.remap_screenkb_button) + " 6",
+				p.getResources().getString(R.string.remap_screenkb_joystick) + " 2",
+				p.getResources().getString(R.string.remap_screenkb_joystick) + " 3",
+				p.getResources().getString(R.string.remap_screenkb_button) + " 7",
+				p.getResources().getString(R.string.remap_screenkb_button) + " 8",
+				p.getResources().getString(R.string.remap_screenkb_button) + " 9",
+				p.getResources().getString(R.string.remap_screenkb_button) + " 10",
+				p.getResources().getString(R.string.remap_screenkb_button) + " 11",
+				p.getResources().getString(R.string.remap_screenkb_button) + " 12",
 			};
 
 			boolean defaults[] = Arrays.copyOf(Globals.ScreenKbControlsShown, Globals.ScreenKbControlsShown.length);
-			if( Globals.AppUsesSecondJoystick )
-			{
-				items = Arrays.copyOf(items, items.length + 1);
-				items[items.length - 1] = p.getResources().getString(R.string.remap_screenkb_joystick) + " 2";
-				defaults = Arrays.copyOf(defaults, defaults.length + 1);
-				defaults[defaults.length - 1] = true;
-			}
-			if( Globals.AppUsesThirdJoystick )
-			{
-				items = Arrays.copyOf(items, items.length + 1);
-				items[items.length - 1] = p.getResources().getString(R.string.remap_screenkb_joystick) + " 3";
-				defaults = Arrays.copyOf(defaults, defaults.length + 1);
-				defaults[defaults.length - 1] = true;
-			}
 
 			for( int i = 0; i < Math.min(6, Globals.AppTouchscreenKeyboardKeysNames.length); i++ )
 				items[i+2] = items[i+2] + " - " + Globals.AppTouchscreenKeyboardKeysNames[i].replace("_", " ");
+			for( int i = 6; i < Math.min(12, Globals.AppTouchscreenKeyboardKeysNames.length); i++ )
+				items[i+4] = items[i+4] + " - " + Globals.AppTouchscreenKeyboardKeysNames[i].replace("_", " ");
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(p);
 			builder.setTitle(p.getResources().getString(R.string.remap_screenkb));
@@ -444,9 +441,15 @@ class SettingsMenuKeyboard extends SettingsMenu
 				p.getResources().getString(R.string.remap_screenkb_button) + " 4",
 				p.getResources().getString(R.string.remap_screenkb_button) + " 5",
 				p.getResources().getString(R.string.remap_screenkb_button) + " 6",
+				p.getResources().getString(R.string.remap_screenkb_button) + " 7",
+				p.getResources().getString(R.string.remap_screenkb_button) + " 8",
+				p.getResources().getString(R.string.remap_screenkb_button) + " 9",
+				p.getResources().getString(R.string.remap_screenkb_button) + " 10",
+				p.getResources().getString(R.string.remap_screenkb_button) + " 11",
+				p.getResources().getString(R.string.remap_screenkb_button) + " 12",
 			};
 
-			for( int i = 0; i < Math.min(6, Globals.AppTouchscreenKeyboardKeysNames.length); i++ )
+			for( int i = 0; i < Math.min(12, Globals.AppTouchscreenKeyboardKeysNames.length); i++ )
 				items[i] = items[i] + " - " + Globals.AppTouchscreenKeyboardKeysNames[i].replace("_", " ");
 
 			if( currentButton >= Globals.RemapScreenKbKeycode.length )
@@ -454,7 +457,12 @@ class SettingsMenuKeyboard extends SettingsMenu
 				goBack(p);
 				return;
 			}
-			if( ! Globals.ScreenKbControlsShown[currentButton + 2] )
+			if( currentButton < 6 && ! Globals.ScreenKbControlsShown[currentButton + 2] )
+			{
+				showRemapScreenKbConfig2(p, currentButton + 1);
+				return;
+			}
+			if( currentButton >= 6 && ! Globals.ScreenKbControlsShown[currentButton + 4] )
 			{
 				showRemapScreenKbConfig2(p, currentButton + 1);
 				return;
@@ -625,8 +633,16 @@ class SettingsMenuKeyboard extends SettingsMenu
 		void run (final MainActivity p)
 		{
 			p.setText(p.getResources().getString(R.string.screenkb_custom_layout_help));
-			CustomizeScreenKbLayoutTool tool = new CustomizeScreenKbLayoutTool(p);
-			Globals.TouchscreenKeyboardSize = Globals.TOUCHSCREEN_KEYBOARD_CUSTOM;
+			if (Globals.ImmersiveMode)
+				DimSystemStatusBar.dim(p.getVideoLayout(), p.getWindow());
+			p.getVideoLayout().getHandler().postDelayed(new Runnable()
+			{
+				public void run()
+				{
+					CustomizeScreenKbLayoutTool tool = new CustomizeScreenKbLayoutTool(p);
+					Globals.TouchscreenKeyboardSize = Globals.TOUCHSCREEN_KEYBOARD_CUSTOM;
+				}
+			}, 200);
 		}
 
 		static class CustomizeScreenKbLayoutTool implements View.OnTouchListener, View.OnKeyListener
@@ -648,13 +664,25 @@ class SettingsMenuKeyboard extends SettingsMenu
 				R.drawable.b5,
 				R.drawable.b6,
 				R.drawable.dpad,
-				R.drawable.dpad
+				R.drawable.dpad,
+				R.drawable.b1,
+				R.drawable.b2,
+				R.drawable.b3,
+				R.drawable.b4,
+				R.drawable.b5,
+				R.drawable.b6,
 			};
 			int oldX = 0, oldY = 0;
 			boolean resizing = false;
-			
+
 			public CustomizeScreenKbLayoutTool(MainActivity _p) 
 			{
+				if( buttons.length != Globals.ScreenKbControlsLayout.length )
+				{
+					Log.i("SDL", "Assertion failed: buttons.length != Globals.ScreenKbControlsLayout.length" );
+					throw new RuntimeException("Assertion failed: buttons.length != Globals.ScreenKbControlsLayout.length");
+				}
+
 				p = _p;
 				layout = new FrameLayout(p);
 				p.getVideoLayout().addView(layout);
@@ -670,30 +698,28 @@ class SettingsMenuKeyboard extends SettingsMenu
 				boundary.setImageBitmap(boundaryBmp);
 				layout.addView(boundary);
 				currentButton = -1;
-				if( Globals.TouchscreenKeyboardTheme == 2 )
-				{
-					buttons = new int[] {
-						R.drawable.sun_dpad,
-						R.drawable.sun_keyboard,
-						R.drawable.sun_b1,
-						R.drawable.sun_b2,
-						R.drawable.sun_b3,
-						R.drawable.sun_b4,
-						R.drawable.sun_b5,
-						R.drawable.sun_b6,
-						R.drawable.sun_dpad,
-						R.drawable.sun_dpad
-					};
-				}
 
-				int displayX = 800;
-				int displayY = 480;
-				try {
-					DisplayMetrics dm = new DisplayMetrics();
-					p.getWindowManager().getDefaultDisplay().getMetrics(dm);
-					displayX = dm.widthPixels;
-					displayY = dm.heightPixels;
-				} catch (Exception eeeee) {}
+				final int displayX = p.getVideoLayout().getWidth();
+				final int displayY = p.getVideoLayout().getHeight();
+
+				if( Globals.TouchscreenKeyboardSize != Globals.TOUCHSCREEN_KEYBOARD_CUSTOM )
+				{
+					DemoRenderer.nativeResize(displayX, displayY, 0);
+					Settings.nativeSetJoystickUsed( Globals.AppUsesThirdJoystick ? 3 : (Globals.AppUsesSecondJoystick ? 2 : (Globals.AppUsesJoystick ? 1 : 0)) );
+					Settings.nativeSetupScreenKeyboard(	Globals.TouchscreenKeyboardSize,
+														Globals.TouchscreenKeyboardDrawSize,
+														Globals.TouchscreenKeyboardTheme,
+														Globals.TouchscreenKeyboardTransparency,
+														Globals.FloatingScreenJoystick ? 1 : 0,
+														Globals.AppTouchscreenKeyboardKeysAmount );
+					for( int i = 0; i < Globals.ScreenKbControlsLayout.length; i++ )
+					{
+						Globals.ScreenKbControlsLayout[i][0] = Settings.nativeGetScreenKeyboardButtonLayout(i, 0);
+						Globals.ScreenKbControlsLayout[i][1] = Settings.nativeGetScreenKeyboardButtonLayout(i, 1);
+						Globals.ScreenKbControlsLayout[i][2] = Settings.nativeGetScreenKeyboardButtonLayout(i, 2);
+						Globals.ScreenKbControlsLayout[i][3] = Settings.nativeGetScreenKeyboardButtonLayout(i, 3);
+					}
+				}
 
 				for( int i = 0; i < Globals.ScreenKbControlsLayout.length; i++ )
 				{
@@ -701,37 +727,7 @@ class SettingsMenuKeyboard extends SettingsMenu
 						continue;
 					if( currentButton == -1 )
 						currentButton = i;
-					//Log.i("SDL", "Screen kb button " + i + " coords " + Globals.ScreenKbControlsLayout[i][0] + ":" + Globals.ScreenKbControlsLayout[i][1] + ":" + Globals.ScreenKbControlsLayout[i][2] + ":" + Globals.ScreenKbControlsLayout[i][3] );
-					// Check if the button is off screen edge or shrunk to zero
-					if( Globals.ScreenKbControlsLayout[i][0] > Globals.ScreenKbControlsLayout[i][2] - displayY/12 )
-						Globals.ScreenKbControlsLayout[i][0] = Globals.ScreenKbControlsLayout[i][2] - displayY/12;
-					if( Globals.ScreenKbControlsLayout[i][1] > Globals.ScreenKbControlsLayout[i][3] - displayY/12 )
-						Globals.ScreenKbControlsLayout[i][1] = Globals.ScreenKbControlsLayout[i][3] - displayY/12;
-					if( Globals.ScreenKbControlsLayout[i][0] < Globals.ScreenKbControlsLayout[i][2] - displayY*2/3 )
-						Globals.ScreenKbControlsLayout[i][0] = Globals.ScreenKbControlsLayout[i][2] - displayY*2/3;
-					if( Globals.ScreenKbControlsLayout[i][1] < Globals.ScreenKbControlsLayout[i][3] - displayY*2/3 )
-						Globals.ScreenKbControlsLayout[i][1] = Globals.ScreenKbControlsLayout[i][3] - displayY*2/3;
-					if( Globals.ScreenKbControlsLayout[i][0] < 0 )
-					{
-						Globals.ScreenKbControlsLayout[i][2] += -Globals.ScreenKbControlsLayout[i][0];
-						Globals.ScreenKbControlsLayout[i][0] = 0;
-					}
-					if( Globals.ScreenKbControlsLayout[i][2] > displayX )
-					{
-						Globals.ScreenKbControlsLayout[i][0] -= Globals.ScreenKbControlsLayout[i][2] - displayX;
-						Globals.ScreenKbControlsLayout[i][2] = displayX;
-					}
-					if( Globals.ScreenKbControlsLayout[i][1] < 0 )
-					{
-						Globals.ScreenKbControlsLayout[i][3] += -Globals.ScreenKbControlsLayout[i][1];
-						Globals.ScreenKbControlsLayout[i][1] = 0;
-					}
-					if( Globals.ScreenKbControlsLayout[i][3] > displayY )
-					{
-						Globals.ScreenKbControlsLayout[i][1] -= Globals.ScreenKbControlsLayout[i][3] - displayY;
-						Globals.ScreenKbControlsLayout[i][3] = displayY;
-					}
-					//Log.i("SDL", "After bounds check coords " + Globals.ScreenKbControlsLayout[i][0] + ":" + Globals.ScreenKbControlsLayout[i][1] + ":" + Globals.ScreenKbControlsLayout[i][2] + ":" + Globals.ScreenKbControlsLayout[i][3] );
+					Log.i("SDL", "Screen kb button " + i + " coords " + Globals.ScreenKbControlsLayout[i][0] + ":" + Globals.ScreenKbControlsLayout[i][1] + ":" + Globals.ScreenKbControlsLayout[i][2] + ":" + Globals.ScreenKbControlsLayout[i][3] );
 
 					imgs[i] = new ImageView(p);
 					imgs[i].setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
@@ -752,6 +748,31 @@ class SettingsMenuKeyboard extends SettingsMenu
 					onKey( null, KeyEvent.KEYCODE_BACK, null ); // All buttons disabled - do not show anything
 				else
 					setupButton(currentButton);
+
+				final Button backButton = new Button(p);
+				backButton.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+				backButton.setText(android.R.string.ok);
+				//backButton.setTop(displayY / 30);
+				//backButton.setLeft(displayX / 2);
+				backButton.setOnClickListener(new View.OnClickListener()
+				{
+					public void onClick(View v)
+					{
+						p.getVideoLayout().removeView(layout);
+						layout = null;
+						goBack(p);
+					}
+				});
+				layout.addView(backButton, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT,
+																			Gravity.TOP | Gravity.CENTER_HORIZONTAL));
+				layout.getHandler().postDelayed(new Runnable()
+				{
+					public void run()
+					{
+						//backButton.setLeft(displayX / 2 - backButton.getWidth() / 2);
+						//backButton.setLeft(displayX / 2);
+					}
+				}, 200);
 			}
 			
 			void setupButton(int i)
@@ -779,6 +800,10 @@ class SettingsMenuKeyboard extends SettingsMenu
 					buttonText = "Joystick 2";
 				if( i == 9 )
 					buttonText = "Joystick 3";
+				if( i >= 10 && i <= 15 )
+					buttonText = p.getResources().getString(R.string.remap_screenkb_button) + (i - 4);
+				if( i >= 10 && i - 4 < Globals.AppTouchscreenKeyboardKeysNames.length )
+					buttonText = Globals.AppTouchscreenKeyboardKeysNames[i - 4].replace("_", " ");
 				p.setText(p.getResources().getString(R.string.screenkb_custom_layout_help) + "\n" + buttonText);
 			}
 
@@ -878,7 +903,7 @@ class SettingsMenuKeyboard extends SettingsMenu
 				p.getResources().getString(R.string.screenkb_floating_joystick),
 			};
 
-			boolean defaults[] = { 
+			boolean defaults[] = {
 				Globals.FloatingScreenJoystick,
 			};
 			

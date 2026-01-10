@@ -1,5 +1,5 @@
 #!/bin/sh
 
-. ./AndroidAppSettings.cfg
+source ./AndroidAppSettings.cfg
 
 adb uninstall $AppFullName

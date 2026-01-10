@@ -1,1 +1,3 @@
 openttd-build-*
+/AndroidData/*.xz
+/data

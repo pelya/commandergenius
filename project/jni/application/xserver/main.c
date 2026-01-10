@@ -8,6 +8,7 @@
 #include <netinet/in.h>
 #include <sys/un.h>
 #include <errno.h>
+#include <pthread.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_screenkeyboard.h>
 #include <SDL/SDL_android.h>
@@ -21,6 +22,7 @@ static void retryLaunchWithDifferentPort(void);
 static void showError(void);
 static void setupEnv(void);
 static char port[16] = ":0";
+static void startPulseAudio(void);
 
 int main( int argc, char* argv[] )
 {
@@ -35,6 +37,10 @@ int main( int argc, char* argv[] )
 		"-nolock",
 		"-noreset",
 		"-nopn",
+		"-listen",
+		"inet",
+		"-listen",
+		"inet6",
 		"-nolisten",
 		"unix",
 		"-fp",
@@ -42,7 +48,7 @@ int main( int argc, char* argv[] )
 		"-screen",
 		screenres,
 	};
-	int argnum = 11;
+	int argnum = 15;
 	char * envp[] = { NULL };
 	int printHelp = 1;
 	int screenResOverride = 0;
@@ -54,6 +60,8 @@ int main( int argc, char* argv[] )
 	int resolutionH = atoi(getenv("DISPLAY_RESOLUTION_HEIGHT"));
 	int displayW = atoi(getenv("DISPLAY_WIDTH_MM"));
 	int displayH = atoi(getenv("DISPLAY_HEIGHT_MM"));
+
+	int pulseAudio = 1;
 
 	__android_log_print(ANDROID_LOG_INFO, "XSDL", "Actual video resolution %d/%dx%d/%d", resolutionW, displayW, resolutionH, displayH);
 	setupEnv();
@@ -81,7 +89,7 @@ int main( int argc, char* argv[] )
 		}
 		else if( strcmp(argv[1], "-screenbuttons") == 0 )
 		{
-			screenButtons = 1;
+			screenButtons = 0;
 		}
 		else if( strcmp(argv[1], "-warndiskspacemb") == 0 && argc > 2 )
 		{
@@ -119,18 +127,20 @@ int main( int argc, char* argv[] )
 
 	if( !screenResOverride )
 	{
-		XSDL_showConfigMenu(&resolutionW, &displayW, &resolutionH, &displayH, &builtinKeyboard, &screenButtons);
-		sprintf( screenres, "%d/%dx%d/%dx%d", resolutionW, displayW, resolutionH, displayH, SDL_GetVideoInfo()->vfmt->BitsPerPixel );
+		XSDL_showConfigMenu(&resolutionW, &displayW, &resolutionH, &displayH, &builtinKeyboard, &screenButtons, port, &pulseAudio);
+		sprintf( screenres, "%d/%dx%d/%dx%d", resolutionW, displayW, resolutionH, displayH,
+					SDL_GetVideoInfo()->vfmt->BitsPerPixel == 24 ? 32 : SDL_GetVideoInfo()->vfmt->BitsPerPixel );
 	}
 
-	XSDL_generateBackground( port, printHelp, resolutionW, resolutionH );
+	XSDL_generateBackground( port, printHelp, 600 * resolutionW / resolutionH, 600 );
 
 	XSDL_deinitSDL();
 
 	if( printHelp )
 	{
-		sprintf( clientcmd, "%s/usr/bin/xhost + ; %s/usr/bin/xli -onroot -center %s/background.bmp",
+		sprintf( clientcmd, "%s/usr/bin/xhost + ; %s/usr/bin/xloadimage -onroot -fullscreen %s/background.png",
 			getenv("SECURE_STORAGE_DIR"), getenv("SECURE_STORAGE_DIR"), getenv("UNSECURE_STORAGE_DIR") );
+
 		args[argnum] = "-exec";
 		args[argnum+1] = clientcmd;
 		argnum += 2;
@@ -148,12 +158,15 @@ int main( int argc, char* argv[] )
 		SDL_ANDROID_SetScreenKeyboardButtonShown(SDL_ANDROID_SCREENKEYBOARD_BUTTON_0, 0);
 		SDL_ANDROID_SetScreenKeyboardButtonShown(SDL_ANDROID_SCREENKEYBOARD_BUTTON_1, 0);
 		SDL_ANDROID_SetScreenKeyboardButtonShown(SDL_ANDROID_SCREENKEYBOARD_BUTTON_2, 0);
+		SDL_ANDROID_SetScreenKeyboardButtonShown(SDL_ANDROID_SCREENKEYBOARD_BUTTON_3, 0);
 	}
 
 	{
 		char s[16];
 		sprintf(s, "%d", builtinKeyboard);
 		setenv("XSDL_BUILTIN_KEYBOARD", s, 1);
+		sprintf(s, "%d", screenButtons);
+		setenv("XSDL_SCREEN_BUTTONS_ALIGN", s, 1);
 	}
 
 	__android_log_print(ANDROID_LOG_INFO, "XSDL", "XSDL video resolution %s, args:", screenres);
@@ -161,10 +174,13 @@ int main( int argc, char* argv[] )
 		__android_log_print(ANDROID_LOG_INFO, "XSDL", "> %s", args[i]);
 
 	// We should never quit. If that happens, then the server did not start - try with different port number.
-	atexit( &retryLaunchWithDifferentPort );
+	atexit( &showError );
 
 	__android_log_print(ANDROID_LOG_INFO, "XSDL", "XSDL chdir to: %s", getenv("SECURE_STORAGE_DIR"));
 	chdir( getenv("SECURE_STORAGE_DIR") ); // Megahack: change /proc/self/cwd to the X.org data dir, and use /proc/self/cwd path in libX11
+
+	if( pulseAudio )
+		startPulseAudio();
 
 	android_main( argnum, args, envp ); // Should never exit on success, if we want to terminate we kill ourselves
 
@@ -196,18 +212,35 @@ void setupEnv(void)
 	sprintf( buf, "%s/usr/share/X11/locale", getenv("SECURE_STORAGE_DIR") );
 }
 
-void retryLaunchWithDifferentPort(void)
+void showError(void)
 {
-	int portNum = atoi(port + 1);
-	if (portNum > 10)
+	XSDL_initSDL();
+	XSDL_showServerLaunchErrorMessage();
+	XSDL_deinitSDL();
+}
+
+static void *pulseThread(void *param)
+{
+	char pulseCmd[PATH_MAX * 7] = "";
+	sprintf(pulseCmd, "HOME=%s TMPDIR=%s LD_LIBRARY_PATH=%s/usr/bin "
+						"logwrapper %s/usr/bin/pulseaudio --disable-shm -n -F %s/pulseaudio.conf "
+						"--dl-search-path=%s/usr/bin --daemonize=false --use-pid-file=false "
+						"--log-target=stderr --log-level=debug",
+						getenv("SECURE_STORAGE_DIR"), getenv("SECURE_STORAGE_DIR"),
+						getenv("SECURE_STORAGE_DIR"), getenv("SECURE_STORAGE_DIR"),
+						getenv("SECURE_STORAGE_DIR"), getenv("SECURE_STORAGE_DIR"));
+	while( 1 )
 	{
-		// Server was ultimately unable to start - show error and exit
-		XSDL_initSDL();
-		XSDL_showServerLaunchErrorMessage();
-		XSDL_deinitSDL();
-		return;
+		__android_log_print(ANDROID_LOG_INFO, "XSDL", "Starting Pulseaudio");
+		__android_log_print(ANDROID_LOG_INFO, "XSDL", "%s", pulseCmd);
+		system(pulseCmd);
+		sleep(5);
 	}
-	sprintf(port, ":%d", portNum + 1);
-	__android_log_print(ANDROID_LOG_INFO, "XSDL", "XSDL launch failed, retrying with new display number %s", port);
-	SDL_ANDROID_RestartMyself(port);
+	return NULL;
+}
+
+void startPulseAudio(void)
+{
+	pthread_t threadId;
+	pthread_create(&threadId, NULL, &pulseThread, NULL);
 }

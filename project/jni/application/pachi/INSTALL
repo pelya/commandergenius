@@ -1,7 +1,0 @@
-Just do
-
-./configure
-make
-make install (as root).
-
-Thanks to Gorka Olaizola (http://helvelte.escomposlinux.org)

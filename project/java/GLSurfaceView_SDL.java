@@ -40,6 +40,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.app.KeyguardManager;
+import android.graphics.Rect;
 
 /**
  * An implementation of SurfaceView that uses the dedicated surface for
@@ -1015,7 +1016,7 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
 			mRenderMode = RENDERMODE_CONTINUOUSLY;
 			mRenderer = renderer;
 			mRenderer.setSwapBuffersCallback(this);
-			setName("GLThread");
+			setName("SDLVideoThread");
 		}
 
 		@Override

@@ -78,7 +78,7 @@ extern void SDL_ANDROID_MainThreadPushMouseMotion(int x, int y)
 {
 	SDL_ANDROID_currentMouseX = x;
 	SDL_ANDROID_currentMouseY = y;
-
+	//__android_log_print(ANDROID_LOG_INFO, "libSDL", "MainThreadPushMouseMotion: %4d %4d", x, y);
 	SDL_SendMouseMotion( ANDROID_CurrentWindow, 0, x, y );
 }
 
@@ -201,7 +201,7 @@ extern void SDL_ANDROID_MainThreadPushKeyboardKey(int pressed, SDL_scancode key,
 
 	if( pressed == SDL_RELEASED )
 		keysym.unicode = 0;
-	else if( keysym.sym < 0x80 )
+	else if( keysym.sym < 0x80 && keysym.unicode == 0 )
 		keysym.unicode = keysym.sym;
 
 	//__android_log_print(ANDROID_LOG_INFO, "libSDL","SDL_SendKeyboardKey sym %d scancode %d unicode %d", keysym.sym, keysym.scancode, keysym.unicode);

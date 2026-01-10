@@ -50,8 +50,7 @@
 #define SWAPLE32(x) XCHG_LONG(x)
 #endif
 
-//#define DEBUG_MSG(...) __android_log_print(ANDROID_LOG_INFO, "libSDL", __VA_ARGS__)
-#define DEBUG_MSG(...)
+#define DEBUG_MSG(...) __android_log_print(ANDROID_LOG_DEBUG, "libSDL", __VA_ARGS__)
 
 
 #define MID_VIBRATO_SAMPLE_INCREMENTS 32

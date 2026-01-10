@@ -35,8 +35,8 @@
 #endif
 #endif
 
-#if defined(MMX_ASMBLIT)
 #include "SDL_cpuinfo.h"
+#if defined(MMX_ASMBLIT)
 #include "mmx.h"
 #endif
 

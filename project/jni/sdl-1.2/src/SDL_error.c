@@ -25,7 +25,7 @@
 
 #include "SDL_error.h"
 #include "SDL_error_c.h"
-#ifdef ANDROID
+#ifdef __ANDROID__
 #include <android/log.h>
 #endif
 
@@ -113,7 +113,7 @@ void SDL_SetError (const char *fmt, ...)
 #ifdef DEBUG_ERROR
 	fprintf(stderr, "ERROR: %s\n", SDL_GetError());
 #endif
-#ifdef ANDROID
+#ifdef __ANDROID__
     __android_log_print(ANDROID_LOG_ERROR, "libSDL", "ERROR: %s", SDL_GetError());
 #endif
 }

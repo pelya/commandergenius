@@ -5,7 +5,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2016, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2017, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -31,7 +31,7 @@
 /* The last #include file should be: */
 #include "memdebug.h"
 
-CURLSH *
+struct Curl_share *
 curl_share_init(void)
 {
   struct Curl_share *share = calloc(1, sizeof(struct Curl_share));
@@ -49,9 +49,8 @@ curl_share_init(void)
 
 #undef curl_share_setopt
 CURLSHcode
-curl_share_setopt(CURLSH *sh, CURLSHoption option, ...)
+curl_share_setopt(struct Curl_share *share, CURLSHoption option, ...)
 {
-  struct Curl_share *share = (struct Curl_share *)sh;
   va_list param;
   int type;
   curl_lock_function lockfunc;
@@ -103,6 +102,8 @@ curl_share_setopt(CURLSH *sh, CURLSHoption option, ...)
       break;
 
     case CURL_LOCK_DATA_CONNECT:     /* not supported (yet) */
+      if(Curl_conncache_init(&share->conn_cache, 103))
+        res = CURLSHE_NOMEM;
       break;
 
     default:
@@ -172,10 +173,8 @@ curl_share_setopt(CURLSH *sh, CURLSHoption option, ...)
 }
 
 CURLSHcode
-curl_share_cleanup(CURLSH *sh)
+curl_share_cleanup(struct Curl_share *share)
 {
-  struct Curl_share *share = (struct Curl_share *)sh;
-
   if(share == NULL)
     return CURLSHE_INVALID;
 
@@ -189,6 +188,8 @@ curl_share_cleanup(CURLSH *sh)
     return CURLSHE_IN_USE;
   }
 
+  Curl_conncache_close_all_connections(&share->conn_cache);
+  Curl_conncache_destroy(&share->conn_cache);
   Curl_hash_destroy(&share->hostcache);
 
 #if !defined(CURL_DISABLE_HTTP) && !defined(CURL_DISABLE_COOKIES)
@@ -213,7 +214,7 @@ curl_share_cleanup(CURLSH *sh)
 
 
 CURLSHcode
-Curl_share_lock(struct SessionHandle *data, curl_lock_data type,
+Curl_share_lock(struct Curl_easy *data, curl_lock_data type,
                 curl_lock_access accesstype)
 {
   struct Curl_share *share = data->share;
@@ -231,7 +232,7 @@ Curl_share_lock(struct SessionHandle *data, curl_lock_data type,
 }
 
 CURLSHcode
-Curl_share_unlock(struct SessionHandle *data, curl_lock_data type)
+Curl_share_unlock(struct Curl_easy *data, curl_lock_data type)
 {
   struct Curl_share *share = data->share;
 

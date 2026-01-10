@@ -8,25 +8,92 @@ VER=build
 
 export ARCH=$1
 
-CPU_TYPE=32
-[ "$ARCH" = "arm64-v8a" ] && CPU_TYPE=64
-
-[ -e openttd-$VER-$1/objs/lang/english.lng ] || {
-	sh -c "cd openttd-$VER-$1 && ../src/configure --without-freetype --without-png --without-zlib --without-lzo2 --without-lzma --endian=LE --cpu-type=$CPU_TYPE && make lang && make -C objs/release endian_target.h depend && make -C objs/setting" || exit 1
-	rm -f openttd-$VER-$1/Makefile
-} || exit 1
-
 [ -e openttd-$VER-$1/Makefile ] || {
-	rm -f src/src/rev.cpp
-	env PATH=$LOCAL_PATH/..:$PATH \
-	env CLANG=1 ../setEnvironment-$1.sh sh -c "cd openttd-$VER-$1 && env ../src/configure --with-sdl --with-freetype --with-png --with-zlib --with-icu --with-libtimidity='pkg-config libtimidity' --with-lzo2=$LOCAL_PATH/../../../obj/local/$ARCH/liblzo2.so --prefix-dir='.' --data-dir='' --without-allegro --with-fontconfig --with-lzma --endian=LE --cpu-type=$CPU_TYPE"
+	CMAKE_SDL=openttd-$VER-$1/cmake/AndroidSDL.cmake
+	mkdir -p openttd-$VER-$1/cmake
+	rm -f src/src/rev.cpp openttd-$VER-$1/CMakeCache.txt $CMAKE_SDL
+
+	APP_MODULES="`sh -c '. ../setEnvironment-'$1'.sh true ; echo $APP_MODULES' ../setEnvironment-$1.sh true`"
+	APILEVEL="`sh -c '. ../setEnvironment-'$1'.sh true ; echo $APILEVEL' ../setEnvironment-$1.sh true`"
+	NDK="`sh -c '. ../setEnvironment-'$1'.sh true ; echo $NDK' ../setEnvironment-$1.sh true`"
+	APP_AVAILABLE_STATIC_LIBS="`sh -c '. ../setEnvironment-'$1'.sh true ; echo $APP_AVAILABLE_STATIC_LIBS' ../setEnvironment-$1.sh true`"
+
+	for LIB in $APP_MODULES; do
+		STATIC=`echo $APP_AVAILABLE_STATIC_LIBS | grep '\b'"$LIB"'\b'`
+
+		TARGET=`echo $LIB | tr 'a-z' 'A-Z'`
+		LIB_FILE=$LIB
+
+		case $LIB in
+			lzma)
+				TARGET=LIBLZMA
+				;;
+			lzo2)
+				TARGET=LZO
+				;;
+			sdl-1.2)
+				TARGET=SDL
+				;;
+			timidity)
+				TARGET=Timidity
+				;;
+			expat)
+				# Different .so file name to avoid linking to system libexpat.so
+				LIB_FILE=expat-sdl
+				;;
+			png)
+				# Hack for PNG_PNG_INCLUDE_DIR
+				echo "set(${TARGET}_${TARGET}_INCLUDE_DIR $LOCAL_PATH/../../$LIB/include)" >> $CMAKE_SDL
+				;;
+			freetype)
+				# Hack for FREETYPE_INCLUDE_DIRS
+				echo "set(${TARGET}_INCLUDE_DIRS $LOCAL_PATH/../../$LIB/include)" >> $CMAKE_SDL
+				;;
+			fontconfig)
+				TARGET=Fontconfig
+				;;
+			icui18n|iculx|icuuc|icudata|icule|icuio)
+				TARGET="ICU_`echo $LIB | sed 's/icu//'`"
+				echo "set(PC_${TARGET}_INCLUDE_DIRS $LOCAL_PATH/../../$LIB/include)" >> $CMAKE_SDL
+				echo "set(PC_${TARGET}_LIBRARY
+						$LOCAL_PATH/../../../obj/local/$ARCH/lib$LIB_FILE.a
+						$LOCAL_PATH/../../../obj/local/$ARCH/libicu-le-hb.a
+						$LOCAL_PATH/../../../obj/local/$ARCH/libharfbuzz.a
+						$LOCAL_PATH/../../../obj/local/$ARCH/libicudata.a
+						$LOCAL_PATH/../../../obj/local/$ARCH/libicuuc.a)" >> $CMAKE_SDL
+				echo "set(PC_${TARGET}_FOUND YES)" >> $CMAKE_SDL
+				;;
+		esac
+
+		echo "set(${TARGET}_FOUND YES)" >> $CMAKE_SDL
+		echo "set(${TARGET}_INCLUDE_DIR $LOCAL_PATH/../../$LIB/include)" >> $CMAKE_SDL
+
+		if [ -n "$STATIC" ] ; then
+			echo "set(${TARGET}_LIBRARY $LOCAL_PATH/../../../obj/local/$ARCH/lib$LIB_FILE.a)" >> $CMAKE_SDL
+			echo "add_library(${TARGET} STATIC IMPORTED)" >> $CMAKE_SDL
+		else
+			echo "set(${TARGET}_LIBRARY $LOCAL_PATH/../../../obj/local/$ARCH/lib$LIB_FILE.so)" >> $CMAKE_SDL
+			echo "add_library(${TARGET} SHARED IMPORTED)" >> $CMAKE_SDL
+		fi
+		echo "target_include_directories(${TARGET} INTERFACE "'${'"${TARGET}"'_INCLUDE_DIR})' >> $CMAKE_SDL
+		echo "set_target_properties(${TARGET} PROPERTIES IMPORTED_LOCATION "'${'"${TARGET}"'_LIBRARY})' >> $CMAKE_SDL
+	done
+
+	cmake \
+		-DCMAKE_MODULE_PATH=$LOCAL_PATH/openttd-$VER-$1/cmake \
+		-DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake \
+		-DANDROID_ABI=$1 \
+		-DANDROID_NATIVE_API_LEVEL=$APILEVEL \
+		-DANDROID_STL=c++_shared \
+		-DGLOBAL_DIR="." \
+		-DHOST_BINARY_DIR=$LOCAL_PATH/build-tools \
+		-DCMAKE_BUILD_TYPE=RelWithDebInfo \
+		-B openttd-$VER-$1 src
+
 } || exit 1
 
-NCPU=4
+NCPU=8
 uname -s | grep -i "linux" > /dev/null && NCPU=`cat /proc/cpuinfo | grep -c -i processor`
 
-# clang arm hack
-LIBATOMIC=
-echo $1 | grep 'arm' && LIBATOMIC=-latomic
+make -C openttd-$VER-$1 -j$NCPU VERBOSE=1 STRIP='' && cp -f openttd-$VER-$1/libapplication.so libapplication-$1.so || exit 1
 
-env CLANG=1 LIBATOMIC=$LIBATOMIC ../setEnvironment-$1.sh sh -c "cd openttd-$VER-$1 && make -j$NCPU VERBOSE=1 STRIP='' LIBS='-lsdl-1.2 -llzo2 -lpng -ltimidity -lfontconfig -lfreetype -lexpat -licui18n -liculx -licu-le-hb -lharfbuzz -licuuc -licudata -lgcc -lz -lc -lgnustl_static -lsupc++ $LIBATOMIC'" && cp -f openttd-$VER-$1/objs/release/openttd libapplication-$1.so || exit 1

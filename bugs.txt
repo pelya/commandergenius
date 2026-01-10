@@ -29,3 +29,7 @@ Requested features, might never get implemented, see todo.txt for features that 
 - OpenArena: Shift and Ctrl keys on USB keyboard do not work for text input.
 
 - OpenArena: When entering with USB keyboard into chatbox, first 't' disappears.
+
+- USB Keyboard: options for camera feed size and for redefining remote menu hotkey.
+
+- UQM HD: add fonts from http://mosc-portal.bursa.ru/showthread.php?t=206 and switch back to joystick controls, set 4:3 aspect ratio as default.

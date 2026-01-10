@@ -5,7 +5,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 2011 - 2016, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 2011 - 2018, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -27,13 +27,18 @@
 #include "curl_gssapi.h"
 #include "sendf.h"
 
+/* The last 3 #include files should be in this order */
+#include "curl_printf.h"
+#include "curl_memory.h"
+#include "memdebug.h"
+
 static char spnego_oid_bytes[] = "\x2b\x06\x01\x05\x05\x02";
 gss_OID_desc Curl_spnego_mech_oid = { 6, &spnego_oid_bytes };
 static char krb5_oid_bytes[] = "\x2a\x86\x48\x86\xf7\x12\x01\x02\x02";
 gss_OID_desc Curl_krb5_mech_oid = { 9, &krb5_oid_bytes };
 
 OM_uint32 Curl_gss_init_sec_context(
-    struct SessionHandle *data,
+    struct Curl_easy *data,
     OM_uint32 *minor_status,
     gss_ctx_id_t *context,
     gss_name_t target_name,
@@ -94,7 +99,7 @@ static size_t display_gss_error(OM_uint32 status, int type,
     if(GSS_LOG_BUFFER_LEN > len + status_string.length + 3) {
       len += snprintf(buf + len, GSS_LOG_BUFFER_LEN - len,
                       "%.*s. ", (int)status_string.length,
-                      (char*)status_string.value);
+                      (char *)status_string.value);
     }
     gss_release_buffer(&min_stat, &status_string);
   } while(!GSS_ERROR(maj_stat) && msg_ctx != 0);
@@ -114,7 +119,7 @@ static size_t display_gss_error(OM_uint32 status, int type,
  * major   [in] - The major status code.
  * minor   [in] - The minor status code.
  */
-void Curl_gss_log_error(struct SessionHandle *data, const char *prefix,
+void Curl_gss_log_error(struct Curl_easy *data, const char *prefix,
                         OM_uint32 major, OM_uint32 minor)
 {
   char buf[GSS_LOG_BUFFER_LEN];

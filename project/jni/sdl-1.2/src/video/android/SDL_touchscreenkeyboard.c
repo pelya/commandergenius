@@ -51,7 +51,13 @@ If you compile this code with SDL 1.3 or newer, or use in some other way, the li
 
 // TODO: this code is a HUGE MESS
 
-enum { MAX_BUTTONS = SDL_ANDROID_SCREENKEYBOARD_BUTTON_NUM-1, MAX_JOYSTICKS = 3, MAX_BUTTONS_AUTOFIRE = 2, BUTTON_TEXT_INPUT = SDL_ANDROID_SCREENKEYBOARD_BUTTON_TEXT, BUTTON_ARROWS = SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD } ; // Max amount of custom buttons
+enum {
+	MAX_JOYSTICKS = 3,
+	MAX_BUTTONS = SDL_ANDROID_SCREENKEYBOARD_BUTTON_NUM,  // Max amount of custom buttons
+	MAX_BUTTONS_AUTOFIRE = 2,
+	BUTTON_TEXT_INPUT = SDL_ANDROID_SCREENKEYBOARD_BUTTON_TEXT,
+	BUTTON_ARROWS = SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD
+};
 
 int SDL_ANDROID_isTouchscreenKeyboardUsed = 0;
 static short touchscreenKeyboardTheme = 0;
@@ -71,15 +77,24 @@ SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREENKB_KEYCODE_2)),
 SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREENKB_KEYCODE_3)),
 SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREENKB_KEYCODE_4)),
 SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREENKB_KEYCODE_5)),
-0
+SDLK_UNKNOWN, // Text input
+SDLK_UNKNOWN, // Joystick 0
+SDLK_UNKNOWN, // Joystick 1
+SDLK_UNKNOWN, // Joystick 2
+SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREENKB_KEYCODE_6)),
+SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREENKB_KEYCODE_7)),
+SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREENKB_KEYCODE_8)),
+SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREENKB_KEYCODE_9)),
+SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREENKB_KEYCODE_10)),
+SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_SCREENKB_KEYCODE_11)),
 };
 
 enum { ARROW_LEFT = 1, ARROW_RIGHT = 2, ARROW_UP = 4, ARROW_DOWN = 8 };
 static short oldArrows = 0;
 
-static Sint8 pointerInButtonRect[MAX_BUTTONS + MAX_JOYSTICKS];
-static Sint8 buttonsGenerateSdlEvents[MAX_BUTTONS + MAX_JOYSTICKS];
-static Sint8 buttonsStayPressedAfterTouch[MAX_BUTTONS + MAX_JOYSTICKS];
+static Sint8 pointerInButtonRect[MAX_BUTTONS];
+static Sint8 buttonsGenerateSdlEvents[MAX_BUTTONS];
+static Sint8 buttonsStayPressedAfterTouch[MAX_BUTTONS];
 
 typedef struct
 {
@@ -99,8 +114,6 @@ static int joystickTouchPoints[MAX_JOYSTICKS*2];
 static int floatingScreenJoystick = 0;
 
 int SDL_ANDROID_AsyncTextInputActive = 0;
-
-static void R_DumpOpenGlState(void);
 
 static inline int InsideRect(const SDL_Rect * r, int x, int y)
 {
@@ -177,8 +190,6 @@ static inline void beginDrawingTex()
 	oldGlState.texture2d = glIsEnabled(GL_TEXTURE_2D);
 	glGetIntegerv(GL_ACTIVE_TEXTURE, &oldGlState.texunitId);
 #endif
-
-	//R_DumpOpenGlState();
 
 	/*
 	glActiveTexture(GL_TEXTURE1);
@@ -372,11 +383,14 @@ static void drawTouchscreenKeyboardSun()
 	for( i = 0; i < MAX_BUTTONS; i++ )
 	{
 		int pressed = SDL_GetKeyboardState(NULL)[buttonKeysyms[i]];
+		int flip = (i >= SDL_ANDROID_SCREENKEYBOARD_BUTTON_2 && i <= SDL_ANDROID_SCREENKEYBOARD_BUTTON_5) ||
+					(i >= SDL_ANDROID_SCREENKEYBOARD_BUTTON_8 && i <= SDL_ANDROID_SCREENKEYBOARD_BUTTON_11);
+
 		if( ! buttons[i].h || ! buttons[i].w )
 			continue;
 
 		drawCharTexFlip( &buttonImages[ pressed ? (i * 2 + 1) : (i * 2) ],
-						NULL, &buttonsDraw[i], (i >= 2 && pressed), 0, 1.0f, 1.0f, 1.0f, transparency );
+						NULL, &buttonsDraw[i], (flip && pressed), 0, 1.0f, 1.0f, 1.0f, transparency );
 	}
 }
 
@@ -405,17 +419,19 @@ static void drawTouchscreenKeyboardDualShock()
 			touch.y = arrowsDraw[i].y + touch.h / 4;
 			drawCharTex( &arrowImages[6], NULL, &touch, 1.0f, 1.0f, 1.0f, transparency );
 		}
-		  
 	}
 
 	for( i = 0; i < MAX_BUTTONS; i++ )
 	{
 		int pressed = SDL_GetKeyboardState(NULL)[buttonKeysyms[i]];
+		int flip = (i >= SDL_ANDROID_SCREENKEYBOARD_BUTTON_2 && i <= SDL_ANDROID_SCREENKEYBOARD_BUTTON_5) ||
+					(i >= SDL_ANDROID_SCREENKEYBOARD_BUTTON_8 && i <= SDL_ANDROID_SCREENKEYBOARD_BUTTON_11);
+
 		if( ! buttons[i].h || ! buttons[i].w )
 			continue;
 
 		drawCharTexFlip( &buttonImages[ pressed ? (i * 2 + 1) : (i * 2) ],
-						NULL, &buttonsDraw[i], (i >= 2 && pressed), 0, 1.0f, 1.0f, 1.0f, transparency );
+						NULL, &buttonsDraw[i], (flip && pressed), 0, 1.0f, 1.0f, 1.0f, transparency );
 	}
 }
 
@@ -488,7 +504,43 @@ unsigned SDL_ANDROID_processTouchscreenKeyboard(int x, int y, int action, int po
 		joyAmount = 1;
 	
 	if( !touchscreenKeyboardShown )
+	{
+		for( i = 0; i < MAX_BUTTONS; i++ )
+		{
+			if( ! buttons[i].h || ! buttons[i].w )
+				continue;
+			if( pointerInButtonRect[i] != -1 )
+			{
+				pointerInButtonRect[i] = -1;
+				if( buttonKeysyms[i] != SDLK_UNKNOWN )
+				{
+					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, buttonKeysyms[i], 0 );
+				}
+			}
+		}
+		for( j = 0; j < joyAmount; j++ )
+		{
+			if( pointerInButtonRect[BUTTON_ARROWS+j] != -1 )
+			{
+				pointerInButtonRect[BUTTON_ARROWS+j] = -1;
+				if( SDL_ANDROID_joysticksAmount > 0 )
+				{
+					int axis = j < 2 ? j*2 : MAX_MULTITOUCH_POINTERS + 4;
+					SDL_ANDROID_MainThreadPushJoystickAxis( 0, axis, 0 );
+					SDL_ANDROID_MainThreadPushJoystickAxis( 0, axis + 1, 0 );
+				}
+				else
+				{
+					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(UP), 0 );
+					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(DOWN), 0 );
+					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(LEFT), 0 );
+					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, SDL_KEY(RIGHT), 0 );
+					oldArrows = 0;
+				}
+			}
+		}
 		return 0;
+	}
 	
 	if( action == MOUSE_DOWN )
 	{
@@ -506,11 +558,16 @@ unsigned SDL_ANDROID_processTouchscreenKeyboard(int x, int y, int action, int po
 				{
 					pointerInButtonRect[i] = pointerId;
 					if( i == BUTTON_TEXT_INPUT )
+					{
 						SDL_ANDROID_ToggleScreenKeyboardTextInput(NULL);
-					else if( buttonsStayPressedAfterTouch[i] )
-						SDL_ANDROID_MainThreadPushKeyboardKey( SDL_GetKeyboardState(NULL)[buttonKeysyms[i]] == 0 ? SDL_PRESSED : SDL_RELEASED, buttonKeysyms[i], 0 );
-					else
-						SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, buttonKeysyms[i], 0 );
+					}
+					else if( buttonKeysyms[i] != SDLK_UNKNOWN )
+					{
+						if( buttonsStayPressedAfterTouch[i] )
+							SDL_ANDROID_MainThreadPushKeyboardKey( SDL_GetKeyboardState(NULL)[buttonKeysyms[i]] == 0 ? SDL_PRESSED : SDL_RELEASED, buttonKeysyms[i], 0 );
+						else
+							SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, buttonKeysyms[i], 0 );
+					}
 					if( preventButtonOverlap )
 					{
 						processOtherButtons = 0;
@@ -615,7 +672,7 @@ unsigned SDL_ANDROID_processTouchscreenKeyboard(int x, int y, int action, int po
 			{
 				processed |= 1<<i;
 				pointerInButtonRect[i] = -1;
-				if( i != BUTTON_TEXT_INPUT && !buttonsStayPressedAfterTouch[i] )
+				if( i != BUTTON_TEXT_INPUT && !buttonsStayPressedAfterTouch[i] && buttonKeysyms[i] != SDLK_UNKNOWN )
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, buttonKeysyms[i], 0 );
 			}
 		}
@@ -727,7 +784,7 @@ unsigned SDL_ANDROID_processTouchscreenKeyboard(int x, int y, int action, int po
 				if( ! InsideRect( &buttons[i], x, y ) && ! buttonsGenerateSdlEvents[i] )
 				{
 					pointerInButtonRect[i] = -1;
-					if( i != BUTTON_TEXT_INPUT )
+					if( i != BUTTON_TEXT_INPUT && buttonKeysyms[i] != SDLK_UNKNOWN )
 						SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, buttonKeysyms[i], 0 );
 				}
 			}
@@ -829,12 +886,17 @@ JAVA_EXPORT_NAME(Settings_nativeSetupScreenKeyboard) ( JNIEnv* env, jobject thiz
 	for(ii = 0; ii < 2; ii++)
 	{
 		// Custom button ordering
-		int iii = ii + i*2;
+		int iii = ii + i * 2;
 		buttons[iii].w = buttonSizePixels;
 		buttons[iii].h = buttons[iii].w;
 		// Move to the screen edge
 		buttons[iii].x = SDL_ANDROID_sRealWindowWidth - buttons[iii].w * (ii + 1);
 		buttons[iii].y = SDL_ANDROID_sRealWindowHeight - buttons[iii].h * (i + 1);
+		// Second set of buttons to the left
+		buttons[iii + SDL_ANDROID_SCREENKEYBOARD_BUTTON_6].x = buttons[iii].x - buttonSizePixels * 2;
+		buttons[iii + SDL_ANDROID_SCREENKEYBOARD_BUTTON_6].y = buttons[iii].y;
+		buttons[iii + SDL_ANDROID_SCREENKEYBOARD_BUTTON_6].w = buttons[iii].w;
+		buttons[iii + SDL_ANDROID_SCREENKEYBOARD_BUTTON_6].h = buttons[iii].h;
 	}
 	if( SDL_ANDROID_joysticksAmount >= 2 )
 	{
@@ -965,6 +1027,9 @@ static int setupScreenKeyboardButtonLegacy( int buttonID, Uint8 * charBuf )
 	else // Error, array too big
 		return 12; // Return value bigger than zero to iterate it
 
+	for( int i = SDL_ANDROID_SCREENKEYBOARD_BUTTON_0 * 2; i < SDL_ANDROID_SCREENKEYBOARD_BUTTON_5 * 2; i++ )
+		buttonImages[i + SDL_ANDROID_SCREENKEYBOARD_BUTTON_6 * 2] = buttonImages[i];
+
 	return setupScreenKeyboardButtonTexture(data, charBuf);
 }
 
@@ -990,9 +1055,9 @@ static int setupScreenKeyboardButtonSun( int buttonID, Uint8 * charBuf )
 
 	ret = setupScreenKeyboardButtonTexture(data, charBuf);
 
-	for( i = 1; i <=4; i++ )
+	for( i = 1; i <= 4; i++ )
 		arrowImages[i] = arrowImages[0];
-	
+
 	for( i = 2; i < MAX_BUTTONS; i++ )
 		buttonImages[i * 2 + 1] = buttonImages[i * 2];
 
@@ -1001,6 +1066,9 @@ static int setupScreenKeyboardButtonSun( int buttonID, Uint8 * charBuf )
 
 	buttonImages[BUTTON_TEXT_INPUT*2] = buttonImages[10];
 	buttonImages[BUTTON_TEXT_INPUT*2+1] = buttonImages[10];
+
+	for( int i = SDL_ANDROID_SCREENKEYBOARD_BUTTON_0 * 2; i < SDL_ANDROID_SCREENKEYBOARD_BUTTON_5 * 2; i++ )
+		buttonImages[i + SDL_ANDROID_SCREENKEYBOARD_BUTTON_6 * 2] = buttonImages[i];
 
 	return ret;
 }
@@ -1038,6 +1106,9 @@ static int setupScreenKeyboardButtonDualShock( int buttonID, Uint8 * charBuf )
 
 	buttonImages[BUTTON_TEXT_INPUT*2] = arrowImages[5];
 	buttonImages[BUTTON_TEXT_INPUT*2+1] = arrowImages[5];
+
+	for( int i = SDL_ANDROID_SCREENKEYBOARD_BUTTON_0 * 2; i < SDL_ANDROID_SCREENKEYBOARD_BUTTON_5 * 2; i++ )
+		buttonImages[i + SDL_ANDROID_SCREENKEYBOARD_BUTTON_6 * 2] = buttonImages[i];
 
 	return ret;
 }
@@ -1086,11 +1157,15 @@ JAVA_EXPORT_NAME(Settings_nativeSetupScreenKeyboardButtons) ( JNIEnv*  env, jobj
 JNIEXPORT jint JNICALL
 JAVA_EXPORT_NAME(Settings_nativeGetKeymapKeyScreenKb) (JNIEnv* env, jobject thiz, jint keynum)
 {
-	if( keynum < 0 || keynum > SDL_ANDROID_SCREENKEYBOARD_BUTTON_5 - SDL_ANDROID_SCREENKEYBOARD_BUTTON_0 + 4 )
-		return SDL_KEY(UNKNOWN);
-		
-	if( keynum <= SDL_ANDROID_SCREENKEYBOARD_BUTTON_5 - SDL_ANDROID_SCREENKEYBOARD_BUTTON_0 )
-		return SDL_ANDROID_GetScreenKeyboardButtonKey(keynum + SDL_ANDROID_SCREENKEYBOARD_BUTTON_0);
+	if( keynum >= SDL_ANDROID_SCREENKEYBOARD_BUTTON_0 && keynum <= SDL_ANDROID_SCREENKEYBOARD_BUTTON_5 )
+	{
+		return SDL_ANDROID_GetScreenKeyboardButtonKey(keynum);
+	}
+
+	if( keynum >= 6 && keynum <= 11 )
+	{
+		return SDL_ANDROID_GetScreenKeyboardButtonKey(keynum - 6 + SDL_ANDROID_SCREENKEYBOARD_BUTTON_6);
+	}
 
 	return SDL_KEY(UNKNOWN);
 }
@@ -1098,17 +1173,20 @@ JAVA_EXPORT_NAME(Settings_nativeGetKeymapKeyScreenKb) (JNIEnv* env, jobject thiz
 JNIEXPORT void JNICALL
 JAVA_EXPORT_NAME(Settings_nativeSetKeymapKeyScreenKb) (JNIEnv* env, jobject thiz, jint keynum, jint key)
 {
-	if( keynum < 0 || keynum > SDL_ANDROID_SCREENKEYBOARD_BUTTON_5 - SDL_ANDROID_SCREENKEYBOARD_BUTTON_0 + 4 )
-		return;
-		
-	if( keynum <= SDL_ANDROID_SCREENKEYBOARD_BUTTON_5 - SDL_ANDROID_SCREENKEYBOARD_BUTTON_0 )
-		SDL_ANDROID_SetScreenKeyboardButtonKey(keynum + SDL_ANDROID_SCREENKEYBOARD_BUTTON_0, key);
+	if( keynum >= SDL_ANDROID_SCREENKEYBOARD_BUTTON_0 && keynum <= SDL_ANDROID_SCREENKEYBOARD_BUTTON_5 )
+	{
+		SDL_ANDROID_SetScreenKeyboardButtonKey(keynum, key);
+	}
+
+	if( keynum >= 6 && keynum <= 11 )
+	{
+		SDL_ANDROID_SetScreenKeyboardButtonKey(keynum - 6 + SDL_ANDROID_SCREENKEYBOARD_BUTTON_6, key);
+	}
 }
 
-JNIEXPORT void JNICALL
-JAVA_EXPORT_NAME(Settings_nativeSetScreenKbKeyUsed) (JNIEnv*  env, jobject thiz, jint keynum, jint used)
+static int convertJavaKeyIdToC(int keynum)
 {
-	SDL_Rect rect = {0, 0, 0, 0};
+	// Why didn't I use consistent IDs between Java and C code?
 	int key = -1;
 	if( keynum == 0 )
 		key = SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD;
@@ -1116,11 +1194,16 @@ JAVA_EXPORT_NAME(Settings_nativeSetScreenKbKeyUsed) (JNIEnv*  env, jobject thiz,
 		key = SDL_ANDROID_SCREENKEYBOARD_BUTTON_TEXT;
 	if( keynum - 2 >= 0 && keynum - 2 <= SDL_ANDROID_SCREENKEYBOARD_BUTTON_5 - SDL_ANDROID_SCREENKEYBOARD_BUTTON_0 )
 		key = keynum - 2 + SDL_ANDROID_SCREENKEYBOARD_BUTTON_0;
+	if( keynum >= SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD2 && keynum < SDL_ANDROID_SCREENKEYBOARD_BUTTON_NUM )
+		key = keynum; // This one is consistent by chance
+	return key;
+}
 
-	if( keynum == SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD2 )
-		key = SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD2;
-	if( keynum == SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD3 )
-		key = SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD3;
+JNIEXPORT void JNICALL
+JAVA_EXPORT_NAME(Settings_nativeSetScreenKbKeyUsed) (JNIEnv*  env, jobject thiz, jint keynum, jint used)
+{
+	SDL_Rect rect = {0, 0, 0, 0};
+	int key = convertJavaKeyIdToC(keynum);
 
 	if( key >= 0 && !used )
 		SDL_ANDROID_SetScreenKeyboardButtonPos(key, &rect);
@@ -1182,15 +1265,22 @@ int SDL_ANDROID_GetScreenKeyboardButtonPos(int buttonId, SDL_Rect * pos)
 
 int SDL_ANDROID_SetScreenKeyboardButtonKey(int buttonId, SDLKey key)
 {
-	if( buttonId < 0 || buttonId > SDL_ANDROID_SCREENKEYBOARD_BUTTON_5 || ! key )
-		return 0;
-	buttonKeysyms[buttonId] = key;
-	return 1;
+	if( buttonId >= SDL_ANDROID_SCREENKEYBOARD_BUTTON_0 && buttonId <= SDL_ANDROID_SCREENKEYBOARD_BUTTON_5 )
+	{
+		buttonKeysyms[buttonId] = key;
+		return 1;
+	}
+	if( buttonId >= SDL_ANDROID_SCREENKEYBOARD_BUTTON_6 && buttonId <= SDL_ANDROID_SCREENKEYBOARD_BUTTON_11 )
+	{
+		buttonKeysyms[buttonId] = key;
+		return 1;
+	}
+	return 0;
 };
 
 SDLKey SDL_ANDROID_GetScreenKeyboardButtonKey(int buttonId)
 {
-	if( buttonId < 0 || buttonId > SDL_ANDROID_SCREENKEYBOARD_BUTTON_5 )
+	if( buttonId < 0 || buttonId >= SDL_ANDROID_SCREENKEYBOARD_BUTTON_NUM )
 		return SDLK_UNKNOWN;
 	return buttonKeysyms[buttonId];
 };
@@ -1333,24 +1423,35 @@ JNIEXPORT void JNICALL
 JAVA_EXPORT_NAME(Settings_nativeSetScreenKbKeyLayout) (JNIEnv* env, jobject thiz, jint keynum, jint x1, jint y1, jint x2, jint y2)
 {
 	SDL_Rect rect = {x1, y1, x2-x1, y2-y1};
-	int key = -1;
-	// Why didn't I use consistent IDs between Java and C code?
-	if( keynum == 0 )
-		key = SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD;
-	if( keynum == 1 )
-		key = SDL_ANDROID_SCREENKEYBOARD_BUTTON_TEXT;
-	if( keynum - 2 >= 0 && keynum - 2 <= SDL_ANDROID_SCREENKEYBOARD_BUTTON_5 - SDL_ANDROID_SCREENKEYBOARD_BUTTON_0 )
-		key = keynum - 2 + SDL_ANDROID_SCREENKEYBOARD_BUTTON_0;
-	if( keynum == SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD2 ) // This one is consistent by chance
-		key = SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD2;
-	if( keynum == SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD3 ) // This one is consistent by chance
-		key = SDL_ANDROID_SCREENKEYBOARD_BUTTON_DPAD3;
+	int key = convertJavaKeyIdToC(keynum);
 
 	if( key >= 0 )
 	{
 		ScreenKbRedefinedByUser = 1;
 		SDL_ANDROID_SetScreenKeyboardButtonPos(key, &rect);
 	}
+}
+
+JNIEXPORT jint JNICALL
+JAVA_EXPORT_NAME(Settings_nativeGetScreenKeyboardButtonLayout) ( JNIEnv* env, jobject thiz, jint keynum, jint coord )
+{
+	SDL_Rect rect = {0, 0, 0, 0};
+	int key = convertJavaKeyIdToC(keynum);
+
+	if( key < 0 )
+		return 0;
+
+	SDL_ANDROID_GetScreenKeyboardButtonPos(key, &rect);
+	if( coord == 0 )
+		return rect.x;
+	if( coord == 1 )
+		return rect.y;
+	if( coord == 2 )
+		return rect.x + rect.w;
+	if( coord == 3 )
+		return rect.y + rect.h;
+
+	return 0;
 }
 
 int SDL_ANDROID_GetScreenKeyboardRedefinedByUser()
@@ -1385,100 +1486,4 @@ extern DECLSPEC int SDL_ANDROID_ScreenKeyboardUpdateToNewVideoMode(int oldx, int
 		SDL_ANDROID_SetScreenKeyboardButtonPos(i, &pos2);
 	}
 	return 0;
-}
-
-/**
- * @brief Dumps OpenGL state for debugging - typically every capability set with glEnable().
- */
-void R_DumpOpenGlState(void)
-{
-#if SDL_VIDEO_OPENGL_ES_VERSION == 1
-#define CAPABILITY( X ) {GL_ ## X, # X}
-	/* List taken from here: http://www.khronos.org/opengles/sdk/1.1/docs/man/glIsEnabled.xml */
-	const struct { GLenum idx; const char * text; } openGLCaps[] = {
-		CAPABILITY(ALPHA_TEST),
-		CAPABILITY(BLEND),
-		CAPABILITY(COLOR_ARRAY),
-		CAPABILITY(COLOR_LOGIC_OP),
-		CAPABILITY(COLOR_MATERIAL),
-		CAPABILITY(CULL_FACE),
-		CAPABILITY(DEPTH_TEST),
-		CAPABILITY(DITHER),
-		CAPABILITY(FOG),
-		CAPABILITY(LIGHTING),
-		CAPABILITY(LINE_SMOOTH),
-		CAPABILITY(MULTISAMPLE),
-		CAPABILITY(NORMAL_ARRAY),
-		CAPABILITY(NORMALIZE),
-		CAPABILITY(POINT_SMOOTH),
-		CAPABILITY(POLYGON_OFFSET_FILL),
-		CAPABILITY(RESCALE_NORMAL),
-		CAPABILITY(SAMPLE_ALPHA_TO_COVERAGE),
-		CAPABILITY(SAMPLE_ALPHA_TO_ONE),
-		CAPABILITY(SAMPLE_COVERAGE),
-		CAPABILITY(SCISSOR_TEST),
-		CAPABILITY(STENCIL_TEST),
-		CAPABILITY(VERTEX_ARRAY)
-	};
-#undef CAPABILITY
-
-	char s[1024] = "";
-	GLint i;
-	GLint maxTexUnits = 0;
-	GLint activeTexUnit = 0;
-	GLint activeClientTexUnit = 0;
-	GLint activeTexId = 0;
-	GLfloat texEnvMode = 0;
-	const char * texEnvModeStr = "UNKNOWN";
-	GLfloat color[4];
-
-	for (i = 0; i < sizeof(openGLCaps) / sizeof(openGLCaps[0]); i++) {
-		if (glIsEnabled(openGLCaps[i].idx)) {
-			strcat(s, openGLCaps[i].text);
-			strcat(s, " ");
-		}
-	}
-	glGetFloatv(GL_CURRENT_COLOR, color);
-
-	__android_log_print(ANDROID_LOG_INFO, "libSDL", "OpenGL enabled caps: %s color %f %f %f %f \n", s, color[0], color[1], color[2], color[3]);
-
-	glGetIntegerv(GL_ACTIVE_TEXTURE, &activeTexUnit);
-	glGetIntegerv(GL_CLIENT_ACTIVE_TEXTURE, &activeClientTexUnit);
-
-	glGetIntegerv(GL_MAX_TEXTURE_UNITS, &maxTexUnits);
-	for (i = GL_TEXTURE0; i < GL_TEXTURE0 + maxTexUnits; i++) {
-		glActiveTexture(i);
-		glClientActiveTexture(i);
-
-		strcpy(s, "");
-		if (glIsEnabled (GL_TEXTURE_2D))
-			strcat(s, "enabled, ");
-		if (glIsEnabled (GL_TEXTURE_COORD_ARRAY))
-			strcat(s, "with texcoord array, ");
-		if (i == activeTexUnit)
-			strcat(s, "active, ");
-		if (i == activeClientTexUnit)
-			strcat(s, "client active, ");
-
-		glGetIntegerv(GL_TEXTURE_BINDING_2D, &activeTexId);
-		glGetTexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, &texEnvMode);
-		if (fabs(texEnvMode - GL_ADD) < 0.1f)
-			texEnvModeStr = "ADD";
-		if (fabs(texEnvMode - GL_MODULATE) < 0.1f)
-			texEnvModeStr = "MODULATE";
-		if (fabs(texEnvMode - GL_DECAL) < 0.1f)
-			texEnvModeStr = "DECAL";
-		if (fabs(texEnvMode - GL_BLEND) < 0.1f)
-			texEnvModeStr = "BLEND";
-		if (fabs(texEnvMode - GL_REPLACE) < 0.1f)
-			texEnvModeStr = "REPLACE";
-		if (fabs(texEnvMode - GL_COMBINE) < 0.1f)
-			texEnvModeStr = "COMBINE";
-
-		__android_log_print(ANDROID_LOG_INFO, "libSDL", "Texunit: %d texID %d %s texEnv mode %s\n", i - GL_TEXTURE0, activeTexId, s, texEnvModeStr);
-	}
-
-	glActiveTexture(activeTexUnit);
-	glClientActiveTexture(activeClientTexUnit);
-#endif
 }

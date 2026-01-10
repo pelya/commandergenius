@@ -8,7 +8,7 @@ ifndef SDL_JAVA_PACKAGE_PATH
 $(error Please define SDL_JAVA_PACKAGE_PATH to the path of your Java package with dots replaced with underscores, for example "com_example_SanAngeles")
 endif
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/../sdl-$(SDL_VERSION)/include
+LOCAL_C_INCLUDES :=
 LOCAL_CFLAGS := -DSDL_JAVA_PACKAGE_PATH=$(SDL_JAVA_PACKAGE_PATH) -DSDL_CURDIR_PATH=\"$(SDL_CURDIR_PATH)\"
 
 LOCAL_CPP_EXTENSION := .cpp

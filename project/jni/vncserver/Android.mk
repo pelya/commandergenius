@@ -1,6 +1,11 @@
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
+LOCAL_MODULE := vncserver
+
+# Hide vncserver from the project if openssl is not compiled
+ifneq ($(filter ssl, $(APP_MODULES)),)
+
 LIBVNCSERVER_ROOT:=src
 
 LIBVNCSERVER_SRC_FILES:= \
@@ -59,6 +64,6 @@ LOCAL_C_INCLUDES += include
 
 LOCAL_STATIC_LIBRARIES := jpeg png ssl crypto
 
-LOCAL_MODULE := vncserver
-
 include $(BUILD_SHARED_LIBRARY)
+
+endif

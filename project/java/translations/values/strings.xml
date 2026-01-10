@@ -26,6 +26,7 @@
     <string name="storage_custom">Specify directory</string>
     <string name="storage_commandline">Command line parameters, one argument per line</string>
     <string name="storage_question">Data installation location</string>
+    <string name="storage_access">Permission to write to SD card</string>
     <string name="optional_downloads">Downloads</string>
     <string name="downloads">Downloads</string>
     <string name="ok">OK</string>
@@ -159,6 +160,7 @@
     <string name="video_orientation_autodetect">Auto-detect screen orientation</string>
     <string name="video_bpp_24">24 bpp screen color depth</string>
     <string name="video_immersive">Hide system navigation buttons / immersive mode</string>
+    <string name="video_draw_cutout">Draw in display cutout area</string>
     <string name="tv_borders">TV borders</string>
 
     <string name="text_edit_click_here">Tap to start typing, press Back when done</string>

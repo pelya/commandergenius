@@ -4,46 +4,30 @@
                             | (__| |_| |  _ <| |___
                              \___|\___/|_| \_\_____|
 
-README
+Include files for libcurl, external users.
 
-  Curl is a command line tool for transferring data specified with URL
-  syntax. Find out how to use curl by reading the curl.1 man page or the
-  MANUAL document. Find out how to install Curl by reading the INSTALL
-  document.
+They're all placed in the curl subdirectory here for better fit in any kind
+of environment. You must include files from here using...
 
-  libcurl is the library curl is using to do its job. It is readily
-  available to be used by your software. Read the libcurl.3 man page to
-  learn how!
+        #include <curl/curl.h>
 
-  You find answers to the most frequent questions we get in the FAQ document.
+... style and point the compiler's include path to the directory holding the
+curl subdirectory. It makes it more likely to survive future modifications.
 
-  Study the COPYING file for distribution terms and similar. If you distribute
-  curl binaries or other binaries that involve libcurl, you might enjoy the
-  LICENSE-MIXING document.
+NOTE FOR LIBCURL HACKERS
 
-CONTACT
+* If you check out from git on a non-configure platform, you must run the
+  appropriate buildconf* script to set up files before being able of compiling
+  the library.
 
-  If you have problems, questions, ideas or suggestions, please contact us
-  by posting to a suitable mailing list. See https://curl.haxx.se/mail/
+* We cannot assume anything else but very basic compiler features being
+  present. While libcurl requires an ANSI C compiler to build, some of the
+  earlier ANSI compilers clearly can't deal with some preprocessor operators.
 
-  All contributors to the project are listed in the THANKS document.
+* Newlines must remain unix-style for older compilers' sake.
 
-WEB SITE
+* Comments must be written in the old-style /* unnested C-fashion */
 
-  Visit the curl web site for the latest news and downloads:
-
-        https://curl.haxx.se/
-
-GIT
-
-  To download the very latest source off the GIT server do this:
-
-    git clone https://github.com/curl/curl.git
-
-  (you'll get a directory named curl created, filled with the source code)
-
-NOTICE
-
-  Curl contains pieces of source code that is Copyright (c) 1998, 1999
-  Kungliga Tekniska Högskolan. This notice is included here to comply with the
-  distribution terms.
+To figure out how to do good and portable checks for features, operating
+systems or specific hardwarare, a very good resource is Bjorn Reese's
+collection at https://sourceforge.net/p/predef/wiki/

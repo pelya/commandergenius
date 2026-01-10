@@ -70,6 +70,15 @@
 /* Definition to make a library symbol externally visible. */
 #define CURL_EXTERN_SYMBOL __attribute__ ((__visibility__ ("default")))
 
+/* IP address type in sockaddr */
+#define CURL_SA_FAMILY_T sa_family_t
+
+/* built with multiple SSL backends */
+/* #undef CURL_WITH_MULTI_SSL */
+
+/* enable debug build options */
+/* #undef DEBUGBUILD */
+
 /* your Entropy Gathering Daemon socket pathname */
 /* #undef EGD_SOCKET */
 
@@ -286,9 +295,15 @@
 /* Define to 1 if you have a working gmtime_r function. */
 #define HAVE_GMTIME_R 1
 
+/* Define to 1 if you have the `gnutls_alpn_set_protocols' function. */
+/* #undef HAVE_GNUTLS_ALPN_SET_PROTOCOLS */
+
 /* Define to 1 if you have the `gnutls_certificate_set_x509_key_file2'
    function. */
 /* #undef HAVE_GNUTLS_CERTIFICATE_SET_X509_KEY_FILE2 */
+
+/* Define to 1 if you have the `gnutls_ocsp_req_init' function. */
+/* #undef HAVE_GNUTLS_OCSP_REQ_INIT */
 
 /* if you have the function gnutls_srp_verifier */
 /* #undef HAVE_GNUTLS_SRP */
@@ -468,6 +483,9 @@
 /* Define to 1 if you have the <netdb.h> header file. */
 #define HAVE_NETDB_H 1
 
+/* Define to 1 if you have the <netinet/in6.h> header file. */
+/* #undef HAVE_NETINET_IN6_H */
+
 /* Define to 1 if you have the <netinet/in.h> header file. */
 #define HAVE_NETINET_IN_H 1
 
@@ -541,7 +559,7 @@
 #define HAVE_PWD_H 1
 
 /* Define to 1 if you have the `RAND_egd' function. */
-#define HAVE_RAND_EGD 1
+/* #undef HAVE_RAND_EGD */
 
 /* Define to 1 if you have the `RAND_screen' function. */
 /* #undef HAVE_RAND_SCREEN */
@@ -909,6 +927,13 @@
 /* Define to the function return type for send. */
 #define SEND_TYPE_RETV ssize_t
 
+/* The size of `curl_off_t', as computed by sizeof. */
+#ifdef __LP64__
+#define SIZEOF_CURL_OFF_T 8
+#else
+#define SIZEOF_CURL_OFF_T 4
+#endif
+
 /* The size of `int', as computed by sizeof. */
 #define SIZEOF_INT 4
 
@@ -964,14 +989,23 @@
 /* if CyaSSL/WolfSSL is enabled */
 /* #undef USE_CYASSL */
 
-/* to enable iOS/Mac OS X native SSL/TLS support */
+/* to enable Apple OS native SSL/TLS support */
 /* #undef USE_DARWINSSL */
 
 /* if GnuTLS is enabled */
 /* #undef USE_GNUTLS */
 
+/* if GnuTLS uses nettle as crypto backend */
+/* #undef USE_GNUTLS_NETTLE */
+
+/* PSL support enabled */
+/* #undef USE_LIBPSL */
+
 /* if librtmp is in use */
 /* #undef USE_LIBRTMP */
+
+/* if libSSH is in use */
+/* #undef USE_LIBSSH */
 
 /* if libSSH2 is in use */
 /* #undef USE_LIBSSH2 */
@@ -1006,6 +1040,9 @@
 /* if you want POSIX threaded DNS lookup */
 /* #undef USE_THREADS_POSIX */
 
+/* if you want Win32 threaded DNS lookup */
+/* #undef USE_THREADS_WIN32 */
+
 /* Use TLS-SRP authentication */
 #define USE_TLS_SRP 1
 
@@ -1017,14 +1054,14 @@
 
 /* Define to 1 if you are building a Windows target with large file support.
    */
-/* #undef USE_WIN32_SMALL_FILES */
+/* #undef USE_WIN32_LARGE_FILES */
 
 /* Use Windows LDAP implementation */
 /* #undef USE_WIN32_LDAP */
 
 /* Define to 1 if you are building a Windows target without large file
    support. */
-/* #undef USE_WIN32_LARGE_FILES */
+/* #undef USE_WIN32_SMALL_FILES */
 
 /* to enable SSPI support */
 /* #undef USE_WINDOWS_SSPI */
@@ -1034,9 +1071,6 @@
 
 /* Define to 1 to provide own prototypes. */
 /* #undef WANT_IDN_PROTOTYPES */
-
-/* Define to avoid automatic inclusion of winsock.h */
-/* #undef WIN32_LEAN_AND_MEAN */
 
 /* Define to 1 if OS is AIX. */
 #ifndef _ALL_SOURCE

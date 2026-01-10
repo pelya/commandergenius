@@ -53,10 +53,16 @@ import java.util.Arrays;
 import android.text.SpannedString;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
 
+import android.os.storage.StorageManager;
+import android.os.storage.OnObbStateChangeListener;
+import android.content.res.AssetManager;
+import android.content.pm.PackageManager;
+import android.content.pm.ApplicationInfo;
 
 class CountingInputStream extends BufferedInputStream
 {
@@ -171,7 +177,6 @@ class DataDownloader extends Thread
 	{
 		Parent = _Parent;
 		Status = new StatusWriter( _Status, _Parent );
-		//Status.setText( "Connecting to " + Globals.DataDownloadUrl );
 		outFilesDir = Globals.DataDir;
 		DownloadComplete = false;
 		this.start();
@@ -187,8 +192,6 @@ class DataDownloader extends Thread
 	@Override
 	public void run()
 	{
-		Parent.getVideoLayout().setOnKeyListener(new BackKeyListener(Parent));
-
 		String [] downloadFiles = Globals.DataDownloadUrl;
 		int total = 0;
 		int count = 0;
@@ -211,7 +214,16 @@ class DataDownloader extends Thread
 							downloadFiles[i].contains("<ARCH>") &&
 							! DownloadDataFile(downloadFiles[i].replace("<ARCH>", android.os.Build.CPU_ABI2), DOWNLOAD_FLAG_FILENAME + String.valueOf(i) + ".flag", count+1, total, i) ) )
 					{
-						DownloadFailed = true;
+						if (!Parent.getFilesDir().getAbsolutePath().equals(Globals.DataDir))
+						{
+							Globals.DataDir = Parent.getFilesDir().getAbsolutePath();
+							Globals.DownloadToSdcard = false;
+							Log.i("SDL", "Switching download destination directory to internal storage and restarting the app: " + Globals.DataDir);
+							Settings.Save(Parent);
+							Intent intent = new Intent(Parent, RestartMainActivity.class);
+							Parent.startActivity(intent);
+							System.exit(0);
+						}
 						return;
 					}
 				}
@@ -219,7 +231,6 @@ class DataDownloader extends Thread
 			}
 		}
 		DownloadComplete = true;
-		Parent.getVideoLayout().setOnKeyListener(null);
 		initParent();
 	}
 
@@ -263,20 +274,6 @@ class DataDownloader extends Thread
 				if( ! matched )
 					throw new IOException();
 				Status.setText( res.getString(R.string.download_unneeded) );
-				for( int i = 1; i < downloadUrls.length; i++ )
-				{
-					if( downloadUrls[i].indexOf("obb:") == 0 ) // APK expansion file provided by Google Play
-					{
-						String url = getObbFilePath(downloadUrls[i]);
-						if (new File(url).length() > 256)
-						{
-							Writer writer = new OutputStreamWriter(new FileOutputStream(url), "UTF-8");
-							writer.write("Extracted and truncated\n");
-							writer.close();
-							Log.i("SDL", "Truncated file from expansion: " + url);
-						}
-					}
-				}
 				return true;
 			} catch ( IOException e ) {
 				forceOverwrite = true;
@@ -306,6 +303,9 @@ class DataDownloader extends Thread
 		boolean DoNotUnzip = false;
 		boolean FileInAssets = false;
 		boolean FileInExpansion = false;
+		boolean MountObb = false;
+		final boolean[] ObbMounted = new boolean[] { false };
+		final boolean[] ObbMountedError = new boolean[] { false };
 		String url = "";
 
 		int downloadUrlIndex = 1;
@@ -331,31 +331,61 @@ class DataDownloader extends Thread
 					partialDownloadLen = partialDownload.length();
 			}
 			Status.setText( downloadCount + "/" + downloadTotal + ": " + res.getString(R.string.connecting_to, url) );
-			if( url.indexOf("obb:") == 0 ) // APK expansion file provided by Google Play
+			if( url.equals("assetpack") )
 			{
-				if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M)
+				if( Parent.assetPackPath != null )
 				{
-					int permissionCheck = Parent.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-					if (permissionCheck != PackageManager.PERMISSION_GRANTED && !Parent.writeExternalStoragePermissionDialogAnswered)
-					{
-						Parent.requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
-						while( !Parent.writeExternalStoragePermissionDialogAnswered )
-						{
-							try{ Thread.sleep(300); } catch (InterruptedException e) {}
-						}
-					}
+					Log.i("SDL", "Found asset pack: " + Parent.assetPackPath);
+					return true;
 				}
-
+				Log.i("SDL", "Asset pack is not installed");
+				downloadUrlIndex++;
+				continue;
+			}
+			else if( url.indexOf("obb:") == 0 || url.indexOf("mnt:") == 0 ) // APK expansion file provided by Google Play
+			{
+				boolean tmpMountObb = ( url.indexOf("mnt:") == 0 );
 				url = getObbFilePath(url);
 				InputStream stream1 = null;
+
 				try {
 					stream1 = new FileInputStream(url);
 					stream1.read();
 					stream1.close();
 					Log.i("SDL", "Fetching file from expansion: " + url);
 					FileInExpansion = true;
+					MountObb = tmpMountObb;
 					break;
-				} catch( Exception e ) {
+				} catch( IOException ee ) {
+					Log.i("SDL", "Failed to open file, requesting storage read permission: " + url);
+
+					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M)
+					{
+						int permissionCheck = Parent.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
+						if (permissionCheck != PackageManager.PERMISSION_GRANTED && !Parent.readExternalStoragePermissionDialogAnswered)
+						{
+							Parent.requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+							while( !Parent.readExternalStoragePermissionDialogAnswered )
+							{
+								try{ Thread.sleep(300); } catch (InterruptedException e) {}
+							}
+						}
+					}
+				} catch( Exception eee ) {
+					Log.i("SDL", "Failed to open file: " + url);
+					downloadUrlIndex++;
+					continue;
+				}
+
+				try {
+					stream1 = new FileInputStream(url);
+					stream1.read();
+					stream1.close();
+					Log.i("SDL", "Fetching file from expansion: " + url);
+					FileInExpansion = true;
+					MountObb = tmpMountObb;
+					break;
+				} catch( Exception eee ) {
 					Log.i("SDL", "Failed to open file: " + url);
 					downloadUrlIndex++;
 					continue;
@@ -424,6 +454,51 @@ class DataDownloader extends Thread
 			}
 		}
 		
+		if( MountObb )
+		{
+			Log.i("SDL", "Mounting OBB file: " + url);
+			StorageManager sm = (StorageManager) Parent.getSystemService(Context.STORAGE_SERVICE);
+			if( !sm.mountObb(url, null, new OnObbStateChangeListener()
+					{
+						public void onObbStateChange(String path, int state)
+						{
+							if (state == OnObbStateChangeListener.MOUNTED ||
+								state == OnObbStateChangeListener.ERROR_ALREADY_MOUNTED)
+							{
+								ObbMounted[0] = true;
+							}
+							else
+							{
+								ObbMountedError[0] = true;
+							}
+						}
+					}) )
+			{
+				Log.i("SDL", "Cannot mount OBB file '" + url + "'");
+				Status.setText( res.getString(R.string.error_dl_from, url) );
+				return false;
+			}
+			while( !ObbMounted[0] )
+			{
+				try{ Thread.sleep(300); } catch (InterruptedException e) {}
+				if( ObbMountedError[0] )
+				{
+					Log.i("SDL", "Cannot mount OBB file '" + url + "'");
+					Status.setText( res.getString(R.string.error_dl_from, url) );
+					return false;
+				}
+			}
+			Parent.ObbMountPath = sm.getMountedObbPath(url);
+			if( Parent.ObbMountPath == null )
+			{
+				Log.i("SDL", "Cannot mount OBB file '" + url + "'");
+				Status.setText( res.getString(R.string.error_dl_from, url) );
+				return false;
+			}
+			Log.i("SDL", "Mounted OBB file '" + url + "' to path " + Parent.ObbMountPath);
+			return true;
+		}
+
 		if( FileInExpansion )
 		{
 			Log.i("SDL", "Count file size: '" + url);
@@ -515,15 +590,7 @@ class DataDownloader extends Thread
 
 		try {
 			stream.close();
-			if( FileInExpansion )
-			{
-				Writer writer = new OutputStreamWriter(new FileOutputStream(url), "UTF-8");
-				writer.write("Extracted and truncated\n");
-				writer.close();
-				Log.i("SDL", "Truncated file from expansion: " + url);
-			}
 		} catch( java.io.IOException e ) {
-			Log.i("SDL", "Error truncating file from expansion: " + url);
 		};
 
 		return true;
@@ -783,7 +850,7 @@ class DataDownloader extends Thread
 			public MainActivity Parent;
 			public void run()
 			{
-				Parent.initSDL();
+				Parent.downloadFinishedInitSDL();
 			}
 		}
 		Callback cb = new Callback();
@@ -801,59 +868,13 @@ class DataDownloader extends Thread
 
 	private String getObbFilePath(final String url)
 	{
+		// "obb:" or "mnt:" - same length
 		return Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/obb/" +
 				Parent.getPackageName() + "/" + url.substring("obb:".length()) + "." + Parent.getPackageName() + ".obb";
 	}
 
-	public class BackKeyListener implements View.OnKeyListener
-	{
-		MainActivity p;
-		public BackKeyListener(MainActivity _p)
-		{
-			p = _p;
-		}
-
-		@Override
-		public boolean onKey(View v, int keyCode, KeyEvent event)
-		{
-			if( DownloadFailed )
-				System.exit(1);
-
-			AlertDialog.Builder builder = new AlertDialog.Builder(p);
-			builder.setTitle(p.getResources().getString(R.string.cancel_download));
-			builder.setMessage(p.getResources().getString(R.string.cancel_download) + (DownloadCanBeResumed ? " " + p.getResources().getString(R.string.cancel_download_resume) : ""));
-			
-			builder.setPositiveButton(p.getResources().getString(R.string.yes), new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int item) 
-				{
-					System.exit(1);
-					dialog.dismiss();
-				}
-			});
-			builder.setNegativeButton(p.getResources().getString(R.string.no), new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int item) 
-				{
-					dialog.dismiss();
-				}
-			});
-			builder.setOnCancelListener(new DialogInterface.OnCancelListener()
-			{
-				public void onCancel(DialogInterface dialog)
-				{
-				}
-			});
-			AlertDialog alert = builder.create();
-			alert.setOwnerActivity(p);
-			alert.show();
-			return true;
-		}
-	}
-
 	public StatusWriter Status;
 	public boolean DownloadComplete = false;
-	public boolean DownloadFailed = false;
 	public boolean DownloadCanBeResumed = false;
 	private MainActivity Parent;
 	private String outFilesDir = null;

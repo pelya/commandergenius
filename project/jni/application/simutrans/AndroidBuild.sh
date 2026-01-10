@@ -1,23 +1,27 @@
 #!/bin/sh
 
-if [ -e simutrans ]; then
-	echo Already downloaded
-else
-	svn checkout https://github.com/aburch/simutrans/trunk simutrans || exit 1
-	patch -p0 < simutrans.patch || exit 1
-	cd simutrans || exit 1
-	./get_lang_files.sh || exit 1
-	cd ..
-fi
-
-mkdir -p AndroidData
-cd simutrans/simutrans
-zip -r ../../AndroidData/data.zip * >/dev/null
-cd ..
+cd simutrans
 
 ln -sf libbzip2.so ../../../../obj/local/$1/libbz2.so
 
+rm -f config.$1.txt
+echo VERBOSE=1 >> config.$1.txt
+echo OPTIMIZE=1 >> config.$1.txt
+echo OSTYPE=linux >> config.$1.txt
+echo COLOUR_DEPTH=16 >> config.$1.txt
+echo BACKEND=sdl >> config.$1.txt
+echo USE_SOFTPOINTER=1 >> config.$1.txt
+echo USE_FREETYPE=1 >> config.$1.txt
+echo USE_FLUIDSYNTH_MIDI=1 >> config.$1.txt
+
+cmake -E copy_if_different config.$1.txt config.$1
+
+echo "#define REVISION `svn info --show-item revision`" > revision.h.txt
+cmake -E copy_if_different revision.h.txt revision.h
+
 env CFLAGS="-fpermissive" \
-../../setEnvironment-$1.sh sh -c " \
-	make -j4 CFG=$1 VERBOSE=1 OPTIMIZE=1 OSTYPE=linux COLOUR_DEPTH=16 BACKEND=sdl USE_SOFTPOINTER=1 && \
-	cp -f build/$1/sim ../libapplication-$1.so" || exit 1
+	LDFLAGS="-L`pwd`/../../../../obj/local/$1" \
+	PATH=`pwd`/../..:$PATH \
+	../../setEnvironment-$1.sh sh -c " \
+		make -j8 CFG=$1 && \
+		cp -f build/$1/sim ../libapplication-$1.so" || exit 1

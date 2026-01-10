@@ -1,0 +1,27 @@
+diff --git a/project/java/Settings.java b/project/java/Settings.java
+index 4467879a0..1de0689c2 100644
+--- a/project/java/Settings.java
++++ b/project/java/Settings.java
+@@ -532,6 +532,9 @@ public class Settings
+ 		} catch ( IOException e ) { }
+ 		new File( p.getFilesDir() + "/" + SettingsFileName ).delete();
+ 
++		// Kill it with vengeance and unload all shared libraries
++		android.os.Process.killProcess(android.os.Process.myPid());
++
+ 		Intent intent = new Intent(p, RestartMainActivity.class);
+ 		p.startActivity(intent);
+ 		System.exit(0);
+diff --git a/project/java/Globals.java b/project/java/Globals.java
+index 8c7017d8a..9ba3a16f7 100644
+--- a/project/java/Globals.java
++++ b/project/java/Globals.java
+@@ -119,7 +119,7 @@ class Globals
+ 	public static int MoveMouseWithGyroscopeSpeed = 2;
+ 	public static boolean ClickMouseWithDpad = false;
+ 	public static boolean RelativeMouseMovement = ForceRelativeMouseMode; // Laptop touchpad mode
+-	public static boolean ForceHardwareMouse = false;
++	public static boolean ForceHardwareMouse = true;
+ 	public static int RelativeMouseMovementSpeed = 2;
+ 	public static int RelativeMouseMovementAccel = 0;
+ 	public static int ShowScreenUnderFinger = Mouse.ZOOM_NONE;

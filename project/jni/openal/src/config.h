@@ -29,7 +29,7 @@
 #define HAVE_FABSF
 
 /* Define if we have the strtof function */
-#define HAVE_STRTOF
+/* #define HAVE_STRTOF */
 
 /* Define if we have stdint.h */
 #define HAVE_STDINT_H
@@ -78,7 +78,7 @@
 #define HAVE_FENV_H 1
 
 /* Define if we have fesetround() */
-#define HAVE_FESETROUND 1
+/* #define HAVE_FESETROUND 1 */
 
 /* Define if we have _controlfp() */
 /*

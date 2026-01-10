@@ -1,1 +1,0 @@
-ufoai/build/projects/AndroidPreBuild.sh

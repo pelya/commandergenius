@@ -1,0 +1,27 @@
+--- a/project/AndroidManifest.xml	2018-05-17 22:12:08.421817275 +0300
++++ a/project/AndroidManifest.xml	2018-05-17 22:14:05.186301554 +0300
+@@ -27,6 +27,24 @@
+ 				<category android:name="tv.ouya.intent.category.GAME" /> <!-- For that one user who still got an OUYA in his living room and won't throw it away just because someone else decides that it's dead -->
+ 			</intent-filter>
+ 		</activity>
++		<activity android:name=".Connect"
++				  android:label="@string/app_name"
++				  android:launchMode="standard"
++				  android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
++				  android:windowSoftInputMode="stateUnspecified">
++			<intent-filter>
++				<action android:name="android.intent.action.VIEW" />
++				<category android:name="android.intent.category.DEFAULT"/>
++				<category android:name="android.intent.category.BROWSABLE"/>
++				<data android:scheme="openlierox"/>
++			</intent-filter>
++			<intent-filter>
++				<action android:name="android.intent.action.VIEW" />
++				<category android:name="android.intent.category.DEFAULT"/>
++				<category android:name="android.intent.category.BROWSABLE"/>
++				<data android:scheme="https" android:host="liero.1337.cx" android:pathPrefix="/connect/"/>
++			</intent-filter>
++		</activity>
+ 		<meta-data android:name="com.sec.android.support.multiwindow" android:value="true" /> <!-- Samsung's multiwindow -->
+ 		<activity android:name=".RestartMainActivity"
+ 				  android:label="@string/app_name"

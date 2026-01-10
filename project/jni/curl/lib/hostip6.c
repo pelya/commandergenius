@@ -5,7 +5,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2016, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2017, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -21,6 +21,11 @@
  ***************************************************************************/
 
 #include "curl_setup.h"
+
+/***********************************************************************
+ * Only for IPv6-enabled builds
+ **********************************************************************/
+#ifdef CURLRES_IPV6
 
 #ifdef HAVE_NETINET_IN_H
 #include <netinet/in.h>
@@ -53,11 +58,6 @@
 #include "curl_printf.h"
 #include "curl_memory.h"
 #include "memdebug.h"
-
-/***********************************************************************
- * Only for IPv6-enabled builds
- **********************************************************************/
-#ifdef CURLRES_IPV6
 
 #if defined(CURLDEBUG) && defined(HAVE_GETNAMEINFO)
 /* These are strictly for memory tracing and are using the same style as the
@@ -167,10 +167,12 @@ Curl_addrinfo *Curl_getaddrinfo(struct connectdata *conn,
   int error;
   char sbuf[12];
   char *sbufptr = NULL;
+#ifndef USE_RESOLVE_ON_IPS
   char addrbuf[128];
+#endif
   int pf;
 #if !defined(CURL_DISABLE_VERBOSE_STRINGS)
-  struct SessionHandle *data = conn->data;
+  struct Curl_easy *data = conn->data;
 #endif
 
   *waitp = 0; /* synchronous response only */
@@ -196,21 +198,31 @@ Curl_addrinfo *Curl_getaddrinfo(struct connectdata *conn,
   hints.ai_family = pf;
   hints.ai_socktype = conn->socktype;
 
+#ifndef USE_RESOLVE_ON_IPS
+  /*
+   * The AI_NUMERICHOST must not be set to get synthesized IPv6 address from
+   * an IPv4 address on iOS and Mac OS X.
+   */
   if((1 == Curl_inet_pton(AF_INET, hostname, addrbuf)) ||
      (1 == Curl_inet_pton(AF_INET6, hostname, addrbuf))) {
     /* the given address is numerical only, prevent a reverse lookup */
     hints.ai_flags = AI_NUMERICHOST;
   }
+#endif
 
   if(port) {
     snprintf(sbuf, sizeof(sbuf), "%d", port);
-    sbufptr=sbuf;
+    sbufptr = sbuf;
   }
 
   error = Curl_getaddrinfo_ex(hostname, sbufptr, &hints, &res);
   if(error) {
     infof(data, "getaddrinfo(3) failed for %s:%d\n", hostname, port);
     return NULL;
+  }
+
+  if(port) {
+    Curl_addrinfo_set_port(res, port);
   }
 
   dump_addrinfo(conn, res);

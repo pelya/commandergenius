@@ -1,0 +1,14 @@
+diff --git a/project/java/Settings.java b/project/java/Settings.java
+index 4467879a0..1de0689c2 100644
+--- a/project/java/Settings.java
++++ b/project/java/Settings.java
+@@ -532,6 +532,9 @@ public class Settings
+ 		} catch ( IOException e ) { }
+ 		new File( p.getFilesDir() + "/" + SettingsFileName ).delete();
+ 
++		// Kill it with vengeance and unload all shared libraries
++		android.os.Process.killProcess(android.os.Process.myPid());
++
+ 		Intent intent = new Intent(p, RestartMainActivity.class);
+ 		p.startActivity(intent);
+ 		System.exit(0);

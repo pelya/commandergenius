@@ -305,7 +305,7 @@ Uint16 SDL_CalculatePitch(SDL_Surface *surface)
 			break;
 	}
 
-#ifdef ANDROID
+#ifdef __ANDROID__
     if( surface->format->BytesPerPixel != 2 ) /* Avoid extra memcpy() when updating GLES textures */
 #endif
 	pitch = (pitch + 3) & ~3;	/* 4-byte aligning */

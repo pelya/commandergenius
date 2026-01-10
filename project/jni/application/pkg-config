@@ -89,6 +89,7 @@ while test $# -gt 0; do
       echo -I${prefix}/include
       ;;
     --libs|--static-libs)
+      #echo "=====> $0 $@: PKG '$PKG'" > /dev/stderr
       case $PKG in
         curl|libcurl)
           echo -lcurl-sdl -l:libssl.so.sdl.1.so -l:libcrypto.so.sdl.1.so
@@ -99,10 +100,33 @@ while test $# -gt 0; do
         openssl|ssl|libssl)
           echo -l:libssl.so.sdl.1.so -l:libcrypto.so.sdl.1.so
           ;;
+        expat|libexpat)
+          echo -lexpat-sdl
+          ;;
+        fontconfig|libfontconfig)
+          echo -lfontconfig -lexpat-sdl
+          ;;
+        iculx|icu-lx|libiculx)
+          echo -liculx -licu-le-hb -lharfbuzz -licuuc -licudata
+          ;;
+        icui18n|icu-i18n|libicui18n)
+          echo -licui18n -licuuc -licudata
+          ;;
+        png|libpng)
+          echo -lpng -lz
+          ;;
+        lzma|liblzma)
+          echo -llzma -lz
+          ;;
+        lzo|liblzo)
+          echo -llzo -lz
+          ;;
         *)
           echo -l$PKG
           ;;
       esac
+      ;;
+    --static)
       ;;
     *)
       ;;

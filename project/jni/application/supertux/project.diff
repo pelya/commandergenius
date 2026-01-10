@@ -1,0 +1,12 @@
+--- a/project/AndroidManifest.xml	2022-01-08 21:01:39.060265726 +0200
++++ b/project/AndroidManifest.xml	2022-01-08 21:03:51.333398840 +0200
+@@ -49,6 +49,9 @@
+     <!-- Allow access to the vibrator -->
+     <uses-permission android:name="android.permission.VIBRATE" />
+ 
++    <!-- Internet access, it was dumb for SDL2 to not include this permission, it does not even need a permission dialog -->
++    <uses-permission android:name="android.permission.INTERNET" />
++
+     <!-- if you want to capture audio, uncomment this. -->
+     <!-- <uses-permission android:name="android.permission.RECORD_AUDIO" /> -->
+ 

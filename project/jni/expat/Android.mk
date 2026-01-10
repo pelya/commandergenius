@@ -28,6 +28,7 @@ LOCAL_SRC_FILES := $(common_SRC_FILES)
 LOCAL_CFLAGS += $(common_CFLAGS)
 LOCAL_C_INCLUDES += $(common_C_INCLUDES)
 
-LOCAL_MODULE:= expat
+LOCAL_MODULE := expat
+LOCAL_MODULE_FILENAME := libexpat-sdl # It clashes with system libexpat on Android 5 and older
 
 include $(BUILD_SHARED_LIBRARY)

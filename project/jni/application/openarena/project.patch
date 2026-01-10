@@ -2,11 +2,11 @@ diff --git a/project/AndroidManifestTemplate.xml b/project/AndroidManifestTempla
 index 7956ad1..37b9de5 100644
 --- a/project/AndroidManifest.xml
 +++ b/project/AndroidManifest.xml
-@@ -25,6 +25,7 @@
- 				<category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" /> <!-- Samsung's multiwindow -->
+@@ -28,6 +28,7 @@
  				<action android:name="com.sec.android.airview.HOVER" /> <!-- Stupid Samsung requires their own intent for finger-hover events -->
  				<category android:name="android.intent.category.LEANBACK_LAUNCHER" /> <!-- Android TV requires this -->
+ 				<category android:name="tv.ouya.intent.category.GAME" /> <!-- For that one user who still got an OUYA in his living room and won't throw it away just because someone else decides that it's dead -->
 +				<category android:name="com.google.intent.category.CARDBOARD" /> <!-- Cardboard VR -->
  			</intent-filter>
  		</activity>
- 		<!-- ==ADMOB== --> <activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"/>
+ 		<meta-data android:name="com.sec.android.support.multiwindow" android:value="true" /> <!-- Samsung's multiwindow -->
