@@ -49,6 +49,8 @@ If you compile this code with SDL 1.3 or newer, or use in some other way, the li
 #include "unicodestuff.h"
 #include "atan2i.h"
 
+extern int SDL_PrivateKeyboardWithDeviceId(Uint8 state, SDL_keysym *keysym, int deviceId);
+
 #ifndef SDL_COMPATIBILITY_HACKS_SLOW_COMPATIBLE_EVENT_QUEUE
 
 #if SDL_VERSION_ATLEAST(1,3,0)
