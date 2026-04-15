@@ -53,6 +53,8 @@ jobs:
         run: >
           git submodule update --init --recursive --depth=1
           project/jni/application/${APP_NAME}
+          project/jni/sdl2 project/jni/sdl2_image
+          project/jni/sdl2_mixer project/jni/sdl2_ttf
 
       - name: Symlink the application dir
         run: |
