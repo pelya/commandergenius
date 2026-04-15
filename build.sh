@@ -36,7 +36,7 @@ do
 			echo "    -i:       install APK file to device after building"
 			echo "    -r:       run APK file on device after building"
 			echo "    -z:       skip zipalign and apksigner"
-			echo "    -v <v>:   choose variant, either sdl or fdroid"
+			echo "    -v <v>:   choose variant, appended to the app package name"
 			echo "    debug:    build debug package"
 			echo "    release:  build release package (default)"
 			echo "    app-name: directory under project/jni/application to be compiled"

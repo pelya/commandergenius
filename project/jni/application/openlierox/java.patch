@@ -1,15 +1,15 @@
-diff --git a/project/java/Settings.java b/project/java/Settings.java
+diff --git a/project/java/Video.java b/project/java/Video.java
 index 9e6150a..09ade66 100644
---- a/project/java/Settings.java
-+++ b/project/java/Settings.java
-@@ -736,7 +736,7 @@ public class Settings
+--- a/project/java/Video.java
++++ b/project/java/Video.java
+@@ -1266,7 +1266,7 @@
  			if( Globals.TouchscreenKeyboardTheme == 2 )
- 				nativeSetupScreenKeyboardButtons(loadRaw(p, R.raw.sun));
+ 				Settings.nativeSetupScreenKeyboardButtons(loadRaw(p, R.raw.sun));
  			if( Globals.TouchscreenKeyboardTheme == 3 )
--				nativeSetupScreenKeyboardButtons(loadRaw(p, R.raw.keen));
-+				nativeSetupScreenKeyboardButtons(loadRaw(p, R.raw.liero));
+-				Settings.nativeSetupScreenKeyboardButtons(loadRaw(p, R.raw.keen));
++				Settings.nativeSetupScreenKeyboardButtons(loadRaw(p, R.raw.liero));
  			if( Globals.TouchscreenKeyboardTheme == 4 )
- 				nativeSetupScreenKeyboardButtons(loadRaw(p, R.raw.retro));
+ 				Settings.nativeSetupScreenKeyboardButtons(loadRaw(p, R.raw.retro));
  			if( Globals.TouchscreenKeyboardTheme == 5 )
 --- /dev/null	2018-12-13 18:37:19.876000065 +0200
 +++ Connect.java	2018-12-17 21:16:01.027001714 +0200

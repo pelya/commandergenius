@@ -84,8 +84,8 @@
 	update = merge
 [submodule "project/jni/application/openlierox/src"]
 	path = project/jni/application/openlierox/src
-	url = https://github.com/albertz/openlierox.git
-	branch = half-assed-android-port
+	url = https://github.com/openlierox/openlierox.git
+	branch = 0.58
 	update = merge
 [submodule "project/jni/application/xserver-debian/debian-image"]
 	path = project/jni/application/xserver-debian/debian-image
