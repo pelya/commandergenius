@@ -99,6 +99,4 @@
 	<!-- ==GLES2== --> <uses-feature android:glEsVersion="0x00020000" required="true"/>
 	<!-- ==GLES3== --> <uses-feature android:glEsVersion="0x00030000" required="true"/>
 
-	<uses-sdk android:minSdkVersion="21"/>
-
 </manifest>
