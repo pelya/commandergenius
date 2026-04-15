@@ -31,6 +31,12 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging false
+        }
+    }
+
     assetPacks = [":assetpack"] // ==ASSETPACK==
 }
 

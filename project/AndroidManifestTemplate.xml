@@ -12,7 +12,6 @@
 				 android:isGame="true"
 				 android:supportsRtl="true"
 				 android:theme="@style/AppTheme"
-				 android:requestLegacyExternalStorage="true"
 	>
 		<activity android:name="MainActivity"
 				  android:label="@string/app_name"
