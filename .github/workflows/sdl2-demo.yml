@@ -43,10 +43,15 @@ jobs:
           distribution: temurin
 
       - name: Set NDK version
-        run: echo "PATH=$ANDROID_NDK_LATEST_HOME:$ANDROID_SDK_ROOT/build-tools/$ANDROID_BUILD_TOOLS:$PATH" >> $GITHUB_ENV
+        run: |
+          echo "PATH=$ANDROID_NDK_LATEST_HOME:$ANDROID_SDK_ROOT/build-tools/$ANDROID_BUILD_TOOLS:$PATH" >> $GITHUB_ENV
+          echo "ANDROID_NDK=$ANDROID_NDK_LATEST_HOME" >> $GITHUB_ENV
+          echo "ANDROID_NDK_HOME=$ANDROID_NDK_LATEST_HOME" >> $GITHUB_ENV
+          echo "ANDROID_NDK_ROOT=$ANDROID_NDK_LATEST_HOME" >> $GITHUB_ENV
 
       - name: Print NDK version
-        run: cat $(dirname $(which ndk-build))/source.properties
+        run: |
+          cat $ANDROID_NDK_HOME/source.properties
 
       - name: Check out the repository
         uses: actions/checkout@v2
