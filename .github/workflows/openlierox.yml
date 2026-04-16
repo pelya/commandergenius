@@ -31,7 +31,8 @@ jobs:
       APP_NAME: openlierox
       # It takes one hour per one architecture to build Boost and ICU libraries, and Github limits CI script duration to 6 hours
       ARCH_LIST: armeabi-v7a arm64-v8a x86 x86_64
-      ANDROID_BUILD_TOOLS: 36.0.0
+      ANDROID_BUILD_TOOLS: 37.0.0
+      PATH: "$ANDROID_NDK_LATEST_HOME:$ANDROID_SDK_ROOT/build-tools/$ANDROID_BUILD_TOOLS:$PATH"
 
     runs-on: ubuntu-latest
 
@@ -47,6 +48,11 @@ jobs:
         with:
           fetch-depth: 1
           submodules: false
+
+      - name: Print NDK version
+        run: |
+          which ndk-build
+          cat $(dirname $(which ndk-build))/source.properties
 
       - name: Check out submodules
         # There are many more submodules in this repo, we don't need them all
@@ -66,7 +72,6 @@ jobs:
 
       - name: Patch Java files and build OpenSSL
         run: |
-          export PATH=$ANDROID_NDK_LATEST_HOME:$PATH
           ./changeAppSettings.sh
 
       - name: Set up Gradle and Android SDK licenses
@@ -82,7 +87,6 @@ jobs:
 
       - name: Hyper turbo build script GOOOOOOOOOOOO
         run: |
-          export PATH=$ANDROID_NDK_LATEST_HOME:$ANDROID_SDK_ROOT/build-tools/$ANDROID_BUILD_TOOLS:$PATH
           ./build.sh
 
       - name: App signing keys
@@ -97,7 +101,6 @@ jobs:
 
       - name: Package
         run: |
-          export PATH=$ANDROID_NDK_LATEST_HOME:$ANDROID_SDK_ROOT/build-tools/$ANDROID_BUILD_TOOLS:$PATH
           if [ -e keystore.jks ]; then
           export ANDROID_KEYSTORE_FILE=`pwd`/keystore.jks
           fi
