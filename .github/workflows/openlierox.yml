@@ -46,10 +46,7 @@ jobs:
         run: echo "PATH=$ANDROID_NDK_LATEST_HOME:$ANDROID_SDK_ROOT/build-tools/$ANDROID_BUILD_TOOLS:$PATH" >> $GITHUB_ENV
 
       - name: Print NDK version
-        run: |
-          echo "PATH=$PATH"
-          which ndk-build
-          cat $(dirname $(which ndk-build))/source.properties
+        run: cat $(dirname $(which ndk-build))/source.properties
 
       - name: Check out the repository
         uses: actions/checkout@v3
@@ -60,7 +57,6 @@ jobs:
       - name: Check out submodules
         # There are many more submodules in this repo, we don't need them all
         run: >
-          echo "PATH=$PATH"
           git submodule update --init --recursive --depth=1
           project/jni/application/${APP_NAME}
           project/jni/sdl2 project/jni/sdl2_image
