@@ -55,7 +55,7 @@ jobs:
           cat $ANDROID_NDK_HOME/source.properties
 
       - name: Check out the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
         with:
           fetch-depth: 1
           submodules: false
@@ -117,6 +117,7 @@ jobs:
           mv *.apk upload/
           ./signBundle.sh
           mv *.aab upload/
+
         env:
           ANDROID_KEYSTORE_PASS: "${{secrets.ANDROID_KEYSTORE_PASS}}"
           ANDROID_KEYSTORE_ALIAS: "${{secrets.ANDROID_KEYSTORE_ALIAS}}"
@@ -124,7 +125,7 @@ jobs:
           ANDROID_UPLOAD_KEYSTORE_ALIAS: "${{secrets.ANDROID_UPLOAD_KEYSTORE_ALIAS}}"
 
       # Github actions is dumb and won't let you download single files from artifacts, so break up the artifacts instead
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: ${{env.APP_NAME}}
           path: upload
