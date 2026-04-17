@@ -1008,6 +1008,7 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 		mRenderer = new DemoRenderer(context);
 		setRenderer(mRenderer);
 		DifferentTouchInput.registerInputManagerCallbacks(context);
+		setContentDescription(context.getResources().getString(R.string.app_name));
 	}
 
 	@Override
