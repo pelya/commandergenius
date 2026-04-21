@@ -132,12 +132,12 @@ jobs:
           path: upload
           if-no-files-found: error
 
-      - uses: r0adkll/upload-google-play@v1.1.3
+      - uses: r0adkll/upload-google-play@v1
         continue-on-error: true
         with:
           serviceAccountJsonPlainText: ${{secrets.SERVICE_ACCOUNT_JSON}}
           packageName: openlierox.net
           releaseFiles: upload/*.aab
-          track: beta
+          tracks: beta
           #changesNotSentForReview: true
           status: completed
