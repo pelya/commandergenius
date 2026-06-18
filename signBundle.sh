@@ -25,6 +25,6 @@ cp -f app-releaseWithDebugInfo.aab ../../../../../../$APPNAME-$APPVER.aab || exi
 # Sign with the new certificate
 echo Using keystore $ANDROID_UPLOAD_KEYSTORE_FILE
 stty -echo
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $ANDROID_UPLOAD_KEYSTORE_FILE $PASS ../../../../../../$APPNAME-$APPVER.aab $ANDROID_UPLOAD_KEYSTORE_ALIAS || exit 1
+jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore $ANDROID_UPLOAD_KEYSTORE_FILE $PASS ../../../../../../$APPNAME-$APPVER.aab $ANDROID_UPLOAD_KEYSTORE_ALIAS || exit 1
 stty echo
 echo
