@@ -1,5 +1,5 @@
-*.o
-tmp-*
+/*.o
+/tmp-*
 /AndroidData/binaries-*
 /AndroidData/bin-map.zip
 /AndroidData/lib
