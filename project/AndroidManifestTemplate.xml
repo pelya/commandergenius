@@ -68,6 +68,7 @@
 	</application>
 
 	<!-- ==INTERNET== --> <uses-permission android:name="android.permission.INTERNET" />
+	<!-- ==INTERNET== --> <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
 	<!-- ==EXTERNAL_STORAGE== --> <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29" tools:ignore="ScopedStorage" />
 	<!-- ==EXTERNAL_STORAGE== --> <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 	<!-- ==EXTERNAL_STORAGE== --> <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
