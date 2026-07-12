@@ -4,13 +4,14 @@ CURDIR=`pwd`
 
 PACKAGE_NAME=`grep AppFullName AndroidAppSettings.cfg | sed 's/.*=//'`
 
-if [ -e pulseaudio/android-build.sh ]; then
-	[ -e pulseaudio/$1/install/bin/pulseaudio ] || {
-		cd pulseaudio
-		./android-build.sh || exit 1
-		cd ..
-	} || exit 1
-fi
+# Termux already includes it's own build of PulseAudio, so remove PulseAudio from XSDL
+#if [ -e pulseaudio/android-build.sh ]; then
+#	[ -e pulseaudio/$1/install/bin/pulseaudio ] || {
+#		cd pulseaudio
+#		./android-build.sh || exit 1
+#		cd ..
+#	} || exit 1
+#fi
 
 ../setEnvironment-$1.sh sh -c '\
 $CC $CFLAGS -Werror=format -c main.c -DXSDL_ARCH=\"'$1'\" -o main-'"$1.o" || exit 1
@@ -79,11 +80,12 @@ cp -f $CURDIR/xserver/data/busybox-$1 ./busybox
 for f in xhost xkbcomp xloadimage xsel; do cp -f $CURDIR/xserver/android/$1/$f ./$f ; done
 # Statically-linked prebuilt executables, generated using Debian chroot.
 
-cp -f $CURDIR/pulseaudio/$1/install/bin/pulseaudio ./
-cp -f $CURDIR/pulseaudio/$1/install/lib/*.so ./
-cp -f $CURDIR/pulseaudio/$1/install/lib/pulseaudio/*.so ./
-cp -f $CURDIR/pulseaudio/$1/install/lib/pulse-*/modules/*.so ./
-cp -f $CURDIR/pulseaudio/$1/*/install/lib/*.so ./
+# Termux already includes it's own build of PulseAudio, so remove PulseAudio from XSDL
+#cp -f $CURDIR/pulseaudio/$1/install/bin/pulseaudio ./
+#cp -f $CURDIR/pulseaudio/$1/install/lib/*.so ./
+#cp -f $CURDIR/pulseaudio/$1/install/lib/pulseaudio/*.so ./
+#cp -f $CURDIR/pulseaudio/$1/install/lib/pulse-*/modules/*.so ./
+#cp -f $CURDIR/pulseaudio/$1/*/install/lib/*.so ./
 cp -f $CURDIR/debian-image/proot-prebuilt/$1/* ./
 #cp -f $CURDIR/debian-image/dist-$1/* ./
 cp -f $CURDIR/debian-image/dist/proot.sh ./

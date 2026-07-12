@@ -826,8 +826,8 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 		sprintf(buf, "Display number: %d", port);
 		renderString(buf, VID_X/2, VID_Y * 3 / 6);
 
-		sprintf(buf, "PulseAudio: %s", *pulseAudio ? "Yes" : "No");
-		renderString(buf, VID_X/2, VID_Y * 4 / 6);
+		//sprintf(buf, "PulseAudio: %s", *pulseAudio ? "Yes" : "No");
+		//renderString(buf, VID_X/2, VID_Y * 4 / 6);
 
 		sprintf(buf, "Okay");
 		renderString(buf, VID_X/2, VID_Y * 5 / 6);
@@ -912,9 +912,9 @@ void XSDL_generateBackground(const char * port, int showHelp, int resolutionW, i
 				renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
 				strcat(clipboard, msg); strcat(clipboard, "\n");
 				y += resolutionH * 15 / VID_Y;
-				sprintf (msg, "export PULSE_SERVER=tcp:%s:4713", saddr);
-				renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
-				strcat(clipboard, msg); strcat(clipboard, "\n");
+				//sprintf (msg, "export PULSE_SERVER=tcp:%s:4713", saddr);
+				//renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+				//strcat(clipboard, msg); strcat(clipboard, "\n");
 				y += resolutionH * 15 / VID_Y;
 				sprintf (msg, "xfwm4 & firefox");
 				renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
@@ -939,8 +939,8 @@ void XSDL_generateBackground(const char * port, int showHelp, int resolutionW, i
 	sprintf (msg, "If you run Linux in chroot on this device, run:");
 	renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
 	y += resolutionH * 15 / VID_Y;
-	sprintf (msg, "export DISPLAY=:0 PULSE_SERVER=tcp:127.0.0.1:4713");
-	renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+	//sprintf (msg, "export DISPLAY=:0 PULSE_SERVER=tcp:127.0.0.1:4713");
+	//renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
 
 	SDL_SavePNG(surf, "background.png");
 	SDL_FreeSurface(surf);
