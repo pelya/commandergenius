@@ -76,7 +76,7 @@ os/.libs/libos.a \
 rm -rf $CURDIR/tmp-$1
 mkdir -p $CURDIR/tmp-$1
 cd $CURDIR/tmp-$1
-cp -f $CURDIR/xserver/data/busybox-$1 ./busybox
+cp -f $CURDIR/xserver/android/$1/busybox ./busybox
 for f in xhost xkbcomp xloadimage xsel; do cp -f $CURDIR/xserver/android/$1/$f ./$f ; done
 # Statically-linked prebuilt executables, generated using Debian chroot.
 
