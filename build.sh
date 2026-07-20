@@ -154,7 +154,7 @@ if $build_release ; then
 	../copyAssets.sh pack-binaries app/build/outputs/apk/release/app-release-unsigned.apk
 	rm -f app/build/outputs/apk/release/app-release.apk
 	if $do_zipalign; then
-		zipalign -p 4 app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/app-release.apk
+		zipalign -P 16 4 app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/app-release.apk
 		apksigner sign --ks ~/.android/debug.keystore --ks-key-alias androiddebugkey --ks-pass pass:android app/build/outputs/apk/release/app-release.apk
 	fi
 else
@@ -172,7 +172,7 @@ else
 	../copyAssets.sh pack-binaries app/build/outputs/apk/debug/app-debug.apk
 	rm -f app/build/outputs/apk/release/app-release.apk
 	if $do_zipalign; then
-		zipalign -p 4 app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/release/app-release.apk
+		zipalign -P 16 4 app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/release/app-release.apk
 		apksigner sign --ks ~/.android/debug.keystore --ks-key-alias androiddebugkey --ks-pass pass:android app/build/outputs/apk/release/app-release.apk
 	fi
 fi

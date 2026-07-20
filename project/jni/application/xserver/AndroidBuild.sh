@@ -4,6 +4,10 @@ CURDIR=`pwd`
 
 PACKAGE_NAME=`grep AppFullName AndroidAppSettings.cfg | sed 's/.*=//'`
 
+# Needed for undefined stderr symbol
+export APILEVEL=24
+
+
 # Termux already includes it's own build of PulseAudio, so remove PulseAudio from XSDL
 #if [ -e pulseaudio/android-build.sh ]; then
 #	[ -e pulseaudio/$1/install/bin/pulseaudio ] || {

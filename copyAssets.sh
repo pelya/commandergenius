@@ -20,7 +20,7 @@ if [ "$1" = "pack-binaries" -o "$1" = "pack-binaries-bundle" ]; then
 		zip -r -D "$APK" base || exit 1
 		rm -rf base
 	else
-		zip -r -D "$APK" lib || exit 1
+		zip -r -D -0 "$APK" lib || exit 1
 	fi
 	cd ../../../../
 	exit 0
