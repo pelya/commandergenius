@@ -379,7 +379,10 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 	enum { MODE_CUSTOM = 11 };
 	char native[32] = "0x0", native56[32], native46[32], native36[32], native26[32];
 	char custom[32] = "1000x1000";
-	int vertical = SDL_ListModes(NULL, 0)[0]->w < SDL_ListModes(NULL, 0)[0]->h;
+	int vertical = (SDL_ListModes(NULL, 0)[0]->w < SDL_ListModes(NULL, 0)[0]->h);
+	int newVertical = vertical;
+	int bpp24 = (SDL_GetVideoInfo()->vfmt->BitsPerPixel == 24);
+	int newBpp24 = bpp24;
 	char cfgpath[PATH_MAX];
 	FILE * cfgfile;
 	int okay = 0;
@@ -464,10 +467,8 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 			}
 		}
 		SDL_FillRect(SDL_GetVideoSurface(), NULL, 0);
-		y = VID_Y/4;
-		renderString("Tap the screen to change", vertical ? VID_Y / 2 : VID_X/2, y);
-		y += 30;
-		renderString("display resolution and font scale (DPI)", vertical ? VID_Y / 2 : VID_X/2, y);
+		y = VID_Y/8;
+		renderString("Tap the screen to change options", vertical ? VID_Y / 2 : VID_X/2, y);
 		char buf[100];
 		y += 30;
 		sprintf(buf, "Resolution: %s", resStr[savedRes]);
@@ -483,6 +484,12 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 		renderString(buf, vertical ? VID_Y / 2 : VID_X/2, y);
 		y += 30;
 		sprintf(buf, "Ctrl/Alt/Shift overlay: %s", *ctrlAltShiftKeys == 0 ? "No" : *ctrlAltShiftKeys == 1 ? "Yes, left side" : "Yes, right side");
+		renderString(buf, vertical ? VID_Y / 2 : VID_X/2, y);
+		y += 30;
+		sprintf(buf, "Orientation: %s", vertical ? "Portrait" : "Landscape");
+		renderString(buf, vertical ? VID_Y / 2 : VID_X/2, y);
+		y += 30;
+		sprintf(buf, "Color depth: %s bpp", bpp24 ? "24" : "16");
 		renderString(buf, vertical ? VID_Y / 2 : VID_X/2, y);
 		y += 40;
 		sprintf(buf, "Starting in %d seconds", counter / 1000 + 1);
@@ -702,17 +709,17 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 				break;
 				case SDL_MOUSEBUTTONUP:
 				{
+					int pos = y;
+					int maxpos = VID_Y;
 					if( vertical )
 					{
-						int z = x;
-						x = y;
-						y = z;
+						maxpos = VID_X;
 					}
-					if( y > 0 && y < VID_Y * 1.5f / 6 )
+					if( pos > 0 && pos < maxpos * 1.5f / 8 )
 					{
 						*builtinKeyboard = (*builtinKeyboard + 1) % 3;
 					}
-					if( y > VID_Y * 1.5f / 6 &&  y < VID_Y * 2.5f / 6 )
+					if( pos > maxpos * 1.5f / 8 && pos < maxpos * 2.5f / 8 )
 					{
 						*ctrlAltShiftKeys = *ctrlAltShiftKeys + 1;
 						if (*ctrlAltShiftKeys > 2)
@@ -720,12 +727,20 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 							*ctrlAltShiftKeys = 0;
 						}
 					}
-					if( y > VID_Y * 2.5f / 6 &&  y < VID_Y * 3.5f / 6 )
+					if( pos > maxpos * 2.5f / 8 && pos < maxpos * 3.5f / 8 )
 					{
 						port ++;
 						port %= 4;
 					}
-					if( y > VID_Y * 4.5 / 6 &&  y < VID_Y * 6 / 6 )
+					if( pos > maxpos * 3.5f / 8 && pos < maxpos * 4.5f / 8 )
+					{
+						newVertical = !newVertical;
+					}
+					if( pos > maxpos * 4.5f / 8 && pos < maxpos * 5.5f / 8 )
+					{
+						newBpp24 = !newBpp24;
+					}
+					if( pos > maxpos * 6.5 / 8 && pos < maxpos * 8 / 8 )
 					{
 						okay = 1;
 					}
@@ -757,16 +772,20 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 		char buf[100];
 
 		sprintf(buf, "Keyboard: %s", *builtinKeyboard == 0 ? "System" : *builtinKeyboard == 1 ? "Builtin QWERTY" : "System + Builtin");
-		renderString(buf, VID_X/2, VID_Y * 1 / 6);
+		renderString(buf, (vertical ? VID_Y : VID_X)/2, (vertical ? VID_X : VID_Y) * 1 / 8);
 
 		sprintf(buf, "Ctrl/Alt/Shift overlay: %s", *ctrlAltShiftKeys == 0 ? "No" : *ctrlAltShiftKeys == 1 ? "Yes, left side" : "Yes, right side");
-		renderString(buf, VID_X/2, VID_Y * 2 / 6);
+		renderString(buf, (vertical ? VID_Y : VID_X)/2, (vertical ? VID_X : VID_Y) * 2 / 8);
 
 		sprintf(buf, "Display number: %d", port);
-		renderString(buf, VID_X/2, VID_Y * 3 / 6);
+		renderString(buf, (vertical ? VID_Y : VID_X)/2, (vertical ? VID_X : VID_Y) * 3 / 8);
+		sprintf(buf, "Screen orientation: %s", newVertical ? "Portrait" : "Landscape");
+		renderString(buf, (vertical ? VID_Y : VID_X)/2, (vertical ? VID_X : VID_Y) * 4 / 8);
+		sprintf(buf, "Color depth: %s bpp", newBpp24 ? "24" : "16");
+		renderString(buf, (vertical ? VID_Y : VID_X)/2, (vertical ? VID_X : VID_Y) * 5 / 8);
 
 		sprintf(buf, "Okay");
-		renderString(buf, VID_X/2, VID_Y * 5 / 6);
+		renderString(buf, (vertical ? VID_Y : VID_X)/2, (vertical ? VID_X : VID_Y) * 7 / 8);
 
 		renderString("∆", x, y);
 		SDL_Delay(50);
@@ -785,6 +804,12 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 		}
 	}
 	sprintf(portStr, ":%d", port);
+	if( vertical != newVertical || bpp24 != newBpp24 )
+	{
+		SDL_ANDROID_SetConfigOption(SDL_ANDROID_CONFIG_VIDEO_DEPTH_BPP, newBpp24 ? 24 : 16);
+		SDL_ANDROID_SetConfigOption(SDL_ANDROID_CONFIG_VIDEO_ORIENTATION_PORTRAIT, newVertical);
+		exit(0);
+	}
 }
 
 void XSDL_generateBackground(const char * port, int showHelp, int resolutionW, int resolutionH)

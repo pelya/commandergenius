@@ -938,6 +938,7 @@ public class Settings
 	}
 
 	static final int SDL_ANDROID_CONFIG_VIDEO_DEPTH_BPP = 0;
+	static final int SDL_ANDROID_CONFIG_VIDEO_ORIENTATION_PORTRAIT = 1;
 
 	public static void setConfigOptionFromSDL(int option, int value)
 	{
@@ -945,6 +946,9 @@ public class Settings
 		{
 			case SDL_ANDROID_CONFIG_VIDEO_DEPTH_BPP:
 				Globals.VideoDepthBpp = value;
+				break;
+			case SDL_ANDROID_CONFIG_VIDEO_ORIENTATION_PORTRAIT:
+				Globals.HorizontalOrientation = (value == 0);
 				break;
 			default:
 				Log.e("SDL", "setConfigOptionFromSDL: cannot find option with ID " + option + ", value " + value);
