@@ -1,1 +1,0 @@
-../xserver/AndroidBuild.sh
