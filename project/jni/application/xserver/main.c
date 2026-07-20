@@ -22,7 +22,6 @@ static void retryLaunchWithDifferentPort(void);
 static void showError(void);
 static void setupEnv(void);
 static char port[16] = ":0";
-static void startPulseAudio(void);
 
 int main( int argc, char* argv[] )
 {
@@ -61,8 +60,6 @@ int main( int argc, char* argv[] )
 	int displayW = atoi(getenv("DISPLAY_WIDTH_MM"));
 	int displayH = atoi(getenv("DISPLAY_HEIGHT_MM"));
 
-	int pulseAudio = 1;
-
 	__android_log_print(ANDROID_LOG_INFO, "XSDL", "Actual video resolution %d/%dx%d/%d", resolutionW, displayW, resolutionH, displayH);
 	setupEnv();
 
@@ -89,7 +86,7 @@ int main( int argc, char* argv[] )
 		}
 		else if( strcmp(argv[1], "-screenbuttons") == 0 )
 		{
-			screenButtons = 0;
+			screenButtons = 1;
 		}
 		else if( strcmp(argv[1], "-warndiskspacemb") == 0 && argc > 2 )
 		{
@@ -127,7 +124,7 @@ int main( int argc, char* argv[] )
 
 	if( !screenResOverride )
 	{
-		XSDL_showConfigMenu(&resolutionW, &displayW, &resolutionH, &displayH, &builtinKeyboard, &screenButtons, port, &pulseAudio);
+		XSDL_showConfigMenu(&resolutionW, &displayW, &resolutionH, &displayH, &builtinKeyboard, &screenButtons, port);
 		sprintf( screenres, "%d/%dx%d/%dx%d", resolutionW, displayW, resolutionH, displayH,
 					SDL_GetVideoInfo()->vfmt->BitsPerPixel == 24 ? 32 : SDL_GetVideoInfo()->vfmt->BitsPerPixel );
 	}
@@ -179,9 +176,6 @@ int main( int argc, char* argv[] )
 	__android_log_print(ANDROID_LOG_INFO, "XSDL", "XSDL chdir to: %s", getenv("SECURE_STORAGE_DIR"));
 	chdir( getenv("SECURE_STORAGE_DIR") ); // Megahack: change /proc/self/cwd to the X.org data dir, and use /proc/self/cwd path in libX11
 
-	if( pulseAudio )
-		startPulseAudio();
-
 	android_main( argnum, args, envp ); // Should never exit on success, if we want to terminate we kill ourselves
 
 	return 0;
@@ -217,30 +211,4 @@ void showError(void)
 	XSDL_initSDL();
 	XSDL_showServerLaunchErrorMessage();
 	XSDL_deinitSDL();
-}
-
-static void *pulseThread(void *param)
-{
-	char pulseCmd[PATH_MAX * 7] = "";
-	sprintf(pulseCmd, "HOME=%s TMPDIR=%s LD_LIBRARY_PATH=%s/usr/bin "
-						"logwrapper %s/usr/bin/pulseaudio --disable-shm -n -F %s/pulseaudio.conf "
-						"--dl-search-path=%s/usr/bin --daemonize=false --use-pid-file=false "
-						"--log-target=stderr --log-level=debug",
-						getenv("SECURE_STORAGE_DIR"), getenv("SECURE_STORAGE_DIR"),
-						getenv("SECURE_STORAGE_DIR"), getenv("SECURE_STORAGE_DIR"),
-						getenv("SECURE_STORAGE_DIR"), getenv("SECURE_STORAGE_DIR"));
-	while( 1 )
-	{
-		__android_log_print(ANDROID_LOG_INFO, "XSDL", "Starting Pulseaudio");
-		__android_log_print(ANDROID_LOG_INFO, "XSDL", "%s", pulseCmd);
-		system(pulseCmd);
-		sleep(5);
-	}
-	return NULL;
-}
-
-void startPulseAudio(void)
-{
-	pthread_t threadId;
-	pthread_create(&threadId, NULL, &pulseThread, NULL);
 }

@@ -23,9 +23,6 @@
 static TTF_Font* sFont;
 
 static int unpackFinished = 0;
-enum { UPGRADE_WARNING_NONE, UPGRADE_WARNING_ASK, UPGRADE_WARNING_PROCEED, UPGRADE_WARNING_CANCEL };
-// Mutex here would be nice, but I'm lazy and don't care
-static int upgradeWarning = UPGRADE_WARNING_NONE;
 static char unpackLog[4][256];
 static int freeSpaceRequiredMb = 0;
 
@@ -84,15 +81,6 @@ static int unpackFiles(const char *archive, const char *script, const char *dele
 	if( strlen(deleteOldDataMarkerFile) > 0 && stat( fname2, &st ) == 0 )
 	{
 		__android_log_print(ANDROID_LOG_INFO, "XSDL", "Upgrade detected, showing warning dialog");
-		//upgradeWarning = UPGRADE_WARNING_PROCEED;
-		upgradeWarning = UPGRADE_WARNING_CANCEL;
-		/*
-		upgradeWarning = UPGRADE_WARNING_ASK;
-		while( upgradeWarning == UPGRADE_WARNING_ASK )
-			SDL_Delay(200);
-		*/
-		if( upgradeWarning == UPGRADE_WARNING_CANCEL )
-			return 1;
 		__android_log_print(ANDROID_LOG_INFO, "XSDL", "Deleting old installation...");
 		sprintf(unpackLog[0], "Deleting old installation...");
 
@@ -370,51 +358,6 @@ void XSDL_unpackFiles(int _freeSpaceRequiredMb)
 		renderString("Unpacking data ...", VID_X/2, VID_Y*7/8);
 		SDL_Flip(SDL_GetVideoSurface());
 		int x = 0, y = 0;
-		while( upgradeWarning == UPGRADE_WARNING_ASK )
-		{
-			SDL_Delay(100);
-			SDL_FillRect(SDL_GetVideoSurface(), NULL, 0);
-			char s[PATH_MAX];
-			sprintf(s, "New update available for %s", getenv("ANDROID_APP_NAME"));
-			renderString(s, VID_X/2, VID_Y*2/8);
-			sprintf(s, "Please move all your %s files to SD card", getenv("ANDROID_APP_NAME"));
-			renderString(s, VID_X/2, VID_Y*3/8);
-			renderString("or they will be deleted during upgrade", VID_X/2, VID_Y*4/8);
-
-			renderString("――――――――――――――――――――",  VID_X/4, VID_Y*11/16);
-			renderString("|                   |", VID_X/4, VID_Y*45/64);
-			renderString("|                   |", VID_X/4, VID_Y*48/64);
-			renderString("|                   |", VID_X/4, VID_Y*101/128);
-			renderString("――――――――――――――――――――",  VID_X/4, VID_Y*13/16);
-			renderString("Install now",           VID_X/4, VID_Y*6/8);
-
-			renderString("――――――――――――――――――――",  VID_X*3/4, VID_Y*11/16);
-			renderString("|                   |", VID_X*3/4, VID_Y*45/64);
-			renderString("|                   |", VID_X*3/4, VID_Y*48/64);
-			renderString("|                   |", VID_X*3/4, VID_Y*101/128);
-			renderString("――――――――――――――――――――",  VID_X*3/4, VID_Y*13/16);
-			renderString("Install later",         VID_X*3/4, VID_Y*6/8);
-			SDL_Event event;
-			while (SDL_PollEvent(&event))
-			{
-				switch (event.type)
-				{
-					case SDL_KEYDOWN:
-						if (event.key.keysym.sym == SDLK_HELP)
-							upgradeWarning = UPGRADE_WARNING_CANCEL;
-					break;
-					case SDL_MOUSEBUTTONUP:
-						if( y > VID_Y*5/8 && y < VID_Y*7/8 )
-							upgradeWarning = (x > VID_X/2) ? UPGRADE_WARNING_CANCEL : UPGRADE_WARNING_PROCEED;
-					break;
-					case SDL_JOYBALLMOTION:
-						x = event.jball.xrel;
-						y = event.jball.yrel;
-					break;
-				}
-			}
-			SDL_Flip(SDL_GetVideoSurface());
-		}
 	}
 
 	pthread_join(thread_id, &status);
@@ -426,7 +369,7 @@ void XSDL_unpackFiles(int _freeSpaceRequiredMb)
 	SDL_JoystickClose(j0);
 }
 
-void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, int * displayH, int * builtinKeyboard, int * ctrlAltShiftKeys, char * portStr, int * pulseAudio)
+void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, int * displayH, int * builtinKeyboard, int * ctrlAltShiftKeys, char * portStr)
 {
 	int x = 0, y = 0, i, ii;
 	SDL_Event event;
@@ -493,7 +436,7 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 	cfgfile = fopen(cfgpath, "r");
 	if( cfgfile )
 	{
-		fscanf(cfgfile, "%d %d %d %d %d %d %d %d", &savedRes, &savedDpi, &customX, &customY, builtinKeyboard, ctrlAltShiftKeys, &port, pulseAudio);
+		fscanf(cfgfile, "%d %d %d %d %d %d %d", &savedRes, &savedDpi, &customX, &customY, builtinKeyboard, ctrlAltShiftKeys, &port);
 		fclose(cfgfile);
 		if (strcmp(portStr, ":0") != 0)
 		{
@@ -782,10 +725,6 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 						port ++;
 						port %= 4;
 					}
-					if( y > VID_Y * 3.5f / 6 &&  y < VID_Y * 4.5f / 6 )
-					{
-						*pulseAudio = !(*pulseAudio);
-					}
 					if( y > VID_Y * 4.5 / 6 &&  y < VID_Y * 6 / 6 )
 					{
 						okay = 1;
@@ -826,9 +765,6 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 		sprintf(buf, "Display number: %d", port);
 		renderString(buf, VID_X/2, VID_Y * 3 / 6);
 
-		//sprintf(buf, "PulseAudio: %s", *pulseAudio ? "Yes" : "No");
-		//renderString(buf, VID_X/2, VID_Y * 4 / 6);
-
 		sprintf(buf, "Okay");
 		renderString(buf, VID_X/2, VID_Y * 5 / 6);
 
@@ -844,7 +780,7 @@ void XSDL_showConfigMenu(int * resolutionW, int * displayW, int * resolutionH, i
 		cfgfile = fopen(cfgpath, "w");
 		if( cfgfile )
 		{
-			fprintf(cfgfile, "%d %d %d %d %d %d %d %d\n", res, dpi, customX, customY, *builtinKeyboard, *ctrlAltShiftKeys, port, *pulseAudio);
+			fprintf(cfgfile, "%d %d %d %d %d %d %d\n", res, dpi, customX, customY, *builtinKeyboard, *ctrlAltShiftKeys, port);
 			fclose(cfgfile);
 		}
 	}
@@ -912,14 +848,11 @@ void XSDL_generateBackground(const char * port, int showHelp, int resolutionW, i
 				renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
 				strcat(clipboard, msg); strcat(clipboard, "\n");
 				y += resolutionH * 15 / VID_Y;
-				//sprintf (msg, "export PULSE_SERVER=tcp:%s:4713", saddr);
-				//renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
-				//strcat(clipboard, msg); strcat(clipboard, "\n");
-				y += resolutionH * 15 / VID_Y;
 				sprintf (msg, "xfwm4 & firefox");
 				renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
 				strcat(clipboard, msg); strcat(clipboard, "\n");
-				y += resolutionH * 20 / VID_Y;
+				y += resolutionH * 15 / VID_Y;
+				y += resolutionH * 15 / VID_Y;
 			}
 		}
 
@@ -936,11 +869,15 @@ void XSDL_generateBackground(const char * port, int showHelp, int resolutionW, i
 	renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
 
 	y += resolutionH * 20 / VID_Y;
-	sprintf (msg, "If you run Linux in chroot on this device, run:");
+	sprintf (msg, "If you run Termux or Linux in chroot on this device, run:");
 	renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
 	y += resolutionH * 15 / VID_Y;
-	//sprintf (msg, "export DISPLAY=:0 PULSE_SERVER=tcp:127.0.0.1:4713");
-	//renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+	y += resolutionH * 15 / VID_Y;
+	sprintf (msg, "export DISPLAY=:0");
+	renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+	y += resolutionH * 15 / VID_Y;
+	sprintf (msg, "dbus-launch --exit-with-session xfce4-session");
+	renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
 
 	SDL_SavePNG(surf, "background.png");
 	SDL_FreeSurface(surf);

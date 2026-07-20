@@ -33,7 +33,7 @@ android {
 
     packagingOptions {
         jniLibs {
-            useLegacyPackaging false
+            useLegacyPackaging true // ==EXTRACT_NATIVE_LIBS==
         }
     }
 

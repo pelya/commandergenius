@@ -447,6 +447,9 @@ CompiledLibraries="$CompiledLibraries"
 # Application uses custom build script AndroidBuild.sh instead of Android.mk (y) or (n)
 CustomBuildScript=$CustomBuildScript
 
+# Extract native libraries when installing .apk - required if you package executables or other binaries as shared libraries
+ExtractNativeLibs=$ExtractNativeLibs
+
 # Aditional CFLAGS for application
 AppCflags='$AppCflags'
 
@@ -919,6 +922,10 @@ cat project/app/build-template.gradle | \
 	sed 's/namespace .*/namespace '"'"${AppFullName}"'"'/' | \
 	sed 's/ndkVersion .*/ndkVersion "'"${NDK_VER}"'"/' > \
 	project/app/build.gradle
+
+if [ "$ExtractNativeLibs" != "y" ]; then
+	$SEDI "/==EXTRACT_NATIVE_LIBS==/ d" project/app/build.gradle
+fi
 
 echo "-keep class $AppFullName.** { *; }" > project/proguard-local.cfg
 
