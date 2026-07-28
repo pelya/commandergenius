@@ -91,9 +91,9 @@ mkdir -p ../AndroidData/lib/$1
 rm -r bin-map-$1.txt
 IDX=0
 for BIN in *; do
-	echo "lib$IDX.so" >> bin-map-$1.txt
+	echo "libxserver$IDX.so" >> bin-map-$1.txt
 	echo "$BIN" >> bin-map-$1.txt
-	cp ./$BIN ../AndroidData/lib/$1/lib$IDX.so
+	cp ./$BIN ../AndroidData/lib/$1/libxserver$IDX.so
 	IDX="`expr $IDX \+ 1`"
 done
 
