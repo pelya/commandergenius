@@ -84,19 +84,6 @@ cp -f $CURDIR/xserver/android/$1/busybox ./busybox
 for f in xhost xkbcomp xloadimage xsel; do cp -f $CURDIR/xserver/android/$1/$f ./$f ; done
 # Statically-linked prebuilt executables, generated using Debian chroot.
 
-# Termux already includes it's own build of PulseAudio, so remove PulseAudio from XSDL
-#cp -f $CURDIR/pulseaudio/$1/install/bin/pulseaudio ./
-#cp -f $CURDIR/pulseaudio/$1/install/lib/*.so ./
-#cp -f $CURDIR/pulseaudio/$1/install/lib/pulseaudio/*.so ./
-#cp -f $CURDIR/pulseaudio/$1/install/lib/pulse-*/modules/*.so ./
-#cp -f $CURDIR/pulseaudio/$1/*/install/lib/*.so ./
-cp -f $CURDIR/debian-image/proot-prebuilt/$1/* ./
-#cp -f $CURDIR/debian-image/dist-$1/* ./
-cp -f $CURDIR/debian-image/dist/proot.sh ./
-cp -f $CURDIR/debian-image/dist/postinstall-img.sh ./
-cp -f $CURDIR/AndroidData/postinstall.sh ./
-cp -f $CURDIR/AndroidData/start-debian.sh ./
-
 rm -f ../AndroidData/binaries-$1.zip
 rm -rf ../AndroidData/lib/$1
 mkdir -p ../AndroidData/lib/$1
