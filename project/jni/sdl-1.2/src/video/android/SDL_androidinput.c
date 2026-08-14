@@ -1959,6 +1959,7 @@ JAVA_EXPORT_NAME(DemoGLSurfaceView_nativeScreenVisibleRect) (JNIEnv* env, jobjec
 	SDL_ANDROID_ScreenVisibleRect.y = y;
 	SDL_ANDROID_ScreenVisibleRect.w = w;
 	SDL_ANDROID_ScreenVisibleRect.h = h;
+	__android_log_print(ANDROID_LOG_INFO, "libSDL", "nativeScreenVisibleRect: %d:%d:%d:%d", x, y, w, h);
 
 	if( SDL_WasInit(SDL_INIT_VIDEO) )
 	{

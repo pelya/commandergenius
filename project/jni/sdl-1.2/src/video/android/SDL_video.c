@@ -2846,9 +2846,9 @@ SDL_RenderCopy(SDL_Texture * texture, const SDL_Rect * srcrect,
         real_dstrect.y += renderer->window->y;
         real_dstrect.w -= renderer->window->x;
         real_dstrect.h -= renderer->window->y;
-        __android_log_print(ANDROID_LOG_INFO, "libSDL", "SDL_RenderCopy src %d:%d:%d:%d dst %d:%d:%d:%d realWH %d:%d",
-            (int)real_srcrect.x, (int)real_srcrect.y, (int)real_srcrect.w, (int)real_srcrect.h,
-            (int)real_dstrect.x, (int)real_dstrect.y, (int)real_dstrect.w, (int)real_dstrect.h, (int)realW, (int)realH);
+        //__android_log_print(ANDROID_LOG_INFO, "libSDL", "SDL_RenderCopy src %d:%d:%d:%d dst %d:%d:%d:%d realWH %d:%d",
+        //    (int)real_srcrect.x, (int)real_srcrect.y, (int)real_srcrect.w, (int)real_srcrect.h,
+        //    (int)real_dstrect.x, (int)real_dstrect.y, (int)real_dstrect.w, (int)real_dstrect.h, (int)realW, (int)realH);
     }
 #endif
 

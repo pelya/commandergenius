@@ -1063,8 +1063,8 @@ static void ANDROID_FlipHWSurfaceInternal(int numrects, SDL_Rect *rects)
 			srcrect.x = MAX(0, MIN(rect.w - srcrect.w, srcrect.x));
 			srcrect.y = MAX(0, MIN(rect.h - srcrect.h, srcrect.y));
 
-			__android_log_print(ANDROID_LOG_INFO, "SDL", "SDL_Flip: %04d:%04d:%04d:%04d -> %04d:%04d:%04d:%04d mouse %04d:%04d",
-				srcrect.x, srcrect.y, srcrect.w, srcrect.h, dstrect.x, dstrect.y, dstrect.w, dstrect.h, x, y);
+			//__android_log_print(ANDROID_LOG_INFO, "SDL", "SDL_Flip: %04d:%04d:%04d:%04d -> %04d:%04d:%04d:%04d mouse %04d:%04d",
+			//	srcrect.x, srcrect.y, srcrect.w, srcrect.h, dstrect.x, dstrect.y, dstrect.w, dstrect.h, x, y);
 			SDL_RenderCopy((struct SDL_Texture *)SDL_CurrentVideoSurface->hwdata, &srcrect, &dstrect);
 		}
 		else if( !SDL_ANDROID_SystemBarAndKeyboardShown )

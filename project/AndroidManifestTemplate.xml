@@ -18,7 +18,7 @@
 				  android:alwaysRetainTaskState="true"
 				  android:launchMode="singleTask"
 				  android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
-				  android:windowSoftInputMode="stateUnspecified"
+				  android:windowSoftInputMode="stateUnchanged|adjustResize"
 				  android:theme="@style/AppTheme"
 				  android:exported="true"
 		>
