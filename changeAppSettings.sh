@@ -294,6 +294,9 @@ ShowMouseCursor=$ShowMouseCursor
 # Screen follows mouse cursor, when it's covered by soft keyboard, this works only in software video mode (y) or (n)
 ScreenFollowsMouse=$ScreenFollowsMouse
 
+# Pinch-zoom gesture will zoom the whole screen centered on mouse cursor, this works only in software video mode (y) or (n)
+ScreenPinchZoom=$ScreenPinchZoom
+
 # Generate more touch events, by default SDL generates one event per one video frame, this is useful for drawing apps (y) or (n)
 GenerateSubframeTouchEvents=$GenerateSubframeTouchEvents
 
@@ -649,6 +652,12 @@ if [ "$ScreenFollowsMouse" = "y" ] ; then
 	ScreenFollowsMouse=true
 else
 	ScreenFollowsMouse=false
+fi
+
+if [ "$ScreenPinchZoom" = "y" ] ; then
+	ScreenPinchZoom=true
+else
+	ScreenPinchZoom=false
 fi
 
 if [ "$GenerateSubframeTouchEvents" = "y" ] ; then
@@ -1051,6 +1060,7 @@ $SEDI "s/public static boolean RightMouseButtonLongPress = .*;/public static boo
 $SEDI "s/public static boolean ForceRelativeMouseMode = .*;/public static boolean ForceRelativeMouseMode = $ForceRelativeMouseMode;/" project/src/Globals.java
 $SEDI "s/public static boolean ShowMouseCursor = .*;/public static boolean ShowMouseCursor = $ShowMouseCursor;/" project/src/Globals.java
 $SEDI "s/public static boolean ScreenFollowsMouse = .*;/public static boolean ScreenFollowsMouse = $ScreenFollowsMouse;/" project/src/Globals.java
+$SEDI "s/public static boolean ScreenPinchZoom = .*;/public static boolean ScreenPinchZoom = $ScreenPinchZoom;/" project/src/Globals.java
 $SEDI "s/public static boolean GenerateSubframeTouchEvents = .*;/public static boolean GenerateSubframeTouchEvents = $GenerateSubframeTouchEvents;/" project/src/Globals.java
 $SEDI "s/public static boolean AppNeedsArrowKeys = .*;/public static boolean AppNeedsArrowKeys = $AppNeedsArrowKeys;/" project/src/Globals.java
 $SEDI "s/public static boolean FloatingScreenJoystick = .*;/public static boolean FloatingScreenJoystick = $FloatingScreenJoystick;/" project/src/Globals.java

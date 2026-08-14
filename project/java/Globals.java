@@ -62,6 +62,7 @@ class Globals
 	public static boolean ForceRelativeMouseMode = false; // If both on-screen keyboard and mouse are needed, this will only set the default setting, user may override it later
 	public static boolean ShowMouseCursor = false; // Draw system mouse cursor, if the app does not do it
 	public static boolean ScreenFollowsMouse = false; // Move app screen make mouse cursor always visible, when soft keyboard is shown
+	public static boolean ScreenPinchZoom = false; // Pinch-zoom gesture will zoom the whole screen centered on mouse cursor
 	public static boolean AppNeedsArrowKeys = true;
 	public static boolean AppNeedsTextInput = true;
 	public static boolean AppUsesJoystick = false;

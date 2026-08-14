@@ -36,8 +36,6 @@ If you compile this code with SDL 1.3 or newer, or use in some other way, the li
 
 //#define VIDEO_DEBUG 1
 
-enum ScreenZoom { ZOOM_NONE = 0, ZOOM_MAGNIFIER = 1 };
-
 extern int SDL_ANDROID_sWindowWidth;
 extern int SDL_ANDROID_sWindowHeight;
 extern int SDL_ANDROID_sRealWindowWidth;
@@ -63,8 +61,17 @@ extern int SDL_ANDROID_TextInputFinished;
 extern SDL_Surface *SDL_CurrentVideoSurface;
 extern SDL_Rect SDL_ANDROID_ForceClearScreenRect[];
 extern int SDL_ANDROID_ForceClearScreenRectAmount;
+
+// Small zoom window near the finger
+enum ScreenZoom { ZOOM_NONE = 0, ZOOM_MAGNIFIER = 1 };
 extern int SDL_ANDROID_ShowScreenUnderFinger;
 extern SDL_Rect SDL_ANDROID_ShowScreenUnderFingerRect, SDL_ANDROID_ShowScreenUnderFingerRectSrc;
+
+// Full-screen zoom centered on mouse cursor
+enum { SDL_ANDROID_PINCH_ZOOM_STEPS = 11 };
+extern const float SDL_ANDROID_PinchZoomRatios[SDL_ANDROID_PINCH_ZOOM_STEPS];
+extern int SDL_ANDROID_PinchZoomStep;
+
 extern int SDL_ANDROID_CallJavaSwapBuffers();
 extern void SDL_ANDROID_CallJavaShowScreenKeyboard(const char * oldText, char * outBuf, int outBufLen, int async);
 extern void SDL_ANDROID_CallJavaHideScreenKeyboard();

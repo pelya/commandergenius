@@ -67,6 +67,38 @@ int SDL_ANDROID_ScreenKeep43Ratio = 0;
 SDL_Rect SDL_ANDROID_ForceClearScreenRect[4] = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
 int SDL_ANDROID_ForceClearScreenRectAmount = 0;
 
+/*
+Generate pretty-looking zoom ratios using this piece of Python:
+
+import math
+from fractions import Fraction
+
+step = 3/4
+denom_limit = 50
+
+for i in range(11):
+    r = math.pow(step, i)
+    f = Fraction.from_float(r).limit_denominator(denom_limit)
+    print(f"{i}: {r} ≈ {f} = {f:f} Δ = {r - f:f}")
+*/
+
+const float SDL_ANDROID_PinchZoomRatios[SDL_ANDROID_PINCH_ZOOM_STEPS] =
+{
+	1.f,
+	3/4.f,
+	9/16.f,
+	19/45.f,
+	6/19.f,
+	9/38.f,
+	8/45.f,
+	2/15.f,
+	1/10.f,
+	3/40.f,
+	1/18.f,
+};
+
+int SDL_ANDROID_PinchZoomStep = 0;
+
 // Extremely wicked JNI environment to call Java functions from C code
 static jclass JavaRendererClass = NULL;
 static jobject JavaRenderer = NULL;

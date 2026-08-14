@@ -153,6 +153,7 @@ int SDL_ANDROID_currentMouseX = 0;
 int SDL_ANDROID_currentMouseY = 0;
 int SDL_ANDROID_currentMouseButtons = 0;
 int screenFollowsMouse = 0;
+int screenPinchZoom = 0;
 int SDL_ANDROID_SystemBarAndKeyboardShown;
 
 static int hardwareMouseDetected = 0;
@@ -378,6 +379,11 @@ static void ProcessMultitouchGesture( int x, int y, int action, int pointerId )
 					multitouchGestureDist += distMaxDiff;
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, multitouchGestureKeycode[0], 0, 1 );
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, multitouchGestureKeycode[0], 0, 1 );
+					if( screenPinchZoom )
+					{
+						SDL_ANDROID_PinchZoomStep++;
+						SDL_ANDROID_PinchZoomStep = MIN(SDL_ANDROID_PinchZoomStep, SDL_ANDROID_PINCH_ZOOM_STEPS - 1);
+					}
 				}
 				if( multitouchGestureDist - dist > distMaxDiff )
 				{
@@ -385,6 +391,11 @@ static void ProcessMultitouchGesture( int x, int y, int action, int pointerId )
 					multitouchGestureDist -= distMaxDiff;
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, multitouchGestureKeycode[1], 0, 1 );
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, multitouchGestureKeycode[1], 0, 1 );
+					if( screenPinchZoom )
+					{
+						SDL_ANDROID_PinchZoomStep--;
+						SDL_ANDROID_PinchZoomStep = MAX(SDL_ANDROID_PinchZoomStep, 0);
+					}
 				}
 
 				int angleDiff = angle - multitouchGestureAngle;
@@ -1160,7 +1171,8 @@ JAVA_EXPORT_NAME(Settings_nativeSetMouseUsed) (JNIEnv* env, jobject thiz,
 		jint RelativeMovement, jint RelativeMovementSpeed, jint RelativeMovementAccel,
 		jint ShowMouseCursor, jint HoverJitterFilter, jint RightMouseButtonLongPress,
 		jint MoveMouseWithGyroscope, jint MoveMouseWithGyroscopeSpeed,
-		jint ForceScreenUpdateMouseClick, jint ScreenFollowsMouse)
+		jint ForceScreenUpdateMouseClick, jint ScreenFollowsMouse,
+		jint ScreenPinchZoom)
 {
 	SDL_ANDROID_isMouseUsed = 1;
 	rightClickMethod = RightClickMethod;
@@ -1187,6 +1199,7 @@ JAVA_EXPORT_NAME(Settings_nativeSetMouseUsed) (JNIEnv* env, jobject thiz,
 	moveMouseWithGyroscopeSpeed *= 5.0f;
 	forceScreenUpdateMouseClick = ForceScreenUpdateMouseClick;
 	screenFollowsMouse = ScreenFollowsMouse;
+	screenPinchZoom = ScreenPinchZoom;
 	//__android_log_print(ANDROID_LOG_INFO, "libSDL", "moveMouseWithGyroscopeSpeed %d = %f", MoveMouseWithGyroscopeSpeed, moveMouseWithGyroscopeSpeed);
 	if( !mouseClickTimeoutInitialized && (
 		leftClickMethod == LEFT_CLICK_WITH_TAP ||

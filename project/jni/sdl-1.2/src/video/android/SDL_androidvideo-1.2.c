@@ -41,6 +41,7 @@ If you compile this code with SDL 1.3 or newer, or use in some other way, the li
 #include "SDL_surface.h"
 #include "SDL_androidvideo.h"
 #include "SDL_androidinput.h"
+#include "atan2i.h"
 
 #include <jni.h>
 #include <android/log.h>
@@ -1013,7 +1014,9 @@ static void ANDROID_FlipHWSurfaceInternal(int numrects, SDL_Rect *rects)
 		rect.w = SDL_CurrentVideoSurface->w;
 		rect.h = SDL_CurrentVideoSurface->h;
 		if(numrects == 0)
+		{
 			SDL_UpdateTexture((struct SDL_Texture *)SDL_CurrentVideoSurface->hwdata, &rect, SDL_CurrentVideoSurface->pixels, SDL_CurrentVideoSurface->pitch);
+		}
 		else
 		{
 			int i;
@@ -1027,8 +1030,47 @@ static void ANDROID_FlipHWSurfaceInternal(int numrects, SDL_Rect *rects)
 			}
 		}
 
-		if( !SDL_ANDROID_SystemBarAndKeyboardShown )
+		if( SDL_ANDROID_PinchZoomStep > 0 )
+		{
+			int x, y;
+			SDL_Rect srcrect;
+			SDL_Rect dstrect = rect;
+			SDL_GetMouseState(&x, &y); // Follow mouse pointer location
+
+			srcrect.w = roundf(rect.w * SDL_ANDROID_PinchZoomRatios[SDL_ANDROID_PinchZoomStep]);
+			srcrect.h = roundf(rect.h * SDL_ANDROID_PinchZoomRatios[SDL_ANDROID_PinchZoomStep]);
+
+ 			if( SDL_ANDROID_SystemBarAndKeyboardShown )
+			{
+				// TODO: this will squish target image vertically
+				dstrect.w = SDL_ANDROID_ScreenVisibleRect.w * SDL_ANDROID_sFakeWindowWidth / SDL_ANDROID_sRealWindowWidth;
+				dstrect.h = SDL_ANDROID_ScreenVisibleRect.h * SDL_ANDROID_sFakeWindowHeight / SDL_ANDROID_sRealWindowHeight;
+				// Adjust srcrect size so the output image won't be squished vertgically
+				srcrect.w = srcrect.w * dstrect.w / rect.w;
+				srcrect.h = srcrect.h * dstrect.h / rect.h;
+				// Mouse at the center of the screen
+				srcrect.x = x - srcrect.w / 2;
+				srcrect.y = y - srcrect.h / 2;
+			}
+			else
+			{
+				// Mouse stays at the same position on the screen when the screen is zoomed
+				srcrect.x = x - x * srcrect.w / rect.w;
+				srcrect.y = y - y * srcrect.h / rect.h;
+			}
+
+			// Clamp srcrect so it won't move past the edge of the video surface
+			srcrect.x = MAX(0, MIN(rect.w - srcrect.w, srcrect.x));
+			srcrect.y = MAX(0, MIN(rect.h - srcrect.h, srcrect.y));
+
+			__android_log_print(ANDROID_LOG_INFO, "SDL", "SDL_Flip: %04d:%04d:%04d:%04d -> %04d:%04d:%04d:%04d mouse %04d:%04d",
+				srcrect.x, srcrect.y, srcrect.w, srcrect.h, dstrect.x, dstrect.y, dstrect.w, dstrect.h, x, y);
+			SDL_RenderCopy((struct SDL_Texture *)SDL_CurrentVideoSurface->hwdata, &srcrect, &dstrect);
+		}
+		else if( !SDL_ANDROID_SystemBarAndKeyboardShown )
+		{
 			SDL_RenderCopy((struct SDL_Texture *)SDL_CurrentVideoSurface->hwdata, &rect, &rect);
+		}
 		else
 		{
 			int x, y;
@@ -1050,7 +1092,9 @@ static void ANDROID_FlipHWSurfaceInternal(int numrects, SDL_Rect *rects)
 			dstrect.h = rect.h;
 			dstrect.x = SDL_ANDROID_ScreenVisibleRect.x * SDL_ANDROID_sFakeWindowWidth / SDL_ANDROID_sRealWindowWidth;
 			dstrect.y = SDL_ANDROID_ScreenVisibleRect.y * SDL_ANDROID_sFakeWindowHeight / SDL_ANDROID_sRealWindowHeight;
-			//__android_log_print(ANDROID_LOG_INFO, "SDL", "SDL_Flip: %04d:%04d:%04d:%04d -> %04d:%04d:%04d:%04d vis %04d:%04d:%04d:%04d", rect.x, rect.y, rect.w, rect.h, dstrect.x, dstrect.y, dstrect.w, dstrect.h, SDL_ANDROID_ScreenVisibleRect.x, SDL_ANDROID_ScreenVisibleRect.y, SDL_ANDROID_ScreenVisibleRect.w, SDL_ANDROID_ScreenVisibleRect.h);
+			//__android_log_print(ANDROID_LOG_INFO, "SDL", "SDL_Flip: %04d:%04d:%04d:%04d -> %04d:%04d:%04d:%04d vis %04d:%04d:%04d:%04d",
+			//	rect.x, rect.y, rect.w, rect.h, dstrect.x, dstrect.y, dstrect.w, dstrect.h,
+			//	SDL_ANDROID_ScreenVisibleRect.x, SDL_ANDROID_ScreenVisibleRect.y, SDL_ANDROID_ScreenVisibleRect.w, SDL_ANDROID_ScreenVisibleRect.h);
 			SDL_RenderCopy((struct SDL_Texture *)SDL_CurrentVideoSurface->hwdata, &rect, &dstrect);
 		}
 
