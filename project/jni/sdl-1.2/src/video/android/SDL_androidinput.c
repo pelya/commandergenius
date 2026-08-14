@@ -293,7 +293,7 @@ static void ClearOldTouchPointers( int action, int pointerId )
 		secondMousePointerId = -1;
 		for( i = 0; i < MAX_MULTITOUCH_POINTERS; i++ )
 		{
-			if( touchPointers[i] != TOUCH_PTR_MOUSE )
+			if( touchPointers[i] & TOUCH_PTR_MOUSE )
 			{
 				if( firstMousePointerId == -1 )
 					firstMousePointerId = i;
@@ -895,7 +895,9 @@ JAVA_EXPORT_NAME(DemoGLSurfaceView_nativeMotionEvent) ( JNIEnv*  env, jobject  t
 
 	ProcessMouseHover( &x, &y, action, force );
 
-	if( pointerId == firstMousePointerId )
+	ClearOldTouchPointers( action, pointerId );
+
+	if( pointerId == firstMousePointerId || firstMousePointerId == -1 )
 	{
 		ProcessMouseRelativeMovement( &x, &y, action );
 		if( action == MOUSE_UP )
@@ -906,8 +908,6 @@ JAVA_EXPORT_NAME(DemoGLSurfaceView_nativeMotionEvent) ( JNIEnv*  env, jobject  t
 			ProcessMouseMove( x, y, force, radius );
 	}
 	ProcessMouseMultitouch( action, pointerId );
-
-	ClearOldTouchPointers( action, pointerId );
 }
 
 static void ProcessDeferredMouseTap()
