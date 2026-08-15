@@ -1075,6 +1075,19 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 		return true;
 	}
 
+	// Android 16 enables predictive back by default for targetSdk 36 and higher,
+	// and then KEYCODE_BACK is no longer delivered to onKeyDown()/onKeyUp().
+	// MainActivity calls this from its OnBackInvokedCallback instead.
+	// Returns false when the app did not handle the key, so the caller can fall
+	// back to the default behaviour, the same way super.onKeyUp() would.
+	public boolean deliverBackKey()
+	{
+		if( nativeKey( KeyEvent.KEYCODE_BACK, 1, 0, 0 ) == 0 )
+			return false;
+		nativeKey( KeyEvent.KEYCODE_BACK, 0, 0, 0 );
+		return true;
+	}
+
 	@Override
 	public boolean onKeyMultiple(int keyCode, int repeatCount, final KeyEvent event)
 	{

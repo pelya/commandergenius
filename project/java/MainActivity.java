@@ -453,6 +453,7 @@ public class MainActivity extends Activity
 		setContentView(_videoLayout);
 		mGLView = new DemoGLSurfaceView(this);
 		SetLayerType.get().setLayerType(mGLView);
+		registerBackInvokedCallback();
 		// Add TV screen borders, if needed
 		if( isRunningOnOUYA() && Globals.TvBorders )
 		{
@@ -660,9 +661,57 @@ public class MainActivity extends Activity
 		return _isPaused;
 	}
 
+	// Predictive back is opt-in on Android 13 and 14, where our callback stays
+	// dormant and KEYCODE_BACK keeps arriving at DemoGLSurfaceView.onKeyUp().
+	// Android 16 turns it on by default for targetSdk 36 and higher, and then
+	// the key never reaches the view, so the back button silently stops working
+	// - it cannot close the on-screen keyboard or leave the app anymore.
+	private Object backInvokedCallback = null;
+
+	private void registerBackInvokedCallback()
+	{
+		if( android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.TIRAMISU )
+			return;
+		android.window.OnBackInvokedCallback callback = new android.window.OnBackInvokedCallback()
+		{
+			public void onBackInvoked()
+			{
+				MainActivity.this.handleBackInvoked();
+			}
+		};
+		getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
+			android.window.OnBackInvokedDispatcher.PRIORITY_DEFAULT, callback );
+		backInvokedCallback = callback;
+	}
+
+	private void unregisterBackInvokedCallback()
+	{
+		if( backInvokedCallback == null )
+			return;
+		getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback(
+			(android.window.OnBackInvokedCallback) backInvokedCallback );
+		backInvokedCallback = null;
+	}
+
+	// Mirrors the KEYCODE_BACK branch of DemoGLSurfaceView.onKeyUp().
+	// The mouse button case is not handled here: a right click remapped to BACK
+	// still arrives as a key event, so onKeyUp() keeps taking care of it.
+	void handleBackInvoked()
+	{
+		if( keyboardWithoutTextInputShown )
+		{
+			showScreenKeyboardWithoutTextInputField(0); // Hide keyboard
+			return;
+		}
+		if( mGLView != null && mGLView.deliverBackKey() )
+			return;
+		finish();
+	}
+
 	@Override
 	protected void onDestroy()
 	{
+		unregisterBackInvokedCallback();
 		if( downloader != null )
 		{
 			synchronized( downloader )
