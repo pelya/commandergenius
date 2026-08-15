@@ -13,6 +13,11 @@ SUPPORT_PNG := true
 # Enable ogg module inside sdl2_mixer (common dependency for both v1.2 and v2 mixers)
 SUPPORT_OGG := true
 
+# Enable mpg123 module inside sdl2_mixer, for apps that link to it directly
+ifneq ($(strip $(filter mpg123, $(COMPILED_LIBRARIES))),)
+SUPPORT_MP3_MPG123 := true
+endif
+
 NDK_VERSION := $(strip $(patsubst android-ndk-%,%,$(filter android-ndk-%, $(subst /, ,$(dir $(TARGET_CC))))))
 #$(info NDK version $(NDK_VERSION)) # This warning puzzles ndk-gdb
 ifneq ($(filter r1 r2 r3 r4 r5 r6 r7 r8,$(NDK_VERSION)),)
