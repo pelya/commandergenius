@@ -32,14 +32,7 @@ $CC $CFLAGS -Werror=format -c gfx.c -DXSDL_ARCH=\"'$1'\" -o gfx-'"$1.o" || exit 
 } || exit 1
 cd xserver
 [ -e configure ] || autoreconf --force -v --install || exit 1
-[ -e android/android-shmem/LICENSE ] || git submodule update --init android/android-shmem || exit 1
-cd android
-[ -e android-shmem/libancillary/ancillary.h ] || {
-	cd android-shmem
-	git submodule update --init libancillary || exit 1
-	cd ..
-} || exit 1
-cd $1
+cd android/$1
 
 # Megahack: set /proc/self/cwd as the X.org data dir, and chdir() to the correct directory when running X.org
 env TARGET_DIR=/proc/self/cwd \
