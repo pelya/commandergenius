@@ -125,11 +125,13 @@ public class DummyService extends Service
 		}
 
 		int killIntentFlags = 0, showIntentFlags = 0, FLAG_MUTABLE = 0x02000000;
-		if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ) {
+		if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.S )
+		{
 			killIntentFlags = FLAG_MUTABLE | PendingIntent.FLAG_CANCEL_CURRENT;
 			showIntentFlags = FLAG_MUTABLE | PendingIntent.FLAG_CANCEL_CURRENT;
 		}
-		else {
+		else
+		{
 			killIntentFlags = PendingIntent.FLAG_CANCEL_CURRENT;
 			showIntentFlags = PendingIntent.FLAG_CANCEL_CURRENT;
 		}
@@ -149,7 +151,12 @@ public class DummyService extends Service
 		Notification ntf = builder.build();
 		ntf.deleteIntent = killIntent;
 
-		startForeground(1, ntf);
+		try {
+			startForeground(1, ntf);
+		} catch ( Exception e ) {
+			Log.i("SDL", "Cannot start dummy service - insufficient permissions");
+		};
+
 		return Service.START_NOT_STICKY;
 	}
 	@Override
