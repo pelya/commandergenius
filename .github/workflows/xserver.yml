@@ -73,8 +73,9 @@ jobs:
       - name: Check out submodules
         # There are many more submodules in this repo, we don't need them all
         run: >
+          git submodule update --init --recursive --depth=1 --remote
+          project/jni/application/${APP_NAME} ;
           git submodule update --init --recursive --depth=1
-          project/jni/application/${APP_NAME}
           project/jni/sdl2 project/jni/sdl2_image
           project/jni/sdl2_mixer project/jni/sdl2_ttf
 
