@@ -9,17 +9,6 @@
  		String lang = new String(Locale.getDefault().getLanguage());
  		if( Locale.getDefault().getCountry().length() > 0 )
  			lang = lang + "_" + Locale.getDefault().getCountry();
---- Video.java
-+++ Video.java
-@@ -1259,7 +1259,7 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
- 				Globals.TouchscreenKeyboardTheme = 9;
- 
- 			if( Globals.TouchscreenKeyboardTheme == 0 )
--				Settings.nativeSetupScreenKeyboardButtons(loadRaw(p, R.raw.ultimatedroid));
-+				Settings.nativeSetupScreenKeyboardButtons(loadRaw(p, R.raw.xsdl));
- 			if( Globals.TouchscreenKeyboardTheme == 1 )
- 				Settings.nativeSetupScreenKeyboardButtons(loadRaw(p, R.raw.simpletheme));
- 			if( Globals.TouchscreenKeyboardTheme == 2 )
 --- Globals.java
 +++ Globals.java
 @@ -90,7 +90,7 @@ class Globals
