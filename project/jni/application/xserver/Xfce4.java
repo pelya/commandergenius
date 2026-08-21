@@ -205,7 +205,7 @@ public class Xfce4 extends ComponentActivity
 					{
 						"-c",
 						"export DISPLAY=:0 ; " +
-						"which xfce4-session || { " +
+						"xfce4-session --help || { " +
 						"apt update ; " +
 						"apt install -y x11-repo ; " +
 						"apt update ; " +
