@@ -1,8 +1,8 @@
 --- a/project/AndroidManifest.xml	2025-05-02 10:27:57.225677144 +0300
 +++ b/project/AndroidManifest.xml	2025-05-02 10:28:19.613269757 +0300
-@@ -47,8 +47,22 @@
+@@ -46,8 +46,40 @@
  				 android:enabled="true"
- 				 android:foregroundServiceType="specialUse"
+ 				 android:foregroundServiceType="specialUse">
  			<property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
 -					  android:value="Keep the app running in background"/>
 +					  android:value="Keep the X server running in background. Stopping it will terminate all X11 applications that are connected to this server."/>
@@ -21,6 +21,44 @@
 +				<data android:scheme="x11" />
 +			</intent-filter>
 +		</activity>
++		<activity android:name=".Xfce4"
++				  android:label="@string/xfce4"
++				  android:alwaysRetainTaskState="true"
++				  android:launchMode="singleTask"
++				  android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
++				  android:windowSoftInputMode="stateUnchanged|adjustResize"
++				  android:theme="@style/AppTheme"
++				  android:exported="true"
++		>
++			<intent-filter>
++				<action android:name="android.intent.action.MAIN" />
++				<category android:name="android.intent.category.LAUNCHER" />
++				<category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" /> <!-- Samsung's multiwindow -->
++				<action android:name="com.sec.android.airview.HOVER" /> <!-- Stupid Samsung requires their own intent for finger-hover events -->
++				<category android:name="android.intent.category.LEANBACK_LAUNCHER" /> <!-- Android TV requires this -->
++				<category android:name="tv.ouya.intent.category.GAME" /> <!-- For that one user who still got an OUYA in his living room and won't throw it away just because someone else decides that it's dead -->
++			</intent-filter>
++		</activity>
  	</application>
  
  	<!-- ==INTERNET== --> <uses-permission android:name="android.permission.INTERNET" />
+@@ -71,4 +103,9 @@
+ 	<uses-feature android:name="android.hardware.sensor" android:required="false"/> <!-- Android TV requires this -->
+ 	<!-- ==SCREEN-SIZE-NORMAL== --> <supports-screens android:smallScreens="false" android:normalScreens="true" android:largeScreens="true" android:xlargeScreens="true" />
+ 
++	<queries>
++		<package android:name="com.termux" />
++	</queries>
++	<uses-permission android:name="com.termux.permission.RUN_COMMAND" />
++
+ </manifest>
+--- a/project/res/values/strings.xml	2026-08-21 16:44:24.412979491 +0300
++++ b/project/res/values/strings.xml	2026-08-21 16:44:53.440506095 +0300
+@@ -4,6 +4,7 @@
+   tools:ignore="MissingTranslation">
+     <string name="app_name">XServer XSDL</string>
+ 
++    <string name="xfce4">Xfce4</string>
+ 
+     <string name="init">Initializing</string>
+     <string name="please_wait">Please wait while data is being downloaded</string>

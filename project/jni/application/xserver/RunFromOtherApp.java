@@ -118,7 +118,7 @@ public class RunFromOtherApp extends Activity
 			public void run()
 			{
 				Log.i("SDL", "Waiting for env vars to be set");
-				while( System.getenv("DISPLAY") == null || System.getenv("PULSE_SERVER") == null )
+				while( System.getenv("DISPLAY") == null )
 				{
 					try {
 						Thread.sleep(300);
@@ -146,10 +146,9 @@ public class RunFromOtherApp extends Activity
 					}).start();
 				}
 
-				Intent intent = new Intent(Intent.ACTION_RUN, Uri.parse("x11://run?DISPLAY=" + Uri.encode(System.getenv("DISPLAY")) + "&PULSE_SERVER=" + Uri.encode(System.getenv("PULSE_SERVER"))));
+				Intent intent = new Intent(Intent.ACTION_RUN, Uri.parse("x11://run?DISPLAY=" + Uri.encode(System.getenv("DISPLAY"))));
 				intent.putExtra("DISPLAY", System.getenv("DISPLAY"));
-				intent.putExtra("PULSE_SERVER", System.getenv("PULSE_SERVER"));
-				intent.putExtra("run", "export DISPLAY=" + System.getenv("DISPLAY") + " ; export PULSE_SERVER=" + System.getenv("PULSE_SERVER"));
+				intent.putExtra("run", "export DISPLAY=" + System.getenv("DISPLAY"));
 				setResult(Activity.RESULT_OK, intent);
 				finish();
 			}

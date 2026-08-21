@@ -818,7 +818,7 @@ void XSDL_generateBackground(const char * port, int showHelp, int resolutionW, i
 	struct ifconf ifc;
 	struct ifreq ifr[20];
 	SDL_Surface * surf;
-	int y = resolutionH * 30 / VID_Y;
+	int y = 0;
 	char msg[128];
 	char clipboard[8192] = "";
 
@@ -837,72 +837,120 @@ void XSDL_generateBackground(const char * port, int showHelp, int resolutionW, i
 	surf = SDL_CreateRGBSurface(SDL_SWSURFACE, resolutionW, resolutionH, 24, 0x0000ff, 0x00ff00, 0xff0000, 0);
 	SDL_FillRect(surf, NULL, 0x7f0000);
 
-	renderStringScaled("To show keyboard, tap Back < or swipe from the screen edge", 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
-	y += resolutionH * 30 / VID_Y;
+	y += resolutionH * 15 / VID_Y;
+	renderStringScaled("To show keyboard, tap or swipe Back <", 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
 
-	renderStringScaled("Launch these commands on your Linux PC:", 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
-	y += resolutionH * 30 / VID_Y;
-
-	sd = socket(PF_INET, SOCK_DGRAM, 0);
-	if (sd > 0)
+	if (getenv("SDL_RESTART_PARAMS") && strcmp(getenv("SDL_RESTART_PARAMS"), "xfce4") == 0)
 	{
-		ifc.ifc_len = sizeof(ifr);
-		ifc.ifc_ifcu.ifcu_buf = (caddr_t)ifr;
+		y += resolutionH * 15 / VID_Y;
+		y += resolutionH * 15 / VID_Y;
+		sprintf (msg, "To fix Termux plugin execution command error");
+		renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+		y += resolutionH * 15 / VID_Y;
+		sprintf (msg, "run following command from Termux,");
+		renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+		y += resolutionH * 15 / VID_Y;
+		sprintf (msg, "this should be done only once:");
+		renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+		y += resolutionH * 15 / VID_Y;
+		y += resolutionH * 15 / VID_Y;
+		sprintf (msg, "echo allow-external-apps=true \\");
+		renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+		y += resolutionH * 15 / VID_Y;
+		sprintf (msg, "  >> .termux/termux.properties");
+		renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
 
-		if (ioctl(sd, SIOCGIFCONF, &ifc) == 0)
+		SDL_SetClipboardText("echo allow-external-apps=true >> .termux/termux.properties");
+
+		y += resolutionH * 15 / VID_Y;
+		y += resolutionH * 15 / VID_Y;
+		sprintf (msg, "Then open system settings - Apps - Termux");
+		renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+		y += resolutionH * 15 / VID_Y;
+		sprintf (msg, "and enable permission:");
+		renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+		y += resolutionH * 15 / VID_Y;
+		sprintf (msg, "Display over other apps");
+		renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+
+		y += resolutionH * 15 / VID_Y;
+		y += resolutionH * 15 / VID_Y;
+		sprintf (msg, "Now tap Termux notification to start Xfce4");
+		renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+		y += resolutionH * 15 / VID_Y;
+		sprintf (msg, "and then tap Xserver XSDL notification");
+		renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+	}
+	else
+	{
+		y += resolutionH * 15 / VID_Y;
+		y += resolutionH * 15 / VID_Y;
+		sprintf (msg, "If you use Termux, run:");
+		renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+		y += resolutionH * 15 / VID_Y;
+		y += resolutionH * 15 / VID_Y;
+		sprintf (msg, "export DISPLAY=:0");
+		renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+		y += resolutionH * 15 / VID_Y;
+		sprintf (msg, "dbus-run-session xfce4-session");
+		renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+
+		y += resolutionH * 15 / VID_Y;
+		y += resolutionH * 15 / VID_Y;
+		renderStringScaled("Launch these commands on your Linux PC:", 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+		y += resolutionH * 15 / VID_Y;
+		y += resolutionH * 15 / VID_Y;
+
+		sd = socket(PF_INET, SOCK_DGRAM, 0);
+		if (sd > 0)
 		{
-			ifc_num = ifc.ifc_len / sizeof(struct ifreq);
-			__android_log_print(ANDROID_LOG_INFO, "XSDL", "%d network interfaces found", ifc_num);
+			ifc.ifc_len = sizeof(ifr);
+			ifc.ifc_ifcu.ifcu_buf = (caddr_t)ifr;
 
-			for (i = 0; i < ifc_num; ++i)
+			if (ioctl(sd, SIOCGIFCONF, &ifc) == 0)
 			{
-				int addr = 0;
-				char saddr[32];
-				if (ifr[i].ifr_addr.sa_family != AF_INET)
-					continue;
+				ifc_num = ifc.ifc_len / sizeof(struct ifreq);
+				__android_log_print(ANDROID_LOG_INFO, "XSDL", "%d network interfaces found", ifc_num);
 
-				if (ioctl(sd, SIOCGIFADDR, &ifr[i]) == 0)
-					addr = ((struct sockaddr_in *)(&ifr[i].ifr_addr))->sin_addr.s_addr;
-				if (addr == 0)
-					continue;
-				sprintf (saddr, "%d.%d.%d.%d", (addr & 0xFF), (addr >> 8 & 0xFF), (addr >> 16 & 0xFF), (addr >> 24 & 0xFF));
-				__android_log_print(ANDROID_LOG_INFO, "XSDL", "interface: %s address: %s\n", ifr[i].ifr_name, saddr);
-				if (strcmp(saddr, "127.0.0.1") == 0)
-					continue;
-				sprintf (msg, "export DISPLAY=%s%s", saddr, port);
-				renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
-				strcat(clipboard, msg); strcat(clipboard, "\n");
-				y += resolutionH * 15 / VID_Y;
-				sprintf (msg, "xfwm4 & firefox");
-				renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
-				strcat(clipboard, msg); strcat(clipboard, "\n");
-				y += resolutionH * 15 / VID_Y;
-				y += resolutionH * 15 / VID_Y;
+				for (i = 0; i < ifc_num; ++i)
+				{
+					int addr = 0;
+					char saddr[32];
+					if (ifr[i].ifr_addr.sa_family != AF_INET)
+						continue;
+
+					if (ioctl(sd, SIOCGIFADDR, &ifr[i]) == 0)
+						addr = ((struct sockaddr_in *)(&ifr[i].ifr_addr))->sin_addr.s_addr;
+					if (addr == 0)
+						continue;
+					sprintf (saddr, "%d.%d.%d.%d", (addr & 0xFF), (addr >> 8 & 0xFF), (addr >> 16 & 0xFF), (addr >> 24 & 0xFF));
+					__android_log_print(ANDROID_LOG_INFO, "XSDL", "interface: %s address: %s\n", ifr[i].ifr_name, saddr);
+					if (strcmp(saddr, "127.0.0.1") == 0)
+						continue;
+					sprintf (msg, "export DISPLAY=%s%s", saddr, port);
+					renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+					strcat(clipboard, msg); strcat(clipboard, "\n");
+					y += resolutionH * 15 / VID_Y;
+					sprintf (msg, "xfwm4 & firefox");
+					renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+					strcat(clipboard, msg); strcat(clipboard, "\n");
+					y += resolutionH * 15 / VID_Y;
+					y += resolutionH * 15 / VID_Y;
+				}
 			}
+
+			close(sd);
 		}
 
-		close(sd);
+		SDL_SetClipboardText(clipboard);
+
+		y += resolutionH * 10 / VID_Y;
+		sprintf (msg, "To tunnel X over SSH, forward port %d", atoi(port+1) + 6000);
+		renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
+		y += resolutionH * 15 / VID_Y;
+		sprintf (msg, "in your SSH client");
+		renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
 	}
-
-	SDL_SetClipboardText(clipboard);
-
-	y += resolutionH * 10 / VID_Y;
-	sprintf (msg, "To tunnel X over SSH, forward port %d", atoi(port+1) + 6000);
-	renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
-	y += resolutionH * 15 / VID_Y;
-	sprintf (msg, "in your SSH client");
-	renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
-
-	y += resolutionH * 20 / VID_Y;
-	sprintf (msg, "If you run Termux or Linux in chroot on this device, run:");
-	renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
-	y += resolutionH * 15 / VID_Y;
-	y += resolutionH * 15 / VID_Y;
-	sprintf (msg, "export DISPLAY=:0");
-	renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
-	y += resolutionH * 15 / VID_Y;
-	sprintf (msg, "dbus-launch --exit-with-session xfce4-session");
-	renderStringScaled(msg, 12 * resolutionH / VID_Y, resolutionW/2, y, 255, 255, 255, surf);
 
 	SDL_SavePNG(surf, "background.png");
 	SDL_FreeSurface(surf);

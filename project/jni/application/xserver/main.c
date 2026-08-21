@@ -103,7 +103,9 @@ int main( int argc, char* argv[] )
 		argv++;
 	}
 
-	if (getenv("SDL_RESTART_PARAMS") && getenv("SDL_RESTART_PARAMS")[0])
+	__android_log_print(ANDROID_LOG_INFO, "XSDL", "SDL_RESTART_PARAMS = '%s'", getenv("SDL_RESTART_PARAMS") ? getenv("SDL_RESTART_PARAMS") : "");
+
+	if (getenv("SDL_RESTART_PARAMS") && getenv("SDL_RESTART_PARAMS")[0] == ':')
 		strcpy(port, getenv("SDL_RESTART_PARAMS"));
 
 	snprintf(fontpath, sizeof(fontpath),
@@ -129,7 +131,7 @@ int main( int argc, char* argv[] )
 					SDL_GetVideoInfo()->vfmt->BitsPerPixel == 24 ? 32 : SDL_GetVideoInfo()->vfmt->BitsPerPixel );
 	}
 
-	XSDL_generateBackground( port, printHelp, 600 * resolutionW / resolutionH, 600 );
+	XSDL_generateBackground( port, printHelp, resolutionW, resolutionH );
 
 	XSDL_deinitSDL();
 
