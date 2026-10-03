@@ -21,6 +21,8 @@
 [submodule "project/jni/application/teeworlds/src"]
 	path = project/jni/application/teeworlds/src
 	url = https://github.com/pelya/teeworlds.git
+	branch = 0.6-android
+	update = merge
 [submodule "project/jni/application/xserver/xserver"]
 	path = project/jni/application/xserver/xserver
 	url = https://github.com/pelya/xserver.git
