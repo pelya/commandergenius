@@ -21,6 +21,3 @@ git clone git@github.com:pelya/commandergenius.git sdl-android
 cd sdl-android
 git submodule update --init --recursive
 ./build.sh xserver
-
-Busybox is precompiled, extracted from here:
-https://bintray.com/termux/termux-packages-24/busybox
