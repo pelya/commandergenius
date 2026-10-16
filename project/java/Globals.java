@@ -128,7 +128,7 @@ class Globals
 	public static int ClickScreenPressure = 0;
 	public static int ClickScreenTouchspotSize = 0;
 	public static boolean FingerHover = true;
-	public static boolean HoverJitterFilter = true;
+	public static boolean HoverJitterFilter = false;
 	public static boolean GenerateSubframeTouchEvents = false;
 	public static boolean KeepAspectRatio = KeepAspectRatioDefaultSetting;
 	public static boolean TvBorders = true;
