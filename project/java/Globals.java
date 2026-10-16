@@ -110,7 +110,7 @@ class Globals
 	public static boolean OptionalDataDownload[] = null;
 	public static int LeftClickMethod = ForceRelativeMouseMode ? Mouse.LEFT_CLICK_WITH_TAP_OR_TIMEOUT : Mouse.LEFT_CLICK_NORMAL;
 	public static int LeftClickKey = KeyEvent.KEYCODE_DPAD_CENTER;
-	public static int LeftClickTimeout = 3;
+	public static int LeftClickTimeout = 2;
 	public static int RightClickTimeout = 4;
 	public static int RightClickMethod = AppNeedsTwoButtonMouse ? Mouse.RIGHT_CLICK_WITH_MULTITOUCH : Mouse.RIGHT_CLICK_NONE;
 	public static int RightClickKey = KeyEvent.KEYCODE_MENU;

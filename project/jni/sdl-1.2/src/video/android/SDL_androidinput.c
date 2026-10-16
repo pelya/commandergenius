@@ -555,9 +555,9 @@ static void ProcessMouseUp( int x, int y )
 
 	if( mouseInitialX >= 0 && mouseInitialY >= 0 && (
 		leftClickMethod == LEFT_CLICK_WITH_TAP || leftClickMethod == LEFT_CLICK_WITH_TAP_OR_TIMEOUT ) &&
-		abs(mouseInitialX - x) < SDL_ANDROID_sFakeWindowHeight / 16 &&
-		abs(mouseInitialY - y) < SDL_ANDROID_sFakeWindowHeight / 16 &&
-		SDL_GetTicks() - mouseInitialTime < 700 )
+		abs(mouseInitialX - x) <= 0 &&
+		abs(mouseInitialY - y) <= 0 &&
+		SDL_GetTicks() - mouseInitialTime < leftClickTimeout )
 	{
 		SDL_ANDROID_MainThreadPushMouseButton( SDL_PRESSED, SDL_BUTTON_LEFT );
 		if( forceScreenUpdateMouseClick && x > 0 )
@@ -640,7 +640,7 @@ static void ProcessMouseMove_Timeouts( int x, int y )
 		leftClickMethod == LEFT_CLICK_WITH_TIMEOUT || leftClickMethod == LEFT_CLICK_WITH_TAP ||
 		leftClickMethod == LEFT_CLICK_WITH_TAP_OR_TIMEOUT || rightClickMethod == RIGHT_CLICK_WITH_TIMEOUT ) )
 	{
-		if( abs(mouseInitialX - x) >= SDL_ANDROID_sFakeWindowHeight / 15 || abs(mouseInitialY - y) >= SDL_ANDROID_sFakeWindowHeight / 15 )
+		if( abs(mouseInitialX - x) > 0 || abs(mouseInitialY - y) > 0 )
 		{
 			mouseInitialX = -1;
 			mouseInitialY = -1;
@@ -677,20 +677,6 @@ static void ProcessMouseMove( int x, int y, int force, int radius )
 {
 	if( SDL_ANDROID_moveMouseWithKbActive )
 	{
-		// Mouse lazily follows magnifying glass, not very intuitive for drag&drop
-		/*
-		if( abs(moveMouseWithKbX - x) > SDL_ANDROID_sFakeWindowWidth / 12 )
-			moveMouseWithKbSpeedX += moveMouseWithKbX > x ? -1 : 1;
-		else
-			moveMouseWithKbSpeedX = moveMouseWithKbSpeedX * 2 / 3;
-		if( abs(moveMouseWithKbY - y) > SDL_ANDROID_sFakeWindowHeight / 12 )
-			moveMouseWithKbSpeedY += moveMouseWithKbY > y ? -1 : 1;
-		else
-			moveMouseWithKbSpeedY = moveMouseWithKbSpeedY * 2 / 3;
-
-		moveMouseWithKbX += moveMouseWithKbSpeedX;
-		moveMouseWithKbY += moveMouseWithKbSpeedY;
-		*/
 		// Mouse follows touch instantly, when it's out of the snapping distance from mouse cursor
 		if( abs(SDL_ANDROID_moveMouseWithKbX - x) >= SDL_ANDROID_sFakeWindowWidth / 10 ||
 			abs(SDL_ANDROID_moveMouseWithKbY - y) >= SDL_ANDROID_sFakeWindowHeight / 10 ) // || SDL_GetTicks() - leftButtonDownTime > 600
@@ -1151,8 +1137,8 @@ static int getClickTimeout(int v)
 	switch(v)
 	{
 		case 0: return 200;
-		case 1: return 300;
-		case 2: return 400;
+		case 1: return 350;
+		case 2: return 500;
 		case 3: return 700;
 		case 4: return 1000;
 	}
