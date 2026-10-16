@@ -130,7 +130,8 @@ static int multitouchGestureX = -1;
 static int multitouchGestureY = -1;
 static int multitouchGestureMiddleX = -1;
 static int multitouchGestureMiddleY = -1;
-static int multitouchGestureHappened = 0;
+static int multitouchGestureBlockLeftClick = 0;
+static int multitouchGestureBlockRightClick = 0;
 static int multitouchScreenPinchZoomDist = -1;
 static float multitouchScreenPinchZoomInitialRatio = 1.0f;
 enum { MULTITOUCH_MOUSE_WHEEL_DIST = 20 };
@@ -377,7 +378,7 @@ static void ProcessMultitouchGesture( int x, int y, int action, int pointerId )
 				int wheelThreshold = SDL_ANDROID_sFakeWindowHeight / MULTITOUCH_MOUSE_WHEEL_DIST;
 				if( dist - multitouchGestureDist > distMaxDiff )
 				{
-					multitouchGestureHappened = 1;
+					multitouchGestureBlockRightClick = 1;
 					multitouchGestureDist += distMaxDiff;
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, multitouchGestureKeycode[0], 0, 1 );
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, multitouchGestureKeycode[0], 0, 1 );
@@ -390,7 +391,7 @@ static void ProcessMultitouchGesture( int x, int y, int action, int pointerId )
 				}
 				if( multitouchGestureDist - dist > distMaxDiff )
 				{
-					multitouchGestureHappened = 1;
+					multitouchGestureBlockRightClick = 1;
 					multitouchGestureDist -= distMaxDiff;
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, multitouchGestureKeycode[1], 0, 1 );
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, multitouchGestureKeycode[1], 0, 1 );
@@ -418,14 +419,14 @@ static void ProcessMultitouchGesture( int x, int y, int action, int pointerId )
 
 				if( angleDiff < -angleMaxDiff )
 				{
-					multitouchGestureHappened = 1;
+					multitouchGestureBlockRightClick = 1;
 					multitouchGestureAngle = angle;
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, multitouchGestureKeycode[2], 0, 1 );
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, multitouchGestureKeycode[2], 0, 1 );
 				}
 				if( angleDiff > angleMaxDiff )
 				{
-					multitouchGestureHappened = 1;
+					multitouchGestureBlockRightClick = 1;
 					multitouchGestureAngle = angle;
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, multitouchGestureKeycode[3], 0, 1 );
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, multitouchGestureKeycode[3], 0, 1 );
@@ -437,28 +438,28 @@ static void ProcessMultitouchGesture( int x, int y, int action, int pointerId )
 				//__android_log_print(ANDROID_LOG_INFO, "libSDL", "middleY %d multitouchGestureMiddleY %d threshold %d", middleY, multitouchGestureMiddleY, wheelThreshold);
 				if( middleX - multitouchGestureMiddleX > wheelThreshold )
 				{
-					multitouchGestureHappened = 1;
+					multitouchGestureBlockRightClick = 1;
 					multitouchGestureMiddleX += wheelThreshold;
 					SDL_ANDROID_MainThreadPushMouseButton( SDL_PRESSED, SDL_BUTTON_X1 );
 					SDL_ANDROID_MainThreadPushMouseButton( SDL_RELEASED, SDL_BUTTON_X1 );
 				}
 				if( multitouchGestureMiddleX - middleX > wheelThreshold )
 				{
-					multitouchGestureHappened = 1;
+					multitouchGestureBlockRightClick = 1;
 					multitouchGestureMiddleX -= wheelThreshold;
 					SDL_ANDROID_MainThreadPushMouseButton( SDL_PRESSED, SDL_BUTTON_X2 );
 					SDL_ANDROID_MainThreadPushMouseButton( SDL_RELEASED, SDL_BUTTON_X2 );
 				}
 				if( middleY - multitouchGestureMiddleY > wheelThreshold )
 				{
-					multitouchGestureHappened = 1;
+					multitouchGestureBlockRightClick = 1;
 					multitouchGestureMiddleY += wheelThreshold;
 					SDL_ANDROID_MainThreadPushMouseButton( SDL_PRESSED, SDL_BUTTON_WHEELUP );
 					SDL_ANDROID_MainThreadPushMouseButton( SDL_RELEASED, SDL_BUTTON_WHEELUP );
 				}
 				if( multitouchGestureMiddleY - middleY > wheelThreshold )
 				{
-					multitouchGestureHappened = 1;
+					multitouchGestureBlockRightClick = 1;
 					multitouchGestureMiddleY -= wheelThreshold;
 					SDL_ANDROID_MainThreadPushMouseButton( SDL_PRESSED, SDL_BUTTON_WHEELDOWN );
 					SDL_ANDROID_MainThreadPushMouseButton( SDL_RELEASED, SDL_BUTTON_WHEELDOWN );
@@ -568,6 +569,7 @@ static void ProcessMouseUp( int x, int y )
 		leftClickMethod == LEFT_CLICK_WITH_TAP || leftClickMethod == LEFT_CLICK_WITH_TAP_OR_TIMEOUT ) &&
 		abs(mouseInitialX - x) <= 0 &&
 		abs(mouseInitialY - y) <= 0 &&
+		!multitouchGestureBlockLeftClick &&
 		SDL_GetTicks() - mouseInitialTime < leftClickTimeout )
 	{
 		SDL_ANDROID_MainThreadPushMouseButton( SDL_PRESSED, SDL_BUTTON_LEFT );
@@ -611,6 +613,7 @@ static void ProcessMouseUp( int x, int y )
 static int ProcessMouseDown( int x, int y )
 {
 	int action = MOUSE_DOWN;
+
 	if( (SDL_ANDROID_moveMouseWithKbActive || leftClickMethod == LEFT_CLICK_NEAR_CURSOR) &&
 		abs(SDL_ANDROID_currentMouseX - x) < SDL_ANDROID_sFakeWindowWidth / 10 && abs(SDL_ANDROID_currentMouseY - y) < SDL_ANDROID_sFakeWindowHeight / 10 )
 	{
@@ -622,8 +625,7 @@ static int ProcessMouseDown( int x, int y )
 		leftButtonDownTime = SDL_GetTicks();
 		action = MOUSE_MOVE;
 	}
-	else
-	if( leftClickMethod == LEFT_CLICK_NORMAL )
+	else if( leftClickMethod == LEFT_CLICK_NORMAL )
 	{
 		SDL_ANDROID_MainThreadPushMouseMotion(x, y);
 		if( !hardwareMouseDetected || SDL_ANDROID_currentMouseButtons == 0 )
@@ -640,8 +642,12 @@ static int ProcessMouseDown( int x, int y )
 		if( mouseClickTimeoutInitialized )
 			sem_post(&mouseClickTimeoutSemaphore);
 	}
+
 	if( SDL_ANDROID_ShowScreenUnderFinger == ZOOM_MAGNIFIER )
 		SDL_ANDROID_UpdateScreenUnderFingerRect(x, y);
+
+	multitouchGestureBlockLeftClick = 0;
+
 	return action;
 }
 
@@ -660,7 +666,7 @@ static void ProcessMouseMove_Timeouts( int x, int y )
 		{
 			if( leftClickMethod == LEFT_CLICK_WITH_TIMEOUT || leftClickMethod == LEFT_CLICK_WITH_TAP_OR_TIMEOUT )
 			{
-				if( SDL_GetTicks() - mouseInitialTime > leftClickTimeout )
+				if( SDL_GetTicks() - mouseInitialTime > leftClickTimeout && !multitouchGestureBlockLeftClick )
 				{
 					//SDL_ANDROID_MainThreadPushMouseMotion(mouseInitialX, mouseInitialY);
 					SDL_ANDROID_MainThreadPushMouseButton( SDL_PRESSED, SDL_BUTTON_LEFT );
@@ -722,6 +728,8 @@ static void ProcessMouseMultitouch( int action, int pointerId )
 {
 	if( pointerId == secondMousePointerId && (action == MOUSE_DOWN || action == MOUSE_UP) )
 	{
+		multitouchGestureBlockLeftClick = 1;
+
 		if( leftClickMethod == LEFT_CLICK_WITH_MULTITOUCH )
 		{
 			SDL_ANDROID_MainThreadPushMouseButton( (action == MOUSE_DOWN) ? SDL_PRESSED : SDL_RELEASED, SDL_BUTTON_LEFT );
@@ -735,13 +743,13 @@ static void ProcessMouseMultitouch( int action, int pointerId )
 			{
 				if( action == MOUSE_UP )
 				{
-					if( !multitouchGestureHappened )
+					if( !multitouchGestureBlockRightClick )
 					{
 						SDL_ANDROID_MainThreadPushMouseButton( SDL_PRESSED, SDL_BUTTON_RIGHT );
 						SDL_ANDROID_MainThreadPushMouseButton( SDL_RELEASED, SDL_BUTTON_RIGHT );
 					}
 				}
-				multitouchGestureHappened = 0;
+				multitouchGestureBlockRightClick = 0;
 				multitouchScreenPinchZoomDist = -1;
 			}
 		}
@@ -749,7 +757,8 @@ static void ProcessMouseMultitouch( int action, int pointerId )
 	if( pointerId != firstMousePointerId && pointerId != secondMousePointerId && (action == MOUSE_DOWN || action == MOUSE_UP) )
 	{
 		SDL_ANDROID_MainThreadPushMouseButton( (action == MOUSE_DOWN) ? SDL_PRESSED : SDL_RELEASED, SDL_BUTTON_MIDDLE );
-		multitouchGestureHappened = 1; // Prevent firing left mouse button when lifting two fingers
+		multitouchGestureBlockLeftClick = 1;
+		multitouchGestureBlockRightClick = 1;
 	}
 }
 
@@ -871,7 +880,7 @@ JAVA_EXPORT_NAME(DemoGLSurfaceView_nativeMotionEvent) ( JNIEnv*  env, jobject  t
 		return;
 #endif
 
-	//__android_log_print(ANDROID_LOG_INFO, "libSDL", "Motion event: %4d %4d action %d ptr %d, force %d radius %d", x, y, action, pointerId, force, radius);
+	//__android_log_print(ANDROID_LOG_INFO, "libSDL", "Motion event: %4d %4d action %s ptr %d, force %d radius %d", x, y, action == MOUSE_UP ? "U" : action == MOUSE_DOWN ? "D" : action == MOUSE_MOVE ? "M" : "H", pointerId, force, radius);
 
 	pointerId = BumpPointerId( pointerId );
 
@@ -893,8 +902,6 @@ JAVA_EXPORT_NAME(DemoGLSurfaceView_nativeMotionEvent) ( JNIEnv*  env, jobject  t
 
 	ProcessMouseHover( &x, &y, action, force );
 
-	ClearOldTouchPointers( action, pointerId );
-
 	if( pointerId == firstMousePointerId || firstMousePointerId == -1 )
 	{
 		ProcessMouseRelativeMovement( &x, &y, action );
@@ -905,7 +912,10 @@ JAVA_EXPORT_NAME(DemoGLSurfaceView_nativeMotionEvent) ( JNIEnv*  env, jobject  t
 		if( action == MOUSE_MOVE )
 			ProcessMouseMove( x, y, force, radius );
 	}
+
 	ProcessMouseMultitouch( action, pointerId );
+
+	ClearOldTouchPointers( action, pointerId );
 }
 
 static void ProcessDeferredMouseTap()
