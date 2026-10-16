@@ -131,6 +131,8 @@ static int multitouchGestureY = -1;
 static int multitouchGestureMiddleX = -1;
 static int multitouchGestureMiddleY = -1;
 static int multitouchGestureHappened = 0;
+static int multitouchScreenPinchZoomDist = -1;
+static float multitouchScreenPinchZoomInitialRatio = 1.0f;
 enum { MULTITOUCH_MOUSE_WHEEL_DIST = 20 };
 int SDL_ANDROID_TouchscreenCalibrationWidth = 0;
 int SDL_ANDROID_TouchscreenCalibrationHeight = 0;
@@ -370,7 +372,7 @@ static void ProcessMultitouchGesture( int x, int y, int action, int pointerId )
 			}
 			else
 			{
-				int distMaxDiff = SDL_ANDROID_sFakeWindowHeight / ( 2 + (1 + multitouchGestureSensitivity) * 3 );
+				int distMaxDiff = SDL_ANDROID_sFakeWindowHeight / (2 + multitouchGestureSensitivity) / 4;
 				int angleMaxDiff = atan2i_PI * 2 / 3 / ( 1 + (1 + multitouchGestureSensitivity) * 2 );
 				int wheelThreshold = SDL_ANDROID_sFakeWindowHeight / MULTITOUCH_MOUSE_WHEEL_DIST;
 				if( dist - multitouchGestureDist > distMaxDiff )
@@ -379,10 +381,11 @@ static void ProcessMultitouchGesture( int x, int y, int action, int pointerId )
 					multitouchGestureDist += distMaxDiff;
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, multitouchGestureKeycode[0], 0, 1 );
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, multitouchGestureKeycode[0], 0, 1 );
-					if( screenPinchZoom )
+					if (multitouchScreenPinchZoomDist < 0)
 					{
-						SDL_ANDROID_PinchZoomStep++;
-						SDL_ANDROID_PinchZoomStep = MIN(SDL_ANDROID_PinchZoomStep, SDL_ANDROID_PINCH_ZOOM_STEPS - 1);
+						// Pinch-zoom is active after passing a small deadzone
+						multitouchScreenPinchZoomDist = dist;
+						multitouchScreenPinchZoomInitialRatio = SDL_ANDROID_PinchZoomRatio;
 					}
 				}
 				if( multitouchGestureDist - dist > distMaxDiff )
@@ -391,11 +394,19 @@ static void ProcessMultitouchGesture( int x, int y, int action, int pointerId )
 					multitouchGestureDist -= distMaxDiff;
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, multitouchGestureKeycode[1], 0, 1 );
 					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_RELEASED, multitouchGestureKeycode[1], 0, 1 );
-					if( screenPinchZoom )
+					if (multitouchScreenPinchZoomDist < 0)
 					{
-						SDL_ANDROID_PinchZoomStep--;
-						SDL_ANDROID_PinchZoomStep = MAX(SDL_ANDROID_PinchZoomStep, 0);
+						// Pinch-zoom is active after passing a small deadzone
+						multitouchScreenPinchZoomDist = dist;
+						multitouchScreenPinchZoomInitialRatio = SDL_ANDROID_PinchZoomRatio;
 					}
+				}
+				if( screenPinchZoom && multitouchScreenPinchZoomDist >= 0 )
+				{
+					SDL_ANDROID_PinchZoomRatio = multitouchScreenPinchZoomInitialRatio *
+						powf(0.75f, (dist - multitouchScreenPinchZoomDist) * SDL_ANDROID_PinchZoomSpeed / distMaxDiff);
+					SDL_ANDROID_PinchZoomRatio = MIN(SDL_ANDROID_PinchZoomRatio, 1.0f);
+					SDL_ANDROID_PinchZoomRatio = MAX(SDL_ANDROID_PinchZoomRatio, SDL_ANDROID_PinchZoomRatioLimit);
 				}
 
 				int angleDiff = angle - multitouchGestureAngle;
@@ -731,6 +742,7 @@ static void ProcessMouseMultitouch( int action, int pointerId )
 					}
 				}
 				multitouchGestureHappened = 0;
+				multitouchScreenPinchZoomDist = -1;
 			}
 		}
 	}

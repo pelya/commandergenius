@@ -196,7 +196,7 @@ class Globals
 	public static boolean ScreenKbControlsShown[] = new boolean[ScreenKbControlsLayout.length]; /* Also joystick and text input button added */
 	public static int RemapMultitouchGestureKeycode[] = new int[4];
 	public static boolean MultitouchGesturesUsed[] = new boolean[4];
-	public static int MultitouchGestureSensitivity = 1;
+	public static int MultitouchGestureSensitivity = 2;
 	public static int TouchscreenCalibration[] = new int[4];
 	public static String DataDir = new String("");
 	public static boolean VideoLinearFilter = true;

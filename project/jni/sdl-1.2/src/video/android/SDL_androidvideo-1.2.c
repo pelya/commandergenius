@@ -1030,15 +1030,15 @@ static void ANDROID_FlipHWSurfaceInternal(int numrects, SDL_Rect *rects)
 			}
 		}
 
-		if( SDL_ANDROID_PinchZoomStep > 0 )
+		if( SDL_ANDROID_PinchZoomRatio < 1.0f )
 		{
 			int x, y;
 			SDL_Rect srcrect;
 			SDL_Rect dstrect = rect;
 			SDL_GetMouseState(&x, &y); // Follow mouse pointer location
 
-			srcrect.w = roundf(rect.w * SDL_ANDROID_PinchZoomRatios[SDL_ANDROID_PinchZoomStep]);
-			srcrect.h = roundf(rect.h * SDL_ANDROID_PinchZoomRatios[SDL_ANDROID_PinchZoomStep]);
+			srcrect.w = roundf(rect.w * SDL_ANDROID_PinchZoomRatio);
+			srcrect.h = roundf(rect.h * SDL_ANDROID_PinchZoomRatio);
 
  			if( SDL_ANDROID_SystemBarAndKeyboardShown )
 			{

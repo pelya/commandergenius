@@ -68,9 +68,9 @@ extern int SDL_ANDROID_ShowScreenUnderFinger;
 extern SDL_Rect SDL_ANDROID_ShowScreenUnderFingerRect, SDL_ANDROID_ShowScreenUnderFingerRectSrc;
 
 // Full-screen zoom centered on mouse cursor
-enum { SDL_ANDROID_PINCH_ZOOM_STEPS = 11 };
-extern const float SDL_ANDROID_PinchZoomRatios[SDL_ANDROID_PINCH_ZOOM_STEPS];
-extern int SDL_ANDROID_PinchZoomStep;
+extern float SDL_ANDROID_PinchZoomRatio;
+static const float SDL_ANDROID_PinchZoomRatioLimit = 1/20.0f;
+static const float SDL_ANDROID_PinchZoomSpeed = 1.5f;
 
 extern int SDL_ANDROID_CallJavaSwapBuffers();
 extern void SDL_ANDROID_CallJavaShowScreenKeyboard(const char * oldText, char * outBuf, int outBufLen, int async);
