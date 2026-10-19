@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "net.olofson.ballfield"
-        minSdk 21
+        minSdk 24
         targetSdk 37
     }
 
